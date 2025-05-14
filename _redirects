@@ -1,0 +1,15 @@
+# Redirects from old Leadpages URLs to new pages
+/prompt-writing-blueprint-apollo/* /prompt-writing-blueprint-apollo/index.html 200
+/101-ai-prompts-ap/* /101-ai-prompts-ap/index.html 200
+/101-ai-prompts-medium/* /101-ai-prompts-medium/index.html 200
+/linkedin-hooks-yt/* /linkedin-hooks-yt/index.html 200
+/chatgpt/* /chatgpt/index.html 200
+/linkedin-hooks/* /linkedin-hooks/index.html 200
+/101-ai-prompts-yt/* /101-ai-prompts-yt/index.html 200
+/101-ai-prompts-ln/* /101-ai-prompts-ln/index.html 200
+/prompt-writing-blueprint/* /prompt-writing-blueprint/index.html 200
+/saas-founders/* /saas-founders/index.html 200
+/thank-you/* /thank-you/index.html 200
+
+# Fallback for all other routes
+/* /index.html 404

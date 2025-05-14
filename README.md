@@ -1,4 +1,46 @@
- Developer Requirements Document
+# Landing Page Builder
+
+## Available Landing Pages
+
+This project includes the following landing pages:
+
+1. **101 AI Prompts**
+   - 101-ai-prompts-ap.html - Apollo version
+   - 101-ai-prompts-linkedin.html - LinkedIn version
+   - 101-ai-prompts-medium.html - Medium version
+   - 101-ai-prompts-ln.html - LinkedIn version (alternate)
+   - 101-ai-prompts-yt.html - YouTube version
+
+2. **Prompt Writing Blueprint**
+   - prompt-writing-blueprint-apollo.html
+
+3. **LinkedIn Hooks**
+   - linkedin-hooks.html - General version
+   - linkedin-hooks-yt.html - YouTube creators version
+
+4. **Other Landing Pages**
+   - ai-writing-course.html
+   - ai-writing-workshop.html
+   - ai-writing-newsletter.html
+   - chatgpt.html
+   - saas-founders.html
+
+5. **Thank You Page**
+   - thank-you.html
+
+## Navigation System
+
+This project includes a hidden navigation system that allows you to easily move between landing pages during development and management. The navigation is only visible when you add the `?admin=true` parameter to any URL.
+
+For example:
+- Normal view: `https://pages.bryancollins.com/101-ai-prompts-ap/`
+- Admin view with navigation: `https://pages.bryancollins.com/101-ai-prompts-ap/?admin=true`
+
+The admin navigation bar appears at the top of the page and provides links to all landing pages in the system.
+
+Additionally, the home page (`/index.html`) with the admin parameter (`/index.html?admin=true`) provides a dashboard view with links to all pages in both normal and admin views.
+
+## Developer Requirements Document
 
 ## 1. Project Overview
 Build a set of ~10 custom landing pages for lead generation, replacing existing Leadpages pages.  
@@ -36,13 +78,18 @@ Primary goal: maximize direct response email list growth via organic social traf
 - **Redirects:** Use a `_redirects` file to map old Leadpages URLs to new custom URLs.
 
 ## 5. Analytics
-- **Plausible Analytics** script must be included on all pages.
-    - Use a single Plausible project for the domain.
-    - Track pageviews and custom events (e.g., form submissions).
-    - Example script to include in `<head>`:
+- **Plausible Analytics** is implemented on all pages using a centralized approach:
+    - The main Plausible script is included in the `<head>` of each page:
       ```html
-      <script async defer data-domain="yourdomain.com" src="https://plausible.io/js/plausible.js"></script>
+      <script defer data-domain="join.bryancollins.com" src="https://plausible.io/js/script.js"></script>
+      <script defer src="resources/analytics.js"></script>
       ```
+    - A centralized `analytics.js` file in the resources directory handles all custom event tracking:
+      - Form submissions tracking
+      - Outbound link tracking
+      - Conversion tracking on the thank you page
+    - Custom events are automatically tracked without additional code on each page
+    - All events include relevant properties for detailed analytics
 
 ## 6. SEO & Performance
 - Each page must have unique meta tags (title, description, Open Graph, Twitter cards).

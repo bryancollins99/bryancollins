@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bryan Collins - Writing Resources</title>
+    <meta name="description" content="Resources for writers and content creators by Bryan Collins.">
+    <meta property="og:url" content="https://pages.bryancollins.com/" />
+    <meta property="og:title" content="Bryan Collins - Writing Resources" />
+    <meta property="og:description" content="Resources for writers and content creators by Bryan Collins." />
+    <link rel="opengraph" href="https://pages.bryancollins.com/" />
+    
+    <!-- Tailwind CSS for styling -->
+    <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    
+    <!-- Plausible Analytics -->
+    <script defer data-domain="join.bryancollins.com" src="https://plausible.io/js/script.js"></script>
+    <script defer src="resources/analytics.js"></script>
+    
+    <!-- Custom styles -->
+    <style>
+        /* Color Palette:
+           Purple: #956FA6 (rgb 149, 110, 165)
+           Light Gray: #EDEDEE (rgb 237, 237, 237)
+           Gold/Yellow: #F3C972 (rgb 242, 200, 114)
+           Blue-Gray: #A6B6CF (rgb 165, 182, 207)
+           Dark Gray/Black: #1B1B1D (rgb 26, 26, 28)
+        */
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            background-color: #EDEDEE;
+            color: #1B1B1D;
+        }
+        .hero-gradient {
+            background: linear-gradient(135deg, #956FA6 0%, #7d5e8d 100%);
+        }
+        .hero-text {
+            color: white;
+            text-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+        }
+        .cta-button {
+            background: #F3C972;
+            color: #1B1B1D;
+            font-weight: 700;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            position: relative;
+            overflow: hidden;
+            padding: 16px 32px;
+            font-size: 1.125rem;
+            letter-spacing: 0.025em;
+            border-radius: 8px;
+            display: inline-block;
+            text-align: center;
+        }
+        .cta-button:hover {
+            background: #eab94a;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+        .landing-page-grid {
+            display: none;
+        }
+        .admin-card {
+            transition: all 0.2s ease;
+            border-left: 4px solid transparent;
+        }
+        .admin-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+            border-left: 4px solid #956FA6;
+        }
+        .admin-card .view-link {
+            display: inline-block;
+            padding: 8px 16px;
+            background-color: #F3C972;
+            color: #1B1B1D;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            letter-spacing: 0.025em;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            position: relative;
+            overflow: hidden;
+            min-width: 110px;
+            text-align: center;
+            white-space: nowrap;
+        }
+        .admin-card .view-link:hover {
+            background-color: #eab94a;
+            transform: translateY(-2px);
+            text-decoration: none;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+        .admin-header {
+            background: linear-gradient(135deg, #956FA6 0%, #7d5e8d 100%);
+            color: white;
+            padding: 1.5rem;
+            border-radius: 0.5rem 0.5rem 0 0;
+            margin-bottom: 1.5rem;
+        }
+        .admin-stats {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 1.5rem;
+            gap: 1rem;
+        }
+        .stat-card {
+            flex: 1;
+            background-color: white;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+        .stat-card .stat-value {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #956FA6;
+        }
+        .stat-card .stat-label {
+            font-size: 0.875rem;
+            color: #6b7280;
+        }
+    </style>
+</head>
+<body>
+
+
+    <!-- Main Content -->
+    <main class="min-h-screen flex flex-col items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
+        <div class="w-full max-w-4xl">
+            <!-- Public Content -->
+            <div id="publicContent" class="bg-white rounded-xl overflow-hidden shadow-xl">
+                <div class="hero-gradient px-8 py-12 text-center">
+                    <h1 class="hero-text text-4xl sm:text-5xl font-extrabold mb-4 leading-tight">Bryan Collins</h1>
+                    <p class="hero-text text-xl sm:text-2xl max-w-xl mx-auto">Resources for Writers & Content Creators</p>
+                </div>
+                
+                <div class="px-8 py-10 text-center">
+                    <p class="text-xl mb-8">Landing page management dashboard.</p>
+                    <a href="index.html?admin=true" class="cta-button font-bold inline-block">
+                        View Dashboard
+                    </a>
+                </div>
+            </div>
+            
+            <!-- Admin Content (Hidden by default) -->
+            <div id="adminContent" class="landing-page-grid mt-12 bg-gray-50 rounded-xl overflow-hidden shadow-xl">
+                <div class="admin-header">
+                    <h2 class="text-2xl font-bold mb-2 text-center">Landing Page Management</h2>
+                    <p class="text-center text-white opacity-90">Manage all your landing pages from one dashboard</p>
+                </div>
+                
+                <div class="px-8 pb-8">
+                    <div class="admin-stats">
+                        <div class="stat-card">
+                            <div class="stat-value">15</div>
+                            <div class="stat-label">Landing Pages</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-value">4</div>
+                            <div class="stat-label">Active Campaigns</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-value">1</div>
+                            <div class="stat-label">Thank You Page</div>
+                        </div>
+                    </div>
+                
+                <h3 class="text-xl font-semibold mb-4 text-gray-700 border-b pb-2">Your Landing Pages</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <!-- Landing Page Cards -->
+                    <div class="admin-card bg-white p-5 rounded-lg shadow">
+                        <h3 class="font-bold mb-3 text-gray-800">Prompt Writing Blueprint Apollo</h3>
+                        <div class="flex flex-col space-y-2">
+                            <span class="text-sm text-gray-500">Apollo Campaign</span>
+                            <a href="prompt-writing-blueprint-apollo.html" class="view-link">View</a>
+                        </div>
+                    </div>
+                    
+                    <div class="admin-card bg-white p-5 rounded-lg shadow">
+                        <h3 class="font-bold mb-3 text-gray-800">101 AI Prompts AP</h3>
+                        <div class="flex flex-col space-y-2">
+                            <span class="text-sm text-gray-500">Apollo Campaign</span>
+                            <a href="101-ai-prompts-ap.html" class="view-link">View</a>
+                        </div>
+                    </div>
+                    
+                    <div class="admin-card bg-white p-5 rounded-lg shadow">
+                        <h3 class="font-bold mb-3 text-gray-800">101 AI Prompts Medium</h3>
+                        <div class="flex flex-col space-y-2">
+                            <span class="text-sm text-gray-500">Medium Campaign</span>
+                            <a href="101-ai-prompts-medium.html" class="view-link">View</a>
+                        </div>
+                    </div>
+                    
+                    <div class="admin-card bg-white p-5 rounded-lg shadow">
+                        <h3 class="font-bold mb-3 text-gray-800">LinkedIn Hooks YT</h3>
+                        <div class="flex flex-col space-y-2">
+                            <span class="text-sm text-gray-500">YouTube Campaign</span>
+                            <a href="linkedin-hooks-yt.html" class="view-link">View</a>
+                        </div>
+                    </div>
+                    
+                    <div class="admin-card bg-white p-5 rounded-lg shadow">
+                        <h3 class="font-bold mb-3 text-gray-800">ChatGPT</h3>
+                        <div class="flex flex-col space-y-2">
+                            <span class="text-sm text-gray-500">General</span>
+                            <a href="chatgpt.html" class="view-link">View</a>
+                        </div>
+                    </div>
+                    
+                    <div class="admin-card bg-white p-5 rounded-lg shadow">
+                        <h3 class="font-bold mb-3 text-gray-800">LinkedIn Hooks</h3>
+                        <div class="flex flex-col space-y-2">
+                            <span class="text-sm text-gray-500">General</span>
+                            <a href="linkedin-hooks.html" class="view-link">View</a>
+                        </div>
+                    </div>
+                    
+                    <div class="admin-card bg-white p-5 rounded-lg shadow">
+                        <h3 class="font-bold mb-3 text-gray-800">101 AI Prompts YT</h3>
+                        <div class="flex flex-col space-y-2">
+                            <span class="text-sm text-gray-500">YouTube Campaign</span>
+                            <a href="101-ai-prompts-yt.html" class="view-link">View</a>
+                        </div>
+                    </div>
+                    
+                    <div class="admin-card bg-white p-5 rounded-lg shadow">
+                        <h3 class="font-bold mb-3 text-gray-800">101 AI Prompts LN</h3>
+                        <div class="flex flex-col space-y-2">
+                            <span class="text-sm text-gray-500">LinkedIn Campaign</span>
+                            <a href="101-ai-prompts-ln.html" class="view-link">View</a>
+                        </div>
+                    </div>
+                    
+                    <div class="admin-card bg-white p-5 rounded-lg shadow">
+                        <h3 class="font-bold mb-3 text-gray-800">Prompt Writing Blueprint</h3>
+                        <div class="flex flex-col space-y-2">
+                            <span class="text-sm text-gray-500">General</span>
+                            <a href="prompt-writing-blueprint.html" class="view-link">View</a>
+                        </div>
+                    </div>
+                    
+                    <div class="admin-card bg-white p-5 rounded-lg shadow">
+                        <h3 class="font-bold mb-3 text-gray-800">SaaS Founders</h3>
+                        <div class="flex flex-col space-y-2">
+                            <span class="text-sm text-gray-500">General</span>
+                            <a href="saas-founders.html" class="view-link">View</a>
+                        </div>
+                    </div>
+                    
+                    <div class="admin-card bg-white p-5 rounded-lg shadow">
+                        <h3 class="font-bold mb-3 text-gray-800">101 AI Prompts LinkedIn</h3>
+                        <div class="flex flex-col space-y-2">
+                            <span class="text-sm text-gray-500">LinkedIn Campaign</span>
+                            <a href="101-ai-prompts-linkedin.html" class="view-link">View</a>
+                        </div>
+                    </div>
+                    
+                    <div class="admin-card bg-white p-5 rounded-lg shadow">
+                        <h3 class="font-bold mb-3 text-gray-800">AI Writing Course</h3>
+                        <div class="flex flex-col space-y-2">
+                            <span class="text-sm text-gray-500">Course Campaign</span>
+                            <a href="ai-writing-course.html" class="view-link">View</a>
+                        </div>
+                    </div>
+                    
+                    <div class="admin-card bg-white p-5 rounded-lg shadow">
+                        <h3 class="font-bold mb-3 text-gray-800">AI Writing Workshop</h3>
+                        <div class="flex flex-col space-y-2">
+                            <span class="text-sm text-gray-500">Workshop Campaign</span>
+                            <a href="ai-writing-workshop.html" class="view-link">View</a>
+                        </div>
+                    </div>
+                    
+                    <div class="admin-card bg-white p-5 rounded-lg shadow">
+                        <h3 class="font-bold mb-3 text-gray-800">AI Writing Newsletter</h3>
+                        <div class="flex flex-col space-y-2">
+                            <span class="text-sm text-gray-500">Newsletter Campaign</span>
+                            <a href="ai-writing-newsletter.html" class="view-link">View</a>
+                        </div>
+                    </div>
+                    
+                    <div class="admin-card bg-white p-5 rounded-lg shadow border-l-4 border-green-500">
+                        <h3 class="font-bold mb-3 text-gray-800">Thank You Page</h3>
+                        <div class="flex flex-col space-y-2">
+                            <span class="text-sm text-green-500">Shared Resource</span>
+                            <a href="thank-you.html" class="view-link">View</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Copyright notice -->
+            <p class="text-center text-xs mt-8" style="color: #1B1B1D; opacity: 0.5;"> 2025 Bryan Collins. All rights reserved.</p>
+        </div>
+    </main>
+    
+    <!-- JavaScript for Admin Navigation -->
+    <script>
+        // Function to get URL parameters
+        function getUrlParameter(name) {
+            name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
+            var regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
+            var results = regex.exec(location.search);
+            return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
+        }
+        
+        // Check for admin parameter and show admin content if present
+        document.addEventListener('DOMContentLoaded', function() {
+            var adminParam = getUrlParameter('admin');
+            if (adminParam === 'true') {
+                document.getElementById('adminContent').style.display = 'block';
+                document.getElementById('publicContent').style.display = 'none';
+            }
+        });
+    </script>
+</body>
+</html>
