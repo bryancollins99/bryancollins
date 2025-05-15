@@ -11,5 +11,43 @@
 /saas-founders/* /saas-founders/index.html 200
 /thank-you/* /thank-you/index.html 200
 
+# LeadPages Redirects - Easily Reversible
+# To disable, comment out these lines and uncomment the fallback section below
+
+# Prompt Writing Blueprint
+https://pages.bryancollins.com/prompt-writing-blueprint/* https://join.bryancollins.com/prompt-writing-blueprint-apollo/ 301!
+https://bryancollins.lpages.co/prompt-writing-blueprint/* https://join.bryancollins.com/prompt-writing-blueprint-apollo/ 301!
+
+# 101 AI Prompts
+https://pages.bryancollins.com/101-ai-prompts/* https://join.bryancollins.com/101-ai-prompts-ap/ 301!
+https://bryancollins.lpages.co/101-ai-prompts/* https://join.bryancollins.com/101-ai-prompts-ap/ 301!
+
+# LinkedIn Hooks
+https://pages.bryancollins.com/linkedin-hooks/* https://join.bryancollins.com/linkedin-hooks/ 301!
+https://bryancollins.lpages.co/linkedin-hooks/* https://join.bryancollins.com/linkedin-hooks/ 301!
+
+# SaaS Founders
+https://pages.bryancollins.com/saas-founders/* https://join.bryancollins.com/saas-founders/ 301!
+https://bryancollins.lpages.co/saas-founders/* https://join.bryancollins.com/saas-founders/ 301!
+
+# Workshop Pages
+https://pages.bryancollins.com/ai-writing-workshop/* https://join.bryancollins.com/ai-writing-workshop/ 301!
+https://pages.bryancollins.com/ai-writing-course/* https://join.bryancollins.com/ai-writing-course/ 301!
+https://pages.bryancollins.com/ai-writing-newsletter/* https://join.bryancollins.com/ai-writing-newsletter/ 301!
+
+# Thank You Page
+https://pages.bryancollins.com/thank-you/* https://join.bryancollins.com/thank-you/ 301!
+
+# REVERSIBLE SECTION
+# To revert to LeadPages, comment out the redirects above and uncomment these lines
+# https://join.bryancollins.com/prompt-writing-blueprint-apollo/* https://pages.bryancollins.com/prompt-writing-blueprint/ 301!
+# https://join.bryancollins.com/101-ai-prompts-ap/* https://pages.bryancollins.com/101-ai-prompts/ 301!
+# https://join.bryancollins.com/linkedin-hooks/* https://pages.bryancollins.com/linkedin-hooks/ 301!
+# https://join.bryancollins.com/saas-founders/* https://pages.bryancollins.com/saas-founders/ 301!
+# https://join.bryancollins.com/ai-writing-workshop/* https://pages.bryancollins.com/ai-writing-workshop/ 301!
+# https://join.bryancollins.com/ai-writing-course/* https://pages.bryancollins.com/ai-writing-course/ 301!
+# https://join.bryancollins.com/ai-writing-newsletter/* https://pages.bryancollins.com/ai-writing-newsletter/ 301!
+# https://join.bryancollins.com/thank-you/* https://pages.bryancollins.com/thank-you/ 301!
+
 # Fallback for all other routes
 /* /index.html 404
