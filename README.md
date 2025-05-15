@@ -136,6 +136,25 @@ If a form doesn't display correctly:
 4. Verify the URL format follows `/{form-id}/index.js`
 5. Ensure there's only one ConvertKit script on the page
 6. Check browser console for errors
+7. Form must be an inline form from Kit and the javascript must be placed where the form should appear
+
+#### Content Security Policy Requirements
+
+The ConvertKit forms require specific domains to be allowed in the Content Security Policy. The following domains must be included in your CSP directives:
+
+- `https://*.convertkit.com`
+- `https://*.kit.com`
+
+The current CSP configuration in `netlify.toml` includes these domains in the following directives:
+
+```
+default-src
+script-src
+img-src
+connect-src
+```
+
+If forms are not displaying on the live site, check the browser console for CSP errors and ensure these domains are properly allowed in your security policy.
 
 - On successful submission, forms redirect to a thank-you page or show a confirmation message.
 - Form submissions are tracked as events in Plausible.
