@@ -8,6 +8,7 @@
 /linkedin-hooks /linkedin-hooks/index.html 200
 /101-ai-prompts-yt /101-ai-prompts-yt/index.html 200
 /101-ai-prompts-ln /101-ai-prompts-ln/index.html 200
+/101-ai-prompts-linkedin https://join.bryancollins.com/101-ai-prompts-ln 301
 # Removed prompt-writing-blueprint redirect
 /saas-founders /saas-founders/index.html 200
 /thank-you /thank-you/index.html 200
