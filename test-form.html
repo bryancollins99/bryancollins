@@ -23,6 +23,12 @@
             padding: 30px;
             margin-bottom: 30px;
         }
+        .form-placeholder {
+            border: 2px dashed #ccc;
+            padding: 20px;
+            text-align: center;
+            min-height: 150px;
+        }
     </style>
 </head>
 <body>
@@ -30,26 +36,28 @@
     
     <div class="form-container">
         <h2>Test Form 1 - Original URL</h2>
-        <script async data-uid="a691970cbd" src="https://become-a-writer-today.kit.com/a691970cbd/index.js"></script>
+        <p>Following ConvertKit support recommendations:</p>
+        <ol>
+            <li>Script placed just before closing body tag</li>
+            <li>Only one script on the page</li>
+            <li>Form is published in ConvertKit dashboard</li>
+        </ol>
+        <div class="form-placeholder" id="form1">
+            Form should appear here
+        </div>
     </div>
     
-    <div class="form-container">
-        <h2>Test Form 2 - Reference File URL</h2>
-        <script async data-uid="a691970cbd" src="https://become-a-writer-today.kit.com/client/forms/a691970cbd/script.js"></script>
-    </div>
-
-    <div class="form-container">
-        <h2>Test Form 3 - Standard ConvertKit URL</h2>
-        <script async data-uid="a691970cbd" src="https://f.convertkit.com/a691970cbd/index.js"></script>
-    </div>
-
     <div class="notes">
-        <h3>Notes:</h3>
+        <h3>Troubleshooting Notes:</h3>
         <ul>
-            <li>If none of the forms load when viewing locally, try uploading this file to a web server.</li>
-            <li>Check your browser's developer console (F12) for any error messages.</li>
-            <li>Make sure your internet connection is working properly.</li>
+            <li>Clear your browser cache and try loading in an incognito/private window</li>
+            <li>Make sure the form is published in Kit (Grow tab > Landing Pages & Forms > Your form > Publish)</li>
+            <li>Verify you only have one Kit script on the page</li>
+            <li>Check your browser's developer console (F12) for any error messages</li>
         </ul>
     </div>
+
+    <!-- ConvertKit form script placed just before closing body tag as recommended -->
+    <script async data-uid="a691970cbd" src="https://become-a-writer-today.kit.com/client/forms/a691970cbd/script.js"></script>
 </body>
 </html>
