@@ -1,5 +1,5 @@
 # Redirects for clean URLs (no file extension)
-/prompt-writing-blueprint-apollo /prompt-writing-blueprint-apollo/index.html 200
+# Removed prompt-writing-blueprint-apollo redirect
 /101-ai-prompts-apollo /101-ai-prompts-apollo/index.html 200
 /101-ai-prompts-ap /101-ai-prompts-apollo/index.html 301
 /101-ai-prompts-medium /101-ai-prompts-medium/index.html 200
@@ -8,13 +8,13 @@
 /linkedin-hooks /linkedin-hooks/index.html 200
 /101-ai-prompts-yt /101-ai-prompts-yt/index.html 200
 /101-ai-prompts-ln /101-ai-prompts-ln/index.html 200
-/prompt-writing-blueprint /prompt-writing-blueprint/index.html 200
+# Removed prompt-writing-blueprint redirect
 /saas-founders /saas-founders/index.html 200
 /thank-you /thank-you/index.html 200
 /content-multiplication-workshop /content-multiplication-workshop/index.html 200
 
 # Handle trailing slashes
-/prompt-writing-blueprint-apollo/ /prompt-writing-blueprint-apollo/index.html 200
+# Removed prompt-writing-blueprint-apollo/ redirect
 /101-ai-prompts-apollo/ /101-ai-prompts-apollo/index.html 200
 /101-ai-prompts-ap/ /101-ai-prompts-apollo/index.html 301
 /101-ai-prompts-medium/ /101-ai-prompts-medium/index.html 200
@@ -23,7 +23,7 @@
 /linkedin-hooks/ /linkedin-hooks/index.html 200
 /101-ai-prompts-yt/ /101-ai-prompts-yt/index.html 200
 /101-ai-prompts-ln/ /101-ai-prompts-ln/index.html 200
-/prompt-writing-blueprint/ /prompt-writing-blueprint/index.html 200
+# Removed prompt-writing-blueprint/ redirect
 /saas-founders/ /saas-founders/index.html 200
 /thank-you/ /thank-you/index.html 200
 /content-multiplication-workshop/ /content-multiplication-workshop/index.html 200
@@ -36,7 +36,7 @@ http://pages.bryancollins.com/* https://join.bryancollins.com/:splat 301!
 https://pages.bryancollins.com/* https://join.bryancollins.com/:splat 301!
 
 # Direct access for pages.bryancollins.com paths
-/prompt-writing-blueprint-apollo/* /prompt-writing-blueprint-apollo/index.html 200
+# Removed prompt-writing-blueprint-apollo/* redirect
 /101-ai-prompts-apollo/* /101-ai-prompts-apollo/index.html 200
 /101-ai-prompts-ap/* /101-ai-prompts-apollo/index.html 301
 /101-ai-prompts-medium/* /101-ai-prompts-medium/index.html 200
@@ -45,7 +45,7 @@ https://pages.bryancollins.com/* https://join.bryancollins.com/:splat 301!
 /linkedin-hooks/* /linkedin-hooks/index.html 200
 /101-ai-prompts-yt/* /101-ai-prompts-yt/index.html 200
 /101-ai-prompts-ln/* /101-ai-prompts-ln/index.html 200
-/prompt-writing-blueprint/* /prompt-writing-blueprint/index.html 200
+# Removed prompt-writing-blueprint/* redirect
 /saas-founders/* /saas-founders/index.html 200
 /content-multiplication-workshop/* /content-multiplication-workshop/index.html 200
 
@@ -58,7 +58,7 @@ https://becomeawritertoday.lpages.co/thank-you/* https://join.bryancollins.com/t
 # 2. Set up redirects from join.bryancollins.com to pages.bryancollins.com
 # Uncomment these lines after changing DNS:
 
-# https://join.bryancollins.com/prompt-writing-blueprint-apollo/* https://pages.bryancollins.com/prompt-writing-blueprint-apollo/ 301!
+# Removed prompt-writing-blueprint-apollo legacy redirect
 # https://join.bryancollins.com/101-ai-prompts-apollo/* https://pages.bryancollins.com/101-ai-prompts-apollo/ 301!
 # https://join.bryancollins.com/101-ai-prompts-ap/* https://pages.bryancollins.com/101-ai-prompts-apollo/ 301!
 # https://join.bryancollins.com/101-ai-prompts-medium/* https://pages.bryancollins.com/101-ai-prompts-medium/ 301!
@@ -67,7 +67,7 @@ https://becomeawritertoday.lpages.co/thank-you/* https://join.bryancollins.com/t
 # https://join.bryancollins.com/linkedin-hooks/* https://pages.bryancollins.com/linkedin-hooks/ 301!
 # https://join.bryancollins.com/101-ai-prompts-yt/* https://pages.bryancollins.com/101-ai-prompts-yt/ 301!
 # https://join.bryancollins.com/101-ai-prompts-ln/* https://pages.bryancollins.com/101-ai-prompts-ln/ 301!
-# https://join.bryancollins.com/prompt-writing-blueprint/* https://pages.bryancollins.com/prompt-writing-blueprint/ 301!
+# Removed prompt-writing-blueprint legacy redirect
 # https://join.bryancollins.com/saas-founders/* https://pages.bryancollins.com/saas-founders/ 301!
 # https://join.bryancollins.com/thank-you/* https://becomeawritertoday.lpages.co/thank-you/ 301!
 

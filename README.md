@@ -11,25 +11,22 @@ This project includes the following landing pages:
    - 101-ai-prompts-ln.html - LinkedIn version (alternate)
    - 101-ai-prompts-yt.html - YouTube version
 
-2. **Prompt Writing Blueprint**
-   - prompt-writing-blueprint-apollo.html
-
-3. **LinkedIn Hooks**
+2. **LinkedIn Hooks**
    - linkedin-hooks.html - General version
    - linkedin-hooks-yt.html - YouTube creators version
 
-4. **Workshop Pages**
+3. **Workshop Pages**
    - content-multiplication-workshop.html - Content Multiplication Workshop
    - ai-writing-workshop.html - AI Writing Workshop
 
-5. **Other Landing Pages**
-   - ai-writing-course.html
-   - ai-writing-newsletter.html
+4. **Other Landing Pages**
    - chatgpt.html
    - saas-founders.html
 
-6. **Thank You Page**
+5. **Thank You Page**
    - thank-you.html
+
+
 
 ## Navigation System
 
@@ -124,7 +121,7 @@ This project uses ConvertKit forms for email capture on all landing pages. There
 - Apollo: `9f849f222b`
 - LN (LinkedIn alternate): `40609e45cc`
 - YouTube: `426c2157ed`
-- AI Writing Newsletter: `4914fa2338`
+- SaaS Founders: `a691970cbd`
 
 #### Troubleshooting Forms
 
@@ -228,10 +225,7 @@ If you want to temporarily keep both systems running in parallel:
 
 ```
 # Comment out these lines
-# https://pages.bryancollins.com/prompt-writing-blueprint-apollo/* https://join.bryancollins.com/prompt-writing-blueprint-apollo/ 301!
-
-# Uncomment these lines
-https://join.bryancollins.com/prompt-writing-blueprint-apollo/* https://pages.bryancollins.com/prompt-writing-blueprint-apollo/ 301!
+# Prompt Writing Blueprint page has been removed
 ```
 
 ### 3. Verify LeadPages Configuration
