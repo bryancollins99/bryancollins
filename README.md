@@ -126,3 +126,53 @@ Primary goal: maximize direct response email list growth via organic social traf
     - How to add/edit landing pages
     - How to update redirects
     - How to update analytics/events
+
+## Reversion Instructions
+
+If you need to revert from Netlify back to LeadPages, follow these steps:
+
+### 1. Update DNS Records in Cloudflare
+
+1. Log in to your Cloudflare account
+2. Navigate to the DNS settings for bryancollins.com
+3. Find the CNAME record for `pages.bryancollins.com`
+4. Change the target from `mylandingpagegenerator.netlify.app` back to `custom-proxy.leadpages.net`
+5. Save the changes
+
+### 2. Update Redirects (Optional)
+
+If you want to temporarily keep both systems running in parallel:
+
+1. Edit the `_redirects` file in this repository
+2. Comment out the current redirects (add # at the beginning of each line)
+3. Uncomment the "REVERSIBLE SECTION" (remove # from those lines)
+4. Commit and push the changes
+
+```
+# Comment out these lines
+# https://pages.bryancollins.com/prompt-writing-blueprint-apollo/* https://join.bryancollins.com/prompt-writing-blueprint-apollo/ 301!
+
+# Uncomment these lines
+https://join.bryancollins.com/prompt-writing-blueprint-apollo/* https://pages.bryancollins.com/prompt-writing-blueprint-apollo/ 301!
+```
+
+### 3. Verify LeadPages Configuration
+
+1. Log in to your LeadPages account
+2. Ensure all your pages are still active and published
+3. Check that your custom domain settings in LeadPages still show `pages.bryancollins.com`
+4. Test a few URLs to make sure they're resolving correctly
+
+### 4. Update Any Links
+
+If you've updated any external links to point to join.bryancollins.com:
+
+1. Identify all places where you've shared the new URLs (emails, social media, etc.)
+2. Update these links to point back to the original LeadPages URLs
+
+### 5. Monitor Analytics
+
+1. Check both Plausible and LeadPages analytics during the transition
+2. Ensure no traffic is being lost during the reversion
+
+The DNS change typically takes 15 minutes to 48 hours to fully propagate worldwide. During this time, some users might see the Netlify site while others see the LeadPages site.
