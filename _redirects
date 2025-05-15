@@ -1,4 +1,33 @@
-# Redirects from old Leadpages URLs to new pages
+# Redirects for clean URLs (no file extension)
+/prompt-writing-blueprint-apollo /prompt-writing-blueprint-apollo/index.html 200
+/101-ai-prompts-ap /101-ai-prompts-ap/index.html 200
+/101-ai-prompts-medium /101-ai-prompts-medium/index.html 200
+/linkedin-hooks-yt /linkedin-hooks-yt/index.html 200
+/chatgpt /chatgpt/index.html 200
+/linkedin-hooks /linkedin-hooks/index.html 200
+/101-ai-prompts-yt /101-ai-prompts-yt/index.html 200
+/101-ai-prompts-ln /101-ai-prompts-ln/index.html 200
+/prompt-writing-blueprint /prompt-writing-blueprint/index.html 200
+/saas-founders /saas-founders/index.html 200
+/thank-you /thank-you/index.html 200
+
+# Handle trailing slashes
+/prompt-writing-blueprint-apollo/ /prompt-writing-blueprint-apollo/index.html 200
+/101-ai-prompts-ap/ /101-ai-prompts-ap/index.html 200
+/101-ai-prompts-medium/ /101-ai-prompts-medium/index.html 200
+/linkedin-hooks-yt/ /linkedin-hooks-yt/index.html 200
+/chatgpt/ /chatgpt/index.html 200
+/linkedin-hooks/ /linkedin-hooks/index.html 200
+/101-ai-prompts-yt/ /101-ai-prompts-yt/index.html 200
+/101-ai-prompts-ln/ /101-ai-prompts-ln/index.html 200
+/prompt-writing-blueprint/ /prompt-writing-blueprint/index.html 200
+/saas-founders/ /saas-founders/index.html 200
+/thank-you/ /thank-you/index.html 200
+
+# Special Paths for pages.bryancollins.com
+# Since pages.bryancollins.com now points to this Netlify site, we need to serve content directly
+
+# Direct access for pages.bryancollins.com paths
 /prompt-writing-blueprint-apollo/* /prompt-writing-blueprint-apollo/index.html 200
 /101-ai-prompts-ap/* /101-ai-prompts-ap/index.html 200
 /101-ai-prompts-medium/* /101-ai-prompts-medium/index.html 200
@@ -9,26 +38,16 @@
 /101-ai-prompts-ln/* /101-ai-prompts-ln/index.html 200
 /prompt-writing-blueprint/* /prompt-writing-blueprint/index.html 200
 /saas-founders/* /saas-founders/index.html 200
-/thank-you/* /thank-you/index.html 200
 
-# LeadPages Redirects - Easily Reversible
-# To disable, comment out these lines and uncomment the fallback section below
-
-# Exact URLs as provided by user
-https://pages.bryancollins.com/prompt-writing-blueprint-apollo/* https://join.bryancollins.com/prompt-writing-blueprint-apollo/ 301!
-https://pages.bryancollins.com/101-ai-prompts-ap/* https://join.bryancollins.com/101-ai-prompts-ap/ 301!
-https://pages.bryancollins.com/101-ai-prompts-medium/* https://join.bryancollins.com/101-ai-prompts-medium/ 301!
-https://pages.bryancollins.com/linkedin-hooks-yt/* https://join.bryancollins.com/linkedin-hooks-yt/ 301!
-https://pages.bryancollins.com/chatgpt/* https://join.bryancollins.com/chatgpt/ 301!
-https://pages.bryancollins.com/linkedin-hooks/* https://join.bryancollins.com/linkedin-hooks/ 301!
-https://pages.bryancollins.com/101-ai-prompts-yt/* https://join.bryancollins.com/101-ai-prompts-yt/ 301!
-https://pages.bryancollins.com/101-ai-prompts-ln/* https://join.bryancollins.com/101-ai-prompts-ln/ 301!
-https://pages.bryancollins.com/prompt-writing-blueprint/* https://join.bryancollins.com/prompt-writing-blueprint/ 301!
-https://pages.bryancollins.com/saas-founders/* https://join.bryancollins.com/saas-founders/ 301!
+# Redirect becomeawritertoday.lpages.co to join.bryancollins.com
 https://becomeawritertoday.lpages.co/thank-you/* https://join.bryancollins.com/thank-you/ 301!
 
 # REVERSIBLE SECTION
-# To revert to LeadPages, comment out the redirects above and uncomment these lines
+# To revert to LeadPages, you need to:
+# 1. Change the DNS for pages.bryancollins.com back to LeadPages
+# 2. Set up redirects from join.bryancollins.com to pages.bryancollins.com
+# Uncomment these lines after changing DNS:
+
 # https://join.bryancollins.com/prompt-writing-blueprint-apollo/* https://pages.bryancollins.com/prompt-writing-blueprint-apollo/ 301!
 # https://join.bryancollins.com/101-ai-prompts-ap/* https://pages.bryancollins.com/101-ai-prompts-ap/ 301!
 # https://join.bryancollins.com/101-ai-prompts-medium/* https://pages.bryancollins.com/101-ai-prompts-medium/ 301!
