@@ -5,7 +5,7 @@
 This project includes the following landing pages:
 
 1. **101 AI Prompts**
-   - 101-ai-prompts-ap.html - Apollo version
+   - 101-ai-prompts-apollo.html - Apollo version
    - 101-ai-prompts-linkedin.html - LinkedIn version
    - 101-ai-prompts-medium.html - Medium version
    - 101-ai-prompts-ln.html - LinkedIn version (alternate)

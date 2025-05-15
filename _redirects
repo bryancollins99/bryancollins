@@ -1,6 +1,7 @@
 # Redirects for clean URLs (no file extension)
 /prompt-writing-blueprint-apollo /prompt-writing-blueprint-apollo/index.html 200
-/101-ai-prompts-ap /101-ai-prompts-ap/index.html 200
+/101-ai-prompts-apollo /101-ai-prompts-apollo/index.html 200
+/101-ai-prompts-ap /101-ai-prompts-apollo/index.html 301
 /101-ai-prompts-medium /101-ai-prompts-medium/index.html 200
 /linkedin-hooks-yt /linkedin-hooks-yt/index.html 200
 /chatgpt /chatgpt/index.html 200
@@ -14,7 +15,8 @@
 
 # Handle trailing slashes
 /prompt-writing-blueprint-apollo/ /prompt-writing-blueprint-apollo/index.html 200
-/101-ai-prompts-ap/ /101-ai-prompts-ap/index.html 200
+/101-ai-prompts-apollo/ /101-ai-prompts-apollo/index.html 200
+/101-ai-prompts-ap/ /101-ai-prompts-apollo/index.html 301
 /101-ai-prompts-medium/ /101-ai-prompts-medium/index.html 200
 /linkedin-hooks-yt/ /linkedin-hooks-yt/index.html 200
 /chatgpt/ /chatgpt/index.html 200
@@ -35,7 +37,8 @@ https://pages.bryancollins.com/* https://join.bryancollins.com/:splat 301!
 
 # Direct access for pages.bryancollins.com paths
 /prompt-writing-blueprint-apollo/* /prompt-writing-blueprint-apollo/index.html 200
-/101-ai-prompts-ap/* /101-ai-prompts-ap/index.html 200
+/101-ai-prompts-apollo/* /101-ai-prompts-apollo/index.html 200
+/101-ai-prompts-ap/* /101-ai-prompts-apollo/index.html 301
 /101-ai-prompts-medium/* /101-ai-prompts-medium/index.html 200
 /linkedin-hooks-yt/* /linkedin-hooks-yt/index.html 200
 /chatgpt/* /chatgpt/index.html 200
@@ -56,7 +59,8 @@ https://becomeawritertoday.lpages.co/thank-you/* https://join.bryancollins.com/t
 # Uncomment these lines after changing DNS:
 
 # https://join.bryancollins.com/prompt-writing-blueprint-apollo/* https://pages.bryancollins.com/prompt-writing-blueprint-apollo/ 301!
-# https://join.bryancollins.com/101-ai-prompts-ap/* https://pages.bryancollins.com/101-ai-prompts-ap/ 301!
+# https://join.bryancollins.com/101-ai-prompts-apollo/* https://pages.bryancollins.com/101-ai-prompts-apollo/ 301!
+# https://join.bryancollins.com/101-ai-prompts-ap/* https://pages.bryancollins.com/101-ai-prompts-apollo/ 301!
 # https://join.bryancollins.com/101-ai-prompts-medium/* https://pages.bryancollins.com/101-ai-prompts-medium/ 301!
 # https://join.bryancollins.com/linkedin-hooks-yt/* https://pages.bryancollins.com/linkedin-hooks-yt/ 301!
 # https://join.bryancollins.com/chatgpt/* https://pages.bryancollins.com/chatgpt/ 301!
