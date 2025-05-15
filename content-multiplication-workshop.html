@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Content Multiplication Workshop - Turn 1 Idea into 10 Assets</title>
+    <meta name="description" content="Join our live workshop and learn how creators use AI to turn a single idea into 10 different content assets. Perfect for business owners and content creators.">
+    <meta property="og:url" content="https://join.bryancollins.com/content-multiplication-workshop/" />
+    <meta property="og:title" content="Content Multiplication Workshop - Turn 1 Idea into 10 Assets" />
+    <meta property="og:description" content="Join our live workshop and learn how creators use AI to turn a single idea into 10 different content assets. Perfect for business owners and content creators." />
+    <link rel="opengraph" href="https://join.bryancollins.com/content-multiplication-workshop/" />
+    
+    <!-- Tailwind CSS for styling -->
+    <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    
+    <!-- Plausible Analytics -->
+    <script defer data-domain="join.bryancollins.com" src="https://plausible.io/js/script.js"></script>
+    <script defer src="resources/analytics.js"></script>
+    
+    <!-- Countdown Timer Script -->
+    <script>
+        function updateCountdown() {
+            const workshopDate = new Date(document.getElementById('workshop-date').getAttribute('data-date'));
+            const now = new Date();
+            const diff = workshopDate - now;
+            
+            if (diff <= 0) {
+                document.getElementById('countdown').innerHTML = '<span class="text-green-600 font-bold">Workshop is LIVE now!</span>';
+                return;
+            }
+            
+            const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+            
+            document.getElementById('countdown').innerHTML = 
+                `<div class="flex justify-center space-x-4">
+                    <div class="text-center"><span class="text-xl font-bold">${days}</span><br><span class="text-xs">days</span></div>
+                    <div class="text-center"><span class="text-xl font-bold">${hours}</span><br><span class="text-xs">hours</span></div>
+                    <div class="text-center"><span class="text-xl font-bold">${minutes}</span><br><span class="text-xs">mins</span></div>
+                    <div class="text-center"><span class="text-xl font-bold">${seconds}</span><br><span class="text-xs">secs</span></div>
+                </div>`;
+        }
+        
+        document.addEventListener('DOMContentLoaded', function() {
+            updateCountdown();
+            setInterval(updateCountdown, 1000);
+        });
+    </script>
+    
+    <!-- Custom styles -->
+    <style>
+        /* Color Palette:
+           Purple: #956FA6 (rgb 149, 110, 165)
+           Light Gray: #EDEDEE (rgb 237, 237, 237)
+           Gold/Yellow: #F3C972 (rgb 242, 200, 114)
+           Blue-Gray: #A6B6CF (rgb 165, 182, 207)
+           Dark Gray/Black: #1B1B1D (rgb 26, 26, 28)
+        */
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            background-color: #EDEDEE;
+            color: #1B1B1D;
+        }
+        .hero-gradient {
+            background: linear-gradient(135deg, #956FA6 0%, #7d5e8d 100%);
+        }
+        .hero-text {
+            color: white;
+            text-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+        }
+        .cta-button {
+            background: #F3C972;
+            color: #1B1B1D;
+            font-weight: 700;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            position: relative;
+            overflow: hidden;
+            padding: 16px 32px;
+            font-size: 1.125rem;
+            letter-spacing: 0.025em;
+            border-radius: 8px;
+        }
+        .cta-button:hover {
+            background: #eab94a;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+        .cta-button:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: 0.5s;
+        }
+        .cta-button:hover:before {
+            left: 100%;
+        }
+        .form-container {
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+        }
+        .benefit-icon {
+            color: #F3C972;
+        }
+        .form-input:focus {
+            border-color: #A6B6CF;
+            box-shadow: 0 0 0 3px rgba(166, 182, 207, 0.3);
+        }
+        .social-proof {
+            border-color: #A6B6CF;
+        }
+        .workshop-detail {
+            border-left: 3px solid #956FA6;
+        }
+        .limited-spots {
+            background-color: rgba(149, 111, 166, 0.1);
+            border: 1px dashed #956FA6;
+        }
+    </style>
+</head>
+<body>
+    <!-- Hero Section -->
+    <main class="min-h-screen flex flex-col items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
+        <div class="w-full max-w-2xl">
+            <!-- Main Content Box -->
+            <div class="bg-white rounded-xl overflow-hidden shadow-xl">
+                <!-- Header -->
+                <div class="hero-gradient px-8 py-12 text-center">
+                    <h1 class="hero-text text-4xl sm:text-5xl font-extrabold mb-4 leading-tight">Content Multiplication</h1>
+                    <p class="hero-text text-xl sm:text-2xl max-w-xl mx-auto">How Creators Use AI to Turn 1 Idea into 10 Assets</p>
+                </div>
+                
+                <!-- Content -->
+                <div class="px-8 py-10">
+                    <div class="space-y-8">
+                        <!-- Workshop Details -->
+                        <div class="limited-spots rounded-lg p-4 text-center mb-6">
+                            <p id="workshop-date" data-date="2025-05-22T15:00:00+00:00" class="font-bold">Next Workshop: May 22, 2025 • 3:00 PM GMT</p>
+                            <div id="countdown" class="mt-3 mb-2">Loading countdown...</div>
+                            <p class="text-sm mt-1 font-semibold text-purple-700">For business owners and content creators</p>
+                        </div>
+                        
+                        <!-- Benefits -->
+                        <div class="space-y-4 max-w-lg mx-auto">
+                            <div class="flex items-start">
+                                <i class="fas fa-check-circle benefit-icon text-xl mt-0.5 flex-shrink-0"></i>
+                                <p class="ml-4 text-lg"><strong>Create 10x more content</strong> from every idea using AI workflows</p>
+                            </div>
+                            <div class="flex items-start">
+                                <i class="fas fa-check-circle benefit-icon text-xl mt-0.5 flex-shrink-0"></i>
+                                <p class="ml-4 text-lg"><strong>Save hours of work</strong> with proven content multiplication systems</p>
+                            </div>
+                            <div class="flex items-start">
+                                <i class="fas fa-check-circle benefit-icon text-xl mt-0.5 flex-shrink-0"></i>
+                                <p class="ml-4 text-lg"><strong>Maintain your unique voice</strong> across all content formats</p>
+                            </div>
+                        </div>
+                        
+                        <!-- Workshop Agenda -->
+                        <div class="max-w-lg mx-auto mt-8">
+                            <h3 class="text-xl font-bold mb-4">Workshop Agenda:</h3>
+                            <div class="space-y-4">
+                                <div class="pl-4 workshop-detail">
+                                    <h4 class="font-bold">Part 1: The Content Multiplication Framework</h4>
+                                    <p class="text-sm">How to extract maximum value from every idea (25 min)</p>
+                                </div>
+                                <div class="pl-4 workshop-detail">
+                                    <h4 class="font-bold">Part 2: 7 AI Workflows for Content Creators</h4>
+                                    <p class="text-sm">Step-by-step systems you can implement today (40 min)</p>
+                                </div>
+                                <div class="pl-4 workshop-detail">
+                                    <h4 class="font-bold">Part 3: Cross-Platform Content Strategy</h4>
+                                    <p class="text-sm">Adapting content for different platforms and formats (25 min)</p>
+                                </div>
+                                <div class="pl-4 workshop-detail">
+                                    <h4 class="font-bold">Part 4: Live Implementation & Q&A</h4>
+                                    <p class="text-sm">Apply the techniques to your own content ideas (30 min)</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Workshop Join Link -->
+                        <div class="max-w-lg mx-auto mt-8 text-center">
+                            <div class="bg-purple-100 rounded-lg p-4 mb-4 border border-purple-300">
+                                <p class="font-medium mb-2">Transform how you create content with AI</p>
+                                <p class="text-sm">Recordings and resources included with your ticket</p>
+                            </div>
+                            <a href="https://courses.becomeawritertoday.com/purchase?product_id=6265115" class="cta-button font-bold inline-block">
+                                SECURE YOUR SPOT
+                            </a>
+                            <p class="text-sm mt-4">Limited seats available to ensure personalized attention</p>
+                        </div>
+                        
+                        <!-- Social Proof -->
+                        <div class="text-center pt-6 mt-8 social-proof border-t">
+                            <p class="text-base"><span class="font-semibold">Join 1,200+ creators</span> who've transformed their content workflow</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Copyright notice -->
+            <p class="text-center text-xs mt-8" style="color: #1B1B1D; opacity: 0.5;">© 2025 Bryan Collins. All rights reserved.</p>
+        </div>
+    </main>
+</body>
+</html>
