@@ -1,0 +1,45 @@
+[build]
+  publish = "/"
+  command = ""
+
+[dev]
+  framework = "html"
+  
+[build.processing]
+  skip_processing = false
+  
+[build.processing.html]
+  pretty_urls = true
+  
+[build.processing.css]
+  bundle = true
+  minify = true
+  
+[build.processing.js]
+  bundle = true
+  minify = true
+  
+[build.processing.images]
+  compress = true
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "DENY"
+    X-XSS-Protection = "1; mode=block"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    Content-Security-Policy = "default-src 'self' https://plausible.io https://*.convertkit.com https://unpkg.com https://cdnjs.cloudflare.com; script-src 'self' 'unsafe-inline' https://plausible.io https://*.convertkit.com https://unpkg.com https://cdnjs.cloudflare.com; style-src 'self' 'unsafe-inline' https://unpkg.com https://cdnjs.cloudflare.com; img-src 'self' data: https://*.convertkit.com; font-src 'self' https://cdnjs.cloudflare.com; connect-src 'self' https://plausible.io https://*.convertkit.com;"
+    
+# Redirect default Netlify subdomain to primary domain
+[[redirects]]
+  from = "https://mylandingpagegenerator.netlify.app/*"
+  to = "https://join.bryancollins.com/:splat"
+  status = 301
+  force = true
+
+# Fallback redirect for 404s
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 404

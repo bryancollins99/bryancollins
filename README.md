@@ -18,14 +18,17 @@ This project includes the following landing pages:
    - linkedin-hooks.html - General version
    - linkedin-hooks-yt.html - YouTube creators version
 
-4. **Other Landing Pages**
+4. **Workshop Pages**
+   - content-multiplication-workshop.html - Content Multiplication Workshop
+   - ai-writing-workshop.html - AI Writing Workshop
+
+5. **Other Landing Pages**
    - ai-writing-course.html
-   - ai-writing-workshop.html
    - ai-writing-newsletter.html
    - chatgpt.html
    - saas-founders.html
 
-5. **Thank You Page**
+6. **Thank You Page**
    - thank-you.html
 
 ## Navigation System
@@ -126,6 +129,28 @@ Primary goal: maximize direct response email list growth via organic social traf
     - How to add/edit landing pages
     - How to update redirects
     - How to update analytics/events
+
+## Domain Configuration
+
+This project uses two primary domains:
+
+1. **join.bryancollins.com** - Primary domain for all landing pages
+2. **pages.bryancollins.com** - Legacy domain that redirects to join.bryancollins.com
+
+### Domain Setup
+
+- Both domains are configured in Netlify's domain settings
+- Both domains have SSL certificates provisioned through Netlify
+- The `_redirects` file contains rules to handle redirects between domains
+
+### Redirect System
+
+The redirect system handles several scenarios:
+
+1. **Clean URLs**: Removes file extensions (e.g., `/page` instead of `/page.html`)
+2. **Legacy Domain Redirects**: Redirects from pages.bryancollins.com to join.bryancollins.com
+3. **Trailing Slashes**: Properly handles URLs with or without trailing slashes
+4. **LeadPages Redirects**: Redirects from old LeadPages URLs to new Netlify URLs
 
 ## Reversion Instructions
 
