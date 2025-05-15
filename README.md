@@ -101,10 +101,44 @@ Primary goal: maximize direct response email list growth via organic social traf
 - Sitemap and robots.txt should be included.
 
 ## 7. Forms & Integrations
-- Each landing page must have a lead capture form.
-- Forms should integrate with ConvertKit for email list building.
-- On successful submission, redirect to a thank-you page or show a confirmation message.
-- Track form submissions as events in Plausible.
+
+### ConvertKit Form Implementation
+
+This project uses ConvertKit forms for email capture on all landing pages. There are two implementation approaches:
+
+#### JavaScript Embed Approach (Recommended)
+
+```html
+<script async data-uid="UNIQUE_FORM_ID" src="https://become-a-writer-today.kit.com/UNIQUE_FORM_ID/index.js"></script>
+```
+
+- Each form has a unique ID that must be configured in ConvertKit as a modal form
+- The domain must be `become-a-writer-today.kit.com`
+- The URL format must follow the pattern: `/{form-id}/index.js`
+- Place the script tag exactly where you want the form to appear in the HTML
+
+#### Current Form IDs
+
+- LinkedIn: `73ff0be26f`
+- Medium: `ebb3352c56`
+- Apollo: `9f849f222b`
+- LN (LinkedIn alternate): `40609e45cc`
+- YouTube: `426c2157ed`
+- AI Writing Newsletter: `4914fa2338`
+
+#### Troubleshooting Forms
+
+If a form doesn't display correctly:
+
+1. Verify the form ID is correct and active in ConvertKit
+2. Ensure the form is published in ConvertKit (Grow tab > Landing Pages & Forms > Your form > Publish)
+3. Check that the domain is `become-a-writer-today.kit.com`
+4. Verify the URL format follows `/{form-id}/index.js`
+5. Ensure there's only one ConvertKit script on the page
+6. Check browser console for errors
+
+- On successful submission, forms redirect to a thank-you page or show a confirmation message.
+- Form submissions are tracked as events in Plausible.
 
 ## 8. Version Control & Collaboration
 - All work must be committed to GitHub with clear commit messages.
