@@ -29,6 +29,10 @@
 # Special Paths for pages.bryancollins.com
 # Since pages.bryancollins.com now points to this Netlify site, we need to serve content directly
 
+# Host-based redirects for pages.bryancollins.com domain
+http://pages.bryancollins.com/* https://join.bryancollins.com/:splat 301!
+https://pages.bryancollins.com/* https://join.bryancollins.com/:splat 301!
+
 # Direct access for pages.bryancollins.com paths
 /prompt-writing-blueprint-apollo/* /prompt-writing-blueprint-apollo/index.html 200
 /101-ai-prompts-ap/* /101-ai-prompts-ap/index.html 200
