@@ -8,7 +8,7 @@
     <meta property="og:url" content="https://join.bryancollins.com/101-ai-prompts-yt/" />
     <meta property="og:title" content="101 Prompt Writing Ideas — Short Book of AI Prompts for YouTube" />
     <meta property="og:description" content="101 ready-to-use prompts for ChatGPT, Gemini, and Claude to plan, script, and grow your channel faster." />
-    <meta property="og:image" content="/101%20Prompt%20Writing%20Ideas.png" />
+    <meta property="og:image" content="https://join.bryancollins.com/101%20Prompt%20Writing%20Ideas.png" />
     <link rel="opengraph" href="https://join.bryancollins.com/101-ai-prompts-yt/" />
     
     <!-- Tailwind CSS for styling -->
@@ -106,7 +106,7 @@
                 <div class="px-8 py-10">
                     <div class="space-y-8">
                         <div class="max-w-lg mx-auto">
-                            <img src="101%20Prompt%20Writing%20Ideas.png" alt="101 Prompt Writing Ideas" class="w-full rounded-lg shadow-md">
+                            <img src="101%20Prompt%20Writing%20Ideas.png" alt="101 Prompt Writing Ideas" loading="lazy" class="w-full rounded-lg shadow-md">
                             <p class="text-xs text-center mt-2" style="color: #1B1B1D; opacity: 0.6;">Instant download • PDF</p>
                         </div>
                         <!-- Benefits -->
@@ -128,6 +128,18 @@
                         <!-- Email Form -->
                         <div class="max-w-lg mx-auto mt-8">
                             <script async data-uid="426c2157ed" src="https://become-a-writer-today.kit.com/426c2157ed/index.js"></script>
+                            <script>
+                                // Redirect to thank-you page on successful ConvertKit submission
+                                window.addEventListener('message', function (event) {
+                                    try {
+                                        var originHostname = new URL(event.origin).hostname;
+                                        var isCK = /kit\.com$/.test(originHostname) || /convertkit\.com$/.test(originHostname);
+                                        if (isCK && typeof event.data === 'string' && event.data.indexOf('submitted') !== -1) {
+                                            window.location.href = '/thank-you/';
+                                        }
+                                    } catch (e) { /* no-op */ }
+                                });
+                            </script>
 
                             <p class="text-sm text-center mt-3" style="color: #1B1B1D; opacity: 0.7;">We respect your privacy. Unsubscribe anytime.</p>
                         </div>
