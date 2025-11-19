@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ANSOFF Matrix Tool — Growth Strategy for Creators</title>
+    <meta name="description" content="Free interactive ANSOFF Matrix tool to plan your growth strategy. Map market penetration, development, product development, and diversification options.">
+    <meta property="og:url" content="https://join.bryancollins.com/ansoff-matrix/" />
+    <meta property="og:title" content="ANSOFF Matrix Tool — Growth Strategy for Creators" />
+    <meta property="og:description" content="Plan your content business growth with this interactive ANSOFF Matrix tool." />
+    
+    <!-- Tailwind CSS -->
+    <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    
+    <!-- jsPDF for PDF generation -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    
+    <!-- Plausible Analytics -->
+    <script defer data-domain="join.bryancollins.com" src="https://plausible.io/js/script.js"></script>
+    <script defer src="resources/analytics.js"></script>
+    
+    <style>
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            background-color: #EDEDEE;
+            color: #1B1B1D;
+        }
+        .hero-gradient {
+            background: linear-gradient(135deg, #956FA6 0%, #7d5e8d 100%);
+        }
+        .hero-text {
+            color: white;
+            text-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+        }
+        .wizard-step {
+            display: none;
+        }
+        .wizard-step.active {
+            display: block;
+        }
+        .progress-bar {
+            height: 8px;
+            background: #EDEDEE;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #956FA6 0%, #F3C972 100%);
+            transition: width 0.3s ease;
+        }
+        .btn-primary {
+            background: #F3C972;
+            color: #1B1B1D;
+            font-weight: 700;
+            padding: 12px 24px;
+            border-radius: 8px;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .btn-primary:hover {
+            background: #eab94a;
+            transform: translateY(-2px);
+        }
+        .btn-secondary {
+            background: #A6B6CF;
+            color: white;
+            font-weight: 600;
+            padding: 12px 24px;
+            border-radius: 8px;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .btn-secondary:hover {
+            background: #8a9bb8;
+        }
+        textarea, input {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #EDEDEE;
+            border-radius: 8px;
+            font-family: inherit;
+            transition: border-color 0.3s ease;
+        }
+        textarea:focus, input:focus {
+            outline: none;
+            border-color: #956FA6;
+        }
+        .matrix-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+        }
+        .matrix-cell {
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+        }
+        .matrix-cell.penetration {
+            border-left: 4px solid #4CAF50;
+        }
+        .matrix-cell.development {
+            border-left: 4px solid #2196F3;
+        }
+        .matrix-cell.product {
+            border-left: 4px solid #FF9800;
+        }
+        .matrix-cell.diversification {
+            border-left: 4px solid #9C27B0;
+        }
+        .tooltip {
+            position: relative;
+            display: inline-block;
+            cursor: help;
+        }
+        .tooltip .tooltiptext {
+            visibility: hidden;
+            width: 250px;
+            background-color: #1B1B1D;
+            color: #fff;
+            text-align: left;
+            border-radius: 6px;
+            padding: 10px;
+            position: absolute;
+            z-index: 1;
+            bottom: 125%;
+            left: 50%;
+            margin-left: -125px;
+            opacity: 0;
+            transition: opacity 0.3s;
+            font-size: 14px;
+        }
+        .tooltip:hover .tooltiptext {
+            visibility: visible;
+            opacity: 1;
+        }
+        .example-box {
+            background: #F3C972;
+            background: linear-gradient(135deg, #F3C972 0%, #f5d89a 100%);
+            padding: 12px 16px;
+            border-radius: 8px;
+            margin-top: 8px;
+            font-size: 14px;
+            color: #1B1B1D;
+        }
+        .framework-card {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s ease;
+        }
+        .framework-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+        }
+    </style>
+</head>
+<body>
+    <main class="min-h-screen py-12 px-4 sm:px-6 lg:px-8">
+        <div class="max-w-4xl mx-auto">
+            
+            <!-- Hero -->
+            <div class="hero-gradient rounded-xl px-8 py-12 text-center mb-8">
+                <div class="inline-block p-4 bg-white bg-opacity-20 rounded-full mb-4">
+                    <i class="fas fa-th text-4xl" style="color: white;"></i>
+                </div>
+                <h1 class="hero-text text-4xl sm:text-5xl font-extrabold mb-4">ANSOFF Matrix</h1>
+                <p class="hero-text text-xl">Plan Your Growth Strategy</p>
+            </div>
+
+            <!-- Explanation -->
+            <div class="bg-white rounded-xl p-8 mb-8">
+                <h2 class="text-2xl font-bold mb-4">What is the ANSOFF Matrix?</h2>
+                <p class="text-lg mb-4">
+                    The ANSOFF Matrix is a strategic planning tool that helps you identify and evaluate growth opportunities for your content business. 
+                    It maps out four key growth strategies based on whether you're working with existing or new products/markets.
+                </p>
+                <p class="text-lg mb-4">
+                    <strong>For content creators,</strong> this means deciding whether to double down on your current audience (Market Penetration), 
+                    reach new audiences with existing content (Market Development), create new content types for your audience (Product Development), 
+                    or venture into entirely new areas (Diversification).
+                </p>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-6">
+                    <div class="p-4 bg-green-50 rounded-lg border-l-4 border-green-500">
+                        <h3 class="font-bold text-green-800 mb-2">Market Penetration</h3>
+                        <p class="text-sm text-gray-700">Grow with existing audience + existing products</p>
+                    </div>
+                    <div class="p-4 bg-blue-50 rounded-lg border-l-4 border-blue-500">
+                        <h3 class="font-bold text-blue-800 mb-2">Market Development</h3>
+                        <p class="text-sm text-gray-700">Reach new audiences with existing products</p>
+                    </div>
+                    <div class="p-4 bg-orange-50 rounded-lg border-l-4 border-orange-500">
+                        <h3 class="font-bold text-orange-800 mb-2">Product Development</h3>
+                        <p class="text-sm text-gray-700">Create new products for existing audience</p>
+                    </div>
+                    <div class="p-4 bg-purple-50 rounded-lg border-l-4 border-purple-500">
+                        <h3 class="font-bold text-purple-800 mb-2">Diversification</h3>
+                        <p class="text-sm text-gray-700">New products for new audiences (higher risk)</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Wizard Container -->
+            <div class="bg-white rounded-xl p-8 mb-8">
+                <!-- Progress Bar -->
+                <div class="mb-8">
+                    <div class="flex justify-between items-center mb-2">
+                        <span class="text-sm font-semibold text-gray-600">Progress</span>
+                        <span class="text-sm font-semibold text-gray-600" id="progress-text">Step 1 of 6</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="progress-fill" style="width: 16.67%;"></div>
+                    </div>
+                </div>
+
+                <!-- Step 1: Current Situation -->
+                <div class="wizard-step active" id="step-1">
+                    <h3 class="text-2xl font-bold mb-4">Step 1: Your Current Situation</h3>
+                    <p class="text-gray-600 mb-6">Let's start by understanding your current business position.</p>
+                    
+                    <div class="mb-4">
+                        <label class="block font-semibold mb-2">
+                            Your Primary Product/Content
+                            <span class="tooltip ml-2">
+                                <i class="fas fa-question-circle text-gray-400"></i>
+                                <span class="tooltiptext">What's your main offering? E.g., YouTube videos, newsletter, podcast, course, etc.</span>
+                            </span>
+                        </label>
+                        <input type="text" id="current-product" placeholder="e.g., YouTube videos about productivity">
+                    </div>
+
+                    <div class="mb-4">
+                        <label class="block font-semibold mb-2">
+                            Your Primary Audience
+                            <span class="tooltip ml-2">
+                                <i class="fas fa-question-circle text-gray-400"></i>
+                                <span class="tooltiptext">Who are your main viewers/readers? Be specific about demographics or interests.</span>
+                            </span>
+                        </label>
+                        <input type="text" id="current-audience" placeholder="e.g., Aspiring entrepreneurs ages 25-35">
+                    </div>
+
+                    <div class="example-box">
+                        <strong>Example:</strong> Product: "Weekly newsletter about AI tools" | Audience: "SaaS founders and marketing professionals"
+                    </div>
+
+                    <div class="flex justify-end mt-6">
+                        <button class="btn-primary" onclick="nextStep()">Next <i class="fas fa-arrow-right ml-2"></i></button>
+                    </div>
+                </div>
+
+                <!-- Step 2: Market Penetration -->
+                <div class="wizard-step" id="step-2">
+                    <h3 class="text-2xl font-bold mb-4">Step 2: Market Penetration</h3>
+                    <p class="text-gray-600 mb-6">How can you get MORE from your EXISTING audience with your CURRENT products?</p>
+                    
+                    <div class="mb-4">
+                        <label class="block font-semibold mb-2">
+                            Market Penetration Ideas
+                            <span class="tooltip ml-2">
+                                <i class="fas fa-question-circle text-gray-400"></i>
+                                <span class="tooltiptext">Ways to increase engagement, frequency, or monetization with your current audience and content.</span>
+                            </span>
+                        </label>
+                        <textarea id="penetration" rows="4" placeholder="e.g., Post more frequently, improve SEO to reach more of the same audience, add premium tier"></textarea>
+                    </div>
+
+                    <div class="example-box">
+                        <strong>Example:</strong> "Increase upload frequency from weekly to 3x/week" | "Launch a Patreon for super fans" | "Optimize thumbnails for higher CTR"
+                    </div>
+
+                    <div class="flex justify-between mt-6">
+                        <button class="btn-secondary" onclick="prevStep()"><i class="fas fa-arrow-left mr-2"></i> Back</button>
+                        <button class="btn-primary" onclick="nextStep()">Next <i class="fas fa-arrow-right ml-2"></i></button>
+                    </div>
+                </div>
+
+                <!-- Step 3: Market Development -->
+                <div class="wizard-step" id="step-3">
+                    <h3 class="text-2xl font-bold mb-4">Step 3: Market Development</h3>
+                    <p class="text-gray-600 mb-6">How can you reach NEW audiences with your EXISTING products?</p>
+                    
+                    <div class="mb-4">
+                        <label class="block font-semibold mb-2">
+                            Market Development Ideas
+                            <span class="tooltip ml-2">
+                                <i class="fas fa-question-circle text-gray-400"></i>
+                                <span class="tooltiptext">New platforms, demographics, or geographic markets where your current content could reach fresh audiences.</span>
+                            </span>
+                        </label>
+                        <textarea id="development" rows="4" placeholder="e.g., Expand to TikTok, translate content to Spanish, target a younger demographic"></textarea>
+                    </div>
+
+                    <div class="example-box">
+                        <strong>Example:</strong> "Cross-post to LinkedIn for B2B audience" | "Create short-form versions for TikTok/Reels" | "Partner with creators in adjacent niches"
+                    </div>
+
+                    <div class="flex justify-between mt-6">
+                        <button class="btn-secondary" onclick="prevStep()"><i class="fas fa-arrow-left mr-2"></i> Back</button>
+                        <button class="btn-primary" onclick="nextStep()">Next <i class="fas fa-arrow-right ml-2"></i></button>
+                    </div>
+                </div>
+
+                <!-- Step 4: Product Development -->
+                <div class="wizard-step" id="step-4">
+                    <h3 class="text-2xl font-bold mb-4">Step 4: Product Development</h3>
+                    <p class="text-gray-600 mb-6">What NEW products can you create for your EXISTING audience?</p>
+                    
+                    <div class="mb-4">
+                        <label class="block font-semibold mb-2">
+                            Product Development Ideas
+                            <span class="tooltip ml-2">
+                                <i class="fas fa-question-circle text-gray-400"></i>
+                                <span class="tooltiptext">New content formats, products, or services that serve your current audience in different ways.</span>
+                            </span>
+                        </label>
+                        <textarea id="product" rows="4" placeholder="e.g., Launch a course, start a podcast, create templates/tools, write a book"></textarea>
+                    </div>
+
+                    <div class="example-box">
+                        <strong>Example:</strong> "Turn best videos into an online course" | "Create a paid community/Slack group" | "Develop productivity templates"
+                    </div>
+
+                    <div class="flex justify-between mt-6">
+                        <button class="btn-secondary" onclick="prevStep()"><i class="fas fa-arrow-left mr-2"></i> Back</button>
+                        <button class="btn-primary" onclick="nextStep()">Next <i class="fas fa-arrow-right ml-2"></i></button>
+                    </div>
+                </div>
+
+                <!-- Step 5: Diversification -->
+                <div class="wizard-step" id="step-5">
+                    <h3 class="text-2xl font-bold mb-4">Step 5: Diversification</h3>
+                    <p class="text-gray-600 mb-6">What NEW products could you create for NEW audiences? (Higher risk, but potentially higher reward)</p>
+                    
+                    <div class="mb-4">
+                        <label class="block font-semibold mb-2">
+                            Diversification Ideas
+                            <span class="tooltip ml-2">
+                                <i class="fas fa-question-circle text-gray-400"></i>
+                                <span class="tooltiptext">Entirely new ventures targeting different audiences. Usually requires more resources and carries more risk.</span>
+                            </span>
+                        </label>
+                        <textarea id="diversification" rows="4" placeholder="e.g., Start a second channel in a different niche, launch a SaaS product, create a different type of business"></textarea>
+                    </div>
+
+                    <div class="example-box">
+                        <strong>Example:</strong> "Launch a second channel about fitness (if main is business)" | "Build a software tool for a different market" | "Start consulting services"
+                    </div>
+
+                    <div class="flex justify-between mt-6">
+                        <button class="btn-secondary" onclick="prevStep()"><i class="fas fa-arrow-left mr-2"></i> Back</button>
+                        <button class="btn-primary" onclick="nextStep()">Next <i class="fas fa-arrow-right ml-2"></i></button>
+                    </div>
+                </div>
+
+                <!-- Step 6: Review & Results -->
+                <div class="wizard-step" id="step-6">
+                    <h3 class="text-2xl font-bold mb-4">Step 6: Your ANSOFF Matrix</h3>
+                    <p class="text-gray-600 mb-6">Here's your complete growth strategy map:</p>
+
+                    <!-- Current Situation Summary -->
+                    <div class="mb-6 p-4 bg-gray-50 rounded-lg">
+                        <h4 class="font-bold mb-2">Current Position:</h4>
+                        <p><strong>Product:</strong> <span id="review-product"></span></p>
+                        <p><strong>Audience:</strong> <span id="review-audience"></span></p>
+                    </div>
+
+                    <!-- Matrix Display -->
+                    <div class="matrix-grid mb-6">
+                        <div class="matrix-cell penetration">
+                            <h4 class="font-bold text-green-700 mb-2">Market Penetration</h4>
+                            <p class="text-sm text-gray-600 mb-2">Existing Product + Existing Market</p>
+                            <p id="review-penetration" class="text-sm"></p>
+                        </div>
+                        <div class="matrix-cell development">
+                            <h4 class="font-bold text-blue-700 mb-2">Market Development</h4>
+                            <p class="text-sm text-gray-600 mb-2">Existing Product + New Market</p>
+                            <p id="review-development" class="text-sm"></p>
+                        </div>
+                        <div class="matrix-cell product">
+                            <h4 class="font-bold text-orange-700 mb-2">Product Development</h4>
+                            <p class="text-sm text-gray-600 mb-2">New Product + Existing Market</p>
+                            <p id="review-product-dev" class="text-sm"></p>
+                        </div>
+                        <div class="matrix-cell diversification">
+                            <h4 class="font-bold text-purple-700 mb-2">Diversification</h4>
+                            <p class="text-sm text-gray-600 mb-2">New Product + New Market</p>
+                            <p id="review-diversification" class="text-sm"></p>
+                        </div>
+                    </div>
+
+                    <div class="flex justify-between mt-6">
+                        <button class="btn-secondary" onclick="prevStep()"><i class="fas fa-arrow-left mr-2"></i> Back</button>
+                        <button class="btn-primary" onclick="downloadPDF()"><i class="fas fa-download mr-2"></i> Download as PDF</button>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Related Frameworks -->
+            <div class="mb-8">
+                <h3 class="text-2xl font-bold mb-6 text-center">Explore More Frameworks</h3>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div class="framework-card">
+                        <div class="text-3xl mb-3" style="color: #956FA6;"><i class="fas fa-balance-scale"></i></div>
+                        <h4 class="font-bold text-lg mb-2">SWOT Analysis</h4>
+                        <p class="text-sm text-gray-600 mb-4">Analyze your strengths, weaknesses, opportunities, and threats</p>
+                        <a href="swot-analysis.html" class="text-sm font-semibold" style="color: #956FA6;">Try This Tool →</a>
+                    </div>
+                    <div class="framework-card">
+                        <div class="text-3xl mb-3" style="color: #956FA6;"><i class="fas fa-chart-line"></i></div>
+                        <h4 class="font-bold text-lg mb-2">BCG Matrix</h4>
+                        <p class="text-sm text-gray-600 mb-4">Evaluate your product portfolio and prioritize investments</p>
+                        <a href="bcg-matrix.html" class="text-sm font-semibold" style="color: #956FA6;">Try This Tool →</a>
+                    </div>
+                    <div class="framework-card">
+                        <div class="text-3xl mb-3" style="color: #956FA6;"><i class="fas fa-project-diagram"></i></div>
+                        <h4 class="font-bold text-lg mb-2">Business Model Canvas</h4>
+                        <p class="text-sm text-gray-600 mb-4">Design your complete business model in 9 building blocks</p>
+                        <a href="business-model-canvas.html" class="text-sm font-semibold" style="color: #956FA6;">Try This Tool →</a>
+                    </div>
+                </div>
+                <div class="text-center mt-6">
+                    <a href="mba-frameworks.html" class="text-lg font-semibold" style="color: #956FA6;">
+                        <i class="fas fa-arrow-left mr-2"></i>Back to All Frameworks
+                    </a>
+                </div>
+            </div>
+
+            <p class="text-center text-xs" style="color: #1B1B1D; opacity: 0.5;">© 2025 Bryan Collins. All rights reserved.</p>
+        </div>
+    </main>
+
+    <script>
+        let currentStep = 1;
+        const totalSteps = 6;
+
+        // Load from localStorage on page load
+        window.addEventListener('DOMContentLoaded', () => {
+            loadFromStorage();
+        });
+
+        function nextStep() {
+            // Save current inputs
+            saveToStorage();
+            
+            // Validate required fields
+            if (currentStep === 1) {
+                const product = document.getElementById('current-product').value;
+                const audience = document.getElementById('current-audience').value;
+                if (!product || !audience) {
+                    alert('Please fill in both fields before continuing.');
+                    return;
+                }
+            }
+
+            // Hide current step
+            document.getElementById(`step-${currentStep}`).classList.remove('active');
+            
+            // Move to next step
+            currentStep++;
+            if (currentStep > totalSteps) currentStep = totalSteps;
+            
+            // Show next step
+            document.getElementById(`step-${currentStep}`).classList.add('active');
+            
+            // Update progress
+            updateProgress();
+            
+            // If final step, populate review
+            if (currentStep === 6) {
+                populateReview();
+            }
+            
+            // Scroll to top
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function prevStep() {
+            // Save current inputs
+            saveToStorage();
+            
+            // Hide current step
+            document.getElementById(`step-${currentStep}`).classList.remove('active');
+            
+            // Move to previous step
+            currentStep--;
+            if (currentStep < 1) currentStep = 1;
+            
+            // Show previous step
+            document.getElementById(`step-${currentStep}`).classList.add('active');
+            
+            // Update progress
+            updateProgress();
+            
+            // Scroll to top
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function updateProgress() {
+            const percentage = (currentStep / totalSteps) * 100;
+            document.getElementById('progress-fill').style.width = percentage + '%';
+            document.getElementById('progress-text').textContent = `Step ${currentStep} of ${totalSteps}`;
+        }
+
+        function saveToStorage() {
+            const data = {
+                currentProduct: document.getElementById('current-product').value,
+                currentAudience: document.getElementById('current-audience').value,
+                penetration: document.getElementById('penetration').value,
+                development: document.getElementById('development').value,
+                product: document.getElementById('product').value,
+                diversification: document.getElementById('diversification').value
+            };
+            localStorage.setItem('ansoff-matrix', JSON.stringify(data));
+        }
+
+        function loadFromStorage() {
+            const saved = localStorage.getItem('ansoff-matrix');
+            if (saved) {
+                const data = JSON.parse(saved);
+                document.getElementById('current-product').value = data.currentProduct || '';
+                document.getElementById('current-audience').value = data.currentAudience || '';
+                document.getElementById('penetration').value = data.penetration || '';
+                document.getElementById('development').value = data.development || '';
+                document.getElementById('product').value = data.product || '';
+                document.getElementById('diversification').value = data.diversification || '';
+            }
+        }
+
+        function populateReview() {
+            document.getElementById('review-product').textContent = document.getElementById('current-product').value;
+            document.getElementById('review-audience').textContent = document.getElementById('current-audience').value;
+            document.getElementById('review-penetration').textContent = document.getElementById('penetration').value || 'No ideas entered';
+            document.getElementById('review-development').textContent = document.getElementById('development').value || 'No ideas entered';
+            document.getElementById('review-product-dev').textContent = document.getElementById('product').value || 'No ideas entered';
+            document.getElementById('review-diversification').textContent = document.getElementById('diversification').value || 'No ideas entered';
+        }
+
+        function downloadPDF() {
+            const { jsPDF } = window.jspdf;
+            const doc = new jsPDF();
+            
+            // Title
+            doc.setFontSize(20);
+            doc.setTextColor(149, 111, 166); // Purple
+            doc.text('ANSOFF Matrix - Growth Strategy', 20, 20);
+            
+            // Date
+            doc.setFontSize(10);
+            doc.setTextColor(100);
+            doc.text('Generated: ' + new Date().toLocaleDateString(), 20, 28);
+            
+            // Current Position
+            doc.setFontSize(14);
+            doc.setTextColor(0);
+            doc.text('Current Position:', 20, 40);
+            doc.setFontSize(11);
+            doc.text('Product: ' + document.getElementById('current-product').value, 20, 48);
+            doc.text('Audience: ' + document.getElementById('current-audience').value, 20, 55);
+            
+            // Market Penetration
+            doc.setFontSize(12);
+            doc.setTextColor(76, 175, 80); // Green
+            doc.text('Market Penetration (Existing Product + Existing Market)', 20, 70);
+            doc.setFontSize(10);
+            doc.setTextColor(0);
+            const penetrationText = doc.splitTextToSize(document.getElementById('penetration').value || 'No ideas entered', 170);
+            doc.text(penetrationText, 20, 78);
+            
+            // Market Development
+            doc.setFontSize(12);
+            doc.setTextColor(33, 150, 243); // Blue
+            doc.text('Market Development (Existing Product + New Market)', 20, 98);
+            doc.setFontSize(10);
+            doc.setTextColor(0);
+            const developmentText = doc.splitTextToSize(document.getElementById('development').value || 'No ideas entered', 170);
+            doc.text(developmentText, 20, 106);
+            
+            // Product Development
+            doc.setFontSize(12);
+            doc.setTextColor(255, 152, 0); // Orange
+            doc.text('Product Development (New Product + Existing Market)', 20, 126);
+            doc.setFontSize(10);
+            doc.setTextColor(0);
+            const productText = doc.splitTextToSize(document.getElementById('product').value || 'No ideas entered', 170);
+            doc.text(productText, 20, 134);
+            
+            // Diversification
+            doc.setFontSize(12);
+            doc.setTextColor(156, 39, 176); // Purple
+            doc.text('Diversification (New Product + New Market)', 20, 154);
+            doc.setFontSize(10);
+            doc.setTextColor(0);
+            const diversificationText = doc.splitTextToSize(document.getElementById('diversification').value || 'No ideas entered', 170);
+            doc.text(diversificationText, 20, 162);
+            
+            // Footer
+            doc.setFontSize(8);
+            doc.setTextColor(150);
+            doc.text('Created with ANSOFF Matrix Tool by Bryan Collins', 20, 285);
+            doc.text('https://join.bryancollins.com/ansoff-matrix', 20, 290);
+            
+            // Save
+            doc.save('ansoff-matrix-' + new Date().toISOString().split('T')[0] + '.pdf');
+        }
+    </script>
+</body>
+</html>
+

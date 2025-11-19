@@ -1,0 +1,346 @@
+---
+// Astro Demo: Homepage
+// Modern homepage with hero, value props, and CTAs focused on newsletter signups
+
+const pageTitle = "Bryan Collins — MBA Frameworks & Creator Tools";
+const pageDescription = "Free MBA frameworks, AI tools, and strategic insights for content creators and entrepreneurs.";
+
+const navItems = [
+  { label: "Newsletter", href: "/join" },
+  { label: "Tools", href: "/tools" },
+  { label: "Products", href: "/products" },
+  { label: "Books", href: "/books" },
+  { label: "MBA Frameworks", href: "/mba-frameworks" }
+];
+
+const valueProps = [
+  {
+    icon: "fa-graduation-cap",
+    title: "Free MBA Frameworks",
+    description: "Interactive strategic planning tools adapted for creators—no $40K tuition required.",
+    link: "/mba-frameworks"
+  },
+  {
+    icon: "fa-robot",
+    title: "AI Prompts & Tools",
+    description: "Ready-to-use AI prompts and productivity tools to save hours every week.",
+    link: "/tools"
+  },
+  {
+    icon: "fa-book",
+    title: "Books on Creativity",
+    description: "Practical guides on writing, productivity, and building a creative practice.",
+    link: "/books"
+  },
+  {
+    icon: "fa-box-open",
+    title: "Products & Resources",
+    description: "Courses, templates, and resources to grow your content business.",
+    link: "/products"
+  }
+];
+---
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{pageTitle}</title>
+    <meta name="description" content={pageDescription}>
+    <meta property="og:title" content={pageTitle} />
+    <meta property="og:description" content={pageDescription} />
+    
+    <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <script defer data-domain="join.bryancollins.com" src="https://plausible.io/js/script.js"></script>
+    
+    <style>
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            background-color: #EDEDEE;
+            color: #1B1B1D;
+        }
+        .hero-gradient {
+            background: linear-gradient(135deg, #956FA6 0%, #7d5e8d 100%);
+        }
+        .nav-sticky {
+            position: sticky;
+            top: 0;
+            z-index: 50;
+            background: white;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+        .cta-button {
+            background: #F3C972;
+            color: #1B1B1D;
+            font-weight: 700;
+            padding: 16px 32px;
+            border-radius: 8px;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+        .cta-button:hover {
+            background: #eab94a;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px -2px rgba(0, 0, 0, 0.15);
+        }
+        .cta-button-secondary {
+            background: white;
+            color: #956FA6;
+            border: 2px solid #956FA6;
+            padding: 14px 30px;
+            border-radius: 8px;
+            text-decoration: none;
+            display: inline-block;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        .cta-button-secondary:hover {
+            background: #956FA6;
+            color: white;
+        }
+        .value-card {
+            background: white;
+            padding: 32px;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s ease;
+            border-top: 4px solid #956FA6;
+        }
+        .value-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+        }
+        .mobile-menu {
+            display: none;
+        }
+        .mobile-menu.active {
+            display: block;
+        }
+        @media (max-width: 768px) {
+            .desktop-nav {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="nav-sticky">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center">
+                    <a href="/" class="text-2xl font-bold" style="color: #956FA6;">Bryan Collins</a>
+                </div>
+                
+                <!-- Desktop Navigation -->
+                <div class="desktop-nav hidden md:flex items-center space-x-8">
+                    {navItems.map(item => (
+                        <a href={item.href} class="text-gray-700 hover:text-gray-900 font-medium">
+                            {item.label}
+                        </a>
+                    ))}
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <button class="md:hidden" onclick="toggleMobileMenu()">
+                    <i class="fas fa-bars text-2xl"></i>
+                </button>
+            </div>
+
+            <!-- Mobile Navigation -->
+            <div class="mobile-menu md:hidden" id="mobile-menu">
+                <div class="px-2 pt-2 pb-3 space-y-1">
+                    {navItems.map(item => (
+                        <a href={item.href} class="block px-3 py-2 text-gray-700 hover:bg-gray-100 rounded-md">
+                            {item.label}
+                        </a>
+                    ))}
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-gradient">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 md:py-32">
+            <div class="text-center">
+                <h1 class="text-4xl md:text-6xl font-extrabold text-white mb-6 leading-tight">
+                    MBA Frameworks & Tools<br />for Content Creators
+                </h1>
+                <p class="text-xl md:text-2xl text-white mb-8 max-w-3xl mx-auto opacity-90">
+                    Free strategic frameworks, AI tools, and actionable insights to build a sustainable creator business
+                </p>
+                
+                <!-- Primary CTA -->
+                <div class="flex flex-col sm:flex-row gap-4 justify-center items-center mb-8">
+                    <a href="/join" class="cta-button text-lg">
+                        <i class="fas fa-envelope mr-2"></i>Join My Newsletter
+                    </a>
+                    <a href="/mba-frameworks" class="cta-button-secondary text-lg">
+                        <i class="fas fa-tools mr-2"></i>Explore MBA Tools
+                    </a>
+                </div>
+
+                <!-- Social Proof -->
+                <p class="text-white text-sm opacity-75">
+                    <i class="fas fa-users mr-2"></i>Join 15,000+ creators and entrepreneurs
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Value Propositions -->
+    <section class="py-20 px-4 sm:px-6 lg:px-8">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">What You'll Get</h2>
+                <p class="text-xl text-gray-600 max-w-2xl mx-auto">
+                    Strategic tools and insights adapted for the creator economy
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                {valueProps.map(prop => (
+                    <a href={prop.link} class="value-card">
+                        <div class="text-5xl mb-4" style="color: #956FA6;">
+                            <i class={`fas ${prop.icon}`}></i>
+                        </div>
+                        <h3 class="text-xl font-bold mb-3">{prop.title}</h3>
+                        <p class="text-gray-600 mb-4">{prop.description}</p>
+                        <span class="text-sm font-semibold" style="color: #956FA6;">
+                            Learn more <i class="fas fa-arrow-right ml-1"></i>
+                        </span>
+                    </a>
+                ))}
+            </div>
+        </div>
+    </section>
+
+    <!-- Newsletter CTA Section -->
+    <section class="py-20 px-4 sm:px-6 lg:px-8" style="background: linear-gradient(135deg, #f8f8f8 0%, #ffffff 100%);">
+        <div class="max-w-4xl mx-auto text-center">
+            <h2 class="text-3xl md:text-4xl font-bold mb-6">Stay Updated</h2>
+            <p class="text-xl text-gray-700 mb-8 max-w-2xl mx-auto">
+                Get weekly insights on strategy, productivity, and building a creator business. 
+                No fluff—just practical advice you can use.
+            </p>
+            
+            <!-- ConvertKit Form Placeholder -->
+            <div class="bg-white rounded-xl p-8 shadow-lg max-w-md mx-auto">
+                <div class="space-y-4">
+                    <input 
+                        type="email" 
+                        placeholder="Your email address" 
+                        class="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:border-purple-500 focus:outline-none"
+                    />
+                    <button class="cta-button w-full text-center">
+                        Subscribe Now
+                    </button>
+                </div>
+                <p class="text-sm text-gray-500 mt-4">
+                    <i class="fas fa-lock mr-1"></i>We respect your privacy. Unsubscribe anytime.
+                </p>
+            </div>
+
+            <div class="mt-8 flex justify-center items-center space-x-6 text-gray-600">
+                <div class="flex items-center">
+                    <i class="fas fa-check-circle mr-2" style="color: #4CAF50;"></i>
+                    <span>Free forever</span>
+                </div>
+                <div class="flex items-center">
+                    <i class="fas fa-envelope-open-text mr-2" style="color: #2196F3;"></i>
+                    <span>Weekly insights</span>
+                </div>
+                <div class="flex items-center">
+                    <i class="fas fa-gift mr-2" style="color: #F3C972;"></i>
+                    <span>Exclusive resources</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-12 px-4 sm:px-6 lg:px-8">
+        <div class="max-w-7xl mx-auto">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
+                <div>
+                    <h3 class="text-xl font-bold mb-4">Bryan Collins</h3>
+                    <p class="text-gray-400 text-sm">
+                        Helping creators build sustainable businesses with strategic frameworks and tools.
+                    </p>
+                </div>
+                <div>
+                    <h4 class="font-bold mb-4">Resources</h4>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="/mba-frameworks" class="text-gray-400 hover:text-white">MBA Frameworks</a></li>
+                        <li><a href="/tools" class="text-gray-400 hover:text-white">Tools</a></li>
+                        <li><a href="/books" class="text-gray-400 hover:text-white">Books</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-bold mb-4">Connect</h4>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="#" class="text-gray-400 hover:text-white">Twitter</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">LinkedIn</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">YouTube</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-bold mb-4">Legal</h4>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="#" class="text-gray-400 hover:text-white">Privacy Policy</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Terms of Service</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Contact</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t border-gray-800 pt-8 text-center text-sm text-gray-400">
+                <p>© 2025 Bryan Collins. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('active');
+        }
+    </script>
+</body>
+</html>
+
+<!--
+ASTRO HOMEPAGE BENEFITS:
+
+1. **Component Extraction**
+   - Navigation → <Navigation /> component
+   - Hero → <Hero /> component  
+   - ValueCard → <ValueCard /> component (reusable)
+   - Footer → <Footer /> component
+   
+2. **Data-Driven**
+   - navItems array → easily update navigation
+   - valueProps array → add/remove sections without touching HTML
+   - Can pull from CMS or markdown files
+
+3. **Performance**
+   - Static generation = instant load
+   - Minimal JavaScript (only mobile menu toggle)
+   - Optimized images with <Image /> component
+
+4. **SEO**
+   - Clean semantic HTML
+   - Proper meta tags
+   - Fast Core Web Vitals scores
+
+5. **Maintainability**
+   - Change nav in one component, updates everywhere
+   - Consistent styling via shared components
+   - Type-safe with TypeScript interfaces
+-->
+

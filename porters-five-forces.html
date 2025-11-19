@@ -1,0 +1,752 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Porter's Five Forces Tool — Competitive Analysis for Creators</title>
+    <meta name="description" content="Free interactive Porter's Five Forces tool. Analyze your competitive environment and market position.">
+    <meta property="og:url" content="https://join.bryancollins.com/porters-five-forces/" />
+    <meta property="og:title" content="Porter's Five Forces Tool — Competitive Analysis" />
+    <meta property="og:description" content="Understand your competitive position with this interactive tool." />
+    
+    <!-- Tailwind CSS -->
+    <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    
+    <!-- jsPDF -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    
+    <!-- Plausible Analytics -->
+    <script defer data-domain="join.bryancollins.com" src="https://plausible.io/js/script.js"></script>
+    <script defer src="resources/analytics.js"></script>
+    
+    <style>
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            background-color: #EDEDEE;
+            color: #1B1B1D;
+        }
+        .hero-gradient {
+            background: linear-gradient(135deg, #956FA6 0%, #7d5e8d 100%);
+        }
+        .hero-text {
+            color: white;
+            text-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+        }
+        .wizard-step {
+            display: none;
+        }
+        .wizard-step.active {
+            display: block;
+        }
+        .progress-bar {
+            height: 8px;
+            background: #EDEDEE;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #956FA6 0%, #F3C972 100%);
+            transition: width 0.3s ease;
+        }
+        .btn-primary {
+            background: #F3C972;
+            color: #1B1B1D;
+            font-weight: 700;
+            padding: 12px 24px;
+            border-radius: 8px;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .btn-primary:hover {
+            background: #eab94a;
+            transform: translateY(-2px);
+        }
+        .btn-secondary {
+            background: #A6B6CF;
+            color: white;
+            font-weight: 600;
+            padding: 12px 24px;
+            border-radius: 8px;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .btn-secondary:hover {
+            background: #8a9bb8;
+        }
+        textarea {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #EDEDEE;
+            border-radius: 8px;
+            font-family: inherit;
+            transition: border-color 0.3s ease;
+        }
+        textarea:focus {
+            outline: none;
+            border-color: #956FA6;
+        }
+        .rating-selector {
+            display: flex;
+            gap: 8px;
+            margin-top: 12px;
+        }
+        .rating-btn {
+            flex: 1;
+            padding: 12px;
+            border: 2px solid #EDEDEE;
+            border-radius: 8px;
+            background: white;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+            font-weight: 600;
+        }
+        .rating-btn:hover {
+            border-color: #956FA6;
+        }
+        .rating-btn.selected {
+            border-color: #956FA6;
+            background: #956FA6;
+            color: white;
+        }
+        .rating-btn.low { color: #4CAF50; }
+        .rating-btn.medium { color: #FF9800; }
+        .rating-btn.high { color: #F44336; }
+        .rating-btn.low.selected { background: #4CAF50; border-color: #4CAF50; }
+        .rating-btn.medium.selected { background: #FF9800; border-color: #FF9800; }
+        .rating-btn.high.selected { background: #F44336; border-color: #F44336; }
+        .forces-diagram {
+            display: grid;
+            grid-template-columns: 1fr 2fr 1fr;
+            grid-template-rows: 1fr 2fr 1fr;
+            gap: 16px;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        .force-box {
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+            text-align: center;
+        }
+        .force-center {
+            grid-column: 2;
+            grid-row: 2;
+            background: linear-gradient(135deg, #956FA6 0%, #7d5e8d 100%);
+            color: white;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        .force-top { grid-column: 2; grid-row: 1; }
+        .force-left { grid-column: 1; grid-row: 2; }
+        .force-right { grid-column: 3; grid-row: 2; }
+        .force-bottom { grid-column: 2; grid-row: 3; }
+        .intensity-indicator {
+            height: 8px;
+            border-radius: 4px;
+            margin-top: 8px;
+        }
+        .intensity-low { background: #4CAF50; width: 33%; }
+        .intensity-medium { background: #FF9800; width: 66%; }
+        .intensity-high { background: #F44336; width: 100%; }
+        .tooltip {
+            position: relative;
+            display: inline-block;
+            cursor: help;
+        }
+        .tooltip .tooltiptext {
+            visibility: hidden;
+            width: 250px;
+            background-color: #1B1B1D;
+            color: #fff;
+            text-align: left;
+            border-radius: 6px;
+            padding: 10px;
+            position: absolute;
+            z-index: 1;
+            bottom: 125%;
+            left: 50%;
+            margin-left: -125px;
+            opacity: 0;
+            transition: opacity 0.3s;
+            font-size: 14px;
+        }
+        .tooltip:hover .tooltiptext {
+            visibility: visible;
+            opacity: 1;
+        }
+        .example-box {
+            background: linear-gradient(135deg, #F3C972 0%, #f5d89a 100%);
+            padding: 12px 16px;
+            border-radius: 8px;
+            margin-top: 8px;
+            font-size: 14px;
+            color: #1B1B1D;
+        }
+        .framework-card {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s ease;
+        }
+        .framework-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+        }
+        @media (max-width: 768px) {
+            .forces-diagram {
+                grid-template-columns: 1fr;
+                grid-template-rows: auto;
+            }
+            .force-center, .force-top, .force-left, .force-right, .force-bottom {
+                grid-column: 1;
+                grid-row: auto;
+            }
+        }
+    </style>
+</head>
+<body>
+    <main class="min-h-screen py-12 px-4 sm:px-6 lg:px-8">
+        <div class="max-w-4xl mx-auto">
+            
+            <!-- Hero -->
+            <div class="hero-gradient rounded-xl px-8 py-12 text-center mb-8">
+                <div class="inline-block p-4 bg-white bg-opacity-20 rounded-full mb-4">
+                    <i class="fas fa-trophy text-4xl" style="color: white;"></i>
+                </div>
+                <h1 class="hero-text text-4xl sm:text-5xl font-extrabold mb-4">Porter's Five Forces</h1>
+                <p class="hero-text text-xl">Analyze Your Competitive Environment</p>
+            </div>
+
+            <!-- Explanation -->
+            <div class="bg-white rounded-xl p-8 mb-8">
+                <h2 class="text-2xl font-bold mb-4">What is Porter's Five Forces?</h2>
+                <p class="text-lg mb-4">
+                    Porter's Five Forces is a framework for analyzing the competitive intensity and attractiveness of your market. 
+                    Developed by Michael Porter, it examines five key forces that shape competition and profitability.
+                </p>
+                <p class="text-lg mb-4">
+                    <strong>For content creators,</strong> this helps you understand: how easy it is for new creators to enter your niche, 
+                    what power your audience has, whether there are alternatives to your content, how much leverage platforms have over you, 
+                    and how intense the competition is.
+                </p>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-6">
+                    <div class="p-4 bg-purple-50 rounded-lg">
+                        <h3 class="font-bold text-purple-800 mb-2">1. Threat of New Entrants</h3>
+                        <p class="text-sm text-gray-700">How easy is it for new creators to start competing?</p>
+                    </div>
+                    <div class="p-4 bg-blue-50 rounded-lg">
+                        <h3 class="font-bold text-blue-800 mb-2">2. Bargaining Power of Buyers</h3>
+                        <p class="text-sm text-gray-700">How much control does your audience have?</p>
+                    </div>
+                    <div class="p-4 bg-green-50 rounded-lg">
+                        <h3 class="font-bold text-green-800 mb-2">3. Threat of Substitutes</h3>
+                        <p class="text-sm text-gray-700">Can your audience easily find alternatives?</p>
+                    </div>
+                    <div class="p-4 bg-orange-50 rounded-lg">
+                        <h3 class="font-bold text-orange-800 mb-2">4. Bargaining Power of Suppliers</h3>
+                        <p class="text-sm text-gray-700">How much power do platforms/vendors have?</p>
+                    </div>
+                    <div class="p-4 bg-red-50 rounded-lg">
+                        <h3 class="font-bold text-red-800 mb-2">5. Competitive Rivalry</h3>
+                        <p class="text-sm text-gray-700">How intense is competition in your niche?</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Wizard Container -->
+            <div class="bg-white rounded-xl p-8 mb-8">
+                <!-- Progress Bar -->
+                <div class="mb-8">
+                    <div class="flex justify-between items-center mb-2">
+                        <span class="text-sm font-semibold text-gray-600">Progress</span>
+                        <span class="text-sm font-semibold text-gray-600" id="progress-text">Step 1 of 6</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="progress-fill" style="width: 16.67%;"></div>
+                    </div>
+                </div>
+
+                <!-- Step 1: Threat of New Entrants -->
+                <div class="wizard-step active" id="step-1">
+                    <h3 class="text-2xl font-bold mb-4">Step 1: Threat of New Entrants</h3>
+                    <p class="text-gray-600 mb-6">How easy is it for new creators to enter your niche and compete with you?</p>
+                    
+                    <div class="mb-4">
+                        <label class="block font-semibold mb-2">
+                            Assess the Barriers to Entry
+                            <span class="tooltip ml-2">
+                                <i class="fas fa-question-circle text-gray-400"></i>
+                                <span class="tooltiptext">Consider: equipment costs, skill requirements, audience building time, brand recognition needed, etc.</span>
+                            </span>
+                        </label>
+                        <textarea id="entrants-analysis" rows="3" placeholder="e.g., Low barriers - anyone can start a YouTube channel. Medium barriers - requires video editing skills. High barriers - need expensive equipment and years of expertise."></textarea>
+                        
+                        <label class="block font-semibold mt-4 mb-2">Rate the Threat Level:</label>
+                        <div class="rating-selector">
+                            <button class="rating-btn low" onclick="selectRating('entrants', 'low')">
+                                <div class="text-2xl">🟢</div>
+                                <div class="text-sm">Low</div>
+                            </button>
+                            <button class="rating-btn medium" onclick="selectRating('entrants', 'medium')">
+                                <div class="text-2xl">🟡</div>
+                                <div class="text-sm">Medium</div>
+                            </button>
+                            <button class="rating-btn high" onclick="selectRating('entrants', 'high')">
+                                <div class="text-2xl">🔴</div>
+                                <div class="text-sm">High</div>
+                            </button>
+                        </div>
+                        <input type="hidden" id="entrants-rating" value="">
+                    </div>
+
+                    <div class="example-box">
+                        <strong>Example:</strong> High threat = "Easy to start a podcast" | Low threat = "Hard to build credibility in medical niche"
+                    </div>
+
+                    <div class="flex justify-end mt-6">
+                        <button class="btn-primary" onclick="nextStep()">Next <i class="fas fa-arrow-right ml-2"></i></button>
+                    </div>
+                </div>
+
+                <!-- Step 2: Bargaining Power of Buyers -->
+                <div class="wizard-step" id="step-2">
+                    <h3 class="text-2xl font-bold mb-4">Step 2: Bargaining Power of Buyers</h3>
+                    <p class="text-gray-600 mb-6">How much control does your audience have? Can they easily switch to competitors?</p>
+                    
+                    <div class="mb-4">
+                        <label class="block font-semibold mb-2">
+                            Assess Your Audience's Power
+                            <span class="tooltip ml-2">
+                                <i class="fas fa-question-circle text-gray-400"></i>
+                                <span class="tooltiptext">Consider: switching costs, content uniqueness, audience loyalty, free vs. paid content, alternatives available.</span>
+                            </span>
+                        </label>
+                        <textarea id="buyers-analysis" rows="3" placeholder="e.g., High power - audience can easily find similar free content elsewhere. Low power - my unique perspective keeps them coming back."></textarea>
+                        
+                        <label class="block font-semibold mt-4 mb-2">Rate the Power Level:</label>
+                        <div class="rating-selector">
+                            <button class="rating-btn low" onclick="selectRating('buyers', 'low')">
+                                <div class="text-2xl">🟢</div>
+                                <div class="text-sm">Low</div>
+                            </button>
+                            <button class="rating-btn medium" onclick="selectRating('buyers', 'medium')">
+                                <div class="text-2xl">🟡</div>
+                                <div class="text-sm">Medium</div>
+                            </button>
+                            <button class="rating-btn high" onclick="selectRating('buyers', 'high')">
+                                <div class="text-2xl">🔴</div>
+                                <div class="text-sm">High</div>
+                            </button>
+                        </div>
+                        <input type="hidden" id="buyers-rating" value="">
+                    </div>
+
+                    <div class="example-box">
+                        <strong>Example:</strong> High power = "Free content, many alternatives" | Low power = "Loyal paid community"
+                    </div>
+
+                    <div class="flex justify-between mt-6">
+                        <button class="btn-secondary" onclick="prevStep()"><i class="fas fa-arrow-left mr-2"></i> Back</button>
+                        <button class="btn-primary" onclick="nextStep()">Next <i class="fas fa-arrow-right ml-2"></i></button>
+                    </div>
+                </div>
+
+                <!-- Step 3: Threat of Substitutes -->
+                <div class="wizard-step" id="step-3">
+                    <h3 class="text-2xl font-bold mb-4">Step 3: Threat of Substitutes</h3>
+                    <p class="text-gray-600 mb-6">What alternatives exist? Can your audience get similar value elsewhere?</p>
+                    
+                    <div class="mb-4">
+                        <label class="block font-semibold mb-2">
+                            Identify Substitute Products/Content
+                            <span class="tooltip ml-2">
+                                <i class="fas fa-question-circle text-gray-400"></i>
+                                <span class="tooltiptext">Other content types, platforms, or solutions that serve the same audience need differently.</span>
+                            </span>
+                        </label>
+                        <textarea id="substitutes-analysis" rows="3" placeholder="e.g., Audience could read blogs instead of watching videos, use AI tools instead of my tutorials, listen to podcasts instead."></textarea>
+                        
+                        <label class="block font-semibold mt-4 mb-2">Rate the Threat Level:</label>
+                        <div class="rating-selector">
+                            <button class="rating-btn low" onclick="selectRating('substitutes', 'low')">
+                                <div class="text-2xl">🟢</div>
+                                <div class="text-sm">Low</div>
+                            </button>
+                            <button class="rating-btn medium" onclick="selectRating('substitutes', 'medium')">
+                                <div class="text-2xl">🟡</div>
+                                <div class="text-sm">Medium</div>
+                            </button>
+                            <button class="rating-btn high" onclick="selectRating('substitutes', 'high')">
+                                <div class="text-2xl">🔴</div>
+                                <div class="text-sm">High</div>
+                            </button>
+                        </div>
+                        <input type="hidden" id="substitutes-rating" value="">
+                    </div>
+
+                    <div class="example-box">
+                        <strong>Example:</strong> High threat = "Many other learning formats" | Low threat = "Unique live coaching"
+                    </div>
+
+                    <div class="flex justify-between mt-6">
+                        <button class="btn-secondary" onclick="prevStep()"><i class="fas fa-arrow-left mr-2"></i> Back</button>
+                        <button class="btn-primary" onclick="nextStep()">Next <i class="fas fa-arrow-right ml-2"></i></button>
+                    </div>
+                </div>
+
+                <!-- Step 4: Bargaining Power of Suppliers -->
+                <div class="wizard-step" id="step-4">
+                    <h3 class="text-2xl font-bold mb-4">Step 4: Bargaining Power of Suppliers</h3>
+                    <p class="text-gray-600 mb-6">How much control do platforms, tools, or vendors have over your business?</p>
+                    
+                    <div class="mb-4">
+                        <label class="block font-semibold mb-2">
+                            Assess Your Dependency on Suppliers
+                            <span class="tooltip ml-2">
+                                <i class="fas fa-question-circle text-gray-400"></i>
+                                <span class="tooltiptext">Platforms (YouTube, Spotify), software tools, freelancers, equipment vendors, ad networks, etc.</span>
+                            </span>
+                        </label>
+                        <textarea id="suppliers-analysis" rows="3" placeholder="e.g., High dependency on YouTube algorithm. Use proprietary software. Rely on specific freelance editor. Locked into ConvertKit."></textarea>
+                        
+                        <label class="block font-semibold mt-4 mb-2">Rate the Power Level:</label>
+                        <div class="rating-selector">
+                            <button class="rating-btn low" onclick="selectRating('suppliers', 'low')">
+                                <div class="text-2xl">🟢</div>
+                                <div class="text-sm">Low</div>
+                            </button>
+                            <button class="rating-btn medium" onclick="selectRating('suppliers', 'medium')">
+                                <div class="text-2xl">🟡</div>
+                                <div class="text-sm">Medium</div>
+                            </button>
+                            <button class="rating-btn high" onclick="selectRating('suppliers', 'high')">
+                                <div class="text-2xl">🔴</div>
+                                <div class="text-sm">High</div>
+                            </button>
+                        </div>
+                        <input type="hidden" id="suppliers-rating" value="">
+                    </div>
+
+                    <div class="example-box">
+                        <strong>Example:</strong> High power = "100% YouTube dependent" | Low power = "Own email list, multi-platform"
+                    </div>
+
+                    <div class="flex justify-between mt-6">
+                        <button class="btn-secondary" onclick="prevStep()"><i class="fas fa-arrow-left mr-2"></i> Back</button>
+                        <button class="btn-primary" onclick="nextStep()">Next <i class="fas fa-arrow-right ml-2"></i></button>
+                    </div>
+                </div>
+
+                <!-- Step 5: Competitive Rivalry -->
+                <div class="wizard-step" id="step-5">
+                    <h3 class="text-2xl font-bold mb-4">Step 5: Competitive Rivalry</h3>
+                    <p class="text-gray-600 mb-6">How intense is the competition in your niche? How crowded is the space?</p>
+                    
+                    <div class="mb-4">
+                        <label class="block font-semibold mb-2">
+                            Assess the Competitive Landscape
+                            <span class="tooltip ml-2">
+                                <i class="fas fa-question-circle text-gray-400"></i>
+                                <span class="tooltiptext">Number of competitors, growth rate of niche, content saturation, differentiation difficulty.</span>
+                            </span>
+                        </label>
+                        <textarea id="rivalry-analysis" rows="3" placeholder="e.g., Highly competitive niche with thousands of creators. Moderate competition - a few dominant players. Low competition - underserved niche."></textarea>
+                        
+                        <label class="block font-semibold mt-4 mb-2">Rate the Intensity Level:</label>
+                        <div class="rating-selector">
+                            <button class="rating-btn low" onclick="selectRating('rivalry', 'low')">
+                                <div class="text-2xl">🟢</div>
+                                <div class="text-sm">Low</div>
+                            </button>
+                            <button class="rating-btn medium" onclick="selectRating('rivalry', 'medium')">
+                                <div class="text-2xl">🟡</div>
+                                <div class="text-sm">Medium</div>
+                            </button>
+                            <button class="rating-btn high" onclick="selectRating('rivalry', 'high')">
+                                <div class="text-2xl">🔴</div>
+                                <div class="text-sm">High</div>
+                            </button>
+                        </div>
+                        <input type="hidden" id="rivalry-rating" value="">
+                    </div>
+
+                    <div class="example-box">
+                        <strong>Example:</strong> High = "Oversaturated productivity space" | Low = "Niche B2B SaaS tutorials"
+                    </div>
+
+                    <div class="flex justify-between mt-6">
+                        <button class="btn-secondary" onclick="prevStep()"><i class="fas fa-arrow-left mr-2"></i> Back</button>
+                        <button class="btn-primary" onclick="nextStep()">Next <i class="fas fa-arrow-right ml-2"></i></button>
+                    </div>
+                </div>
+
+                <!-- Step 6: Results -->
+                <div class="wizard-step" id="step-6">
+                    <h3 class="text-2xl font-bold mb-4">Your Five Forces Analysis</h3>
+                    <p class="text-gray-600 mb-6">Here's your competitive environment assessment:</p>
+
+                    <!-- Forces Diagram -->
+                    <div class="forces-diagram mb-8">
+                        <div class="force-box force-top">
+                            <h5 class="font-bold text-sm mb-2">Threat of New Entrants</h5>
+                            <p class="text-xs mb-2" id="review-entrants-text"></p>
+                            <div class="intensity-indicator" id="review-entrants-bar"></div>
+                        </div>
+                        
+                        <div class="force-box force-left">
+                            <h5 class="font-bold text-sm mb-2">Supplier Power</h5>
+                            <p class="text-xs mb-2" id="review-suppliers-text"></p>
+                            <div class="intensity-indicator" id="review-suppliers-bar"></div>
+                        </div>
+                        
+                        <div class="force-box force-center">
+                            <i class="fas fa-trophy text-4xl mb-2"></i>
+                            <h5 class="font-bold text-lg">Your Competitive Position</h5>
+                        </div>
+                        
+                        <div class="force-box force-right">
+                            <h5 class="font-bold text-sm mb-2">Buyer Power</h5>
+                            <p class="text-xs mb-2" id="review-buyers-text"></p>
+                            <div class="intensity-indicator" id="review-buyers-bar"></div>
+                        </div>
+                        
+                        <div class="force-box force-bottom">
+                            <h5 class="font-bold text-sm mb-2">Threat of Substitutes</h5>
+                            <p class="text-xs mb-2" id="review-substitutes-text"></p>
+                            <div class="intensity-indicator" id="review-substitutes-bar"></div>
+                        </div>
+                    </div>
+
+                    <!-- Competitive Rivalry (separate) -->
+                    <div class="bg-white p-6 rounded-lg shadow mb-6">
+                        <h5 class="font-bold text-lg mb-2">Competitive Rivalry: <span id="review-rivalry-label"></span></h5>
+                        <p class="text-sm mb-2" id="review-rivalry-analysis"></p>
+                        <div class="intensity-indicator" id="review-rivalry-bar"></div>
+                    </div>
+
+                    <div class="bg-blue-50 border-l-4 border-blue-500 p-4">
+                        <h4 class="font-bold text-blue-900 mb-2"><i class="fas fa-lightbulb mr-2"></i>Strategy Insights:</h4>
+                        <ul class="text-sm text-blue-900 space-y-1">
+                            <li>• <strong>High forces = Less attractive market</strong> (harder to be profitable)</li>
+                            <li>• <strong>Low forces = More attractive market</strong> (easier to succeed)</li>
+                            <li>• Focus on differentiating where threats are high</li>
+                            <li>• Build moats to reduce competitive pressure</li>
+                        </ul>
+                    </div>
+
+                    <div class="flex justify-between mt-6">
+                        <button class="btn-secondary" onclick="prevStep()"><i class="fas fa-arrow-left mr-2"></i> Back</button>
+                        <button class="btn-primary" onclick="downloadPDF()"><i class="fas fa-download mr-2"></i> Download as PDF</button>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Related Frameworks -->
+            <div class="mb-8">
+                <h3 class="text-2xl font-bold mb-6 text-center">Explore More Frameworks</h3>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div class="framework-card">
+                        <div class="text-3xl mb-3" style="color: #956FA6;"><i class="fas fa-globe"></i></div>
+                        <h4 class="font-bold text-lg mb-2">PESTEL Analysis</h4>
+                        <p class="text-sm text-gray-600 mb-4">Assess macro-environmental factors affecting your business</p>
+                        <a href="pestel-analysis.html" class="text-sm font-semibold" style="color: #956FA6;">Try This Tool →</a>
+                    </div>
+                    <div class="framework-card">
+                        <div class="text-3xl mb-3" style="color: #956FA6;"><i class="fas fa-link"></i></div>
+                        <h4 class="font-bold text-lg mb-2">Value Chain Analysis</h4>
+                        <p class="text-sm text-gray-600 mb-4">Map where you create value in your content business</p>
+                        <a href="value-chain.html" class="text-sm font-semibold" style="color: #956FA6;">Try This Tool →</a>
+                    </div>
+                    <div class="framework-card">
+                        <div class="text-3xl mb-3" style="color: #956FA6;"><i class="fas fa-balance-scale"></i></div>
+                        <h4 class="font-bold text-lg mb-2">SWOT Analysis</h4>
+                        <p class="text-sm text-gray-600 mb-4">Identify your strengths, weaknesses, opportunities, and threats</p>
+                        <a href="swot-analysis.html" class="text-sm font-semibold" style="color: #956FA6;">Try This Tool →</a>
+                    </div>
+                </div>
+                <div class="text-center mt-6">
+                    <a href="mba-frameworks.html" class="text-lg font-semibold" style="color: #956FA6;">
+                        <i class="fas fa-arrow-left mr-2"></i>Back to All Frameworks
+                    </a>
+                </div>
+            </div>
+
+            <p class="text-center text-xs" style="color: #1B1B1D; opacity: 0.5;">© 2025 Bryan Collins. All rights reserved.</p>
+        </div>
+    </main>
+
+    <script>
+        let currentStep = 1;
+        const totalSteps = 6;
+        const ratings = {};
+
+        window.addEventListener('DOMContentLoaded', () => {
+            loadFromStorage();
+        });
+
+        function selectRating(force, level) {
+            ratings[force] = level;
+            
+            // Update UI
+            const buttons = document.querySelectorAll(`#step-${currentStep} .rating-btn`);
+            buttons.forEach(btn => btn.classList.remove('selected'));
+            event.target.closest('.rating-btn').classList.add('selected');
+            
+            // Update hidden input
+            document.getElementById(`${force}-rating`).value = level;
+            
+            saveToStorage();
+        }
+
+        function nextStep() {
+            saveToStorage();
+            document.getElementById(`step-${currentStep}`).classList.remove('active');
+            currentStep++;
+            if (currentStep > totalSteps) currentStep = totalSteps;
+            document.getElementById(`step-${currentStep}`).classList.add('active');
+            updateProgress();
+            
+            if (currentStep === 6) {
+                populateReview();
+            }
+            
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function prevStep() {
+            saveToStorage();
+            document.getElementById(`step-${currentStep}`).classList.remove('active');
+            currentStep--;
+            if (currentStep < 1) currentStep = 1;
+            document.getElementById(`step-${currentStep}`).classList.add('active');
+            updateProgress();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function updateProgress() {
+            const percentage = (currentStep / totalSteps) * 100;
+            document.getElementById('progress-fill').style.width = percentage + '%';
+            document.getElementById('progress-text').textContent = `Step ${currentStep} of ${totalSteps}`;
+        }
+
+        function saveToStorage() {
+            const data = {
+                entrantsAnalysis: document.getElementById('entrants-analysis').value,
+                entrantsRating: document.getElementById('entrants-rating').value,
+                buyersAnalysis: document.getElementById('buyers-analysis').value,
+                buyersRating: document.getElementById('buyers-rating').value,
+                substitutesAnalysis: document.getElementById('substitutes-analysis').value,
+                substitutesRating: document.getElementById('substitutes-rating').value,
+                suppliersAnalysis: document.getElementById('suppliers-analysis').value,
+                suppliersRating: document.getElementById('suppliers-rating').value,
+                rivalryAnalysis: document.getElementById('rivalry-analysis').value,
+                rivalryRating: document.getElementById('rivalry-rating').value
+            };
+            localStorage.setItem('porters-five-forces', JSON.stringify(data));
+        }
+
+        function loadFromStorage() {
+            const saved = localStorage.getItem('porters-five-forces');
+            if (saved) {
+                const data = JSON.parse(saved);
+                document.getElementById('entrants-analysis').value = data.entrantsAnalysis || '';
+                document.getElementById('entrants-rating').value = data.entrantsRating || '';
+                document.getElementById('buyers-analysis').value = data.buyersAnalysis || '';
+                document.getElementById('buyers-rating').value = data.buyersRating || '';
+                document.getElementById('substitutes-analysis').value = data.substitutesAnalysis || '';
+                document.getElementById('substitutes-rating').value = data.substitutesRating || '';
+                document.getElementById('suppliers-analysis').value = data.suppliersAnalysis || '';
+                document.getElementById('suppliers-rating').value = data.suppliersRating || '';
+                document.getElementById('rivalry-analysis').value = data.rivalryAnalysis || '';
+                document.getElementById('rivalry-rating').value = data.rivalryRating || '';
+            }
+        }
+
+        function populateReview() {
+            const forces = ['entrants', 'buyers', 'substitutes', 'suppliers', 'rivalry'];
+            
+            forces.forEach(force => {
+                const rating = document.getElementById(`${force}-rating`).value || 'Not rated';
+                const analysis = document.getElementById(`${force}-analysis`).value || 'No analysis';
+                
+                if (force !== 'rivalry') {
+                    document.getElementById(`review-${force}-text`).textContent = rating.toUpperCase();
+                    const bar = document.getElementById(`review-${force}-bar`);
+                    bar.className = 'intensity-indicator';
+                    if (rating === 'low') bar.classList.add('intensity-low');
+                    else if (rating === 'medium') bar.classList.add('intensity-medium');
+                    else if (rating === 'high') bar.classList.add('intensity-high');
+                } else {
+                    document.getElementById('review-rivalry-label').textContent = rating.toUpperCase();
+                    document.getElementById('review-rivalry-analysis').textContent = analysis;
+                    const bar = document.getElementById('review-rivalry-bar');
+                    bar.className = 'intensity-indicator';
+                    if (rating === 'low') bar.classList.add('intensity-low');
+                    else if (rating === 'medium') bar.classList.add('intensity-medium');
+                    else if (rating === 'high') bar.classList.add('intensity-high');
+                }
+            });
+        }
+
+        function downloadPDF() {
+            const { jsPDF } = window.jspdf;
+            const doc = new jsPDF();
+            
+            doc.setFontSize(20);
+            doc.setTextColor(149, 111, 166);
+            doc.text("Porter's Five Forces Analysis", 20, 20);
+            
+            doc.setFontSize(10);
+            doc.setTextColor(100);
+            doc.text('Generated: ' + new Date().toLocaleDateString(), 20, 28);
+            
+            let yPos = 40;
+            const forces = [
+                { label: 'Threat of New Entrants', id: 'entrants' },
+                { label: 'Bargaining Power of Buyers', id: 'buyers' },
+                { label: 'Threat of Substitutes', id: 'substitutes' },
+                { label: 'Bargaining Power of Suppliers', id: 'suppliers' },
+                { label: 'Competitive Rivalry', id: 'rivalry' }
+            ];
+            
+            forces.forEach(force => {
+                doc.setFontSize(12);
+                doc.setTextColor(149, 111, 166);
+                const rating = document.getElementById(`${force.id}-rating`).value || 'Not rated';
+                doc.text(`${force.label}: ${rating.toUpperCase()}`, 20, yPos);
+                yPos += 6;
+                
+                doc.setFontSize(10);
+                doc.setTextColor(0);
+                const analysis = doc.splitTextToSize(document.getElementById(`${force.id}-analysis`).value || 'No analysis', 170);
+                doc.text(analysis, 20, yPos);
+                yPos += analysis.length * 5 + 8;
+                
+                if (yPos > 260) {
+                    doc.addPage();
+                    yPos = 20;
+                }
+            });
+            
+            doc.setFontSize(8);
+            doc.setTextColor(150);
+            doc.text("Created with Porter's Five Forces Tool by Bryan Collins", 20, 285);
+            doc.text('https://join.bryancollins.com/porters-five-forces', 20, 290);
+            
+            doc.save('porters-five-forces-' + new Date().toISOString().split('T')[0] + '.pdf');
+        }
+    </script>
+</body>
+</html>
+

@@ -1,0 +1,675 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Business Model Canvas Tool — Design Your Business Model</title>
+    <meta name="description" content="Free interactive Business Model Canvas tool. Design your complete business model with 9 key building blocks.">
+    <meta property="og:url" content="https://join.bryancollins.com/business-model-canvas/" />
+    <meta property="og:title" content="Business Model Canvas Tool" />
+    <meta property="og:description" content="Design your content business model with this interactive tool." />
+    
+    <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script defer data-domain="join.bryancollins.com" src="https://plausible.io/js/script.js"></script>
+    <script defer src="resources/analytics.js"></script>
+    
+    <style>
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            background-color: #EDEDEE;
+            color: #1B1B1D;
+        }
+        .hero-gradient {
+            background: linear-gradient(135deg, #956FA6 0%, #7d5e8d 100%);
+        }
+        .hero-text {
+            color: white;
+            text-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+        }
+        .wizard-step {
+            display: none;
+        }
+        .wizard-step.active {
+            display: block;
+        }
+        .progress-bar {
+            height: 8px;
+            background: #EDEDEE;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #956FA6 0%, #F3C972 100%);
+            transition: width 0.3s ease;
+        }
+        .btn-primary {
+            background: #F3C972;
+            color: #1B1B1D;
+            font-weight: 700;
+            padding: 12px 24px;
+            border-radius: 8px;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .btn-primary:hover {
+            background: #eab94a;
+            transform: translateY(-2px);
+        }
+        .btn-secondary {
+            background: #A6B6CF;
+            color: white;
+            font-weight: 600;
+            padding: 12px 24px;
+            border-radius: 8px;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .btn-secondary:hover {
+            background: #8a9bb8;
+        }
+        textarea {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #EDEDEE;
+            border-radius: 8px;
+            font-family: inherit;
+            transition: border-color 0.3s ease;
+        }
+        textarea:focus {
+            outline: none;
+            border-color: #956FA6;
+        }
+        .canvas-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            grid-template-rows: repeat(2, auto);
+            gap: 12px;
+        }
+        .canvas-box {
+            background: white;
+            padding: 16px;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+            min-height: 150px;
+        }
+        .canvas-box h5 {
+            font-weight: 700;
+            margin-bottom: 8px;
+            font-size: 14px;
+        }
+        .canvas-box p {
+            font-size: 12px;
+            line-height: 1.4;
+        }
+        .box-key-partners { grid-column: 1; grid-row: 1 / 3; border-left: 4px solid #FF6B6B; }
+        .box-key-activities { grid-column: 2; grid-row: 1; border-left: 4px solid #4ECDC4; }
+        .box-key-resources { grid-column: 2; grid-row: 2; border-left: 4px solid #95E1D3; }
+        .box-value-prop { grid-column: 3; grid-row: 1 / 3; border-left: 4px solid #F3C972; background: linear-gradient(135deg, #fff 0%, #fffbf0 100%); }
+        .box-customer-rel { grid-column: 4; grid-row: 1; border-left: 4px solid #A8E6CF; }
+        .box-channels { grid-column: 4; grid-row: 2; border-left: 4px solid #DCEDC1; }
+        .box-customer-seg { grid-column: 5; grid-row: 1 / 3; border-left: 4px solid #956FA6; }
+        .box-cost { grid-column: 1 / 3; grid-row: 3; border-left: 4px solid #FF8B94; }
+        .box-revenue { grid-column: 3 / 6; grid-row: 3; border-left: 4px solid #4CAF50; }
+        .tooltip {
+            position: relative;
+            display: inline-block;
+            cursor: help;
+        }
+        .tooltip .tooltiptext {
+            visibility: hidden;
+            width: 250px;
+            background-color: #1B1B1D;
+            color: #fff;
+            text-align: left;
+            border-radius: 6px;
+            padding: 10px;
+            position: absolute;
+            z-index: 1;
+            bottom: 125%;
+            left: 50%;
+            margin-left: -125px;
+            opacity: 0;
+            transition: opacity 0.3s;
+            font-size: 14px;
+        }
+        .tooltip:hover .tooltiptext {
+            visibility: visible;
+            opacity: 1;
+        }
+        .example-box {
+            background: linear-gradient(135deg, #F3C972 0%, #f5d89a 100%);
+            padding: 12px 16px;
+            border-radius: 8px;
+            margin-top: 8px;
+            font-size: 14px;
+            color: #1B1B1D;
+        }
+        .framework-card {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s ease;
+        }
+        .framework-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+        }
+        @media (max-width: 1024px) {
+            .canvas-grid {
+                grid-template-columns: 1fr;
+                grid-template-rows: auto;
+            }
+            .canvas-box {
+                grid-column: 1 !important;
+                grid-row: auto !important;
+            }
+        }
+    </style>
+</head>
+<body>
+    <main class="min-h-screen py-12 px-4 sm:px-6 lg:px-8">
+        <div class="max-w-6xl mx-auto">
+            
+            <div class="hero-gradient rounded-xl px-8 py-12 text-center mb-8">
+                <div class="inline-block p-4 bg-white bg-opacity-20 rounded-full mb-4">
+                    <i class="fas fa-project-diagram text-4xl" style="color: white;"></i>
+                </div>
+                <h1 class="hero-text text-4xl sm:text-5xl font-extrabold mb-4">Business Model Canvas</h1>
+                <p class="hero-text text-xl">Design Your Complete Business Model</p>
+            </div>
+
+            <div class="bg-white rounded-xl p-8 mb-8">
+                <h2 class="text-2xl font-bold mb-4">What is the Business Model Canvas?</h2>
+                <p class="text-lg mb-4">
+                    The Business Model Canvas is a strategic tool that visualizes your entire business model on one page using 9 building blocks. 
+                    It helps you understand how you create, deliver, and capture value.
+                </p>
+                <p class="text-lg mb-4">
+                    <strong>For content creators,</strong> this tool helps you design a sustainable business by mapping out 
+                    who you serve, what you offer, how you reach them, and how you make money—all in one cohesive framework.
+                </p>
+            </div>
+
+            <div class="bg-white rounded-xl p-8 mb-8">
+                <div class="mb-8">
+                    <div class="flex justify-between items-center mb-2">
+                        <span class="text-sm font-semibold text-gray-600">Progress</span>
+                        <span class="text-sm font-semibold text-gray-600" id="progress-text">Step 1 of 10</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="progress-fill" style="width: 10%;"></div>
+                    </div>
+                </div>
+
+                <!-- Step 1: Customer Segments -->
+                <div class="wizard-step active" id="step-1">
+                    <h3 class="text-2xl font-bold mb-4">Step 1: Customer Segments</h3>
+                    <p class="text-gray-600 mb-6">Who are you creating value for? Who are your most important customers?</p>
+                    
+                    <div class="mb-4">
+                        <label class="block font-semibold mb-2">
+                            Define Your Customer Segments
+                            <span class="tooltip ml-2">
+                                <i class="fas fa-question-circle text-gray-400"></i>
+                                <span class="tooltiptext">Different groups of people or organizations you aim to reach and serve. Be specific about demographics, behaviors, and needs.</span>
+                            </span>
+                        </label>
+                        <textarea id="customer-segments" rows="4" placeholder="e.g., Aspiring entrepreneurs 25-35, Small business owners, Marketing professionals learning AI"></textarea>
+                    </div>
+
+                    <div class="example-box">
+                        <strong>Example:</strong> "Content creators with 10K-100K followers" | "B2B SaaS founders" | "Corporate employees learning new skills"
+                    </div>
+
+                    <div class="flex justify-end mt-6">
+                        <button class="btn-primary" onclick="nextStep()">Next <i class="fas fa-arrow-right ml-2"></i></button>
+                    </div>
+                </div>
+
+                <!-- Step 2: Value Propositions -->
+                <div class="wizard-step" id="step-2">
+                    <h3 class="text-2xl font-bold mb-4">Step 2: Value Propositions</h3>
+                    <p class="text-gray-600 mb-6">What value do you deliver? What problem are you solving? Why should customers choose you?</p>
+                    
+                    <div class="mb-4">
+                        <label class="block font-semibold mb-2">
+                            Your Value Proposition
+                            <span class="tooltip ml-2">
+                                <i class="fas fa-question-circle text-gray-400"></i>
+                                <span class="tooltiptext">The bundle of products and services that create value for your customer segment. What makes you different?</span>
+                            </span>
+                        </label>
+                        <textarea id="value-propositions" rows="4" placeholder="e.g., Practical AI tutorials that save 10 hours/week, MBA frameworks without the tuition, Authentic creator insights"></textarea>
+                    </div>
+
+                    <div class="example-box">
+                        <strong>Example:</strong> "Learn to code in 100 days with daily support" | "Actionable productivity tips from real experience"
+                    </div>
+
+                    <div class="flex justify-between mt-6">
+                        <button class="btn-secondary" onclick="prevStep()"><i class="fas fa-arrow-left mr-2"></i> Back</button>
+                        <button class="btn-primary" onclick="nextStep()">Next <i class="fas fa-arrow-right ml-2"></i></button>
+                    </div>
+                </div>
+
+                <!-- Step 3: Channels -->
+                <div class="wizard-step" id="step-3">
+                    <h3 class="text-2xl font-bold mb-4">Step 3: Channels</h3>
+                    <p class="text-gray-600 mb-6">How do you reach and communicate with your customer segments?</p>
+                    
+                    <div class="mb-4">
+                        <label class="block font-semibold mb-2">
+                            Your Distribution Channels
+                            <span class="tooltip ml-2">
+                                <i class="fas fa-question-circle text-gray-400"></i>
+                                <span class="tooltiptext">The touchpoints through which you deliver your value proposition. Platforms, social media, email, website, etc.</span>
+                            </span>
+                        </label>
+                        <textarea id="channels" rows="4" placeholder="e.g., YouTube, Newsletter, Podcast, Twitter/X, Website, LinkedIn"></textarea>
+                    </div>
+
+                    <div class="example-box">
+                        <strong>Example:</strong> "YouTube for education + Newsletter for deeper dives + Twitter for engagement"
+                    </div>
+
+                    <div class="flex justify-between mt-6">
+                        <button class="btn-secondary" onclick="prevStep()"><i class="fas fa-arrow-left mr-2"></i> Back</button>
+                        <button class="btn-primary" onclick="nextStep()">Next <i class="fas fa-arrow-right ml-2"></i></button>
+                    </div>
+                </div>
+
+                <!-- Step 4: Customer Relationships -->
+                <div class="wizard-step" id="step-4">
+                    <h3 class="text-2xl font-bold mb-4">Step 4: Customer Relationships</h3>
+                    <p class="text-gray-600 mb-6">How do you get, keep, and grow your relationships with customers?</p>
+                    
+                    <div class="mb-4">
+                        <label class="block font-semibold mb-2">
+                            Your Relationship Strategy
+                            <span class="tooltip ml-2">
+                                <i class="fas fa-question-circle text-gray-400"></i>
+                                <span class="tooltiptext">Personal assistance, self-service, community, co-creation. How do you interact with your audience?</span>
+                            </span>
+                        </label>
+                        <textarea id="customer-relationships" rows="4" placeholder="e.g., Self-service content, Community forum, Email support, Monthly Q&As, Personal coaching"></textarea>
+                    </div>
+
+                    <div class="example-box">
+                        <strong>Example:</strong> "Automated email sequences + Active Discord community + Quarterly live workshops"
+                    </div>
+
+                    <div class="flex justify-between mt-6">
+                        <button class="btn-secondary" onclick="prevStep()"><i class="fas fa-arrow-left mr-2"></i> Back</button>
+                        <button class="btn-primary" onclick="nextStep()">Next <i class="fas fa-arrow-right ml-2"></i></button>
+                    </div>
+                </div>
+
+                <!-- Step 5: Revenue Streams -->
+                <div class="wizard-step" id="step-5">
+                    <h3 class="text-2xl font-bold mb-4">Step 5: Revenue Streams</h3>
+                    <p class="text-gray-600 mb-6">How do you make money? What are customers willing to pay for?</p>
+                    
+                    <div class="mb-4">
+                        <label class="block font-semibold mb-2">
+                            Your Revenue Sources
+                            <span class="tooltip ml-2">
+                                <i class="fas fa-question-circle text-gray-400"></i>
+                                <span class="tooltiptext">Ad revenue, sponsorships, courses, memberships, affiliate commissions, consulting, products, etc.</span>
+                            </span>
+                        </label>
+                        <textarea id="revenue-streams" rows="4" placeholder="e.g., Ad revenue ($X/month), Sponsorships ($X/deal), Course sales ($X), Memberships ($X/month), Affiliate income"></textarea>
+                    </div>
+
+                    <div class="example-box">
+                        <strong>Example:</strong> "YouTube ads $2K/mo + Sponsorships $5K/mo + Course sales $3K/mo + Community $1K/mo"
+                    </div>
+
+                    <div class="flex justify-between mt-6">
+                        <button class="btn-secondary" onclick="prevStep()"><i class="fas fa-arrow-left mr-2"></i> Back</button>
+                        <button class="btn-primary" onclick="nextStep()">Next <i class="fas fa-arrow-right ml-2"></i></button>
+                    </div>
+                </div>
+
+                <!-- Step 6: Key Resources -->
+                <div class="wizard-step" id="step-6">
+                    <h3 class="text-2xl font-bold mb-4">Step 6: Key Resources</h3>
+                    <p class="text-gray-600 mb-6">What key assets do you need to make your business model work?</p>
+                    
+                    <div class="mb-4">
+                        <label class="block font-semibold mb-2">
+                            Your Essential Resources
+                            <span class="tooltip ml-2">
+                                <i class="fas fa-question-circle text-gray-400"></i>
+                                <span class="tooltiptext">Physical (equipment), intellectual (brand, content), human (skills), financial (budget, cash flow).</span>
+                            </span>
+                        </label>
+                        <textarea id="key-resources" rows="4" placeholder="e.g., Camera/mic equipment, Video editing skills, Brand reputation, Email list, Website, Content library"></textarea>
+                    </div>
+
+                    <div class="example-box">
+                        <strong>Example:</strong> "50K email subscribers" | "Personal brand & credibility" | "Video production setup" | "$5K/mo budget"
+                    </div>
+
+                    <div class="flex justify-between mt-6">
+                        <button class="btn-secondary" onclick="prevStep()"><i class="fas fa-arrow-left mr-2"></i> Back</button>
+                        <button class="btn-primary" onclick="nextStep()">Next <i class="fas fa-arrow-right ml-2"></i></button>
+                    </div>
+                </div>
+
+                <!-- Step 7: Key Activities -->
+                <div class="wizard-step" id="step-7">
+                    <h3 class="text-2xl font-bold mb-4">Step 7: Key Activities</h3>
+                    <p class="text-gray-600 mb-6">What key things must you do to make your business model work?</p>
+                    
+                    <div class="mb-4">
+                        <label class="block font-semibold mb-2">
+                            Your Core Activities
+                            <span class="tooltip ml-2">
+                                <i class="fas fa-question-circle text-gray-400"></i>
+                                <span class="tooltiptext">The most important actions you must take: content creation, marketing, community management, product development.</span>
+                            </span>
+                        </label>
+                        <textarea id="key-activities" rows="4" placeholder="e.g., Weekly video production, Newsletter writing, Community engagement, Course updates, Brand partnerships"></textarea>
+                    </div>
+
+                    <div class="example-box">
+                        <strong>Example:</strong> "Create 3 videos/week" | "Write daily newsletter" | "Engage with community daily" | "Monthly product updates"
+                    </div>
+
+                    <div class="flex justify-between mt-6">
+                        <button class="btn-secondary" onclick="prevStep()"><i class="fas fa-arrow-left mr-2"></i> Back</button>
+                        <button class="btn-primary" onclick="nextStep()">Next <i class="fas fa-arrow-right ml-2"></i></button>
+                    </div>
+                </div>
+
+                <!-- Step 8: Key Partners -->
+                <div class="wizard-step" id="step-8">
+                    <h3 class="text-2xl font-bold mb-4">Step 8: Key Partners</h3>
+                    <p class="text-gray-600 mb-6">Who are your key partners and suppliers? What do they help you with?</p>
+                    
+                    <div class="mb-4">
+                        <label class="block font-semibold mb-2">
+                            Your Strategic Partnerships
+                            <span class="tooltip ml-2">
+                                <i class="fas fa-question-circle text-gray-400"></i>
+                                <span class="tooltiptext">Suppliers, freelancers, platforms, collaboration partners, tools/services you depend on.</span>
+                            </span>
+                        </label>
+                        <textarea id="key-partners" rows="4" placeholder="e.g., Video editor freelancer, YouTube/ConvertKit platforms, Software vendors, Brand partnership network, Affiliate programs"></textarea>
+                    </div>
+
+                    <div class="example-box">
+                        <strong>Example:</strong> "Upwork editor" | "YouTube Partner Program" | "ConvertKit" | "Collaboration with 3 creators in niche"
+                    </div>
+
+                    <div class="flex justify-between mt-6">
+                        <button class="btn-secondary" onclick="prevStep()"><i class="fas fa-arrow-left mr-2"></i> Back</button>
+                        <button class="btn-primary" onclick="nextStep()">Next <i class="fas fa-arrow-right ml-2"></i></button>
+                    </div>
+                </div>
+
+                <!-- Step 9: Cost Structure -->
+                <div class="wizard-step" id="step-9">
+                    <h3 class="text-2xl font-bold mb-4">Step 9: Cost Structure</h3>
+                    <p class="text-gray-600 mb-6">What are your most important costs? Which resources and activities are most expensive?</p>
+                    
+                    <div class="mb-4">
+                        <label class="block font-semibold mb-2">
+                            Your Key Costs
+                            <span class="tooltip ml-2">
+                                <i class="fas fa-question-circle text-gray-400"></i>
+                                <span class="tooltiptext">Fixed costs (software subscriptions, hosting) and variable costs (freelancers, ads, equipment).</span>
+                            </span>
+                        </label>
+                        <textarea id="cost-structure" rows="4" placeholder="e.g., Software subscriptions $200/mo, Freelancer editor $500/mo, Hosting $50/mo, Ads budget $300/mo, Equipment $2K/year"></textarea>
+                    </div>
+
+                    <div class="example-box">
+                        <strong>Example:</strong> "Total monthly: $1500 (Software $300 + Freelancers $800 + Ads $400)"
+                    </div>
+
+                    <div class="flex justify-between mt-6">
+                        <button class="btn-secondary" onclick="prevStep()"><i class="fas fa-arrow-left mr-2"></i> Back</button>
+                        <button class="btn-primary" onclick="nextStep()">Next <i class="fas fa-arrow-right ml-2"></i></button>
+                    </div>
+                </div>
+
+                <!-- Step 10: Results -->
+                <div class="wizard-step" id="step-10">
+                    <h3 class="text-2xl font-bold mb-4">Your Business Model Canvas</h3>
+                    <p class="text-gray-600 mb-6">Here's your complete business model:</p>
+
+                    <div class="canvas-grid mb-6">
+                        <div class="canvas-box box-key-partners">
+                            <h5><i class="fas fa-handshake mr-1"></i> Key Partners</h5>
+                            <p id="review-key-partners"></p>
+                        </div>
+                        <div class="canvas-box box-key-activities">
+                            <h5><i class="fas fa-cogs mr-1"></i> Key Activities</h5>
+                            <p id="review-key-activities"></p>
+                        </div>
+                        <div class="canvas-box box-value-prop">
+                            <h5><i class="fas fa-star mr-1"></i> Value Propositions</h5>
+                            <p id="review-value-propositions"></p>
+                        </div>
+                        <div class="canvas-box box-customer-rel">
+                            <h5><i class="fas fa-heart mr-1"></i> Customer Relationships</h5>
+                            <p id="review-customer-relationships"></p>
+                        </div>
+                        <div class="canvas-box box-customer-seg">
+                            <h5><i class="fas fa-users mr-1"></i> Customer Segments</h5>
+                            <p id="review-customer-segments"></p>
+                        </div>
+                        <div class="canvas-box box-key-resources">
+                            <h5><i class="fas fa-briefcase mr-1"></i> Key Resources</h5>
+                            <p id="review-key-resources"></p>
+                        </div>
+                        <div class="canvas-box box-channels">
+                            <h5><i class="fas fa-broadcast-tower mr-1"></i> Channels</h5>
+                            <p id="review-channels"></p>
+                        </div>
+                        <div class="canvas-box box-cost">
+                            <h5><i class="fas fa-dollar-sign mr-1"></i> Cost Structure</h5>
+                            <p id="review-cost-structure"></p>
+                        </div>
+                        <div class="canvas-box box-revenue">
+                            <h5><i class="fas fa-coins mr-1"></i> Revenue Streams</h5>
+                            <p id="review-revenue-streams"></p>
+                        </div>
+                    </div>
+
+                    <div class="bg-blue-50 border-l-4 border-blue-500 p-4">
+                        <h4 class="font-bold text-blue-900 mb-2"><i class="fas fa-lightbulb mr-2"></i>Next Steps:</h4>
+                        <ul class="text-sm text-blue-900 space-y-1">
+                            <li>• Identify gaps or weak areas in your model</li>
+                            <li>• Test assumptions with real customers</li>
+                            <li>• Ensure revenue > costs for sustainability</li>
+                            <li>• Iterate and refine based on feedback</li>
+                        </ul>
+                    </div>
+
+                    <div class="flex justify-between mt-6">
+                        <button class="btn-secondary" onclick="prevStep()"><i class="fas fa-arrow-left mr-2"></i> Back</button>
+                        <button class="btn-primary" onclick="downloadPDF()"><i class="fas fa-download mr-2"></i> Download as PDF</button>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Related Frameworks -->
+            <div class="mb-8">
+                <h3 class="text-2xl font-bold mb-6 text-center">Explore More Frameworks</h3>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div class="framework-card">
+                        <div class="text-3xl mb-3" style="color: #956FA6;"><i class="fas fa-th"></i></div>
+                        <h4 class="font-bold text-lg mb-2">ANSOFF Matrix</h4>
+                        <p class="text-sm text-gray-600 mb-4">Map your growth strategy options</p>
+                        <a href="ansoff-matrix.html" class="text-sm font-semibold" style="color: #956FA6;">Try This Tool →</a>
+                    </div>
+                    <div class="framework-card">
+                        <div class="text-3xl mb-3" style="color: #956FA6;"><i class="fas fa-link"></i></div>
+                        <h4 class="font-bold text-lg mb-2">Value Chain Analysis</h4>
+                        <p class="text-sm text-gray-600 mb-4">Map where you create value</p>
+                        <a href="value-chain.html" class="text-sm font-semibold" style="color: #956FA6;">Try This Tool →</a>
+                    </div>
+                    <div class="framework-card">
+                        <div class="text-3xl mb-3" style="color: #956FA6;"><i class="fas fa-chart-line"></i></div>
+                        <h4 class="font-bold text-lg mb-2">BCG Matrix</h4>
+                        <p class="text-sm text-gray-600 mb-4">Evaluate your product portfolio</p>
+                        <a href="bcg-matrix.html" class="text-sm font-semibold" style="color: #956FA6;">Try This Tool →</a>
+                    </div>
+                </div>
+                <div class="text-center mt-6">
+                    <a href="mba-frameworks.html" class="text-lg font-semibold" style="color: #956FA6;">
+                        <i class="fas fa-arrow-left mr-2"></i>Back to All Frameworks
+                    </a>
+                </div>
+            </div>
+
+            <p class="text-center text-xs" style="color: #1B1B1D; opacity: 0.5;">© 2025 Bryan Collins. All rights reserved.</p>
+        </div>
+    </main>
+
+    <script>
+        let currentStep = 1;
+        const totalSteps = 10;
+
+        window.addEventListener('DOMContentLoaded', () => {
+            loadFromStorage();
+        });
+
+        function nextStep() {
+            saveToStorage();
+            document.getElementById(`step-${currentStep}`).classList.remove('active');
+            currentStep++;
+            if (currentStep > totalSteps) currentStep = totalSteps;
+            document.getElementById(`step-${currentStep}`).classList.add('active');
+            updateProgress();
+            
+            if (currentStep === 10) {
+                populateReview();
+            }
+            
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function prevStep() {
+            saveToStorage();
+            document.getElementById(`step-${currentStep}`).classList.remove('active');
+            currentStep--;
+            if (currentStep < 1) currentStep = 1;
+            document.getElementById(`step-${currentStep}`).classList.add('active');
+            updateProgress();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function updateProgress() {
+            const percentage = (currentStep / totalSteps) * 100;
+            document.getElementById('progress-fill').style.width = percentage + '%';
+            document.getElementById('progress-text').textContent = `Step ${currentStep} of ${totalSteps}`;
+        }
+
+        function saveToStorage() {
+            const data = {
+                customerSegments: document.getElementById('customer-segments').value,
+                valuePropositions: document.getElementById('value-propositions').value,
+                channels: document.getElementById('channels').value,
+                customerRelationships: document.getElementById('customer-relationships').value,
+                revenueStreams: document.getElementById('revenue-streams').value,
+                keyResources: document.getElementById('key-resources').value,
+                keyActivities: document.getElementById('key-activities').value,
+                keyPartners: document.getElementById('key-partners').value,
+                costStructure: document.getElementById('cost-structure').value
+            };
+            localStorage.setItem('business-model-canvas', JSON.stringify(data));
+        }
+
+        function loadFromStorage() {
+            const saved = localStorage.getItem('business-model-canvas');
+            if (saved) {
+                const data = JSON.parse(saved);
+                document.getElementById('customer-segments').value = data.customerSegments || '';
+                document.getElementById('value-propositions').value = data.valuePropositions || '';
+                document.getElementById('channels').value = data.channels || '';
+                document.getElementById('customer-relationships').value = data.customerRelationships || '';
+                document.getElementById('revenue-streams').value = data.revenueStreams || '';
+                document.getElementById('key-resources').value = data.keyResources || '';
+                document.getElementById('key-activities').value = data.keyActivities || '';
+                document.getElementById('key-partners').value = data.keyPartners || '';
+                document.getElementById('cost-structure').value = data.costStructure || '';
+            }
+        }
+
+        function populateReview() {
+            document.getElementById('review-customer-segments').textContent = document.getElementById('customer-segments').value || 'Not specified';
+            document.getElementById('review-value-propositions').textContent = document.getElementById('value-propositions').value || 'Not specified';
+            document.getElementById('review-channels').textContent = document.getElementById('channels').value || 'Not specified';
+            document.getElementById('review-customer-relationships').textContent = document.getElementById('customer-relationships').value || 'Not specified';
+            document.getElementById('review-revenue-streams').textContent = document.getElementById('revenue-streams').value || 'Not specified';
+            document.getElementById('review-key-resources').textContent = document.getElementById('key-resources').value || 'Not specified';
+            document.getElementById('review-key-activities').textContent = document.getElementById('key-activities').value || 'Not specified';
+            document.getElementById('review-key-partners').textContent = document.getElementById('key-partners').value || 'Not specified';
+            document.getElementById('review-cost-structure').textContent = document.getElementById('cost-structure').value || 'Not specified';
+        }
+
+        function downloadPDF() {
+            const { jsPDF } = window.jspdf;
+            const doc = new jsPDF();
+            
+            doc.setFontSize(20);
+            doc.setTextColor(149, 111, 166);
+            doc.text('Business Model Canvas', 20, 20);
+            
+            doc.setFontSize(10);
+            doc.setTextColor(100);
+            doc.text('Generated: ' + new Date().toLocaleDateString(), 20, 28);
+            
+            let yPos = 40;
+            const blocks = [
+                { label: 'Customer Segments', id: 'customer-segments' },
+                { label: 'Value Propositions', id: 'value-propositions' },
+                { label: 'Channels', id: 'channels' },
+                { label: 'Customer Relationships', id: 'customer-relationships' },
+                { label: 'Revenue Streams', id: 'revenue-streams' },
+                { label: 'Key Resources', id: 'key-resources' },
+                { label: 'Key Activities', id: 'key-activities' },
+                { label: 'Key Partners', id: 'key-partners' },
+                { label: 'Cost Structure', id: 'cost-structure' }
+            ];
+            
+            blocks.forEach(block => {
+                if (yPos > 260) {
+                    doc.addPage();
+                    yPos = 20;
+                }
+                
+                doc.setFontSize(12);
+                doc.setTextColor(149, 111, 166);
+                doc.text(block.label, 20, yPos);
+                yPos += 6;
+                
+                doc.setFontSize(10);
+                doc.setTextColor(0);
+                const text = doc.splitTextToSize(document.getElementById(block.id).value || 'Not specified', 170);
+                doc.text(text, 20, yPos);
+                yPos += text.length * 5 + 8;
+            });
+            
+            doc.setFontSize(8);
+            doc.setTextColor(150);
+            doc.text('Created with Business Model Canvas Tool by Bryan Collins', 20, 285);
+            doc.text('https://join.bryancollins.com/business-model-canvas', 20, 290);
+            
+            doc.save('business-model-canvas-' + new Date().toISOString().split('T')[0] + '.pdf');
+        }
+    </script>
+</body>
+</html>
+

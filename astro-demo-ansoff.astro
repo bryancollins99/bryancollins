@@ -1,0 +1,342 @@
+---
+// Astro Demo: ANSOFF Matrix Tool
+// This demonstrates how the interactive MBA framework tools would be implemented in Astro
+// Benefits: Component reusability, better performance, type safety, easier maintenance
+
+// Imports for Astro components (these would be created in a real implementation)
+// import Layout from '../layouts/Layout.astro';
+// import FrameworkHero from '../components/FrameworkHero.astro';
+// import WizardProgress from '../components/WizardProgress.astro';
+// import FrameworkCard from '../components/FrameworkCard.astro';
+
+const pageTitle = "ANSOFF Matrix Tool — Growth Strategy for Creators";
+const pageDescription = "Free interactive ANSOFF Matrix tool to plan your growth strategy. Map market penetration, development, product development, and diversification options.";
+
+// SEO metadata
+const seo = {
+  title: pageTitle,
+  description: pageDescription,
+  ogImage: "/og-images/ansoff-matrix.png",
+  canonical: "https://join.bryancollins.com/ansoff-matrix/"
+};
+
+// Related frameworks data
+const relatedFrameworks = [
+  {
+    icon: "fa-balance-scale",
+    title: "SWOT Analysis",
+    description: "Analyze your strengths, weaknesses, opportunities, and threats",
+    url: "/swot-analysis"
+  },
+  {
+    icon: "fa-chart-line",
+    title: "BCG Matrix",
+    description: "Evaluate your product portfolio and prioritize investments",
+    url: "/bcg-matrix"
+  },
+  {
+    icon: "fa-project-diagram",
+    title: "Business Model Canvas",
+    description: "Design your complete business model in 9 building blocks",
+    url: "/business-model-canvas"
+  }
+];
+---
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{seo.title}</title>
+    <meta name="description" content={seo.description}>
+    <meta property="og:url" content={seo.canonical} />
+    <meta property="og:title" content={seo.title} />
+    <meta property="og:description" content={seo.description} />
+    
+    <!-- Tailwind CSS -->
+    <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    
+    <!-- jsPDF -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    
+    <!-- Plausible Analytics -->
+    <script defer data-domain="join.bryancollins.com" src="https://plausible.io/js/script.js"></script>
+    
+    <style>
+        /* Scoped component styles - in real Astro, these would be in <style> tags within components */
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            background-color: #EDEDEE;
+            color: #1B1B1D;
+        }
+        .hero-gradient {
+            background: linear-gradient(135deg, #956FA6 0%, #7d5e8d 100%);
+        }
+        .hero-text {
+            color: white;
+            text-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+        }
+        .wizard-step {
+            display: none;
+        }
+        .wizard-step.active {
+            display: block;
+        }
+        .progress-bar {
+            height: 8px;
+            background: #EDEDEE;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #956FA6 0%, #F3C972 100%);
+            transition: width 0.3s ease;
+        }
+        .btn-primary {
+            background: #F3C972;
+            color: #1B1B1D;
+            font-weight: 700;
+            padding: 12px 24px;
+            border-radius: 8px;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .btn-primary:hover {
+            background: #eab94a;
+            transform: translateY(-2px);
+        }
+        .btn-secondary {
+            background: #A6B6CF;
+            color: white;
+            font-weight: 600;
+            padding: 12px 24px;
+            border-radius: 8px;
+            border: none;
+            cursor: pointer;
+        }
+        textarea, input {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #EDEDEE;
+            border-radius: 8px;
+            font-family: inherit;
+        }
+        textarea:focus, input:focus {
+            outline: none;
+            border-color: #956FA6;
+        }
+        .matrix-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+        }
+        .matrix-cell {
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+        }
+        .framework-card {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s ease;
+        }
+        .framework-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+        }
+    </style>
+</head>
+<body>
+    <main class="min-h-screen py-12 px-4 sm:px-6 lg:px-8">
+        <div class="max-w-4xl mx-auto">
+            
+            <!-- Hero Component (would be <FrameworkHero /> in real Astro) -->
+            <div class="hero-gradient rounded-xl px-8 py-12 text-center mb-8">
+                <div class="inline-block p-4 bg-white bg-opacity-20 rounded-full mb-4">
+                    <i class="fas fa-th text-4xl" style="color: white;"></i>
+                </div>
+                <h1 class="hero-text text-4xl sm:text-5xl font-extrabold mb-4">ANSOFF Matrix</h1>
+                <p class="hero-text text-xl">Plan Your Growth Strategy</p>
+            </div>
+
+            <!-- Explanation Section -->
+            <div class="bg-white rounded-xl p-8 mb-8">
+                <h2 class="text-2xl font-bold mb-4">What is the ANSOFF Matrix?</h2>
+                <p class="text-lg mb-4">
+                    The ANSOFF Matrix is a strategic planning tool that helps you identify and evaluate growth opportunities for your content business.
+                </p>
+                <p class="text-lg mb-4">
+                    <strong>For content creators,</strong> this means deciding whether to double down on your current audience, reach new audiences, create new content types, or venture into entirely new areas.
+                </p>
+            </div>
+
+            <!-- Interactive Wizard (client-side JavaScript) -->
+            <div class="bg-white rounded-xl p-8 mb-8">
+                <div class="mb-8">
+                    <div class="flex justify-between items-center mb-2">
+                        <span class="text-sm font-semibold text-gray-600">Progress</span>
+                        <span class="text-sm font-semibold text-gray-600" id="progress-text">Step 1 of 6</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="progress-fill" style="width: 16.67%;"></div>
+                    </div>
+                </div>
+
+                <div class="wizard-step active" id="step-1">
+                    <h3 class="text-2xl font-bold mb-4">Step 1: Your Current Situation</h3>
+                    <p class="text-gray-600 mb-6">Let's start by understanding your current business position.</p>
+                    
+                    <div class="mb-4">
+                        <label class="block font-semibold mb-2">Your Primary Product/Content</label>
+                        <input type="text" id="current-product" placeholder="e.g., YouTube videos about productivity">
+                    </div>
+
+                    <div class="mb-4">
+                        <label class="block font-semibold mb-2">Your Primary Audience</label>
+                        <input type="text" id="current-audience" placeholder="e.g., Aspiring entrepreneurs ages 25-35">
+                    </div>
+
+                    <div class="flex justify-end mt-6">
+                        <button class="btn-primary" onclick="nextStep()">Next <i class="fas fa-arrow-right ml-2"></i></button>
+                    </div>
+                </div>
+
+                <!-- Additional steps would follow the same pattern -->
+            </div>
+
+            <!-- Related Frameworks (would be <FrameworkCard /> components in real Astro) -->
+            <div class="mb-8">
+                <h3 class="text-2xl font-bold mb-6 text-center">Explore More Frameworks</h3>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    {relatedFrameworks.map(framework => (
+                        <div class="framework-card">
+                            <div class="text-3xl mb-3" style="color: #956FA6;">
+                                <i class={`fas ${framework.icon}`}></i>
+                            </div>
+                            <h4 class="font-bold text-lg mb-2">{framework.title}</h4>
+                            <p class="text-sm text-gray-600 mb-4">{framework.description}</p>
+                            <a href={framework.url} class="text-sm font-semibold" style="color: #956FA6;">Try This Tool →</a>
+                        </div>
+                    ))}
+                </div>
+                <div class="text-center mt-6">
+                    <a href="/mba-frameworks" class="text-lg font-semibold" style="color: #956FA6;">
+                        <i class="fas fa-arrow-left mr-2"></i>Back to All Frameworks
+                    </a>
+                </div>
+            </div>
+
+            <p class="text-center text-xs" style="color: #1B1B1D; opacity: 0.5;">© 2025 Bryan Collins. All rights reserved.</p>
+        </div>
+    </main>
+
+    <!-- Client-side interactivity (would be in a separate .ts file in real Astro) -->
+    <script>
+        // This script demonstrates client-side functionality
+        // In a real Astro setup, you'd use:
+        // <script> tags with client:load directive
+        // Or Alpine.js for reactive state management
+        // Or a framework like React/Vue/Svelte islands
+        
+        let currentStep = 1;
+        const totalSteps = 6;
+
+        function nextStep() {
+            document.getElementById(`step-${currentStep}`).classList.remove('active');
+            currentStep++;
+            if (currentStep > totalSteps) currentStep = totalSteps;
+            document.getElementById(`step-${currentStep}`)?.classList.add('active');
+            updateProgress();
+        }
+
+        function updateProgress() {
+            const percentage = (currentStep / totalSteps) * 100;
+            document.getElementById('progress-fill').style.width = percentage + '%';
+            document.getElementById('progress-text').textContent = `Step ${currentStep} of ${totalSteps}`;
+        }
+
+        // localStorage persistence
+        window.addEventListener('DOMContentLoaded', () => {
+            const saved = localStorage.getItem('ansoff-matrix');
+            if (saved) {
+                const data = JSON.parse(saved);
+                // Populate fields
+            }
+        });
+    </script>
+</body>
+</html>
+
+<!--
+ASTRO BENEFITS FOR THIS PROJECT:
+
+1. **Component Reusability**
+   - Create shared components: FrameworkHero, WizardStep, ProgressBar, FrameworkCard
+   - DRY principle: Write once, use across all 8 framework tools
+   - Props for customization (icons, colors, step counts)
+
+2. **Better Performance**
+   - Static generation by default (near-zero JavaScript shipped)
+   - Hydration only where needed (client:load, client:visible directives)
+   - Optimal loading with built-in image optimization
+
+3. **Type Safety with TypeScript**
+   - Define interfaces for framework data, wizard steps, form state
+   - Catch errors at build time, not runtime
+   - Better IDE autocomplete and refactoring
+
+4. **Content Collections**
+   - Store framework descriptions, tooltips, examples as structured data
+   - Type-safe content with Zod schemas
+   - Query and filter frameworks easily
+
+5. **Easier Maintenance**
+   - Single source of truth for styling (Tailwind classes in components)
+   - Update all pages by changing one component
+   - Layout templates for consistent structure
+
+6. **SEO Built-in**
+   - Automatic sitemap generation
+   - Built-in SEO component
+   - Meta tags managed in one place
+
+EXAMPLE COMPONENT STRUCTURE:
+
+/src
+  /components
+    - FrameworkHero.astro
+    - WizardProgress.astro
+    - WizardStep.astro
+    - MatrixVisual.astro
+    - FrameworkCard.astro
+    - RelatedFrameworks.astro
+  /layouts
+    - FrameworkLayout.astro
+  /pages
+    - ansoff-matrix.astro
+    - swot-analysis.astro
+    - [other frameworks].astro
+  /content
+    /frameworks
+      - ansoff-matrix.md (descriptions, examples)
+      - swot-analysis.md
+  /utils
+    - pdfGenerator.ts
+    - localStorage.ts
+
+MIGRATION PATH:
+1. Convert one framework tool (ANSOFF) to Astro
+2. Extract reusable components
+3. Migrate remaining 7 tools using components
+4. Add content collections for framework data
+5. Implement TypeScript interfaces
+-->
+

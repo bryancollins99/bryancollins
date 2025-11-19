@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BCG Matrix Tool — Product Portfolio Analysis</title>
+    <meta name="description" content="Free interactive BCG Matrix tool. Categorize your products/content as Stars, Cash Cows, Question Marks, or Dogs.">
+    <meta property="og:url" content="https://join.bryancollins.com/bcg-matrix/" />
+    <meta property="og:title" content="BCG Matrix Tool — Product Portfolio Analysis" />
+    <meta property="og:description" content="Analyze your product portfolio with this interactive BCG Matrix tool." />
+    
+    <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script defer data-domain="join.bryancollins.com" src="https://plausible.io/js/script.js"></script>
+    <script defer src="resources/analytics.js"></script>
+    
+    <style>
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            background-color: #EDEDEE;
+            color: #1B1B1D;
+        }
+        .hero-gradient {
+            background: linear-gradient(135deg, #956FA6 0%, #7d5e8d 100%);
+        }
+        .hero-text {
+            color: white;
+            text-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+        }
+        .wizard-step {
+            display: none;
+        }
+        .wizard-step.active {
+            display: block;
+        }
+        .progress-bar {
+            height: 8px;
+            background: #EDEDEE;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #956FA6 0%, #F3C972 100%);
+            transition: width 0.3s ease;
+        }
+        .btn-primary {
+            background: #F3C972;
+            color: #1B1B1D;
+            font-weight: 700;
+            padding: 12px 24px;
+            border-radius: 8px;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .btn-primary:hover {
+            background: #eab94a;
+            transform: translateY(-2px);
+        }
+        .btn-secondary {
+            background: #A6B6CF;
+            color: white;
+            font-weight: 600;
+            padding: 12px 24px;
+            border-radius: 8px;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .btn-secondary:hover {
+            background: #8a9bb8;
+        }
+        textarea, input {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #EDEDEE;
+            border-radius: 8px;
+            font-family: inherit;
+            transition: border-color 0.3s ease;
+        }
+        textarea:focus, input:focus {
+            outline: none;
+            border-color: #956FA6;
+        }
+        .bcg-matrix {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        .quadrant {
+            background: white;
+            padding: 24px;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+            min-height: 200px;
+        }
+        .quadrant h5 {
+            font-weight: 700;
+            margin-bottom: 12px;
+            font-size: 18px;
+            display: flex;
+            align-items: center;
+        }
+        .quadrant p {
+            font-size: 13px;
+            line-height: 1.5;
+        }
+        .quadrant ul {
+            list-style: none;
+            padding: 0;
+            margin-top: 12px;
+        }
+        .quadrant ul li {
+            padding: 6px;
+            margin-bottom: 4px;
+            background: #f8f8f8;
+            border-radius: 6px;
+            font-size: 13px;
+        }
+        .stars { border-left: 4px solid #FFD700; background: linear-gradient(135deg, #fff 0%, #fffef5 100%); }
+        .question-marks { border-left: 4px solid #FF9800; background: linear-gradient(135deg, #fff 0%, #fff9f0 100%); }
+        .cash-cows { border-left: 4px solid #4CAF50; background: linear-gradient(135deg, #fff 0%, #f5fff7 100%); }
+        .dogs { border-left: 4px solid #9E9E9E; background: linear-gradient(135deg, #fff 0%, #f5f5f5 100%); }
+        .product-input {
+            margin-bottom: 12px;
+        }
+        .add-product-btn {
+            background: #A6B6CF;
+            color: white;
+            padding: 8px 16px;
+            border-radius: 6px;
+            border: none;
+            cursor: pointer;
+            font-size: 14px;
+            margin-top: 8px;
+        }
+        .add-product-btn:hover {
+            background: #8a9bb8;
+        }
+        .tooltip {
+            position: relative;
+            display: inline-block;
+            cursor: help;
+        }
+        .tooltip .tooltiptext {
+            visibility: hidden;
+            width: 250px;
+            background-color: #1B1B1D;
+            color: #fff;
+            text-align: left;
+            border-radius: 6px;
+            padding: 10px;
+            position: absolute;
+            z-index: 1;
+            bottom: 125%;
+            left: 50%;
+            margin-left: -125px;
+            opacity: 0;
+            transition: opacity 0.3s;
+            font-size: 14px;
+        }
+        .tooltip:hover .tooltiptext {
+            visibility: visible;
+            opacity: 1;
+        }
+        .example-box {
+            background: linear-gradient(135deg, #F3C972 0%, #f5d89a 100%);
+            padding: 12px 16px;
+            border-radius: 8px;
+            margin-top: 8px;
+            font-size: 14px;
+            color: #1B1B1D;
+        }
+        .framework-card {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s ease;
+        }
+        .framework-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+        }
+        @media (max-width: 768px) {
+            .bcg-matrix {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <main class="min-h-screen py-12 px-4 sm:px-6 lg:px-8">
+        <div class="max-w-4xl mx-auto">
+            
+            <div class="hero-gradient rounded-xl px-8 py-12 text-center mb-8">
+                <div class="inline-block p-4 bg-white bg-opacity-20 rounded-full mb-4">
+                    <i class="fas fa-chart-line text-4xl" style="color: white;"></i>
+                </div>
+                <h1 class="hero-text text-4xl sm:text-5xl font-extrabold mb-4">BCG Matrix</h1>
+                <p class="hero-text text-xl">Analyze Your Product Portfolio</p>
+            </div>
+
+            <div class="bg-white rounded-xl p-8 mb-8">
+                <h2 class="text-2xl font-bold mb-4">What is the BCG Matrix?</h2>
+                <p class="text-lg mb-4">
+                    The BCG Growth-Share Matrix helps you categorize your products/content into 4 quadrants based on 
+                    <strong>market growth</strong> (potential) and <strong>market share</strong> (current performance).
+                </p>
+                <p class="text-lg mb-4">
+                    <strong>For content creators,</strong> this helps you decide which content/products to invest in, maintain, 
+                    develop, or discontinue. It's about allocating your limited time and resources strategically.
+                </p>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-6">
+                    <div class="p-4 bg-yellow-50 rounded-lg border-l-4 border-yellow-500">
+                        <h3 class="font-bold text-yellow-800 mb-2">⭐ Stars</h3>
+                        <p class="text-sm text-gray-700">High growth + High share = Invest heavily</p>
+                    </div>
+                    <div class="p-4 bg-orange-50 rounded-lg border-l-4 border-orange-500">
+                        <h3 class="font-bold text-orange-800 mb-2">❓ Question Marks</h3>
+                        <p class="text-sm text-gray-700">High growth + Low share = Invest or divest</p>
+                    </div>
+                    <div class="p-4 bg-green-50 rounded-lg border-l-4 border-green-500">
+                        <h3 class="font-bold text-green-800 mb-2">🐄 Cash Cows</h3>
+                        <p class="text-sm text-gray-700">Low growth + High share = Milk for cash</p>
+                    </div>
+                    <div class="p-4 bg-gray-50 rounded-lg border-l-4 border-gray-500">
+                        <h3 class="font-bold text-gray-800 mb-2">🐕 Dogs</h3>
+                        <p class="text-sm text-gray-700">Low growth + Low share = Consider discontinuing</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-xl p-8 mb-8">
+                <div class="mb-8">
+                    <div class="flex justify-between items-center mb-2">
+                        <span class="text-sm font-semibold text-gray-600">Progress</span>
+                        <span class="text-sm font-semibold text-gray-600" id="progress-text">Step 1 of 5</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="progress-fill" style="width: 20%;"></div>
+                    </div>
+                </div>
+
+                <!-- Step 1: Stars -->
+                <div class="wizard-step active" id="step-1">
+                    <h3 class="text-2xl font-bold mb-4">Step 1: Stars ⭐</h3>
+                    <p class="text-gray-600 mb-6">Products/content with HIGH GROWTH potential and HIGH current performance</p>
+                    
+                    <div class="mb-4">
+                        <label class="block font-semibold mb-2">
+                            List Your Stars
+                            <span class="tooltip ml-2">
+                                <i class="fas fa-question-circle text-gray-400"></i>
+                                <span class="tooltiptext">What's performing well AND has huge growth potential? These deserve maximum investment.</span>
+                            </span>
+                        </label>
+                        <textarea id="stars" rows="5" placeholder="e.g., 'AI tutorials series' - growing niche, already popular&#10;'New podcast' - trending topic, early traction"></textarea>
+                    </div>
+
+                    <div class="example-box">
+                        <strong>Example:</strong> "AI productivity content (viral + growing market)" | "Live coaching program (selling well + demand increasing)"
+                    </div>
+
+                    <div class="flex justify-end mt-6">
+                        <button class="btn-primary" onclick="nextStep()">Next <i class="fas fa-arrow-right ml-2"></i></button>
+                    </div>
+                </div>
+
+                <!-- Step 2: Question Marks -->
+                <div class="wizard-step" id="step-2">
+                    <h3 class="text-2xl font-bold mb-4">Step 2: Question Marks ❓</h3>
+                    <p class="text-gray-600 mb-6">Products/content with HIGH GROWTH potential but LOW current performance</p>
+                    
+                    <div class="mb-4">
+                        <label class="block font-semibold mb-2">
+                            List Your Question Marks
+                            <span class="tooltip ml-2">
+                                <i class="fas fa-question-circle text-gray-400"></i>
+                                <span class="tooltiptext">High potential but not performing yet. Decide: invest more to turn into a Star, or cut losses?</span>
+                            </span>
+                        </label>
+                        <textarea id="question-marks" rows="5" placeholder="e.g., 'New course launched' - hot topic but low sales yet&#10;'TikTok channel' - growing platform but no traction"></textarea>
+                    </div>
+
+                    <div class="example-box">
+                        <strong>Example:</strong> "Web3 content (growing interest but low views)" | "New product (big market but not selling)"
+                    </div>
+
+                    <div class="flex justify-between mt-6">
+                        <button class="btn-secondary" onclick="prevStep()"><i class="fas fa-arrow-left mr-2"></i> Back</button>
+                        <button class="btn-primary" onclick="nextStep()">Next <i class="fas fa-arrow-right ml-2"></i></button>
+                    </div>
+                </div>
+
+                <!-- Step 3: Cash Cows -->
+                <div class="wizard-step" id="step-3">
+                    <h3 class="text-2xl font-bold mb-4">Step 3: Cash Cows 🐄</h3>
+                    <p class="text-gray-600 mb-6">Products/content with LOW GROWTH potential but HIGH current performance</p>
+                    
+                    <div class="mb-4">
+                        <label class="block font-semibold mb-2">
+                            List Your Cash Cows
+                            <span class="tooltip ml-2">
+                                <i class="fas fa-question-circle text-gray-400"></i>
+                                <span class="tooltiptext">Mature products that generate consistent revenue. Don't invest heavily, but maintain and milk them.</span>
+                            </span>
+                        </label>
+                        <textarea id="cash-cows" rows="5" placeholder="e.g., 'Evergreen course' - steady sales, mature market&#10;'Popular old video' - consistent ad revenue, slow growth"></textarea>
+                    </div>
+
+                    <div class="example-box">
+                        <strong>Example:</strong> "Excel course (mature but sells steadily)" | "Email course (passive income, saturated niche)"
+                    </div>
+
+                    <div class="flex justify-between mt-6">
+                        <button class="btn-secondary" onclick="prevStep()"><i class="fas fa-arrow-left mr-2"></i> Back</button>
+                        <button class="btn-primary" onclick="nextStep()">Next <i class="fas fa-arrow-right ml-2"></i></button>
+                    </div>
+                </div>
+
+                <!-- Step 4: Dogs -->
+                <div class="wizard-step" id="step-4">
+                    <h3 class="text-2xl font-bold mb-4">Step 4: Dogs 🐕</h3>
+                    <p class="text-gray-600 mb-6">Products/content with LOW GROWTH potential and LOW current performance</p>
+                    
+                    <div class="mb-4">
+                        <label class="block font-semibold mb-2">
+                            List Your Dogs
+                            <span class="tooltip ml-2">
+                                <i class="fas fa-question-circle text-gray-400"></i>
+                                <span class="tooltiptext">Underperforming products in declining markets. Consider discontinuing or repositioning.</span>
+                            </span>
+                        </label>
+                        <textarea id="dogs" rows="5" placeholder="e.g., 'Old product' - low sales, dying niche&#10;'Outdated content series' - low views, topic irrelevant"></textarea>
+                    </div>
+
+                    <div class="example-box">
+                        <strong>Example:</strong> "Google+ tips (dead platform)" | "Outdated tech course (irrelevant + not selling)"
+                    </div>
+
+                    <div class="flex justify-between mt-6">
+                        <button class="btn-secondary" onclick="prevStep()"><i class="fas fa-arrow-left mr-2"></i> Back</button>
+                        <button class="btn-primary" onclick="nextStep()">Next <i class="fas fa-arrow-right ml-2"></i></button>
+                    </div>
+                </div>
+
+                <!-- Step 5: Results -->
+                <div class="wizard-step" id="step-5">
+                    <h3 class="text-2xl font-bold mb-4">Your BCG Matrix</h3>
+                    <p class="text-gray-600 mb-6">Here's your product portfolio breakdown:</p>
+
+                    <div class="bcg-matrix mb-6">
+                        <div class="quadrant stars">
+                            <h5><span style="color: #FFD700;">⭐</span> Stars</h5>
+                            <p class="text-xs text-gray-600 mb-2">High Growth + High Share → Invest Heavily</p>
+                            <div id="review-stars" class="text-sm whitespace-pre-line"></div>
+                        </div>
+                        <div class="quadrant question-marks">
+                            <h5><span style="color: #FF9800;">❓</span> Question Marks</h5>
+                            <p class="text-xs text-gray-600 mb-2">High Growth + Low Share → Invest or Divest</p>
+                            <div id="review-question-marks" class="text-sm whitespace-pre-line"></div>
+                        </div>
+                        <div class="quadrant cash-cows">
+                            <h5><span style="color: #4CAF50;">🐄</span> Cash Cows</h5>
+                            <p class="text-xs text-gray-600 mb-2">Low Growth + High Share → Maintain & Milk</p>
+                            <div id="review-cash-cows" class="text-sm whitespace-pre-line"></div>
+                        </div>
+                        <div class="quadrant dogs">
+                            <h5><span style="color: #9E9E9E;">🐕</span> Dogs</h5>
+                            <p class="text-xs text-gray-600 mb-2">Low Growth + Low Share → Divest or Reposition</p>
+                            <div id="review-dogs" class="text-sm whitespace-pre-line"></div>
+                        </div>
+                    </div>
+
+                    <div class="bg-blue-50 border-l-4 border-blue-500 p-4">
+                        <h4 class="font-bold text-blue-900 mb-2"><i class="fas fa-lightbulb mr-2"></i>Strategic Actions:</h4>
+                        <ul class="text-sm text-blue-900 space-y-1">
+                            <li>• <strong>Stars:</strong> Invest maximum resources—these are your future</li>
+                            <li>• <strong>Question Marks:</strong> Test and decide—turn into Stars or cut</li>
+                            <li>• <strong>Cash Cows:</strong> Maintain with minimal effort, harvest profits</li>
+                            <li>• <strong>Dogs:</strong> Discontinue or reposition—don't waste resources</li>
+                        </ul>
+                    </div>
+
+                    <div class="flex justify-between mt-6">
+                        <button class="btn-secondary" onclick="prevStep()"><i class="fas fa-arrow-left mr-2"></i> Back</button>
+                        <button class="btn-primary" onclick="downloadPDF()"><i class="fas fa-download mr-2"></i> Download as PDF</button>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Related Frameworks -->
+            <div class="mb-8">
+                <h3 class="text-2xl font-bold mb-6 text-center">Explore More Frameworks</h3>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div class="framework-card">
+                        <div class="text-3xl mb-3" style="color: #956FA6;"><i class="fas fa-th"></i></div>
+                        <h4 class="font-bold text-lg mb-2">ANSOFF Matrix</h4>
+                        <p class="text-sm text-gray-600 mb-4">Map your growth strategy options</p>
+                        <a href="ansoff-matrix.html" class="text-sm font-semibold" style="color: #956FA6;">Try This Tool →</a>
+                    </div>
+                    <div class="framework-card">
+                        <div class="text-3xl mb-3" style="color: #956FA6;"><i class="fas fa-project-diagram"></i></div>
+                        <h4 class="font-bold text-lg mb-2">Business Model Canvas</h4>
+                        <p class="text-sm text-gray-600 mb-4">Design your complete business model</p>
+                        <a href="business-model-canvas.html" class="text-sm font-semibold" style="color: #956FA6;">Try This Tool →</a>
+                    </div>
+                    <div class="framework-card">
+                        <div class="text-3xl mb-3" style="color: #956FA6;"><i class="fas fa-trophy"></i></div>
+                        <h4 class="font-bold text-lg mb-2">Porter's Five Forces</h4>
+                        <p class="text-sm text-gray-600 mb-4">Analyze competitive forces in your market</p>
+                        <a href="porters-five-forces.html" class="text-sm font-semibold" style="color: #956FA6;">Try This Tool →</a>
+                    </div>
+                </div>
+                <div class="text-center mt-6">
+                    <a href="mba-frameworks.html" class="text-lg font-semibold" style="color: #956FA6;">
+                        <i class="fas fa-arrow-left mr-2"></i>Back to All Frameworks
+                    </a>
+                </div>
+            </div>
+
+            <p class="text-center text-xs" style="color: #1B1B1D; opacity: 0.5;">© 2025 Bryan Collins. All rights reserved.</p>
+        </div>
+    </main>
+
+    <script>
+        let currentStep = 1;
+        const totalSteps = 5;
+
+        window.addEventListener('DOMContentLoaded', () => {
+            loadFromStorage();
+        });
+
+        function nextStep() {
+            saveToStorage();
+            document.getElementById(`step-${currentStep}`).classList.remove('active');
+            currentStep++;
+            if (currentStep > totalSteps) currentStep = totalSteps;
+            document.getElementById(`step-${currentStep}`).classList.add('active');
+            updateProgress();
+            
+            if (currentStep === 5) {
+                populateReview();
+            }
+            
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function prevStep() {
+            saveToStorage();
+            document.getElementById(`step-${currentStep}`).classList.remove('active');
+            currentStep--;
+            if (currentStep < 1) currentStep = 1;
+            document.getElementById(`step-${currentStep}`).classList.add('active');
+            updateProgress();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function updateProgress() {
+            const percentage = (currentStep / totalSteps) * 100;
+            document.getElementById('progress-fill').style.width = percentage + '%';
+            document.getElementById('progress-text').textContent = `Step ${currentStep} of ${totalSteps}`;
+        }
+
+        function saveToStorage() {
+            const data = {
+                stars: document.getElementById('stars').value,
+                questionMarks: document.getElementById('question-marks').value,
+                cashCows: document.getElementById('cash-cows').value,
+                dogs: document.getElementById('dogs').value
+            };
+            localStorage.setItem('bcg-matrix', JSON.stringify(data));
+        }
+
+        function loadFromStorage() {
+            const saved = localStorage.getItem('bcg-matrix');
+            if (saved) {
+                const data = JSON.parse(saved);
+                document.getElementById('stars').value = data.stars || '';
+                document.getElementById('question-marks').value = data.questionMarks || '';
+                document.getElementById('cash-cows').value = data.cashCows || '';
+                document.getElementById('dogs').value = data.dogs || '';
+            }
+        }
+
+        function populateReview() {
+            document.getElementById('review-stars').textContent = document.getElementById('stars').value || 'None listed';
+            document.getElementById('review-question-marks').textContent = document.getElementById('question-marks').value || 'None listed';
+            document.getElementById('review-cash-cows').textContent = document.getElementById('cash-cows').value || 'None listed';
+            document.getElementById('review-dogs').textContent = document.getElementById('dogs').value || 'None listed';
+        }
+
+        function downloadPDF() {
+            const { jsPDF } = window.jspdf;
+            const doc = new jsPDF();
+            
+            doc.setFontSize(20);
+            doc.setTextColor(149, 111, 166);
+            doc.text('BCG Matrix - Product Portfolio', 20, 20);
+            
+            doc.setFontSize(10);
+            doc.setTextColor(100);
+            doc.text('Generated: ' + new Date().toLocaleDateString(), 20, 28);
+            
+            const quadrants = [
+                { label: 'Stars (High Growth + High Share)', id: 'stars', color: [255, 215, 0], strategy: 'Invest Heavily' },
+                { label: 'Question Marks (High Growth + Low Share)', id: 'question-marks', color: [255, 152, 0], strategy: 'Invest or Divest' },
+                { label: 'Cash Cows (Low Growth + High Share)', id: 'cash-cows', color: [76, 175, 80], strategy: 'Maintain & Milk' },
+                { label: 'Dogs (Low Growth + Low Share)', id: 'dogs', color: [158, 158, 158], strategy: 'Divest or Reposition' }
+            ];
+            
+            let yPos = 40;
+            quadrants.forEach(quad => {
+                doc.setFontSize(12);
+                doc.setTextColor(...quad.color);
+                doc.text(quad.label, 20, yPos);
+                yPos += 5;
+                doc.setFontSize(9);
+                doc.setTextColor(100);
+                doc.text('Strategy: ' + quad.strategy, 20, yPos);
+                yPos += 6;
+                
+                doc.setFontSize(10);
+                doc.setTextColor(0);
+                const text = doc.splitTextToSize(document.getElementById(quad.id).value || 'None listed', 170);
+                doc.text(text, 20, yPos);
+                yPos += text.length * 5 + 10;
+                
+                if (yPos > 250) {
+                    doc.addPage();
+                    yPos = 20;
+                }
+            });
+            
+            doc.setFontSize(8);
+            doc.setTextColor(150);
+            doc.text('Created with BCG Matrix Tool by Bryan Collins', 20, 285);
+            doc.text('https://join.bryancollins.com/bcg-matrix', 20, 290);
+            
+            doc.save('bcg-matrix-' + new Date().toISOString().split('T')[0] + '.pdf');
+        }
+    </script>
+</body>
+</html>
+

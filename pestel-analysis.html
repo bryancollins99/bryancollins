@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PESTEL Analysis Tool — Macro-Environment Assessment</title>
+    <meta name="description" content="Free interactive PESTEL Analysis tool. Assess Political, Economic, Social, Technological, Environmental, and Legal factors.">
+    <meta property="og:url" content="https://join.bryancollins.com/pestel-analysis/" />
+    <meta property="og:title" content="PESTEL Analysis Tool" />
+    <meta property="og:description" content="Analyze external macro-environment factors with this interactive tool." />
+    
+    <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script defer data-domain="join.bryancollins.com" src="https://plausible.io/js/script.js"></script>
+    <script defer src="resources/analytics.js"></script>
+    
+    <style>
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            background-color: #EDEDEE;
+            color: #1B1B1D;
+        }
+        .hero-gradient {
+            background: linear-gradient(135deg, #956FA6 0%, #7d5e8d 100%);
+        }
+        .hero-text {
+            color: white;
+            text-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+        }
+        .wizard-step {
+            display: none;
+        }
+        .wizard-step.active {
+            display: block;
+        }
+        .progress-bar {
+            height: 8px;
+            background: #EDEDEE;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #956FA6 0%, #F3C972 100%);
+            transition: width 0.3s ease;
+        }
+        .btn-primary {
+            background: #F3C972;
+            color: #1B1B1D;
+            font-weight: 700;
+            padding: 12px 24px;
+            border-radius: 8px;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .btn-primary:hover {
+            background: #eab94a;
+            transform: translateY(-2px);
+        }
+        .btn-secondary {
+            background: #A6B6CF;
+            color: white;
+            font-weight: 600;
+            padding: 12px 24px;
+            border-radius: 8px;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .btn-secondary:hover {
+            background: #8a9bb8;
+        }
+        textarea {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #EDEDEE;
+            border-radius: 8px;
+            font-family: inherit;
+            transition: border-color 0.3s ease;
+        }
+        textarea:focus {
+            outline: none;
+            border-color: #956FA6;
+        }
+        .pestel-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 16px;
+        }
+        .pestel-box {
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+            min-height: 180px;
+        }
+        .pestel-box h5 {
+            font-weight: 700;
+            margin-bottom: 12px;
+            font-size: 18px;
+            display: flex;
+            align-items: center;
+        }
+        .pestel-box p {
+            font-size: 14px;
+            line-height: 1.5;
+        }
+        .political { border-left: 4px solid #E74C3C; }
+        .economic { border-left: 4px solid #3498DB; }
+        .social { border-left: 4px solid #9B59B6; }
+        .technological { border-left: 4px solid #1ABC9C; }
+        .environmental { border-left: 4px solid #27AE60; }
+        .legal { border-left: 4px solid #F39C12; }
+        .tooltip {
+            position: relative;
+            display: inline-block;
+            cursor: help;
+        }
+        .tooltip .tooltiptext {
+            visibility: hidden;
+            width: 250px;
+            background-color: #1B1B1D;
+            color: #fff;
+            text-align: left;
+            border-radius: 6px;
+            padding: 10px;
+            position: absolute;
+            z-index: 1;
+            bottom: 125%;
+            left: 50%;
+            margin-left: -125px;
+            opacity: 0;
+            transition: opacity 0.3s;
+            font-size: 14px;
+        }
+        .tooltip:hover .tooltiptext {
+            visibility: visible;
+            opacity: 1;
+        }
+        .example-box {
+            background: linear-gradient(135deg, #F3C972 0%, #f5d89a 100%);
+            padding: 12px 16px;
+            border-radius: 8px;
+            margin-top: 8px;
+            font-size: 14px;
+            color: #1B1B1D;
+        }
+        .framework-card {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s ease;
+        }
+        .framework-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+        }
+        @media (max-width: 768px) {
+            .pestel-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <main class="min-h-screen py-12 px-4 sm:px-6 lg:px-8">
+        <div class="max-w-4xl mx-auto">
+            
+            <div class="hero-gradient rounded-xl px-8 py-12 text-center mb-8">
+                <div class="inline-block p-4 bg-white bg-opacity-20 rounded-full mb-4">
+                    <i class="fas fa-globe text-4xl" style="color: white;"></i>
+                </div>
+                <h1 class="hero-text text-4xl sm:text-5xl font-extrabold mb-4">PESTEL Analysis</h1>
+                <p class="hero-text text-xl">Assess Your Macro-Environment</p>
+            </div>
+
+            <div class="bg-white rounded-xl p-8 mb-8">
+                <h2 class="text-2xl font-bold mb-4">What is PESTEL Analysis?</h2>
+                <p class="text-lg mb-4">
+                    PESTEL Analysis examines external macro-environmental factors that can impact your business. 
+                    It stands for <strong>Political, Economic, Social, Technological, Environmental, and Legal</strong> factors.
+                </p>
+                <p class="text-lg mb-4">
+                    <strong>For content creators,</strong> this helps you understand broader trends and forces beyond your control: 
+                    platform regulations, economic conditions, cultural shifts, emerging tech, sustainability concerns, and legal requirements.
+                </p>
+            </div>
+
+            <div class="bg-white rounded-xl p-8 mb-8">
+                <div class="mb-8">
+                    <div class="flex justify-between items-center mb-2">
+                        <span class="text-sm font-semibold text-gray-600">Progress</span>
+                        <span class="text-sm font-semibold text-gray-600" id="progress-text">Step 1 of 7</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="progress-fill" style="width: 14.29%;"></div>
+                    </div>
+                </div>
+
+                <!-- Step 1: Political -->
+                <div class="wizard-step active" id="step-1">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 rounded-full flex items-center justify-center mr-4" style="background: #E74C3C;">
+                            <i class="fas fa-landmark text-white text-xl"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-2xl font-bold" style="color: #E74C3C;">Political Factors</h3>
+                            <p class="text-gray-600">Government policies, regulations, political stability</p>
+                        </div>
+                    </div>
+                    
+                    <div class="mb-4">
+                        <label class="block font-semibold mb-2">
+                            Identify Political Factors
+                            <span class="tooltip ml-2">
+                                <i class="fas fa-question-circle text-gray-400"></i>
+                                <span class="tooltiptext">Platform policies, content regulations, tax laws, government support for creators, international trade policies.</span>
+                            </span>
+                        </label>
+                        <textarea id="political" rows="4" placeholder="e.g., YouTube policy changes, content moderation laws, creator tax regulations, government funding for creators"></textarea>
+                    </div>
+
+                    <div class="example-box">
+                        <strong>Example:</strong> "Platform algorithm policy shifts" | "New content regulation laws" | "Tax changes for online income"
+                    </div>
+
+                    <div class="flex justify-end mt-6">
+                        <button class="btn-primary" onclick="nextStep()">Next <i class="fas fa-arrow-right ml-2"></i></button>
+                    </div>
+                </div>
+
+                <!-- Step 2: Economic -->
+                <div class="wizard-step" id="step-2">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 rounded-full flex items-center justify-center mr-4" style="background: #3498DB;">
+                            <i class="fas fa-chart-line text-white text-xl"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-2xl font-bold" style="color: #3498DB;">Economic Factors</h3>
+                            <p class="text-gray-600">Economic conditions, purchasing power, market trends</p>
+                        </div>
+                    </div>
+                    
+                    <div class="mb-4">
+                        <label class="block font-semibold mb-2">
+                            Identify Economic Factors
+                            <span class="tooltip ml-2">
+                                <i class="fas fa-question-circle text-gray-400"></i>
+                                <span class="tooltiptext">Ad revenue trends, audience spending power, subscription economy, inflation, currency exchange rates.</span>
+                            </span>
+                        </label>
+                        <textarea id="economic" rows="4" placeholder="e.g., Ad CPM rates declining, recession affecting sponsorships, growth in subscription services, inflation impacting costs"></textarea>
+                    </div>
+
+                    <div class="example-box">
+                        <strong>Example:</strong> "CPM rates down 30%" | "Recession = fewer brand deals" | "Strong dollar helping international reach"
+                    </div>
+
+                    <div class="flex justify-between mt-6">
+                        <button class="btn-secondary" onclick="prevStep()"><i class="fas fa-arrow-left mr-2"></i> Back</button>
+                        <button class="btn-primary" onclick="nextStep()">Next <i class="fas fa-arrow-right ml-2"></i></button>
+                    </div>
+                </div>
+
+                <!-- Step 3: Social -->
+                <div class="wizard-step" id="step-3">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 rounded-full flex items-center justify-center mr-4" style="background: #9B59B6;">
+                            <i class="fas fa-users text-white text-xl"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-2xl font-bold" style="color: #9B59B6;">Social Factors</h3>
+                            <p class="text-gray-600">Cultural trends, demographics, consumer behavior</p>
+                        </div>
+                    </div>
+                    
+                    <div class="mb-4">
+                        <label class="block font-semibold mb-2">
+                            Identify Social Factors
+                            <span class="tooltip ml-2">
+                                <i class="fas fa-question-circle text-gray-400"></i>
+                                <span class="tooltiptext">Cultural shifts, demographic changes, lifestyle trends, consumer attitudes, social values.</span>
+                            </span>
+                        </label>
+                        <textarea id="social" rows="4" placeholder="e.g., Growing interest in AI/productivity, remote work culture, Gen Z preferences, authenticity trending, mental health awareness"></textarea>
+                    </div>
+
+                    <div class="example-box">
+                        <strong>Example:</strong> "Short-form content preference" | "Demand for authentic creators" | "Interest in sustainability rising"
+                    </div>
+
+                    <div class="flex justify-between mt-6">
+                        <button class="btn-secondary" onclick="prevStep()"><i class="fas fa-arrow-left mr-2"></i> Back</button>
+                        <button class="btn-primary" onclick="nextStep()">Next <i class="fas fa-arrow-right ml-2"></i></button>
+                    </div>
+                </div>
+
+                <!-- Step 4: Technological -->
+                <div class="wizard-step" id="step-4">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 rounded-full flex items-center justify-center mr-4" style="background: #1ABC9C;">
+                            <i class="fas fa-microchip text-white text-xl"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-2xl font-bold" style="color: #1ABC9C;">Technological Factors</h3>
+                            <p class="text-gray-600">Innovation, automation, digital transformation</p>
+                        </div>
+                    </div>
+                    
+                    <div class="mb-4">
+                        <label class="block font-semibold mb-2">
+                            Identify Technological Factors
+                            <span class="tooltip ml-2">
+                                <i class="fas fa-question-circle text-gray-400"></i>
+                                <span class="tooltiptext">AI tools, new platforms, production technology, automation, emerging distribution channels.</span>
+                            </span>
+                        </label>
+                        <textarea id="technological" rows="4" placeholder="e.g., AI content tools, new social platforms, advanced editing software, automation tools, VR/AR opportunities"></textarea>
+                    </div>
+
+                    <div class="example-box">
+                        <strong>Example:</strong> "AI reducing editing time 80%" | "New platform TikTok Shop" | "Better mobile production tools"
+                    </div>
+
+                    <div class="flex justify-between mt-6">
+                        <button class="btn-secondary" onclick="prevStep()"><i class="fas fa-arrow-left mr-2"></i> Back</button>
+                        <button class="btn-primary" onclick="nextStep()">Next <i class="fas fa-arrow-right ml-2"></i></button>
+                    </div>
+                </div>
+
+                <!-- Step 5: Environmental -->
+                <div class="wizard-step" id="step-5">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 rounded-full flex items-center justify-center mr-4" style="background: #27AE60;">
+                            <i class="fas fa-leaf text-white text-xl"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-2xl font-bold" style="color: #27AE60;">Environmental Factors</h3>
+                            <p class="text-gray-600">Climate, sustainability, environmental concerns</p>
+                        </div>
+                    </div>
+                    
+                    <div class="mb-4">
+                        <label class="block font-semibold mb-2">
+                            Identify Environmental Factors
+                            <span class="tooltip ml-2">
+                                <i class="fas fa-question-circle text-gray-400"></i>
+                                <span class="tooltiptext">Sustainability trends, carbon footprint awareness, eco-friendly products, climate impact on topics/audience.</span>
+                            </span>
+                        </label>
+                        <textarea id="environmental" rows="4" placeholder="e.g., Audience cares about sustainability, digital carbon footprint, eco-friendly partnerships, remote work reducing travel"></textarea>
+                    </div>
+
+                    <div class="example-box">
+                        <strong>Example:</strong> "Audience prefers eco-conscious brands" | "Digital-first = lower carbon footprint" | "Topic relevance to climate"
+                    </div>
+
+                    <div class="flex justify-between mt-6">
+                        <button class="btn-secondary" onclick="prevStep()"><i class="fas fa-arrow-left mr-2"></i> Back</button>
+                        <button class="btn-primary" onclick="nextStep()">Next <i class="fas fa-arrow-right ml-2"></i></button>
+                    </div>
+                </div>
+
+                <!-- Step 6: Legal -->
+                <div class="wizard-step" id="step-6">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 rounded-full flex items-center justify-center mr-4" style="background: #F39C12;">
+                            <i class="fas fa-gavel text-white text-xl"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-2xl font-bold" style="color: #F39C12;">Legal Factors</h3>
+                            <p class="text-gray-600">Laws, regulations, compliance requirements</p>
+                        </div>
+                    </div>
+                    
+                    <div class="mb-4">
+                        <label class="block font-semibold mb-2">
+                            Identify Legal Factors
+                            <span class="tooltip ml-2">
+                                <i class="fas fa-question-circle text-gray-400"></i>
+                                <span class="tooltiptext">Copyright laws, data privacy (GDPR), disclosure requirements, contracts, intellectual property, labor laws.</span>
+                            </span>
+                        </label>
+                        <textarea id="legal" rows="4" placeholder="e.g., GDPR compliance, FTC disclosure rules, copyright strikes, contract negotiations, music licensing, creator classification laws"></textarea>
+                    </div>
+
+                    <div class="example-box">
+                        <strong>Example:</strong> "Must disclose sponsorships" | "GDPR email compliance" | "Copyright claims on music" | "Contractor vs employee laws"
+                    </div>
+
+                    <div class="flex justify-between mt-6">
+                        <button class="btn-secondary" onclick="prevStep()"><i class="fas fa-arrow-left mr-2"></i> Back</button>
+                        <button class="btn-primary" onclick="nextStep()">Next <i class="fas fa-arrow-right ml-2"></i></button>
+                    </div>
+                </div>
+
+                <!-- Step 7: Results -->
+                <div class="wizard-step" id="step-7">
+                    <h3 class="text-2xl font-bold mb-4">Your PESTEL Analysis</h3>
+                    <p class="text-gray-600 mb-6">Here's your complete macro-environment assessment:</p>
+
+                    <div class="pestel-grid mb-6">
+                        <div class="pestel-box political">
+                            <h5><i class="fas fa-landmark mr-2" style="color: #E74C3C;"></i> Political</h5>
+                            <p id="review-political"></p>
+                        </div>
+                        <div class="pestel-box economic">
+                            <h5><i class="fas fa-chart-line mr-2" style="color: #3498DB;"></i> Economic</h5>
+                            <p id="review-economic"></p>
+                        </div>
+                        <div class="pestel-box social">
+                            <h5><i class="fas fa-users mr-2" style="color: #9B59B6;"></i> Social</h5>
+                            <p id="review-social"></p>
+                        </div>
+                        <div class="pestel-box technological">
+                            <h5><i class="fas fa-microchip mr-2" style="color: #1ABC9C;"></i> Technological</h5>
+                            <p id="review-technological"></p>
+                        </div>
+                        <div class="pestel-box environmental">
+                            <h5><i class="fas fa-leaf mr-2" style="color: #27AE60;"></i> Environmental</h5>
+                            <p id="review-environmental"></p>
+                        </div>
+                        <div class="pestel-box legal">
+                            <h5><i class="fas fa-gavel mr-2" style="color: #F39C12;"></i> Legal</h5>
+                            <p id="review-legal"></p>
+                        </div>
+                    </div>
+
+                    <div class="bg-blue-50 border-l-4 border-blue-500 p-4">
+                        <h4 class="font-bold text-blue-900 mb-2"><i class="fas fa-lightbulb mr-2"></i>Strategy Insights:</h4>
+                        <ul class="text-sm text-blue-900 space-y-1">
+                            <li>• Identify opportunities from positive external factors</li>
+                            <li>• Prepare contingency plans for threats</li>
+                            <li>• Monitor factors that could significantly impact your business</li>
+                            <li>• Stay flexible and adapt to macro-environment changes</li>
+                        </ul>
+                    </div>
+
+                    <div class="flex justify-between mt-6">
+                        <button class="btn-secondary" onclick="prevStep()"><i class="fas fa-arrow-left mr-2"></i> Back</button>
+                        <button class="btn-primary" onclick="downloadPDF()"><i class="fas fa-download mr-2"></i> Download as PDF</button>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Related Frameworks -->
+            <div class="mb-8">
+                <h3 class="text-2xl font-bold mb-6 text-center">Explore More Frameworks</h3>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div class="framework-card">
+                        <div class="text-3xl mb-3" style="color: #956FA6;"><i class="fas fa-balance-scale"></i></div>
+                        <h4 class="font-bold text-lg mb-2">SWOT Analysis</h4>
+                        <p class="text-sm text-gray-600 mb-4">Analyze internal and external strategic factors</p>
+                        <a href="swot-analysis.html" class="text-sm font-semibold" style="color: #956FA6;">Try This Tool →</a>
+                    </div>
+                    <div class="framework-card">
+                        <div class="text-3xl mb-3" style="color: #956FA6;"><i class="fas fa-trophy"></i></div>
+                        <h4 class="font-bold text-lg mb-2">Porter's Five Forces</h4>
+                        <p class="text-sm text-gray-600 mb-4">Assess competitive intensity in your market</p>
+                        <a href="porters-five-forces.html" class="text-sm font-semibold" style="color: #956FA6;">Try This Tool →</a>
+                    </div>
+                    <div class="framework-card">
+                        <div class="text-3xl mb-3" style="color: #956FA6;"><i class="fas fa-th"></i></div>
+                        <h4 class="font-bold text-lg mb-2">ANSOFF Matrix</h4>
+                        <p class="text-sm text-gray-600 mb-4">Map your growth strategy options</p>
+                        <a href="ansoff-matrix.html" class="text-sm font-semibold" style="color: #956FA6;">Try This Tool →</a>
+                    </div>
+                </div>
+                <div class="text-center mt-6">
+                    <a href="mba-frameworks.html" class="text-lg font-semibold" style="color: #956FA6;">
+                        <i class="fas fa-arrow-left mr-2"></i>Back to All Frameworks
+                    </a>
+                </div>
+            </div>
+
+            <p class="text-center text-xs" style="color: #1B1B1D; opacity: 0.5;">© 2025 Bryan Collins. All rights reserved.</p>
+        </div>
+    </main>
+
+    <script>
+        let currentStep = 1;
+        const totalSteps = 7;
+
+        window.addEventListener('DOMContentLoaded', () => {
+            loadFromStorage();
+        });
+
+        function nextStep() {
+            saveToStorage();
+            document.getElementById(`step-${currentStep}`).classList.remove('active');
+            currentStep++;
+            if (currentStep > totalSteps) currentStep = totalSteps;
+            document.getElementById(`step-${currentStep}`).classList.add('active');
+            updateProgress();
+            
+            if (currentStep === 7) {
+                populateReview();
+            }
+            
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function prevStep() {
+            saveToStorage();
+            document.getElementById(`step-${currentStep}`).classList.remove('active');
+            currentStep--;
+            if (currentStep < 1) currentStep = 1;
+            document.getElementById(`step-${currentStep}`).classList.add('active');
+            updateProgress();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function updateProgress() {
+            const percentage = (currentStep / totalSteps) * 100;
+            document.getElementById('progress-fill').style.width = percentage + '%';
+            document.getElementById('progress-text').textContent = `Step ${currentStep} of ${totalSteps}`;
+        }
+
+        function saveToStorage() {
+            const data = {
+                political: document.getElementById('political').value,
+                economic: document.getElementById('economic').value,
+                social: document.getElementById('social').value,
+                technological: document.getElementById('technological').value,
+                environmental: document.getElementById('environmental').value,
+                legal: document.getElementById('legal').value
+            };
+            localStorage.setItem('pestel-analysis', JSON.stringify(data));
+        }
+
+        function loadFromStorage() {
+            const saved = localStorage.getItem('pestel-analysis');
+            if (saved) {
+                const data = JSON.parse(saved);
+                document.getElementById('political').value = data.political || '';
+                document.getElementById('economic').value = data.economic || '';
+                document.getElementById('social').value = data.social || '';
+                document.getElementById('technological').value = data.technological || '';
+                document.getElementById('environmental').value = data.environmental || '';
+                document.getElementById('legal').value = data.legal || '';
+            }
+        }
+
+        function populateReview() {
+            document.getElementById('review-political').textContent = document.getElementById('political').value || 'Not specified';
+            document.getElementById('review-economic').textContent = document.getElementById('economic').value || 'Not specified';
+            document.getElementById('review-social').textContent = document.getElementById('social').value || 'Not specified';
+            document.getElementById('review-technological').textContent = document.getElementById('technological').value || 'Not specified';
+            document.getElementById('review-environmental').textContent = document.getElementById('environmental').value || 'Not specified';
+            document.getElementById('review-legal').textContent = document.getElementById('legal').value || 'Not specified';
+        }
+
+        function downloadPDF() {
+            const { jsPDF } = window.jspdf;
+            const doc = new jsPDF();
+            
+            doc.setFontSize(20);
+            doc.setTextColor(149, 111, 166);
+            doc.text('PESTEL Analysis', 20, 20);
+            
+            doc.setFontSize(10);
+            doc.setTextColor(100);
+            doc.text('Generated: ' + new Date().toLocaleDateString(), 20, 28);
+            
+            let yPos = 40;
+            const factors = [
+                { label: 'Political', id: 'political', color: [231, 76, 60] },
+                { label: 'Economic', id: 'economic', color: [52, 152, 219] },
+                { label: 'Social', id: 'social', color: [155, 89, 182] },
+                { label: 'Technological', id: 'technological', color: [26, 188, 156] },
+                { label: 'Environmental', id: 'environmental', color: [39, 174, 96] },
+                { label: 'Legal', id: 'legal', color: [243, 156, 18] }
+            ];
+            
+            factors.forEach(factor => {
+                doc.setFontSize(14);
+                doc.setTextColor(...factor.color);
+                doc.text(factor.label + ' Factors', 20, yPos);
+                yPos += 6;
+                
+                doc.setFontSize(10);
+                doc.setTextColor(0);
+                const text = doc.splitTextToSize(document.getElementById(factor.id).value || 'Not specified', 170);
+                doc.text(text, 20, yPos);
+                yPos += text.length * 5 + 8;
+                
+                if (yPos > 260) {
+                    doc.addPage();
+                    yPos = 20;
+                }
+            });
+            
+            doc.setFontSize(8);
+            doc.setTextColor(150);
+            doc.text('Created with PESTEL Analysis Tool by Bryan Collins', 20, 285);
+            doc.text('https://join.bryancollins.com/pestel-analysis', 20, 290);
+            
+            doc.save('pestel-analysis-' + new Date().toISOString().split('T')[0] + '.pdf');
+        }
+    </script>
+</body>
+</html>
+

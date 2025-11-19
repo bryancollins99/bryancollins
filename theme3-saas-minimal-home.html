@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bryan Collins — MBA Frameworks (SaaS Minimal Style)</title>
+    <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        /* SaaS Minimal theme: Ultra-modern, spacious, product-focused */
+        @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap');
+        
+        body {
+            font-family: 'Space Grotesk', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: #000000;
+            color: #ffffff;
+        }
+        .nav-container {
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(20px) saturate(180%);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            position: sticky;
+            top: 0;
+            z-index: 50;
+        }
+        .hero-section {
+            background: #000000;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            width: 800px;
+            height: 800px;
+            background: radial-gradient(circle, rgba(99, 102, 241, 0.15), transparent 70%);
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            animation: pulse 8s ease-in-out infinite;
+        }
+        @keyframes pulse {
+            0%, 100% { opacity: 0.5; transform: translate(-50%, -50%) scale(1); }
+            50% { opacity: 0.8; transform: translate(-50%, -50%) scale(1.1); }
+        }
+        .gradient-text {
+            background: linear-gradient(135deg, #ffffff 0%, #6366f1 50%, #8b5cf6 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .btn-primary {
+            background: #6366f1;
+            color: white;
+            padding: 18px 48px;
+            border-radius: 100px;
+            font-weight: 600;
+            transition: all 0.3s;
+            box-shadow: 0 0 40px rgba(99, 102, 241, 0.4);
+            font-size: 16px;
+            letter-spacing: -0.02em;
+        }
+        .btn-primary:hover {
+            background: #4f46e5;
+            box-shadow: 0 0 60px rgba(99, 102, 241, 0.6);
+            transform: translateY(-2px);
+        }
+        .btn-ghost {
+            color: rgba(255, 255, 255, 0.8);
+            padding: 18px 48px;
+            border-radius: 100px;
+            font-weight: 600;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s;
+            background: rgba(255, 255, 255, 0.02);
+            font-size: 16px;
+            letter-spacing: -0.02em;
+        }
+        .btn-ghost:hover {
+            background: rgba(255, 255, 255, 0.05);
+            border-color: rgba(255, 255, 255, 0.2);
+        }
+        .feature-card {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.03), rgba(255, 255, 255, 0.01));
+            border-radius: 24px;
+            padding: 48px;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: 24px;
+            padding: 1px;
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.3), transparent);
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            opacity: 0;
+            transition: opacity 0.5s;
+        }
+        .feature-card:hover::before {
+            opacity: 1;
+        }
+        .feature-card:hover {
+            transform: translateY(-12px);
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.02));
+            box-shadow: 0 24px 48px rgba(99, 102, 241, 0.15);
+        }
+        .icon-box {
+            width: 64px;
+            height: 64px;
+            border-radius: 16px;
+            background: rgba(99, 102, 241, 0.1);
+            border: 1px solid rgba(99, 102, 241, 0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #6366f1;
+            font-size: 28px;
+            margin-bottom: 24px;
+        }
+        .pill-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 10px 24px;
+            border-radius: 100px;
+            font-size: 13px;
+            font-weight: 600;
+            color: rgba(255, 255, 255, 0.7);
+            letter-spacing: -0.01em;
+        }
+        .grid-bg {
+            background-image: 
+                linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+            background-size: 100px 100px;
+        }
+        .logo-text {
+            font-size: 20px;
+            font-weight: 700;
+            letter-spacing: -0.03em;
+        }
+        .section-label {
+            font-size: 12px;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: #6366f1;
+            margin-bottom: 16px;
+        }
+    </style>
+</head>
+<body class="grid-bg">
+    <!-- Navigation (SaaS Minimal Style) -->
+    <nav class="nav-container">
+        <div class="max-w-7xl mx-auto px-6 lg:px-12">
+            <div class="flex justify-between items-center h-20">
+                <div class="logo-text text-white">
+                    Bryan Collins
+                </div>
+                <div class="hidden md:flex items-center space-x-10">
+                    <a href="#" class="text-gray-400 hover:text-white font-medium transition text-sm">Tools</a>
+                    <a href="#" class="text-gray-400 hover:text-white font-medium transition text-sm">Frameworks</a>
+                    <a href="#" class="text-gray-400 hover:text-white font-medium transition text-sm">Books</a>
+                    <a href="#" class="text-gray-400 hover:text-white font-medium transition text-sm">Resources</a>
+                    <a href="#" class="bg-white text-black px-6 py-2.5 rounded-full font-semibold hover:bg-gray-100 transition text-sm">
+                        Get Started
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="max-w-6xl mx-auto px-6 lg:px-12 relative z-10">
+            <div class="text-center">
+                <div class="pill-badge mx-auto mb-10">
+                    <div class="w-2 h-2 rounded-full bg-green-400"></div>
+                    <span>Join 15,000+ strategic creators</span>
+                </div>
+                <h1 class="text-6xl md:text-8xl font-bold mb-8 leading-none" style="letter-spacing: -0.04em;">
+                    Think like an<br/>
+                    <span class="gradient-text">MBA strategist</span>
+                </h1>
+                <p class="text-xl md:text-2xl text-gray-400 mb-12 max-w-2xl mx-auto leading-relaxed" style="letter-spacing: -0.01em;">
+                    Strategic frameworks, AI tools, and actionable insights for creators building sustainable businesses.
+                </p>
+                <div class="flex flex-col sm:flex-row gap-5 justify-center items-center mb-16">
+                    <a href="#" class="btn-primary">
+                        Start Free
+                    </a>
+                    <a href="#" class="btn-ghost">
+                        Explore Tools
+                    </a>
+                </div>
+                <div class="flex items-center justify-center gap-8 text-sm text-gray-500">
+                    <div class="flex items-center gap-2">
+                        <svg class="w-4 h-4 text-green-400" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                        </svg>
+                        <span>Free forever</span>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <svg class="w-4 h-4 text-green-400" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                        </svg>
+                        <span>No credit card</span>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <svg class="w-4 h-4 text-green-400" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                        </svg>
+                        <span>Instant access</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Spacer -->
+    <div class="h-40"></div>
+
+    <!-- Features Section -->
+    <section class="py-32 relative">
+        <div class="max-w-7xl mx-auto px-6 lg:px-12">
+            <div class="text-center mb-24">
+                <div class="section-label">PLATFORM</div>
+                <h2 class="text-5xl md:text-6xl font-bold mb-6" style="letter-spacing: -0.03em;">
+                    Built for <span class="gradient-text">creators</span>
+                </h2>
+                <p class="text-xl text-gray-400 max-w-2xl mx-auto">
+                    Everything you need to think strategically and build sustainably
+                </p>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="feature-card">
+                    <div class="icon-box">
+                        <i class="fas fa-th"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-4" style="letter-spacing: -0.02em;">8 Interactive Frameworks</h3>
+                    <p class="text-gray-400 leading-relaxed">SWOT, ANSOFF, Porter's 5 Forces, BCG Matrix—all interactive with PDF export</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="icon-box">
+                        <i class="fas fa-magic"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-4" style="letter-spacing: -0.02em;">101+ AI Prompts</h3>
+                    <p class="text-gray-400 leading-relaxed">Ready-to-use ChatGPT prompts that save hours every week</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="icon-box">
+                        <i class="fas fa-book"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-4" style="letter-spacing: -0.02em;">Bestselling Books</h3>
+                    <p class="text-gray-400 leading-relaxed">5-star rated guides on creativity, productivity, and building a business</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="icon-box">
+                        <i class="fas fa-envelope"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-4" style="letter-spacing: -0.02em;">Weekly Insights</h3>
+                    <p class="text-gray-400 leading-relaxed">Strategic thinking delivered to your inbox—join 15,000+ creators</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="icon-box">
+                        <i class="fas fa-video"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-4" style="letter-spacing: -0.02em;">Online Courses</h3>
+                    <p class="text-gray-400 leading-relaxed">Step-by-step training on writing, marketing, and audience building</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="icon-box">
+                        <i class="fas fa-download"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-4" style="letter-spacing: -0.02em;">Free Resources</h3>
+                    <p class="text-gray-400 leading-relaxed">Templates, guides, and tools you can use immediately</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="py-32 relative">
+        <div class="max-w-6xl mx-auto px-6 lg:px-12">
+            <div class="bg-gradient-to-br from-indigo-600/20 to-purple-600/20 border border-white/10 rounded-3xl p-16">
+                <div class="grid md:grid-cols-3 gap-16 text-center">
+                    <div>
+                        <div class="text-6xl font-bold mb-4 gradient-text">15K+</div>
+                        <div class="text-gray-400 text-lg">Active Creators</div>
+                    </div>
+                    <div>
+                        <div class="text-6xl font-bold mb-4 gradient-text">101+</div>
+                        <div class="text-gray-400 text-lg">AI Prompts</div>
+                    </div>
+                    <div>
+                        <div class="text-6xl font-bold mb-4 gradient-text">4.9★</div>
+                        <div class="text-gray-400 text-lg">Average Rating</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="py-32 relative">
+        <div class="max-w-4xl mx-auto px-6 lg:px-12 text-center">
+            <div class="section-label text-center">GET STARTED</div>
+            <h2 class="text-5xl md:text-7xl font-bold mb-8" style="letter-spacing: -0.04em;">
+                Ready to build<br/>smarter?
+            </h2>
+            <p class="text-xl text-gray-400 mb-12 max-w-2xl mx-auto">
+                Join thousands of creators using strategic frameworks to build thriving businesses
+            </p>
+            <div class="max-w-md mx-auto">
+                <div class="bg-white/5 border border-white/10 rounded-3xl p-8 backdrop-blur-xl">
+                    <input 
+                        type="email" 
+                        placeholder="Your email address" 
+                        class="w-full px-6 py-4 bg-white/5 border border-white/10 rounded-2xl mb-4 focus:outline-none focus:border-indigo-500 text-white placeholder-gray-500 transition"
+                    >
+                    <button class="w-full bg-white text-black py-4 rounded-2xl font-bold text-lg hover:bg-gray-100 transition">
+                        Start Free
+                    </button>
+                    <p class="text-sm text-gray-500 mt-5 flex items-center justify-center gap-2">
+                        <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clip-rule="evenodd"/>
+                        </svg>
+                        <span>No spam. Unsubscribe anytime.</span>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="border-t border-white/10 py-16 mt-20">
+        <div class="max-w-7xl mx-auto px-6 lg:px-12">
+            <div class="grid md:grid-cols-2 gap-12 mb-12">
+                <div>
+                    <div class="logo-text mb-4">Bryan Collins</div>
+                    <p class="text-gray-500 mb-6 max-w-md">
+                        Strategic MBA frameworks and tools for creators building sustainable businesses.
+                    </p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center hover:bg-white/10 transition text-gray-400">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center hover:bg-white/10 transition text-gray-400">
+                            <i class="fab fa-linkedin"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center hover:bg-white/10 transition text-gray-400">
+                            <i class="fab fa-youtube"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="grid grid-cols-2 gap-8">
+                    <div>
+                        <h4 class="text-white font-bold mb-4 text-sm">Product</h4>
+                        <ul class="space-y-2 text-sm">
+                            <li><a href="#" class="text-gray-500 hover:text-white transition">Tools</a></li>
+                            <li><a href="#" class="text-gray-500 hover:text-white transition">Frameworks</a></li>
+                            <li><a href="#" class="text-gray-500 hover:text-white transition">Books</a></li>
+                            <li><a href="#" class="text-gray-500 hover:text-white transition">Courses</a></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 class="text-white font-bold mb-4 text-sm">Company</h4>
+                        <ul class="space-y-2 text-sm">
+                            <li><a href="#" class="text-gray-500 hover:text-white transition">About</a></li>
+                            <li><a href="#" class="text-gray-500 hover:text-white transition">Privacy</a></li>
+                            <li><a href="#" class="text-gray-500 hover:text-white transition">Terms</a></li>
+                            <li><a href="#" class="text-gray-500 hover:text-white transition">Contact</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="border-t border-white/10 pt-8 text-center text-sm text-gray-600">
+                <p>© 2025 Bryan Collins. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <div class="fixed bottom-6 right-6">
+        <div class="bg-white text-black px-5 py-3 rounded-full shadow-2xl text-xs font-bold border border-gray-200">
+            <i class="fas fa-palette mr-2"></i>Theme 3: SaaS Minimal Style
+        </div>
+    </div>
+</body>
+</html>
+

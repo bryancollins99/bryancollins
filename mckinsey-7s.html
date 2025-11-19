@@ -1,0 +1,640 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>McKinsey 7S Framework Tool — Organizational Alignment</title>
+    <meta name="description" content="Free interactive McKinsey 7S Framework tool. Align Strategy, Structure, Systems, Shared Values, Style, Staff, and Skills.">
+    <meta property="og:url" content="https://join.bryancollins.com/mckinsey-7s/" />
+    <meta property="og:title" content="McKinsey 7S Framework Tool" />
+    <meta property="og:description" content="Align your organization with this interactive 7S tool." />
+    
+    <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script defer data-domain="join.bryancollins.com" src="https://plausible.io/js/script.js"></script>
+    <script defer src="resources/analytics.js"></script>
+    
+    <style>
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            background-color: #EDEDEE;
+            color: #1B1B1D;
+        }
+        .hero-gradient {
+            background: linear-gradient(135deg, #956FA6 0%, #7d5e8d 100%);
+        }
+        .hero-text {
+            color: white;
+            text-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+        }
+        .wizard-step {
+            display: none;
+        }
+        .wizard-step.active {
+            display: block;
+        }
+        .progress-bar {
+            height: 8px;
+            background: #EDEDEE;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #956FA6 0%, #F3C972 100%);
+            transition: width 0.3s ease;
+        }
+        .btn-primary {
+            background: #F3C972;
+            color: #1B1B1D;
+            font-weight: 700;
+            padding: 12px 24px;
+            border-radius: 8px;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .btn-primary:hover {
+            background: #eab94a;
+            transform: translateY(-2px);
+        }
+        .btn-secondary {
+            background: #A6B6CF;
+            color: white;
+            font-weight: 600;
+            padding: 12px 24px;
+            border-radius: 8px;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .btn-secondary:hover {
+            background: #8a9bb8;
+        }
+        textarea {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #EDEDEE;
+            border-radius: 8px;
+            font-family: inherit;
+            transition: border-color 0.3s ease;
+        }
+        textarea:focus {
+            outline: none;
+            border-color: #956FA6;
+        }
+        .seven-s-diagram {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            grid-template-rows: repeat(3, 1fr);
+            gap: 16px;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        .s-box {
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+            border-left: 4px solid #956FA6;
+        }
+        .s-box h5 {
+            font-weight: 700;
+            margin-bottom: 8px;
+            font-size: 16px;
+            color: #956FA6;
+        }
+        .s-box p {
+            font-size: 13px;
+            line-height: 1.5;
+        }
+        .s-center {
+            grid-column: 2;
+            grid-row: 2;
+            background: linear-gradient(135deg, #956FA6 0%, #7d5e8d 100%);
+            color: white;
+            border: none;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        .s-center h5 {
+            color: white;
+        }
+        .s-strategy { grid-column: 2; grid-row: 1; }
+        .s-structure { grid-column: 1; grid-row: 2; }
+        .s-systems { grid-column: 3; grid-row: 2; }
+        .s-style { grid-column: 1; grid-row: 1; }
+        .s-staff { grid-column: 3; grid-row: 1; }
+        .s-skills { grid-column: 1; grid-row: 3; }
+        .tooltip {
+            position: relative;
+            display: inline-block;
+            cursor: help;
+        }
+        .tooltip .tooltiptext {
+            visibility: hidden;
+            width: 250px;
+            background-color: #1B1B1D;
+            color: #fff;
+            text-align: left;
+            border-radius: 6px;
+            padding: 10px;
+            position: absolute;
+            z-index: 1;
+            bottom: 125%;
+            left: 50%;
+            margin-left: -125px;
+            opacity: 0;
+            transition: opacity 0.3s;
+            font-size: 14px;
+        }
+        .tooltip:hover .tooltiptext {
+            visibility: visible;
+            opacity: 1;
+        }
+        .example-box {
+            background: linear-gradient(135deg, #F3C972 0%, #f5d89a 100%);
+            padding: 12px 16px;
+            border-radius: 8px;
+            margin-top: 8px;
+            font-size: 14px;
+            color: #1B1B1D;
+        }
+        .framework-card {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s ease;
+        }
+        .framework-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+        }
+        @media (max-width: 768px) {
+            .seven-s-diagram {
+                grid-template-columns: 1fr;
+                grid-template-rows: auto;
+            }
+            .s-box, .s-center {
+                grid-column: 1 !important;
+                grid-row: auto !important;
+            }
+        }
+    </style>
+</head>
+<body>
+    <main class="min-h-screen py-12 px-4 sm:px-6 lg:px-8">
+        <div class="max-w-4xl mx-auto">
+            
+            <div class="hero-gradient rounded-xl px-8 py-12 text-center mb-8">
+                <div class="inline-block p-4 bg-white bg-opacity-20 rounded-full mb-4">
+                    <i class="fas fa-sitemap text-4xl" style="color: white;"></i>
+                </div>
+                <h1 class="hero-text text-4xl sm:text-5xl font-extrabold mb-4">McKinsey 7S Framework</h1>
+                <p class="hero-text text-xl">Align Your Organization for Success</p>
+            </div>
+
+            <div class="bg-white rounded-xl p-8 mb-8">
+                <h2 class="text-2xl font-bold mb-4">What is the McKinsey 7S Framework?</h2>
+                <p class="text-lg mb-4">
+                    The McKinsey 7S Framework is a model for analyzing organizational effectiveness by examining 7 interdependent elements. 
+                    All 7 elements must be aligned for optimal performance.
+                </p>
+                <p class="text-lg mb-4">
+                    <strong>For content creators,</strong> this helps you ensure all parts of your business work together harmoniously— 
+                    from your strategy and systems to your team and company culture.
+                </p>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-6">
+                    <div class="p-4 bg-purple-50 rounded-lg">
+                        <h3 class="font-bold text-purple-800 mb-2">Hard Elements (easier to define)</h3>
+                        <ul class="text-sm text-gray-700 space-y-1">
+                            <li>• <strong>Strategy:</strong> Plan to achieve goals</li>
+                            <li>• <strong>Structure:</strong> Organization hierarchy</li>
+                            <li>• <strong>Systems:</strong> Processes and workflows</li>
+                        </ul>
+                    </div>
+                    <div class="p-4 bg-blue-50 rounded-lg">
+                        <h3 class="font-bold text-blue-800 mb-2">Soft Elements (harder to define)</h3>
+                        <ul class="text-sm text-gray-700 space-y-1">
+                            <li>• <strong>Shared Values:</strong> Core beliefs</li>
+                            <li>• <strong>Style:</strong> Leadership approach</li>
+                            <li>• <strong>Staff:</strong> People and capabilities</li>
+                            <li>• <strong>Skills:</strong> Competencies</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-xl p-8 mb-8">
+                <div class="mb-8">
+                    <div class="flex justify-between items-center mb-2">
+                        <span class="text-sm font-semibold text-gray-600">Progress</span>
+                        <span class="text-sm font-semibold text-gray-600" id="progress-text">Step 1 of 8</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="progress-fill" style="width: 12.5%;"></div>
+                    </div>
+                </div>
+
+                <!-- Step 1: Shared Values (Center) -->
+                <div class="wizard-step active" id="step-1">
+                    <h3 class="text-2xl font-bold mb-4">Step 1: Shared Values (Core)</h3>
+                    <p class="text-gray-600 mb-6">What are your organization's core values and beliefs? This is at the center of the framework.</p>
+                    
+                    <div class="mb-4">
+                        <label class="block font-semibold mb-2">
+                            Define Your Shared Values
+                            <span class="tooltip ml-2">
+                                <i class="fas fa-question-circle text-gray-400"></i>
+                                <span class="tooltiptext">The central beliefs and attitudes that guide your business. What do you stand for? What's non-negotiable?</span>
+                            </span>
+                        </label>
+                        <textarea id="shared-values" rows="4" placeholder="e.g., Authenticity over perfection, helping creators build sustainable businesses, transparency with audience"></textarea>
+                    </div>
+
+                    <div class="example-box">
+                        <strong>Example:</strong> "Provide high-value free content" | "Build in public" | "Community over algorithms"
+                    </div>
+
+                    <div class="flex justify-end mt-6">
+                        <button class="btn-primary" onclick="nextStep()">Next <i class="fas fa-arrow-right ml-2"></i></button>
+                    </div>
+                </div>
+
+                <!-- Step 2: Strategy -->
+                <div class="wizard-step" id="step-2">
+                    <h3 class="text-2xl font-bold mb-4">Step 2: Strategy</h3>
+                    <p class="text-gray-600 mb-6">What's your plan to achieve competitive advantage and reach your goals?</p>
+                    
+                    <div class="mb-4">
+                        <label class="block font-semibold mb-2">
+                            Your Strategy
+                            <span class="tooltip ml-2">
+                                <i class="fas fa-question-circle text-gray-400"></i>
+                                <span class="tooltiptext">Your high-level plan: target audience, differentiation, growth approach, competitive positioning.</span>
+                            </span>
+                        </label>
+                        <textarea id="strategy" rows="4" placeholder="e.g., Focus on B2B SaaS niche, build email list to 100K, launch 2 premium products/year, differentiate with real case studies"></textarea>
+                    </div>
+
+                    <div class="example-box">
+                        <strong>Example:</strong> "Dominate AI productivity niche via YouTube + Newsletter → Monetize with courses"
+                    </div>
+
+                    <div class="flex justify-between mt-6">
+                        <button class="btn-secondary" onclick="prevStep()"><i class="fas fa-arrow-left mr-2"></i> Back</button>
+                        <button class="btn-primary" onclick="nextStep()">Next <i class="fas fa-arrow-right ml-2"></i></button>
+                    </div>
+                </div>
+
+                <!-- Step 3: Structure -->
+                <div class="wizard-step" id="step-3">
+                    <h3 class="text-2xl font-bold mb-4">Step 3: Structure</h3>
+                    <p class="text-gray-600 mb-6">How is your organization organized? Who reports to whom?</p>
+                    
+                    <div class="mb-4">
+                        <label class="block font-semibold mb-2">
+                            Your Structure
+                            <span class="tooltip ml-2">
+                                <i class="fas fa-question-circle text-gray-400"></i>
+                                <span class="tooltiptext">Organizational hierarchy, team structure, roles, reporting relationships. Solo? Small team? Flat?</span>
+                            </span>
+                        </label>
+                        <textarea id="structure" rows="4" placeholder="e.g., Solo creator with 2 contractors (editor + VA), flat structure, I make all decisions"></textarea>
+                    </div>
+
+                    <div class="example-box">
+                        <strong>Example:</strong> "Founder → Part-time editor → Freelance designer | Flat, collaborative"
+                    </div>
+
+                    <div class="flex justify-between mt-6">
+                        <button class="btn-secondary" onclick="prevStep()"><i class="fas fa-arrow-left mr-2"></i> Back</button>
+                        <button class="btn-primary" onclick="nextStep()">Next <i class="fas fa-arrow-right ml-2"></i></button>
+                    </div>
+                </div>
+
+                <!-- Step 4: Systems -->
+                <div class="wizard-step" id="step-4">
+                    <h3 class="text-2xl font-bold mb-4">Step 4: Systems</h3>
+                    <p class="text-gray-600 mb-6">What processes and workflows do you have in place?</p>
+                    
+                    <div class="mb-4">
+                        <label class="block font-semibold mb-2">
+                            Your Systems & Processes
+                            <span class="tooltip ml-2">
+                                <i class="fas fa-question-circle text-gray-400"></i>
+                                <span class="tooltiptext">Procedures, workflows, routines: content creation process, publishing schedule, analytics review, email sequences.</span>
+                            </span>
+                        </label>
+                        <textarea id="systems" rows="4" placeholder="e.g., Weekly content calendar, automated email sequences, Notion for project management, monthly analytics review"></textarea>
+                    </div>
+
+                    <div class="example-box">
+                        <strong>Example:</strong> "Monday: research | Wed: film | Fri: edit & publish | Automated email nurture sequence"
+                    </div>
+
+                    <div class="flex justify-between mt-6">
+                        <button class="btn-secondary" onclick="prevStep()"><i class="fas fa-arrow-left mr-2"></i> Back</button>
+                        <button class="btn-primary" onclick="nextStep()">Next <i class="fas fa-arrow-right ml-2"></i></button>
+                    </div>
+                </div>
+
+                <!-- Step 5: Style -->
+                <div class="wizard-step" id="step-5">
+                    <h3 class="text-2xl font-bold mb-4">Step 5: Style</h3>
+                    <p class="text-gray-600 mb-6">What's your leadership and management style? How do you operate?</p>
+                    
+                    <div class="mb-4">
+                        <label class="block font-semibold mb-2">
+                            Your Leadership Style
+                            <span class="tooltip ml-2">
+                                <i class="fas fa-question-circle text-gray-400"></i>
+                                <span class="tooltiptext">How you lead, make decisions, communicate, manage: collaborative, directive, hands-on, delegative?</span>
+                            </span>
+                        </label>
+                        <textarea id="style" rows="4" placeholder="e.g., Collaborative and transparent, involve team in decisions, focus on autonomy, lead by example"></textarea>
+                    </div>
+
+                    <div class="example-box">
+                        <strong>Example:</strong> "Transparent communicator, involve contractors in planning, give creative freedom"
+                    </div>
+
+                    <div class="flex justify-between mt-6">
+                        <button class="btn-secondary" onclick="prevStep()"><i class="fas fa-arrow-left mr-2"></i> Back</button>
+                        <button class="btn-primary" onclick="nextStep()">Next <i class="fas fa-arrow-right ml-2"></i></button>
+                    </div>
+                </div>
+
+                <!-- Step 6: Staff -->
+                <div class="wizard-step" id="step-6">
+                    <h3 class="text-2xl font-bold mb-4">Step 6: Staff</h3>
+                    <p class="text-gray-600 mb-6">What people and capabilities do you have?</p>
+                    
+                    <div class="mb-4">
+                        <label class="block font-semibold mb-2">
+                            Your Staff & People
+                            <span class="tooltip ml-2">
+                                <i class="fas fa-question-circle text-gray-400"></i>
+                                <span class="tooltiptext">Number of people, their roles, strengths/gaps, hiring/training plans, retention strategies.</span>
+                            </span>
+                        </label>
+                        <textarea id="staff" rows="4" placeholder="e.g., Just me + 1 editor (expert in Final Cut), need to hire copywriter, retain through fair pay + creative freedom"></textarea>
+                    </div>
+
+                    <div class="example-box">
+                        <strong>Example:</strong> "Solo + 2 contractors | Gap: need marketing specialist | Retain via profit-sharing"
+                    </div>
+
+                    <div class="flex justify-between mt-6">
+                        <button class="btn-secondary" onclick="prevStep()"><i class="fas fa-arrow-left mr-2"></i> Back</button>
+                        <button class="btn-primary" onclick="nextStep()">Next <i class="fas fa-arrow-right ml-2"></i></button>
+                    </div>
+                </div>
+
+                <!-- Step 7: Skills -->
+                <div class="wizard-step" id="step-7">
+                    <h3 class="text-2xl font-bold mb-4">Step 7: Skills</h3>
+                    <p class="text-gray-600 mb-6">What distinctive competencies do you and your team have?</p>
+                    
+                    <div class="mb-4">
+                        <label class="block font-semibold mb-2">
+                            Your Core Skills
+                            <span class="tooltip ml-2">
+                                <i class="fas fa-question-circle text-gray-400"></i>
+                                <span class="tooltiptext">What you're really good at organizationally: video production, storytelling, community building, technical expertise.</span>
+                            </span>
+                        </label>
+                        <textarea id="skills" rows="4" placeholder="e.g., Expert storytelling, deep technical knowledge in niche, fast video production, strong community engagement"></textarea>
+                    </div>
+
+                    <div class="example-box">
+                        <strong>Example:</strong> "World-class video editing" | "Deep AI expertise" | "Authentic personal brand"
+                    </div>
+
+                    <div class="flex justify-between mt-6">
+                        <button class="btn-secondary" onclick="prevStep()"><i class="fas fa-arrow-left mr-2"></i> Back</button>
+                        <button class="btn-primary" onclick="nextStep()">Next <i class="fas fa-arrow-right ml-2"></i></button>
+                    </div>
+                </div>
+
+                <!-- Step 8: Results -->
+                <div class="wizard-step" id="step-8">
+                    <h3 class="text-2xl font-bold mb-4">Your McKinsey 7S Model</h3>
+                    <p class="text-gray-600 mb-6">Here's your complete organizational alignment:</p>
+
+                    <div class="seven-s-diagram mb-6">
+                        <div class="s-box s-style">
+                            <h5>Style</h5>
+                            <p id="review-style"></p>
+                        </div>
+                        <div class="s-box s-strategy">
+                            <h5>Strategy</h5>
+                            <p id="review-strategy"></p>
+                        </div>
+                        <div class="s-box s-staff">
+                            <h5>Staff</h5>
+                            <p id="review-staff"></p>
+                        </div>
+                        <div class="s-box s-structure">
+                            <h5>Structure</h5>
+                            <p id="review-structure"></p>
+                        </div>
+                        <div class="s-box s-center">
+                            <h5>Shared Values</h5>
+                            <p id="review-shared-values" class="text-sm"></p>
+                        </div>
+                        <div class="s-box s-systems">
+                            <h5>Systems</h5>
+                            <p id="review-systems"></p>
+                        </div>
+                        <div class="s-box s-skills">
+                            <h5>Skills</h5>
+                            <p id="review-skills"></p>
+                        </div>
+                    </div>
+
+                    <div class="bg-blue-50 border-l-4 border-blue-500 p-4">
+                        <h4 class="font-bold text-blue-900 mb-2"><i class="fas fa-lightbulb mr-2"></i>Alignment Check:</h4>
+                        <ul class="text-sm text-blue-900 space-y-1">
+                            <li>• All 7 elements should reinforce each other</li>
+                            <li>• Identify misalignments (e.g., strategy requires skills you don't have)</li>
+                            <li>• When changing one element, consider impact on others</li>
+                            <li>• Shared Values at center should guide all decisions</li>
+                        </ul>
+                    </div>
+
+                    <div class="flex justify-between mt-6">
+                        <button class="btn-secondary" onclick="prevStep()"><i class="fas fa-arrow-left mr-2"></i> Back</button>
+                        <button class="btn-primary" onclick="downloadPDF()"><i class="fas fa-download mr-2"></i> Download as PDF</button>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Related Frameworks -->
+            <div class="mb-8">
+                <h3 class="text-2xl font-bold mb-6 text-center">Explore More Frameworks</h3>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div class="framework-card">
+                        <div class="text-3xl mb-3" style="color: #956FA6;"><i class="fas fa-link"></i></div>
+                        <h4 class="font-bold text-lg mb-2">Value Chain Analysis</h4>
+                        <p class="text-sm text-gray-600 mb-4">Map where you create value in your business</p>
+                        <a href="value-chain.html" class="text-sm font-semibold" style="color: #956FA6;">Try This Tool →</a>
+                    </div>
+                    <div class="framework-card">
+                        <div class="text-3xl mb-3" style="color: #956FA6;"><i class="fas fa-project-diagram"></i></div>
+                        <h4 class="font-bold text-lg mb-2">Business Model Canvas</h4>
+                        <p class="text-sm text-gray-600 mb-4">Design your complete business model</p>
+                        <a href="business-model-canvas.html" class="text-sm font-semibold" style="color: #956FA6;">Try This Tool →</a>
+                    </div>
+                    <div class="framework-card">
+                        <div class="text-3xl mb-3" style="color: #956FA6;"><i class="fas fa-balance-scale"></i></div>
+                        <h4 class="font-bold text-lg mb-2">SWOT Analysis</h4>
+                        <p class="text-sm text-gray-600 mb-4">Analyze your strategic position</p>
+                        <a href="swot-analysis.html" class="text-sm font-semibold" style="color: #956FA6;">Try This Tool →</a>
+                    </div>
+                </div>
+                <div class="text-center mt-6">
+                    <a href="mba-frameworks.html" class="text-lg font-semibold" style="color: #956FA6;">
+                        <i class="fas fa-arrow-left mr-2"></i>Back to All Frameworks
+                    </a>
+                </div>
+            </div>
+
+            <p class="text-center text-xs" style="color: #1B1B1D; opacity: 0.5;">© 2025 Bryan Collins. All rights reserved.</p>
+        </div>
+    </main>
+
+    <script>
+        let currentStep = 1;
+        const totalSteps = 8;
+
+        window.addEventListener('DOMContentLoaded', () => {
+            loadFromStorage();
+        });
+
+        function nextStep() {
+            saveToStorage();
+            document.getElementById(`step-${currentStep}`).classList.remove('active');
+            currentStep++;
+            if (currentStep > totalSteps) currentStep = totalSteps;
+            document.getElementById(`step-${currentStep}`).classList.add('active');
+            updateProgress();
+            
+            if (currentStep === 8) {
+                populateReview();
+            }
+            
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function prevStep() {
+            saveToStorage();
+            document.getElementById(`step-${currentStep}`).classList.remove('active');
+            currentStep--;
+            if (currentStep < 1) currentStep = 1;
+            document.getElementById(`step-${currentStep}`).classList.add('active');
+            updateProgress();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function updateProgress() {
+            const percentage = (currentStep / totalSteps) * 100;
+            document.getElementById('progress-fill').style.width = percentage + '%';
+            document.getElementById('progress-text').textContent = `Step ${currentStep} of ${totalSteps}`;
+        }
+
+        function saveToStorage() {
+            const data = {
+                sharedValues: document.getElementById('shared-values').value,
+                strategy: document.getElementById('strategy').value,
+                structure: document.getElementById('structure').value,
+                systems: document.getElementById('systems').value,
+                style: document.getElementById('style').value,
+                staff: document.getElementById('staff').value,
+                skills: document.getElementById('skills').value
+            };
+            localStorage.setItem('mckinsey-7s', JSON.stringify(data));
+        }
+
+        function loadFromStorage() {
+            const saved = localStorage.getItem('mckinsey-7s');
+            if (saved) {
+                const data = JSON.parse(saved);
+                document.getElementById('shared-values').value = data.sharedValues || '';
+                document.getElementById('strategy').value = data.strategy || '';
+                document.getElementById('structure').value = data.structure || '';
+                document.getElementById('systems').value = data.systems || '';
+                document.getElementById('style').value = data.style || '';
+                document.getElementById('staff').value = data.staff || '';
+                document.getElementById('skills').value = data.skills || '';
+            }
+        }
+
+        function populateReview() {
+            document.getElementById('review-shared-values').textContent = document.getElementById('shared-values').value || 'Not specified';
+            document.getElementById('review-strategy').textContent = document.getElementById('strategy').value || 'Not specified';
+            document.getElementById('review-structure').textContent = document.getElementById('structure').value || 'Not specified';
+            document.getElementById('review-systems').textContent = document.getElementById('systems').value || 'Not specified';
+            document.getElementById('review-style').textContent = document.getElementById('style').value || 'Not specified';
+            document.getElementById('review-staff').textContent = document.getElementById('staff').value || 'Not specified';
+            document.getElementById('review-skills').textContent = document.getElementById('skills').value || 'Not specified';
+        }
+
+        function downloadPDF() {
+            const { jsPDF } = window.jspdf;
+            const doc = new jsPDF();
+            
+            doc.setFontSize(20);
+            doc.setTextColor(149, 111, 166);
+            doc.text('McKinsey 7S Framework', 20, 20);
+            
+            doc.setFontSize(10);
+            doc.setTextColor(100);
+            doc.text('Generated: ' + new Date().toLocaleDateString(), 20, 28);
+            
+            let yPos = 40;
+            const elements = [
+                { label: 'Shared Values (Core)', id: 'shared-values' },
+                { label: 'Strategy', id: 'strategy' },
+                { label: 'Structure', id: 'structure' },
+                { label: 'Systems', id: 'systems' },
+                { label: 'Style', id: 'style' },
+                { label: 'Staff', id: 'staff' },
+                { label: 'Skills', id: 'skills' }
+            ];
+            
+            elements.forEach(element => {
+                if (yPos > 260) {
+                    doc.addPage();
+                    yPos = 20;
+                }
+                
+                doc.setFontSize(12);
+                doc.setTextColor(149, 111, 166);
+                doc.text(element.label, 20, yPos);
+                yPos += 6;
+                
+                doc.setFontSize(10);
+                doc.setTextColor(0);
+                const text = doc.splitTextToSize(document.getElementById(element.id).value || 'Not specified', 170);
+                doc.text(text, 20, yPos);
+                yPos += text.length * 5 + 8;
+            });
+            
+            doc.setFontSize(8);
+            doc.setTextColor(150);
+            doc.text('Created with McKinsey 7S Framework Tool by Bryan Collins', 20, 285);
+            doc.text('https://join.bryancollins.com/mckinsey-7s', 20, 290);
+            
+            doc.save('mckinsey-7s-' + new Date().toISOString().split('T')[0] + '.pdf');
+        }
+    </script>
+</body>
+</html>
+

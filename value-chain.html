@@ -1,0 +1,778 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Value Chain Analysis Tool — Content Business Strategy</title>
+    <meta name="description" content="Free interactive Value Chain Analysis tool. Identify where you create value from content production to delivery.">
+    <meta property="og:url" content="https://join.bryancollins.com/value-chain/" />
+    <meta property="og:title" content="Value Chain Analysis Tool — Content Business Strategy" />
+    <meta property="og:description" content="Map your value creation activities with this interactive tool for creators." />
+    
+    <!-- Tailwind CSS -->
+    <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    
+    <!-- jsPDF for PDF generation -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    
+    <!-- Plausible Analytics -->
+    <script defer data-domain="join.bryancollins.com" src="https://plausible.io/js/script.js"></script>
+    <script defer src="resources/analytics.js"></script>
+    
+    <style>
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            background-color: #EDEDEE;
+            color: #1B1B1D;
+        }
+        .hero-gradient {
+            background: linear-gradient(135deg, #956FA6 0%, #7d5e8d 100%);
+        }
+        .hero-text {
+            color: white;
+            text-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+        }
+        .wizard-step {
+            display: none;
+        }
+        .wizard-step.active {
+            display: block;
+        }
+        .progress-bar {
+            height: 8px;
+            background: #EDEDEE;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #956FA6 0%, #F3C972 100%);
+            transition: width 0.3s ease;
+        }
+        .btn-primary {
+            background: #F3C972;
+            color: #1B1B1D;
+            font-weight: 700;
+            padding: 12px 24px;
+            border-radius: 8px;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .btn-primary:hover {
+            background: #eab94a;
+            transform: translateY(-2px);
+        }
+        .btn-secondary {
+            background: #A6B6CF;
+            color: white;
+            font-weight: 600;
+            padding: 12px 24px;
+            border-radius: 8px;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .btn-secondary:hover {
+            background: #8a9bb8;
+        }
+        textarea, input {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #EDEDEE;
+            border-radius: 8px;
+            font-family: inherit;
+            transition: border-color 0.3s ease;
+        }
+        textarea:focus, input:focus {
+            outline: none;
+            border-color: #956FA6;
+        }
+        .value-chain-flow {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+        .support-activities {
+            background: linear-gradient(135deg, #A6B6CF 0%, #8a9bb8 100%);
+            padding: 16px;
+            border-radius: 12px;
+            color: white;
+        }
+        .primary-activities {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 12px;
+        }
+        .activity-box {
+            background: white;
+            padding: 16px;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+            border-left: 4px solid #956FA6;
+        }
+        .activity-box h5 {
+            font-weight: 700;
+            color: #956FA6;
+            margin-bottom: 8px;
+            font-size: 14px;
+        }
+        .activity-box p {
+            font-size: 12px;
+            line-height: 1.4;
+        }
+        .support-box {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 12px;
+            border-radius: 8px;
+            margin-bottom: 8px;
+        }
+        .support-box:last-child {
+            margin-bottom: 0;
+        }
+        .support-box h5 {
+            font-weight: 700;
+            margin-bottom: 4px;
+            font-size: 13px;
+        }
+        .support-box p {
+            font-size: 11px;
+            line-height: 1.3;
+        }
+        .tooltip {
+            position: relative;
+            display: inline-block;
+            cursor: help;
+        }
+        .tooltip .tooltiptext {
+            visibility: hidden;
+            width: 250px;
+            background-color: #1B1B1D;
+            color: #fff;
+            text-align: left;
+            border-radius: 6px;
+            padding: 10px;
+            position: absolute;
+            z-index: 1;
+            bottom: 125%;
+            left: 50%;
+            margin-left: -125px;
+            opacity: 0;
+            transition: opacity 0.3s;
+            font-size: 14px;
+        }
+        .tooltip:hover .tooltiptext {
+            visibility: visible;
+            opacity: 1;
+        }
+        .example-box {
+            background: linear-gradient(135deg, #F3C972 0%, #f5d89a 100%);
+            padding: 12px 16px;
+            border-radius: 8px;
+            margin-top: 8px;
+            font-size: 14px;
+            color: #1B1B1D;
+        }
+        .framework-card {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s ease;
+        }
+        .framework-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+        }
+        @media (max-width: 1024px) {
+            .primary-activities {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <main class="min-h-screen py-12 px-4 sm:px-6 lg:px-8">
+        <div class="max-w-6xl mx-auto">
+            
+            <!-- Hero -->
+            <div class="hero-gradient rounded-xl px-8 py-12 text-center mb-8">
+                <div class="inline-block p-4 bg-white bg-opacity-20 rounded-full mb-4">
+                    <i class="fas fa-link text-4xl" style="color: white;"></i>
+                </div>
+                <h1 class="hero-text text-4xl sm:text-5xl font-extrabold mb-4">Value Chain Analysis</h1>
+                <p class="hero-text text-xl">Map Where You Create Value</p>
+            </div>
+
+            <!-- Explanation -->
+            <div class="bg-white rounded-xl p-8 mb-8">
+                <h2 class="text-2xl font-bold mb-4">What is Value Chain Analysis?</h2>
+                <p class="text-lg mb-4">
+                    Value Chain Analysis helps you identify all the activities involved in creating and delivering your content or products. 
+                    It separates activities into <strong>Primary Activities</strong> (directly creating value) and <strong>Support Activities</strong> (enabling the primary activities).
+                </p>
+                <p class="text-lg mb-4">
+                    <strong>For content creators,</strong> this means understanding every step from ideation to audience delivery, 
+                    and identifying where you can improve efficiency, reduce costs, or add unique value that sets you apart.
+                </p>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
+                    <div class="p-4 bg-purple-50 rounded-lg border-l-4 border-purple-500">
+                        <h3 class="font-bold text-purple-800 mb-2">Primary Activities</h3>
+                        <ul class="text-sm text-gray-700 space-y-1">
+                            <li>• <strong>Inbound:</strong> Research, tools, resources</li>
+                            <li>• <strong>Operations:</strong> Content creation</li>
+                            <li>• <strong>Outbound:</strong> Publishing, distribution</li>
+                            <li>• <strong>Marketing:</strong> Promotion, SEO, ads</li>
+                            <li>• <strong>Service:</strong> Community engagement</li>
+                        </ul>
+                    </div>
+                    <div class="p-4 bg-blue-50 rounded-lg border-l-4 border-blue-500">
+                        <h3 class="font-bold text-blue-800 mb-2">Support Activities</h3>
+                        <ul class="text-sm text-gray-700 space-y-1">
+                            <li>• <strong>Infrastructure:</strong> Systems, admin</li>
+                            <li>• <strong>HR:</strong> Team, freelancers, yourself</li>
+                            <li>• <strong>Technology:</strong> Software, equipment</li>
+                            <li>• <strong>Procurement:</strong> Buying/licensing</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Wizard Container -->
+            <div class="bg-white rounded-xl p-8 mb-8">
+                <!-- Progress Bar -->
+                <div class="mb-8">
+                    <div class="flex justify-between items-center mb-2">
+                        <span class="text-sm font-semibold text-gray-600">Progress</span>
+                        <span class="text-sm font-semibold text-gray-600" id="progress-text">Step 1 of 10</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="progress-fill" style="width: 10%;"></div>
+                    </div>
+                </div>
+
+                <!-- Step 1: Inbound Logistics -->
+                <div class="wizard-step active" id="step-1">
+                    <h3 class="text-2xl font-bold mb-4">Step 1: Inbound Logistics</h3>
+                    <p class="text-gray-600 mb-6">What inputs do you need before creating content?</p>
+                    
+                    <div class="mb-4">
+                        <label class="block font-semibold mb-2">
+                            Your Inbound Activities
+                            <span class="tooltip ml-2">
+                                <i class="fas fa-question-circle text-gray-400"></i>
+                                <span class="tooltiptext">Research, gathering resources, subscribing to tools, collecting data, trend analysis, etc.</span>
+                            </span>
+                        </label>
+                        <textarea id="inbound" rows="4" placeholder="e.g., Research trending topics, gather statistics, subscribe to news sources, collect stock footage"></textarea>
+                    </div>
+
+                    <div class="example-box">
+                        <strong>Example:</strong> "Browse Reddit/Twitter for trending topics" | "Subscribe to industry newsletters" | "Access stock photo library"
+                    </div>
+
+                    <div class="flex justify-end mt-6">
+                        <button class="btn-primary" onclick="nextStep()">Next <i class="fas fa-arrow-right ml-2"></i></button>
+                    </div>
+                </div>
+
+                <!-- Step 2: Operations -->
+                <div class="wizard-step" id="step-2">
+                    <h3 class="text-2xl font-bold mb-4">Step 2: Operations (Content Creation)</h3>
+                    <p class="text-gray-600 mb-6">How do you actually create your content?</p>
+                    
+                    <div class="mb-4">
+                        <label class="block font-semibold mb-2">
+                            Your Operations Activities
+                            <span class="tooltip ml-2">
+                                <i class="fas fa-question-circle text-gray-400"></i>
+                                <span class="tooltiptext">Writing, filming, editing, designing, recording, producing—the core creation process.</span>
+                            </span>
+                        </label>
+                        <textarea id="operations" rows="4" placeholder="e.g., Script writing, video recording, editing in Premiere Pro, designing thumbnails, adding captions"></textarea>
+                    </div>
+
+                    <div class="example-box">
+                        <strong>Example:</strong> "Write 2000-word article in Google Docs" | "Record 4K video footage" | "Edit video with transitions and B-roll"
+                    </div>
+
+                    <div class="flex justify-between mt-6">
+                        <button class="btn-secondary" onclick="prevStep()"><i class="fas fa-arrow-left mr-2"></i> Back</button>
+                        <button class="btn-primary" onclick="nextStep()">Next <i class="fas fa-arrow-right ml-2"></i></button>
+                    </div>
+                </div>
+
+                <!-- Step 3: Outbound Logistics -->
+                <div class="wizard-step" id="step-3">
+                    <h3 class="text-2xl font-bold mb-4">Step 3: Outbound Logistics</h3>
+                    <p class="text-gray-600 mb-6">How do you publish and distribute your content?</p>
+                    
+                    <div class="mb-4">
+                        <label class="block font-semibold mb-2">
+                            Your Outbound Activities
+                            <span class="tooltip ml-2">
+                                <i class="fas fa-question-circle text-gray-400"></i>
+                                <span class="tooltiptext">Uploading, scheduling, cross-posting, formatting for different platforms, distribution.</span>
+                            </span>
+                        </label>
+                        <textarea id="outbound" rows="4" placeholder="e.g., Upload to YouTube, schedule posts, export to podcast platforms, cross-post to social media"></textarea>
+                    </div>
+
+                    <div class="example-box">
+                        <strong>Example:</strong> "Upload to YouTube with optimized description" | "Schedule email via ConvertKit" | "Cross-post to LinkedIn/Twitter"
+                    </div>
+
+                    <div class="flex justify-between mt-6">
+                        <button class="btn-secondary" onclick="prevStep()"><i class="fas fa-arrow-left mr-2"></i> Back</button>
+                        <button class="btn-primary" onclick="nextStep()">Next <i class="fas fa-arrow-right ml-2"></i></button>
+                    </div>
+                </div>
+
+                <!-- Step 4: Marketing & Sales -->
+                <div class="wizard-step" id="step-4">
+                    <h3 class="text-2xl font-bold mb-4">Step 4: Marketing & Sales</h3>
+                    <p class="text-gray-600 mb-6">How do you promote and monetize?</p>
+                    
+                    <div class="mb-4">
+                        <label class="block font-semibold mb-2">
+                            Your Marketing Activities
+                            <span class="tooltip ml-2">
+                                <i class="fas fa-question-circle text-gray-400"></i>
+                                <span class="tooltiptext">SEO, paid ads, social media promotion, collaborations, email marketing, selling products/services.</span>
+                            </span>
+                        </label>
+                        <textarea id="marketing" rows="4" placeholder="e.g., SEO optimization, run Facebook ads, collaborate with other creators, send weekly newsletter, pitch sponsors"></textarea>
+                    </div>
+
+                    <div class="example-box">
+                        <strong>Example:</strong> "Optimize for SEO keywords" | "Run YouTube ads campaign" | "Email list promotion" | "Affiliate marketing"
+                    </div>
+
+                    <div class="flex justify-between mt-6">
+                        <button class="btn-secondary" onclick="prevStep()"><i class="fas fa-arrow-left mr-2"></i> Back</button>
+                        <button class="btn-primary" onclick="nextStep()">Next <i class="fas fa-arrow-right ml-2"></i></button>
+                    </div>
+                </div>
+
+                <!-- Step 5: Service -->
+                <div class="wizard-step" id="step-5">
+                    <h3 class="text-2xl font-bold mb-4">Step 5: Service (Community Engagement)</h3>
+                    <p class="text-gray-600 mb-6">How do you support and engage with your audience?</p>
+                    
+                    <div class="mb-4">
+                        <label class="block font-semibold mb-2">
+                            Your Service Activities
+                            <span class="tooltip ml-2">
+                                <i class="fas fa-question-circle text-gray-400"></i>
+                                <span class="tooltiptext">Responding to comments, customer support, community building, answering questions, gathering feedback.</span>
+                            </span>
+                        </label>
+                        <textarea id="service" rows="4" placeholder="e.g., Reply to comments, host Q&A sessions, moderate Discord, answer emails, gather feedback for improvements"></textarea>
+                    </div>
+
+                    <div class="example-box">
+                        <strong>Example:</strong> "Reply to YouTube comments daily" | "Host monthly live Q&A" | "Run community polls" | "Customer support via email"
+                    </div>
+
+                    <div class="flex justify-between mt-6">
+                        <button class="btn-secondary" onclick="prevStep()"><i class="fas fa-arrow-left mr-2"></i> Back</button>
+                        <button class="btn-primary" onclick="nextStep()">Next <i class="fas fa-arrow-right ml-2"></i></button>
+                    </div>
+                </div>
+
+                <!-- Step 6: Infrastructure -->
+                <div class="wizard-step" id="step-6">
+                    <h3 class="text-2xl font-bold mb-4">Step 6: Infrastructure (Support)</h3>
+                    <p class="text-gray-600 mb-6">What systems, processes, and admin work support your business?</p>
+                    
+                    <div class="mb-4">
+                        <label class="block font-semibold mb-2">
+                            Your Infrastructure Activities
+                            <span class="tooltip ml-2">
+                                <i class="fas fa-question-circle text-gray-400"></i>
+                                <span class="tooltiptext">Legal, accounting, planning, project management, analytics tracking, workflow systems.</span>
+                            </span>
+                        </label>
+                        <textarea id="infrastructure" rows="4" placeholder="e.g., Track analytics, manage finances/taxes, content calendar planning, legal contracts, project management"></textarea>
+                    </div>
+
+                    <div class="example-box">
+                        <strong>Example:</strong> "Use Notion for content calendar" | "QuickBooks for accounting" | "Google Analytics tracking" | "Annual tax filing"
+                    </div>
+
+                    <div class="flex justify-between mt-6">
+                        <button class="btn-secondary" onclick="prevStep()"><i class="fas fa-arrow-left mr-2"></i> Back</button>
+                        <button class="btn-primary" onclick="nextStep()">Next <i class="fas fa-arrow-right ml-2"></i></button>
+                    </div>
+                </div>
+
+                <!-- Step 7: Human Resources -->
+                <div class="wizard-step" id="step-7">
+                    <h3 class="text-2xl font-bold mb-4">Step 7: Human Resources (Support)</h3>
+                    <p class="text-gray-600 mb-6">Who works on your content business and how do you manage them?</p>
+                    
+                    <div class="mb-4">
+                        <label class="block font-semibold mb-2">
+                            Your HR Activities
+                            <span class="tooltip ml-2">
+                                <i class="fas fa-question-circle text-gray-400"></i>
+                                <span class="tooltiptext">Hiring, training, managing team/freelancers, personal development, skill building.</span>
+                            </span>
+                        </label>
+                        <textarea id="hr" rows="4" placeholder="e.g., Hire video editors on Upwork, train VA on processes, personal skill development courses, team coordination"></textarea>
+                    </div>
+
+                    <div class="example-box">
+                        <strong>Example:</strong> "Solo creator (self-training)" | "Work with part-time editor" | "Outsource thumbnail design" | "Take online courses"
+                    </div>
+
+                    <div class="flex justify-between mt-6">
+                        <button class="btn-secondary" onclick="prevStep()"><i class="fas fa-arrow-left mr-2"></i> Back</button>
+                        <button class="btn-primary" onclick="nextStep()">Next <i class="fas fa-arrow-right ml-2"></i></button>
+                    </div>
+                </div>
+
+                <!-- Step 8: Technology Development -->
+                <div class="wizard-step" id="step-8">
+                    <h3 class="text-2xl font-bold mb-4">Step 8: Technology Development (Support)</h3>
+                    <p class="text-gray-600 mb-6">What technology, software, and equipment do you use?</p>
+                    
+                    <div class="mb-4">
+                        <label class="block font-semibold mb-2">
+                            Your Technology Activities
+                            <span class="tooltip ml-2">
+                                <i class="fas fa-question-circle text-gray-400"></i>
+                                <span class="tooltiptext">Software subscriptions, equipment upgrades, automation tools, website development, tech optimization.</span>
+                            </span>
+                        </label>
+                        <textarea id="technology" rows="4" placeholder="e.g., Adobe Creative Suite, Notion, Zapier automation, website hosting, camera/mic equipment, AI tools"></textarea>
+                    </div>
+
+                    <div class="example-box">
+                        <strong>Example:</strong> "Premiere Pro for editing" | "ChatGPT for ideation" | "Canon R5 camera" | "ConvertKit for email" | "Custom website"
+                    </div>
+
+                    <div class="flex justify-between mt-6">
+                        <button class="btn-secondary" onclick="prevStep()"><i class="fas fa-arrow-left mr-2"></i> Back</button>
+                        <button class="btn-primary" onclick="nextStep()">Next <i class="fas fa-arrow-right ml-2"></i></button>
+                    </div>
+                </div>
+
+                <!-- Step 9: Procurement -->
+                <div class="wizard-step" id="step-9">
+                    <h3 class="text-2xl font-bold mb-4">Step 9: Procurement (Support)</h3>
+                    <p class="text-gray-600 mb-6">What do you purchase or license to operate?</p>
+                    
+                    <div class="mb-4">
+                        <label class="block font-semibold mb-2">
+                            Your Procurement Activities
+                            <span class="tooltip ml-2">
+                                <i class="fas fa-question-circle text-gray-400"></i>
+                                <span class="tooltiptext">Buying subscriptions, licensing music/footage, purchasing equipment, negotiating vendor contracts.</span>
+                            </span>
+                        </label>
+                        <textarea id="procurement" rows="4" placeholder="e.g., Epidemic Sound subscription, stock footage licenses, equipment purchases, cloud storage, domain registration"></textarea>
+                    </div>
+
+                    <div class="example-box">
+                        <strong>Example:</strong> "Artlist music license" | "AWS cloud storage" | "Namecheap domain" | "Adobe subscription" | "Equipment from B&H"
+                    </div>
+
+                    <div class="flex justify-between mt-6">
+                        <button class="btn-secondary" onclick="prevStep()"><i class="fas fa-arrow-left mr-2"></i> Back</button>
+                        <button class="btn-primary" onclick="nextStep()">Next <i class="fas fa-arrow-right ml-2"></i></button>
+                    </div>
+                </div>
+
+                <!-- Step 10: Results -->
+                <div class="wizard-step" id="step-10">
+                    <h3 class="text-2xl font-bold mb-4">Your Value Chain</h3>
+                    <p class="text-gray-600 mb-6">Here's your complete value creation map:</p>
+
+                    <!-- Value Chain Diagram -->
+                    <div class="value-chain-flow">
+                        <!-- Support Activities -->
+                        <div class="support-activities">
+                            <h4 class="font-bold mb-3 text-lg">Support Activities</h4>
+                            <div class="support-box">
+                                <h5>Infrastructure</h5>
+                                <p id="review-infrastructure"></p>
+                            </div>
+                            <div class="support-box">
+                                <h5>Human Resources</h5>
+                                <p id="review-hr"></p>
+                            </div>
+                            <div class="support-box">
+                                <h5>Technology Development</h5>
+                                <p id="review-technology"></p>
+                            </div>
+                            <div class="support-box">
+                                <h5>Procurement</h5>
+                                <p id="review-procurement"></p>
+                            </div>
+                        </div>
+
+                        <!-- Primary Activities -->
+                        <div>
+                            <h4 class="font-bold mb-3 text-lg">Primary Activities (Value Creation Flow)</h4>
+                            <div class="primary-activities">
+                                <div class="activity-box">
+                                    <h5><i class="fas fa-inbox mr-1"></i> Inbound</h5>
+                                    <p id="review-inbound"></p>
+                                </div>
+                                <div class="activity-box">
+                                    <h5><i class="fas fa-cogs mr-1"></i> Operations</h5>
+                                    <p id="review-operations"></p>
+                                </div>
+                                <div class="activity-box">
+                                    <h5><i class="fas fa-shipping-fast mr-1"></i> Outbound</h5>
+                                    <p id="review-outbound"></p>
+                                </div>
+                                <div class="activity-box">
+                                    <h5><i class="fas fa-bullhorn mr-1"></i> Marketing</h5>
+                                    <p id="review-marketing"></p>
+                                </div>
+                                <div class="activity-box">
+                                    <h5><i class="fas fa-users mr-1"></i> Service</h5>
+                                    <p id="review-service"></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-blue-50 border-l-4 border-blue-500 p-4 mt-6">
+                        <h4 class="font-bold text-blue-900 mb-2"><i class="fas fa-lightbulb mr-2"></i>Use Your Value Chain To:</h4>
+                        <ul class="text-sm text-blue-900 space-y-1">
+                            <li>• Identify activities where you add unique value</li>
+                            <li>• Find inefficiencies or bottlenecks to optimize</li>
+                            <li>• Decide what to outsource vs. keep in-house</li>
+                            <li>• Understand your competitive advantage</li>
+                        </ul>
+                    </div>
+
+                    <div class="flex justify-between mt-6">
+                        <button class="btn-secondary" onclick="prevStep()"><i class="fas fa-arrow-left mr-2"></i> Back</button>
+                        <button class="btn-primary" onclick="downloadPDF()"><i class="fas fa-download mr-2"></i> Download as PDF</button>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Related Frameworks -->
+            <div class="mb-8">
+                <h3 class="text-2xl font-bold mb-6 text-center">Explore More Frameworks</h3>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div class="framework-card">
+                        <div class="text-3xl mb-3" style="color: #956FA6;"><i class="fas fa-trophy"></i></div>
+                        <h4 class="font-bold text-lg mb-2">Porter's Five Forces</h4>
+                        <p class="text-sm text-gray-600 mb-4">Analyze competitive forces in your market environment</p>
+                        <a href="porters-five-forces.html" class="text-sm font-semibold" style="color: #956FA6;">Try This Tool →</a>
+                    </div>
+                    <div class="framework-card">
+                        <div class="text-3xl mb-3" style="color: #956FA6;"><i class="fas fa-sitemap"></i></div>
+                        <h4 class="font-bold text-lg mb-2">McKinsey 7S</h4>
+                        <p class="text-sm text-gray-600 mb-4">Align 7 internal elements for organizational effectiveness</p>
+                        <a href="mckinsey-7s.html" class="text-sm font-semibold" style="color: #956FA6;">Try This Tool →</a>
+                    </div>
+                    <div class="framework-card">
+                        <div class="text-3xl mb-3" style="color: #956FA6;"><i class="fas fa-project-diagram"></i></div>
+                        <h4 class="font-bold text-lg mb-2">Business Model Canvas</h4>
+                        <p class="text-sm text-gray-600 mb-4">Design your complete business model in 9 building blocks</p>
+                        <a href="business-model-canvas.html" class="text-sm font-semibold" style="color: #956FA6;">Try This Tool →</a>
+                    </div>
+                </div>
+                <div class="text-center mt-6">
+                    <a href="mba-frameworks.html" class="text-lg font-semibold" style="color: #956FA6;">
+                        <i class="fas fa-arrow-left mr-2"></i>Back to All Frameworks
+                    </a>
+                </div>
+            </div>
+
+            <p class="text-center text-xs" style="color: #1B1B1D; opacity: 0.5;">© 2025 Bryan Collins. All rights reserved.</p>
+        </div>
+    </main>
+
+    <script>
+        let currentStep = 1;
+        const totalSteps = 10;
+
+        window.addEventListener('DOMContentLoaded', () => {
+            loadFromStorage();
+        });
+
+        function nextStep() {
+            saveToStorage();
+            document.getElementById(`step-${currentStep}`).classList.remove('active');
+            currentStep++;
+            if (currentStep > totalSteps) currentStep = totalSteps;
+            document.getElementById(`step-${currentStep}`).classList.add('active');
+            updateProgress();
+            
+            if (currentStep === 10) {
+                populateReview();
+            }
+            
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function prevStep() {
+            saveToStorage();
+            document.getElementById(`step-${currentStep}`).classList.remove('active');
+            currentStep--;
+            if (currentStep < 1) currentStep = 1;
+            document.getElementById(`step-${currentStep}`).classList.add('active');
+            updateProgress();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function updateProgress() {
+            const percentage = (currentStep / totalSteps) * 100;
+            document.getElementById('progress-fill').style.width = percentage + '%';
+            document.getElementById('progress-text').textContent = `Step ${currentStep} of ${totalSteps}`;
+        }
+
+        function saveToStorage() {
+            const data = {
+                inbound: document.getElementById('inbound').value,
+                operations: document.getElementById('operations').value,
+                outbound: document.getElementById('outbound').value,
+                marketing: document.getElementById('marketing').value,
+                service: document.getElementById('service').value,
+                infrastructure: document.getElementById('infrastructure').value,
+                hr: document.getElementById('hr').value,
+                technology: document.getElementById('technology').value,
+                procurement: document.getElementById('procurement').value
+            };
+            localStorage.setItem('value-chain', JSON.stringify(data));
+        }
+
+        function loadFromStorage() {
+            const saved = localStorage.getItem('value-chain');
+            if (saved) {
+                const data = JSON.parse(saved);
+                document.getElementById('inbound').value = data.inbound || '';
+                document.getElementById('operations').value = data.operations || '';
+                document.getElementById('outbound').value = data.outbound || '';
+                document.getElementById('marketing').value = data.marketing || '';
+                document.getElementById('service').value = data.service || '';
+                document.getElementById('infrastructure').value = data.infrastructure || '';
+                document.getElementById('hr').value = data.hr || '';
+                document.getElementById('technology').value = data.technology || '';
+                document.getElementById('procurement').value = data.procurement || '';
+            }
+        }
+
+        function populateReview() {
+            document.getElementById('review-inbound').textContent = document.getElementById('inbound').value || 'Not specified';
+            document.getElementById('review-operations').textContent = document.getElementById('operations').value || 'Not specified';
+            document.getElementById('review-outbound').textContent = document.getElementById('outbound').value || 'Not specified';
+            document.getElementById('review-marketing').textContent = document.getElementById('marketing').value || 'Not specified';
+            document.getElementById('review-service').textContent = document.getElementById('service').value || 'Not specified';
+            document.getElementById('review-infrastructure').textContent = document.getElementById('infrastructure').value || 'Not specified';
+            document.getElementById('review-hr').textContent = document.getElementById('hr').value || 'Not specified';
+            document.getElementById('review-technology').textContent = document.getElementById('technology').value || 'Not specified';
+            document.getElementById('review-procurement').textContent = document.getElementById('procurement').value || 'Not specified';
+        }
+
+        function downloadPDF() {
+            const { jsPDF } = window.jspdf;
+            const doc = new jsPDF();
+            
+            doc.setFontSize(20);
+            doc.setTextColor(149, 111, 166);
+            doc.text('Value Chain Analysis', 20, 20);
+            
+            doc.setFontSize(10);
+            doc.setTextColor(100);
+            doc.text('Generated: ' + new Date().toLocaleDateString(), 20, 28);
+            
+            let yPos = 40;
+            
+            // Support Activities
+            doc.setFontSize(14);
+            doc.setTextColor(166, 182, 207);
+            doc.text('Support Activities', 20, yPos);
+            yPos += 8;
+            
+            doc.setFontSize(11);
+            doc.setTextColor(0);
+            doc.text('Infrastructure:', 20, yPos);
+            yPos += 5;
+            doc.setFontSize(9);
+            const infraText = doc.splitTextToSize(document.getElementById('infrastructure').value || 'Not specified', 170);
+            doc.text(infraText, 20, yPos);
+            yPos += infraText.length * 4 + 5;
+            
+            doc.setFontSize(11);
+            doc.text('Human Resources:', 20, yPos);
+            yPos += 5;
+            doc.setFontSize(9);
+            const hrText = doc.splitTextToSize(document.getElementById('hr').value || 'Not specified', 170);
+            doc.text(hrText, 20, yPos);
+            yPos += hrText.length * 4 + 5;
+            
+            doc.setFontSize(11);
+            doc.text('Technology Development:', 20, yPos);
+            yPos += 5;
+            doc.setFontSize(9);
+            const techText = doc.splitTextToSize(document.getElementById('technology').value || 'Not specified', 170);
+            doc.text(techText, 20, yPos);
+            yPos += techText.length * 4 + 5;
+            
+            doc.setFontSize(11);
+            doc.text('Procurement:', 20, yPos);
+            yPos += 5;
+            doc.setFontSize(9);
+            const procText = doc.splitTextToSize(document.getElementById('procurement').value || 'Not specified', 170);
+            doc.text(procText, 20, yPos);
+            yPos += procText.length * 4 + 8;
+            
+            // Primary Activities
+            if (yPos > 240) {
+                doc.addPage();
+                yPos = 20;
+            }
+            
+            doc.setFontSize(14);
+            doc.setTextColor(149, 111, 166);
+            doc.text('Primary Activities (Value Flow)', 20, yPos);
+            yPos += 8;
+            
+            const activities = [
+                { label: 'Inbound Logistics', id: 'inbound' },
+                { label: 'Operations', id: 'operations' },
+                { label: 'Outbound Logistics', id: 'outbound' },
+                { label: 'Marketing & Sales', id: 'marketing' },
+                { label: 'Service', id: 'service' }
+            ];
+            
+            activities.forEach(activity => {
+                if (yPos > 260) {
+                    doc.addPage();
+                    yPos = 20;
+                }
+                
+                doc.setFontSize(11);
+                doc.setTextColor(0);
+                doc.text(activity.label + ':', 20, yPos);
+                yPos += 5;
+                doc.setFontSize(9);
+                const actText = doc.splitTextToSize(document.getElementById(activity.id).value || 'Not specified', 170);
+                doc.text(actText, 20, yPos);
+                yPos += actText.length * 4 + 5;
+            });
+            
+            // Footer
+            doc.setFontSize(8);
+            doc.setTextColor(150);
+            doc.text('Created with Value Chain Analysis Tool by Bryan Collins', 20, 285);
+            doc.text('https://join.bryancollins.com/value-chain', 20, 290);
+            
+            doc.save('value-chain-analysis-' + new Date().toISOString().split('T')[0] + '.pdf');
+        }
+    </script>
+</body>
+</html>
+

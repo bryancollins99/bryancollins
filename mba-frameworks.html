@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MBA Strategy Tools for Creators — Bryan Collins</title>
+    <meta name="description" content="Free interactive MBA framework tools adapted for content creators. SWOT Analysis, ANSOFF Matrix, Porter's Five Forces, and more.">
+    <meta property="og:url" content="https://join.bryancollins.com/mba-frameworks/" />
+    <meta property="og:title" content="MBA Strategy Tools for Creators" />
+    <meta property="og:description" content="Free interactive tools to plan your content business strategy using proven MBA frameworks." />
+    
+    <!-- Tailwind CSS for styling -->
+    <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    
+    <!-- Plausible Analytics -->
+    <script defer data-domain="join.bryancollins.com" src="https://plausible.io/js/script.js"></script>
+    <script defer src="resources/analytics.js"></script>
+    
+    <!-- Custom styles -->
+    <style>
+        /* Color Palette:
+           Purple: #956FA6 (rgb 149, 110, 165)
+           Light Gray: #EDEDEE (rgb 237, 237, 237)
+           Gold/Yellow: #F3C972 (rgb 242, 200, 114)
+           Blue-Gray: #A6B6CF (rgb 165, 182, 207)
+           Dark Gray/Black: #1B1B1D (rgb 26, 26, 28)
+        */
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            background-color: #EDEDEE;
+            color: #1B1B1D;
+        }
+        .hero-gradient {
+            background: linear-gradient(135deg, #956FA6 0%, #7d5e8d 100%);
+        }
+        .hero-text {
+            color: white;
+            text-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+        }
+        .framework-card {
+            background: white;
+            border-radius: 12px;
+            padding: 24px;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+            border: 2px solid transparent;
+        }
+        .framework-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+            border-color: #956FA6;
+        }
+        .framework-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            margin-bottom: 16px;
+            background: linear-gradient(135deg, #956FA6 0%, #7d5e8d 100%);
+            color: white;
+        }
+        .cta-button {
+            background: #F3C972;
+            color: #1B1B1D;
+            font-weight: 700;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            padding: 12px 24px;
+            font-size: 1rem;
+            border-radius: 8px;
+            text-decoration: none;
+            display: inline-block;
+        }
+        .cta-button:hover {
+            background: #eab94a;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px -2px rgba(0, 0, 0, 0.15);
+        }
+    </style>
+</head>
+<body>
+    <main class="min-h-screen py-12 px-4 sm:px-6 lg:px-8">
+        <!-- Hero Section -->
+        <div class="max-w-6xl mx-auto text-center mb-12">
+            <div class="hero-gradient rounded-xl px-8 py-12 mb-8">
+                <h1 class="hero-text text-4xl sm:text-5xl font-extrabold mb-4">MBA Strategy Tools for Creators</h1>
+                <p class="hero-text text-xl sm:text-2xl max-w-3xl mx-auto">Free interactive frameworks to plan, analyze, and grow your content business</p>
+            </div>
+            
+            <div class="max-w-3xl mx-auto mb-12">
+                <p class="text-lg text-gray-700">
+                    These proven MBA frameworks have been adapted for content creators, YouTubers, newsletter writers, and online entrepreneurs. 
+                    Each tool guides you step-by-step and lets you download your completed strategy as a PDF.
+                </p>
+            </div>
+        </div>
+
+        <!-- Framework Cards Grid -->
+        <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
+            
+            <!-- ANSOFF Matrix -->
+            <div class="framework-card">
+                <div class="framework-icon">
+                    <i class="fas fa-th"></i>
+                </div>
+                <h3 class="text-xl font-bold mb-2">ANSOFF Matrix</h3>
+                <p class="text-gray-600 mb-4">Map your growth options: penetrate existing markets, develop new ones, or diversify your offerings.</p>
+                <a href="ansoff-matrix.html" class="cta-button w-full text-center">Use This Tool <i class="fas fa-arrow-right ml-2"></i></a>
+            </div>
+
+            <!-- SWOT Analysis -->
+            <div class="framework-card">
+                <div class="framework-icon">
+                    <i class="fas fa-balance-scale"></i>
+                </div>
+                <h3 class="text-xl font-bold mb-2">SWOT Analysis</h3>
+                <p class="text-gray-600 mb-4">Identify your Strengths, Weaknesses, Opportunities, and Threats to make strategic decisions.</p>
+                <a href="swot-analysis.html" class="cta-button w-full text-center">Use This Tool <i class="fas fa-arrow-right ml-2"></i></a>
+            </div>
+
+            <!-- Porter's Five Forces -->
+            <div class="framework-card">
+                <div class="framework-icon">
+                    <i class="fas fa-trophy"></i>
+                </div>
+                <h3 class="text-xl font-bold mb-2">Porter's Five Forces</h3>
+                <p class="text-gray-600 mb-4">Analyze your competitive environment and understand what influences your market position.</p>
+                <a href="porters-five-forces.html" class="cta-button w-full text-center">Use This Tool <i class="fas fa-arrow-right ml-2"></i></a>
+            </div>
+
+            <!-- Business Model Canvas -->
+            <div class="framework-card">
+                <div class="framework-icon">
+                    <i class="fas fa-project-diagram"></i>
+                </div>
+                <h3 class="text-xl font-bold mb-2">Business Model Canvas</h3>
+                <p class="text-gray-600 mb-4">Design your complete business model with 9 key building blocks for sustainable revenue.</p>
+                <a href="business-model-canvas.html" class="cta-button w-full text-center">Use This Tool <i class="fas fa-arrow-right ml-2"></i></a>
+            </div>
+
+            <!-- Value Chain Analysis -->
+            <div class="framework-card">
+                <div class="framework-icon">
+                    <i class="fas fa-link"></i>
+                </div>
+                <h3 class="text-xl font-bold mb-2">Value Chain Analysis</h3>
+                <p class="text-gray-600 mb-4">Understand where you create value in your content business from production to delivery.</p>
+                <a href="value-chain.html" class="cta-button w-full text-center">Use This Tool <i class="fas fa-arrow-right ml-2"></i></a>
+            </div>
+
+            <!-- PESTEL Analysis -->
+            <div class="framework-card">
+                <div class="framework-icon">
+                    <i class="fas fa-globe"></i>
+                </div>
+                <h3 class="text-xl font-bold mb-2">PESTEL Analysis</h3>
+                <p class="text-gray-600 mb-4">Assess external factors (Political, Economic, Social, Tech, Environmental, Legal) affecting your business.</p>
+                <a href="pestel-analysis.html" class="cta-button w-full text-center">Use This Tool <i class="fas fa-arrow-right ml-2"></i></a>
+            </div>
+
+            <!-- BCG Matrix -->
+            <div class="framework-card">
+                <div class="framework-icon">
+                    <i class="fas fa-chart-line"></i>
+                </div>
+                <h3 class="text-xl font-bold mb-2">BCG Matrix</h3>
+                <p class="text-gray-600 mb-4">Evaluate your product portfolio: identify Stars, Cash Cows, Question Marks, and Dogs.</p>
+                <a href="bcg-matrix.html" class="cta-button w-full text-center">Use This Tool <i class="fas fa-arrow-right ml-2"></i></a>
+            </div>
+
+            <!-- McKinsey 7S -->
+            <div class="framework-card">
+                <div class="framework-icon">
+                    <i class="fas fa-sitemap"></i>
+                </div>
+                <h3 class="text-xl font-bold mb-2">McKinsey 7S</h3>
+                <p class="text-gray-600 mb-4">Align 7 key elements (Strategy, Structure, Systems, etc.) for organizational effectiveness.</p>
+                <a href="mckinsey-7s.html" class="cta-button w-full text-center">Use This Tool <i class="fas fa-arrow-right ml-2"></i></a>
+            </div>
+
+        </div>
+
+        <!-- Bottom CTA Section -->
+        <div class="max-w-4xl mx-auto text-center bg-white rounded-xl p-8 shadow-lg">
+            <h2 class="text-2xl font-bold mb-4">Want the Complete Framework Collection?</h2>
+            <p class="text-lg text-gray-700 mb-6">
+                Get all MBA frameworks in one downloadable PDF, plus examples from successful content businesses.
+            </p>
+            <a href="mba.html" class="cta-button" style="padding: 16px 32px; font-size: 1.125rem;">
+                <i class="fas fa-download mr-2"></i>Download Framework Collection
+            </a>
+        </div>
+
+        <!-- Copyright notice -->
+        <p class="text-center text-xs mt-12" style="color: #1B1B1D; opacity: 0.5;">© 2025 Bryan Collins. All rights reserved.</p>
+    </main>
+</body>
+</html>
+
