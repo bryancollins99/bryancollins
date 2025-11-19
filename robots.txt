@@ -6,9 +6,16 @@ Disallow: /test-form.html
 Disallow: /base-template.html
 Disallow: /thank-you.html
 
+# Block demo/test theme pages
+Disallow: /astropaper-*.html
+Disallow: /shadcn-*.html
+Disallow: /simple-black-*.html
+Disallow: /youtube-brand-*.html
+Disallow: /theme-*.html
+
 # Block admin if it exists
 Disallow: /admin/
 Disallow: /dashboard/
 
-Sitemap: https://join.bryancollins.com/sitemap.xml
+Sitemap: https://bryancollins.com/sitemap.xml
 
