@@ -1,0 +1,400 @@
+/* 
+   SaaS Minimal Theme for MBA Framework Tools
+   Brand Colors: #FFDE59 (Yellow) + #597AFF (Blue) + #000000 (Black)
+   
+   COLOR THEORY:
+   - Yellow: Primary actions, CTAs, high energy (60-10% usage)
+   - Blue: Information, trust, navigation (30% usage)
+   - Black/Gray: Background, structure (60% usage)
+*/
+
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap');
+
+:root {
+    --yellow: #FFDE59;
+    --yellow-dark: #ffd633;
+    --blue: #597AFF;
+    --blue-dark: #4a6ae6;
+    --black: #0a0a0a;
+    --gray-900: #121212;
+    --gray-800: #1e1e1e;
+    --gray-700: #2a2a2a;
+    --gray-600: #3a3a3a;
+    --gray-400: #9ca3af;
+    --gray-300: #d1d5db;
+    --gray-200: #e5e7eb;
+    --white: #ffffff;
+}
+
+/* ============================================
+   GLOBAL STYLES
+   ============================================ */
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Space Grotesk', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    line-height: 1.6;
+    background-color: var(--gray-900);
+    color: var(--white);
+    margin: 0;
+    padding: 0;
+}
+
+/* ============================================
+   TYPOGRAPHY
+   ============================================ */
+
+h1, h2, h3, h4, h5, h6 {
+    color: var(--white);
+    font-weight: 700;
+    line-height: 1.2;
+    margin: 0 0 1rem 0;
+}
+
+h1 { font-size: 2.5rem; }
+h2 { font-size: 2rem; }
+h3 { font-size: 1.5rem; }
+h4 { font-size: 1.25rem; }
+
+p {
+    color: var(--gray-300);
+    margin: 0 0 1rem 0;
+}
+
+/* ============================================
+   HERO SECTION
+   ============================================ */
+
+.hero-gradient {
+    background: linear-gradient(135deg, var(--gray-800) 0%, var(--gray-700) 100%);
+    border-radius: 16px;
+    padding: 3rem 2rem;
+    text-align: center;
+    margin-bottom: 2rem;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+}
+
+.hero-text {
+    color: var(--white);
+    text-shadow: 0 2px 8px rgba(255, 222, 89, 0.2);
+}
+
+.hero-icon {
+    width: 64px;
+    height: 64px;
+    background: rgba(89, 122, 255, 0.15);
+    border: 2px solid rgba(89, 122, 255, 0.3);
+    border-radius: 16px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1.5rem;
+}
+
+.hero-icon i {
+    color: var(--blue);
+    font-size: 2rem;
+}
+
+/* ============================================
+   CARDS
+   ============================================ */
+
+.card, .framework-card, .bg-white {
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.04)) !important;
+    border: 1px solid rgba(89, 122, 255, 0.3) !important;
+    border-radius: 16px !important;
+    padding: 2rem !important;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5) !important;
+    transition: all 0.3s ease !important;
+}
+
+.card:hover, .framework-card:hover {
+    transform: translateY(-4px);
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.12), rgba(255, 255, 255, 0.06)) !important;
+    box-shadow: 0 12px 32px rgba(89, 122, 255, 0.35) !important;
+    border-color: rgba(89, 122, 255, 0.5) !important;
+}
+
+/* ============================================
+   BUTTONS
+   ============================================ */
+
+.btn-primary, button[type="button"]:not(.btn-secondary) {
+    background: var(--yellow) !important;
+    color: var(--black) !important;
+    font-weight: 700 !important;
+    padding: 14px 32px !important;
+    border-radius: 100px !important;
+    border: none !important;
+    cursor: pointer !important;
+    transition: all 0.3s ease !important;
+    box-shadow: 0 0 30px rgba(255, 222, 89, 0.4) !important;
+    font-size: 1rem !important;
+}
+
+.btn-primary:hover {
+    background: var(--yellow-dark) !important;
+    transform: translateY(-2px) !important;
+    box-shadow: 0 0 40px rgba(255, 222, 89, 0.6) !important;
+}
+
+.btn-secondary {
+    background: rgba(255, 222, 89, 0.1) !important;
+    color: var(--yellow) !important;
+    font-weight: 600 !important;
+    padding: 14px 32px !important;
+    border-radius: 100px !important;
+    border: 2px solid var(--yellow) !important;
+    cursor: pointer !important;
+    transition: all 0.3s ease !important;
+}
+
+.btn-secondary:hover {
+    background: rgba(255, 222, 89, 0.2) !important;
+}
+
+/* ============================================
+   FORMS
+   ============================================ */
+
+textarea, 
+input[type="text"], 
+input[type="email"], 
+input[type="number"] {
+    width: 100% !important;
+    padding: 14px 16px !important;
+    border: 1px solid rgba(255, 222, 89, 0.2) !important;
+    border-radius: 12px !important;
+    font-family: inherit !important;
+    background: rgba(255, 255, 255, 0.05) !important;
+    color: var(--white) !important;
+    font-size: 1rem !important;
+    transition: all 0.3s ease !important;
+}
+
+textarea:focus, 
+input:focus {
+    outline: none !important;
+    border-color: var(--yellow) !important;
+    background: rgba(255, 255, 255, 0.08) !important;
+    box-shadow: 0 0 0 3px rgba(255, 222, 89, 0.1) !important;
+}
+
+textarea::placeholder, 
+input::placeholder {
+    color: var(--gray-400) !important;
+}
+
+label {
+    color: var(--white) !important;
+    font-weight: 600 !important;
+    display: block !important;
+    margin-bottom: 0.5rem !important;
+}
+
+/* ============================================
+   PROGRESS BAR
+   ============================================ */
+
+.progress-bar {
+    height: 8px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 100px;
+    overflow: hidden;
+}
+
+.progress-fill {
+    height: 100%;
+    background: var(--yellow);
+    transition: width 0.3s ease;
+    box-shadow: 0 0 20px rgba(255, 222, 89, 0.5);
+}
+
+/* ============================================
+   MATRIX/GRID CELLS
+   ============================================ */
+
+.matrix-cell, .force-card, .canvas-cell {
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.04));
+    padding: 1.5rem;
+    border-radius: 12px;
+    border: 1px solid rgba(89, 122, 255, 0.3);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+}
+
+.matrix-cell h4, .matrix-cell h3 {
+    color: var(--white) !important;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+}
+
+.matrix-cell p {
+    color: var(--gray-300);
+    font-size: 0.95rem;
+}
+
+/* Matrix cell variants - blue for structure/organization */
+.matrix-cell.penetration,
+.matrix-cell.development,
+.matrix-cell.product,
+.matrix-cell.diversification {
+    border-left: 4px solid var(--blue) !important;
+}
+
+/* ============================================
+   EXAMPLE BOXES
+   ============================================ */
+
+.example-box {
+    background: rgba(89, 122, 255, 0.15);
+    border: 1px solid rgba(89, 122, 255, 0.4);
+    padding: 12px 16px;
+    border-radius: 12px;
+    margin-top: 0.5rem;
+    color: var(--gray-300);
+    font-size: 0.95rem;
+    font-weight: 400;
+    font-style: italic;
+}
+
+/* ============================================
+   TOOLTIPS
+   ============================================ */
+
+.tooltip {
+    position: relative;
+    display: inline-block;
+    cursor: help;
+}
+
+.tooltip .tooltiptext {
+    visibility: hidden;
+    width: 250px;
+    background-color: rgba(255, 222, 89, 0.95);
+    color: var(--black);
+    text-align: left;
+    border-radius: 12px;
+    padding: 12px;
+    position: absolute;
+    z-index: 100;
+    bottom: 125%;
+    left: 50%;
+    margin-left: -125px;
+    font-weight: 500;
+    opacity: 0;
+    transition: opacity 0.3s;
+    font-size: 0.875rem;
+}
+
+.tooltip:hover .tooltiptext {
+    visibility: visible;
+    opacity: 1;
+}
+
+.tooltip i {
+    color: var(--gray-400);
+    transition: color 0.3s;
+}
+
+.tooltip:hover i {
+    color: var(--blue);
+}
+
+/* ============================================
+   LINKS & NAVIGATION
+   ============================================ */
+
+a {
+    color: var(--blue);
+    text-decoration: none;
+    transition: all 0.3s;
+}
+
+a:hover {
+    color: var(--yellow);
+}
+
+/* Icon colors - use blue for secondary/decorative icons */
+.fa, .fas, .far, .fab {
+    color: var(--blue) !important;
+}
+
+/* Yellow icons for primary actions */
+.btn-primary .fa,
+.hero-icon .fa {
+    color: var(--yellow) !important;
+}
+
+/* ============================================
+   TEXT UTILITIES (Override Tailwind)
+   ============================================ */
+
+.text-gray-600, .text-gray-700, .text-gray-500 {
+    color: var(--gray-200) !important;
+}
+
+.text-green-800, .text-blue-800, .text-orange-800, .text-purple-800 {
+    color: var(--white) !important;
+    font-weight: 600 !important;
+}
+
+/* ============================================
+   BACKGROUND UTILITIES (Override Tailwind)
+   ============================================ */
+
+.bg-green-50, .bg-blue-50, .bg-orange-50, .bg-purple-50 {
+    background: rgba(89, 122, 255, 0.1) !important;
+    border-color: var(--blue) !important;
+}
+
+.border-green-500, .border-blue-500, .border-orange-500, .border-purple-500 {
+    border-color: var(--blue) !important;
+}
+
+/* ============================================
+   RESULT SECTION
+   ============================================ */
+
+#result {
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.04));
+    border: 1px solid rgba(89, 122, 255, 0.3);
+    border-radius: 24px;
+    padding: 2.5rem;
+    margin-top: 2rem;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+}
+
+/* ============================================
+   WIZARD STEPS
+   ============================================ */
+
+.wizard-step {
+    display: none;
+}
+
+.wizard-step.active {
+    display: block;
+    animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* ============================================
+   FOOTER
+   ============================================ */
+
+footer {
+    border-top: 1px solid rgba(89, 122, 255, 0.1);
+    background: rgba(0, 0, 0, 0.5);
+    padding: 2rem 1rem;
+    text-align: center;
+    color: var(--gray-300);
+}
+

@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bryan Collins — MBA Frameworks & Creator Strategies</title>
+    <meta name="description" content="MBA frameworks, AI tools, and strategic insights for creators building sustainable businesses.">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+        
+        /* shadcn/ui Dark Mode Theme Variables */
+        :root {
+            --background: 222.2 84% 4.9%;
+            --foreground: 210 40% 98%;
+            --card: 222.2 84% 4.9%;
+            --card-foreground: 210 40% 98%;
+            --popover: 222.2 84% 4.9%;
+            --popover-foreground: 210 40% 98%;
+            --primary: 217.2 91.2% 59.8%; /* Your blue #597AFF */
+            --primary-foreground: 222.47 71.2% 4.1%;
+            --secondary: 217.2 32.6% 17.5%;
+            --secondary-foreground: 210 40% 98%;
+            --muted: 217.2 32.6% 17.5%;
+            --muted-foreground: 215 20.2% 65.1%;
+            --accent: 45 93% 67%; /* Your yellow #FFDE59 */
+            --accent-foreground: 222.2 47.4% 11.2%;
+            --destructive: 0 62.8% 30.6%;
+            --destructive-foreground: 210 40% 98%;
+            --border: 217.2 32.6% 17.5%;
+            --input: 217.2 32.6% 17.5%;
+            --ring: 224.3 76.3% 48%;
+            --radius: 0.5rem;
+        }
+        
+        * {
+            border-color: hsl(var(--border));
+        }
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background-color: hsl(var(--background));
+            color: hsl(var(--foreground));
+            line-height: 1.6;
+        }
+        
+        /* shadcn/ui Button Styles */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: calc(var(--radius) - 2px);
+            font-size: 0.875rem;
+            font-weight: 500;
+            transition: all 0.2s;
+            padding: 0.625rem 1rem;
+            text-decoration: none;
+            cursor: pointer;
+            border: 1px solid transparent;
+        }
+        
+        .btn-default {
+            background-color: hsl(var(--primary));
+            color: hsl(var(--primary-foreground));
+        }
+        
+        .btn-default:hover {
+            background-color: hsl(217.2 91.2% 54%);
+        }
+        
+        .btn-secondary {
+            background-color: hsl(var(--secondary));
+            color: hsl(var(--secondary-foreground));
+        }
+        
+        .btn-secondary:hover {
+            background-color: hsl(217.2 32.6% 20%);
+        }
+        
+        .btn-accent {
+            background-color: hsl(var(--accent));
+            color: hsl(var(--accent-foreground));
+        }
+        
+        .btn-accent:hover {
+            background-color: hsl(45 93% 62%);
+        }
+        
+        .btn-outline {
+            border: 1px solid hsl(var(--border));
+            background-color: transparent;
+            color: hsl(var(--foreground));
+        }
+        
+        .btn-outline:hover {
+            background-color: hsl(var(--secondary));
+        }
+        
+        /* shadcn/ui Card Styles */
+        .card {
+            background-color: hsl(var(--card));
+            color: hsl(var(--card-foreground));
+            border: 1px solid hsl(var(--border));
+            border-radius: var(--radius);
+            padding: 1.5rem;
+            transition: all 0.2s;
+        }
+        
+        .card:hover {
+            border-color: hsl(var(--primary));
+            box-shadow: 0 0 0 1px hsl(var(--primary) / 0.5);
+        }
+        
+        /* shadcn/ui Badge Styles */
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            border-radius: calc(var(--radius) - 2px);
+            padding: 0.25rem 0.625rem;
+            font-size: 0.75rem;
+            font-weight: 600;
+            transition: all 0.2s;
+            border: 1px solid transparent;
+        }
+        
+        .badge-default {
+            background-color: hsl(var(--primary) / 0.1);
+            color: hsl(var(--primary));
+            border-color: hsl(var(--primary) / 0.2);
+        }
+        
+        .badge-secondary {
+            background-color: hsl(var(--secondary));
+            color: hsl(var(--secondary-foreground));
+        }
+        
+        /* Header */
+        header {
+            border-bottom: 1px solid hsl(var(--border));
+            background-color: hsl(var(--background) / 0.8);
+            backdrop-filter: blur(12px);
+            position: sticky;
+            top: 0;
+            z-index: 50;
+        }
+        
+        nav a {
+            color: hsl(var(--muted-foreground));
+            text-decoration: none;
+            font-size: 0.875rem;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+        
+        nav a:hover {
+            color: hsl(var(--foreground));
+        }
+        
+        /* Hero Section */
+        .hero-gradient {
+            background: linear-gradient(to bottom, hsl(var(--background)), hsl(217.2 32.6% 12%));
+        }
+        
+        h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            line-height: 1.1;
+            letter-spacing: -0.02em;
+        }
+        
+        h2 {
+            font-size: 1.875rem;
+            font-weight: 600;
+            letter-spacing: -0.01em;
+        }
+        
+        h3 {
+            font-size: 1.25rem;
+            font-weight: 600;
+        }
+        
+        .muted {
+            color: hsl(var(--muted-foreground));
+        }
+        
+        /* Input Styles */
+        input[type="email"] {
+            background-color: hsl(var(--background));
+            border: 1px solid hsl(var(--border));
+            color: hsl(var(--foreground));
+            border-radius: calc(var(--radius) - 2px);
+            padding: 0.625rem 0.875rem;
+            font-size: 0.875rem;
+            transition: all 0.2s;
+        }
+        
+        input[type="email"]:focus {
+            outline: none;
+            border-color: hsl(var(--ring));
+            box-shadow: 0 0 0 2px hsl(var(--ring) / 0.2);
+        }
+        
+        /* Footer */
+        footer {
+            border-top: 1px solid hsl(var(--border));
+            margin-top: 4rem;
+        }
+        
+        /* Theme Badge */
+        .theme-badge {
+            position: fixed;
+            bottom: 1.5rem;
+            right: 1.5rem;
+            background: hsl(var(--primary));
+            color: hsl(var(--primary-foreground));
+            padding: 0.5rem 1rem;
+            border-radius: 100px;
+            font-size: 0.875rem;
+            font-weight: 600;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+            border: 1px solid hsl(var(--border));
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+            <a href="#" class="text-lg font-semibold" style="color: hsl(var(--foreground));">Bryan Collins</a>
+            <nav class="hidden md:flex items-center gap-6">
+                <a href="#">Posts</a>
+                <a href="#">Frameworks</a>
+                <a href="#">About</a>
+                <a href="#" class="btn btn-accent">
+                    <i class="fas fa-download mr-2"></i>Free Tools
+                </a>
+            </nav>
+            <button class="md:hidden">
+                <i class="fas fa-bars text-xl"></i>
+            </button>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero-gradient py-20 px-6">
+        <div class="max-w-4xl mx-auto text-center">
+            <div class="inline-flex items-center gap-2 badge badge-default mb-6">
+                <i class="fas fa-sparkles"></i>
+                <span>Free MBA Frameworks for Creators</span>
+            </div>
+            
+            <h1 class="mb-6">
+                Strategic MBA Frameworks<br/>
+                <span style="color: hsl(var(--primary));">Without the $40K Tuition</span>
+            </h1>
+            
+            <p class="text-xl muted mb-8 max-w-2xl mx-auto">
+                Learn how to think strategically about your creator business. Free frameworks, 
+                AI tools, and insights—no MBA required.
+            </p>
+            
+            <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                <a href="#" class="btn btn-accent text-base px-8 py-3">
+                    <i class="fas fa-envelope mr-2"></i>Get Free AI Prompts
+                </a>
+                <a href="#" class="btn btn-outline text-base px-8 py-3">
+                    <i class="fas fa-tools mr-2"></i>Explore Frameworks
+                </a>
+            </div>
+            
+            <div class="flex items-center justify-center gap-6 mt-12 text-sm muted">
+                <div class="flex items-center gap-2">
+                    <i class="fas fa-users"></i>
+                    <span>15,000+ readers</span>
+                </div>
+                <div class="flex items-center gap-2">
+                    <i class="fas fa-tools"></i>
+                    <span>8 free tools</span>
+                </div>
+                <div class="flex items-center gap-2">
+                    <i class="fas fa-star" style="color: hsl(var(--accent));"></i>
+                    <span>No signup required</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Grid -->
+    <section class="max-w-7xl mx-auto px-6 py-16">
+        <h2 class="text-center mb-12">What You Get</h2>
+        
+        <div class="grid md:grid-cols-3 gap-6">
+            <!-- Feature 1 -->
+            <div class="card">
+                <div class="w-12 h-12 rounded-lg flex items-center justify-center mb-4" style="background: hsl(var(--primary) / 0.1);">
+                    <i class="fas fa-chart-line text-2xl" style="color: hsl(var(--primary));"></i>
+                </div>
+                <h3 class="mb-2">8 MBA Frameworks</h3>
+                <p class="text-sm muted mb-4">
+                    Interactive tools for SWOT, ANSOFF, Porter's Five Forces, Business Model Canvas, and more.
+                </p>
+                <a href="#" class="text-sm font-medium" style="color: hsl(var(--primary));">
+                    Try Tools <i class="fas fa-arrow-right ml-1"></i>
+                </a>
+            </div>
+
+            <!-- Feature 2 -->
+            <div class="card">
+                <div class="w-12 h-12 rounded-lg flex items-center justify-center mb-4" style="background: hsl(var(--accent) / 0.1);">
+                    <i class="fas fa-robot text-2xl" style="color: hsl(var(--accent));"></i>
+                </div>
+                <h3 class="mb-2">101 AI Prompts</h3>
+                <p class="text-sm muted mb-4">
+                    Battle-tested ChatGPT prompts for content creation, marketing, and strategy.
+                </p>
+                <a href="#" class="text-sm font-medium" style="color: hsl(var(--primary));">
+                    Download Free <i class="fas fa-arrow-right ml-1"></i>
+                </a>
+            </div>
+
+            <!-- Feature 3 -->
+            <div class="card">
+                <div class="w-12 h-12 rounded-lg flex items-center justify-center mb-4" style="background: hsl(var(--primary) / 0.1);">
+                    <i class="fas fa-book text-2xl" style="color: hsl(var(--primary));"></i>
+                </div>
+                <h3 class="mb-2">Bestselling Books</h3>
+                <p class="text-sm muted mb-4">
+                    Practical guides on creativity, productivity, and building a sustainable creator business.
+                </p>
+                <a href="#" class="text-sm font-medium" style="color: hsl(var(--primary));">
+                    View Books <i class="fas fa-arrow-right ml-1"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Interactive Tools Preview -->
+    <section class="max-w-7xl mx-auto px-6 py-16">
+        <div class="text-center mb-12">
+            <h2 class="mb-4">Interactive MBA Frameworks</h2>
+            <p class="text-lg muted max-w-2xl mx-auto">
+                Fill out the wizard, visualize your strategy, export to PDF. No login required.
+            </p>
+        </div>
+        
+        <div class="grid md:grid-cols-4 gap-6">
+            <!-- Tool Card 1 -->
+            <div class="card text-center">
+                <div class="w-16 h-16 rounded-lg flex items-center justify-center mb-4 mx-auto" style="background: hsl(var(--primary) / 0.1);">
+                    <i class="fas fa-th-large text-3xl" style="color: hsl(var(--primary));"></i>
+                </div>
+                <h3 class="mb-2 text-base">ANSOFF Matrix</h3>
+                <p class="text-xs muted mb-4">Growth strategy options</p>
+                <span class="badge badge-default">
+                    <i class="fas fa-download mr-1"></i>PDF Export
+                </span>
+            </div>
+
+            <!-- Tool Card 2 -->
+            <div class="card text-center">
+                <div class="w-16 h-16 rounded-lg flex items-center justify-center mb-4 mx-auto" style="background: hsl(var(--primary) / 0.1);">
+                    <i class="fas fa-balance-scale text-3xl" style="color: hsl(var(--primary));"></i>
+                </div>
+                <h3 class="mb-2 text-base">SWOT Analysis</h3>
+                <p class="text-xs muted mb-4">Strategic assessment</p>
+                <span class="badge badge-default">
+                    <i class="fas fa-download mr-1"></i>PDF Export
+                </span>
+            </div>
+
+            <!-- Tool Card 3 -->
+            <div class="card text-center">
+                <div class="w-16 h-16 rounded-lg flex items-center justify-center mb-4 mx-auto" style="background: hsl(var(--primary) / 0.1);">
+                    <i class="fas fa-chart-line text-3xl" style="color: hsl(var(--primary));"></i>
+                </div>
+                <h3 class="mb-2 text-base">BCG Matrix</h3>
+                <p class="text-xs muted mb-4">Portfolio analysis</p>
+                <span class="badge badge-default">
+                    <i class="fas fa-download mr-1"></i>PDF Export
+                </span>
+            </div>
+
+            <!-- Tool Card 4 -->
+            <div class="card text-center">
+                <div class="w-16 h-16 rounded-lg flex items-center justify-center mb-4 mx-auto" style="background: hsl(var(--primary) / 0.1);">
+                    <i class="fas fa-layer-group text-3xl" style="color: hsl(var(--primary));"></i>
+                </div>
+                <h3 class="mb-2 text-base">Business Model</h3>
+                <p class="text-xs muted mb-4">9-box canvas</p>
+                <span class="badge badge-default">
+                    <i class="fas fa-download mr-1"></i>PDF Export
+                </span>
+            </div>
+        </div>
+        
+        <div class="text-center mt-8">
+            <a href="#" class="btn btn-default">
+                View All 8 Frameworks <i class="fas fa-arrow-right ml-2"></i>
+            </a>
+        </div>
+    </section>
+
+    <!-- Newsletter CTA -->
+    <section class="max-w-4xl mx-auto px-6 py-16">
+        <div class="card text-center" style="background: hsl(217.2 32.6% 12%); border: 1px solid hsl(var(--border));">
+            <div class="max-w-xl mx-auto">
+                <div class="inline-flex items-center gap-2 badge badge-secondary mb-4">
+                    <i class="fas fa-envelope"></i>
+                    <span>Weekly Newsletter</span>
+                </div>
+                
+                <h2 class="mb-4">Get Strategic Insights Every Week</h2>
+                <p class="muted mb-6">
+                    Join 15,000+ creators receiving MBA frameworks, AI prompts, and strategies in their inbox.
+                </p>
+                
+                <form class="flex flex-col sm:flex-row gap-3 max-w-md mx-auto">
+                    <input 
+                        type="email" 
+                        placeholder="your@email.com" 
+                        class="flex-1"
+                    >
+                    <button type="submit" class="btn btn-accent px-6">
+                        Subscribe
+                    </button>
+                </form>
+                
+                <p class="text-xs muted mt-4">
+                    <i class="fas fa-lock mr-1"></i>No spam. Unsubscribe anytime.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Social Proof -->
+    <section class="max-w-7xl mx-auto px-6 py-16">
+        <h2 class="text-center mb-12">Trusted by Creators</h2>
+        
+        <div class="grid md:grid-cols-3 gap-6">
+            <div class="card">
+                <div class="flex items-center gap-1 mb-3" style="color: hsl(var(--accent));">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                </div>
+                <p class="mb-4">"These MBA frameworks have completely changed how I think about my YouTube channel. The ANSOFF Matrix helped me identify new growth opportunities."</p>
+                <div class="font-semibold">Sarah Mitchell</div>
+                <div class="text-sm muted">YouTube Creator, 150K subs</div>
+            </div>
+            
+            <div class="card">
+                <div class="flex items-center gap-1 mb-3" style="color: hsl(var(--accent));">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                </div>
+                <p class="mb-4">"The AI prompts alone are worth signing up. I use them daily for content creation and email marketing. Huge time saver."</p>
+                <div class="font-semibold">Marcus Chen</div>
+                <div class="text-sm muted">Newsletter Writer, 12K subscribers</div>
+            </div>
+            
+            <div class="card">
+                <div class="flex items-center gap-1 mb-3" style="color: hsl(var(--accent));">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                </div>
+                <p class="mb-4">"Finally, strategic tools designed for creators instead of corporate executives. The SWOT analysis helped me refocus my business."</p>
+                <div class="font-semibold">Emma Rodriguez</div>
+                <div class="text-sm muted">Course Creator</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="max-w-7xl mx-auto px-6 py-8">
+            <div class="flex flex-col md:flex-row justify-between items-center gap-4">
+                <p class="text-sm muted">
+                    © 2025 Bryan Collins. All rights reserved.
+                </p>
+                <div class="flex gap-6">
+                    <a href="#" class="muted hover:text-white transition-colors">
+                        <i class="fab fa-twitter text-lg"></i>
+                    </a>
+                    <a href="#" class="muted hover:text-white transition-colors">
+                        <i class="fab fa-linkedin text-lg"></i>
+                    </a>
+                    <a href="#" class="muted hover:text-white transition-colors">
+                        <i class="fab fa-youtube text-lg"></i>
+                    </a>
+                    <a href="#" class="muted hover:text-white transition-colors">
+                        <i class="fab fa-github text-lg"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Theme Badge -->
+    <div class="theme-badge">
+        <i class="fas fa-code mr-2"></i>shadcn/ui Style
+    </div>
+</body>
+</html>
+

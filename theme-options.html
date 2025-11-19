@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Theme Options — Choose Your Design</title>
+    <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap');
+        
+        body {
+            font-family: 'Space Grotesk', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
+            color: #ffffff;
+            min-height: 100vh;
+            padding: 40px 20px;
+        }
+        
+        .option-card {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.04));
+            border: 2px solid rgba(89, 122, 255, 0.3);
+            border-radius: 24px;
+            padding: 40px;
+            transition: all 0.4s;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .option-card:hover {
+            transform: translateY(-8px);
+            border-color: rgba(255, 222, 89, 0.5);
+            box-shadow: 0 20px 40px rgba(89, 122, 255, 0.3);
+        }
+        
+        .badge {
+            display: inline-block;
+            background: rgba(255, 222, 89, 0.15);
+            border: 1px solid rgba(255, 222, 89, 0.4);
+            color: #FFDE59;
+            padding: 6px 16px;
+            border-radius: 100px;
+            font-size: 12px;
+            font-weight: 700;
+            margin-bottom: 16px;
+            text-transform: uppercase;
+        }
+        
+        .badge.new {
+            background: rgba(89, 122, 255, 0.15);
+            border-color: rgba(89, 122, 255, 0.4);
+            color: #597AFF;
+        }
+        
+        .badge.current {
+            background: rgba(34, 197, 94, 0.15);
+            border-color: rgba(34, 197, 94, 0.4);
+            color: #22c55e;
+        }
+        
+        .btn-primary {
+            display: inline-block;
+            background: #FFDE59;
+            color: #000000;
+            padding: 16px 40px;
+            border-radius: 100px;
+            font-weight: 700;
+            transition: all 0.3s;
+            box-shadow: 0 0 30px rgba(255, 222, 89, 0.4);
+            text-decoration: none;
+            margin-top: 24px;
+        }
+        
+        .btn-primary:hover {
+            background: #ffd633;
+            transform: translateY(-2px);
+            box-shadow: 0 0 40px rgba(255, 222, 89, 0.6);
+        }
+        
+        .btn-secondary {
+            display: inline-block;
+            background: rgba(89, 122, 255, 0.1);
+            color: #597AFF;
+            padding: 16px 40px;
+            border-radius: 100px;
+            font-weight: 700;
+            border: 2px solid #597AFF;
+            transition: all 0.3s;
+            text-decoration: none;
+            margin-top: 24px;
+            margin-left: 12px;
+        }
+        
+        .btn-secondary:hover {
+            background: rgba(89, 122, 255, 0.2);
+        }
+        
+        .pros-cons {
+            margin-top: 24px;
+        }
+        
+        .pro-item, .con-item {
+            display: flex;
+            align-items: start;
+            gap: 12px;
+            margin-bottom: 12px;
+        }
+        
+        .pro-item i {
+            color: #22c55e;
+            margin-top: 4px;
+        }
+        
+        .con-item i {
+            color: #ef4444;
+            margin-top: 4px;
+        }
+    </style>
+</head>
+<body>
+    <div class="max-w-7xl mx-auto">
+        <!-- Header -->
+        <div class="text-center mb-16">
+            <h1 class="text-6xl font-extrabold mb-6" style="letter-spacing: -0.03em;">
+                Choose Your <span style="background: linear-gradient(135deg, #FFDE59, #597AFF); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">Theme</span>
+            </h1>
+            <p class="text-xl text-gray-300 max-w-3xl mx-auto">
+                Compare 5 design options for your creator platform. Each styled differently to help you choose.
+            </p>
+        </div>
+
+        <!-- Options Grid -->
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-16">
+            
+            <!-- Option 1: YouTube Brand (Updated Current) -->
+            <div class="option-card">
+                <div class="badge new">
+                    <i class="fas fa-youtube mr-1"></i> Updated
+                </div>
+                <h2 class="text-3xl font-bold mb-4">YouTube Brand</h2>
+                <p class="text-gray-300 mb-4">
+                    Your current theme updated with exact YouTube brand colors: #FFDE59 yellow, black, and white. Clean and professional.
+                </p>
+                
+                <div class="pros-cons">
+                    <h4 class="font-bold mb-3 text-lg">Pros:</h4>
+                    <div class="pro-item">
+                        <i class="fas fa-check-circle"></i>
+                        <span class="text-sm text-gray-300">Exact YouTube brand match (#FFDE59)</span>
+                    </div>
+                    <div class="pro-item">
+                        <i class="fas fa-check-circle"></i>
+                        <span class="text-sm text-gray-300">Simple HTML/CSS structure</span>
+                    </div>
+                    <div class="pro-item">
+                        <i class="fas fa-check-circle"></i>
+                        <span class="text-sm text-gray-300">Light & professional</span>
+                    </div>
+                    <div class="pro-item">
+                        <i class="fas fa-check-circle"></i>
+                        <span class="text-sm text-gray-300">Easy to maintain</span>
+                    </div>
+                    
+                    <h4 class="font-bold mb-3 text-lg mt-4">Cons:</h4>
+                    <div class="con-item">
+                        <i class="fas fa-times-circle"></i>
+                        <span class="text-sm text-gray-300">Light theme (less modern feel)</span>
+                    </div>
+                    <div class="con-item">
+                        <i class="fas fa-times-circle"></i>
+                        <span class="text-sm text-gray-300">Less dramatic than dark themes</span>
+                    </div>
+                </div>
+                
+                <a href="youtube-brand-home.html" class="btn-primary">
+                    <i class="fas fa-eye mr-2"></i>View This Theme
+                </a>
+            </div>
+
+            <!-- Option 2: SaaS Minimal (What we built) -->
+            <div class="option-card" style="border-color: rgba(255, 222, 89, 0.5);">
+                <div class="badge">
+                    <i class="fas fa-star mr-1"></i> Recommended
+                </div>
+                <h2 class="text-3xl font-bold mb-4">SaaS Minimal</h2>
+                <p class="text-gray-300 mb-4">
+                    Dark theme with your brand colors (#FFDE59 + #597AFF). 5 pages + 8 interactive framework tools.
+                </p>
+                
+                <div class="pros-cons">
+                    <h4 class="font-bold mb-3 text-lg">Pros:</h4>
+                    <div class="pro-item">
+                        <i class="fas fa-check-circle"></i>
+                        <span class="text-sm text-gray-300">Your exact brand colors</span>
+                    </div>
+                    <div class="pro-item">
+                        <i class="fas fa-check-circle"></i>
+                        <span class="text-sm text-gray-300">Modern, professional design</span>
+                    </div>
+                    <div class="pro-item">
+                        <i class="fas fa-check-circle"></i>
+                        <span class="text-sm text-gray-300">Interactive framework tools ready</span>
+                    </div>
+                    <div class="pro-item">
+                        <i class="fas fa-check-circle"></i>
+                        <span class="text-sm text-gray-300">No framework needed (pure HTML)</span>
+                    </div>
+                    
+                    <h4 class="font-bold mb-3 text-lg mt-4">Cons:</h4>
+                    <div class="con-item">
+                        <i class="fas fa-times-circle"></i>
+                        <span class="text-sm text-gray-300">Dark theme may not suit everyone</span>
+                    </div>
+                    <div class="con-item">
+                        <i class="fas fa-times-circle"></i>
+                        <span class="text-sm text-gray-300">Manual HTML editing for updates</span>
+                    </div>
+                </div>
+                
+                <a href="saas-index.html" class="btn-primary">
+                    <i class="fas fa-rocket mr-2"></i>View Demo
+                </a>
+            </div>
+
+            <!-- Option 3: AstroPaper -->
+            <div class="option-card">
+                <div class="badge new">
+                    <i class="fas fa-lightbulb mr-1"></i> New Option
+                </div>
+                <h2 class="text-3xl font-bold mb-4">AstroPaper</h2>
+                <p class="text-gray-300 mb-4">
+                    Minimal, SEO-friendly Astro blog theme with 3.9k stars. Built for content creators with type-safe markdown.
+                </p>
+                
+                <div class="pros-cons">
+                    <h4 class="font-bold mb-3 text-lg">Pros:</h4>
+                    <div class="pro-item">
+                        <i class="fas fa-check-circle"></i>
+                        <span class="text-sm text-gray-300">Excellent SEO & performance</span>
+                    </div>
+                    <div class="pro-item">
+                        <i class="fas fa-check-circle"></i>
+                        <span class="text-sm text-gray-300">Type-safe markdown blog posts</span>
+                    </div>
+                    <div class="pro-item">
+                        <i class="fas fa-check-circle"></i>
+                        <span class="text-sm text-gray-300">Built-in search, tags, RSS</span>
+                    </div>
+                    <div class="pro-item">
+                        <i class="fas fa-check-circle"></i>
+                        <span class="text-sm text-gray-300">Active community & updates</span>
+                    </div>
+                    <div class="pro-item">
+                        <i class="fas fa-check-circle"></i>
+                        <span class="text-sm text-gray-300">Easy content management</span>
+                    </div>
+                    
+                    <h4 class="font-bold mb-3 text-lg mt-4">Cons:</h4>
+                    <div class="con-item">
+                        <i class="fas fa-times-circle"></i>
+                        <span class="text-sm text-gray-300">Requires Astro setup & build</span>
+                    </div>
+                    <div class="con-item">
+                        <i class="fas fa-times-circle"></i>
+                        <span class="text-sm text-gray-300">More blog-focused (less landing page)</span>
+                    </div>
+                    <div class="con-item">
+                        <i class="fas fa-times-circle"></i>
+                        <span class="text-sm text-gray-300">Need to integrate framework tools</span>
+                    </div>
+                </div>
+                
+                <a href="astropaper-index.html" class="btn-primary">
+                    <i class="fas fa-eye mr-2"></i>View All Pages
+                </a>
+                <a href="https://github.com/satnaing/astro-paper" target="_blank" class="btn-secondary" style="margin-left: 0;">
+                    <i class="fab fa-github mr-2"></i>GitHub
+                </a>
+            </div>
+
+            <!-- Option 4: shadcn/ui (Next.js Ready) -->
+            <div class="option-card">
+                <div class="badge new">
+                    <i class="fas fa-rocket mr-1"></i> Next.js Ready
+                </div>
+                <h2 class="text-3xl font-bold mb-4">shadcn/ui</h2>
+                <p class="text-gray-300 mb-4">
+                    Actual shadcn/ui design system with dark mode. This is what your Next.js rebuild will look like.
+                </p>
+                
+                <div class="pros-cons">
+                    <h4 class="font-bold mb-3 text-lg">Pros:</h4>
+                    <div class="pro-item">
+                        <i class="fas fa-check-circle"></i>
+                        <span class="text-sm text-gray-300">Exact Next.js + shadcn/ui aesthetic</span>
+                    </div>
+                    <div class="pro-item">
+                        <i class="fas fa-check-circle"></i>
+                        <span class="text-sm text-gray-300">Professional component library</span>
+                    </div>
+                    <div class="pro-item">
+                        <i class="fas fa-check-circle"></i>
+                        <span class="text-sm text-gray-300">Dark mode optimized</span>
+                    </div>
+                    <div class="pro-item">
+                        <i class="fas fa-check-circle"></i>
+                        <span class="text-sm text-gray-300">Brand colors integrated</span>
+                    </div>
+                    <div class="pro-item">
+                        <i class="fas fa-check-circle"></i>
+                        <span class="text-sm text-gray-300">PRD-aligned technology</span>
+                    </div>
+                    
+                    <h4 class="font-bold mb-3 text-lg mt-4">Cons:</h4>
+                    <div class="con-item">
+                        <i class="fas fa-times-circle"></i>
+                        <span class="text-sm text-gray-300">Preview only (not deployed yet)</span>
+                    </div>
+                    <div class="con-item">
+                        <i class="fas fa-times-circle"></i>
+                        <span class="text-sm text-gray-300">Requires Next.js rebuild</span>
+                    </div>
+                </div>
+                
+                <a href="shadcn-index.html" class="btn-primary">
+                    <i class="fas fa-eye mr-2"></i>View All Pages
+                </a>
+            </div>
+
+        </div>
+
+        <!-- Comparison Table -->
+        <div class="bg-white bg-opacity-5 border border-blue-500 border-opacity-30 rounded-3xl p-12 mb-16">
+            <h3 class="text-4xl font-bold mb-8 text-center">Feature Comparison</h3>
+            <div class="overflow-x-auto">
+                <table class="w-full text-left">
+                    <thead>
+                        <tr class="border-b border-white border-opacity-10">
+                            <th class="pb-4 text-gray-400 font-semibold">Feature</th>
+                            <th class="pb-4 text-center">Current</th>
+                            <th class="pb-4 text-center">SaaS Minimal</th>
+                            <th class="pb-4 text-center">AstroPaper</th>
+                            <th class="pb-4 text-center">shadcn/ui</th>
+                        </tr>
+                    </thead>
+                    <tbody class="text-sm">
+                        <tr class="border-b border-white border-opacity-5">
+                            <td class="py-4 text-gray-300">Brand Colors Applied</td>
+                            <td class="py-4 text-center"><i class="fas fa-times text-red-500"></i></td>
+                            <td class="py-4 text-center"><i class="fas fa-check text-green-500"></i></td>
+                            <td class="py-4 text-center text-gray-500">Needs customization</td>
+                            <td class="py-4 text-center"><i class="fas fa-check text-green-500"></i></td>
+                        </tr>
+                        <tr class="border-b border-white border-opacity-5">
+                            <td class="py-4 text-gray-300">Framework Tools</td>
+                            <td class="py-4 text-center"><i class="fas fa-check text-green-500"></i></td>
+                            <td class="py-4 text-center"><i class="fas fa-check text-green-500"></i></td>
+                            <td class="py-4 text-center text-gray-500">Manual integration</td>
+                            <td class="py-4 text-center"><i class="fas fa-check text-green-500"></i> Easy port</td>
+                        </tr>
+                        <tr class="border-b border-white border-opacity-5">
+                            <td class="py-4 text-gray-300">SEO Optimized</td>
+                            <td class="py-4 text-center text-gray-500">Basic</td>
+                            <td class="py-4 text-center text-gray-500">Good</td>
+                            <td class="py-4 text-center"><i class="fas fa-check text-green-500"></i> Excellent</td>
+                            <td class="py-4 text-center"><i class="fas fa-check text-green-500"></i> Excellent</td>
+                        </tr>
+                        <tr class="border-b border-white border-opacity-5">
+                            <td class="py-4 text-gray-300">Next.js Ready</td>
+                            <td class="py-4 text-center"><i class="fas fa-times text-red-500"></i></td>
+                            <td class="py-4 text-center text-yellow-400">Port needed</td>
+                            <td class="py-4 text-center"><i class="fas fa-times text-red-500"></i></td>
+                            <td class="py-4 text-center"><i class="fas fa-check text-green-500"></i> Native</td>
+                        </tr>
+                        <tr class="border-b border-white border-opacity-5">
+                            <td class="py-4 text-gray-300">Component Library</td>
+                            <td class="py-4 text-center"><i class="fas fa-times text-red-500"></i></td>
+                            <td class="py-4 text-center"><i class="fas fa-times text-red-500"></i></td>
+                            <td class="py-4 text-center text-gray-500">Custom</td>
+                            <td class="py-4 text-center"><i class="fas fa-check text-green-500"></i> shadcn/ui</td>
+                        </tr>
+                        <tr class="border-b border-white border-opacity-5">
+                            <td class="py-4 text-gray-300">Landing Pages</td>
+                            <td class="py-4 text-center"><i class="fas fa-check text-green-500"></i></td>
+                            <td class="py-4 text-center"><i class="fas fa-check text-green-500"></i></td>
+                            <td class="py-4 text-center text-gray-500">Limited</td>
+                            <td class="py-4 text-center"><i class="fas fa-check text-green-500"></i> Excellent</td>
+                        </tr>
+                        <tr class="border-b border-white border-opacity-5">
+                            <td class="py-4 text-gray-300">Setup Complexity</td>
+                            <td class="py-4 text-center text-green-500">Simple</td>
+                            <td class="py-4 text-center text-green-500">Simple</td>
+                            <td class="py-4 text-center text-yellow-400">Moderate</td>
+                            <td class="py-4 text-center text-yellow-400">Moderate</td>
+                        </tr>
+                        <tr class="border-b border-white border-opacity-5">
+                            <td class="py-4 text-gray-300">Maintenance</td>
+                            <td class="py-4 text-center text-yellow-400">Manual</td>
+                            <td class="py-4 text-center text-yellow-400">Manual</td>
+                            <td class="py-4 text-center text-green-500">Easy (Markdown)</td>
+                            <td class="py-4 text-center text-green-500">Component-based</td>
+                        </tr>
+                        <tr>
+                            <td class="py-4 text-gray-300">Dark/Light Mode</td>
+                            <td class="py-4 text-center"><i class="fas fa-times text-red-500"></i></td>
+                            <td class="py-4 text-center text-gray-500">Dark only</td>
+                            <td class="py-4 text-center"><i class="fas fa-check text-green-500"></i></td>
+                            <td class="py-4 text-center"><i class="fas fa-check text-green-500"></i> Both</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Recommendation -->
+        <div class="text-center bg-white bg-opacity-5 border border-yellow-500 border-opacity-30 rounded-3xl p-12">
+            <i class="fas fa-lightbulb text-6xl text-yellow-400 mb-6"></i>
+            <h3 class="text-3xl font-bold mb-4">My Recommendation</h3>
+            <p class="text-xl text-gray-300 max-w-3xl mx-auto mb-8">
+                <strong class="text-yellow-400">Go with SaaS Minimal</strong> if you want immediate deployment with your brand colors and framework tools. 
+                <br/><br/>
+                <strong class="text-blue-400">Choose AstroPaper</strong> if you plan to publish regular blog content and want excellent SEO/performance with easier content management via Markdown.
+                <br/><br/>
+                You could also <strong>combine both:</strong> Use AstroPaper for your blog/content + integrate the SaaS Minimal landing pages and framework tools.
+            </p>
+            <div class="flex flex-wrap gap-4 justify-center mt-8">
+                <a href="saas-index.html" class="btn-primary">
+                    <i class="fas fa-rocket mr-2"></i>Deploy SaaS Minimal
+                </a>
+                <a href="https://github.com/satnaing/astro-paper" target="_blank" class="btn-secondary">
+                    <i class="fab fa-github mr-2"></i>Explore AstroPaper
+                </a>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="text-center mt-16 text-gray-500 text-sm">
+            <p>All themes can be customized to match your exact requirements</p>
+        </div>
+    </div>
+</body>
+</html>
+

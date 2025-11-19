@@ -3,30 +3,39 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bryan Collins - Writing Resources</title>
-    <meta name="description" content="Resources for writers and content creators by Bryan Collins.">
-    <meta property="og:url" content="https://pages.bryancollins.com/" />
-    <meta property="og:title" content="Bryan Collins - Writing Resources" />
-    <meta property="og:description" content="Resources for writers and content creators by Bryan Collins." />
-    <link rel="opengraph" href="https://pages.bryancollins.com/" />
+    <title>Bryan Collins — Tools, Projects & Resources for Creators</title>
+    <meta name="description" content="Free MBA frameworks, strategic tools, and resources for content creators and entrepreneurs.">
     
-    <!-- Tailwind CSS for styling -->
     <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     
     <!-- Plausible Analytics -->
     <script defer data-domain="join.bryancollins.com" src="https://plausible.io/js/script.js"></script>
-    <script defer src="resources/analytics.js"></script>
     
-    <!-- Custom styles -->
+    <!-- Schema.org Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "Bryan Collins",
+      "url": "https://join.bryancollins.com",
+      "sameAs": [
+        "https://www.youtube.com/channel/UCglNILz3uBqPer5EMJ_pzVg",
+        "https://www.linkedin.com/in/bryancollins99/",
+        "https://www.amazon.com/stores/Bryan-Collins/author/B00KPFFYU6",
+        "https://clarity.fm/bryancollins"
+      ],
+      "jobTitle": "Author and Educator",
+      "description": "USA Today bestselling author helping writers build sustainable businesses with MBA frameworks and AI tools",
+      "knowsAbout": ["Writing", "Business Strategy", "MBA Frameworks", "AI Tools", "Content Creation"],
+      "alumniOf": {
+        "@type": "Organization",
+        "name": "Trinity Business School"
+      }
+    }
+    </script>
+    
     <style>
-        /* Color Palette:
-           Purple: #956FA6 (rgb 149, 110, 165)
-           Light Gray: #EDEDEE (rgb 237, 237, 237)
-           Gold/Yellow: #F3C972 (rgb 242, 200, 114)
-           Blue-Gray: #A6B6CF (rgb 165, 182, 207)
-           Dark Gray/Black: #1B1B1D (rgb 26, 26, 28)
-        */
         body {
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
             line-height: 1.6;
@@ -34,277 +43,303 @@
             color: #1B1B1D;
         }
         .hero-gradient {
-            background: linear-gradient(135deg, #956FA6 0%, #7d5e8d 100%);
+            background: linear-gradient(135deg, #000000 0%, #1a1a1a 100%);
         }
-        .hero-text {
+        .nav-bar {
+            background: #000000;
+            border-bottom: 1px solid #333;
+        }
+        .nav-link {
             color: white;
-            text-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
-        }
-        .cta-button {
-            background: #F3C972;
-            color: #1B1B1D;
-            font-weight: 700;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-            position: relative;
-            overflow: hidden;
-            padding: 16px 32px;
-            font-size: 1.125rem;
-            letter-spacing: 0.025em;
-            border-radius: 8px;
-            display: inline-block;
-            text-align: center;
-        }
-        .cta-button:hover {
-            background: #eab94a;
-            transform: translateY(-2px);
-            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
-        }
-        .landing-page-grid {
-            display: none;
-        }
-        .admin-card {
-            transition: all 0.2s ease;
-            border-left: 4px solid transparent;
-        }
-        .admin-card:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
-            border-left: 4px solid #956FA6;
-        }
-        .admin-card .view-link {
-            display: inline-block;
-            padding: 8px 16px;
-            background-color: #F3C972;
-            color: #1B1B1D;
-            border-radius: 8px;
-            font-weight: 600;
-            transition: all 0.3s ease;
-            letter-spacing: 0.025em;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-            position: relative;
-            overflow: hidden;
-            min-width: 110px;
-            text-align: center;
-            white-space: nowrap;
-        }
-        .admin-card .view-link:hover {
-            background-color: #eab94a;
-            transform: translateY(-2px);
+            padding: 0.5rem 1rem;
             text-decoration: none;
-            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            transition: color 0.2s;
         }
-        .admin-header {
-            background: linear-gradient(135deg, #956FA6 0%, #7d5e8d 100%);
+        .nav-link:hover {
+            color: #FFDE59;
+        }
+        .card {
+            background: white;
+            border-radius: 8px;
+            padding: 2rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 4px 16px rgba(0,0,0,0.15);
+        }
+        .icon-yellow {
+            color: #FFDE59;
+        }
+        .btn-primary {
+            background: #FFDE59;
+            color: #000000;
+            padding: 0.75rem 1.5rem;
+            border-radius: 6px;
+            text-decoration: none;
+            display: inline-block;
+            font-weight: 600;
+            transition: all 0.3s;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .btn-primary:hover {
+            background: #ffd633;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+        }
+        .btn-secondary {
+            background: transparent;
             color: white;
-            padding: 1.5rem;
-            border-radius: 0.5rem 0.5rem 0 0;
-            margin-bottom: 1.5rem;
+            border: 2px solid white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 6px;
+            text-decoration: none;
+            display: inline-block;
+            font-weight: 600;
+            transition: all 0.3s;
         }
-        .admin-stats {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 1.5rem;
-            gap: 1rem;
+        .btn-secondary:hover {
+            background: white;
+            color: #000000;
         }
-        .stat-card {
-            flex: 1;
-            background-color: white;
-            padding: 1rem;
-            border-radius: 0.5rem;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-            text-align: center;
-        }
-        .stat-card .stat-value {
-            font-size: 1.5rem;
-            font-weight: bold;
-            color: #956FA6;
-        }
-        .stat-card .stat-label {
-            font-size: 0.875rem;
-            color: #6b7280;
+        .section-title {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: #000000;
         }
     </style>
 </head>
 <body>
+    <!-- Navigation -->
+    <nav class="nav-bar sticky top-0 z-50">
+        <div class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
+            <a href="/index.html" class="text-white font-bold text-xl">Bryan Collins</a>
+            <div class="flex gap-6">
+                <a href="/mba-frameworks.html" class="nav-link">Tools</a>
+                <a href="/projects.html" class="nav-link">Projects</a>
+                <a href="/now.html" class="nav-link">Now</a>
+                <a href="/contact.html" class="nav-link">Contact</a>
+                <a href="/newsletter.html" class="nav-link">Newsletter</a>
+            </div>
+        </div>
+    </nav>
 
+    <!-- Hero Section -->
+    <header class="hero-gradient text-white py-24 px-4">
+        <div class="max-w-4xl mx-auto text-center">
+            <h1 class="text-5xl sm:text-6xl font-extrabold mb-6 leading-tight">Resources for Writers & Readers</h1>
+            <p class="text-xl sm:text-2xl mb-10 opacity-90 leading-relaxed">USA Today bestselling author helping 15,000+ readers build sustainable writing businesses with MBA frameworks and AI tools.</p>
+            <div class="flex gap-4 justify-center flex-wrap">
+                <a href="/newsletter.html" class="btn-primary">
+                    <i class="fas fa-envelope mr-2"></i>Join My Newsletter
+                </a>
+                <a href="/mba-frameworks.html" class="btn-secondary">
+                    <i class="fas fa-tools mr-2"></i>Free MBA Tools
+                </a>
+            </div>
+        </div>
+    </header>
 
-    <!-- Main Content -->
-    <main class="min-h-screen flex flex-col items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
-        <div class="w-full max-w-4xl">
-            <!-- Public Content -->
-            <div id="publicContent" class="bg-white rounded-xl overflow-hidden shadow-xl">
-                <div class="hero-gradient px-8 py-12 text-center">
-                    <h1 class="hero-text text-4xl sm:text-5xl font-extrabold mb-4 leading-tight">Bryan Collins</h1>
-                    <p class="hero-text text-xl sm:text-2xl max-w-xl mx-auto">Resources for Writers & Content Creators</p>
+    <!-- Tools Section -->
+    <section class="py-16 px-4">
+        <div class="max-w-6xl mx-auto">
+            <h2 class="section-title text-center mb-12">🛠️ Free Business Strategy Tools</h2>
+            <div class="grid md:grid-cols-3 gap-8 mb-8">
+                <div class="card">
+                    <i class="fas fa-table icon-yellow text-3xl mb-4"></i>
+                    <h3 class="text-xl font-bold mb-3">ANSOFF Matrix</h3>
+                    <p class="mb-4 text-gray-700">Analyze growth strategies and market opportunities for your business.</p>
+                    <a href="/ansoff-matrix.html" class="text-black font-semibold hover:underline">Try it now →</a>
                 </div>
-                
-                <div class="px-8 py-10 text-center">
-                    <p class="text-xl mb-8">Landing page management dashboard.</p>
-                    <a href="index.html?admin=true" class="cta-button font-bold inline-block">
-                        View Dashboard
+                <div class="card">
+                    <i class="fas fa-chart-line icon-yellow text-3xl mb-4"></i>
+                    <h3 class="text-xl font-bold mb-3">SWOT Analysis</h3>
+                    <p class="mb-4 text-gray-700">Identify strengths, weaknesses, opportunities, and threats.</p>
+                    <a href="/swot-analysis.html" class="text-black font-semibold hover:underline">Try it now →</a>
+                </div>
+                <div class="card">
+                    <i class="fas fa-chess icon-yellow text-3xl mb-4"></i>
+                    <h3 class="text-xl font-bold mb-3">Porter's Five Forces</h3>
+                    <p class="mb-4 text-gray-700">Assess competitive forces in your industry.</p>
+                    <a href="/porters-five-forces.html" class="text-black font-semibold hover:underline">Try it now →</a>
+                </div>
+            </div>
+            <div class="text-center">
+                <a href="/mba-frameworks.html" class="btn-primary">View All 8 Tools →</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section class="py-16 px-4 bg-white">
+        <div class="max-w-6xl mx-auto">
+            <h2 class="section-title text-center mb-4">Sites I've Built</h2>
+            <p class="text-center text-gray-600 mb-12 max-w-2xl mx-auto">From content hubs to AI training platforms, here are the projects I've created to help writers and readers.</p>
+            <div class="grid md:grid-cols-2 gap-8">
+                <div class="card">
+                    <div class="flex items-start gap-3 mb-3">
+                        <i class="fas fa-pen text-2xl icon-yellow mt-1"></i>
+                        <div>
+                            <h3 class="text-xl font-bold mb-1">Become a Writer Today</h3>
+                            <p class="text-sm text-gray-500">becomeawritertoday.com</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-700 mb-4">The #1 resource for writers and content creators. Articles, courses, and resources reaching 100,000+ monthly readers.</p>
+                    <a href="https://becomeawritertoday.com" target="_blank" class="text-black font-semibold hover:underline inline-flex items-center">Visit site <i class="fas fa-external-link-alt ml-2 text-sm"></i></a>
+                </div>
+                <div class="card">
+                    <div class="flex items-start gap-3 mb-3">
+                        <i class="fas fa-robot text-2xl icon-yellow mt-1"></i>
+                        <div>
+                            <h3 class="text-xl font-bold mb-1">Prompt Writing Studio</h3>
+                            <p class="text-sm text-gray-500">promptwritingstudio.com</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-700 mb-4">Complete AI prompt writing course with 100+ templates and frameworks. $197 one-time payment.</p>
+                    <a href="https://promptwritingstudio.com" target="_blank" class="text-black font-semibold hover:underline inline-flex items-center">Learn more <i class="fas fa-external-link-alt ml-2 text-sm"></i></a>
+                </div>
+                <div class="card">
+                    <div class="flex items-start gap-3 mb-3">
+                        <i class="fas fa-bolt text-2xl icon-yellow mt-1"></i>
+                        <div>
+                            <h3 class="text-xl font-bold mb-1">AI Flash Report</h3>
+                            <p class="text-sm text-gray-500">aiflashreport.com</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-700 mb-4">Daily curated AI news and insights for busy professionals who want to stay ahead.</p>
+                    <a href="https://aiflashreport.com" target="_blank" class="text-black font-semibold hover:underline inline-flex items-center">Read latest <i class="fas fa-external-link-alt ml-2 text-sm"></i></a>
+                </div>
+                <div class="card">
+                    <div class="flex items-start gap-3 mb-3">
+                        <i class="fas fa-lightbulb text-2xl icon-yellow mt-1"></i>
+                        <div>
+                            <h3 class="text-xl font-bold mb-1">PromptSnips</h3>
+                            <p class="text-sm text-gray-500">promptsnips.com</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-700 mb-4">Share and discover AI prompts. A tool for writers to save and organize their best prompts.</p>
+                    <a href="https://promptsnips.com" target="_blank" class="text-black font-semibold hover:underline inline-flex items-center">Try it now <i class="fas fa-external-link-alt ml-2 text-sm"></i></a>
+                </div>
+                <div class="card">
+                    <div class="flex items-start gap-3 mb-3">
+                        <i class="fas fa-running text-2xl icon-yellow mt-1"></i>
+                        <div>
+                            <h3 class="text-xl font-bold mb-1">My Triathlon Calculator</h3>
+                            <p class="text-sm text-gray-500">mytriathloncalculator.com</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-700 mb-4">Training tools and calculators for triathletes to track progress and plan races.</p>
+                    <a href="https://mytriathloncalculator.com" target="_blank" class="text-black font-semibold hover:underline inline-flex items-center">Check it out <i class="fas fa-external-link-alt ml-2 text-sm"></i></a>
+                </div>
+            </div>
+            <div class="text-center mt-8">
+                <a href="/projects.html" class="btn-primary">View All Projects & Books →</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Video Playlists Section -->
+    <section class="py-16 px-4 bg-white">
+        <div class="max-w-6xl mx-auto">
+            <h2 class="section-title text-center mb-4">📺 Watch & Learn</h2>
+            <p class="text-center text-gray-600 mb-12 max-w-2xl mx-auto">Free video tutorials on MBA frameworks, content strategy, and AI for writers.</p>
+            
+            <div class="grid md:grid-cols-2 gap-8">
+                <!-- MBA Frameworks Playlist -->
+                <div class="card">
+                    <h3 class="text-xl font-bold mb-4">MBA Frameworks for Writers</h3>
+                    <div class="rounded-lg overflow-hidden mb-4">
+                        <iframe 
+                            width="100%" 
+                            height="250" 
+                            src="https://www.youtube.com/embed/videoseries?list=PLxQrU2dxeHH7L0C4wkGAZa8PJnjhr0cT7" 
+                            title="MBA Frameworks Playlist" 
+                            frameborder="0" 
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                            allowfullscreen
+                            style="border-radius: 8px;">
+                        </iframe>
+                    </div>
+                    <p class="text-gray-700 text-sm">Learn strategic frameworks from top business schools, adapted for writing businesses.</p>
+                </div>
+
+                <!-- LinkedIn Authority Building Playlist -->
+                <div class="card">
+                    <h3 class="text-xl font-bold mb-4">LinkedIn Authority Building</h3>
+                    <div class="rounded-lg overflow-hidden mb-4">
+                        <iframe 
+                            width="100%" 
+                            height="250" 
+                            src="https://www.youtube.com/embed/videoseries?list=PLxQrU2dxeHH5T9CpEdlLUX4emq49-La4F" 
+                            title="LinkedIn Authority Building Playlist" 
+                            frameborder="0" 
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                            allowfullscreen
+                            style="border-radius: 8px;">
+                        </iframe>
+                    </div>
+                    <p class="text-gray-700 text-sm">Build your authority and grow your audience on LinkedIn with strategic content.</p>
+                </div>
+
+                <!-- Writing Advice Playlist -->
+                <div class="card">
+                    <h3 class="text-xl font-bold mb-4">Writing Advice</h3>
+                    <div class="rounded-lg overflow-hidden mb-4">
+                        <iframe 
+                            width="100%" 
+                            height="250" 
+                            src="https://www.youtube.com/embed/videoseries?list=PLxQrU2dxeHH7YhnYjZ7IooR-uGt3kF28Y" 
+                            title="Writing Advice Playlist" 
+                            frameborder="0" 
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                            allowfullscreen
+                            style="border-radius: 8px;">
+                        </iframe>
+                    </div>
+                    <p class="text-gray-700 text-sm">Practical tips and advice to improve your writing craft and build a writing career.</p>
+                </div>
+
+                <!-- YouTube Channel CTA -->
+                <div class="card flex flex-col items-center justify-center text-center bg-gray-50">
+                    <i class="fab fa-youtube text-6xl icon-yellow mb-4"></i>
+                    <h3 class="text-xl font-bold mb-3">More on YouTube</h3>
+                    <p class="text-gray-700 mb-6">Subscribe for weekly videos on writing, AI, and business strategy.</p>
+                    <a href="https://www.youtube.com/channel/UCglNILz3uBqPer5EMJ_pzVg" target="_blank" class="inline-flex items-center bg-black text-white px-6 py-3 rounded-lg font-semibold hover:bg-gray-800 transition">
+                        <i class="fab fa-youtube mr-2"></i>Subscribe Now
                     </a>
                 </div>
             </div>
-            
-            <!-- Admin Content (Hidden by default) -->
-            <div id="adminContent" class="landing-page-grid mt-12 bg-gray-50 rounded-xl overflow-hidden shadow-xl">
-                <div class="admin-header">
-                    <h2 class="text-2xl font-bold mb-2 text-center">Landing Page Management</h2>
-                    <p class="text-center text-white opacity-90">Manage all your landing pages from one dashboard</p>
-                </div>
-                
-                <div class="px-8 pb-8">
-                    <div class="admin-stats">
-                        <div class="stat-card">
-                            <div class="stat-value">11</div>
-                            <div class="stat-label">Lead Gen Pages</div>
-                        </div>
-                        <div class="stat-card">
-                            <div class="stat-value">3</div>
-                            <div class="stat-label">Workshop Pages</div>
-                        </div>
-                        <div class="stat-card">
-                            <div class="stat-value">1</div>
-                            <div class="stat-label">Thank You Page</div>
-                        </div>
-                    </div>
-                
-                <h3 class="text-xl font-semibold mb-4 text-gray-700 border-b pb-2">Lead Generation Pages</h3>
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                    
-                    <div class="admin-card bg-white p-5 rounded-lg shadow">
-                        <h3 class="font-bold mb-3 text-gray-800">101 AI Prompts Apollo</h3>
-                        <div class="flex flex-col space-y-2">
-                            <span class="text-sm text-gray-500">Apollo Campaign</span>
-                            <a href="101-ai-prompts-apollo.html" class="view-link">View</a>
-                        </div>
-                    </div>
-                    
-                    <div class="admin-card bg-white p-5 rounded-lg shadow">
-                        <h3 class="font-bold mb-3 text-gray-800">101 AI Prompts Medium</h3>
-                        <div class="flex flex-col space-y-2">
-                            <span class="text-sm text-gray-500">Medium Campaign</span>
-                            <a href="101-ai-prompts-medium.html" class="view-link">View</a>
-                        </div>
-                    </div>
-                    
-                    <div class="admin-card bg-white p-5 rounded-lg shadow">
-                        <h3 class="font-bold mb-3 text-gray-800">LinkedIn Hooks YT</h3>
-                        <div class="flex flex-col space-y-2">
-                            <span class="text-sm text-gray-500">YouTube Campaign</span>
-                            <a href="linkedin-hooks-yt.html" class="view-link">View</a>
-                        </div>
-                    </div>
-                    
-                    <div class="admin-card bg-white p-5 rounded-lg shadow">
-                        <h3 class="font-bold mb-3 text-gray-800">ChatGPT</h3>
-                        <div class="flex flex-col space-y-2">
-                            <span class="text-sm text-gray-500">General</span>
-                            <a href="chatgpt.html" class="view-link">View</a>
-                        </div>
-                    </div>
-                    
-                    <div class="admin-card bg-white p-5 rounded-lg shadow">
-                        <h3 class="font-bold mb-3 text-gray-800">LinkedIn Hooks</h3>
-                        <div class="flex flex-col space-y-2">
-                            <span class="text-sm text-gray-500">General</span>
-                            <a href="linkedin-hooks.html" class="view-link">View</a>
-                        </div>
-                    </div>
-                    
-                    <div class="admin-card bg-white p-5 rounded-lg shadow">
-                        <h3 class="font-bold mb-3 text-gray-800">101 AI Prompts YT</h3>
-                        <div class="flex flex-col space-y-2">
-                            <span class="text-sm text-gray-500">YouTube Campaign</span>
-                            <a href="101-ai-prompts-yt.html" class="view-link">View</a>
-                        </div>
-                    </div>
-                    
-                    <div class="admin-card bg-white p-5 rounded-lg shadow">
-                        <h3 class="font-bold mb-3 text-gray-800">101 AI Prompts LN</h3>
-                        <div class="flex flex-col space-y-2">
-                            <span class="text-sm text-gray-500">LinkedIn Campaign</span>
-                            <a href="101-ai-prompts-ln.html" class="view-link">View</a>
-                        </div>
-                    </div>
-                    
-                    
-                </div>
-                
-                <h3 class="text-xl font-semibold mb-4 mt-8 text-gray-700 border-b pb-2">Workshop & Event Pages</h3>
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                    <div class="admin-card bg-white p-5 rounded-lg shadow border-l-4 border-blue-500">
-                        <h3 class="font-bold mb-3 text-gray-800">Content Multiplication Workshop</h3>
-                        <div class="flex flex-col space-y-2">
-                            <span class="text-sm text-blue-500">Live Workshop - May 22</span>
-                            <a href="content-multiplication-workshop.html" class="view-link">View</a>
-                        </div>
-                    </div>
-                    
-                    <div class="admin-card bg-white p-5 rounded-lg shadow border-l-4 border-blue-500">
-                        <h3 class="font-bold mb-3 text-gray-800">AI Writing Workshop</h3>
-                        <div class="flex flex-col space-y-2">
-                            <span class="text-sm text-blue-500">Live Workshop</span>
-                            <a href="ai-writing-workshop.html" class="view-link">View</a>
-                        </div>
-                    </div>
-                    
-                    <!-- Removed AI Writing Newsletter section -->
-                </div>
-                
-                <h3 class="text-xl font-semibold mb-4 mt-8 text-gray-700 border-b pb-2">Shared Resources</h3>
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                    
-                    <div class="admin-card bg-white p-5 rounded-lg shadow border-l-4 border-green-500">
-                        <h3 class="font-bold mb-3 text-gray-800">Thank You Page</h3>
-                        <div class="flex flex-col space-y-2">
-                            <span class="text-sm text-green-500">Shared Resource</span>
-                            <a href="thank-you.html" class="view-link">View</a>
-                        </div>
-                    </div>
-
-                    <div class="admin-card bg-white p-5 rounded-lg shadow border-l-4 border-blue-500">
-                        <h3 class="font-bold mb-3 text-gray-800">Analytics Dashboard</h3>
-                        <div class="flex flex-col space-y-2">
-                            <span class="text-sm text-blue-500">External Resource</span>
-                            <a href="https://plausible.io/join.bryancollins.com" class="view-link" target="_blank">View Analytics</a>
-                        </div>
-                    </div>
-
-                    <div class="admin-card bg-white p-5 rounded-lg shadow border-l-4 border-purple-500">
-                        <h3 class="font-bold mb-3 text-gray-800">ConvertKit Dashboard</h3>
-                        <div class="flex flex-col space-y-2">
-                            <span class="text-sm text-purple-500">External Resource</span>
-                            <a href="https://app.kit.com/dashboard" class="view-link" target="_blank">View Forms</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Copyright notice -->
-            <p class="text-center text-xs mt-8" style="color: #1B1B1D; opacity: 0.5;"> 2025 Bryan Collins. All rights reserved.</p>
         </div>
-    </main>
-    
-    <!-- JavaScript for Admin Navigation -->
-    <script>
-        // Function to get URL parameters
-        function getUrlParameter(name) {
-            name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
-            var regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
-            var results = regex.exec(location.search);
-            return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
-        }
-        
-        // Check for admin parameter and show admin content if present
-        document.addEventListener('DOMContentLoaded', function() {
-            var adminParam = getUrlParameter('admin');
-            if (adminParam === 'true') {
-                document.getElementById('adminContent').style.display = 'block';
-                document.getElementById('publicContent').style.display = 'none';
-            }
-        });
-    </script>
+    </section>
+
+    <!-- Newsletter CTA -->
+    <section class="py-16 px-4">
+        <div class="max-w-3xl mx-auto">
+            <div class="card text-center">
+                <i class="fas fa-envelope icon-yellow text-4xl mb-4"></i>
+                <h2 class="text-3xl font-bold mb-4">Get 101 AI Prompts Free</h2>
+                <p class="text-xl text-gray-700 mb-6">Join 15,000+ readers and get instant access to 101 AI prompts, plus MBA frameworks and strategic insights delivered several times a week.</p>
+                <a href="/newsletter.html" class="btn-primary text-lg">
+                    <i class="fas fa-gift mr-2"></i>Get Your Free Prompts
+                </a>
+                <p class="text-sm text-gray-600 mt-4">Free • Several times a week • Unsubscribe anytime</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-black text-white py-8 px-4">
+        <div class="max-w-6xl mx-auto text-center">
+            <div class="flex gap-6 justify-center mb-4">
+                <a href="https://www.youtube.com/channel/UCglNILz3uBqPer5EMJ_pzVg" target="_blank" class="hover:text-yellow-400"><i class="fab fa-youtube text-2xl"></i></a>
+                <a href="https://www.linkedin.com/in/bryancollins99/" target="_blank" class="hover:text-yellow-400"><i class="fab fa-linkedin text-2xl"></i></a>
+                <a href="https://www.amazon.com/stores/Bryan-Collins/author/B00KPFFYU6" target="_blank" class="hover:text-yellow-400"><i class="fab fa-amazon text-2xl"></i></a>
+                <a href="https://clarity.fm/bryancollins" target="_blank" class="hover:text-yellow-400"><i class="fas fa-phone text-2xl"></i></a>
+            </div>
+            <p class="text-sm opacity-70">© 2025 Bryan Collins. All rights reserved.</p>
+        </div>
+    </footer>
 </body>
 </html>

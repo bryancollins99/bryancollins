@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MBA Framework Tools — Free Interactive Tools</title>
+    <meta name="description" content="Free interactive MBA framework tools including SWOT, ANSOFF, Porter's 5 Forces, and more.">
+    
+    <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background-color: #FFFFFF;
+            color: #3D3D3D;
+            line-height: 1.6;
+        }
+        
+        header {
+            background: #000000;
+            border-bottom: 1px solid #333;
+        }
+        
+        nav a {
+            color: #FFFFFF;
+            text-decoration: none;
+            font-size: 0.9375rem;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+        
+        nav a:hover {
+            color: #FFDE59;
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            line-height: 1.1;
+            letter-spacing: -0.02em;
+            color: #1B1B1D;
+        }
+        
+        h2 {
+            font-size: 1.875rem;
+            font-weight: 600;
+            color: #1B1B1D;
+        }
+        
+        h3 {
+            font-size: 1.125rem;
+            font-weight: 600;
+            color: #1B1B1D;
+        }
+        
+        .muted {
+            color: #6E6E6E;
+        }
+        
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 6px;
+            font-size: 0.875rem;
+            font-weight: 500;
+            transition: all 0.2s;
+            padding: 0.625rem 1.25rem;
+            text-decoration: none;
+        }
+        
+        .btn-primary {
+            background: #FFDE59;
+            color: #000000;
+        }
+        
+        .btn-primary:hover {
+            background: #ffd633;
+        }
+        
+        .btn-outline {
+            border: 1px solid #D0D0D0;
+            background: transparent;
+            color: #3D3D3D;
+            width: 100%;
+            text-align: center;
+        }
+        
+        .btn-outline:hover {
+            background: #F5F5F5;
+            border-color: #000000;
+        }
+        
+        .framework-card {
+            background: #FFFFFF;
+            border: 1px solid #E5E5E5;
+            border-radius: 8px;
+            padding: 1.75rem;
+            transition: all 0.2s;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+        
+        .framework-card:hover {
+            border-color: #D0D0D0;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+        }
+        
+        .icon-box {
+            width: 48px;
+            height: 48px;
+            background: #F5F5F5;
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1rem;
+        }
+        
+        .badge {
+            display: inline-block;
+            background: #F5F5F5;
+            padding: 4px 10px;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: #6E6E6E;
+        }
+        
+        footer {
+            border-top: 1px solid #E5E5E5;
+            margin-top: 4rem;
+        }
+    </style>
+</head>
+<body>
+    <!-- Black Header -->
+    <header class="sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+            <a href="astropaper-clean-home.html" class="text-xl font-bold" style="color: #FFFFFF;">Bryan Collins</a>
+            <nav class="hidden md:flex items-center gap-8">
+                <a href="astropaper-clean-frameworks.html" style="color: #FFDE59;">Frameworks</a>
+                <a href="#">Books</a>
+                <a href="#">About</a>
+                <a href="astropaper-clean-optin.html" class="btn btn-primary">
+                    <i class="fas fa-download mr-2"></i>Free Tools
+                </a>
+            </nav>
+            <button class="md:hidden" style="color: #FFFFFF;">
+                <i class="fas fa-bars text-xl"></i>
+            </button>
+        </div>
+    </header>
+
+    <!-- Page Header -->
+    <section class="py-16 px-6">
+        <div class="max-w-7xl mx-auto">
+            <div class="max-w-3xl">
+                <h1 class="mb-4">MBA Framework Tools</h1>
+                <p class="text-xl muted">
+                    Strategic planning frameworks adapted for content creators. Fill out the wizard, 
+                    visualize your strategy, and export to PDF.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Frameworks Grid -->
+    <section class="px-6 pb-16">
+        <div class="max-w-7xl mx-auto">
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                
+                <!-- ANSOFF Matrix -->
+                <div class="framework-card">
+                    <div class="icon-box">
+                        <i class="fas fa-th-large text-xl" style="color: #3D3D3D;"></i>
+                    </div>
+                    <h3 class="mb-2">ANSOFF Matrix</h3>
+                    <p class="text-sm muted mb-4 flex-grow">
+                        Identify growth strategies: market penetration, development, product development, or diversification.
+                    </p>
+                    <div class="mb-4">
+                        <span class="badge">
+                            <i class="fas fa-download mr-1"></i>PDF Export
+                        </span>
+                    </div>
+                    <a href="../ansoff-matrix.html" class="btn btn-outline">
+                        Try This Tool
+                    </a>
+                </div>
+
+                <!-- SWOT Analysis -->
+                <div class="framework-card">
+                    <div class="icon-box">
+                        <i class="fas fa-balance-scale text-xl" style="color: #3D3D3D;"></i>
+                    </div>
+                    <h3 class="mb-2">SWOT Analysis</h3>
+                    <p class="text-sm muted mb-4 flex-grow">
+                        Analyze Strengths, Weaknesses, Opportunities, and Threats to inform strategic decisions.
+                    </p>
+                    <div class="mb-4">
+                        <span class="badge">
+                            <i class="fas fa-download mr-1"></i>PDF Export
+                        </span>
+                    </div>
+                    <a href="../swot-analysis.html" class="btn btn-outline">
+                        Try This Tool
+                    </a>
+                </div>
+
+                <!-- Porter's Five Forces -->
+                <div class="framework-card">
+                    <div class="icon-box">
+                        <i class="fas fa-shield-alt text-xl" style="color: #3D3D3D;"></i>
+                    </div>
+                    <h3 class="mb-2">Porter's Five Forces</h3>
+                    <p class="text-sm muted mb-4 flex-grow">
+                        Evaluate competitive forces: rivalry, new entrants, substitutes, suppliers, and buyers.
+                    </p>
+                    <div class="mb-4">
+                        <span class="badge">
+                            <i class="fas fa-download mr-1"></i>PDF Export
+                        </span>
+                    </div>
+                    <a href="../porters-five-forces.html" class="btn btn-outline">
+                        Try This Tool
+                    </a>
+                </div>
+
+                <!-- Value Chain -->
+                <div class="framework-card">
+                    <div class="icon-box">
+                        <i class="fas fa-link text-xl" style="color: #3D3D3D;"></i>
+                    </div>
+                    <h3 class="mb-2">Value Chain</h3>
+                    <p class="text-sm muted mb-4 flex-grow">
+                        Map primary and support activities to identify competitive advantages.
+                    </p>
+                    <div class="mb-4">
+                        <span class="badge">
+                            <i class="fas fa-download mr-1"></i>PDF Export
+                        </span>
+                    </div>
+                    <a href="../value-chain.html" class="btn btn-outline">
+                        Try This Tool
+                    </a>
+                </div>
+
+                <!-- Business Model Canvas -->
+                <div class="framework-card">
+                    <div class="icon-box">
+                        <i class="fas fa-layer-group text-xl" style="color: #3D3D3D;"></i>
+                    </div>
+                    <h3 class="mb-2">Business Model</h3>
+                    <p class="text-sm muted mb-4 flex-grow">
+                        Map your business model: customers, value propositions, channels, and revenue.
+                    </p>
+                    <div class="mb-4">
+                        <span class="badge">
+                            <i class="fas fa-download mr-1"></i>PDF Export
+                        </span>
+                    </div>
+                    <a href="../business-model-canvas.html" class="btn btn-outline">
+                        Try This Tool
+                    </a>
+                </div>
+
+                <!-- PESTEL Analysis -->
+                <div class="framework-card">
+                    <div class="icon-box">
+                        <i class="fas fa-globe text-xl" style="color: #3D3D3D;"></i>
+                    </div>
+                    <h3 class="mb-2">PESTEL Analysis</h3>
+                    <p class="text-sm muted mb-4 flex-grow">
+                        Analyze macro factors: Political, Economic, Social, Technological, Environmental, Legal.
+                    </p>
+                    <div class="mb-4">
+                        <span class="badge">
+                            <i class="fas fa-download mr-1"></i>PDF Export
+                        </span>
+                    </div>
+                    <a href="../pestel-analysis.html" class="btn btn-outline">
+                        Try This Tool
+                    </a>
+                </div>
+
+                <!-- BCG Matrix -->
+                <div class="framework-card">
+                    <div class="icon-box">
+                        <i class="fas fa-chart-line text-xl" style="color: #3D3D3D;"></i>
+                    </div>
+                    <h3 class="mb-2">BCG Matrix</h3>
+                    <p class="text-sm muted mb-4 flex-grow">
+                        Classify products as Stars, Cash Cows, Question Marks, or Dogs.
+                    </p>
+                    <div class="mb-4">
+                        <span class="badge">
+                            <i class="fas fa-download mr-1"></i>PDF Export
+                        </span>
+                    </div>
+                    <a href="../bcg-matrix.html" class="btn btn-outline">
+                        Try This Tool
+                    </a>
+                </div>
+
+                <!-- McKinsey 7S -->
+                <div class="framework-card">
+                    <div class="icon-box">
+                        <i class="fas fa-project-diagram text-xl" style="color: #3D3D3D;"></i>
+                    </div>
+                    <h3 class="mb-2">McKinsey 7S</h3>
+                    <p class="text-sm muted mb-4 flex-grow">
+                        Align Strategy, Structure, Systems, Shared Values, Style, Staff, and Skills.
+                    </p>
+                    <div class="mb-4">
+                        <span class="badge">
+                            <i class="fas fa-download mr-1"></i>PDF Export
+                        </span>
+                    </div>
+                    <a href="../mckinsey-7s.html" class="btn btn-outline">
+                        Try This Tool
+                    </a>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="py-16 px-6" style="background: #FAFAFA;">
+        <div class="max-w-3xl mx-auto text-center">
+            <h2 class="mb-4">Want More Strategic Insights?</h2>
+            <p class="text-lg muted mb-6">
+                Get 101 ChatGPT prompts plus weekly MBA frameworks and strategies.
+            </p>
+            <a href="astropaper-clean-optin.html" class="btn btn-primary px-8 py-3">
+                <i class="fas fa-download mr-2"></i>Get Free AI Prompts
+            </a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="max-w-7xl mx-auto px-6 py-8">
+            <div class="flex flex-col md:flex-row justify-between items-center gap-4">
+                <p class="text-sm muted">
+                    © 2025 Bryan Collins. All rights reserved.
+                </p>
+                <div class="flex gap-6 text-sm">
+                    <a href="astropaper-clean-home.html" class="muted hover:text-black transition-colors">Home</a>
+                    <a href="#" class="muted hover:text-black transition-colors">Privacy</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
+

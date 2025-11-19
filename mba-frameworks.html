@@ -20,10 +20,9 @@
     <!-- Custom styles -->
     <style>
         /* Color Palette:
-           Purple: #956FA6 (rgb 149, 110, 165)
+           Black: #000000
            Light Gray: #EDEDEE (rgb 237, 237, 237)
-           Gold/Yellow: #F3C972 (rgb 242, 200, 114)
-           Blue-Gray: #A6B6CF (rgb 165, 182, 207)
+           Yellow: #FFDE59
            Dark Gray/Black: #1B1B1D (rgb 26, 26, 28)
         */
         body {
@@ -32,8 +31,21 @@
             background-color: #EDEDEE;
             color: #1B1B1D;
         }
+        .nav-bar {
+            background: #000000;
+            border-bottom: 1px solid #333;
+        }
+        .nav-link {
+            color: white;
+            padding: 0.5rem 1rem;
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+        .nav-link:hover {
+            color: #FFDE59;
+        }
         .hero-gradient {
-            background: linear-gradient(135deg, #956FA6 0%, #7d5e8d 100%);
+            background: linear-gradient(135deg, #000000 0%, #1a1a1a 100%);
         }
         .hero-text {
             color: white;
@@ -50,7 +62,7 @@
         .framework-card:hover {
             transform: translateY(-4px);
             box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
-            border-color: #956FA6;
+            border-color: #FFDE59;
         }
         .framework-icon {
             width: 60px;
@@ -61,12 +73,12 @@
             justify-content: center;
             font-size: 28px;
             margin-bottom: 16px;
-            background: linear-gradient(135deg, #956FA6 0%, #7d5e8d 100%);
-            color: white;
+            background: #000000;
+            color: #FFDE59;
         }
         .cta-button {
-            background: #F3C972;
-            color: #1B1B1D;
+            background: #FFDE59;
+            color: #000000;
             font-weight: 700;
             transition: all 0.3s ease;
             box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
@@ -77,26 +89,65 @@
             display: inline-block;
         }
         .cta-button:hover {
-            background: #eab94a;
+            background: #ffd633;
             transform: translateY(-2px);
             box-shadow: 0 6px 12px -2px rgba(0, 0, 0, 0.15);
         }
     </style>
 </head>
 <body>
+    <!-- Navigation -->
+    <nav class="nav-bar sticky top-0 z-50">
+        <div class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
+            <a href="/index.html" class="text-white font-bold text-xl">Bryan Collins</a>
+            <div class="flex gap-6">
+                <a href="/mba-frameworks.html" class="nav-link">Tools</a>
+                <a href="/projects.html" class="nav-link">Projects</a>
+                <a href="/now.html" class="nav-link">Now</a>
+                <a href="/contact.html" class="nav-link">Contact</a>
+                <a href="/newsletter.html" class="nav-link">Newsletter</a>
+            </div>
+        </div>
+    </nav>
+
     <main class="min-h-screen py-12 px-4 sm:px-6 lg:px-8">
         <!-- Hero Section -->
         <div class="max-w-6xl mx-auto text-center mb-12">
             <div class="hero-gradient rounded-xl px-8 py-12 mb-8">
-                <h1 class="hero-text text-4xl sm:text-5xl font-extrabold mb-4">MBA Strategy Tools for Creators</h1>
-                <p class="hero-text text-xl sm:text-2xl max-w-3xl mx-auto">Free interactive frameworks to plan, analyze, and grow your content business</p>
+                <h1 class="hero-text text-4xl sm:text-5xl font-extrabold mb-4">MBA Strategy Tools</h1>
+                <p class="hero-text text-xl sm:text-2xl max-w-3xl mx-auto">Free interactive frameworks to plan, analyze, and grow your business</p>
             </div>
             
             <div class="max-w-3xl mx-auto mb-12">
                 <p class="text-lg text-gray-700">
-                    These proven MBA frameworks have been adapted for content creators, YouTubers, newsletter writers, and online entrepreneurs. 
+                    These proven MBA frameworks have been adapted for online entrepreneurs. 
                     Each tool guides you step-by-step and lets you download your completed strategy as a PDF.
                 </p>
+            </div>
+        </div>
+
+        <!-- YouTube Playlist Section -->
+        <div class="max-w-4xl mx-auto mb-16">
+            <div class="bg-white rounded-xl p-8 shadow-lg">
+                <h2 class="text-2xl font-bold mb-4 text-center">📺 Watch: MBA Frameworks Explained</h2>
+                <p class="text-center text-gray-700 mb-6">Learn how to apply these frameworks to your business with my YouTube series.</p>
+                <div class="aspect-w-16 aspect-h-9 rounded-lg overflow-hidden">
+                    <iframe 
+                        width="100%" 
+                        height="450" 
+                        src="https://www.youtube.com/embed/videoseries?list=PLxQrU2dxeHH7L0C4wkGAZa8PJnjhr0cT7" 
+                        title="MBA Frameworks Playlist" 
+                        frameborder="0" 
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                        allowfullscreen
+                        style="border-radius: 8px;">
+                    </iframe>
+                </div>
+                <div class="text-center mt-4">
+                    <a href="https://www.youtube.com/playlist?list=PLxQrU2dxeHH7L0C4wkGAZa8PJnjhr0cT7" target="_blank" class="text-black font-semibold hover:underline inline-flex items-center">
+                        <i class="fab fa-youtube mr-2"></i>Watch on YouTube
+                    </a>
+                </div>
             </div>
         </div>
 
@@ -110,7 +161,7 @@
                 </div>
                 <h3 class="text-xl font-bold mb-2">ANSOFF Matrix</h3>
                 <p class="text-gray-600 mb-4">Map your growth options: penetrate existing markets, develop new ones, or diversify your offerings.</p>
-                <a href="ansoff-matrix.html" class="cta-button w-full text-center">Use This Tool <i class="fas fa-arrow-right ml-2"></i></a>
+                <a href="/ansoff-matrix.html" class="cta-button w-full text-center">Use This Tool <i class="fas fa-arrow-right ml-2"></i></a>
             </div>
 
             <!-- SWOT Analysis -->
@@ -120,7 +171,7 @@
                 </div>
                 <h3 class="text-xl font-bold mb-2">SWOT Analysis</h3>
                 <p class="text-gray-600 mb-4">Identify your Strengths, Weaknesses, Opportunities, and Threats to make strategic decisions.</p>
-                <a href="swot-analysis.html" class="cta-button w-full text-center">Use This Tool <i class="fas fa-arrow-right ml-2"></i></a>
+                <a href="/swot-analysis.html" class="cta-button w-full text-center">Use This Tool <i class="fas fa-arrow-right ml-2"></i></a>
             </div>
 
             <!-- Porter's Five Forces -->
@@ -130,7 +181,7 @@
                 </div>
                 <h3 class="text-xl font-bold mb-2">Porter's Five Forces</h3>
                 <p class="text-gray-600 mb-4">Analyze your competitive environment and understand what influences your market position.</p>
-                <a href="porters-five-forces.html" class="cta-button w-full text-center">Use This Tool <i class="fas fa-arrow-right ml-2"></i></a>
+                <a href="/porters-five-forces.html" class="cta-button w-full text-center">Use This Tool <i class="fas fa-arrow-right ml-2"></i></a>
             </div>
 
             <!-- Business Model Canvas -->
@@ -140,7 +191,7 @@
                 </div>
                 <h3 class="text-xl font-bold mb-2">Business Model Canvas</h3>
                 <p class="text-gray-600 mb-4">Design your complete business model with 9 key building blocks for sustainable revenue.</p>
-                <a href="business-model-canvas.html" class="cta-button w-full text-center">Use This Tool <i class="fas fa-arrow-right ml-2"></i></a>
+                <a href="/business-model-canvas.html" class="cta-button w-full text-center">Use This Tool <i class="fas fa-arrow-right ml-2"></i></a>
             </div>
 
             <!-- Value Chain Analysis -->
@@ -150,7 +201,7 @@
                 </div>
                 <h3 class="text-xl font-bold mb-2">Value Chain Analysis</h3>
                 <p class="text-gray-600 mb-4">Understand where you create value in your content business from production to delivery.</p>
-                <a href="value-chain.html" class="cta-button w-full text-center">Use This Tool <i class="fas fa-arrow-right ml-2"></i></a>
+                <a href="/value-chain.html" class="cta-button w-full text-center">Use This Tool <i class="fas fa-arrow-right ml-2"></i></a>
             </div>
 
             <!-- PESTEL Analysis -->
@@ -160,7 +211,7 @@
                 </div>
                 <h3 class="text-xl font-bold mb-2">PESTEL Analysis</h3>
                 <p class="text-gray-600 mb-4">Assess external factors (Political, Economic, Social, Tech, Environmental, Legal) affecting your business.</p>
-                <a href="pestel-analysis.html" class="cta-button w-full text-center">Use This Tool <i class="fas fa-arrow-right ml-2"></i></a>
+                <a href="/pestel-analysis.html" class="cta-button w-full text-center">Use This Tool <i class="fas fa-arrow-right ml-2"></i></a>
             </div>
 
             <!-- BCG Matrix -->
@@ -170,7 +221,7 @@
                 </div>
                 <h3 class="text-xl font-bold mb-2">BCG Matrix</h3>
                 <p class="text-gray-600 mb-4">Evaluate your product portfolio: identify Stars, Cash Cows, Question Marks, and Dogs.</p>
-                <a href="bcg-matrix.html" class="cta-button w-full text-center">Use This Tool <i class="fas fa-arrow-right ml-2"></i></a>
+                <a href="/bcg-matrix.html" class="cta-button w-full text-center">Use This Tool <i class="fas fa-arrow-right ml-2"></i></a>
             </div>
 
             <!-- McKinsey 7S -->
@@ -180,19 +231,19 @@
                 </div>
                 <h3 class="text-xl font-bold mb-2">McKinsey 7S</h3>
                 <p class="text-gray-600 mb-4">Align 7 key elements (Strategy, Structure, Systems, etc.) for organizational effectiveness.</p>
-                <a href="mckinsey-7s.html" class="cta-button w-full text-center">Use This Tool <i class="fas fa-arrow-right ml-2"></i></a>
+                <a href="/mckinsey-7s.html" class="cta-button w-full text-center">Use This Tool <i class="fas fa-arrow-right ml-2"></i></a>
             </div>
 
         </div>
 
         <!-- Bottom CTA Section -->
         <div class="max-w-4xl mx-auto text-center bg-white rounded-xl p-8 shadow-lg">
-            <h2 class="text-2xl font-bold mb-4">Want the Complete Framework Collection?</h2>
+            <h2 class="text-2xl font-bold mb-4">Get 101 AI Prompts Free</h2>
             <p class="text-lg text-gray-700 mb-6">
-                Get all MBA frameworks in one downloadable PDF, plus examples from successful content businesses.
+                Join 15,000+ readers and get instant access to 101 AI prompts, plus MBA frameworks and strategic insights several times a week.
             </p>
-            <a href="mba.html" class="cta-button" style="padding: 16px 32px; font-size: 1.125rem;">
-                <i class="fas fa-download mr-2"></i>Download Framework Collection
+            <a href="/newsletter.html" class="cta-button" style="padding: 16px 32px; font-size: 1.125rem;">
+                <i class="fas fa-gift mr-2"></i>Get Your Free Prompts
             </a>
         </div>
 

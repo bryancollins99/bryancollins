@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ANSOFF Matrix Tool — Growth Strategy for Creators</title>
+    <meta name="description" content="Free interactive ANSOFF Matrix tool to plan your growth strategy.">
+    
+    <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    
+    <style>
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            background-color: #EDEDEE;
+            color: #1B1B1D;
+        }
+        .hero-gradient {
+            background: linear-gradient(135deg, #000000 0%, #1a1a1a 100%);
+        }
+        .hero-text {
+            color: white;
+        }
+        .wizard-step {
+            display: none;
+        }
+        .wizard-step.active {
+            display: block;
+        }
+        .cta-button {
+            background: #FFDE59;
+            color: #000000;
+            font-weight: 700;
+            padding: 14px 28px;
+            border-radius: 8px;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .cta-button:hover {
+            background: #ffd633;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 15px -3px rgba(255, 222, 89, 0.3);
+        }
+        .btn-secondary {
+            background: white;
+            color: #1B1B1D;
+            border: 2px solid #D0D0D0;
+            font-weight: 600;
+            padding: 12px 26px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .btn-secondary:hover {
+            border-color: #000000;
+        }
+        textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #D0D0D0;
+            border-radius: 8px;
+            font-family: inherit;
+            resize: vertical;
+            min-height: 120px;
+        }
+        textarea:focus {
+            border-color: #000000;
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.1);
+        }
+        .progress-bar {
+            height: 4px;
+            background: #D0D0D0;
+            border-radius: 100px;
+            overflow: hidden;
+            margin-bottom: 2rem;
+        }
+        .progress-fill {
+            height: 100%;
+            background: #FFDE59;
+            transition: width 0.3s;
+        }
+        .matrix-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+        .matrix-cell {
+            background: #F9F9F9;
+            border: 1px solid #D0D0D0;
+            border-radius: 8px;
+            padding: 1.5rem;
+            min-height: 150px;
+        }
+        .matrix-cell h3 {
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            color: #1B1B1D;
+        }
+        .example-box {
+            background: #F5F5F5;
+            border: 1px solid #E5E5E5;
+            border-radius: 6px;
+            padding: 1rem;
+            margin-top: 0.75rem;
+            font-size: 0.875rem;
+        }
+        label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: #1B1B1D;
+        }
+        .benefit-icon {
+            color: #FFDE59;
+        }
+    </style>
+</head>
+<body>
+    <main class="min-h-screen flex flex-col items-center justify-center py-12 px-4">
+        <div class="w-full max-w-4xl">
+            <div class="bg-white rounded-xl overflow-hidden shadow-xl">
+                
+                <!-- Header -->
+                <div class="hero-gradient px-8 py-12 text-center">
+                    <h1 class="hero-text text-4xl sm:text-5xl font-extrabold mb-4 leading-tight">ANSOFF Matrix</h1>
+                    <p class="hero-text text-xl max-w-2xl mx-auto">Plan your growth strategy with this interactive tool</p>
+                </div>
+                
+                <!-- Content -->
+                <div class="px-8 py-10">
+                    <!-- Progress Bar -->
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="progressBar" style="width: 16.67%;"></div>
+                    </div>
+                    
+                    <!-- Step 1: Introduction -->
+                    <div class="wizard-step active" id="step1">
+                        <h2 class="text-3xl font-bold mb-4">Welcome</h2>
+                        <p class="text-lg mb-6">
+                            The ANSOFF Matrix helps you evaluate four growth strategies for your creator business.
+                        </p>
+                        
+                        <div class="space-y-3 mb-8">
+                            <div class="flex items-start">
+                                <i class="fas fa-check-circle benefit-icon text-xl mt-0.5 flex-shrink-0"></i>
+                                <p class="ml-4"><strong>Market Penetration:</strong> Sell more to existing audience</p>
+                            </div>
+                            <div class="flex items-start">
+                                <i class="fas fa-check-circle benefit-icon text-xl mt-0.5 flex-shrink-0"></i>
+                                <p class="ml-4"><strong>Market Development:</strong> Find new audiences</p>
+                            </div>
+                            <div class="flex items-start">
+                                <i class="fas fa-check-circle benefit-icon text-xl mt-0.5 flex-shrink-0"></i>
+                                <p class="ml-4"><strong>Product Development:</strong> Create new offerings</p>
+                            </div>
+                            <div class="flex items-start">
+                                <i class="fas fa-check-circle benefit-icon text-xl mt-0.5 flex-shrink-0"></i>
+                                <p class="ml-4"><strong>Diversification:</strong> New products for new markets</p>
+                            </div>
+                        </div>
+                        
+                        <button onclick="nextStep()" class="cta-button">
+                            Get Started <i class="fas fa-arrow-right ml-2"></i>
+                        </button>
+                    </div>
+
+                    <!-- Step 2: Business Context -->
+                    <div class="wizard-step" id="step2">
+                        <h2 class="text-3xl font-bold mb-4">Your Business</h2>
+                        <p class="text-lg mb-6">Tell us about your creator business.</p>
+                        
+                        <label for="businessName">Business/Channel Name</label>
+                        <textarea id="businessName" placeholder="e.g., Bryan Collins - Creator Strategy"></textarea>
+                        
+                        <div class="example-box">
+                            <strong>Example:</strong> "Tech Review YouTube Channel with 50K subscribers"
+                        </div>
+                        
+                        <div class="flex gap-3 mt-6">
+                            <button onclick="prevStep()" class="btn-secondary">
+                                <i class="fas fa-arrow-left mr-2"></i>Back
+                            </button>
+                            <button onclick="nextStep()" class="cta-button">
+                                Next <i class="fas fa-arrow-right ml-2"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Step 3: Market Penetration -->
+                    <div class="wizard-step" id="step3">
+                        <h2 class="text-3xl font-bold mb-4">Market Penetration</h2>
+                        <p class="text-lg mb-6">How can you sell more to your existing audience?</p>
+                        
+                        <label for="penetration">Your Strategies</label>
+                        <textarea id="penetration" placeholder="List your ideas (one per line)"></textarea>
+                        
+                        <div class="example-box">
+                            <strong>Example:</strong><br>
+                            • Launch email sequence to convert subscribers<br>
+                            • Create upsell for existing customers<br>
+                            • Increase posting frequency to boost engagement
+                        </div>
+                        
+                        <div class="flex gap-3 mt-6">
+                            <button onclick="prevStep()" class="btn-secondary">
+                                <i class="fas fa-arrow-left mr-2"></i>Back
+                            </button>
+                            <button onclick="nextStep()" class="cta-button">
+                                Next <i class="fas fa-arrow-right ml-2"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Step 4: Market Development -->
+                    <div class="wizard-step" id="step4">
+                        <h2 class="text-3xl font-bold mb-4">Market Development</h2>
+                        <p class="text-lg mb-6">How can you reach new audiences with existing content?</p>
+                        
+                        <label for="development">Your Strategies</label>
+                        <textarea id="development" placeholder="List your ideas (one per line)"></textarea>
+                        
+                        <div class="example-box">
+                            <strong>Example:</strong><br>
+                            • Translate content for international audience<br>
+                            • Partner with adjacent creators<br>
+                            • Expand to new social platform
+                        </div>
+                        
+                        <div class="flex gap-3 mt-6">
+                            <button onclick="prevStep()" class="btn-secondary">
+                                <i class="fas fa-arrow-left mr-2"></i>Back
+                            </button>
+                            <button onclick="nextStep()" class="cta-button">
+                                Next <i class="fas fa-arrow-right ml-2"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Step 5: Product Development -->
+                    <div class="wizard-step" id="step5">
+                        <h2 class="text-3xl font-bold mb-4">Product Development</h2>
+                        <p class="text-lg mb-6">What new products can you create for your existing audience?</p>
+                        
+                        <label for="product">Your Strategies</label>
+                        <textarea id="product" placeholder="List your ideas (one per line)"></textarea>
+                        
+                        <div class="example-box">
+                            <strong>Example:</strong><br>
+                            • Launch premium course<br>
+                            • Create membership community<br>
+                            • Develop coaching program
+                        </div>
+                        
+                        <div class="flex gap-3 mt-6">
+                            <button onclick="prevStep()" class="btn-secondary">
+                                <i class="fas fa-arrow-left mr-2"></i>Back
+                            </button>
+                            <button onclick="nextStep()" class="cta-button">
+                                Next <i class="fas fa-arrow-right ml-2"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Step 6: Diversification -->
+                    <div class="wizard-step" id="step6">
+                        <h2 class="text-3xl font-bold mb-4">Diversification</h2>
+                        <p class="text-lg mb-6">What new products for new markets could you explore?</p>
+                        
+                        <label for="diversification">Your Strategies</label>
+                        <textarea id="diversification" placeholder="List your ideas (one per line)"></textarea>
+                        
+                        <div class="example-box">
+                            <strong>Example:</strong><br>
+                            • Launch B2B consulting service<br>
+                            • Create software tool for niche<br>
+                            • Start agency serving brands
+                        </div>
+                        
+                        <div class="flex gap-3 mt-6">
+                            <button onclick="prevStep()" class="btn-secondary">
+                                <i class="fas fa-arrow-left mr-2"></i>Back
+                            </button>
+                            <button onclick="generateMatrix()" class="cta-button">
+                                Generate Matrix <i class="fas fa-magic ml-2"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Step 7: Results -->
+                    <div class="wizard-step" id="step7">
+                        <h2 class="text-3xl font-bold mb-4">Your ANSOFF Matrix</h2>
+                        <p class="text-lg mb-6">Here's your completed growth strategy matrix.</p>
+                        
+                        <div class="matrix-grid">
+                            <div class="matrix-cell">
+                                <h3>Market Penetration</h3>
+                                <div id="penetrationResult" class="text-sm"></div>
+                            </div>
+                            <div class="matrix-cell">
+                                <h3>Market Development</h3>
+                                <div id="developmentResult" class="text-sm"></div>
+                            </div>
+                            <div class="matrix-cell">
+                                <h3>Product Development</h3>
+                                <div id="productResult" class="text-sm"></div>
+                            </div>
+                            <div class="matrix-cell">
+                                <h3>Diversification</h3>
+                                <div id="diversificationResult" class="text-sm"></div>
+                            </div>
+                        </div>
+                        
+                        <div class="flex gap-3 mt-8">
+                            <button onclick="downloadPDF()" class="cta-button">
+                                <i class="fas fa-download mr-2"></i>Download PDF
+                            </button>
+                            <button onclick="resetForm()" class="btn-secondary">
+                                <i class="fas fa-redo mr-2"></i>Start Over
+                            </button>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+            
+            <p class="text-center text-xs mt-8" style="color: #1B1B1D; opacity: 0.5;">© 2025 Bryan Collins. All rights reserved.</p>
+        </div>
+    </main>
+
+    <script>
+        let currentStep = 1;
+        const totalSteps = 7;
+
+        function nextStep() {
+            if (currentStep < totalSteps) {
+                document.getElementById('step' + currentStep).classList.remove('active');
+                currentStep++;
+                document.getElementById('step' + currentStep).classList.add('active');
+                updateProgress();
+                window.scrollTo(0, 0);
+            }
+        }
+
+        function prevStep() {
+            if (currentStep > 1) {
+                document.getElementById('step' + currentStep).classList.remove('active');
+                currentStep--;
+                document.getElementById('step' + currentStep).classList.add('active');
+                updateProgress();
+                window.scrollTo(0, 0);
+            }
+        }
+
+        function updateProgress() {
+            const progress = (currentStep / totalSteps) * 100;
+            document.getElementById('progressBar').style.width = progress + '%';
+        }
+
+        function generateMatrix() {
+            const penetration = document.getElementById('penetration').value.split('\n').filter(s => s.trim());
+            const development = document.getElementById('development').value.split('\n').filter(s => s.trim());
+            const product = document.getElementById('product').value.split('\n').filter(s => s.trim());
+            const diversification = document.getElementById('diversification').value.split('\n').filter(s => s.trim());
+
+            document.getElementById('penetrationResult').innerHTML = penetration.map(s => '• ' + s).join('<br>');
+            document.getElementById('developmentResult').innerHTML = development.map(s => '• ' + s).join('<br>');
+            document.getElementById('productResult').innerHTML = product.map(s => '• ' + s).join('<br>');
+            document.getElementById('diversificationResult').innerHTML = diversification.map(s => '• ' + s).join('<br>');
+
+            nextStep();
+        }
+
+        function downloadPDF() {
+            window.print();
+        }
+
+        function resetForm() {
+            document.getElementById('businessName').value = '';
+            document.getElementById('penetration').value = '';
+            document.getElementById('development').value = '';
+            document.getElementById('product').value = '';
+            document.getElementById('diversification').value = '';
+            currentStep = 1;
+            document.getElementById('step7').classList.remove('active');
+            document.getElementById('step1').classList.add('active');
+            updateProgress();
+            window.scrollTo(0, 0);
+        }
+    </script>
+</body>
+</html>
+

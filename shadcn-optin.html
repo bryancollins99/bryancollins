@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>101 AI Prompts for Creators — Free Download</title>
+    <meta name="description" content="Get 101 battle-tested ChatGPT prompts to accelerate your creative work. Free PDF download.">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+        
+        /* shadcn/ui Dark Mode Theme Variables */
+        :root {
+            --background: 222.2 84% 4.9%;
+            --foreground: 210 40% 98%;
+            --card: 222.2 84% 4.9%;
+            --card-foreground: 210 40% 98%;
+            --popover: 222.2 84% 4.9%;
+            --popover-foreground: 210 40% 98%;
+            --primary: 217.2 91.2% 59.8%;
+            --primary-foreground: 222.47 71.2% 4.1%;
+            --secondary: 217.2 32.6% 17.5%;
+            --secondary-foreground: 210 40% 98%;
+            --muted: 217.2 32.6% 17.5%;
+            --muted-foreground: 215 20.2% 65.1%;
+            --accent: 45 93% 67%;
+            --accent-foreground: 222.2 47.4% 11.2%;
+            --destructive: 0 62.8% 30.6%;
+            --destructive-foreground: 210 40% 98%;
+            --border: 217.2 32.6% 17.5%;
+            --input: 217.2 32.6% 17.5%;
+            --ring: 224.3 76.3% 48%;
+            --radius: 0.5rem;
+        }
+        
+        * {
+            border-color: hsl(var(--border));
+        }
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background-color: hsl(var(--background));
+            color: hsl(var(--foreground));
+            line-height: 1.6;
+        }
+        
+        /* shadcn/ui Button Styles */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: calc(var(--radius) - 2px);
+            font-size: 0.875rem;
+            font-weight: 500;
+            transition: all 0.2s;
+            padding: 0.625rem 1rem;
+            text-decoration: none;
+            cursor: pointer;
+            border: 1px solid transparent;
+        }
+        
+        .btn-accent {
+            background-color: hsl(var(--accent));
+            color: hsl(var(--accent-foreground));
+        }
+        
+        .btn-accent:hover {
+            background-color: hsl(45 93% 62%);
+        }
+        
+        /* shadcn/ui Card Styles */
+        .card {
+            background-color: hsl(var(--card));
+            color: hsl(var(--card-foreground));
+            border: 1px solid hsl(var(--border));
+            border-radius: var(--radius);
+            padding: 1.5rem;
+            transition: all 0.2s;
+        }
+        
+        /* Badge Styles */
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            border-radius: calc(var(--radius) - 2px);
+            padding: 0.25rem 0.625rem;
+            font-size: 0.75rem;
+            font-weight: 600;
+            transition: all 0.2s;
+            border: 1px solid transparent;
+        }
+        
+        .badge-accent {
+            background-color: hsl(var(--accent) / 0.1);
+            color: hsl(var(--accent));
+            border-color: hsl(var(--accent) / 0.2);
+        }
+        
+        /* Header */
+        header {
+            border-bottom: 1px solid hsl(var(--border));
+            background-color: hsl(var(--background) / 0.8);
+            backdrop-filter: blur(12px);
+        }
+        
+        nav a {
+            color: hsl(var(--muted-foreground));
+            text-decoration: none;
+            font-size: 0.875rem;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+        
+        nav a:hover {
+            color: hsl(var(--foreground));
+        }
+        
+        /* Hero Gradient */
+        .hero-gradient {
+            background: linear-gradient(to bottom, hsl(var(--background)), hsl(217.2 32.6% 12%));
+        }
+        
+        h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            line-height: 1.1;
+            letter-spacing: -0.02em;
+        }
+        
+        h2 {
+            font-size: 1.875rem;
+            font-weight: 600;
+            letter-spacing: -0.01em;
+        }
+        
+        h3 {
+            font-size: 1.125rem;
+            font-weight: 600;
+        }
+        
+        .muted {
+            color: hsl(var(--muted-foreground));
+        }
+        
+        /* Input Styles */
+        input[type="text"],
+        input[type="email"] {
+            background-color: hsl(var(--background));
+            border: 1px solid hsl(var(--border));
+            color: hsl(var(--foreground));
+            border-radius: calc(var(--radius) - 2px);
+            padding: 0.625rem 0.875rem;
+            font-size: 0.875rem;
+            transition: all 0.2s;
+            width: 100%;
+        }
+        
+        input[type="text"]:focus,
+        input[type="email"]:focus {
+            outline: none;
+            border-color: hsl(var(--ring));
+            box-shadow: 0 0 0 2px hsl(var(--ring) / 0.2);
+        }
+        
+        /* Benefit Item */
+        .benefit-item {
+            display: flex;
+            align-items: start;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .benefit-item i {
+            color: hsl(var(--primary));
+            font-size: 1.25rem;
+            margin-top: 0.25rem;
+        }
+        
+        /* Stat Box */
+        .stat-box {
+            text-align: center;
+            padding: 1.5rem;
+            background: hsl(217.2 32.6% 12%);
+            border: 1px solid hsl(var(--border));
+            border-radius: var(--radius);
+        }
+        
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: hsl(var(--accent));
+        }
+        
+        footer {
+            border-top: 1px solid hsl(var(--border));
+            margin-top: 4rem;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+            <a href="shadcn-home.html" class="text-lg font-semibold" style="color: hsl(var(--foreground));">Bryan Collins</a>
+            <nav class="hidden md:flex items-center gap-6">
+                <a href="#">Posts</a>
+                <a href="shadcn-frameworks.html">Frameworks</a>
+                <a href="#">About</a>
+            </nav>
+            <button class="md:hidden">
+                <i class="fas fa-bars text-xl"></i>
+            </button>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero-gradient py-20 px-6">
+        <div class="max-w-3xl mx-auto text-center">
+            <div class="inline-flex items-center gap-2 badge badge-accent mb-6">
+                <i class="fas fa-gift"></i>
+                <span>FREE DOWNLOAD</span>
+            </div>
+            
+            <h1 class="mb-6">
+                101 AI Prompts<br/>
+                <span style="color: hsl(var(--primary));">for Creators</span>
+            </h1>
+            
+            <p class="text-xl muted mb-12 max-w-2xl mx-auto">
+                Battle-tested ChatGPT prompts that save you hours every week. Perfect for writers, 
+                marketers, and content creators.
+            </p>
+            
+            <!-- Form Card -->
+            <div class="card max-w-md mx-auto mb-12" style="background: hsl(217.2 32.6% 12%);">
+                <form class="space-y-4">
+                    <div class="text-left">
+                        <label class="block text-sm font-medium mb-2">First Name</label>
+                        <input type="text" placeholder="John" required>
+                    </div>
+                    
+                    <div class="text-left">
+                        <label class="block text-sm font-medium mb-2">Email Address</label>
+                        <input type="email" placeholder="john@example.com" required>
+                    </div>
+                    
+                    <button type="submit" class="btn btn-accent w-full py-3 text-base font-semibold">
+                        <i class="fas fa-download mr-2"></i>Download Free PDF
+                    </button>
+                </form>
+                
+                <p class="text-xs muted text-center mt-4">
+                    <i class="fas fa-lock mr-1"></i>No spam. Unsubscribe anytime.
+                </p>
+            </div>
+            
+            <!-- Trust Signals -->
+            <div class="flex flex-wrap justify-center gap-8 text-sm">
+                <div class="flex items-center gap-2 muted">
+                    <i class="fas fa-users" style="color: hsl(var(--primary));"></i>
+                    <span>15,000+ downloads</span>
+                </div>
+                <div class="flex items-center gap-2 muted">
+                    <i class="fas fa-star" style="color: hsl(var(--accent));"></i>
+                    <span>4.9/5 rating</span>
+                </div>
+                <div class="flex items-center gap-2 muted">
+                    <i class="fas fa-check-circle" style="color: #22c55e;"></i>
+                    <span>100% free</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- What's Inside -->
+    <section class="max-w-7xl mx-auto px-6 py-16">
+        <h2 class="text-center mb-12">What's Inside</h2>
+        <div class="grid md:grid-cols-4 gap-6 mb-12">
+            <div class="stat-box">
+                <div class="stat-number">21</div>
+                <div class="text-sm muted font-medium">Writing Prompts</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-number">18</div>
+                <div class="text-sm muted font-medium">Marketing</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-number">15</div>
+                <div class="text-sm muted font-medium">Social Media</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-number">12</div>
+                <div class="text-sm muted font-medium">Email</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Benefits -->
+    <section class="max-w-3xl mx-auto px-6 py-16">
+        <h2 class="text-center mb-12">Why Download This?</h2>
+        
+        <div class="space-y-6">
+            <div class="benefit-item">
+                <i class="fas fa-check-circle"></i>
+                <div>
+                    <h3 class="mb-1">Content Creation Prompts</h3>
+                    <p class="muted">Generate blog posts, social media content, and email sequences faster than ever</p>
+                </div>
+            </div>
+            
+            <div class="benefit-item">
+                <i class="fas fa-check-circle"></i>
+                <div>
+                    <h3 class="mb-1">Marketing & Strategy</h3>
+                    <p class="muted">Develop campaigns, analyze competitors, and craft compelling offers</p>
+                </div>
+            </div>
+            
+            <div class="benefit-item">
+                <i class="fas fa-check-circle"></i>
+                <div>
+                    <h3 class="mb-1">Research & Editing</h3>
+                    <p class="muted">Speed up research, improve your writing, and polish your copy</p>
+                </div>
+            </div>
+            
+            <div class="benefit-item">
+                <i class="fas fa-check-circle"></i>
+                <div>
+                    <h3 class="mb-1">Ready to Use</h3>
+                    <p class="muted">Copy, paste, and customize—no AI expertise required</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="max-w-7xl mx-auto px-6 py-16">
+        <h2 class="text-center mb-12">What Creators Say</h2>
+        
+        <div class="grid md:grid-cols-3 gap-6">
+            <div class="card">
+                <div class="flex items-center gap-1 mb-4" style="color: hsl(var(--accent));">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                </div>
+                <p class="mb-4 muted">"These prompts have cut my content creation time in half. The writing prompts alone are worth it."</p>
+                <div class="font-semibold">Sarah Mitchell</div>
+                <div class="text-sm muted">Content Creator</div>
+            </div>
+            
+            <div class="card">
+                <div class="flex items-center gap-1 mb-4" style="color: hsl(var(--accent));">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                </div>
+                <p class="mb-4 muted">"Game changer for my marketing campaigns. I use these prompts every single day."</p>
+                <div class="font-semibold">Marcus Chen</div>
+                <div class="text-sm muted">Marketing Consultant</div>
+            </div>
+            
+            <div class="card">
+                <div class="flex items-center gap-1 mb-4" style="color: hsl(var(--accent));">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                </div>
+                <p class="mb-4 muted">"Finally, AI prompts that actually work. Clear, specific, and incredibly useful."</p>
+                <div class="font-semibold">Emily Rodriguez</div>
+                <div class="text-sm muted">Freelance Writer</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Final CTA -->
+    <section class="max-w-4xl mx-auto px-6 py-16">
+        <div class="card text-center" style="background: hsl(217.2 32.6% 12%); border: 1px solid hsl(var(--border));">
+            <div class="max-w-xl mx-auto p-8">
+                <h2 class="mb-4">Ready to Work 10x Faster?</h2>
+                <p class="text-lg muted mb-8">
+                    Download your free PDF now and start using AI like a pro
+                </p>
+                <button class="btn btn-accent px-12 py-4 text-base font-semibold">
+                    <i class="fas fa-download mr-2"></i>Get Your Free Prompts
+                </button>
+                
+                <div class="flex items-center justify-center gap-6 mt-8 text-sm muted">
+                    <div class="flex items-center gap-2">
+                        <i class="fas fa-check-circle" style="color: #22c55e;"></i>
+                        <span>No credit card</span>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <i class="fas fa-check-circle" style="color: #22c55e;"></i>
+                        <span>Instant access</span>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <i class="fas fa-check-circle" style="color: #22c55e;"></i>
+                        <span>100% free</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="max-w-7xl mx-auto px-6 py-8">
+            <div class="flex flex-col md:flex-row justify-between items-center gap-4">
+                <p class="text-sm muted">
+                    © 2025 Bryan Collins. All rights reserved.
+                </p>
+                <div class="flex gap-6 text-sm">
+                    <a href="shadcn-home.html" class="muted hover:text-white transition-colors">Home</a>
+                    <a href="shadcn-frameworks.html" class="muted hover:text-white transition-colors">Frameworks</a>
+                    <a href="#" class="muted hover:text-white transition-colors">Privacy</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
+

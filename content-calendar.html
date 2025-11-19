@@ -1,0 +1,607 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>30-Day Content Calendar Generator — Bryan Collins</title>
+    <meta name="description" content="Free AI-powered content calendar generator. Get 30 days of content ideas for your blog, YouTube channel, or newsletter in minutes.">
+    
+    <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    
+    <!-- jsPDF for PDF generation -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    
+    <!-- Plausible Analytics -->
+    <script defer data-domain="join.bryancollins.com" src="https://plausible.io/js/script.js"></script>
+    
+    <style>
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            background-color: #EDEDEE;
+            color: #1B1B1D;
+        }
+        .nav-bar {
+            background: #000000;
+            border-bottom: 1px solid #333;
+        }
+        .nav-link {
+            color: white;
+            padding: 0.5rem 1rem;
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+        .nav-link:hover {
+            color: #FFDE59;
+        }
+        .hero-gradient {
+            background: linear-gradient(135deg, #000000 0%, #1a1a1a 100%);
+        }
+        .wizard-step {
+            display: none;
+        }
+        .wizard-step.active {
+            display: block;
+        }
+        .progress-bar {
+            background: #e5e5e5;
+            height: 8px;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+        .progress-fill {
+            background: #FFDE59;
+            height: 100%;
+            transition: width 0.3s ease;
+        }
+        .btn-primary {
+            background: #FFDE59;
+            color: #000;
+            padding: 0.875rem 2rem;
+            border-radius: 6px;
+            border: none;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 1.125rem;
+        }
+        .btn-primary:hover {
+            background: #ffd633;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+        }
+        .btn-secondary {
+            background: white;
+            color: #000;
+            padding: 0.875rem 2rem;
+            border-radius: 6px;
+            border: 2px solid #000;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .btn-secondary:hover {
+            background: #000;
+            color: white;
+        }
+        .calendar-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 1rem;
+        }
+        .day-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .day-number {
+            background: #FFDE59;
+            color: #000;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+        .form-input, .form-select, .form-textarea {
+            width: 100%;
+            padding: 0.75rem;
+            border: 2px solid #e5e5e5;
+            border-radius: 6px;
+            font-size: 1rem;
+            transition: border-color 0.2s;
+        }
+        .form-input:focus, .form-select:focus, .form-textarea:focus {
+            outline: none;
+            border-color: #FFDE59;
+        }
+        .sticky-cta {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: white;
+            border-top: 2px solid #FFDE59;
+            padding: 1rem;
+            box-shadow: 0 -4px 12px rgba(0,0,0,0.1);
+            z-index: 1000;
+            display: none;
+        }
+        .sticky-cta.show {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="nav-bar sticky top-0 z-50">
+        <div class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
+            <a href="/index.html" class="text-white font-bold text-xl">Bryan Collins</a>
+            <div class="flex gap-6">
+                <a href="/mba-frameworks.html" class="nav-link">Tools</a>
+                <a href="/projects.html" class="nav-link">Projects</a>
+                <a href="/now.html" class="nav-link">Now</a>
+                <a href="/contact.html" class="nav-link">Contact</a>
+                <a href="/newsletter.html" class="nav-link">Newsletter</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="hero-gradient text-white py-16 px-4">
+        <div class="max-w-4xl mx-auto text-center">
+            <h1 class="text-5xl font-extrabold mb-4">30-Day Content Calendar Generator</h1>
+            <p class="text-xl opacity-90">Never run out of content ideas again. Get a full month of topics tailored to your niche.</p>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="py-12 px-4">
+        <div class="max-w-4xl mx-auto">
+            
+            <!-- Progress Bar -->
+            <div class="bg-white rounded-xl p-6 mb-8 shadow-lg">
+                <div class="flex justify-between items-center mb-2">
+                    <span class="text-sm font-semibold" id="step-indicator">Step 1 of 4</span>
+                    <span class="text-sm text-gray-600" id="progress-percent">0%</span>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progress-fill" style="width: 0%"></div>
+                </div>
+            </div>
+
+            <!-- Wizard Form -->
+            <div class="bg-white rounded-xl p-8 shadow-lg mb-8">
+                
+                <!-- Step 1: Niche -->
+                <div class="wizard-step active" id="step1">
+                    <h2 class="text-3xl font-bold mb-4">What's your niche?</h2>
+                    <p class="text-gray-600 mb-6">Tell us what you create content about.</p>
+                    
+                    <div class="mb-6">
+                        <label class="block font-semibold mb-2">Select your niche:</label>
+                        <select id="niche" class="form-select">
+                            <option value="">-- Choose one --</option>
+                            <option value="Writing & Blogging">Writing & Blogging</option>
+                            <option value="Business & Entrepreneurship">Business & Entrepreneurship</option>
+                            <option value="Personal Development">Personal Development</option>
+                            <option value="Marketing & Sales">Marketing & Sales</option>
+                            <option value="Technology & AI">Technology & AI</option>
+                            <option value="Health & Fitness">Health & Fitness</option>
+                            <option value="Finance & Investing">Finance & Investing</option>
+                            <option value="Productivity">Productivity</option>
+                            <option value="Creative Arts">Creative Arts</option>
+                            <option value="Other">Other</option>
+                        </select>
+                    </div>
+                    
+                    <div class="mb-6" id="customNiche" style="display: none;">
+                        <label class="block font-semibold mb-2">Describe your niche:</label>
+                        <input type="text" id="customNicheInput" class="form-input" placeholder="e.g., sustainable fashion, vegan cooking">
+                    </div>
+                    
+                    <button onclick="nextStep(2)" class="btn-primary w-full">Next <i class="fas fa-arrow-right ml-2"></i></button>
+                </div>
+
+                <!-- Step 2: Platform -->
+                <div class="wizard-step" id="step2">
+                    <h2 class="text-3xl font-bold mb-4">Where do you publish?</h2>
+                    <p class="text-gray-600 mb-6">Choose your primary platform.</p>
+                    
+                    <div class="grid md:grid-cols-3 gap-4 mb-6">
+                        <label class="cursor-pointer">
+                            <input type="radio" name="platform" value="Blog" class="hidden platform-radio">
+                            <div class="border-2 border-gray-300 rounded-lg p-4 text-center hover:border-yellow-400 transition platform-card">
+                                <i class="fas fa-blog text-3xl mb-2"></i>
+                                <div class="font-semibold">Blog</div>
+                            </div>
+                        </label>
+                        <label class="cursor-pointer">
+                            <input type="radio" name="platform" value="YouTube" class="hidden platform-radio">
+                            <div class="border-2 border-gray-300 rounded-lg p-4 text-center hover:border-yellow-400 transition platform-card">
+                                <i class="fab fa-youtube text-3xl mb-2"></i>
+                                <div class="font-semibold">YouTube</div>
+                            </div>
+                        </label>
+                        <label class="cursor-pointer">
+                            <input type="radio" name="platform" value="Newsletter" class="hidden platform-radio">
+                            <div class="border-2 border-gray-300 rounded-lg p-4 text-center hover:border-yellow-400 transition platform-card">
+                                <i class="fas fa-envelope text-3xl mb-2"></i>
+                                <div class="font-semibold">Newsletter</div>
+                            </div>
+                        </label>
+                        <label class="cursor-pointer">
+                            <input type="radio" name="platform" value="Podcast" class="hidden platform-radio">
+                            <div class="border-2 border-gray-300 rounded-lg p-4 text-center hover:border-yellow-400 transition platform-card">
+                                <i class="fas fa-microphone text-3xl mb-2"></i>
+                                <div class="font-semibold">Podcast</div>
+                            </div>
+                        </label>
+                        <label class="cursor-pointer">
+                            <input type="radio" name="platform" value="Social Media" class="hidden platform-radio">
+                            <div class="border-2 border-gray-300 rounded-lg p-4 text-center hover:border-yellow-400 transition platform-card">
+                                <i class="fas fa-share-alt text-3xl mb-2"></i>
+                                <div class="font-semibold">Social Media</div>
+                            </div>
+                        </label>
+                        <label class="cursor-pointer">
+                            <input type="radio" name="platform" value="LinkedIn" class="hidden platform-radio">
+                            <div class="border-2 border-gray-300 rounded-lg p-4 text-center hover:border-yellow-400 transition platform-card">
+                                <i class="fab fa-linkedin text-3xl mb-2"></i>
+                                <div class="font-semibold">LinkedIn</div>
+                            </div>
+                        </label>
+                    </div>
+                    
+                    <div class="flex gap-4">
+                        <button onclick="prevStep(1)" class="btn-secondary flex-1"><i class="fas fa-arrow-left mr-2"></i> Back</button>
+                        <button onclick="nextStep(3)" class="btn-primary flex-1">Next <i class="fas fa-arrow-right ml-2"></i></button>
+                    </div>
+                </div>
+
+                <!-- Step 3: Audience -->
+                <div class="wizard-step" id="step3">
+                    <h2 class="text-3xl font-bold mb-4">Who's your audience?</h2>
+                    <p class="text-gray-600 mb-6">Describe who you're creating content for.</p>
+                    
+                    <div class="mb-6">
+                        <label class="block font-semibold mb-2">Target audience:</label>
+                        <input type="text" id="audience" class="form-input" placeholder="e.g., aspiring writers, small business owners, freelancers">
+                    </div>
+                    
+                    <div class="mb-6">
+                        <label class="block font-semibold mb-2">Their main problem/goal:</label>
+                        <textarea id="audienceProblem" class="form-textarea" rows="3" placeholder="e.g., They want to start a blog but don't know where to begin"></textarea>
+                    </div>
+                    
+                    <div class="flex gap-4">
+                        <button onclick="prevStep(2)" class="btn-secondary flex-1"><i class="fas fa-arrow-left mr-2"></i> Back</button>
+                        <button onclick="nextStep(4)" class="btn-primary flex-1">Next <i class="fas fa-arrow-right ml-2"></i></button>
+                    </div>
+                </div>
+
+                <!-- Step 4: Content Mix -->
+                <div class="wizard-step" id="step4">
+                    <h2 class="text-3xl font-bold mb-4">What type of content?</h2>
+                    <p class="text-gray-600 mb-6">Select the content types you want to create.</p>
+                    
+                    <div class="space-y-3 mb-6">
+                        <label class="flex items-center cursor-pointer">
+                            <input type="checkbox" class="mr-3" value="How-To Guides" checked>
+                            <span class="font-semibold">How-To Guides</span>
+                        </label>
+                        <label class="flex items-center cursor-pointer">
+                            <input type="checkbox" class="mr-3" value="Listicles" checked>
+                            <span class="font-semibold">Listicles (Top 10, Best Of)</span>
+                        </label>
+                        <label class="flex items-center cursor-pointer">
+                            <input type="checkbox" class="mr-3" value="Case Studies" checked>
+                            <span class="font-semibold">Case Studies / Examples</span>
+                        </label>
+                        <label class="flex items-center cursor-pointer">
+                            <input type="checkbox" class="mr-3" value="Opinion" checked>
+                            <span class="font-semibold">Opinion / Commentary</span>
+                        </label>
+                        <label class="flex items-center cursor-pointer">
+                            <input type="checkbox" class="mr-3" value="Interviews">
+                            <span class="font-semibold">Interviews / Q&A</span>
+                        </label>
+                        <label class="flex items-center cursor-pointer">
+                            <input type="checkbox" class="mr-3" value="Reviews">
+                            <span class="font-semibold">Product/Tool Reviews</span>
+                        </label>
+                    </div>
+                    
+                    <div class="flex gap-4">
+                        <button onclick="prevStep(3)" class="btn-secondary flex-1"><i class="fas fa-arrow-left mr-2"></i> Back</button>
+                        <button onclick="generateCalendar()" class="btn-primary flex-1">Generate Calendar <i class="fas fa-magic ml-2"></i></button>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Results Section -->
+            <div id="results" class="bg-white rounded-xl p-8 shadow-lg" style="display: none;">
+                <div class="text-center mb-8">
+                    <h2 class="text-3xl font-bold mb-4">Your 30-Day Content Calendar</h2>
+                    <p class="text-gray-600 mb-6">Here's your personalized content plan. Download it and start creating!</p>
+                    <button onclick="downloadPDF()" class="btn-primary">
+                        <i class="fas fa-download mr-2"></i>Download as PDF
+                    </button>
+                </div>
+                
+                <div id="calendarGrid" class="calendar-grid"></div>
+                
+                <!-- Newsletter CTA -->
+                <div class="mt-12 bg-gray-50 rounded-xl p-8 text-center">
+                    <h3 class="text-2xl font-bold mb-4">Want more content ideas?</h3>
+                    <p class="text-lg text-gray-700 mb-6">Join 15,000+ readers getting MBA frameworks, AI prompts, and content strategies several times a week.</p>
+                    <a href="/newsletter.html" class="btn-primary inline-block">
+                        <i class="fas fa-gift mr-2"></i>Get 101 AI Prompts Free
+                    </a>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- Sticky CTA -->
+    <div class="sticky-cta" id="stickyCTA">
+        <div class="max-w-4xl mx-auto flex items-center justify-between">
+            <span class="font-semibold">Ready to download your calendar?</span>
+            <button onclick="downloadPDF()" class="btn-primary">
+                <i class="fas fa-download mr-2"></i>Download PDF
+            </button>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-black text-white py-8 px-4 mt-16">
+        <div class="max-w-6xl mx-auto text-center">
+            <div class="flex gap-6 justify-center mb-4">
+                <a href="https://www.youtube.com/channel/UCglNILz3uBqPer5EMJ_pzVg" target="_blank" class="hover:text-yellow-400"><i class="fab fa-youtube text-2xl"></i></a>
+                <a href="https://www.linkedin.com/in/bryancollins99/" target="_blank" class="hover:text-yellow-400"><i class="fab fa-linkedin text-2xl"></i></a>
+                <a href="https://www.amazon.com/stores/Bryan-Collins/author/B00KPFFYU6" target="_blank" class="hover:text-yellow-400"><i class="fab fa-amazon text-2xl"></i></a>
+                <a href="https://clarity.fm/bryancollins" target="_blank" class="hover:text-yellow-400"><i class="fas fa-phone text-2xl"></i></a>
+            </div>
+            <p class="text-sm opacity-70">© 2025 Bryan Collins. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        let currentStep = 1;
+        const totalSteps = 4;
+
+        // Show/hide custom niche input
+        document.getElementById('niche').addEventListener('change', function() {
+            document.getElementById('customNiche').style.display = 
+                this.value === 'Other' ? 'block' : 'none';
+        });
+
+        // Platform selection visual feedback
+        document.querySelectorAll('.platform-radio').forEach(radio => {
+            radio.addEventListener('change', function() {
+                document.querySelectorAll('.platform-card').forEach(card => {
+                    card.classList.remove('border-yellow-400', 'bg-yellow-50');
+                    card.classList.add('border-gray-300');
+                });
+                if (this.checked) {
+                    const card = this.nextElementSibling;
+                    card.classList.remove('border-gray-300');
+                    card.classList.add('border-yellow-400', 'bg-yellow-50');
+                }
+            });
+        });
+
+        function nextStep(step) {
+            // Validation
+            if (currentStep === 1) {
+                const niche = document.getElementById('niche').value;
+                if (!niche) {
+                    alert('Please select your niche');
+                    return;
+                }
+                if (niche === 'Other' && !document.getElementById('customNicheInput').value) {
+                    alert('Please describe your niche');
+                    return;
+                }
+            }
+            if (currentStep === 2) {
+                const platform = document.querySelector('input[name="platform"]:checked');
+                if (!platform) {
+                    alert('Please select a platform');
+                    return;
+                }
+            }
+            if (currentStep === 3) {
+                if (!document.getElementById('audience').value || !document.getElementById('audienceProblem').value) {
+                    alert('Please fill in all audience fields');
+                    return;
+                }
+            }
+
+            document.getElementById(`step${currentStep}`).classList.remove('active');
+            document.getElementById(`step${step}`).classList.add('active');
+            currentStep = step;
+            updateProgress();
+        }
+
+        function prevStep(step) {
+            document.getElementById(`step${currentStep}`).classList.remove('active');
+            document.getElementById(`step${step}`).classList.add('active');
+            currentStep = step;
+            updateProgress();
+        }
+
+        function updateProgress() {
+            const progress = ((currentStep - 1) / (totalSteps - 1)) * 100;
+            document.getElementById('progress-fill').style.width = progress + '%';
+            document.getElementById('step-indicator').textContent = `Step ${currentStep} of ${totalSteps}`;
+            document.getElementById('progress-percent').textContent = Math.round(progress) + '%';
+        }
+
+        function generateCalendar() {
+            // Get form data
+            const niche = document.getElementById('niche').value === 'Other' ? 
+                document.getElementById('customNicheInput').value : 
+                document.getElementById('niche').value;
+            const platform = document.querySelector('input[name="platform"]:checked').value;
+            const audience = document.getElementById('audience').value;
+            const audienceProblem = document.getElementById('audienceProblem').value;
+            
+            const contentTypes = Array.from(document.querySelectorAll('#step4 input[type="checkbox"]:checked'))
+                .map(cb => cb.value);
+
+            // Hide wizard, show results
+            document.querySelector('.wizard-step.active').parentElement.style.display = 'none';
+            document.getElementById('results').style.display = 'block';
+            document.getElementById('stickyCTA').classList.add('show');
+
+            // Generate 30 content ideas
+            const ideas = generateIdeas(niche, platform, audience, contentTypes);
+            
+            const grid = document.getElementById('calendarGrid');
+            grid.innerHTML = '';
+            
+            ideas.forEach((idea, index) => {
+                const card = document.createElement('div');
+                card.className = 'day-card';
+                card.innerHTML = `
+                    <div class="day-number">Day ${index + 1}</div>
+                    <h3 class="font-bold mb-2">${idea.title}</h3>
+                    <p class="text-sm text-gray-600">${idea.type}</p>
+                `;
+                grid.appendChild(card);
+            });
+
+            // Scroll to results
+            document.getElementById('results').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function generateIdeas(niche, platform, audience, contentTypes) {
+            // Template-based content ideas
+            const templates = {
+                'How-To Guides': [
+                    `How to get started with ${niche}`,
+                    `Step-by-step guide to ${niche} for beginners`,
+                    `How to improve your ${niche} skills in 30 days`,
+                    `The beginner's guide to ${niche}`,
+                    `How to avoid common ${niche} mistakes`
+                ],
+                'Listicles': [
+                    `10 best ${niche} tools for ${audience}`,
+                    `5 ${niche} tips every ${audience} should know`,
+                    `7 ${niche} hacks that actually work`,
+                    `Top 10 ${niche} resources to bookmark`,
+                    `8 ${niche} trends to watch this year`
+                ],
+                'Case Studies': [
+                    `How I achieved [goal] using ${niche}`,
+                    `Real ${niche} success story from ${audience}`,
+                    `${niche} case study: What worked and what didn't`,
+                    `Behind the scenes of my ${niche} process`,
+                    `Lessons learned from ${niche} failures`
+                ],
+                'Opinion': [
+                    `Why ${niche} is more important than ever`,
+                    `The truth about ${niche} nobody talks about`,
+                    `My honest thoughts on ${niche} trends`,
+                    `Is ${niche} worth the hype?`,
+                    `The future of ${niche}: My predictions`
+                ],
+                'Interviews': [
+                    `Expert interview: Insights on ${niche}`,
+                    `Q&A with successful ${niche} practitioner`,
+                    `Learning ${niche} from the best`,
+                    `Interview: How they mastered ${niche}`
+                ],
+                'Reviews': [
+                    `${niche} tool review: Is it worth it?`,
+                    `Testing popular ${niche} products`,
+                    `Best ${niche} resources: Honest review`,
+                    `Product comparison for ${niche}`
+                ]
+            };
+
+            const ideas = [];
+            let dayCount = 0;
+
+            // Cycle through selected content types
+            while (ideas.length < 30) {
+                contentTypes.forEach(type => {
+                    if (ideas.length < 30 && templates[type]) {
+                        const typeTemplates = templates[type];
+                        const template = typeTemplates[dayCount % typeTemplates.length];
+                        ideas.push({
+                            title: template,
+                            type: type
+                        });
+                    }
+                });
+                dayCount++;
+            }
+
+            return ideas.slice(0, 30);
+        }
+
+        function downloadPDF() {
+            const { jsPDF } = window.jspdf;
+            const doc = new jsPDF();
+            
+            // Title
+            doc.setFontSize(20);
+            doc.text('30-Day Content Calendar', 20, 20);
+            
+            // Get ideas
+            const cards = document.querySelectorAll('.day-card');
+            let y = 40;
+            
+            cards.forEach((card, index) => {
+                if (y > 270) {
+                    doc.addPage();
+                    y = 20;
+                }
+                
+                const dayNum = card.querySelector('.day-number').textContent;
+                const title = card.querySelector('h3').textContent;
+                const type = card.querySelector('p').textContent;
+                
+                doc.setFontSize(10);
+                doc.setFont(undefined, 'bold');
+                doc.text(`${dayNum}:`, 20, y);
+                doc.setFont(undefined, 'normal');
+                doc.text(title, 40, y);
+                doc.setFontSize(8);
+                doc.setTextColor(100);
+                doc.text(`(${type})`, 40, y + 4);
+                doc.setTextColor(0);
+                
+                y += 10;
+            });
+            
+            // Footer
+            doc.setFontSize(10);
+            doc.text('Created with bryancollins.com', 20, 285);
+            
+            doc.save('30-day-content-calendar.pdf');
+        }
+
+        // Show sticky CTA on scroll
+        window.addEventListener('scroll', function() {
+            const results = document.getElementById('results');
+            if (results.style.display !== 'none') {
+                const rect = results.getBoundingClientRect();
+                if (rect.bottom < window.innerHeight) {
+                    document.getElementById('stickyCTA').classList.add('show');
+                }
+            }
+        });
+    </script>
+</body>
+</html>
+

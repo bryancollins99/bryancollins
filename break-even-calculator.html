@@ -1,0 +1,1052 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Break-Even Calculator — Free Business Tool by Bryan Collins</title>
+    <meta name="description" content="Calculate your break-even point instantly. Free business calculator to determine how many units you need to sell to cover costs and start making profit.">
+    
+    <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    
+    <!-- Chart.js for visualizations -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.9.1/dist/chart.min.js"></script>
+    
+    <!-- jsPDF for PDF generation -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    
+    <!-- Plausible Analytics -->
+    <script defer data-domain="join.bryancollins.com" src="https://plausible.io/js/script.js"></script>
+    
+    <!-- Schema.org Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "Break-Even Calculator",
+        "description": "Free break-even analysis calculator for businesses and entrepreneurs",
+        "url": "https://join.bryancollins.com/break-even-calculator",
+        "applicationCategory": "BusinessApplication",
+        "operatingSystem": "Any",
+        "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "USD"
+        },
+        "author": {
+            "@type": "Person",
+            "name": "Bryan Collins"
+        }
+    }
+    </script>
+    
+    <style>
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            background-color: #EDEDEE;
+            color: #1B1B1D;
+        }
+        .nav-bar {
+            background: #000000;
+            border-bottom: 1px solid #333;
+        }
+        .nav-link {
+            color: white;
+            padding: 0.5rem 1rem;
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+        .nav-link:hover {
+            color: #FFDE59;
+        }
+        .hero-gradient {
+            background: linear-gradient(135deg, #000000 0%, #1a1a1a 100%);
+        }
+        .wizard-step {
+            display: none;
+        }
+        .wizard-step.active {
+            display: block;
+        }
+        .progress-bar {
+            background: #e5e5e5;
+            height: 8px;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+        .progress-fill {
+            background: #FFDE59;
+            height: 100%;
+            transition: width 0.3s ease;
+        }
+        .btn-primary {
+            background: #FFDE59;
+            color: #000;
+            padding: 0.875rem 2rem;
+            border-radius: 6px;
+            border: none;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 1.125rem;
+        }
+        .btn-primary:hover {
+            background: #ffd633;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+        }
+        .btn-secondary {
+            background: white;
+            color: #000;
+            padding: 0.875rem 2rem;
+            border-radius: 6px;
+            border: 2px solid #000;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .btn-secondary:hover {
+            background: #000;
+            color: white;
+        }
+        .form-input, .form-select {
+            width: 100%;
+            padding: 0.75rem;
+            border: 2px solid #e5e5e5;
+            border-radius: 6px;
+            font-size: 1rem;
+            transition: border-color 0.2s;
+        }
+        .form-input:focus, .form-select:focus {
+            outline: none;
+            border-color: #FFDE59;
+        }
+        .info-box {
+            background: #f8f9fa;
+            border-left: 4px solid #FFDE59;
+            padding: 1rem;
+            border-radius: 4px;
+            margin: 1rem 0;
+        }
+        .metric-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+        .metric-value {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #000;
+            margin: 0.5rem 0;
+        }
+        .metric-label {
+            color: #666;
+            font-size: 0.875rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .sticky-cta {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: white;
+            border-top: 2px solid #FFDE59;
+            padding: 1rem;
+            box-shadow: 0 -4px 12px rgba(0,0,0,0.1);
+            z-index: 1000;
+            display: none;
+        }
+        .sticky-cta.show {
+            display: block;
+        }
+        .chart-container {
+            position: relative;
+            height: 400px;
+            margin: 2rem 0;
+        }
+        .tooltip-icon {
+            display: inline-block;
+            width: 18px;
+            height: 18px;
+            background: #FFDE59;
+            color: #000;
+            border-radius: 50%;
+            text-align: center;
+            font-size: 12px;
+            font-weight: bold;
+            cursor: help;
+            margin-left: 0.5rem;
+        }
+        .related-tools {
+            background: #f8f9fa;
+            border-radius: 8px;
+            padding: 2rem;
+            margin-top: 2rem;
+        }
+        .tool-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 8px;
+            text-decoration: none;
+            color: inherit;
+            display: block;
+            transition: all 0.3s;
+            border: 2px solid transparent;
+        }
+        .tool-card:hover {
+            border-color: #FFDE59;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="nav-bar sticky top-0 z-50">
+        <div class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
+            <a href="/index.html" class="text-white font-bold text-xl">Bryan Collins</a>
+            <div class="flex gap-6">
+                <a href="/mba-frameworks.html" class="nav-link">Tools</a>
+                <a href="/projects.html" class="nav-link">Projects</a>
+                <a href="/now.html" class="nav-link">Now</a>
+                <a href="/contact.html" class="nav-link">Contact</a>
+                <a href="/newsletter.html" class="nav-link">Newsletter</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="hero-gradient text-white py-16 px-4">
+        <div class="max-w-4xl mx-auto text-center">
+            <h1 class="text-5xl font-extrabold mb-4">Break-Even Calculator</h1>
+            <p class="text-xl opacity-90">Calculate exactly how many sales you need to cover costs and start making profit</p>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="py-12 px-4">
+        <div class="max-w-4xl mx-auto">
+            
+            <!-- Progress Bar -->
+            <div class="bg-white rounded-xl p-6 mb-8 shadow-lg">
+                <div class="flex justify-between items-center mb-2">
+                    <span class="text-sm font-semibold" id="step-indicator">Step 1 of 4</span>
+                    <span class="text-sm text-gray-600" id="progress-percent">0%</span>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progress-fill" style="width: 0%"></div>
+                </div>
+            </div>
+
+            <!-- Wizard Form -->
+            <div class="bg-white rounded-xl p-8 shadow-lg mb-8">
+                
+                <!-- Step 1: Business Type -->
+                <div class="wizard-step active" id="step1">
+                    <h2 class="text-3xl font-bold mb-4">What type of business?</h2>
+                    <p class="text-gray-600 mb-6">Select the option that best describes your business model.</p>
+                    
+                    <div class="grid md:grid-cols-2 gap-4 mb-6">
+                        <label class="cursor-pointer">
+                            <input type="radio" name="businessType" value="product" class="hidden business-radio" checked>
+                            <div class="border-2 border-yellow-400 bg-yellow-50 rounded-lg p-4 hover:border-yellow-400 transition business-card">
+                                <i class="fas fa-box text-3xl mb-2 block"></i>
+                                <div class="font-semibold text-lg">Physical Product</div>
+                                <div class="text-sm text-gray-600">Selling tangible goods</div>
+                            </div>
+                        </label>
+                        <label class="cursor-pointer">
+                            <input type="radio" name="businessType" value="service" class="hidden business-radio">
+                            <div class="border-2 border-gray-300 rounded-lg p-4 hover:border-yellow-400 transition business-card">
+                                <i class="fas fa-hands-helping text-3xl mb-2 block"></i>
+                                <div class="font-semibold text-lg">Service</div>
+                                <div class="text-sm text-gray-600">Consulting, freelancing, etc.</div>
+                            </div>
+                        </label>
+                        <label class="cursor-pointer">
+                            <input type="radio" name="businessType" value="digital" class="hidden business-radio">
+                            <div class="border-2 border-gray-300 rounded-lg p-4 hover:border-yellow-400 transition business-card">
+                                <i class="fas fa-laptop text-3xl mb-2 block"></i>
+                                <div class="font-semibold text-lg">Digital Product</div>
+                                <div class="text-sm text-gray-600">Courses, ebooks, software</div>
+                            </div>
+                        </label>
+                        <label class="cursor-pointer">
+                            <input type="radio" name="businessType" value="saas" class="hidden business-radio">
+                            <div class="border-2 border-gray-300 rounded-lg p-4 hover:border-yellow-400 transition business-card">
+                                <i class="fas fa-cloud text-3xl mb-2 block"></i>
+                                <div class="font-semibold text-lg">SaaS/Subscription</div>
+                                <div class="text-sm text-gray-600">Monthly recurring revenue</div>
+                            </div>
+                        </label>
+                    </div>
+                    
+                    <button onclick="nextStep(2)" class="btn-primary w-full">Next <i class="fas fa-arrow-right ml-2"></i></button>
+                </div>
+
+                <!-- Step 2: Fixed Costs -->
+                <div class="wizard-step" id="step2">
+                    <h2 class="text-3xl font-bold mb-4">Fixed Costs</h2>
+                    <p class="text-gray-600 mb-4">Enter your monthly fixed costs (expenses that don't change with sales volume).</p>
+                    
+                    <div class="info-box">
+                        <i class="fas fa-info-circle text-yellow-600"></i>
+                        <strong>Fixed costs</strong> remain constant regardless of how much you sell. Examples: rent, salaries, insurance, software subscriptions.
+                    </div>
+                    
+                    <div class="space-y-4 mb-6">
+                        <div>
+                            <label class="block font-semibold mb-2">
+                                Rent/Lease 
+                                <span class="tooltip-icon" title="Office, warehouse, or equipment rental">?</span>
+                            </label>
+                            <div class="flex items-center">
+                                <span class="mr-2 text-xl">$</span>
+                                <input type="number" id="rent" class="form-input" placeholder="1500" value="0" min="0" step="0.01">
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <label class="block font-semibold mb-2">
+                                Salaries & Wages
+                                <span class="tooltip-icon" title="Fixed employee costs">?</span>
+                            </label>
+                            <div class="flex items-center">
+                                <span class="mr-2 text-xl">$</span>
+                                <input type="number" id="salaries" class="form-input" placeholder="5000" value="0" min="0" step="0.01">
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <label class="block font-semibold mb-2">
+                                Utilities & Insurance
+                                <span class="tooltip-icon" title="Internet, electricity, business insurance">?</span>
+                            </label>
+                            <div class="flex items-center">
+                                <span class="mr-2 text-xl">$</span>
+                                <input type="number" id="utilities" class="form-input" placeholder="300" value="0" min="0" step="0.01">
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <label class="block font-semibold mb-2">
+                                Other Fixed Costs
+                                <span class="tooltip-icon" title="Software, subscriptions, marketing">?</span>
+                            </label>
+                            <div class="flex items-center">
+                                <span class="mr-2 text-xl">$</span>
+                                <input type="number" id="otherFixed" class="form-input" placeholder="500" value="0" min="0" step="0.01">
+                            </div>
+                        </div>
+                        
+                        <div class="bg-yellow-50 p-4 rounded-lg border-2 border-yellow-400">
+                            <div class="flex justify-between items-center">
+                                <span class="font-bold text-lg">Total Fixed Costs (Monthly):</span>
+                                <span class="text-2xl font-bold" id="totalFixed">$0</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="flex gap-4">
+                        <button onclick="prevStep(1)" class="btn-secondary flex-1"><i class="fas fa-arrow-left mr-2"></i> Back</button>
+                        <button onclick="nextStep(3)" class="btn-primary flex-1">Next <i class="fas fa-arrow-right ml-2"></i></button>
+                    </div>
+                </div>
+
+                <!-- Step 3: Variable Costs -->
+                <div class="wizard-step" id="step3">
+                    <h2 class="text-3xl font-bold mb-4">Variable Costs</h2>
+                    <p class="text-gray-600 mb-4">Enter your per-unit variable costs (costs that increase with each sale).</p>
+                    
+                    <div class="info-box">
+                        <i class="fas fa-info-circle text-yellow-600"></i>
+                        <strong>Variable costs</strong> change based on production/sales volume. Examples: materials, shipping, payment processing fees.
+                    </div>
+                    
+                    <div class="space-y-4 mb-6">
+                        <div>
+                            <label class="block font-semibold mb-2">
+                                Cost of Materials/Production (per unit)
+                                <span class="tooltip-icon" title="Raw materials or cost to produce one unit">?</span>
+                            </label>
+                            <div class="flex items-center">
+                                <span class="mr-2 text-xl">$</span>
+                                <input type="number" id="materials" class="form-input" placeholder="15.00" value="0" min="0" step="0.01">
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <label class="block font-semibold mb-2">
+                                Shipping/Delivery (per unit)
+                                <span class="tooltip-icon" title="Cost to deliver to customer">?</span>
+                            </label>
+                            <div class="flex items-center">
+                                <span class="mr-2 text-xl">$</span>
+                                <input type="number" id="shipping" class="form-input" placeholder="5.00" value="0" min="0" step="0.01">
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <label class="block font-semibold mb-2">
+                                Transaction Fees (per unit)
+                                <span class="tooltip-icon" title="Payment processing, marketplace fees">?</span>
+                            </label>
+                            <div class="flex items-center">
+                                <span class="mr-2 text-xl">$</span>
+                                <input type="number" id="fees" class="form-input" placeholder="2.00" value="0" min="0" step="0.01">
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <label class="block font-semibold mb-2">
+                                Other Variable Costs (per unit)
+                                <span class="tooltip-icon" title="Packaging, labels, etc.">?</span>
+                            </label>
+                            <div class="flex items-center">
+                                <span class="mr-2 text-xl">$</span>
+                                <input type="number" id="otherVariable" class="form-input" placeholder="1.00" value="0" min="0" step="0.01">
+                            </div>
+                        </div>
+                        
+                        <div class="bg-yellow-50 p-4 rounded-lg border-2 border-yellow-400">
+                            <div class="flex justify-between items-center">
+                                <span class="font-bold text-lg">Total Variable Cost (Per Unit):</span>
+                                <span class="text-2xl font-bold" id="totalVariable">$0</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="flex gap-4">
+                        <button onclick="prevStep(2)" class="btn-secondary flex-1"><i class="fas fa-arrow-left mr-2"></i> Back</button>
+                        <button onclick="nextStep(4)" class="btn-primary flex-1">Next <i class="fas fa-arrow-right ml-2"></i></button>
+                    </div>
+                </div>
+
+                <!-- Step 4: Pricing -->
+                <div class="wizard-step" id="step4">
+                    <h2 class="text-3xl font-bold mb-4">Pricing</h2>
+                    <p class="text-gray-600 mb-6">What do you charge per unit/service?</p>
+                    
+                    <div class="mb-6">
+                        <label class="block font-semibold mb-2 text-lg">
+                            Selling Price (per unit)
+                            <span class="tooltip-icon" title="What customers pay for one unit">?</span>
+                        </label>
+                        <div class="flex items-center">
+                            <span class="mr-2 text-2xl">$</span>
+                            <input type="number" id="price" class="form-input text-2xl" placeholder="50.00" value="0" min="0" step="0.01">
+                        </div>
+                    </div>
+                    
+                    <div class="info-box">
+                        <i class="fas fa-lightbulb text-yellow-600"></i>
+                        <strong>Tip:</strong> Your price must be higher than your variable cost per unit to make a profit!
+                    </div>
+                    
+                    <div class="bg-gray-50 p-6 rounded-lg mb-6">
+                        <h3 class="font-bold text-lg mb-4">Quick Preview:</h3>
+                        <div class="space-y-2 text-sm">
+                            <div class="flex justify-between">
+                                <span>Selling Price:</span>
+                                <span class="font-semibold" id="previewPrice">$0.00</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span>Variable Cost:</span>
+                                <span class="font-semibold" id="previewVariable">$0.00</span>
+                            </div>
+                            <div class="flex justify-between border-t pt-2">
+                                <span class="font-bold">Contribution Margin:</span>
+                                <span class="font-bold text-green-600" id="previewMargin">$0.00</span>
+                            </div>
+                            <div class="text-xs text-gray-600 mt-2">
+                                (This is how much each sale contributes to covering fixed costs)
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="flex gap-4">
+                        <button onclick="prevStep(3)" class="btn-secondary flex-1"><i class="fas fa-arrow-left mr-2"></i> Back</button>
+                        <button onclick="calculate()" class="btn-primary flex-1">Calculate Break-Even <i class="fas fa-calculator ml-2"></i></button>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Results Section -->
+            <div id="results" class="bg-white rounded-xl p-8 shadow-lg" style="display: none;">
+                <div class="text-center mb-8">
+                    <h2 class="text-3xl font-bold mb-4">Your Break-Even Analysis</h2>
+                    <p class="text-gray-600">Here's exactly what you need to know about your business profitability.</p>
+                </div>
+                
+                <!-- Key Metrics -->
+                <div class="grid md:grid-cols-3 gap-6 mb-8">
+                    <div class="metric-card">
+                        <div class="metric-label">Break-Even Units</div>
+                        <div class="metric-value" id="breakEvenUnits">0</div>
+                        <div class="text-sm text-gray-600">units per month</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-label">Break-Even Revenue</div>
+                        <div class="metric-value" id="breakEvenRevenue">$0</div>
+                        <div class="text-sm text-gray-600">per month</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-label">Contribution Margin</div>
+                        <div class="metric-value" id="contributionMargin">0%</div>
+                        <div class="text-sm text-gray-600">per unit sold</div>
+                    </div>
+                </div>
+                
+                <!-- Chart -->
+                <div class="bg-gray-50 rounded-lg p-6 mb-8">
+                    <h3 class="text-xl font-bold mb-4 text-center">Break-Even Chart</h3>
+                    <div class="chart-container">
+                        <canvas id="breakEvenChart"></canvas>
+                    </div>
+                </div>
+                
+                <!-- Profit Projections -->
+                <div class="bg-gray-50 rounded-lg p-6 mb-8">
+                    <h3 class="text-xl font-bold mb-4">Profit Projections</h3>
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-sm">
+                            <thead>
+                                <tr class="border-b-2 border-gray-300">
+                                    <th class="text-left py-2">Units Sold</th>
+                                    <th class="text-right py-2">Revenue</th>
+                                    <th class="text-right py-2">Total Costs</th>
+                                    <th class="text-right py-2">Profit/Loss</th>
+                                </tr>
+                            </thead>
+                            <tbody id="profitTable">
+                                <!-- Generated by JS -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                
+                <!-- Insights -->
+                <div class="bg-yellow-50 border-2 border-yellow-400 rounded-lg p-6 mb-8">
+                    <h3 class="text-xl font-bold mb-4"><i class="fas fa-lightbulb mr-2"></i>Key Insights</h3>
+                    <div id="insights" class="space-y-3"></div>
+                </div>
+                
+                <!-- Download CTA -->
+                <div class="text-center mb-8">
+                    <button onclick="downloadPDF()" class="btn-primary">
+                        <i class="fas fa-download mr-2"></i>Download Full Report (PDF)
+                    </button>
+                </div>
+                
+                <!-- Related Tools -->
+                <div class="related-tools">
+                    <h3 class="text-2xl font-bold mb-4 text-center">You Might Also Like</h3>
+                    <div class="grid md:grid-cols-3 gap-4">
+                        <a href="/ansoff-matrix.html" class="tool-card">
+                            <i class="fas fa-chart-line text-2xl mb-2 block text-yellow-600"></i>
+                            <h4 class="font-bold mb-1">ANSOFF Matrix</h4>
+                            <p class="text-sm text-gray-600">Plan your growth strategy</p>
+                        </a>
+                        <a href="/swot-analysis.html" class="tool-card">
+                            <i class="fas fa-balance-scale text-2xl mb-2 block text-yellow-600"></i>
+                            <h4 class="font-bold mb-1">SWOT Analysis</h4>
+                            <p class="text-sm text-gray-600">Analyze strengths & opportunities</p>
+                        </a>
+                        <a href="/porters-five-forces.html" class="tool-card">
+                            <i class="fas fa-trophy text-2xl mb-2 block text-yellow-600"></i>
+                            <h4 class="font-bold mb-1">Porter's Five Forces</h4>
+                            <p class="text-sm text-gray-600">Assess competitive landscape</p>
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Newsletter CTA -->
+                <div class="mt-12 bg-gray-900 text-white rounded-xl p-8 text-center">
+                    <h3 class="text-2xl font-bold mb-4">Want More Business Tools & Strategies?</h3>
+                    <p class="text-lg mb-6 opacity-90">Join 15,000+ entrepreneurs getting MBA frameworks, AI prompts, and growth tactics several times a week.</p>
+                    <a href="/newsletter.html" class="btn-primary inline-block">
+                        <i class="fas fa-gift mr-2"></i>Get 101 AI Prompts Free
+                    </a>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- Sticky CTA -->
+    <div class="sticky-cta" id="stickyCTA">
+        <div class="max-w-4xl mx-auto flex items-center justify-between">
+            <span class="font-semibold">Ready to download your analysis?</span>
+            <button onclick="downloadPDF()" class="btn-primary">
+                <i class="fas fa-download mr-2"></i>Download PDF
+            </button>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-black text-white py-8 px-4 mt-16">
+        <div class="max-w-6xl mx-auto text-center">
+            <div class="flex gap-6 justify-center mb-4">
+                <a href="https://www.youtube.com/channel/UCglNILz3uBqPer5EMJ_pzVg" target="_blank" class="hover:text-yellow-400"><i class="fab fa-youtube text-2xl"></i></a>
+                <a href="https://www.linkedin.com/in/bryancollins99/" target="_blank" class="hover:text-yellow-400"><i class="fab fa-linkedin text-2xl"></i></a>
+                <a href="https://www.amazon.com/stores/Bryan-Collins/author/B00KPFFYU6" target="_blank" class="hover:text-yellow-400"><i class="fab fa-amazon text-2xl"></i></a>
+                <a href="https://clarity.fm/bryancollins" target="_blank" class="hover:text-yellow-400"><i class="fas fa-phone text-2xl"></i></a>
+            </div>
+            <p class="text-sm opacity-70">© 2025 Bryan Collins. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        let currentStep = 1;
+        const totalSteps = 4;
+        let chartInstance = null;
+
+        // Business type selection
+        document.querySelectorAll('.business-radio').forEach(radio => {
+            radio.addEventListener('change', function() {
+                document.querySelectorAll('.business-card').forEach(card => {
+                    card.classList.remove('border-yellow-400', 'bg-yellow-50');
+                    card.classList.add('border-gray-300');
+                });
+                if (this.checked) {
+                    const card = this.nextElementSibling;
+                    card.classList.remove('border-gray-300');
+                    card.classList.add('border-yellow-400', 'bg-yellow-50');
+                }
+            });
+        });
+
+        // Auto-calculate totals
+        ['rent', 'salaries', 'utilities', 'otherFixed'].forEach(id => {
+            document.getElementById(id).addEventListener('input', updateFixedTotal);
+        });
+        
+        ['materials', 'shipping', 'fees', 'otherVariable'].forEach(id => {
+            document.getElementById(id).addEventListener('input', updateVariableTotal);
+        });
+        
+        document.getElementById('price').addEventListener('input', updatePreview);
+
+        function updateFixedTotal() {
+            const total = 
+                parseFloat(document.getElementById('rent').value || 0) +
+                parseFloat(document.getElementById('salaries').value || 0) +
+                parseFloat(document.getElementById('utilities').value || 0) +
+                parseFloat(document.getElementById('otherFixed').value || 0);
+            document.getElementById('totalFixed').textContent = '$' + total.toFixed(2);
+        }
+
+        function updateVariableTotal() {
+            const total = 
+                parseFloat(document.getElementById('materials').value || 0) +
+                parseFloat(document.getElementById('shipping').value || 0) +
+                parseFloat(document.getElementById('fees').value || 0) +
+                parseFloat(document.getElementById('otherVariable').value || 0);
+            document.getElementById('totalVariable').textContent = '$' + total.toFixed(2);
+            updatePreview();
+        }
+
+        function updatePreview() {
+            const price = parseFloat(document.getElementById('price').value || 0);
+            const variable = 
+                parseFloat(document.getElementById('materials').value || 0) +
+                parseFloat(document.getElementById('shipping').value || 0) +
+                parseFloat(document.getElementById('fees').value || 0) +
+                parseFloat(document.getElementById('otherVariable').value || 0);
+            const margin = price - variable;
+            
+            document.getElementById('previewPrice').textContent = '$' + price.toFixed(2);
+            document.getElementById('previewVariable').textContent = '$' + variable.toFixed(2);
+            document.getElementById('previewMargin').textContent = '$' + margin.toFixed(2);
+        }
+
+        function nextStep(step) {
+            // Validation
+            if (currentStep === 2) {
+                const totalFixed = parseFloat(document.getElementById('totalFixed').textContent.replace('$', ''));
+                if (totalFixed <= 0) {
+                    alert('Please enter at least some fixed costs');
+                    return;
+                }
+            }
+            if (currentStep === 3) {
+                const totalVariable = parseFloat(document.getElementById('totalVariable').textContent.replace('$', ''));
+                if (totalVariable < 0) {
+                    alert('Please enter your variable costs');
+                    return;
+                }
+            }
+            if (currentStep === 4) {
+                const price = parseFloat(document.getElementById('price').value || 0);
+                if (price <= 0) {
+                    alert('Please enter a selling price');
+                    return;
+                }
+            }
+
+            document.getElementById(`step${currentStep}`).classList.remove('active');
+            document.getElementById(`step${step}`).classList.add('active');
+            currentStep = step;
+            updateProgress();
+        }
+
+        function prevStep(step) {
+            document.getElementById(`step${currentStep}`).classList.remove('active');
+            document.getElementById(`step${step}`).classList.add('active');
+            currentStep = step;
+            updateProgress();
+        }
+
+        function updateProgress() {
+            const progress = ((currentStep - 1) / (totalSteps - 1)) * 100;
+            document.getElementById('progress-fill').style.width = progress + '%';
+            document.getElementById('step-indicator').textContent = `Step ${currentStep} of ${totalSteps}`;
+            document.getElementById('progress-percent').textContent = Math.round(progress) + '%';
+        }
+
+        function calculate() {
+            // Get values
+            const fixedCosts = parseFloat(document.getElementById('totalFixed').textContent.replace('$', ''));
+            const variableCost = parseFloat(document.getElementById('totalVariable').textContent.replace('$', ''));
+            const price = parseFloat(document.getElementById('price').value || 0);
+            
+            // Validation
+            if (price <= variableCost) {
+                alert('Error: Your selling price must be higher than your variable cost per unit to make a profit!');
+                return;
+            }
+            
+            // Calculate break-even
+            const contributionMargin = price - variableCost;
+            const breakEvenUnits = Math.ceil(fixedCosts / contributionMargin);
+            const breakEvenRevenue = breakEvenUnits * price;
+            const contributionMarginPercent = (contributionMargin / price) * 100;
+            
+            // Display results
+            document.getElementById('breakEvenUnits').textContent = breakEvenUnits.toLocaleString();
+            document.getElementById('breakEvenRevenue').textContent = '$' + breakEvenRevenue.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2});
+            document.getElementById('contributionMargin').textContent = contributionMarginPercent.toFixed(1) + '%';
+            
+            // Generate chart
+            generateChart(fixedCosts, variableCost, price, breakEvenUnits);
+            
+            // Generate profit table
+            generateProfitTable(fixedCosts, variableCost, price, breakEvenUnits);
+            
+            // Generate insights
+            generateInsights(fixedCosts, variableCost, price, breakEvenUnits, contributionMarginPercent);
+            
+            // Show results
+            document.querySelector('.wizard-step.active').parentElement.style.display = 'none';
+            document.getElementById('results').style.display = 'block';
+            document.getElementById('stickyCTA').classList.add('show');
+            
+            // Scroll to results
+            document.getElementById('results').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function generateChart(fixedCosts, variableCost, price, breakEvenUnits) {
+            const ctx = document.getElementById('breakEvenChart').getContext('2d');
+            
+            // Destroy existing chart
+            if (chartInstance) {
+                chartInstance.destroy();
+            }
+            
+            // Generate data points
+            const maxUnits = Math.ceil(breakEvenUnits * 2);
+            const labels = [];
+            const revenueData = [];
+            const costsData = [];
+            
+            for (let i = 0; i <= maxUnits; i += Math.ceil(maxUnits / 20)) {
+                labels.push(i);
+                revenueData.push(i * price);
+                costsData.push(fixedCosts + (i * variableCost));
+            }
+            
+            chartInstance = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: labels,
+                    datasets: [
+                        {
+                            label: 'Total Revenue',
+                            data: revenueData,
+                            borderColor: '#FFDE59',
+                            backgroundColor: 'rgba(255, 222, 89, 0.1)',
+                            borderWidth: 3,
+                            tension: 0
+                        },
+                        {
+                            label: 'Total Costs',
+                            data: costsData,
+                            borderColor: '#000000',
+                            backgroundColor: 'rgba(0, 0, 0, 0.1)',
+                            borderWidth: 3,
+                            tension: 0
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'top',
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    let label = context.dataset.label || '';
+                                    if (label) {
+                                        label += ': ';
+                                    }
+                                    label += '$' + context.parsed.y.toLocaleString();
+                                    return label;
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        x: {
+                            title: {
+                                display: true,
+                                text: 'Units Sold'
+                            }
+                        },
+                        y: {
+                            title: {
+                                display: true,
+                                text: 'Dollars ($)'
+                            },
+                            ticks: {
+                                callback: function(value) {
+                                    return '$' + value.toLocaleString();
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+        }
+
+        function generateProfitTable(fixedCosts, variableCost, price, breakEvenUnits) {
+            const table = document.getElementById('profitTable');
+            table.innerHTML = '';
+            
+            const scenarios = [
+                Math.floor(breakEvenUnits * 0.5),
+                Math.floor(breakEvenUnits * 0.75),
+                breakEvenUnits,
+                Math.ceil(breakEvenUnits * 1.25),
+                Math.ceil(breakEvenUnits * 1.5),
+                Math.ceil(breakEvenUnits * 2)
+            ];
+            
+            scenarios.forEach(units => {
+                const revenue = units * price;
+                const totalCosts = fixedCosts + (units * variableCost);
+                const profit = revenue - totalCosts;
+                
+                const row = document.createElement('tr');
+                row.className = 'border-b';
+                row.innerHTML = `
+                    <td class="py-2">${units.toLocaleString()}</td>
+                    <td class="text-right">$${revenue.toLocaleString(undefined, {minimumFractionDigits: 2})}</td>
+                    <td class="text-right">$${totalCosts.toLocaleString(undefined, {minimumFractionDigits: 2})}</td>
+                    <td class="text-right font-bold ${profit >= 0 ? 'text-green-600' : 'text-red-600'}">
+                        ${profit >= 0 ? '+' : ''}$${profit.toLocaleString(undefined, {minimumFractionDigits: 2})}
+                    </td>
+                `;
+                if (units === breakEvenUnits) {
+                    row.classList.add('bg-yellow-50', 'font-bold');
+                }
+                table.appendChild(row);
+            });
+        }
+
+        function generateInsights(fixedCosts, variableCost, price, breakEvenUnits, contributionMarginPercent) {
+            const insights = document.getElementById('insights');
+            insights.innerHTML = '';
+            
+            const insightsList = [];
+            
+            // Basic insight
+            insightsList.push(`You need to sell <strong>${breakEvenUnits.toLocaleString()} units per month</strong> to break even.`);
+            
+            // Daily target
+            const dailyTarget = Math.ceil(breakEvenUnits / 30);
+            insightsList.push(`That's approximately <strong>${dailyTarget} ${dailyTarget === 1 ? 'sale' : 'sales'} per day</strong> to cover all your costs.`);
+            
+            // Contribution margin insight
+            if (contributionMarginPercent > 60) {
+                insightsList.push(`<strong>Excellent!</strong> Your contribution margin of ${contributionMarginPercent.toFixed(1)}% is very healthy. Each sale contributes significantly to covering fixed costs.`);
+            } else if (contributionMarginPercent > 40) {
+                insightsList.push(`Your contribution margin of ${contributionMarginPercent.toFixed(1)}% is good. Consider ways to reduce variable costs or increase pricing to improve it further.`);
+            } else {
+                insightsList.push(`<strong>Warning:</strong> Your contribution margin of ${contributionMarginPercent.toFixed(1)}% is low. Consider reducing variable costs or increasing your price to improve profitability.`);
+            }
+            
+            // Profit at 2x
+            const doubleUnits = breakEvenUnits * 2;
+            const profitAtDouble = (doubleUnits * (price - variableCost)) - fixedCosts;
+            insightsList.push(`If you sell <strong>${doubleUnits.toLocaleString()} units</strong> (2x break-even), you'll make <strong>$${profitAtDouble.toLocaleString(undefined, {minimumFractionDigits: 2})}</strong> profit per month.`);
+            
+            // Fixed cost insight
+            const fixedCostPercent = (fixedCosts / (breakEvenUnits * price)) * 100;
+            if (fixedCostPercent > 50) {
+                insightsList.push(`Your fixed costs represent ${fixedCostPercent.toFixed(0)}% of break-even revenue. Look for opportunities to reduce fixed expenses.`);
+            }
+            
+            insightsList.forEach(insight => {
+                const div = document.createElement('div');
+                div.innerHTML = `<i class="fas fa-check-circle text-yellow-600 mr-2"></i>${insight}`;
+                insights.appendChild(div);
+            });
+        }
+
+        function downloadPDF() {
+            const { jsPDF } = window.jspdf;
+            const doc = new jsPDF();
+            
+            // Title
+            doc.setFontSize(22);
+            doc.setFont(undefined, 'bold');
+            doc.text('Break-Even Analysis Report', 20, 20);
+            
+            doc.setFontSize(10);
+            doc.setFont(undefined, 'normal');
+            doc.text('Generated on ' + new Date().toLocaleDateString(), 20, 28);
+            
+            // Key Metrics
+            doc.setFontSize(16);
+            doc.setFont(undefined, 'bold');
+            doc.text('Key Metrics', 20, 45);
+            
+            doc.setFontSize(11);
+            doc.setFont(undefined, 'normal');
+            let y = 55;
+            
+            const breakEvenUnits = document.getElementById('breakEvenUnits').textContent;
+            const breakEvenRevenue = document.getElementById('breakEvenRevenue').textContent;
+            const contributionMargin = document.getElementById('contributionMargin').textContent;
+            
+            doc.text(`Break-Even Units: ${breakEvenUnits} units/month`, 20, y);
+            y += 8;
+            doc.text(`Break-Even Revenue: ${breakEvenRevenue}/month`, 20, y);
+            y += 8;
+            doc.text(`Contribution Margin: ${contributionMargin}`, 20, y);
+            y += 15;
+            
+            // Inputs Summary
+            doc.setFontSize(16);
+            doc.setFont(undefined, 'bold');
+            doc.text('Your Inputs', 20, y);
+            y += 10;
+            
+            doc.setFontSize(11);
+            doc.setFont(undefined, 'normal');
+            
+            const fixedCosts = document.getElementById('totalFixed').textContent;
+            const variableCost = document.getElementById('totalVariable').textContent;
+            const price = '$' + parseFloat(document.getElementById('price').value).toFixed(2);
+            
+            doc.text(`Total Fixed Costs: ${fixedCosts}/month`, 20, y);
+            y += 8;
+            doc.text(`Variable Cost Per Unit: ${variableCost}`, 20, y);
+            y += 8;
+            doc.text(`Selling Price Per Unit: ${price}`, 20, y);
+            y += 15;
+            
+            // Profit Projections
+            doc.setFontSize(16);
+            doc.setFont(undefined, 'bold');
+            doc.text('Profit Projections', 20, y);
+            y += 10;
+            
+            doc.setFontSize(10);
+            const table = document.getElementById('profitTable');
+            const rows = table.querySelectorAll('tr');
+            
+            doc.text('Units', 20, y);
+            doc.text('Revenue', 70, y);
+            doc.text('Costs', 110, y);
+            doc.text('Profit/Loss', 150, y);
+            y += 7;
+            
+            doc.setFont(undefined, 'normal');
+            rows.forEach(row => {
+                if (y > 270) {
+                    doc.addPage();
+                    y = 20;
+                }
+                const cells = row.querySelectorAll('td');
+                doc.text(cells[0].textContent, 20, y);
+                doc.text(cells[1].textContent, 70, y);
+                doc.text(cells[2].textContent, 110, y);
+                doc.text(cells[3].textContent, 150, y);
+                y += 7;
+            });
+            
+            // Insights
+            if (y > 220) {
+                doc.addPage();
+                y = 20;
+            } else {
+                y += 10;
+            }
+            
+            doc.setFontSize(16);
+            doc.setFont(undefined, 'bold');
+            doc.text('Key Insights', 20, y);
+            y += 10;
+            
+            doc.setFontSize(10);
+            doc.setFont(undefined, 'normal');
+            const insights = document.getElementById('insights').children;
+            Array.from(insights).forEach(insight => {
+                if (y > 270) {
+                    doc.addPage();
+                    y = 20;
+                }
+                const text = insight.textContent.trim();
+                const lines = doc.splitTextToSize(text, 170);
+                lines.forEach(line => {
+                    doc.text(line, 20, y);
+                    y += 6;
+                });
+                y += 2;
+            });
+            
+            // Footer
+            const pageCount = doc.internal.getNumberOfPages();
+            for (let i = 1; i <= pageCount; i++) {
+                doc.setPage(i);
+                doc.setFontSize(8);
+                doc.text('Created with bryancollins.com', 20, 285);
+                doc.text(`Page ${i} of ${pageCount}`, 180, 285);
+            }
+            
+            doc.save('break-even-analysis.pdf');
+        }
+
+        // Show sticky CTA on scroll
+        window.addEventListener('scroll', function() {
+            const results = document.getElementById('results');
+            if (results.style.display !== 'none') {
+                const scrolled = window.scrollY > 500;
+                if (scrolled) {
+                    document.getElementById('stickyCTA').classList.add('show');
+                }
+            }
+        });
+    </script>
+</body>
+</html>
+

@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>What I'm Doing Now — Bryan Collins</title>
+    <meta name="description" content="What Bryan Collins is currently working on and focused on right now.">
+    
+    <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    
+    <!-- Plausible Analytics -->
+    <script defer data-domain="join.bryancollins.com" src="https://plausible.io/js/script.js"></script>
+    
+    <style>
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            background-color: #EDEDEE;
+            color: #1B1B1D;
+        }
+        .nav-bar {
+            background: #000000;
+            border-bottom: 1px solid #333;
+        }
+        .nav-link {
+            color: white;
+            padding: 0.5rem 1rem;
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+        .nav-link:hover {
+            color: #FFDE59;
+        }
+        .hero-gradient {
+            background: linear-gradient(135deg, #000000 0%, #1a1a1a 100%);
+        }
+        .hero-text {
+            color: white;
+        }
+        .cta-button {
+            background: #FFDE59;
+            color: #000000;
+            font-weight: 700;
+            transition: all 0.3s ease;
+            padding: 14px 28px;
+            font-size: 1rem;
+            border-radius: 8px;
+            display: inline-block;
+            text-decoration: none;
+        }
+        .cta-button:hover {
+            background: #ffd633;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 15px -3px rgba(255, 222, 89, 0.3);
+        }
+        .section {
+            margin-bottom: 3rem;
+        }
+        .section h2 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: #1B1B1D;
+        }
+        .section ul {
+            list-style: none;
+            padding: 0;
+        }
+        .section li {
+            padding-left: 1.5rem;
+            position: relative;
+            margin-bottom: 0.75rem;
+        }
+        .section li:before {
+            content: "→";
+            position: absolute;
+            left: 0;
+            color: #FFDE59;
+            font-weight: bold;
+        }
+        .updated {
+            font-size: 0.875rem;
+            color: #6E6E6E;
+            font-style: italic;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="nav-bar sticky top-0 z-50">
+        <div class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
+            <a href="/" class="text-white font-bold text-xl">Bryan Collins</a>
+            <div class="flex gap-6">
+                <a href="/mba-frameworks.html" class="nav-link">Tools</a>
+                <a href="/projects.html" class="nav-link">Projects</a>
+                <a href="/now.html" class="nav-link">Now</a>
+                <a href="/newsletter.html" class="nav-link">Newsletter</a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="min-h-screen flex flex-col items-center justify-center py-12 px-4">
+        <div class="w-full max-w-3xl">
+            <!-- Main Content Box -->
+            <div class="bg-white rounded-xl overflow-hidden shadow-xl">
+                <!-- Header -->
+                <div class="hero-gradient px-8 py-12 text-center">
+                    <h1 class="hero-text text-4xl sm:text-5xl font-extrabold mb-4 leading-tight">What I'm Doing Now</h1>
+                    <p class="hero-text text-xl">A snapshot of my current projects and focus</p>
+                </div>
+                
+                <!-- Content -->
+                <div class="px-8 py-10">
+                    <p class="updated text-center mb-8">Last updated: January 2025</p>
+                    
+                    <!-- Current Projects -->
+                    <div class="section">
+                        <h2>Current Projects</h2>
+                        <ul>
+                            <li>Building 8 interactive MBA framework tools for creators</li>
+                            <li>Writing weekly strategic insights for 15,000+ newsletter subscribers</li>
+                            <li>Creating AI prompt resources for content creators</li>
+                            <li>Developing educational products for creator businesses</li>
+                        </ul>
+                    </div>
+                    
+                    <!-- Learning -->
+                    <div class="section">
+                        <h2>What I'm Learning</h2>
+                        <ul>
+                            <li>Strategic frameworks adapted for digital creators</li>
+                            <li>AI-powered content creation workflows</li>
+                            <li>Business model design for creator economy</li>
+                            <li>Conversion optimization and user experience</li>
+                        </ul>
+                    </div>
+                    
+                    <!-- Focus -->
+                    <div class="section">
+                        <h2>Current Focus</h2>
+                        <ul>
+                            <li>Helping creators think strategically about their businesses</li>
+                            <li>Making MBA frameworks accessible without corporate jargon</li>
+                            <li>Providing free, practical tools that deliver immediate value</li>
+                            <li>Building sustainable systems for long-term creator success</li>
+                        </ul>
+                    </div>
+                    
+                    <!-- Reading -->
+                    <div class="section">
+                        <h2>Currently Reading</h2>
+                        <ul>
+                            <li>Business strategy and competitive analysis</li>
+                            <li>Creator economy trends and case studies</li>
+                            <li>AI and automation for content workflows</li>
+                            <li>Product design and user experience research</li>
+                        </ul>
+                    </div>
+                    
+                    <!-- CTA -->
+                    <div class="text-center pt-8 mt-8" style="border-top: 1px solid #D0D0D0;">
+                        <p class="mb-6">Want to follow along on this journey?</p>
+                        <a href="/newsletter.html" class="cta-button">
+                            <i class="fas fa-envelope mr-2"></i>Join My Newsletter
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Footer Note -->
+            <p class="text-center text-xs mt-8" style="color: #1B1B1D; opacity: 0.5;">
+                Inspired by <a href="https://nownownow.com/about" target="_blank" class="underline">Derek Sivers' Now Page</a> movement
+            </p>
+            
+            <!-- Copyright -->
+            <p class="text-center text-xs mt-4" style="color: #1B1B1D; opacity: 0.5;">© 2025 Bryan Collins. All rights reserved.</p>
+        </div>
+    </main>
+</body>
+</html>
+

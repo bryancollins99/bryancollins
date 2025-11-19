@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bryan Collins — MBA Frameworks & AI Tools for Creators</title>
+    <meta name="description" content="Free MBA frameworks, AI prompts, and strategic insights for creators building sustainable businesses.">
+    
+    <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background-color: #FFFFFF;
+            color: #3D3D3D;
+            line-height: 1.6;
+        }
+        
+        /* Black header like Kit */
+        header {
+            background: #000000;
+            border-bottom: 1px solid #333;
+        }
+        
+        nav a {
+            color: #FFFFFF;
+            text-decoration: none;
+            font-size: 0.9375rem;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+        
+        nav a:hover {
+            color: #FFDE59;
+        }
+        
+        h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            line-height: 1.1;
+            letter-spacing: -0.02em;
+            color: #1B1B1D;
+        }
+        
+        h2 {
+            font-size: 1.875rem;
+            font-weight: 600;
+            letter-spacing: -0.01em;
+            color: #1B1B1D;
+        }
+        
+        h3 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: #1B1B1D;
+        }
+        
+        .muted {
+            color: #6E6E6E;
+        }
+        
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 6px;
+            font-size: 0.9375rem;
+            font-weight: 500;
+            transition: all 0.2s;
+            padding: 0.625rem 1.25rem;
+            text-decoration: none;
+            cursor: pointer;
+        }
+        
+        .btn-primary {
+            background: #FFDE59;
+            color: #000000;
+        }
+        
+        .btn-primary:hover {
+            background: #ffd633;
+        }
+        
+        .btn-outline {
+            border: 1px solid #D0D0D0;
+            background: transparent;
+            color: #3D3D3D;
+        }
+        
+        .btn-outline:hover {
+            background: #F5F5F5;
+        }
+        
+        .card {
+            background: #FFFFFF;
+            border: 1px solid #E5E5E5;
+            border-radius: 8px;
+            padding: 2rem;
+            transition: all 0.2s;
+        }
+        
+        .card:hover {
+            border-color: #D0D0D0;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+        }
+        
+        footer {
+            border-top: 1px solid #E5E5E5;
+            margin-top: 4rem;
+        }
+    </style>
+</head>
+<body>
+    <!-- Black Header like Kit -->
+    <header class="sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+            <a href="#" class="text-xl font-bold" style="color: #FFFFFF;">Bryan Collins</a>
+            <nav class="hidden md:flex items-center gap-8">
+                <a href="astropaper-clean-frameworks.html">Frameworks</a>
+                <a href="#">Books</a>
+                <a href="#">About</a>
+                <a href="astropaper-clean-optin.html" class="btn btn-primary">
+                    <i class="fas fa-download mr-2"></i>Free Tools
+                </a>
+            </nav>
+            <button class="md:hidden" style="color: #FFFFFF;">
+                <i class="fas fa-bars text-xl"></i>
+            </button>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="py-20 px-6">
+        <div class="max-w-4xl mx-auto text-center">
+            <h1 class="mb-6">
+                Strategic MBA Frameworks<br/>
+                Without the $40K Tuition
+            </h1>
+            
+            <p class="text-xl muted mb-10 max-w-2xl mx-auto">
+                Learn how to think strategically about your creator business. Free frameworks, 
+                AI tools, and insights—no MBA required.
+            </p>
+            
+            <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                <a href="astropaper-clean-optin.html" class="btn btn-primary text-base px-8 py-3">
+                    <i class="fas fa-envelope mr-2"></i>Get Free AI Prompts
+                </a>
+                <a href="astropaper-clean-frameworks.html" class="btn btn-outline text-base px-8 py-3">
+                    <i class="fas fa-tools mr-2"></i>Explore Frameworks
+                </a>
+            </div>
+            
+            <div class="flex items-center justify-center gap-8 mt-12 text-sm muted">
+                <div class="flex items-center gap-2">
+                    <i class="fas fa-users"></i>
+                    <span>15,000+ readers</span>
+                </div>
+                <div class="flex items-center gap-2">
+                    <i class="fas fa-tools"></i>
+                    <span>8 free tools</span>
+                </div>
+                <div class="flex items-center gap-2">
+                    <i class="fas fa-star" style="color: #FFDE59;"></i>
+                    <span>No signup required</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Grid -->
+    <section class="py-16 px-6" style="background: #FAFAFA;">
+        <div class="max-w-7xl mx-auto">
+            <h2 class="text-center mb-12">What You Get</h2>
+            
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- Feature 1 -->
+                <div class="card">
+                    <div class="w-12 h-12 rounded-lg flex items-center justify-center mb-4" style="background: #F5F5F5;">
+                        <i class="fas fa-chart-line text-2xl" style="color: #3D3D3D;"></i>
+                    </div>
+                    <h3 class="mb-2">8 MBA Frameworks</h3>
+                    <p class="text-sm muted mb-4">
+                        Interactive tools for SWOT, ANSOFF, Porter's Five Forces, Business Model Canvas, and more.
+                    </p>
+                    <a href="astropaper-clean-frameworks.html" class="text-sm font-medium" style="color: #000000;">
+                        Try Tools <i class="fas fa-arrow-right ml-1"></i>
+                    </a>
+                </div>
+
+                <!-- Feature 2 -->
+                <div class="card">
+                    <div class="w-12 h-12 rounded-lg flex items-center justify-center mb-4" style="background: #F5F5F5;">
+                        <i class="fas fa-robot text-2xl" style="color: #3D3D3D;"></i>
+                    </div>
+                    <h3 class="mb-2">101 AI Prompts</h3>
+                    <p class="text-sm muted mb-4">
+                        Battle-tested ChatGPT prompts for content creation, marketing, and strategy.
+                    </p>
+                    <a href="astropaper-clean-optin.html" class="text-sm font-medium" style="color: #000000;">
+                        Download Free <i class="fas fa-arrow-right ml-1"></i>
+                    </a>
+                </div>
+
+                <!-- Feature 3 -->
+                <div class="card">
+                    <div class="w-12 h-12 rounded-lg flex items-center justify-center mb-4" style="background: #F5F5F5;">
+                        <i class="fas fa-book text-2xl" style="color: #3D3D3D;"></i>
+                    </div>
+                    <h3 class="mb-2">Bestselling Books</h3>
+                    <p class="text-sm muted mb-4">
+                        Practical guides on creativity, productivity, and building a sustainable creator business.
+                    </p>
+                    <a href="#" class="text-sm font-medium" style="color: #000000;">
+                        View Books <i class="fas fa-arrow-right ml-1"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Newsletter CTA -->
+    <section class="py-16 px-6">
+        <div class="max-w-3xl mx-auto">
+            <div class="card text-center" style="border: 2px solid #E5E5E5;">
+                <h2 class="mb-4">Get Strategic Insights Every Week</h2>
+                <p class="muted mb-6">
+                    Join 15,000+ creators receiving MBA frameworks, AI prompts, and strategies in their inbox.
+                </p>
+                
+                <form class="flex flex-col sm:flex-row gap-3 max-w-md mx-auto">
+                    <input 
+                        type="email" 
+                        placeholder="your@email.com" 
+                        class="flex-1 px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-black"
+                        style="border-color: #D0D0D0;"
+                    >
+                    <button type="submit" class="btn btn-primary px-6">Subscribe</button>
+                </form>
+                
+                <p class="text-xs muted mt-4">
+                    <i class="fas fa-lock mr-1"></i>No spam. Unsubscribe anytime.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="max-w-7xl mx-auto px-6 py-8">
+            <div class="flex flex-col md:flex-row justify-between items-center gap-4">
+                <p class="text-sm muted">
+                    © 2025 Bryan Collins. All rights reserved.
+                </p>
+                <div class="flex gap-6 text-sm">
+                    <a href="#" class="muted hover:text-black transition-colors">Privacy</a>
+                    <a href="#" class="muted hover:text-black transition-colors">Contact</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
+

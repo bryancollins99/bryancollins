@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MBA Framework Tools — Free Interactive Tools for Creators</title>
+    <meta name="description" content="Free interactive MBA framework tools including SWOT, ANSOFF, Porter's 5 Forces, and more.">
+    
+    <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    
+    <style>
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            background-color: #EDEDEE;
+            color: #1B1B1D;
+        }
+        .hero-gradient {
+            background: linear-gradient(135deg, #000000 0%, #1a1a1a 100%);
+        }
+        .hero-text {
+            color: white;
+        }
+        .cta-button {
+            background: #FFDE59;
+            color: #000000;
+            font-weight: 700;
+            transition: all 0.3s ease;
+            padding: 12px 24px;
+            font-size: 0.9375rem;
+            border-radius: 8px;
+            display: inline-block;
+            text-decoration: none;
+        }
+        .cta-button:hover {
+            background: #ffd633;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 15px -3px rgba(255, 222, 89, 0.3);
+        }
+        .tool-card {
+            background: white;
+            border-radius: 12px;
+            padding: 1.75rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+        .tool-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.15);
+        }
+        .tool-icon {
+            width: 56px;
+            height: 56px;
+            background: #F5F5F5;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1rem;
+        }
+        .badge {
+            display: inline-block;
+            background: #F5F5F5;
+            padding: 4px 12px;
+            border-radius: 100px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+    <!-- Hero Section -->
+    <main class="min-h-screen flex flex-col items-center justify-center py-12 px-4">
+        <div class="w-full max-w-5xl">
+            <!-- Main Content Box -->
+            <div class="bg-white rounded-xl overflow-hidden shadow-xl">
+                <!-- Header -->
+                <div class="hero-gradient px-8 py-12 text-center">
+                    <h1 class="hero-text text-4xl sm:text-5xl font-extrabold mb-4 leading-tight">MBA Framework Tools</h1>
+                    <p class="hero-text text-xl max-w-2xl mx-auto">
+                        Free interactive strategic planning tools. Fill out the wizard, visualize your strategy, export to PDF.
+                    </p>
+                </div>
+                
+                <!-- Content -->
+                <div class="px-8 py-12">
+                    <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
+                        
+                        <!-- ANSOFF Matrix -->
+                        <div class="tool-card">
+                            <div class="tool-icon">
+                                <i class="fas fa-th-large text-2xl" style="color: #1B1B1D;"></i>
+                            </div>
+                            <h3 class="text-lg font-semibold mb-2">ANSOFF Matrix</h3>
+                            <p class="text-sm mb-4 flex-grow">
+                                Identify growth strategies: market penetration, development, product development, or diversification.
+                            </p>
+                            <div class="mb-4">
+                                <span class="badge">
+                                    <i class="fas fa-download mr-1"></i>PDF Export
+                                </span>
+                            </div>
+                            <a href="../ansoff-matrix.html" class="cta-button w-full text-center">
+                                Try Tool
+                            </a>
+                        </div>
+
+                        <!-- SWOT Analysis -->
+                        <div class="tool-card">
+                            <div class="tool-icon">
+                                <i class="fas fa-balance-scale text-2xl" style="color: #1B1B1D;"></i>
+                            </div>
+                            <h3 class="text-lg font-semibold mb-2">SWOT Analysis</h3>
+                            <p class="text-sm mb-4 flex-grow">
+                                Analyze Strengths, Weaknesses, Opportunities, and Threats to inform strategic decisions.
+                            </p>
+                            <div class="mb-4">
+                                <span class="badge">
+                                    <i class="fas fa-download mr-1"></i>PDF Export
+                                </span>
+                            </div>
+                            <a href="../swot-analysis.html" class="cta-button w-full text-center">
+                                Try Tool
+                            </a>
+                        </div>
+
+                        <!-- Porter's Five Forces -->
+                        <div class="tool-card">
+                            <div class="tool-icon">
+                                <i class="fas fa-shield-alt text-2xl" style="color: #1B1B1D;"></i>
+                            </div>
+                            <h3 class="text-lg font-semibold mb-2">Porter's Five Forces</h3>
+                            <p class="text-sm mb-4 flex-grow">
+                                Evaluate competitive forces: rivalry, new entrants, substitutes, suppliers, and buyers.
+                            </p>
+                            <div class="mb-4">
+                                <span class="badge">
+                                    <i class="fas fa-download mr-1"></i>PDF Export
+                                </span>
+                            </div>
+                            <a href="../porters-five-forces.html" class="cta-button w-full text-center">
+                                Try Tool
+                            </a>
+                        </div>
+
+                        <!-- Value Chain -->
+                        <div class="tool-card">
+                            <div class="tool-icon">
+                                <i class="fas fa-link text-2xl" style="color: #1B1B1D;"></i>
+                            </div>
+                            <h3 class="text-lg font-semibold mb-2">Value Chain</h3>
+                            <p class="text-sm mb-4 flex-grow">
+                                Map primary and support activities to identify competitive advantages and efficiencies.
+                            </p>
+                            <div class="mb-4">
+                                <span class="badge">
+                                    <i class="fas fa-download mr-1"></i>PDF Export
+                                </span>
+                            </div>
+                            <a href="../value-chain.html" class="cta-button w-full text-center">
+                                Try Tool
+                            </a>
+                        </div>
+
+                        <!-- Business Model Canvas -->
+                        <div class="tool-card">
+                            <div class="tool-icon">
+                                <i class="fas fa-layer-group text-2xl" style="color: #1B1B1D;"></i>
+                            </div>
+                            <h3 class="text-lg font-semibold mb-2">Business Model</h3>
+                            <p class="text-sm mb-4 flex-grow">
+                                Map your business model: customers, value propositions, channels, revenue, and resources.
+                            </p>
+                            <div class="mb-4">
+                                <span class="badge">
+                                    <i class="fas fa-download mr-1"></i>PDF Export
+                                </span>
+                            </div>
+                            <a href="../business-model-canvas.html" class="cta-button w-full text-center">
+                                Try Tool
+                            </a>
+                        </div>
+
+                        <!-- PESTEL Analysis -->
+                        <div class="tool-card">
+                            <div class="tool-icon">
+                                <i class="fas fa-globe text-2xl" style="color: #1B1B1D;"></i>
+                            </div>
+                            <h3 class="text-lg font-semibold mb-2">PESTEL Analysis</h3>
+                            <p class="text-sm mb-4 flex-grow">
+                                Analyze macro factors: Political, Economic, Social, Technological, Environmental, Legal.
+                            </p>
+                            <div class="mb-4">
+                                <span class="badge">
+                                    <i class="fas fa-download mr-1"></i>PDF Export
+                                </span>
+                            </div>
+                            <a href="../pestel-analysis.html" class="cta-button w-full text-center">
+                                Try Tool
+                            </a>
+                        </div>
+
+                        <!-- BCG Matrix -->
+                        <div class="tool-card">
+                            <div class="tool-icon">
+                                <i class="fas fa-chart-line text-2xl" style="color: #1B1B1D;"></i>
+                            </div>
+                            <h3 class="text-lg font-semibold mb-2">BCG Matrix</h3>
+                            <p class="text-sm mb-4 flex-grow">
+                                Classify products as Stars, Cash Cows, Question Marks, or Dogs to allocate resources.
+                            </p>
+                            <div class="mb-4">
+                                <span class="badge">
+                                    <i class="fas fa-download mr-1"></i>PDF Export
+                                </span>
+                            </div>
+                            <a href="../bcg-matrix.html" class="cta-button w-full text-center">
+                                Try Tool
+                            </a>
+                        </div>
+
+                        <!-- McKinsey 7S -->
+                        <div class="tool-card">
+                            <div class="tool-icon">
+                                <i class="fas fa-project-diagram text-2xl" style="color: #1B1B1D;"></i>
+                            </div>
+                            <h3 class="text-lg font-semibold mb-2">McKinsey 7S</h3>
+                            <p class="text-sm mb-4 flex-grow">
+                                Align Strategy, Structure, Systems, Shared Values, Style, Staff, and Skills.
+                            </p>
+                            <div class="mb-4">
+                                <span class="badge">
+                                    <i class="fas fa-download mr-1"></i>PDF Export
+                                </span>
+                            </div>
+                            <a href="../mckinsey-7s.html" class="cta-button w-full text-center">
+                                Try Tool
+                            </a>
+                        </div>
+
+                    </div>
+                    
+                    <!-- CTA -->
+                    <div class="text-center py-8 border-t" style="border-color: #D0D0D0;">
+                        <h3 class="text-2xl font-bold mb-4">Want More Strategic Insights?</h3>
+                        <p class="text-lg mb-6">Get 101 ChatGPT prompts plus weekly MBA frameworks and strategies.</p>
+                        <a href="simple-black-optin.html" class="cta-button">
+                            <i class="fas fa-download mr-2"></i>Get Free AI Prompts
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Copyright -->
+            <p class="text-center text-xs mt-8" style="color: #1B1B1D; opacity: 0.5;">© 2025 Bryan Collins. All rights reserved.</p>
+        </div>
+    </main>
+</body>
+</html>
+

@@ -13,6 +13,9 @@
     <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     
+    <!-- Clean Framework Theme -->
+    <link rel="stylesheet" href="framework-theme-clean.css">
+    
     <!-- jsPDF for PDF generation -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     
@@ -21,18 +24,25 @@
     <script defer src="resources/analytics.js"></script>
     
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap');
+        
+        :root {
+            --primary-yellow: #FFDE59;
+            --primary-black: #000000;
+        }
+        
         body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            font-family: 'Space Grotesk', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
             line-height: 1.6;
-            background-color: #EDEDEE;
-            color: #1B1B1D;
+            background-color: #000000;
+            color: #ffffff;
         }
         .hero-gradient {
-            background: linear-gradient(135deg, #956FA6 0%, #7d5e8d 100%);
+            background: linear-gradient(135deg, #000000 0%, #1a1a1a 100%);
         }
         .hero-text {
             color: white;
-            text-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+            text-shadow: 0 1px 3px rgba(255, 222, 89, 0.3);
         }
         .wizard-step {
             display: none;
@@ -42,53 +52,62 @@
         }
         .progress-bar {
             height: 8px;
-            background: #EDEDEE;
+            background: rgba(255, 255, 255, 0.1);
             border-radius: 4px;
             overflow: hidden;
         }
         .progress-fill {
             height: 100%;
-            background: linear-gradient(90deg, #956FA6 0%, #F3C972 100%);
+            background: var(--primary-yellow);
             transition: width 0.3s ease;
+            box-shadow: 0 0 20px rgba(255, 222, 89, 0.5);
         }
         .btn-primary {
-            background: #F3C972;
-            color: #1B1B1D;
+            background: var(--primary-yellow);
+            color: var(--primary-black);
             font-weight: 700;
-            padding: 12px 24px;
-            border-radius: 8px;
+            padding: 14px 32px;
+            border-radius: 100px;
             border: none;
             cursor: pointer;
             transition: all 0.3s ease;
+            box-shadow: 0 0 30px rgba(255, 222, 89, 0.4);
         }
         .btn-primary:hover {
-            background: #eab94a;
+            background: #ffd633;
             transform: translateY(-2px);
+            box-shadow: 0 0 40px rgba(255, 222, 89, 0.6);
         }
         .btn-secondary {
-            background: #A6B6CF;
-            color: white;
+            background: rgba(255, 222, 89, 0.1);
+            color: var(--primary-yellow);
             font-weight: 600;
-            padding: 12px 24px;
-            border-radius: 8px;
-            border: none;
+            padding: 14px 32px;
+            border-radius: 100px;
+            border: 2px solid var(--primary-yellow);
             cursor: pointer;
             transition: all 0.3s ease;
         }
         .btn-secondary:hover {
-            background: #8a9bb8;
+            background: rgba(255, 222, 89, 0.2);
         }
         textarea, input {
             width: 100%;
-            padding: 12px;
-            border: 2px solid #EDEDEE;
-            border-radius: 8px;
+            padding: 14px;
+            border: 1px solid rgba(255, 222, 89, 0.2);
+            border-radius: 12px;
             font-family: inherit;
             transition: border-color 0.3s ease;
+            background: rgba(255, 255, 255, 0.05);
+            color: white;
         }
         textarea:focus, input:focus {
             outline: none;
-            border-color: #956FA6;
+            border-color: var(--primary-yellow);
+            background: rgba(255, 255, 255, 0.08);
+        }
+        textarea::placeholder, input::placeholder {
+            color: #6b7280;
         }
         .matrix-grid {
             display: grid;
@@ -96,22 +115,23 @@
             gap: 16px;
         }
         .matrix-cell {
-            background: white;
-            padding: 20px;
-            border-radius: 12px;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.02));
+            padding: 24px;
+            border-radius: 16px;
+            border: 1px solid rgba(255, 222, 89, 0.2);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
         }
         .matrix-cell.penetration {
-            border-left: 4px solid #4CAF50;
+            border-left: 4px solid var(--primary-yellow);
         }
         .matrix-cell.development {
-            border-left: 4px solid #2196F3;
+            border-left: 4px solid var(--primary-yellow);
         }
         .matrix-cell.product {
-            border-left: 4px solid #FF9800;
+            border-left: 4px solid var(--primary-yellow);
         }
         .matrix-cell.diversification {
-            border-left: 4px solid #9C27B0;
+            border-left: 4px solid var(--primary-yellow);
         }
         .tooltip {
             position: relative;
@@ -121,16 +141,17 @@
         .tooltip .tooltiptext {
             visibility: hidden;
             width: 250px;
-            background-color: #1B1B1D;
-            color: #fff;
+            background-color: rgba(255, 222, 89, 0.95);
+            color: #000000;
             text-align: left;
-            border-radius: 6px;
-            padding: 10px;
+            border-radius: 12px;
+            padding: 12px;
             position: absolute;
             z-index: 1;
             bottom: 125%;
             left: 50%;
             margin-left: -125px;
+            font-weight: 500;
             opacity: 0;
             transition: opacity 0.3s;
             font-size: 14px;
@@ -140,24 +161,49 @@
             opacity: 1;
         }
         .example-box {
-            background: #F3C972;
-            background: linear-gradient(135deg, #F3C972 0%, #f5d89a 100%);
+            background: rgba(255, 222, 89, 0.15);
+            border: 1px solid rgba(255, 222, 89, 0.3);
             padding: 12px 16px;
-            border-radius: 8px;
+            border-radius: 12px;
             margin-top: 8px;
             font-size: 14px;
-            color: #1B1B1D;
+            color: #ffffff;
+            font-weight: 500;
         }
         .framework-card {
-            background: white;
-            border-radius: 12px;
-            padding: 20px;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.02));
+            border: 1px solid rgba(255, 222, 89, 0.2);
+            border-radius: 16px;
+            padding: 24px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
             transition: all 0.3s ease;
         }
         .framework-card:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+            transform: translateY(-4px);
+            box-shadow: 0 12px 32px rgba(255, 222, 89, 0.2);
+            border-color: rgba(255, 222, 89, 0.4);
+        }
+        .bg-white {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.02)) !important;
+            border: 1px solid rgba(255, 222, 89, 0.1);
+        }
+        .text-gray-600, .text-gray-700 {
+            color: #d1d5db !important;
+        }
+        .text-green-800, .text-blue-800, .text-orange-800, .text-purple-800 {
+            color: #ffffff !important;
+            font-weight: 600;
+        }
+        .bg-green-50, .bg-blue-50, .bg-orange-50, .bg-purple-50 {
+            background: rgba(255, 255, 255, 0.08) !important;
+            border-color: var(--primary-yellow) !important;
+        }
+        label {
+            color: var(--primary-yellow) !important;
+            font-weight: 600;
+        }
+        h3, h2 {
+            color: #ffffff !important;
         }
     </style>
 </head>
@@ -408,26 +454,26 @@
                 <h3 class="text-2xl font-bold mb-6 text-center">Explore More Frameworks</h3>
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
                     <div class="framework-card">
-                        <div class="text-3xl mb-3" style="color: #956FA6;"><i class="fas fa-balance-scale"></i></div>
+                        <div class="text-3xl mb-3" style="color: #597AFF;"><i class="fas fa-balance-scale"></i></div>
                         <h4 class="font-bold text-lg mb-2">SWOT Analysis</h4>
                         <p class="text-sm text-gray-600 mb-4">Analyze your strengths, weaknesses, opportunities, and threats</p>
-                        <a href="swot-analysis.html" class="text-sm font-semibold" style="color: #956FA6;">Try This Tool →</a>
+                        <a href="swot-analysis.html" class="text-sm font-semibold" style="color: #597AFF;">Try This Tool →</a>
                     </div>
                     <div class="framework-card">
-                        <div class="text-3xl mb-3" style="color: #956FA6;"><i class="fas fa-chart-line"></i></div>
+                        <div class="text-3xl mb-3" style="color: #597AFF;"><i class="fas fa-chart-line"></i></div>
                         <h4 class="font-bold text-lg mb-2">BCG Matrix</h4>
                         <p class="text-sm text-gray-600 mb-4">Evaluate your product portfolio and prioritize investments</p>
-                        <a href="bcg-matrix.html" class="text-sm font-semibold" style="color: #956FA6;">Try This Tool →</a>
+                        <a href="bcg-matrix.html" class="text-sm font-semibold" style="color: #597AFF;">Try This Tool →</a>
                     </div>
                     <div class="framework-card">
-                        <div class="text-3xl mb-3" style="color: #956FA6;"><i class="fas fa-project-diagram"></i></div>
+                        <div class="text-3xl mb-3" style="color: #597AFF;"><i class="fas fa-project-diagram"></i></div>
                         <h4 class="font-bold text-lg mb-2">Business Model Canvas</h4>
                         <p class="text-sm text-gray-600 mb-4">Design your complete business model in 9 building blocks</p>
-                        <a href="business-model-canvas.html" class="text-sm font-semibold" style="color: #956FA6;">Try This Tool →</a>
+                        <a href="business-model-canvas.html" class="text-sm font-semibold" style="color: #597AFF;">Try This Tool →</a>
                     </div>
                 </div>
                 <div class="text-center mt-6">
-                    <a href="mba-frameworks.html" class="text-lg font-semibold" style="color: #956FA6;">
+                    <a href="mba-frameworks.html" class="text-lg font-semibold" style="color: #597AFF;">
                         <i class="fas fa-arrow-left mr-2"></i>Back to All Frameworks
                     </a>
                 </div>
