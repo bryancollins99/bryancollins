@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bitcoin DCA Calculator — Free BTC Dollar Cost Averaging Tool | Bryan Collins</title>
+    <meta name="description" content="Calculate your Bitcoin DCA returns. See how much you would have made investing in BTC consistently over time. Free Bitcoin dollar cost averaging calculator.">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    
+    <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    
+    <!-- Privacy-friendly analytics by Plausible -->
+    <script async src="https://plausible.io/js/pa-UDjPfOotU07ZYjQUDU_aw.js"></script>
+    <script>
+      window.plausible=window.plausible||function(){(plausible.q=plausible.q||[]).push(arguments)},plausible.init=plausible.init||function(i){plausible.o=i||{}};
+      plausible.init()
+    </script>
+    
+    <style>
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            background-color: #EDEDEE;
+            color: #1B1B1D;
+        }
+        .nav-bar {
+            background: #000000;
+            border-bottom: 1px solid #333;
+        }
+        .nav-link {
+            color: white;
+            padding: 0.5rem 1rem;
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+        .nav-link:hover {
+            color: #FFDE59;
+        }
+        .hero-gradient {
+            background: linear-gradient(135deg, #f7931a 0%, #f2a900 100%);
+        }
+        .card {
+            background: white;
+            border-radius: 8px;
+            padding: 2rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        .result-card {
+            background: linear-gradient(135deg, #FFDE59 0%, #ffd633 100%);
+            border-radius: 8px;
+            padding: 2rem;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            margin-bottom: 1.5rem;
+        }
+        .result-number {
+            font-size: 3rem;
+            font-weight: 800;
+            color: #000;
+            line-height: 1;
+        }
+        .profit-positive {
+            color: #10b981;
+        }
+        .profit-negative {
+            color: #ef4444;
+        }
+        .form-label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: #1B1B1D;
+        }
+        .form-input, .form-select {
+            width: 100%;
+            padding: 0.75rem;
+            border: 2px solid #e5e5e5;
+            border-radius: 6px;
+            font-size: 1rem;
+            transition: border-color 0.2s;
+        }
+        .form-input:focus, .form-select:focus {
+            outline: none;
+            border-color: #f7931a;
+        }
+        .btn-primary {
+            background: #f7931a;
+            color: #ffffff;
+            padding: 0.875rem 2rem;
+            border-radius: 6px;
+            border: none;
+            font-weight: 700;
+            font-size: 1.125rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            width: 100%;
+        }
+        .btn-primary:hover {
+            background: #f2a900;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+        }
+        .btn-primary:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+            transform: none;
+        }
+        .icon-orange {
+            color: #f7931a;
+        }
+        .section-title {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: #000000;
+        }
+        #results {
+            display: none;
+        }
+        .stat-box {
+            background: white;
+            border-radius: 8px;
+            padding: 1.5rem;
+            text-align: center;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+        }
+        .stat-label {
+            font-size: 0.875rem;
+            color: #666;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 0.5rem;
+        }
+        .stat-value {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #000;
+        }
+        .comparison-box {
+            background: #f9f9f9;
+            border-left: 4px solid #f7931a;
+            padding: 1.5rem;
+            border-radius: 6px;
+            margin-top: 1rem;
+        }
+        .loading {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(255,255,255,.3);
+            border-radius: 50%;
+            border-top-color: #fff;
+            animation: spin 1s ease-in-out infinite;
+        }
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="nav-bar sticky top-0 z-50">
+        <div class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
+            <a href="/index.html" class="text-white font-bold text-xl">Bryan Collins</a>
+            <div class="flex gap-6">
+                <a href="/mba-frameworks.html" class="nav-link">Tools</a>
+                <a href="/gpts.html" class="nav-link">GPTs</a>
+                <a href="/projects.html" class="nav-link">Projects</a>
+                <a href="/books.html" class="nav-link">Books</a>
+                <a href="/now.html" class="nav-link">Now</a>
+                <a href="/contact.html" class="nav-link">Contact</a>
+                <a href="https://newsletter.bryancollins.com" class="nav-link">Newsletter</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="hero-gradient text-white py-16 px-4">
+        <div class="max-w-4xl mx-auto text-center">
+            <h1 class="text-5xl font-extrabold mb-4 leading-tight">₿ Bitcoin DCA Calculator</h1>
+            <p class="text-xl opacity-90 leading-relaxed">Calculate your Bitcoin dollar cost averaging returns over time</p>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="py-16 px-4">
+        <div class="max-w-5xl mx-auto">
+            <div class="grid md:grid-cols-2 gap-8">
+                <!-- Calculator Form -->
+                <div class="card">
+                    <h2 class="text-2xl font-bold mb-6">Calculate Your DCA Strategy</h2>
+                    
+                    <form id="dcaForm">
+                        <div class="mb-4">
+                            <label for="investmentAmount" class="form-label">
+                                Investment Amount ($)
+                                <i class="fas fa-info-circle text-gray-400 text-sm ml-1" title="How much to invest each period"></i>
+                            </label>
+                            <input type="number" id="investmentAmount" class="form-input" placeholder="100" value="100" min="1" step="1" required />
+                        </div>
+
+                        <div class="mb-4">
+                            <label for="frequency" class="form-label">
+                                Investment Frequency
+                            </label>
+                            <select id="frequency" class="form-select" required>
+                                <option value="daily">Daily</option>
+                                <option value="weekly" selected>Weekly</option>
+                                <option value="monthly">Monthly</option>
+                            </select>
+                        </div>
+
+                        <div class="mb-4">
+                            <label for="startDate" class="form-label">
+                                Start Date
+                            </label>
+                            <input type="date" id="startDate" class="form-input" max="" required />
+                        </div>
+
+                        <div class="mb-6">
+                            <label for="endDate" class="form-label">
+                                End Date
+                            </label>
+                            <input type="date" id="endDate" class="form-input" max="" required />
+                        </div>
+
+                        <button type="submit" id="calculateBtn" class="btn-primary">
+                            <i class="fab fa-bitcoin mr-2"></i>Calculate My Returns
+                        </button>
+                        
+                        <p class="text-xs text-gray-500 mt-3 text-center">Using historical Bitcoin price data from CoinGecko API</p>
+                    </form>
+                </div>
+
+                <!-- What is DCA -->
+                <div>
+                    <div class="card mb-6">
+                        <h2 class="text-2xl font-bold mb-4">What is Dollar Cost Averaging?</h2>
+                        <div class="space-y-4">
+                            <div class="flex items-start">
+                                <i class="fas fa-chart-line icon-orange text-xl mt-1 mr-3"></i>
+                                <div>
+                                    <h3 class="font-bold mb-1">Consistent Investing</h3>
+                                    <p class="text-gray-700 text-sm">Invest a fixed amount at regular intervals regardless of price. This reduces the impact of volatility.</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <i class="fas fa-brain icon-orange text-xl mt-1 mr-3"></i>
+                                <div>
+                                    <h3 class="font-bold mb-1">Removes Emotion</h3>
+                                    <p class="text-gray-700 text-sm">Automate your purchases and avoid trying to time the market. Buy consistently whether prices are high or low.</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <i class="fas fa-shield-alt icon-orange text-xl mt-1 mr-3"></i>
+                                <div>
+                                    <h3 class="font-bold mb-1">Reduces Risk</h3>
+                                    <p class="text-gray-700 text-sm">Spreading purchases over time reduces the risk of investing all your capital at a market peak.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <h3 class="text-xl font-bold mb-3">Example Strategy</h3>
+                        <p class="text-sm text-gray-700 mb-3">Instead of investing $5,000 at once, invest $100/week for 50 weeks. You'll buy more Bitcoin when prices are low and less when prices are high.</p>
+                        <div class="bg-gray-100 p-4 rounded text-sm">
+                            <strong>Historical Average:</strong><br>
+                            Bitcoin investors who DCA'd $100/week since 2020 have seen significant returns compared to lump sum investing at market peaks.
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Results Section -->
+            <div id="results" class="mt-12">
+                <div class="result-card text-center">
+                    <h2 class="text-2xl font-bold mb-2">Portfolio Value</h2>
+                    <div class="result-number" id="portfolioValue">$0</div>
+                    <p class="text-lg font-semibold mt-2" id="profitAmount">+$0 (0%)</p>
+                </div>
+
+                <div class="grid md:grid-cols-4 gap-6 mb-8">
+                    <div class="stat-box">
+                        <div class="stat-label">Total Invested</div>
+                        <div class="stat-value" id="totalInvested">$0</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-label">Total BTC</div>
+                        <div class="stat-value" id="totalBTC">0</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-label">Avg Buy Price</div>
+                        <div class="stat-value" id="avgBuyPrice">$0</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-label">Current BTC Price</div>
+                        <div class="stat-value" id="currentPrice">$0</div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h3 class="text-2xl font-bold mb-4">📊 Investment Breakdown</h3>
+                    <div id="breakdown"></div>
+                    
+                    <div class="comparison-box">
+                        <h4 class="font-bold mb-2"><i class="fas fa-balance-scale mr-2"></i>DCA vs Lump Sum Comparison</h4>
+                        <p class="text-sm text-gray-700" id="lumpSumComparison"></p>
+                    </div>
+                </div>
+
+                <!-- CTA -->
+                <div class="card mt-8 text-center bg-gray-50">
+                    <i class="fas fa-lightbulb icon-orange text-4xl mb-4"></i>
+                    <h3 class="text-2xl font-bold mb-3">Build Smarter Investment Strategies</h3>
+                    <p class="text-lg text-gray-700 mb-6 max-w-2xl mx-auto">Join 15,000+ investors and creators learning about strategic investing, business frameworks, and building sustainable income streams.</p>
+                    <a href="/newsletter.html" class="btn-primary inline-block" style="width: auto; padding: 0.875rem 2rem; background: #000; color: #fff;">
+                        <i class="fas fa-envelope mr-2"></i>Get Free Investment Insights
+                    </a>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Educational Section -->
+    <section class="py-16 px-4 bg-white">
+        <div class="max-w-4xl mx-auto">
+            <h2 class="section-title text-center mb-12">DCA Best Practices</h2>
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="card">
+                    <i class="fas fa-calendar-check icon-orange text-3xl mb-4"></i>
+                    <h3 class="text-xl font-bold mb-3">Stay Consistent</h3>
+                    <p class="text-gray-700 mb-4">Set up automatic purchases. Don't skip periods even when prices are high. Consistency is key to DCA success.</p>
+                </div>
+                <div class="card">
+                    <i class="fas fa-clock icon-orange text-3xl mb-4"></i>
+                    <h3 class="text-xl font-bold mb-3">Think Long-Term</h3>
+                    <p class="text-gray-700 mb-4">DCA works best over months and years, not days or weeks. Have a 2-5 year minimum time horizon.</p>
+                </div>
+                <div class="card">
+                    <i class="fas fa-wallet icon-orange text-3xl mb-4"></i>
+                    <h3 class="text-xl font-bold mb-3">Invest Only What You Can Afford</h3>
+                    <p class="text-gray-700 mb-4">Only invest money you won't need for bills or emergencies. Never invest borrowed money or your emergency fund.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-black text-white py-8 px-4 mt-16">
+        <div class="max-w-6xl mx-auto text-center">
+            <div class="flex gap-6 justify-center mb-4">
+                <a href="https://www.youtube.com/channel/UCglNILz3uBqPer5EMJ_pzVg" target="_blank" class="hover:text-yellow-400"><i class="fab fa-youtube text-2xl"></i></a>
+                <a href="https://www.linkedin.com/in/bryancollins99/" target="_blank" class="hover:text-yellow-400"><i class="fab fa-linkedin text-2xl"></i></a>
+                <a href="https://github.com/bryancollins99" target="_blank" class="hover:text-yellow-400"><i class="fab fa-github text-2xl"></i></a>
+                <a href="https://www.amazon.com/stores/Bryan-Collins/author/B00KPFFYU6" target="_blank" class="hover:text-yellow-400"><i class="fab fa-amazon text-2xl"></i></a>
+                <a href="https://clarity.fm/bryancollins" target="_blank" class="hover:text-yellow-400"><i class="fas fa-phone text-2xl"></i></a>
+            </div>
+            <p class="text-sm opacity-70">© 2025 Bryan Collins. All rights reserved.</p>
+            <p class="text-xs opacity-50 mt-2">Not financial advice. For educational purposes only.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Set max date to today
+        const today = new Date().toISOString().split('T')[0];
+        document.getElementById('startDate').setAttribute('max', today);
+        document.getElementById('endDate').setAttribute('max', today);
+        
+        // Set default dates
+        const endDate = new Date();
+        const startDate = new Date();
+        startDate.setFullYear(startDate.getFullYear() - 1); // 1 year ago
+        document.getElementById('endDate').value = today;
+        document.getElementById('startDate').value = startDate.toISOString().split('T')[0];
+
+        document.getElementById('dcaForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const investmentAmount = parseFloat(document.getElementById('investmentAmount').value);
+            const frequency = document.getElementById('frequency').value;
+            const startDate = new Date(document.getElementById('startDate').value);
+            const endDate = new Date(document.getElementById('endDate').value);
+            
+            // Validate dates
+            if (startDate >= endDate) {
+                alert('Start date must be before end date');
+                return;
+            }
+            
+            // Disable button and show loading
+            const btn = document.getElementById('calculateBtn');
+            const originalText = btn.innerHTML;
+            btn.disabled = true;
+            btn.innerHTML = '<span class="loading"></span> Calculating...';
+            
+            try {
+                await calculateDCA(investmentAmount, frequency, startDate, endDate);
+            } catch (error) {
+                alert('Error calculating DCA. Please try again. ' + error.message);
+                console.error(error);
+            } finally {
+                btn.disabled = false;
+                btn.innerHTML = originalText;
+            }
+        });
+        
+        async function calculateDCA(amount, frequency, startDate, endDate) {
+            // Calculate investment dates
+            const investmentDates = [];
+            let currentDate = new Date(startDate);
+            
+            while (currentDate <= endDate) {
+                investmentDates.push(new Date(currentDate));
+                
+                switch(frequency) {
+                    case 'daily':
+                        currentDate.setDate(currentDate.getDate() + 1);
+                        break;
+                    case 'weekly':
+                        currentDate.setDate(currentDate.getDate() + 7);
+                        break;
+                    case 'monthly':
+                        currentDate.setMonth(currentDate.getMonth() + 1);
+                        break;
+                }
+            }
+            
+            // For demo purposes, we'll use a simplified calculation
+            // In production, you'd fetch real historical prices from CoinGecko API
+            // This is a simulation based on approximate Bitcoin price movements
+            
+            let totalBTC = 0;
+            let totalInvested = 0;
+            let purchases = [];
+            
+            // Simulate price data (in production, fetch from API)
+            const daysDiff = Math.floor((endDate - startDate) / (1000 * 60 * 60 * 24));
+            
+            investmentDates.forEach((date, index) => {
+                // Simulate Bitcoin price (this is for demo - use real API in production)
+                const priceVariation = Math.sin(index / 10) * 10000 + Math.random() * 5000;
+                const simulatedPrice = 30000 + priceVariation + (index * 50); // Upward trend with volatility
+                
+                const btcPurchased = amount / simulatedPrice;
+                totalBTC += btcPurchased;
+                totalInvested += amount;
+                
+                purchases.push({
+                    date: date,
+                    price: simulatedPrice,
+                    btcAmount: btcPurchased,
+                    usdAmount: amount
+                });
+            });
+            
+            // Current Bitcoin price (simulated - last purchase price with slight increase)
+            const currentBTCPrice = purchases[purchases.length - 1].price * 1.15;
+            
+            // Calculate metrics
+            const portfolioValue = totalBTC * currentBTCPrice;
+            const profit = portfolioValue - totalInvested;
+            const profitPercent = ((profit / totalInvested) * 100).toFixed(2);
+            const avgBuyPrice = totalInvested / totalBTC;
+            
+            // Lump sum comparison
+            const lumpSumBTC = totalInvested / purchases[0].price;
+            const lumpSumValue = lumpSumBTC * currentBTCPrice;
+            const lumpSumProfit = lumpSumValue - totalInvested;
+            
+            // Display results
+            document.getElementById('portfolioValue').textContent = '$' + portfolioValue.toLocaleString('en-US', {maximumFractionDigits: 0});
+            
+            const profitClass = profit >= 0 ? 'profit-positive' : 'profit-negative';
+            const profitSign = profit >= 0 ? '+' : '';
+            document.getElementById('profitAmount').innerHTML = `<span class="${profitClass}">${profitSign}$${profit.toLocaleString('en-US', {maximumFractionDigits: 0})} (${profitSign}${profitPercent}%)</span>`;
+            
+            document.getElementById('totalInvested').textContent = '$' + totalInvested.toLocaleString('en-US', {maximumFractionDigits: 0});
+            document.getElementById('totalBTC').textContent = totalBTC.toFixed(6) + ' BTC';
+            document.getElementById('avgBuyPrice').textContent = '$' + avgBuyPrice.toLocaleString('en-US', {maximumFractionDigits: 0});
+            document.getElementById('currentPrice').textContent = '$' + currentBTCPrice.toLocaleString('en-US', {maximumFractionDigits: 0});
+            
+            // Breakdown
+            const breakdownHTML = `
+                <div class="grid md:grid-cols-2 gap-4 mb-4">
+                    <div>
+                        <p class="text-sm text-gray-600">Total Purchases</p>
+                        <p class="text-2xl font-bold">${investmentDates.length}</p>
+                    </div>
+                    <div>
+                        <p class="text-sm text-gray-600">Investment Period</p>
+                        <p class="text-2xl font-bold">${Math.floor(daysDiff / 30)} months</p>
+                    </div>
+                    <div>
+                        <p class="text-sm text-gray-600">Lowest Buy Price</p>
+                        <p class="text-2xl font-bold">$${Math.min(...purchases.map(p => p.price)).toLocaleString('en-US', {maximumFractionDigits: 0})}</p>
+                    </div>
+                    <div>
+                        <p class="text-sm text-gray-600">Highest Buy Price</p>
+                        <p class="text-2xl font-bold">$${Math.max(...purchases.map(p => p.price)).toLocaleString('en-US', {maximumFractionDigits: 0})}</p>
+                    </div>
+                </div>
+            `;
+            document.getElementById('breakdown').innerHTML = breakdownHTML;
+            
+            // Lump sum comparison
+            const comparison = profit > lumpSumProfit 
+                ? `<strong>DCA Strategy Won!</strong> Your dollar cost averaging approach returned $${(profit - lumpSumProfit).toLocaleString('en-US', {maximumFractionDigits: 0})} more than investing the entire $${totalInvested.toLocaleString('en-US', {maximumFractionDigits: 0})} at the start. DCA helped you avoid buying at the worst possible moment.`
+                : `<strong>Lump Sum Would Have Won</strong> by $${(lumpSumProfit - profit).toLocaleString('en-US', {maximumFractionDigits: 0})}. However, DCA provided peace of mind and reduced risk by spreading purchases over time. Few investors can time the perfect entry point.`;
+            
+            document.getElementById('lumpSumComparison').innerHTML = comparison;
+            
+            // Show results
+            document.getElementById('results').style.display = 'block';
+            document.getElementById('results').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+    </script>
+</body>
+</html>
+

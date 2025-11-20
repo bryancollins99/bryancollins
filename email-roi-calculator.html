@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Email ROI Calculator — Free Tool by Bryan Collins</title>
+    <meta name="description" content="Calculate the ROI of your email list. Free Email ROI Calculator to estimate revenue potential and subscriber value for your newsletter.">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    
+    <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    
+    <!-- Privacy-friendly analytics by Plausible -->
+    <script async src="https://plausible.io/js/pa-UDjPfOotU07ZYjQUDU_aw.js"></script>
+    <script>
+      window.plausible=window.plausible||function(){(plausible.q=plausible.q||[]).push(arguments)},plausible.init=plausible.init||function(i){plausible.o=i||{}};
+      plausible.init()
+    </script>
+    
+    <style>
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            background-color: #EDEDEE;
+            color: #1B1B1D;
+        }
+        .nav-bar {
+            background: #000000;
+            border-bottom: 1px solid #333;
+        }
+        .nav-link {
+            color: white;
+            padding: 0.5rem 1rem;
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+        .nav-link:hover {
+            color: #FFDE59;
+        }
+        .hero-gradient {
+            background: linear-gradient(135deg, #000000 0%, #1a1a1a 100%);
+        }
+        .card {
+            background: white;
+            border-radius: 8px;
+            padding: 2rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        .result-card {
+            background: linear-gradient(135deg, #FFDE59 0%, #ffd633 100%);
+            border-radius: 8px;
+            padding: 2rem;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            margin-bottom: 1.5rem;
+        }
+        .result-number {
+            font-size: 3rem;
+            font-weight: 800;
+            color: #000;
+            line-height: 1;
+        }
+        .form-label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: #1B1B1D;
+        }
+        .form-input {
+            width: 100%;
+            padding: 0.75rem;
+            border: 2px solid #e5e5e5;
+            border-radius: 6px;
+            font-size: 1rem;
+            transition: border-color 0.2s;
+        }
+        .form-input:focus {
+            outline: none;
+            border-color: #FFDE59;
+        }
+        .btn-primary {
+            background: #FFDE59;
+            color: #000000;
+            padding: 0.875rem 2rem;
+            border-radius: 6px;
+            border: none;
+            font-weight: 700;
+            font-size: 1.125rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            width: 100%;
+        }
+        .btn-primary:hover {
+            background: #ffd633;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+        }
+        .btn-secondary {
+            background: #000;
+            color: #fff;
+            padding: 0.875rem 2rem;
+            border-radius: 6px;
+            text-decoration: none;
+            display: inline-block;
+            font-weight: 700;
+            font-size: 1.125rem;
+            text-align: center;
+            transition: all 0.3s;
+        }
+        .btn-secondary:hover {
+            background: #333;
+        }
+        .icon-yellow {
+            color: #FFDE59;
+        }
+        .section-title {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: #000000;
+        }
+        .insight-box {
+            background: #f9f9f9;
+            border-left: 4px solid #FFDE59;
+            padding: 1.5rem;
+            border-radius: 6px;
+            margin-bottom: 1rem;
+        }
+        #results {
+            display: none;
+        }
+        .stat-box {
+            background: white;
+            border-radius: 8px;
+            padding: 1.5rem;
+            text-align: center;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+        }
+        .stat-label {
+            font-size: 0.875rem;
+            color: #666;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 0.5rem;
+        }
+        .stat-value {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #000;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="nav-bar sticky top-0 z-50">
+        <div class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
+            <a href="/index.html" class="text-white font-bold text-xl">Bryan Collins</a>
+            <div class="flex gap-6">
+                <a href="/mba-frameworks.html" class="nav-link">Tools</a>
+                <a href="/gpts.html" class="nav-link">GPTs</a>
+                <a href="/projects.html" class="nav-link">Projects</a>
+                <a href="/books.html" class="nav-link">Books</a>
+                <a href="/now.html" class="nav-link">Now</a>
+                <a href="/contact.html" class="nav-link">Contact</a>
+                <a href="https://newsletter.bryancollins.com" class="nav-link">Newsletter</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="hero-gradient text-white py-16 px-4">
+        <div class="max-w-4xl mx-auto text-center">
+            <h1 class="text-5xl font-extrabold mb-4 leading-tight">📧 Email ROI Calculator</h1>
+            <p class="text-xl opacity-90 leading-relaxed">Discover the true value of your email list and revenue potential</p>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="py-16 px-4">
+        <div class="max-w-5xl mx-auto">
+            <div class="grid md:grid-cols-2 gap-8">
+                <!-- Calculator Form -->
+                <div class="card">
+                    <h2 class="text-2xl font-bold mb-6">Enter Your Email Metrics</h2>
+                    
+                    <form id="roiForm">
+                        <div class="mb-4">
+                            <label for="listSize" class="form-label">
+                                Email List Size
+                                <i class="fas fa-info-circle text-gray-400 text-sm ml-1" title="Total number of subscribers"></i>
+                            </label>
+                            <input type="number" id="listSize" class="form-input" placeholder="1000" value="1000" min="0" required />
+                        </div>
+
+                        <div class="mb-4">
+                            <label for="openRate" class="form-label">
+                                Open Rate (%)
+                                <i class="fas fa-info-circle text-gray-400 text-sm ml-1" title="Industry average is 15-25%"></i>
+                            </label>
+                            <input type="number" id="openRate" class="form-input" placeholder="20" value="20" min="0" max="100" step="0.1" required />
+                        </div>
+
+                        <div class="mb-4">
+                            <label for="clickRate" class="form-label">
+                                Click-Through Rate (%)
+                                <i class="fas fa-info-circle text-gray-400 text-sm ml-1" title="Industry average is 2-5%"></i>
+                            </label>
+                            <input type="number" id="clickRate" class="form-input" placeholder="3" value="3" min="0" max="100" step="0.1" required />
+                        </div>
+
+                        <div class="mb-4">
+                            <label for="conversionRate" class="form-label">
+                                Conversion Rate (%)
+                                <i class="fas fa-info-circle text-gray-400 text-sm ml-1" title="% of clicks that become customers"></i>
+                            </label>
+                            <input type="number" id="conversionRate" class="form-input" placeholder="5" value="5" min="0" max="100" step="0.1" required />
+                        </div>
+
+                        <div class="mb-4">
+                            <label for="avgValue" class="form-label">
+                                Average Customer Value ($)
+                                <i class="fas fa-info-circle text-gray-400 text-sm ml-1" title="Average purchase amount or lifetime value"></i>
+                            </label>
+                            <input type="number" id="avgValue" class="form-input" placeholder="100" value="100" min="0" step="0.01" required />
+                        </div>
+
+                        <div class="mb-6">
+                            <label for="emailsPerMonth" class="form-label">
+                                Emails Sent Per Month
+                                <i class="fas fa-info-circle text-gray-400 text-sm ml-1" title="How often do you send promotional emails?"></i>
+                            </label>
+                            <input type="number" id="emailsPerMonth" class="form-input" placeholder="4" value="4" min="0" required />
+                        </div>
+
+                        <button type="submit" class="btn-primary">
+                            <i class="fas fa-calculator mr-2"></i>Calculate My ROI
+                        </button>
+                    </form>
+                </div>
+
+                <!-- Why This Matters -->
+                <div>
+                    <div class="card mb-6">
+                        <h2 class="text-2xl font-bold mb-4">Why Email ROI Matters</h2>
+                        <div class="space-y-4">
+                            <div class="flex items-start">
+                                <i class="fas fa-chart-line icon-yellow text-xl mt-1 mr-3"></i>
+                                <div>
+                                    <h3 class="font-bold mb-1">Highest ROI Channel</h3>
+                                    <p class="text-gray-700 text-sm">Email marketing returns $42 for every $1 spent — higher than any other marketing channel.</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <i class="fas fa-users icon-yellow text-xl mt-1 mr-3"></i>
+                                <div>
+                                    <h3 class="font-bold mb-1">You Own Your Audience</h3>
+                                    <p class="text-gray-700 text-sm">Unlike social media, your email list can't be taken away by algorithm changes or platform shutdowns.</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <i class="fas fa-bolt icon-yellow text-xl mt-1 mr-3"></i>
+                                <div>
+                                    <h3 class="font-bold mb-1">Direct Connection</h3>
+                                    <p class="text-gray-700 text-sm">Email puts your message directly in front of your audience without competing for attention in crowded feeds.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <h3 class="text-xl font-bold mb-3">Industry Benchmarks</h3>
+                        <ul class="space-y-2 text-sm text-gray-700">
+                            <li><strong>Open Rate:</strong> 15-25% (Good: 25%+)</li>
+                            <li><strong>Click Rate:</strong> 2-5% (Good: 5%+)</li>
+                            <li><strong>Conversion Rate:</strong> 2-5% (Good: 5%+)</li>
+                            <li><strong>ROI:</strong> $38-$45 per $1 spent</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Results Section -->
+            <div id="results" class="mt-12">
+                <div class="result-card text-center">
+                    <h2 class="text-2xl font-bold mb-2">Your Email List Could Generate</h2>
+                    <div class="result-number" id="annualRevenue">$0</div>
+                    <p class="text-lg font-semibold mt-2">per year in revenue</p>
+                </div>
+
+                <div class="grid md:grid-cols-4 gap-6 mb-8">
+                    <div class="stat-box">
+                        <div class="stat-label">Monthly Revenue</div>
+                        <div class="stat-value" id="monthlyRevenue">$0</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-label">Value Per Subscriber</div>
+                        <div class="stat-value" id="valuePerSub">$0</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-label">Monthly Customers</div>
+                        <div class="stat-value" id="monthlyCustomers">0</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-label">Annual Customers</div>
+                        <div class="stat-value" id="annualCustomers">0</div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h3 class="text-2xl font-bold mb-6">📊 Your Personalized Insights</h3>
+                    <div id="insights"></div>
+                </div>
+
+                <!-- CTA -->
+                <div class="card mt-8 text-center bg-gray-50">
+                    <i class="fas fa-rocket icon-yellow text-4xl mb-4"></i>
+                    <h3 class="text-2xl font-bold mb-3">Want to 10x These Numbers?</h3>
+                    <p class="text-lg text-gray-700 mb-6 max-w-2xl mx-auto">Join 15,000+ creators who are building profitable email lists. Get my free guide with 101 AI prompts to help you create better email content and grow your audience.</p>
+                    <a href="/newsletter.html" class="btn-secondary inline-block">
+                        <i class="fas fa-envelope mr-2"></i>Get Free Email Marketing Resources
+                    </a>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- How to Improve Section -->
+    <section class="py-16 px-4 bg-white">
+        <div class="max-w-4xl mx-auto">
+            <h2 class="section-title text-center mb-12">How to Improve Your Email ROI</h2>
+            <div class="grid md:grid-cols-2 gap-8">
+                <div class="card">
+                    <i class="fas fa-pen icon-yellow text-3xl mb-4"></i>
+                    <h3 class="text-xl font-bold mb-3">Better Subject Lines</h3>
+                    <p class="text-gray-700 mb-4">Improve open rates by 20-30% with compelling, curiosity-driven subject lines that make people want to click.</p>
+                </div>
+                <div class="card">
+                    <i class="fas fa-bullseye icon-yellow text-3xl mb-4"></i>
+                    <h3 class="text-xl font-bold mb-3">Segmentation</h3>
+                    <p class="text-gray-700 mb-4">Segment your list by interests and behavior to increase relevance and boost conversion rates by 50%+.</p>
+                </div>
+                <div class="card">
+                    <i class="fas fa-magic icon-yellow text-3xl mb-4"></i>
+                    <h3 class="text-xl font-bold mb-3">Personalization</h3>
+                    <p class="text-gray-700 mb-4">Personalized emails deliver 6x higher transaction rates. Go beyond "Hi [Name]" to truly relevant content.</p>
+                </div>
+                <div class="card">
+                    <i class="fas fa-chart-bar icon-yellow text-3xl mb-4"></i>
+                    <h3 class="text-xl font-bold mb-3">A/B Testing</h3>
+                    <p class="text-gray-700 mb-4">Test subject lines, send times, and content to continuously optimize your email performance.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-black text-white py-8 px-4 mt-16">
+        <div class="max-w-6xl mx-auto text-center">
+            <div class="flex gap-6 justify-center mb-4">
+                <a href="https://www.youtube.com/channel/UCglNILz3uBqPer5EMJ_pzVg" target="_blank" class="hover:text-yellow-400"><i class="fab fa-youtube text-2xl"></i></a>
+                <a href="https://www.linkedin.com/in/bryancollins99/" target="_blank" class="hover:text-yellow-400"><i class="fab fa-linkedin text-2xl"></i></a>
+                <a href="https://github.com/bryancollins99" target="_blank" class="hover:text-yellow-400"><i class="fab fa-github text-2xl"></i></a>
+                <a href="https://www.amazon.com/stores/Bryan-Collins/author/B00KPFFYU6" target="_blank" class="hover:text-yellow-400"><i class="fab fa-amazon text-2xl"></i></a>
+                <a href="https://clarity.fm/bryancollins" target="_blank" class="hover:text-yellow-400"><i class="fas fa-phone text-2xl"></i></a>
+            </div>
+            <p class="text-sm opacity-70">© 2025 Bryan Collins. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        document.getElementById('roiForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Get form values
+            const listSize = parseFloat(document.getElementById('listSize').value);
+            const openRate = parseFloat(document.getElementById('openRate').value) / 100;
+            const clickRate = parseFloat(document.getElementById('clickRate').value) / 100;
+            const conversionRate = parseFloat(document.getElementById('conversionRate').value) / 100;
+            const avgValue = parseFloat(document.getElementById('avgValue').value);
+            const emailsPerMonth = parseFloat(document.getElementById('emailsPerMonth').value);
+            
+            // Calculate metrics
+            const opensPerEmail = listSize * openRate;
+            const clicksPerEmail = opensPerEmail * clickRate;
+            const customersPerEmail = clicksPerEmail * conversionRate;
+            const revenuePerEmail = customersPerEmail * avgValue;
+            
+            const monthlyRevenue = revenuePerEmail * emailsPerMonth;
+            const annualRevenue = monthlyRevenue * 12;
+            const monthlyCustomers = Math.round(customersPerEmail * emailsPerMonth);
+            const annualCustomers = monthlyCustomers * 12;
+            const valuePerSubscriber = annualRevenue / listSize;
+            
+            // Display results
+            document.getElementById('annualRevenue').textContent = '$' + annualRevenue.toLocaleString('en-US', {maximumFractionDigits: 0});
+            document.getElementById('monthlyRevenue').textContent = '$' + monthlyRevenue.toLocaleString('en-US', {maximumFractionDigits: 0});
+            document.getElementById('valuePerSub').textContent = '$' + valuePerSubscriber.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2});
+            document.getElementById('monthlyCustomers').textContent = monthlyCustomers.toLocaleString('en-US');
+            document.getElementById('annualCustomers').textContent = annualCustomers.toLocaleString('en-US');
+            
+            // Generate insights
+            const insights = [];
+            
+            if (openRate < 0.18) {
+                insights.push({
+                    icon: 'fa-exclamation-triangle',
+                    title: 'Low Open Rate',
+                    text: 'Your open rate is below industry average (18-25%). Focus on improving subject lines and sender reputation. Better subject lines alone could add $' + ((monthlyRevenue * 0.25) * 12).toLocaleString('en-US', {maximumFractionDigits: 0}) + ' in annual revenue.'
+                });
+            } else if (openRate > 0.25) {
+                insights.push({
+                    icon: 'fa-check-circle',
+                    title: 'Excellent Open Rate',
+                    text: 'Your open rate is above industry average! Your subscribers are engaged and trust your emails. Keep doing what you\'re doing with subject lines and content.'
+                });
+            }
+            
+            if (clickRate < 0.025) {
+                insights.push({
+                    icon: 'fa-exclamation-triangle',
+                    title: 'Low Click-Through Rate',
+                    text: 'Your CTR is below average (2.5-5%). Make your CTAs more compelling and ensure your email content delivers on the subject line promise. A 2% improvement could generate $' + ((listSize * openRate * 0.02 * conversionRate * avgValue * emailsPerMonth) * 12).toLocaleString('en-US', {maximumFractionDigits: 0}) + ' more per year.'
+                });
+            } else if (clickRate > 0.05) {
+                insights.push({
+                    icon: 'fa-check-circle',
+                    title: 'Strong Click-Through Rate',
+                    text: 'Your CTR is above average! Your email content resonates with your audience and your calls-to-action are working well.'
+                });
+            }
+            
+            if (conversionRate < 0.03) {
+                insights.push({
+                    icon: 'fa-exclamation-triangle',
+                    title: 'Conversion Opportunity',
+                    text: 'Your conversion rate has room for improvement. Consider improving your landing pages, offer clarity, and matching message consistency between email and destination. Doubling your conversion rate would add $' + annualRevenue.toLocaleString('en-US', {maximumFractionDigits: 0}) + ' in annual revenue.'
+                });
+            } else if (conversionRate > 0.05) {
+                insights.push({
+                    icon: 'fa-check-circle',
+                    title: 'Great Conversion Rate',
+                    text: 'Your conversion rate is above average! Your offers are well-matched to your audience and your sales process is working effectively.'
+                });
+            }
+            
+            if (valuePerSubscriber < 1) {
+                insights.push({
+                    icon: 'fa-lightbulb',
+                    title: 'Grow Your List',
+                    text: 'At $' + valuePerSubscriber.toFixed(2) + ' per subscriber annually, growing your list by 1,000 subscribers would add $' + (valuePerSubscriber * 1000).toLocaleString('en-US', {maximumFractionDigits: 0}) + ' in annual revenue. Focus on creating lead magnets and growing your email list.'
+                });
+            } else if (valuePerSubscriber > 5) {
+                insights.push({
+                    icon: 'fa-fire',
+                    title: 'High-Value List',
+                    text: 'Excellent! Each subscriber generates $' + valuePerSubscriber.toFixed(2) + ' annually. This is a highly valuable list. Double down on list growth — every 100 new subscribers adds $' + (valuePerSubscriber * 100).toLocaleString('en-US', {maximumFractionDigits: 0}) + '/year.'
+                });
+            }
+            
+            if (emailsPerMonth < 4) {
+                insights.push({
+                    icon: 'fa-calendar',
+                    title: 'Email More Frequently',
+                    text: 'You\'re only sending ' + emailsPerMonth + ' emails per month. Sending just one more email per month could generate an additional $' + (revenuePerEmail * 12).toLocaleString('en-US', {maximumFractionDigits: 0}) + ' per year.'
+                });
+            }
+            
+            // Display insights
+            const insightsHTML = insights.map(insight => `
+                <div class="insight-box">
+                    <div class="flex items-start">
+                        <i class="fas ${insight.icon} icon-yellow text-xl mt-1 mr-3"></i>
+                        <div>
+                            <h4 class="font-bold mb-1">${insight.title}</h4>
+                            <p class="text-gray-700 text-sm">${insight.text}</p>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+            
+            document.getElementById('insights').innerHTML = insightsHTML;
+            
+            // Show results
+            document.getElementById('results').style.display = 'block';
+            
+            // Scroll to results
+            document.getElementById('results').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        });
+    </script>
+</body>
+</html>
+

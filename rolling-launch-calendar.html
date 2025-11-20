@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rolling Launch Calendar — 8-Week Cycle Planner | Bryan Collins</title>
+    <meta name="description" content="Plan your product launches with the proven 8-week cycle: open offer → deliver → document → iterate. Free rolling launch calendar for creators.">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    
+    <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    
+    <!-- Privacy-friendly analytics by Plausible -->
+    <script async src="https://plausible.io/js/pa-UDjPfOotU07ZYjQUDU_aw.js"></script>
+    <script>
+      window.plausible=window.plausible||function(){(plausible.q=plausible.q||[]).push(arguments)},plausible.init=plausible.init||function(i){plausible.o=i||{}};
+      plausible.init()
+    </script>
+    
+    <style>
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            background-color: #EDEDEE;
+            color: #1B1B1D;
+        }
+        .nav-bar {
+            background: #000000;
+            border-bottom: 1px solid #333;
+        }
+        .nav-link {
+            color: white;
+            padding: 0.5rem 1rem;
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+        .nav-link:hover {
+            color: #FFDE59;
+        }
+        .hero-gradient {
+            background: linear-gradient(135deg, #000000 0%, #1a1a1a 100%);
+        }
+        .card {
+            background: white;
+            border-radius: 8px;
+            padding: 2rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        .phase-card {
+            background: white;
+            border-radius: 8px;
+            padding: 1.5rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            border-left: 4px solid #FFDE59;
+            margin-bottom: 1rem;
+        }
+        .phase-open { border-left-color: #10b981; }
+        .phase-deliver { border-left-color: #3b82f6; }
+        .phase-document { border-left-color: #f59e0b; }
+        .phase-iterate { border-left-color: #8b5cf6; }
+        
+        .week-card {
+            background: #f9f9f9;
+            border-radius: 6px;
+            padding: 1rem;
+            margin-bottom: 0.75rem;
+        }
+        .week-header {
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .task-list {
+            list-style: none;
+            padding: 0;
+            margin: 0.5rem 0 0 0;
+        }
+        .task-item {
+            padding: 0.5rem;
+            margin: 0.25rem 0;
+            background: white;
+            border-radius: 4px;
+            font-size: 0.875rem;
+            display: flex;
+            align-items: start;
+        }
+        .task-item i {
+            margin-right: 0.5rem;
+            margin-top: 0.25rem;
+            color: #FFDE59;
+        }
+        .form-label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: #1B1B1D;
+        }
+        .form-input {
+            width: 100%;
+            padding: 0.75rem;
+            border: 2px solid #e5e5e5;
+            border-radius: 6px;
+            font-size: 1rem;
+            transition: border-color 0.2s;
+        }
+        .form-input:focus {
+            outline: none;
+            border-color: #FFDE59;
+        }
+        .btn-primary {
+            background: #FFDE59;
+            color: #000000;
+            padding: 0.875rem 2rem;
+            border-radius: 6px;
+            border: none;
+            font-weight: 700;
+            font-size: 1.125rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            width: 100%;
+        }
+        .btn-primary:hover {
+            background: #ffd633;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+        }
+        .icon-yellow {
+            color: #FFDE59;
+        }
+        .section-title {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: #000000;
+        }
+        #calendar {
+            display: none;
+        }
+        .cycle-overview {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+        .cycle-stat {
+            background: linear-gradient(135deg, #FFDE59 0%, #ffd633 100%);
+            padding: 1.5rem;
+            border-radius: 8px;
+            text-align: center;
+        }
+        .cycle-stat-label {
+            font-size: 0.875rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+        .cycle-stat-value {
+            font-size: 1.5rem;
+            font-weight: 800;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="nav-bar sticky top-0 z-50">
+        <div class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
+            <a href="/index.html" class="text-white font-bold text-xl">Bryan Collins</a>
+            <div class="flex gap-6">
+                <a href="/mba-frameworks.html" class="nav-link">Tools</a>
+                <a href="/gpts.html" class="nav-link">GPTs</a>
+                <a href="/projects.html" class="nav-link">Projects</a>
+                <a href="/books.html" class="nav-link">Books</a>
+                <a href="/now.html" class="nav-link">Now</a>
+                <a href="/contact.html" class="nav-link">Contact</a>
+                <a href="https://newsletter.bryancollins.com" class="nav-link">Newsletter</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="hero-gradient text-white py-16 px-4">
+        <div class="max-w-4xl mx-auto text-center">
+            <h1 class="text-5xl font-extrabold mb-4 leading-tight">🚀 Rolling Launch Calendar</h1>
+            <p class="text-xl opacity-90 leading-relaxed">Plan your 8-week product launch cycle: Open → Deliver → Document → Iterate</p>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="py-16 px-4">
+        <div class="max-w-6xl mx-auto">
+            <div class="grid md:grid-cols-2 gap-8 mb-12">
+                <!-- Calendar Generator -->
+                <div class="card">
+                    <h2 class="text-2xl font-bold mb-6">Create Your Launch Calendar</h2>
+                    
+                    <form id="launchForm">
+                        <div class="mb-4">
+                            <label for="productName" class="form-label">
+                                Product/Offer Name
+                            </label>
+                            <input type="text" id="productName" class="form-input" placeholder="e.g., Email Marketing Masterclass" required />
+                        </div>
+
+                        <div class="mb-4">
+                            <label for="startDate" class="form-label">
+                                Launch Start Date
+                            </label>
+                            <input type="date" id="startDate" class="form-input" required />
+                        </div>
+
+                        <div class="mb-4">
+                            <label for="offerType" class="form-label">
+                                Offer Type
+                            </label>
+                            <select id="offerType" class="form-input" required>
+                                <option value="course">Online Course</option>
+                                <option value="cohort">Cohort-Based Course</option>
+                                <option value="workshop">Workshop/Masterclass</option>
+                                <option value="product">Digital Product</option>
+                                <option value="service">Service/Consulting</option>
+                                <option value="newsletter">Newsletter Launch</option>
+                            </select>
+                        </div>
+
+                        <div class="mb-6">
+                            <label for="audienceSize" class="form-label">
+                                Estimated Audience Size
+                            </label>
+                            <input type="number" id="audienceSize" class="form-input" placeholder="1000" min="0" />
+                        </div>
+
+                        <button type="submit" class="btn-primary">
+                            <i class="fas fa-calendar-alt mr-2"></i>Generate My 8-Week Plan
+                        </button>
+                    </form>
+                </div>
+
+                <!-- The 8-Week Framework -->
+                <div>
+                    <div class="card">
+                        <h2 class="text-2xl font-bold mb-4">The 8-Week Framework</h2>
+                        <p class="text-gray-700 mb-6">A proven cycle for sustainable launches without burnout. Ship, learn, improve, repeat.</p>
+                        
+                        <div class="space-y-4">
+                            <div class="flex items-start">
+                                <div class="w-12 h-12 bg-green-500 rounded-lg flex items-center justify-center text-white font-bold mr-3 flex-shrink-0">1-2</div>
+                                <div>
+                                    <h3 class="font-bold">OPEN: Cart Open</h3>
+                                    <p class="text-sm text-gray-700">Sales window, daily emails, social proof, urgency, close cart</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <div class="w-12 h-12 bg-blue-500 rounded-lg flex items-center justify-center text-white font-bold mr-3 flex-shrink-0">3-5</div>
+                                <div>
+                                    <h3 class="font-bold">DELIVER: Fulfillment</h3>
+                                    <p class="text-sm text-gray-700">Onboard customers, deliver value, gather feedback, support</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <div class="w-12 h-12 bg-yellow-500 rounded-lg flex items-center justify-center text-white font-bold mr-3 flex-shrink-0">6</div>
+                                <div>
+                                    <h3 class="font-bold">DOCUMENT: Capture Lessons</h3>
+                                    <p class="text-sm text-gray-700">Record what worked, testimonials, metrics, case studies</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <div class="w-12 h-12 bg-purple-500 rounded-lg flex items-center justify-center text-white font-bold mr-3 flex-shrink-0">7-8</div>
+                                <div>
+                                    <h3 class="font-bold">ITERATE: Improve & Prep</h3>
+                                    <p class="text-sm text-gray-700">Update offer, prep next launch, seed content, build demand</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Generated Calendar -->
+            <div id="calendar">
+                <div class="cycle-overview" id="cycleOverview"></div>
+                
+                <div class="card mb-8">
+                    <div class="flex justify-between items-center mb-6">
+                        <h2 class="text-3xl font-bold">Your 8-Week Launch Plan</h2>
+                        <button onclick="window.print()" class="text-sm text-gray-600 hover:text-black">
+                            <i class="fas fa-print mr-1"></i>Print Calendar
+                        </button>
+                    </div>
+                    <div id="calendarContent"></div>
+                </div>
+
+                <!-- Pro Tips -->
+                <div class="card">
+                    <h3 class="text-2xl font-bold mb-4">💡 Pro Tips for Success</h3>
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div>
+                            <h4 class="font-bold mb-2 flex items-center"><i class="fas fa-lightbulb icon-yellow mr-2"></i>During OPEN Phase</h4>
+                            <ul class="text-sm text-gray-700 space-y-1 ml-6 list-disc">
+                                <li>Email daily with value + soft CTA</li>
+                                <li>Share social proof and testimonials</li>
+                                <li>Create urgency with bonuses and deadlines</li>
+                                <li>Go live for Q&A sessions</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h4 class="font-bold mb-2 flex items-center"><i class="fas fa-rocket icon-yellow mr-2"></i>During DELIVER Phase</h4>
+                            <ul class="text-sm text-gray-700 space-y-1 ml-6 list-disc">
+                                <li>Over-deliver on promises</li>
+                                <li>Create quick wins in week 1</li>
+                                <li>Gather feedback constantly</li>
+                                <li>Build community and support</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h4 class="font-bold mb-2 flex items-center"><i class="fas fa-file-alt icon-yellow mr-2"></i>During DOCUMENT Phase</h4>
+                            <ul class="text-sm text-gray-700 space-y-1 ml-6 list-disc">
+                                <li>Request video testimonials</li>
+                                <li>Document wins and transformations</li>
+                                <li>Track all metrics and conversions</li>
+                                <li>Note what to improve next time</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h4 class="font-bold mb-2 flex items-center"><i class="fas fa-sync icon-yellow mr-2"></i>During ITERATE Phase</h4>
+                            <ul class="text-sm text-gray-700 space-y-1 ml-6 list-disc">
+                                <li>Update offer based on feedback</li>
+                                <li>Seed next launch with content</li>
+                                <li>Build waitlist for next cohort</li>
+                                <li>Rest and avoid burnout</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- CTA Section -->
+    <section class="py-16 px-4 bg-white">
+        <div class="max-w-3xl mx-auto text-center">
+            <i class="fas fa-envelope icon-yellow text-4xl mb-4"></i>
+            <h2 class="text-3xl font-bold mb-4">Want More Launch Strategies?</h2>
+            <p class="text-xl text-gray-700 mb-6">Join 15,000+ creators getting MBA frameworks, launch strategies, and AI prompts for building sustainable creator businesses.</p>
+            <a href="/newsletter.html" class="btn-primary inline-block" style="width: auto; padding: 0.875rem 2rem;">
+                <i class="fas fa-envelope mr-2"></i>Get Free Resources
+            </a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-black text-white py-8 px-4 mt-16">
+        <div class="max-w-6xl mx-auto text-center">
+            <div class="flex gap-6 justify-center mb-4">
+                <a href="https://www.youtube.com/channel/UCglNILz3uBqPer5EMJ_pzVg" target="_blank" class="hover:text-yellow-400"><i class="fab fa-youtube text-2xl"></i></a>
+                <a href="https://www.linkedin.com/in/bryancollins99/" target="_blank" class="hover:text-yellow-400"><i class="fab fa-linkedin text-2xl"></i></a>
+                <a href="https://github.com/bryancollins99" target="_blank" class="hover:text-yellow-400"><i class="fab fa-github text-2xl"></i></a>
+                <a href="https://www.amazon.com/stores/Bryan-Collins/author/B00KPFFYU6" target="_blank" class="hover:text-yellow-400"><i class="fab fa-amazon text-2xl"></i></a>
+                <a href="https://clarity.fm/bryancollins" target="_blank" class="hover:text-yellow-400"><i class="fas fa-phone text-2xl"></i></a>
+            </div>
+            <p class="text-sm opacity-70">© 2025 Bryan Collins. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        document.getElementById('launchForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const productName = document.getElementById('productName').value;
+            const startDate = new Date(document.getElementById('startDate').value);
+            const offerType = document.getElementById('offerType').value;
+            const audienceSize = document.getElementById('audienceSize').value;
+            
+            // Generate calendar
+            generateCalendar(productName, startDate, offerType, audienceSize);
+            
+            // Show calendar
+            document.getElementById('calendar').style.display = 'block';
+            document.getElementById('calendar').scrollIntoView({ behavior: 'smooth' });
+        });
+        
+        function generateCalendar(productName, startDate, offerType, audienceSize) {
+            const phases = [
+                {
+                    name: 'OPEN',
+                    weeks: 2,
+                    color: 'phase-open',
+                    tasks: {
+                        week1: [
+                            'Send "Cart is Open" email to entire list',
+                            'Share benefits and transformation stories',
+                            'Post social proof and testimonials',
+                            'Daily emails with value + CTA',
+                            'Host live Q&A or webinar'
+                        ],
+                        week2: [
+                            'Send "Last Chance" sequence (3-4 emails)',
+                            'Create urgency with bonuses',
+                            'Share more testimonials and wins',
+                            'Final day: Multiple touchpoints',
+                            'Close cart and send "Sold Out" email'
+                        ]
+                    }
+                },
+                {
+                    name: 'DELIVER',
+                    weeks: 3,
+                    color: 'phase-deliver',
+                    tasks: {
+                        week1: [
+                            'Welcome email with onboarding',
+                            'Quick win lesson/module in first 24-48hrs',
+                            'Set up community/communication channel',
+                            'First live session or office hours',
+                            'Check in with students personally'
+                        ],
+                        week2: [
+                            'Release core content/curriculum',
+                            'Host accountability session',
+                            'Share student wins in community',
+                            'Provide support and answer questions',
+                            'Gather initial feedback'
+                        ],
+                        week3: [
+                            'Continue content delivery',
+                            'Case study featuring early wins',
+                            'Mid-program check-in survey',
+                            'Address common questions/issues',
+                            'Build momentum toward completion'
+                        ]
+                    }
+                },
+                {
+                    name: 'DOCUMENT',
+                    weeks: 1,
+                    color: 'phase-document',
+                    tasks: {
+                        week1: [
+                            'Request video testimonials from top students',
+                            'Screenshot wins, results, and feedback',
+                            'Document all metrics (conversion, completion, etc)',
+                            'Write case studies of standout students',
+                            'List what worked vs what needs improvement',
+                            'Update sales page with new social proof'
+                        ]
+                    }
+                },
+                {
+                    name: 'ITERATE',
+                    weeks: 2,
+                    color: 'phase-iterate',
+                    tasks: {
+                        week1: [
+                            'Review all feedback and make improvements',
+                            'Update course materials based on questions',
+                            'Plan content for next launch seeding',
+                            'Update positioning/messaging if needed',
+                            'Set dates for next cohort'
+                        ],
+                        week2: [
+                            'Create waitlist landing page',
+                            'Start seeding content for next launch',
+                            'Publish case studies and testimonials',
+                            'Build demand with "results" content',
+                            'Rest and recharge before next cycle'
+                        ]
+                    }
+                }
+            ];
+            
+            // Generate overview
+            let currentDate = new Date(startDate);
+            const endDate = new Date(startDate);
+            endDate.setDate(endDate.getDate() + 56); // 8 weeks
+            
+            const overviewHTML = `
+                <div class="cycle-stat">
+                    <div class="cycle-stat-label">Product</div>
+                    <div class="cycle-stat-value">${productName}</div>
+                </div>
+                <div class="cycle-stat">
+                    <div class="cycle-stat-label">Start Date</div>
+                    <div class="cycle-stat-value">${formatDate(startDate)}</div>
+                </div>
+                <div class="cycle-stat">
+                    <div class="cycle-stat-label">End Date</div>
+                    <div class="cycle-stat-value">${formatDate(endDate)}</div>
+                </div>
+                <div class="cycle-stat">
+                    <div class="cycle-stat-label">Total Weeks</div>
+                    <div class="cycle-stat-value">8 Weeks</div>
+                </div>
+            `;
+            document.getElementById('cycleOverview').innerHTML = overviewHTML;
+            
+            // Generate detailed calendar
+            let calendarHTML = '';
+            let weekNumber = 1;
+            
+            phases.forEach(phase => {
+                calendarHTML += `<div class="phase-card ${phase.color}">`;
+                calendarHTML += `<h3 class="text-2xl font-bold mb-4">Phase ${phases.indexOf(phase) + 1}: ${phase.name}</h3>`;
+                
+                for (let i = 1; i <= phase.weeks; i++) {
+                    const weekStartDate = new Date(currentDate);
+                    const weekEndDate = new Date(currentDate);
+                    weekEndDate.setDate(weekEndDate.getDate() + 6);
+                    
+                    calendarHTML += `<div class="week-card">`;
+                    calendarHTML += `<div class="week-header">`;
+                    calendarHTML += `<span>Week ${weekNumber}: ${phase.name}</span>`;
+                    calendarHTML += `<span class="text-sm text-gray-600">${formatDate(weekStartDate)} - ${formatDate(weekEndDate)}</span>`;
+                    calendarHTML += `</div>`;
+                    
+                    const tasksKey = `week${i}`;
+                    if (phase.tasks[tasksKey]) {
+                        calendarHTML += `<ul class="task-list">`;
+                        phase.tasks[tasksKey].forEach(task => {
+                            calendarHTML += `<li class="task-item"><i class="fas fa-check-circle"></i><span>${task}</span></li>`;
+                        });
+                        calendarHTML += `</ul>`;
+                    }
+                    
+                    calendarHTML += `</div>`;
+                    
+                    currentDate.setDate(currentDate.getDate() + 7);
+                    weekNumber++;
+                }
+                
+                calendarHTML += `</div>`;
+            });
+            
+            document.getElementById('calendarContent').innerHTML = calendarHTML;
+        }
+        
+        function formatDate(date) {
+            const options = { month: 'short', day: 'numeric', year: 'numeric' };
+            return date.toLocaleDateString('en-US', options);
+        }
+        
+        // Set default date to today
+        document.getElementById('startDate').valueAsDate = new Date();
+    </script>
+</body>
+</html>
+

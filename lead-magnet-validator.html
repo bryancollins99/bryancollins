@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lead Magnet Validator - Score Your Lead Magnet Idea | Bryan Collins</title>
+    <meta name="description" content="Find out if your lead magnet is solving a problem or just adding to the noise. Get scored feedback on specificity, solve-ability, and deliverability.">
+    
+    <link rel="canonical" href="https://join.bryancollins.com/lead-magnet-validator.html">
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    
+    <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    
+    <script async src="https://plausible.io/js/pa-UDjPfOotU07ZYjQUDU_aw.js"></script>
+    <script>
+      window.plausible=window.plausible||function(){(plausible.q=plausible.q||[]).push(arguments)},plausible.init=plausible.init||function(i){plausible.o=i||{}};
+      plausible.init()
+    </script>
+    
+    <style>
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            background-color: #EDEDEE;
+            color: #1B1B1D;
+        }
+        .hero-gradient {
+            background: linear-gradient(135deg, #000000 0%, #1a1a1a 100%);
+        }
+        .nav-bar {
+            background: #000000;
+            border-bottom: 1px solid #333;
+        }
+        .nav-link {
+            color: white;
+            padding: 0.5rem 1rem;
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+        .nav-link:hover {
+            color: #FFDE59;
+        }
+        .card {
+            background: white;
+            border-radius: 8px;
+            padding: 2rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        .btn-primary {
+            background: #FFDE59;
+            color: #000000;
+            padding: 0.75rem 1.5rem;
+            border-radius: 6px;
+            text-decoration: none;
+            display: inline-block;
+            font-weight: 600;
+            transition: all 0.3s;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            border: none;
+            cursor: pointer;
+        }
+        .btn-primary:hover {
+            background: #ffd633;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+        }
+        .btn-primary:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+        }
+        .score-circle {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            font-weight: bold;
+            margin: 0 auto;
+            border: 8px solid;
+        }
+        .score-excellent { 
+            background: #d3fbeb; 
+            border-color: #10bf7a; 
+            color: #0c905c;
+        }
+        .score-good { 
+            background: #fff9db; 
+            border-color: #FFDE59; 
+            color: #8b7b00;
+        }
+        .score-needs-work { 
+            background: #fde8e2; 
+            border-color: #f2643b; 
+            color: #ea4110;
+        }
+        .criterion-card {
+            background: #f8f9fa;
+            border-radius: 6px;
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        .criterion-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.5rem;
+        }
+        .criterion-score {
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+        .spinner {
+            border: 3px solid #f3f3f3;
+            border-top: 3px solid #FFDE59;
+            border-radius: 50%;
+            width: 24px;
+            height: 24px;
+            animation: spin 1s linear infinite;
+            display: inline-block;
+            margin-right: 8px;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        textarea {
+            width: 100%;
+            padding: 1rem;
+            border: 2px solid #e3e3e3;
+            border-radius: 6px;
+            font-family: inherit;
+            resize: vertical;
+            min-height: 100px;
+        }
+        textarea:focus, input:focus {
+            outline: none;
+            border-color: #FFDE59;
+        }
+        input[type="text"] {
+            width: 100%;
+            padding: 0.75rem;
+            border: 2px solid #e3e3e3;
+            border-radius: 6px;
+            font-family: inherit;
+        }
+        .icon-yellow {
+            color: #FFDE59;
+        }
+        .progress-bar {
+            height: 8px;
+            background: #e3e3e3;
+            border-radius: 4px;
+            overflow: hidden;
+            margin-top: 0.5rem;
+        }
+        .progress-fill {
+            height: 100%;
+            transition: width 0.3s ease;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="nav-bar sticky top-0 z-50">
+        <div class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
+            <a href="/index.html" class="text-white font-bold text-xl">Bryan Collins</a>
+            <div class="flex gap-6">
+                <a href="/mba-frameworks.html" class="nav-link">Tools</a>
+                <a href="/gpts.html" class="nav-link">GPTs</a>
+                <a href="/projects.html" class="nav-link">Projects</a>
+                <a href="/books.html" class="nav-link">Books</a>
+                <a href="/now.html" class="nav-link">Now</a>
+                <a href="/contact.html" class="nav-link">Contact</a>
+                <a href="https://newsletter.bryancollins.com" class="nav-link">Newsletter</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="hero-gradient text-white py-16 px-4">
+        <div class="max-w-4xl mx-auto text-center">
+            <i class="fas fa-certificate icon-yellow text-5xl mb-6"></i>
+            <h1 class="text-4xl sm:text-5xl font-extrabold mb-4 leading-tight">Lead Magnet Validator</h1>
+            <p class="text-xl sm:text-2xl opacity-90 leading-relaxed">Find out if your lead magnet is solving a problem or just adding to the noise.</p>
+            <p class="text-lg opacity-80 mt-4">Get scored on specificity, solve-ability, and deliverability.</p>
+        </div>
+    </header>
+
+    <!-- Tool Section -->
+    <section class="py-16 px-4">
+        <div class="max-w-4xl mx-auto">
+            <div class="card mb-8">
+                <div class="mb-6">
+                    <label class="block text-sm font-bold mb-2" for="apiKey">
+                        <i class="fas fa-key mr-2"></i>OpenAI API Key
+                    </label>
+                    <input 
+                        type="text" 
+                        id="apiKey" 
+                        placeholder="sk-proj-..." 
+                        class="mb-2"
+                    >
+                    <p class="text-xs text-gray-600">Your API key is stored locally in your browser and never sent to our servers. <a href="https://platform.openai.com/api-keys" target="_blank" class="underline">Get your API key here</a>.</p>
+                </div>
+
+                <div class="mb-6">
+                    <label class="block text-sm font-bold mb-2" for="title">
+                        <i class="fas fa-heading mr-2"></i>Lead Magnet Title
+                    </label>
+                    <input 
+                        type="text" 
+                        id="title" 
+                        placeholder="e.g., '101 AI Prompts for Content Creators'"
+                    >
+                </div>
+
+                <div class="mb-6">
+                    <label class="block text-sm font-bold mb-2" for="description">
+                        <i class="fas fa-align-left mr-2"></i>Brief Description
+                    </label>
+                    <textarea 
+                        id="description" 
+                        placeholder="What does your lead magnet deliver? Who is it for? What specific problem does it solve?"
+                    ></textarea>
+                </div>
+
+                <div class="mb-6">
+                    <label class="block text-sm font-bold mb-2" for="audience">
+                        <i class="fas fa-users mr-2"></i>Target Audience
+                    </label>
+                    <input 
+                        type="text" 
+                        id="audience" 
+                        placeholder="e.g., 'Solo content creators struggling with ChatGPT'"
+                    >
+                </div>
+
+                <button onclick="validateLeadMagnet()" class="btn-primary w-full" id="validateBtn">
+                    <i class="fas fa-check-circle mr-2"></i>Validate My Lead Magnet
+                </button>
+            </div>
+
+            <!-- Results Section -->
+            <div id="resultsSection" style="display: none;">
+                <div class="card mb-6">
+                    <h2 class="text-2xl font-bold mb-6 text-center">
+                        <i class="fas fa-chart-line icon-yellow mr-2"></i>Your Lead Magnet Score
+                    </h2>
+                    
+                    <div id="overallScore" class="mb-8"></div>
+                    
+                    <h3 class="text-xl font-bold mb-4">Detailed Breakdown</h3>
+                    <div id="criteriaBreakdown"></div>
+                    
+                    <h3 class="text-xl font-bold mb-4 mt-8">
+                        <i class="fas fa-lightbulb icon-yellow mr-2"></i>Recommendations
+                    </h3>
+                    <div id="recommendations" class="bg-gray-50 p-6 rounded-lg"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works -->
+    <section class="py-16 px-4 bg-white">
+        <div class="max-w-4xl mx-auto">
+            <h2 class="text-3xl font-bold text-center mb-12">What Makes a Great Lead Magnet?</h2>
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="text-center">
+                    <i class="fas fa-bullseye icon-yellow text-4xl mb-4"></i>
+                    <h3 class="text-xl font-bold mb-3">Specific</h3>
+                    <p class="text-gray-700">Solves ONE clear problem for ONE specific audience. Not "marketing tips" but "3 email templates to re-engage cold subscribers."</p>
+                </div>
+                <div class="text-center">
+                    <i class="fas fa-tools icon-yellow text-4xl mb-4"></i>
+                    <h3 class="text-xl font-bold mb-3">Solvable</h3>
+                    <p class="text-gray-700">Delivers a quick win. Not "How to build a million-dollar business" but "The 5-minute content calendar template."</p>
+                </div>
+                <div class="text-center">
+                    <i class="fas fa-rocket icon-yellow text-4xl mb-4"></i>
+                    <h3 class="text-xl font-bold mb-3">Deliverable</h3>
+                    <p class="text-gray-700">Easy to consume and implement. PDF checklist > 50-page ebook. Template > theory. Action > inspiration.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Related Tools Section -->
+    <section class="py-16 px-4 bg-white">
+        <div class="max-w-6xl mx-auto">
+            <h2 class="text-3xl font-bold text-center mb-12">
+                <i class="fas fa-tools icon-yellow mr-2"></i>More Free Tools
+            </h2>
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="card">
+                    <i class="fas fa-random icon-yellow text-3xl mb-4"></i>
+                    <h3 class="text-xl font-bold mb-3">Content Repurposing Matrix</h3>
+                    <p class="mb-4 text-gray-700">Turn one piece of content into email, LinkedIn, Twitter, and Substack variations.</p>
+                    <a href="/content-repurposing.html" class="text-black font-semibold hover:underline">Repurpose Your Content →</a>
+                </div>
+                <div class="card">
+                    <i class="fas fa-calculator icon-yellow text-3xl mb-4"></i>
+                    <h3 class="text-xl font-bold mb-3">Break-Even Calculator</h3>
+                    <p class="mb-4 text-gray-700">Calculate when your business or product will become profitable.</p>
+                    <a href="/break-even-calculator.html" class="text-black font-semibold hover:underline">Calculate Break-Even →</a>
+                </div>
+                <div class="card">
+                    <i class="fas fa-table icon-yellow text-3xl mb-4"></i>
+                    <h3 class="text-xl font-bold mb-3">MBA Frameworks</h3>
+                    <p class="mb-4 text-gray-700">Access 8 free MBA frameworks including SWOT, ANSOFF Matrix, and Porter's Five Forces.</p>
+                    <a href="/mba-frameworks.html" class="text-black font-semibold hover:underline">Explore All Frameworks →</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="py-16 px-4">
+        <div class="max-w-3xl mx-auto">
+            <div class="card text-center">
+                <i class="fas fa-envelope icon-yellow text-4xl mb-4"></i>
+                <h2 class="text-3xl font-bold mb-4">See a Lead Magnet That Works</h2>
+                <p class="text-xl text-gray-700 mb-6">Join 15,000+ creators and get my 101 AI Prompts lead magnet. It's been downloaded 10,000+ times because it's specific, solvable, and deliverable.</p>
+                <a href="https://newsletter.bryancollins.com" class="btn-primary">
+                    <i class="fas fa-envelope mr-2"></i>Get 101 AI Prompts Free
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-black text-white py-8 px-4">
+        <div class="max-w-6xl mx-auto text-center">
+            <div class="flex gap-6 justify-center mb-4">
+                <a href="https://www.youtube.com/channel/UCglNILz3uBqPer5EMJ_pzVg" target="_blank" class="hover:text-yellow-400"><i class="fab fa-youtube text-2xl"></i></a>
+                <a href="https://www.linkedin.com/in/bryancollins99/" target="_blank" class="hover:text-yellow-400"><i class="fab fa-linkedin text-2xl"></i></a>
+                <a href="https://github.com/bryancollins99" target="_blank" class="hover:text-yellow-400"><i class="fab fa-github text-2xl"></i></a>
+            </div>
+            <p class="text-sm opacity-70">© 2025 Bryan Collins. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Load API key from localStorage
+        window.addEventListener('DOMContentLoaded', () => {
+            const savedKey = localStorage.getItem('openai_api_key');
+            if (savedKey) {
+                document.getElementById('apiKey').value = savedKey;
+            }
+        });
+
+        async function validateLeadMagnet() {
+            const apiKey = document.getElementById('apiKey').value.trim();
+            const title = document.getElementById('title').value.trim();
+            const description = document.getElementById('description').value.trim();
+            const audience = document.getElementById('audience').value.trim();
+            const btn = document.getElementById('validateBtn');
+
+            if (!apiKey) {
+                alert('Please enter your OpenAI API key');
+                return;
+            }
+
+            if (!title || !description || !audience) {
+                alert('Please fill in all fields');
+                return;
+            }
+
+            // Save API key
+            localStorage.setItem('openai_api_key', apiKey);
+
+            // Show loading state
+            btn.disabled = true;
+            btn.innerHTML = '<span class="spinner"></span>Analyzing...';
+
+            try {
+                const analysis = await analyzeLeadMagnet(apiKey, title, description, audience);
+                displayResults(analysis);
+            } catch (error) {
+                alert('Error: ' + error.message);
+            } finally {
+                btn.disabled = false;
+                btn.innerHTML = '<i class="fas fa-check-circle mr-2"></i>Validate My Lead Magnet';
+            }
+        }
+
+        async function analyzeLeadMagnet(apiKey, title, description, audience) {
+            const prompt = `Analyze this lead magnet idea and provide a detailed evaluation.
+
+Lead Magnet Title: ${title}
+Description: ${description}
+Target Audience: ${audience}
+
+Evaluate on these criteria (score each 1-10):
+1. SPECIFICITY: Is it solving ONE clear problem for ONE specific audience?
+2. SOLVABILITY: Does it deliver a quick win? Can someone implement it quickly?
+3. DELIVERABILITY: Is it easy to consume and actionable (not theoretical)?
+
+Respond with a JSON object in this exact format:
+{
+  "overall_score": 85,
+  "specificity": {
+    "score": 9,
+    "feedback": "Your analysis here..."
+  },
+  "solvability": {
+    "score": 8,
+    "feedback": "Your analysis here..."
+  },
+  "deliverability": {
+    "score": 9,
+    "feedback": "Your analysis here..."
+  },
+  "recommendations": [
+    "Specific actionable recommendation 1",
+    "Specific actionable recommendation 2",
+    "Specific actionable recommendation 3"
+  ],
+  "verdict": "A brief 2-3 sentence overall assessment"
+}`;
+
+            const response = await fetch('https://api.openai.com/v1/chat/completions', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${apiKey}`
+                },
+                body: JSON.stringify({
+                    model: 'gpt-4',
+                    messages: [
+                        {
+                            role: 'system',
+                            content: 'You are an expert in lead magnet strategy with years of experience helping creators build email lists. You provide honest, actionable feedback based on proven principles: specificity, solvability, and deliverability.'
+                        },
+                        {
+                            role: 'user',
+                            content: prompt
+                        }
+                    ],
+                    temperature: 0.7,
+                    max_tokens: 1200,
+                    response_format: { type: "json_object" }
+                })
+            });
+
+            if (!response.ok) {
+                const error = await response.json();
+                throw new Error(error.error?.message || 'API request failed');
+            }
+
+            const data = await response.json();
+            return JSON.parse(data.choices[0].message.content);
+        }
+
+        function displayResults(analysis) {
+            const resultsSection = document.getElementById('resultsSection');
+            const overallScore = document.getElementById('overallScore');
+            const criteriaBreakdown = document.getElementById('criteriaBreakdown');
+            const recommendations = document.getElementById('recommendations');
+
+            // Show section
+            resultsSection.style.display = 'block';
+
+            // Overall score
+            const scoreClass = analysis.overall_score >= 80 ? 'score-excellent' : 
+                              analysis.overall_score >= 60 ? 'score-good' : 'score-needs-work';
+            const scoreLabel = analysis.overall_score >= 80 ? 'Excellent!' : 
+                              analysis.overall_score >= 60 ? 'Good' : 'Needs Work';
+            
+            overallScore.innerHTML = `
+                <div class="score-circle ${scoreClass}">${analysis.overall_score}</div>
+                <p class="text-center text-2xl font-bold mt-4">${scoreLabel}</p>
+                <p class="text-center text-gray-700 mt-2 max-w-2xl mx-auto">${analysis.verdict}</p>
+            `;
+
+            // Criteria breakdown
+            const criteria = [
+                { key: 'specificity', icon: 'fa-bullseye', label: 'Specificity' },
+                { key: 'solvability', icon: 'fa-tools', label: 'Solvability' },
+                { key: 'deliverability', icon: 'fa-rocket', label: 'Deliverability' }
+            ];
+
+            criteriaBreakdown.innerHTML = criteria.map(c => {
+                const data = analysis[c.key];
+                const percentage = (data.score / 10) * 100;
+                const color = data.score >= 8 ? '#10bf7a' : data.score >= 6 ? '#FFDE59' : '#f2643b';
+                
+                return `
+                    <div class="criterion-card">
+                        <div class="criterion-header">
+                            <div>
+                                <i class="fas ${c.icon} icon-yellow mr-2"></i>
+                                <span class="font-bold">${c.label}</span>
+                            </div>
+                            <div class="criterion-score">${data.score}/10</div>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: ${percentage}%; background-color: ${color};"></div>
+                        </div>
+                        <p class="text-gray-700 mt-3">${data.feedback}</p>
+                    </div>
+                `;
+            }).join('');
+
+            // Recommendations
+            recommendations.innerHTML = `
+                <ul class="space-y-3">
+                    ${analysis.recommendations.map(rec => `
+                        <li class="flex items-start">
+                            <i class="fas fa-arrow-right icon-yellow mr-3 mt-1"></i>
+                            <span class="text-gray-700">${rec}</span>
+                        </li>
+                    `).join('')}
+                </ul>
+            `;
+
+            // Scroll to results
+            resultsSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+    </script>
+</body>
+</html>
+
