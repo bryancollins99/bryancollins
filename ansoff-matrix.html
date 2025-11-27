@@ -3,26 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ANSOFF Matrix Tool — Growth Strategy for Creators</title>
+    <title>ANSOFF Matrix — Bryan Collins</title>
     <meta name="description" content="Free interactive ANSOFF Matrix tool to plan your growth strategy. Map market penetration, development, product development, and diversification options.">
     <meta property="og:url" content="https://join.bryancollins.com/ansoff-matrix/" />
     <meta property="og:title" content="ANSOFF Matrix Tool — Growth Strategy for Creators" />
     <meta property="og:description" content="Plan your content business growth with this interactive ANSOFF Matrix tool." />
     
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    
     <!-- Tailwind CSS -->
-    <!-- Favicon -->
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
-
     <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
-    <!-- Favicon -->
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
-
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     
     <!-- Clean Framework Theme -->
-    <!-- Favicon -->
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
-
     <link rel="stylesheet" href="framework-theme-clean.css">
     
     <!-- jsPDF for PDF generation -->
@@ -124,11 +118,100 @@
             gap: 16px;
         }
         .matrix-cell {
-            background: linear-gradient(135deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.02));
-            padding: 24px;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.04));
+            padding: 28px;
             border-radius: 16px;
-            border: 1px solid rgba(255, 222, 89, 0.2);
+            border: 1px solid rgba(255, 222, 89, 0.3);
             box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+        }
+        .matrix-cell h4 {
+            font-size: 20px !important;
+            margin-bottom: 12px !important;
+            font-weight: 700 !important;
+        }
+        .matrix-cell .subtitle {
+            font-size: 13px;
+            opacity: 0.8;
+            margin-bottom: 16px;
+        }
+        .matrix-cell .content {
+            font-size: 16px;
+            line-height: 1.8;
+            color: #ffffff;
+        }
+        .enhanced-content {
+            margin-top: 12px;
+            padding-top: 12px;
+            border-top: 1px solid rgba(255, 222, 89, 0.2);
+        }
+        .enhanced-content ul {
+            list-style: none;
+            padding: 0;
+            margin: 8px 0;
+        }
+        .enhanced-content li {
+            padding: 8px 0 8px 24px;
+            position: relative;
+            font-size: 15px;
+            line-height: 1.6;
+        }
+        .enhanced-content li:before {
+            content: "→";
+            position: absolute;
+            left: 0;
+            color: var(--primary-yellow);
+            font-weight: bold;
+        }
+        .loading-spinner {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(255, 222, 89, 0.3);
+            border-radius: 50%;
+            border-top-color: var(--primary-yellow);
+            animation: spin 1s ease-in-out infinite;
+        }
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        @keyframes slideIn {
+            from {
+                transform: translateX(400px);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+        @keyframes slideOut {
+            from {
+                transform: translateX(0);
+                opacity: 1;
+            }
+            to {
+                transform: translateX(400px);
+                opacity: 0;
+            }
+        }
+        .enhance-btn {
+            background: rgba(255, 222, 89, 0.15);
+            color: var(--primary-yellow);
+            border: 1px solid var(--primary-yellow);
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 16px;
+        }
+        .enhance-btn:hover {
+            background: rgba(255, 222, 89, 0.25);
+        }
+        .enhance-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
         }
         .matrix-cell.penetration {
             border-left: 4px solid var(--primary-yellow);
@@ -217,6 +300,49 @@
     </style>
 </head>
 <body>
+    <!-- Navigation -->
+    <nav class="nav-bar sticky top-0 z-50">
+        <div class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between relative">
+            <a href="/index.html" class="text-white font-bold text-xl">Bryan Collins</a>
+            <button class="mobile-menu-button" id="mobileMenuButton" aria-label="Toggle menu">
+                <i class="fas fa-bars"></i>
+            </button>
+            <div class="desktop-nav">
+                <a href="/mba-frameworks.html" class="nav-link">Tools</a>
+                <a href="/gpts.html" class="nav-link">GPTs</a>
+                <a href="/projects.html" class="nav-link">Projects</a>
+                <a href="/books.html" class="nav-link">Books</a>
+                <a href="/now.html" class="nav-link">Now</a>
+                <a href="/contact.html" class="nav-link">Contact</a>
+                <a href="https://newsletter.bryancollins.com" class="nav-link">Newsletter</a>
+            </div>
+            <div class="mobile-nav" id="mobileNav">
+                <a href="/mba-frameworks.html" class="nav-link">Tools</a>
+                <a href="/gpts.html" class="nav-link">GPTs</a>
+                <a href="/projects.html" class="nav-link">Projects</a>
+                <a href="/books.html" class="nav-link">Books</a>
+                <a href="/now.html" class="nav-link">Now</a>
+                <a href="/contact.html" class="nav-link">Contact</a>
+                <a href="https://newsletter.bryancollins.com" class="nav-link">Newsletter</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Breadcrumbs -->
+    <div class="bg-gray-100 py-3 px-4">
+        <div class="max-w-4xl mx-auto">
+            <nav aria-label="Breadcrumb">
+                <ol class="flex items-center space-x-2 text-sm">
+                    <li><a href="/index.html" class="text-gray-600 hover:text-black">Home</a></li>
+                    <li class="text-gray-400">/</li>
+                    <li><a href="/mba-frameworks.html" class="text-gray-600 hover:text-black">Tools</a></li>
+                    <li class="text-gray-400">/</li>
+                    <li class="text-black font-semibold">ANSOFF Matrix</li>
+                </ol>
+            </nav>
+        </div>
+    </div>
+
     <main class="min-h-screen py-12 px-4 sm:px-6 lg:px-8">
         <div class="max-w-4xl mx-auto">
             
@@ -420,33 +546,58 @@
                     <p class="text-gray-600 mb-6">Here's your complete growth strategy map:</p>
 
                     <!-- Current Situation Summary -->
-                    <div class="mb-6 p-4 bg-gray-50 rounded-lg">
-                        <h4 class="font-bold mb-2">Current Position:</h4>
-                        <p><strong>Product:</strong> <span id="review-product"></span></p>
-                        <p><strong>Audience:</strong> <span id="review-audience"></span></p>
+                    <div class="mb-6 p-5" style="background: rgba(255, 255, 255, 0.1); border-radius: 12px; border: 1px solid rgba(255, 222, 89, 0.2);">
+                        <h4 class="font-bold mb-3" style="font-size: 18px; color: var(--primary-yellow);">Current Position:</h4>
+                        <p style="font-size: 16px; margin-bottom: 8px;"><strong>Product:</strong> <span id="review-product"></span></p>
+                        <p style="font-size: 16px;"><strong>Audience:</strong> <span id="review-audience"></span></p>
+                    </div>
+
+                    <!-- AI Enhancement Button -->
+                    <div class="text-center mb-6">
+                        <button id="enhance-btn" class="btn-primary" onclick="enhanceWithAI()" style="font-size: 16px; padding: 14px 32px;">
+                            <i class="fas fa-magic mr-2"></i> Enhance with AI Insights
+                        </button>
+                        <p class="text-sm mt-2" style="color: rgba(255, 255, 255, 0.7);">Get strategic recommendations powered by Claude AI</p>
+                    </div>
+
+                    <div id="loading-state" style="display: none; text-align: center; padding: 40px;">
+                        <div class="loading-spinner" style="margin: 0 auto 16px;"></div>
+                        <p style="color: rgba(255, 255, 255, 0.8);">Analyzing your strategy with AI...</p>
                     </div>
 
                     <!-- Matrix Display -->
                     <div class="matrix-grid mb-6">
                         <div class="matrix-cell penetration">
-                            <h4 class="font-bold text-green-700 mb-2">Market Penetration</h4>
-                            <p class="text-sm text-gray-600 mb-2">Existing Product + Existing Market</p>
-                            <p id="review-penetration" class="text-sm"></p>
+                            <h4 style="color: #4CAF50;">Market Penetration</h4>
+                            <p class="subtitle">Existing Product + Existing Market</p>
+                            <div class="content">
+                                <div id="review-penetration"></div>
+                                <div id="enhanced-penetration" class="enhanced-content" style="display: none;"></div>
+                            </div>
                         </div>
                         <div class="matrix-cell development">
-                            <h4 class="font-bold text-blue-700 mb-2">Market Development</h4>
-                            <p class="text-sm text-gray-600 mb-2">Existing Product + New Market</p>
-                            <p id="review-development" class="text-sm"></p>
+                            <h4 style="color: #2196F3;">Market Development</h4>
+                            <p class="subtitle">Existing Product + New Market</p>
+                            <div class="content">
+                                <div id="review-development"></div>
+                                <div id="enhanced-development" class="enhanced-content" style="display: none;"></div>
+                            </div>
                         </div>
                         <div class="matrix-cell product">
-                            <h4 class="font-bold text-orange-700 mb-2">Product Development</h4>
-                            <p class="text-sm text-gray-600 mb-2">New Product + Existing Market</p>
-                            <p id="review-product-dev" class="text-sm"></p>
+                            <h4 style="color: #FF9800;">Product Development</h4>
+                            <p class="subtitle">New Product + Existing Market</p>
+                            <div class="content">
+                                <div id="review-product-dev"></div>
+                                <div id="enhanced-product-dev" class="enhanced-content" style="display: none;"></div>
+                            </div>
                         </div>
                         <div class="matrix-cell diversification">
-                            <h4 class="font-bold text-purple-700 mb-2">Diversification</h4>
-                            <p class="text-sm text-gray-600 mb-2">New Product + New Market</p>
-                            <p id="review-diversification" class="text-sm"></p>
+                            <h4 style="color: #9C27B0;">Diversification</h4>
+                            <p class="subtitle">New Product + New Market</p>
+                            <div class="content">
+                                <div id="review-diversification"></div>
+                                <div id="enhanced-diversification" class="enhanced-content" style="display: none;"></div>
+                            </div>
                         </div>
                     </div>
 
@@ -488,7 +639,12 @@
                 </div>
             </div>
 
-            <p class="text-center text-xs" style="color: #1B1B1D; opacity: 0.5;">© 2025 Bryan Collins. All rights reserved.</p>
+            <div class="flex gap-4 justify-center text-sm text-gray-400 mb-4">
+                    <a href="/privacy.html" class="hover:text-black">Privacy Policy</a>
+                    <span>•</span>
+                    <a href="/terms.html" class="hover:text-black">Terms of Service</a>
+                </div>
+                <p class="text-center text-xs" style="color: #1B1B1D; opacity: 0.5;">© 2025 Bryan Collins. All rights reserved.</p>
         </div>
     </main>
 
@@ -592,69 +748,193 @@
         function populateReview() {
             document.getElementById('review-product').textContent = document.getElementById('current-product').value;
             document.getElementById('review-audience').textContent = document.getElementById('current-audience').value;
-            document.getElementById('review-penetration').textContent = document.getElementById('penetration').value || 'No ideas entered';
-            document.getElementById('review-development').textContent = document.getElementById('development').value || 'No ideas entered';
-            document.getElementById('review-product-dev').textContent = document.getElementById('product').value || 'No ideas entered';
-            document.getElementById('review-diversification').textContent = document.getElementById('diversification').value || 'No ideas entered';
+            
+            const penetration = document.getElementById('penetration').value || 'No ideas entered';
+            const development = document.getElementById('development').value || 'No ideas entered';
+            const productDev = document.getElementById('product').value || 'No ideas entered';
+            const diversification = document.getElementById('diversification').value || 'No ideas entered';
+            
+            document.getElementById('review-penetration').innerHTML = `<p style="margin-bottom: 8px;"><strong>Your Ideas:</strong></p><p>${penetration}</p>`;
+            document.getElementById('review-development').innerHTML = `<p style="margin-bottom: 8px;"><strong>Your Ideas:</strong></p><p>${development}</p>`;
+            document.getElementById('review-product-dev').innerHTML = `<p style="margin-bottom: 8px;"><strong>Your Ideas:</strong></p><p>${productDev}</p>`;
+            document.getElementById('review-diversification').innerHTML = `<p style="margin-bottom: 8px;"><strong>Your Ideas:</strong></p><p>${diversification}</p>`;
+        }
+
+        async function enhanceWithAI() {
+            const enhanceBtn = document.getElementById('enhance-btn');
+            const loadingState = document.getElementById('loading-state');
+            
+            // Show loading state
+            enhanceBtn.style.display = 'none';
+            loadingState.style.display = 'block';
+            
+            try {
+                const response = await fetch('/.netlify/functions/enhance-mba-content', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        tool: 'ansoff',
+                        inputs: {
+                            product: document.getElementById('current-product').value,
+                            audience: document.getElementById('current-audience').value,
+                            penetration: document.getElementById('penetration').value,
+                            development: document.getElementById('development').value,
+                            productDev: document.getElementById('product').value,
+                            diversification: document.getElementById('diversification').value
+                        }
+                    })
+                });
+
+                const data = await response.json();
+                
+                if (data.success) {
+                    displayEnhancedContent(data.enhancedContent);
+                } else {
+                    throw new Error(data.message || 'Failed to enhance content');
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                showNotification('Failed to enhance content. Please try again.', 'error');
+                enhanceBtn.style.display = 'block';
+                loadingState.style.display = 'none';
+            }
+        }
+
+        function displayEnhancedContent(content) {
+            const mapping = {
+                'penetration': 'enhanced-penetration',
+                'development': 'enhanced-development',
+                'productDevelopment': 'enhanced-product-dev',
+                'diversification': 'enhanced-diversification'
+            };
+
+            Object.keys(mapping).forEach(key => {
+                const element = document.getElementById(mapping[key]);
+                if (content[key] && Array.isArray(content[key])) {
+                    const html = `
+                        <div class="ai-badge" style="display: inline-block; background: var(--primary-yellow); color: #000; padding: 4px 12px; border-radius: 12px; font-size: 12px; font-weight: 700; margin-bottom: 12px;">
+                            <i class="fas fa-sparkles mr-1"></i> AI ENHANCED
+                        </div>
+                        <p style="margin-bottom: 8px; font-weight: 600; color: var(--primary-yellow); font-size: 14px;">Strategic Recommendations:</p>
+                        <ul style="margin: 0;">
+                            ${content[key].map(item => `<li>${item}</li>`).join('')}
+                        </ul>
+                    `;
+                    element.innerHTML = html;
+                    element.style.display = 'block';
+                    
+                    // Add fade-in animation
+                    element.style.opacity = '0';
+                    setTimeout(() => {
+                        element.style.transition = 'opacity 0.5s ease-in';
+                        element.style.opacity = '1';
+                    }, 100);
+                }
+            });
+
+            // Show success message
+            showNotification('AI analysis complete! Your strategy has been enhanced.', 'success');
+        }
+
+        function showNotification(message, type = 'info') {
+            const notification = document.createElement('div');
+            notification.style.cssText = `
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                background: ${type === 'success' ? '#4CAF50' : type === 'error' ? '#f44336' : '#2196F3'};
+                color: white;
+                padding: 16px 24px;
+                border-radius: 8px;
+                box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+                z-index: 10000;
+                font-weight: 600;
+                animation: slideIn 0.3s ease-out;
+            `;
+            notification.textContent = message;
+            document.body.appendChild(notification);
+
+            setTimeout(() => {
+                notification.style.animation = 'slideOut 0.3s ease-in';
+                setTimeout(() => notification.remove(), 300);
+            }, 3000);
         }
 
         function downloadPDF() {
             const { jsPDF } = window.jspdf;
             const doc = new jsPDF();
+            let yPos = 20;
             
             // Title
             doc.setFontSize(20);
-            doc.setTextColor(149, 111, 166); // Purple
-            doc.text('ANSOFF Matrix - Growth Strategy', 20, 20);
+            doc.setTextColor(255, 222, 89);
+            doc.text('ANSOFF Matrix - Growth Strategy', 20, yPos);
+            yPos += 8;
             
             // Date
             doc.setFontSize(10);
             doc.setTextColor(100);
-            doc.text('Generated: ' + new Date().toLocaleDateString(), 20, 28);
+            doc.text('Generated: ' + new Date().toLocaleDateString(), 20, yPos);
+            yPos += 15;
             
             // Current Position
             doc.setFontSize(14);
             doc.setTextColor(0);
-            doc.text('Current Position:', 20, 40);
+            doc.text('Current Position:', 20, yPos);
+            yPos += 8;
             doc.setFontSize(11);
-            doc.text('Product: ' + document.getElementById('current-product').value, 20, 48);
-            doc.text('Audience: ' + document.getElementById('current-audience').value, 20, 55);
+            doc.text('Product: ' + document.getElementById('current-product').value, 20, yPos);
+            yPos += 7;
+            doc.text('Audience: ' + document.getElementById('current-audience').value, 20, yPos);
+            yPos += 15;
             
-            // Market Penetration
-            doc.setFontSize(12);
-            doc.setTextColor(76, 175, 80); // Green
-            doc.text('Market Penetration (Existing Product + Existing Market)', 20, 70);
-            doc.setFontSize(10);
-            doc.setTextColor(0);
-            const penetrationText = doc.splitTextToSize(document.getElementById('penetration').value || 'No ideas entered', 170);
-            doc.text(penetrationText, 20, 78);
+            // Add each quadrant with AI recommendations
+            const quadrants = [
+                { title: 'Market Penetration', color: [76, 175, 80], inputId: 'penetration', enhancedId: 'enhanced-penetration' },
+                { title: 'Market Development', color: [33, 150, 243], inputId: 'development', enhancedId: 'enhanced-development' },
+                { title: 'Product Development', color: [255, 152, 0], inputId: 'product', enhancedId: 'enhanced-product-dev' },
+                { title: 'Diversification', color: [156, 39, 176], inputId: 'diversification', enhancedId: 'enhanced-diversification' }
+            ];
             
-            // Market Development
-            doc.setFontSize(12);
-            doc.setTextColor(33, 150, 243); // Blue
-            doc.text('Market Development (Existing Product + New Market)', 20, 98);
-            doc.setFontSize(10);
-            doc.setTextColor(0);
-            const developmentText = doc.splitTextToSize(document.getElementById('development').value || 'No ideas entered', 170);
-            doc.text(developmentText, 20, 106);
-            
-            // Product Development
-            doc.setFontSize(12);
-            doc.setTextColor(255, 152, 0); // Orange
-            doc.text('Product Development (New Product + Existing Market)', 20, 126);
-            doc.setFontSize(10);
-            doc.setTextColor(0);
-            const productText = doc.splitTextToSize(document.getElementById('product').value || 'No ideas entered', 170);
-            doc.text(productText, 20, 134);
-            
-            // Diversification
-            doc.setFontSize(12);
-            doc.setTextColor(156, 39, 176); // Purple
-            doc.text('Diversification (New Product + New Market)', 20, 154);
-            doc.setFontSize(10);
-            doc.setTextColor(0);
-            const diversificationText = doc.splitTextToSize(document.getElementById('diversification').value || 'No ideas entered', 170);
-            doc.text(diversificationText, 20, 162);
+            quadrants.forEach(quad => {
+                if (yPos > 250) {
+                    doc.addPage();
+                    yPos = 20;
+                }
+                
+                doc.setFontSize(12);
+                doc.setTextColor(...quad.color);
+                doc.text(quad.title, 20, yPos);
+                yPos += 7;
+                
+                doc.setFontSize(10);
+                doc.setTextColor(0);
+                const userInput = doc.splitTextToSize(document.getElementById(quad.inputId).value || 'No ideas entered', 170);
+                doc.text(userInput, 20, yPos);
+                yPos += userInput.length * 5 + 3;
+                
+                // Add AI recommendations if present
+                const enhancedEl = document.getElementById(quad.enhancedId);
+                if (enhancedEl && enhancedEl.style.display !== 'none') {
+                    doc.setFontSize(10);
+                    doc.setTextColor(255, 222, 89);
+                    doc.text('AI Recommendations:', 20, yPos);
+                    yPos += 6;
+                    
+                    doc.setFontSize(9);
+                    doc.setTextColor(0);
+                    const lis = enhancedEl.querySelectorAll('li');
+                    lis.forEach(li => {
+                        const text = doc.splitTextToSize('• ' + li.textContent, 165);
+                        doc.text(text, 25, yPos);
+                        yPos += text.length * 4 + 2;
+                    });
+                }
+                
+                yPos += 8;
+            });
             
             // Footer
             doc.setFontSize(8);
@@ -664,6 +944,35 @@
             
             // Save
             doc.save('ansoff-matrix-' + new Date().toISOString().split('T')[0] + '.pdf');
+            showNotification('PDF downloaded successfully!', 'success');
+        }
+
+        // Mobile menu toggle
+        const mobileMenuButton = document.getElementById('mobileMenuButton');
+        const mobileNav = document.getElementById('mobileNav');
+        
+        if (mobileMenuButton && mobileNav) {
+            mobileMenuButton.addEventListener('click', function() {
+                mobileNav.classList.toggle('active');
+                const icon = this.querySelector('i');
+                if (mobileNav.classList.contains('active')) {
+                    icon.classList.remove('fa-bars');
+                    icon.classList.add('fa-times');
+                } else {
+                    icon.classList.remove('fa-times');
+                    icon.classList.add('fa-bars');
+                }
+            });
+            
+            const mobileLinks = mobileNav.querySelectorAll('.nav-link');
+            mobileLinks.forEach(link => {
+                link.addEventListener('click', function() {
+                    mobileNav.classList.remove('active');
+                    const icon = mobileMenuButton.querySelector('i');
+                    icon.classList.remove('fa-times');
+                    icon.classList.add('fa-bars');
+                });
+            });
         }
     </script>
 </body>

@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Competitive Positioning Matrix - Map Your Market Position | Bryan Collins</title>
+    <meta name="description" content="Visual tool to map your competitive positioning. Plot your business and competitors on a 2x2 matrix to identify market gaps and opportunities.">
+    
+    <link rel="canonical" href="https://join.bryancollins.com/competitive-positioning.html">
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    
+    <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    
+    <script async src="https://plausible.io/js/pa-UDjPfOotU07ZYjQUDU_aw.js"></script>
+    <script>
+      window.plausible=window.plausible||function(){(plausible.q=plausible.q||[]).push(arguments)},plausible.init=plausible.init||function(i){plausible.o=i||{}};
+      plausible.init()
+    </script>
+    
+    <style>
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            background-color: #EDEDEE;
+            color: #1B1B1D;
+        }
+        .hero-gradient {
+            background: linear-gradient(135deg, #000000 0%, #1a1a1a 100%);
+        }
+        .nav-bar {
+            background: #000000;
+            border-bottom: 1px solid #333;
+        }
+        .nav-link {
+            color: white;
+            padding: 0.5rem 1rem;
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+        .nav-link:hover {
+            color: #FFDE59;
+        }
+        .card {
+            background: white;
+            border-radius: 8px;
+            padding: 2rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        .btn-primary {
+            background: #FFDE59;
+            color: #000000;
+            padding: 0.75rem 1.5rem;
+            border-radius: 6px;
+            text-decoration: none;
+            display: inline-block;
+            font-weight: 600;
+            transition: all 0.3s;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            border: none;
+            cursor: pointer;
+        }
+        .btn-primary:hover {
+            background: #ffd633;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+        }
+        .btn-secondary {
+            background: #000;
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            border: none;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.2s;
+        }
+        .btn-secondary:hover {
+            background: #333;
+        }
+        .icon-yellow {
+            color: #FFDE59;
+        }
+        input[type="text"], select {
+            width: 100%;
+            padding: 0.75rem;
+            border: 2px solid #e3e3e3;
+            border-radius: 6px;
+            font-family: inherit;
+        }
+        input[type="text"]:focus, select:focus {
+            outline: none;
+            border-color: #FFDE59;
+        }
+        .matrix-canvas {
+            background: white;
+            border: 2px solid #333;
+            border-radius: 8px;
+            cursor: crosshair;
+            position: relative;
+        }
+        .competitor-dot {
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            position: absolute;
+            transform: translate(-50%, -50%);
+            cursor: move;
+            border: 2px solid white;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+        }
+        .competitor-label {
+            position: absolute;
+            background: rgba(0,0,0,0.8);
+            color: white;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 12px;
+            white-space: nowrap;
+            pointer-events: none;
+            transform: translate(-50%, -150%);
+        }
+        .axis-label {
+            position: absolute;
+            font-weight: 600;
+            font-size: 14px;
+        }
+        .competitor-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem;
+            background: #f8f9fa;
+            border-radius: 4px;
+            margin-bottom: 0.5rem;
+        }
+        .color-dot {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            border: 2px solid white;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.2);
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="nav-bar sticky top-0 z-50">
+        <div class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
+            <a href="/index.html" class="text-white font-bold text-xl">Bryan Collins</a>
+            <div class="flex gap-6">
+                <a href="/mba-frameworks.html" class="nav-link">Tools</a>
+                <a href="/gpts.html" class="nav-link">GPTs</a>
+                <a href="/projects.html" class="nav-link">Projects</a>
+                <a href="/books.html" class="nav-link">Books</a>
+                <a href="/now.html" class="nav-link">Now</a>
+                <a href="/contact.html" class="nav-link">Contact</a>
+                <a href="https://newsletter.bryancollins.com" class="nav-link">Newsletter</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="hero-gradient text-white py-16 px-4">
+        <div class="max-w-4xl mx-auto text-center">
+            <i class="fas fa-map-marked-alt icon-yellow text-5xl mb-6"></i>
+            <h1 class="text-4xl sm:text-5xl font-extrabold mb-4 leading-tight">Competitive Positioning Matrix</h1>
+            <p class="text-xl sm:text-2xl opacity-90 leading-relaxed">Map your market position and identify white space opportunities.</p>
+            <p class="text-lg opacity-80 mt-4">Visualize where you stand against competitors on two key dimensions.</p>
+        </div>
+    </header>
+
+    <!-- Tool Section -->
+    <section class="py-16 px-4">
+        <div class="max-w-6xl mx-auto">
+            <div class="grid md:grid-cols-2 gap-8">
+                <!-- Configuration Panel -->
+                <div class="card">
+                    <h2 class="text-2xl font-bold mb-6">
+                        <i class="fas fa-cog icon-yellow mr-2"></i>Setup Your Matrix
+                    </h2>
+
+                    <div class="mb-6">
+                        <label class="block text-sm font-bold mb-2">X-Axis (Horizontal)</label>
+                        <select id="xAxis" onchange="updateAxisLabels()">
+                            <option value="Price (Low to High)">Price (Low to High)</option>
+                            <option value="Quality (Low to High)">Quality (Low to High)</option>
+                            <option value="Features (Simple to Complex)">Features (Simple to Complex)</option>
+                            <option value="Market Position (Niche to Mass Market)">Market Position (Niche to Mass Market)</option>
+                            <option value="Innovation (Follower to Leader)">Innovation (Follower to Leader)</option>
+                            <option value="Service Level (Basic to Premium)">Service Level (Basic to Premium)</option>
+                        </select>
+                    </div>
+
+                    <div class="mb-6">
+                        <label class="block text-sm font-bold mb-2">Y-Axis (Vertical)</label>
+                        <select id="yAxis" onchange="updateAxisLabels()">
+                            <option value="Quality (Low to High)">Quality (Low to High)</option>
+                            <option value="Price (Low to High)">Price (Low to High)</option>
+                            <option value="Features (Simple to Complex)">Features (Simple to Complex)</option>
+                            <option value="Brand Recognition (Low to High)">Brand Recognition (Low to High)</option>
+                            <option value="Customer Experience (Basic to Exceptional)">Customer Experience (Basic to Exceptional)</option>
+                            <option value="Speed to Market (Slow to Fast)">Speed to Market (Slow to Fast)</option>
+                        </select>
+                    </div>
+
+                    <div class="mb-6">
+                        <h3 class="text-lg font-bold mb-3">Add Competitors</h3>
+                        <div class="flex gap-2 mb-3">
+                            <input type="text" id="competitorName" placeholder="Company/Product name" onkeypress="if(event.key==='Enter') addCompetitor()">
+                            <button onclick="addCompetitor()" class="btn-secondary">
+                                <i class="fas fa-plus"></i>
+                            </button>
+                        </div>
+                        <div id="competitorList"></div>
+                    </div>
+
+                    <div class="flex gap-3">
+                        <button onclick="exportMatrix()" class="btn-secondary flex-1">
+                            <i class="fas fa-download mr-2"></i>Export PNG
+                        </button>
+                        <button onclick="resetMatrix()" class="btn-secondary flex-1">
+                            <i class="fas fa-redo mr-2"></i>Reset
+                        </button>
+                    </div>
+
+                    <div class="mt-6 p-4 bg-yellow-50 border-l-4 border-yellow-400 rounded">
+                        <p class="text-sm text-gray-700">
+                            <strong>Tip:</strong> Click on the matrix to position each competitor. Drag dots to adjust positions. Look for white space = opportunities.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Matrix Visualization -->
+                <div class="card">
+                    <h2 class="text-2xl font-bold mb-4">
+                        <i class="fas fa-chart-scatter icon-yellow mr-2"></i>Your Matrix
+                    </h2>
+                    <div style="position: relative;">
+                        <canvas id="matrixCanvas" class="matrix-canvas" width="500" height="500"></canvas>
+                        <div id="competitorDots"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Instructions -->
+            <div class="card mt-8">
+                <h3 class="text-xl font-bold mb-4">
+                    <i class="fas fa-question-circle icon-yellow mr-2"></i>How to Use
+                </h3>
+                <div class="grid md:grid-cols-3 gap-6">
+                    <div>
+                        <div class="text-3xl mb-2">1️⃣</div>
+                        <h4 class="font-bold mb-2">Choose Your Axes</h4>
+                        <p class="text-gray-700 text-sm">Select the two most important dimensions for your market. Common choices: Price vs Quality, Features vs Simplicity.</p>
+                    </div>
+                    <div>
+                        <div class="text-3xl mb-2">2️⃣</div>
+                        <h4 class="font-bold mb-2">Add Competitors</h4>
+                        <p class="text-gray-700 text-sm">List your company and 3-6 key competitors. Click on the matrix to position each one based on the axes you chose.</p>
+                    </div>
+                    <div>
+                        <div class="text-3xl mb-2">3️⃣</div>
+                        <h4 class="font-bold mb-2">Find White Space</h4>
+                        <p class="text-gray-700 text-sm">Look for empty areas on the matrix—these represent market opportunities where no one is competing.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Related Tools Section -->
+    <section class="py-16 px-4 bg-white">
+        <div class="max-w-6xl mx-auto">
+            <h2 class="text-3xl font-bold text-center mb-12">
+                <i class="fas fa-tools icon-yellow mr-2"></i>More Strategy Tools
+            </h2>
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="card">
+                    <i class="fas fa-chess icon-yellow text-3xl mb-4"></i>
+                    <h3 class="text-xl font-bold mb-3">Porter's Five Forces</h3>
+                    <p class="mb-4 text-gray-700">Assess competitive forces and industry attractiveness.</p>
+                    <a href="/porters-five-forces.html" class="text-black font-semibold hover:underline">Analyze Industry →</a>
+                </div>
+                <div class="card">
+                    <i class="fas fa-chart-line icon-yellow text-3xl mb-4"></i>
+                    <h3 class="text-xl font-bold mb-3">SWOT Analysis</h3>
+                    <p class="mb-4 text-gray-700">Identify strengths, weaknesses, opportunities, and threats.</p>
+                    <a href="/swot-analysis.html" class="text-black font-semibold hover:underline">Create SWOT →</a>
+                </div>
+                <div class="card">
+                    <i class="fas fa-table icon-yellow text-3xl mb-4"></i>
+                    <h3 class="text-xl font-bold mb-3">ANSOFF Matrix</h3>
+                    <p class="mb-4 text-gray-700">Analyze growth strategies and market opportunities.</p>
+                    <a href="/ansoff-matrix.html" class="text-black font-semibold hover:underline">Explore Growth →</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="py-16 px-4">
+        <div class="max-w-3xl mx-auto">
+            <div class="card text-center">
+                <i class="fas fa-envelope icon-yellow text-4xl mb-4"></i>
+                <h2 class="text-3xl font-bold mb-4">Get More Strategy Frameworks</h2>
+                <p class="text-xl text-gray-700 mb-6">Join 15,000+ entrepreneurs and get MBA frameworks, strategic insights, and business tools delivered to your inbox.</p>
+                <a href="https://newsletter.bryancollins.com" class="btn-primary">
+                    <i class="fas fa-envelope mr-2"></i>Join My Newsletter
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-black text-white py-8 px-4">
+        <div class="max-w-6xl mx-auto text-center">
+            <div class="flex gap-6 justify-center mb-4">
+                <a href="https://www.youtube.com/channel/UCglNILz3uBqPer5EMJ_pzVg" target="_blank" class="hover:text-yellow-400"><i class="fab fa-youtube text-2xl"></i></a>
+                <a href="https://www.linkedin.com/in/bryancollins99/" target="_blank" class="hover:text-yellow-400"><i class="fab fa-linkedin text-2xl"></i></a>
+                <a href="https://github.com/bryancollins99" target="_blank" class="hover:text-yellow-400"><i class="fab fa-github text-2xl"></i></a>
+            </div>
+            <div class="flex gap-4 justify-center text-sm text-gray-400 mb-4">
+                    <a href="/privacy.html" class="hover:text-white">Privacy Policy</a>
+                    <span>•</span>
+                    <a href="/terms.html" class="hover:text-white">Terms of Service</a>
+                </div>
+                <p class="text-sm opacity-70">© 2025 Bryan Collins. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        const colors = ['#3B82F6', '#EF4444', '#10B981', '#F59E0B', '#8B5CF6', '#EC4899', '#06B6D4', '#84CC16'];
+        let competitors = [];
+        let selectedCompetitor = null;
+        let canvas, ctx;
+
+        window.addEventListener('DOMContentLoaded', () => {
+            canvas = document.getElementById('matrixCanvas');
+            ctx = canvas.getContext('2d');
+            drawMatrix();
+            loadFromStorage();
+            
+            canvas.addEventListener('click', handleCanvasClick);
+        });
+
+        function drawMatrix() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            
+            // Draw grid lines
+            ctx.strokeStyle = '#e3e3e3';
+            ctx.lineWidth = 1;
+            
+            // Vertical center line
+            ctx.beginPath();
+            ctx.moveTo(canvas.width / 2, 0);
+            ctx.lineTo(canvas.width / 2, canvas.height);
+            ctx.stroke();
+            
+            // Horizontal center line
+            ctx.beginPath();
+            ctx.moveTo(0, canvas.height / 2);
+            ctx.lineTo(canvas.width, canvas.height / 2);
+            ctx.stroke();
+            
+            // Draw border
+            ctx.strokeStyle = '#333';
+            ctx.lineWidth = 2;
+            ctx.strokeRect(0, 0, canvas.width, canvas.height);
+            
+            // Draw axis labels
+            const xAxisText = document.getElementById('xAxis').value;
+            const yAxisText = document.getElementById('yAxis').value;
+            
+            ctx.fillStyle = '#666';
+            ctx.font = 'bold 14px Inter';
+            ctx.textAlign = 'center';
+            
+            // X-axis label (bottom)
+            ctx.fillText(xAxisText, canvas.width / 2, canvas.height - 10);
+            
+            // Y-axis label (left, rotated)
+            ctx.save();
+            ctx.translate(15, canvas.height / 2);
+            ctx.rotate(-Math.PI / 2);
+            ctx.fillText(yAxisText, 0, 0);
+            ctx.restore();
+        }
+
+        function updateAxisLabels() {
+            drawMatrix();
+            updateDotPositions();
+            saveToStorage();
+        }
+
+        function addCompetitor() {
+            const input = document.getElementById('competitorName');
+            const name = input.value.trim();
+            
+            if (!name) return;
+            if (competitors.length >= 8) {
+                alert('Maximum 8 competitors allowed');
+                return;
+            }
+            
+            const competitor = {
+                id: Date.now(),
+                name: name,
+                color: colors[competitors.length % colors.length],
+                x: null,
+                y: null
+            };
+            
+            competitors.push(competitor);
+            input.value = '';
+            updateCompetitorList();
+            saveToStorage();
+        }
+
+        function removeCompetitor(id) {
+            competitors = competitors.filter(c => c.id !== id);
+            updateCompetitorList();
+            updateDotPositions();
+            saveToStorage();
+        }
+
+        function updateCompetitorList() {
+            const list = document.getElementById('competitorList');
+            list.innerHTML = competitors.map(c => `
+                <div class="competitor-item">
+                    <div class="color-dot" style="background-color: ${c.color}"></div>
+                    <span class="flex-1">${c.name}</span>
+                    <span class="text-xs text-gray-500">${c.x !== null ? 'Positioned' : 'Click matrix to place'}</span>
+                    <button onclick="removeCompetitor(${c.id})" class="text-red-500 hover:text-red-700">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+            `).join('');
+        }
+
+        function handleCanvasClick(e) {
+            const rect = canvas.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+            
+            // Find first unpositioned competitor
+            const unpositioned = competitors.find(c => c.x === null);
+            if (unpositioned) {
+                unpositioned.x = x;
+                unpositioned.y = y;
+                updateCompetitorList();
+                updateDotPositions();
+                saveToStorage();
+            }
+        }
+
+        function updateDotPositions() {
+            const container = document.getElementById('competitorDots');
+            const rect = canvas.getBoundingClientRect();
+            
+            container.innerHTML = competitors
+                .filter(c => c.x !== null)
+                .map(c => `
+                    <div class="competitor-dot" 
+                         style="background-color: ${c.color}; left: ${c.x}px; top: ${c.y}px;"
+                         draggable="true"
+                         ondragstart="startDrag(event, ${c.id})"
+                         ondragend="endDrag(event, ${c.id})">
+                    </div>
+                    <div class="competitor-label" style="left: ${c.x}px; top: ${c.y}px;">
+                        ${c.name}
+                    </div>
+                `).join('');
+        }
+
+        function startDrag(e, id) {
+            selectedCompetitor = id;
+        }
+
+        function endDrag(e, id) {
+            const rect = canvas.getBoundingClientRect();
+            const x = Math.max(0, Math.min(canvas.width, e.clientX - rect.left));
+            const y = Math.max(0, Math.min(canvas.height, e.clientY - rect.top));
+            
+            const competitor = competitors.find(c => c.id === id);
+            if (competitor) {
+                competitor.x = x;
+                competitor.y = y;
+                updateDotPositions();
+                saveToStorage();
+            }
+        }
+
+        function exportMatrix() {
+            const exportCanvas = document.createElement('canvas');
+            exportCanvas.width = canvas.width;
+            exportCanvas.height = canvas.height;
+            const exportCtx = exportCanvas.getContext('2d');
+            
+            // Draw white background
+            exportCtx.fillStyle = 'white';
+            exportCtx.fillRect(0, 0, exportCanvas.width, exportCanvas.height);
+            
+            // Copy matrix
+            exportCtx.drawImage(canvas, 0, 0);
+            
+            // Draw competitors
+            competitors.filter(c => c.x !== null).forEach(c => {
+                // Draw dot
+                exportCtx.fillStyle = c.color;
+                exportCtx.beginPath();
+                exportCtx.arc(c.x, c.y, 8, 0, Math.PI * 2);
+                exportCtx.fill();
+                exportCtx.strokeStyle = 'white';
+                exportCtx.lineWidth = 2;
+                exportCtx.stroke();
+                
+                // Draw label
+                exportCtx.fillStyle = 'rgba(0,0,0,0.8)';
+                exportCtx.font = '12px Inter';
+                const textWidth = exportCtx.measureText(c.name).width;
+                exportCtx.fillRect(c.x - textWidth/2 - 4, c.y - 28, textWidth + 8, 20);
+                exportCtx.fillStyle = 'white';
+                exportCtx.textAlign = 'center';
+                exportCtx.fillText(c.name, c.x, c.y - 15);
+            });
+            
+            // Download
+            const link = document.createElement('a');
+            link.download = 'competitive-positioning-matrix.png';
+            link.href = exportCanvas.toDataURL();
+            link.click();
+        }
+
+        function resetMatrix() {
+            if (confirm('Reset matrix and remove all competitors?')) {
+                competitors = [];
+                updateCompetitorList();
+                updateDotPositions();
+                saveToStorage();
+            }
+        }
+
+        function saveToStorage() {
+            localStorage.setItem('competitiveMatrix', JSON.stringify({
+                competitors,
+                xAxis: document.getElementById('xAxis').value,
+                yAxis: document.getElementById('yAxis').value
+            }));
+        }
+
+        function loadFromStorage() {
+            const saved = localStorage.getItem('competitiveMatrix');
+            if (saved) {
+                const data = JSON.parse(saved);
+                competitors = data.competitors || [];
+                document.getElementById('xAxis').value = data.xAxis || 'Price (Low to High)';
+                document.getElementById('yAxis').value = data.yAxis || 'Quality (Low to High)';
+                updateCompetitorList();
+                updateDotPositions();
+                drawMatrix();
+            }
+        }
+    </script>
+</body>
+</html>
+

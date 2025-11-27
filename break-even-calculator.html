@@ -6,13 +6,27 @@
     <title>Break-Even Calculator — Free Business Tool by Bryan Collins</title>
     <meta name="description" content="Calculate your break-even point instantly. Free business calculator to determine how many units you need to sell to cover costs and start making profit.">
     
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://join.bryancollins.com/break-even-calculator">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://join.bryancollins.com/break-even-calculator">
+    <meta property="og:title" content="Free Break-Even Calculator | Bryan Collins">
+    <meta property="og:description" content="Calculate break-even point instantly. Determine how many units you need to sell to cover costs.">
+    <meta property="og:image" content="https://join.bryancollins.com/resources/bryan-collins.jpeg">
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://join.bryancollins.com/break-even-calculator">
+    <meta property="twitter:title" content="Free Break-Even Calculator">
+    <meta property="twitter:description" content="Calculate break-even point instantly. Free business calculator tool.">
+    <meta property="twitter:image" content="https://join.bryancollins.com/resources/bryan-collins.jpeg">
+    
     <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="/favicon.svg">
 
     <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
-    <!-- Favicon -->
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
-
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     
     <!-- Chart.js for visualizations -->
@@ -212,6 +226,78 @@
             transform: translateY(-2px);
             box-shadow: 0 4px 8px rgba(0,0,0,0.1);
         }
+        .error-message {
+            background: #fee;
+            border-left: 4px solid #dc2626;
+            padding: 1rem;
+            border-radius: 4px;
+            margin-bottom: 1rem;
+        }
+        .tooltip-wrapper {
+            position: relative;
+            display: inline-block;
+        }
+        .tooltip-content {
+            visibility: hidden;
+            position: absolute;
+            z-index: 1000;
+            bottom: 125%;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: #333;
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            font-size: 0.875rem;
+            white-space: nowrap;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        .tooltip-wrapper:hover .tooltip-content,
+        .tooltip-wrapper:focus-within .tooltip-content {
+            visibility: visible;
+            opacity: 1;
+        }
+        .tooltip-content::after {
+            content: "";
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            margin-left: -5px;
+            border-width: 5px;
+            border-style: solid;
+            border-color: #333 transparent transparent transparent;
+        }
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border-width: 0;
+        }
+        .hidden {
+            display: none;
+        }
+        @media (max-width: 768px) {
+            .btn-primary, .btn-secondary {
+                padding: 1rem 1.5rem;
+                font-size: 1.125rem;
+                min-height: 44px;
+            }
+            .form-input {
+                min-height: 44px;
+                font-size: 16px;
+            }
+        }
+        @media print {
+            .nav-bar, footer, .btn-secondary, .related-tools { display: none; }
+            body { background: white; }
+            .metric-card, .card { box-shadow: none; border: 1px solid #ddd; page-break-inside: avoid; }
+        }
     </style>
 </head>
 <body>
@@ -221,7 +307,9 @@
             <a href="/index.html" class="text-white font-bold text-xl">Bryan Collins</a>
             <div class="flex gap-6">
                 <a href="/mba-frameworks.html" class="nav-link">Tools</a>
+                <a href="/gpts.html" class="nav-link">GPTs</a>
                 <a href="/projects.html" class="nav-link">Projects</a>
+                <a href="/books.html" class="nav-link">Books</a>
                 <a href="/now.html" class="nav-link">Now</a>
                 <a href="/contact.html" class="nav-link">Contact</a>
                 <a href="https://newsletter.bryancollins.com" class="nav-link">Newsletter</a>
@@ -254,6 +342,17 @@
 
             <!-- Wizard Form -->
             <div class="bg-white rounded-xl p-8 shadow-lg mb-8">
+                
+                <!-- Error Message -->
+                <div id="error-message" class="error-message hidden" role="alert" aria-live="polite">
+                    <div class="flex items-start">
+                        <i class="fas fa-exclamation-triangle text-red-600 mr-2 mt-1"></i>
+                        <div>
+                            <p class="font-bold">Error</p>
+                            <p id="error-text"></p>
+                        </div>
+                    </div>
+                </div>
                 
                 <!-- Step 1: Business Type -->
                 <div class="wizard-step active" id="step1">
@@ -480,7 +579,7 @@
                     
                     <div class="flex gap-4">
                         <button onclick="prevStep(3)" class="btn-secondary flex-1"><i class="fas fa-arrow-left mr-2"></i> Back</button>
-                        <button onclick="calculate()" class="btn-primary flex-1">Calculate Break-Even <i class="fas fa-calculator ml-2"></i></button>
+                        <button onclick="calculate()" id="calculateBtn" class="btn-primary flex-1">Calculate Break-Even <i class="fas fa-calculator ml-2"></i></button>
                     </div>
                 </div>
 
@@ -547,9 +646,12 @@
                 </div>
                 
                 <!-- Download CTA -->
-                <div class="text-center mb-8">
+                <div class="text-center mb-8 flex gap-4 justify-center">
                     <button onclick="downloadPDF()" class="btn-primary">
                         <i class="fas fa-download mr-2"></i>Download Full Report (PDF)
+                    </button>
+                    <button onclick="resetCalculator()" class="btn-secondary">
+                        <i class="fas fa-redo mr-2"></i>Start Over
                     </button>
                 </div>
                 
@@ -557,21 +659,24 @@
                 <div class="related-tools">
                     <h3 class="text-2xl font-bold mb-4 text-center">You Might Also Like</h3>
                     <div class="grid md:grid-cols-3 gap-4">
-                        <a href="/ansoff-matrix.html" class="tool-card">
-                            <i class="fas fa-chart-line text-2xl mb-2 block text-yellow-600"></i>
-                            <h4 class="font-bold mb-1">ANSOFF Matrix</h4>
-                            <p class="text-sm text-gray-600">Plan your growth strategy</p>
+                        <a href="/burn-rate-calculator.html" class="tool-card">
+                            <i class="fas fa-fire text-2xl mb-2 block text-yellow-600"></i>
+                            <h4 class="font-bold mb-1">Burn Rate Calculator</h4>
+                            <p class="text-sm text-gray-600">Calculate your runway</p>
                         </a>
-                        <a href="/swot-analysis.html" class="tool-card">
-                            <i class="fas fa-balance-scale text-2xl mb-2 block text-yellow-600"></i>
-                            <h4 class="font-bold mb-1">SWOT Analysis</h4>
-                            <p class="text-sm text-gray-600">Analyze strengths & opportunities</p>
+                        <a href="/email-roi-calculator.html" class="tool-card">
+                            <i class="fas fa-envelope text-2xl mb-2 block text-yellow-600"></i>
+                            <h4 class="font-bold mb-1">Email ROI Calculator</h4>
+                            <p class="text-sm text-gray-600">Measure email list value</p>
                         </a>
-                        <a href="/porters-five-forces.html" class="tool-card">
-                            <i class="fas fa-trophy text-2xl mb-2 block text-yellow-600"></i>
-                            <h4 class="font-bold mb-1">Porter's Five Forces</h4>
-                            <p class="text-sm text-gray-600">Assess competitive landscape</p>
+                        <a href="/freelance-rate-calculator.html" class="tool-card">
+                            <i class="fas fa-money-bill-wave text-2xl mb-2 block text-yellow-600"></i>
+                            <h4 class="font-bold mb-1">Freelance Rate Calculator</h4>
+                            <p class="text-sm text-gray-600">Calculate sustainable rates</p>
                         </a>
+                    </div>
+                    <div class="text-center mt-6">
+                        <a href="/mba-frameworks.html#calculators" class="text-black font-semibold hover:underline">View All Calculators & Tools →</a>
                     </div>
                 </div>
                 
@@ -599,16 +704,73 @@
     </div>
 
     <!-- Footer -->
-    <footer class="bg-black text-white py-8 px-4 mt-16">
-        <div class="max-w-6xl mx-auto text-center">
-            <div class="flex gap-6 justify-center mb-4">
-                <a href="https://www.youtube.com/channel/UCglNILz3uBqPer5EMJ_pzVg" target="_blank" class="hover:text-yellow-400"><i class="fab fa-youtube text-2xl"></i></a>
-                <a href="https://www.linkedin.com/in/bryancollins99/" target="_blank" class="hover:text-yellow-400"><i class="fab fa-linkedin text-2xl"></i></a>
-                <a href="https://github.com/bryancollins99" target="_blank" class="hover:text-yellow-400"><i class="fab fa-github text-2xl"></i></a>
-                <a href="https://www.amazon.com/stores/Bryan-Collins/author/B00KPFFYU6" target="_blank" class="hover:text-yellow-400"><i class="fab fa-amazon text-2xl"></i></a>
-                <a href="https://clarity.fm/bryancollins" target="_blank" class="hover:text-yellow-400"><i class="fas fa-phone text-2xl"></i></a>
+    <footer class="bg-black text-white py-12 px-4 mt-16">
+        <div class="max-w-6xl mx-auto">
+            <!-- Footer Links -->
+            <div class="grid md:grid-cols-4 gap-8 mb-8">
+                <!-- Tools -->
+                <div>
+                    <h3 class="font-bold text-lg mb-4 text-yellow-400">MBA Frameworks</h3>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="/ansoff-matrix.html" class="hover:text-yellow-400">ANSOFF Matrix</a></li>
+                        <li><a href="/swot-analysis.html" class="hover:text-yellow-400">SWOT Analysis</a></li>
+                        <li><a href="/porters-five-forces.html" class="hover:text-yellow-400">Porter's Five Forces</a></li>
+                        <li><a href="/mba-frameworks.html" class="hover:text-yellow-400">View All Tools →</a></li>
+                    </ul>
+                </div>
+                
+                <!-- Calculators -->
+                <div>
+                    <h3 class="font-bold text-lg mb-4 text-yellow-400">Calculators</h3>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="/burn-rate-calculator.html" class="hover:text-yellow-400">Burn Rate Calculator</a></li>
+                        <li><a href="/break-even-calculator.html" class="hover:text-yellow-400">Break-Even Calculator</a></li>
+                        <li><a href="/email-roi-calculator.html" class="hover:text-yellow-400">Email ROI Calculator</a></li>
+                        <li><a href="/btc-dca-calculator.html" class="hover:text-yellow-400">BTC DCA Calculator</a></li>
+                        <li><a href="/freelance-rate-calculator.html" class="hover:text-yellow-400">Freelance Rate Calculator</a></li>
+                        <li><a href="/position-sizing-calculator.html" class="hover:text-yellow-400">Position Sizing Calculator</a></li>
+                    </ul>
+                </div>
+                
+                <!-- Resources -->
+                <div>
+                    <h3 class="font-bold text-lg mb-4 text-yellow-400">Resources</h3>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="/gpts.html" class="hover:text-yellow-400">Custom GPTs</a></li>
+                        <li><a href="/projects.html" class="hover:text-yellow-400">Projects</a></li>
+                        <li><a href="/books.html" class="hover:text-yellow-400">Books</a></li>
+                        <li><a href="https://newsletter.bryancollins.com" class="hover:text-yellow-400">Newsletter</a></li>
+                    </ul>
+                </div>
+                
+                <!-- Connect -->
+                <div>
+                    <h3 class="font-bold text-lg mb-4 text-yellow-400">Connect</h3>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="/now.html" class="hover:text-yellow-400">What I'm Doing Now</a></li>
+                        <li><a href="/contact.html" class="hover:text-yellow-400">Contact</a></li>
+                        <li><a href="https://clarity.fm/bryancollins" target="_blank" rel="noopener" class="hover:text-yellow-400">Book a Call</a></li>
+                        <li><a href="/work-with-me.html" class="hover:text-yellow-400">Work With Me</a></li>
+                    </ul>
+                </div>
             </div>
-            <p class="text-sm opacity-70">© 2025 Bryan Collins. All rights reserved.</p>
+            
+            <!-- Social & Copyright -->
+            <div class="text-center border-t border-gray-700 pt-8">
+                <div class="flex gap-6 justify-center mb-4">
+                    <a href="https://www.youtube.com/channel/UCglNILz3uBqPer5EMJ_pzVg" target="_blank" rel="noopener" aria-label="YouTube channel" class="hover:text-yellow-400"><i class="fab fa-youtube text-2xl"></i></a>
+                    <a href="https://www.linkedin.com/in/bryancollins99/" target="_blank" rel="noopener" aria-label="LinkedIn profile" class="hover:text-yellow-400"><i class="fab fa-linkedin text-2xl"></i></a>
+                    <a href="https://github.com/bryancollins99" target="_blank" rel="noopener" aria-label="GitHub profile" class="hover:text-yellow-400"><i class="fab fa-github text-2xl"></i></a>
+                    <a href="https://www.amazon.com/stores/Bryan-Collins/author/B00KPFFYU6" target="_blank" rel="noopener" aria-label="Amazon author page" class="hover:text-yellow-400"><i class="fab fa-amazon text-2xl"></i></a>
+                    <a href="https://clarity.fm/bryancollins" target="_blank" rel="noopener" aria-label="Book a call" class="hover:text-yellow-400"><i class="fas fa-phone text-2xl"></i></a>
+                </div>
+                <div class="flex gap-4 justify-center text-sm text-gray-400 mb-4">
+                    <a href="/privacy.html" class="hover:text-white">Privacy Policy</a>
+                    <span>•</span>
+                    <a href="/terms.html" class="hover:text-white">Terms of Service</a>
+                </div>
+                <p class="text-sm opacity-70">© 2025 Bryan Collins. All rights reserved.</p>
+            </div>
         </div>
     </footer>
 
@@ -616,6 +778,25 @@
         let currentStep = 1;
         const totalSteps = 4;
         let chartInstance = null;
+
+        // Reset calculator
+        function resetCalculator() {
+            location.reload();
+        }
+
+        // Error handling
+        function showError(message) {
+            const errorDiv = document.getElementById('error-message');
+            const errorText = document.getElementById('error-text');
+            errorText.textContent = message;
+            errorDiv.classList.remove('hidden');
+            errorDiv.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            setTimeout(() => errorDiv.classList.add('hidden'), 5000);
+        }
+
+        function hideError() {
+            document.getElementById('error-message').classList.add('hidden');
+        }
 
         // Business type selection
         document.querySelectorAll('.business-radio').forEach(radio => {
@@ -677,25 +858,26 @@
         }
 
         function nextStep(step) {
+            hideError();
             // Validation
             if (currentStep === 2) {
                 const totalFixed = parseFloat(document.getElementById('totalFixed').textContent.replace('$', ''));
                 if (totalFixed <= 0) {
-                    alert('Please enter at least some fixed costs');
+                    showError('Please enter at least some fixed costs (must be greater than $0)');
                     return;
                 }
             }
             if (currentStep === 3) {
                 const totalVariable = parseFloat(document.getElementById('totalVariable').textContent.replace('$', ''));
                 if (totalVariable < 0) {
-                    alert('Please enter your variable costs');
+                    showError('Please enter your variable costs (must be $0 or greater)');
                     return;
                 }
             }
             if (currentStep === 4) {
                 const price = parseFloat(document.getElementById('price').value || 0);
                 if (price <= 0) {
-                    alert('Please enter a selling price');
+                    showError('Please enter a selling price (must be greater than $0)');
                     return;
                 }
             }
@@ -721,16 +903,40 @@
         }
 
         function calculate() {
-            // Get values
-            const fixedCosts = parseFloat(document.getElementById('totalFixed').textContent.replace('$', ''));
-            const variableCost = parseFloat(document.getElementById('totalVariable').textContent.replace('$', ''));
-            const price = parseFloat(document.getElementById('price').value || 0);
+            hideError();
             
-            // Validation
-            if (price <= variableCost) {
-                alert('Error: Your selling price must be higher than your variable cost per unit to make a profit!');
-                return;
-            }
+            // Show loading state
+            const button = document.getElementById('calculateBtn');
+            const originalText = button.innerHTML;
+            button.disabled = true;
+            button.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i>Calculating...';
+            
+            setTimeout(() => {
+                // Get values
+                const fixedCosts = parseFloat(document.getElementById('totalFixed').textContent.replace('$', ''));
+                const variableCost = parseFloat(document.getElementById('totalVariable').textContent.replace('$', ''));
+                const price = parseFloat(document.getElementById('price').value || 0);
+                
+                // Validation
+                if (price <= variableCost) {
+                    showError('Error: Your selling price must be higher than your variable cost per unit to make a profit!');
+                    button.disabled = false;
+                    button.innerHTML = originalText;
+                    return;
+                }
+                
+                // Track with analytics
+                if (window.plausible) {
+                    plausible('Calculator Used', {
+                        props: { calculator: 'Break-Even' }
+                    });
+                }
+                
+                continueCalculation(fixedCosts, variableCost, price, button, originalText);
+            }, 300);
+        }
+        
+        function continueCalculation(fixedCosts, variableCost, price, button, originalText) {
             
             // Calculate break-even
             const contributionMargin = price - variableCost;
@@ -756,6 +962,10 @@
             document.querySelector('.wizard-step.active').parentElement.style.display = 'none';
             document.getElementById('results').style.display = 'block';
             document.getElementById('stickyCTA').classList.add('show');
+            
+            // Restore button state
+            button.disabled = false;
+            button.innerHTML = originalText;
             
             // Scroll to results
             document.getElementById('results').scrollIntoView({ behavior: 'smooth' });

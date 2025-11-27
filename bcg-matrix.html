@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BCG Matrix Tool — Product Portfolio Analysis</title>
+    <title>BCG Matrix — Bryan Collins</title>
     <meta name="description" content="Free interactive BCG Matrix tool. Categorize your products/content as Stars, Cash Cows, Question Marks, or Dogs.">
     <meta property="og:url" content="https://join.bryancollins.com/bcg-matrix/" />
     <meta property="og:title" content="BCG Matrix Tool — Product Portfolio Analysis" />
@@ -13,9 +13,6 @@
     <link rel="icon" type="image/svg+xml" href="/favicon.svg">
 
     <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
-    <!-- Favicon -->
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
-
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <script defer data-domain="join.bryancollins.com" src="https://plausible.io/js/script.js"></script>
@@ -100,21 +97,69 @@
         }
         .quadrant {
             background: white;
-            padding: 24px;
+            padding: 28px;
             border-radius: 12px;
             box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-            min-height: 200px;
+            min-height: 250px;
         }
         .quadrant h5 {
             font-weight: 700;
             margin-bottom: 12px;
-            font-size: 18px;
+            font-size: 20px;
             display: flex;
             align-items: center;
         }
-        .quadrant p {
-            font-size: 13px;
-            line-height: 1.5;
+        .quadrant .subtitle {
+            font-size: 12px;
+            opacity: 0.7;
+            margin-bottom: 12px;
+        }
+        .quadrant .content {
+            font-size: 15px;
+            line-height: 1.7;
+        }
+        .enhanced-content {
+            margin-top: 12px;
+            padding-top: 12px;
+            border-top: 1px solid rgba(0, 0, 0, 0.1);
+        }
+        .enhanced-content ul {
+            list-style: none;
+            padding: 0;
+            margin: 8px 0;
+        }
+        .enhanced-content li {
+            padding: 6px 0 6px 20px;
+            position: relative;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+        .enhanced-content li:before {
+            content: "→";
+            position: absolute;
+            left: 0;
+            color: #956FA6;
+            font-weight: bold;
+        }
+        .loading-spinner {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(149, 111, 166, 0.3);
+            border-radius: 50%;
+            border-top-color: #956FA6;
+            animation: spin 1s ease-in-out infinite;
+        }
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        @keyframes slideIn {
+            from { transform: translateX(400px); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+        @keyframes slideOut {
+            from { transform: translateX(0); opacity: 1; }
+            to { transform: translateX(400px); opacity: 0; }
         }
         .quadrant ul {
             list-style: none;
@@ -198,9 +243,106 @@
                 grid-template-columns: 1fr;
             }
         }
+        /* Navigation Styles */
+        .nav-bar {
+            background: #000000;
+            border-bottom: 1px solid #333;
+        }
+        .nav-link {
+            color: white;
+            padding: 0.5rem 1rem;
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+        .nav-link:hover {
+            color: #FFDE59;
+        }
+        .mobile-menu-button {
+            display: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+            background: none;
+            border: none;
+            padding: 0.5rem;
+        }
+        .desktop-nav {
+            display: flex;
+            gap: 1.5rem;
+        }
+        .mobile-nav {
+            display: none;
+            flex-direction: column;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background: #000000;
+            border-top: 1px solid #333;
+            padding: 1rem;
+            z-index: 100;
+        }
+        .mobile-nav.active {
+            display: flex;
+        }
+        .mobile-nav .nav-link {
+            padding: 0.75rem 1rem;
+            border-bottom: 1px solid #333;
+        }
+        @media (max-width: 768px) {
+            .mobile-menu-button {
+                display: block;
+            }
+            .desktop-nav {
+                display: none;
+            }
+        }
     </style>
 </head>
 <body>
+    <!-- Navigation -->
+    <nav class="nav-bar sticky top-0 z-50">
+        <div class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between relative">
+            <a href="/index.html" class="text-white font-bold text-xl">Bryan Collins</a>
+            <button class="mobile-menu-button" id="mobileMenuButton" aria-label="Toggle menu">
+                <i class="fas fa-bars"></i>
+            </button>
+            <div class="desktop-nav">
+                <a href="/mba-frameworks.html" class="nav-link">Tools</a>
+                <a href="/gpts.html" class="nav-link">GPTs</a>
+                <a href="/projects.html" class="nav-link">Projects</a>
+                <a href="/books.html" class="nav-link">Books</a>
+                <a href="/now.html" class="nav-link">Now</a>
+                <a href="/contact.html" class="nav-link">Contact</a>
+                <a href="https://newsletter.bryancollins.com" class="nav-link">Newsletter</a>
+            </div>
+            <div class="mobile-nav" id="mobileNav">
+                <a href="/mba-frameworks.html" class="nav-link">Tools</a>
+                <a href="/gpts.html" class="nav-link">GPTs</a>
+                <a href="/projects.html" class="nav-link">Projects</a>
+                <a href="/books.html" class="nav-link">Books</a>
+                <a href="/now.html" class="nav-link">Now</a>
+                <a href="/contact.html" class="nav-link">Contact</a>
+                <a href="https://newsletter.bryancollins.com" class="nav-link">Newsletter</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Breadcrumbs -->
+    <div class="bg-gray-100 py-3 px-4">
+        <div class="max-w-4xl mx-auto">
+            <nav aria-label="Breadcrumb">
+                <ol class="flex items-center space-x-2 text-sm">
+                    <li><a href="/index.html" class="text-gray-600 hover:text-black">Home</a></li>
+                    <li class="text-gray-400">/</li>
+                    <li><a href="/mba-frameworks.html" class="text-gray-600 hover:text-black">Tools</a></li>
+                    <li class="text-gray-400">/</li>
+                    <li class="text-black font-semibold">BCG Matrix</li>
+                </ol>
+            </nav>
+        </div>
+    </div>
+
     <main class="min-h-screen py-12 px-4 sm:px-6 lg:px-8">
         <div class="max-w-4xl mx-auto">
             
@@ -361,26 +503,51 @@
                     <h3 class="text-2xl font-bold mb-4">Your BCG Matrix</h3>
                     <p class="text-gray-600 mb-6">Here's your product portfolio breakdown:</p>
 
+                    <!-- AI Enhancement Button -->
+                    <div class="text-center mb-6">
+                        <button id="enhance-btn" class="btn-primary" onclick="enhanceWithAI()">
+                            <i class="fas fa-magic mr-2"></i> Enhance with AI Insights
+                        </button>
+                        <p class="text-xs text-gray-600 mt-2">Get strategic recommendations powered by Claude AI</p>
+                    </div>
+
+                    <div id="loading-state" style="display: none; text-align: center; padding: 40px;">
+                        <div class="loading-spinner" style="margin: 0 auto 16px;"></div>
+                        <p class="text-gray-600">Analyzing your portfolio with AI...</p>
+                    </div>
+
                     <div class="bcg-matrix mb-6">
                         <div class="quadrant stars">
                             <h5><span style="color: #FFD700;">⭐</span> Stars</h5>
-                            <p class="text-xs text-gray-600 mb-2">High Growth + High Share → Invest Heavily</p>
-                            <div id="review-stars" class="text-sm whitespace-pre-line"></div>
+                            <p class="subtitle">High Growth + High Share → Invest Heavily</p>
+                            <div class="content">
+                                <div id="review-stars"></div>
+                                <div id="enhanced-stars" class="enhanced-content" style="display: none;"></div>
+                            </div>
                         </div>
                         <div class="quadrant question-marks">
                             <h5><span style="color: #FF9800;">❓</span> Question Marks</h5>
-                            <p class="text-xs text-gray-600 mb-2">High Growth + Low Share → Invest or Divest</p>
-                            <div id="review-question-marks" class="text-sm whitespace-pre-line"></div>
+                            <p class="subtitle">High Growth + Low Share → Invest or Divest</p>
+                            <div class="content">
+                                <div id="review-question-marks"></div>
+                                <div id="enhanced-question-marks" class="enhanced-content" style="display: none;"></div>
+                            </div>
                         </div>
                         <div class="quadrant cash-cows">
                             <h5><span style="color: #4CAF50;">🐄</span> Cash Cows</h5>
-                            <p class="text-xs text-gray-600 mb-2">Low Growth + High Share → Maintain & Milk</p>
-                            <div id="review-cash-cows" class="text-sm whitespace-pre-line"></div>
+                            <p class="subtitle">Low Growth + High Share → Maintain & Milk</p>
+                            <div class="content">
+                                <div id="review-cash-cows"></div>
+                                <div id="enhanced-cash-cows" class="enhanced-content" style="display: none;"></div>
+                            </div>
                         </div>
                         <div class="quadrant dogs">
                             <h5><span style="color: #9E9E9E;">🐕</span> Dogs</h5>
-                            <p class="text-xs text-gray-600 mb-2">Low Growth + Low Share → Divest or Reposition</p>
-                            <div id="review-dogs" class="text-sm whitespace-pre-line"></div>
+                            <p class="subtitle">Low Growth + Low Share → Divest or Reposition</p>
+                            <div class="content">
+                                <div id="review-dogs"></div>
+                                <div id="enhanced-dogs" class="enhanced-content" style="display: none;"></div>
+                            </div>
                         </div>
                     </div>
 
@@ -432,7 +599,12 @@
                 </div>
             </div>
 
-            <p class="text-center text-xs" style="color: #1B1B1D; opacity: 0.5;">© 2025 Bryan Collins. All rights reserved.</p>
+            <div class="flex gap-4 justify-center text-sm text-gray-400 mb-4">
+                    <a href="/privacy.html" class="hover:text-black">Privacy Policy</a>
+                    <span>•</span>
+                    <a href="/terms.html" class="hover:text-black">Terms of Service</a>
+                </div>
+                <p class="text-center text-xs" style="color: #1B1B1D; opacity: 0.5;">© 2025 Bryan Collins. All rights reserved.</p>
         </div>
     </main>
 
@@ -497,52 +669,177 @@
         }
 
         function populateReview() {
-            document.getElementById('review-stars').textContent = document.getElementById('stars').value || 'None listed';
-            document.getElementById('review-question-marks').textContent = document.getElementById('question-marks').value || 'None listed';
-            document.getElementById('review-cash-cows').textContent = document.getElementById('cash-cows').value || 'None listed';
-            document.getElementById('review-dogs').textContent = document.getElementById('dogs').value || 'None listed';
+            const stars = document.getElementById('stars').value || 'None listed';
+            const questionMarks = document.getElementById('question-marks').value || 'None listed';
+            const cashCows = document.getElementById('cash-cows').value || 'None listed';
+            const dogs = document.getElementById('dogs').value || 'None listed';
+            
+            document.getElementById('review-stars').innerHTML = `<p style="margin-bottom: 8px; font-weight: 600;">Your Products:</p><p>${stars}</p>`;
+            document.getElementById('review-question-marks').innerHTML = `<p style="margin-bottom: 8px; font-weight: 600;">Your Products:</p><p>${questionMarks}</p>`;
+            document.getElementById('review-cash-cows').innerHTML = `<p style="margin-bottom: 8px; font-weight: 600;">Your Products:</p><p>${cashCows}</p>`;
+            document.getElementById('review-dogs').innerHTML = `<p style="margin-bottom: 8px; font-weight: 600;">Your Products:</p><p>${dogs}</p>`;
+        }
+
+        async function enhanceWithAI() {
+            const enhanceBtn = document.getElementById('enhance-btn');
+            const loadingState = document.getElementById('loading-state');
+            
+            enhanceBtn.style.display = 'none';
+            loadingState.style.display = 'block';
+            
+            try {
+                const response = await fetch('/.netlify/functions/enhance-mba-content', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        tool: 'bcg',
+                        inputs: {
+                            stars: document.getElementById('stars').value,
+                            questionMarks: document.getElementById('question-marks').value,
+                            cashCows: document.getElementById('cash-cows').value,
+                            dogs: document.getElementById('dogs').value
+                        }
+                    })
+                });
+
+                const data = await response.json();
+                
+                if (data.success) {
+                    displayEnhancedContent(data.enhancedContent);
+                } else {
+                    throw new Error(data.message || 'Failed to enhance content');
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                showNotification('Failed to enhance content. Please try again.', 'error');
+                enhanceBtn.style.display = 'block';
+                loadingState.style.display = 'none';
+            }
+        }
+
+        function displayEnhancedContent(content) {
+            const mapping = {
+                'stars': 'enhanced-stars',
+                'questionMarks': 'enhanced-question-marks',
+                'cashCows': 'enhanced-cash-cows',
+                'dogs': 'enhanced-dogs'
+            };
+
+            Object.keys(mapping).forEach(key => {
+                const element = document.getElementById(mapping[key]);
+                if (content[key] && Array.isArray(content[key])) {
+                    const html = `
+                        <div style="display: inline-block; background: #956FA6; color: white; padding: 4px 12px; border-radius: 12px; font-size: 12px; font-weight: 700; margin-bottom: 12px;">
+                            <i class="fas fa-sparkles mr-1"></i> AI ENHANCED
+                        </div>
+                        <p style="margin-bottom: 8px; font-weight: 600; color: #956FA6; font-size: 14px;">Strategic Recommendations:</p>
+                        <ul style="margin: 0;">
+                            ${content[key].map(item => `<li>${item}</li>`).join('')}
+                        </ul>
+                    `;
+                    element.innerHTML = html;
+                    element.style.display = 'block';
+                    
+                    element.style.opacity = '0';
+                    setTimeout(() => {
+                        element.style.transition = 'opacity 0.5s ease-in';
+                        element.style.opacity = '1';
+                    }, 100);
+                }
+            });
+
+            showNotification('AI analysis complete! Your portfolio has been enhanced.', 'success');
+        }
+
+        function showNotification(message, type = 'info') {
+            const notification = document.createElement('div');
+            notification.style.cssText = `
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                background: ${type === 'success' ? '#4CAF50' : type === 'error' ? '#f44336' : '#2196F3'};
+                color: white;
+                padding: 16px 24px;
+                border-radius: 8px;
+                box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+                z-index: 10000;
+                font-weight: 600;
+                animation: slideIn 0.3s ease-out;
+            `;
+            notification.textContent = message;
+            document.body.appendChild(notification);
+
+            setTimeout(() => {
+                notification.style.animation = 'slideOut 0.3s ease-in';
+                setTimeout(() => notification.remove(), 300);
+            }, 3000);
         }
 
         function downloadPDF() {
             const { jsPDF } = window.jspdf;
             const doc = new jsPDF();
+            let yPos = 20;
             
             doc.setFontSize(20);
             doc.setTextColor(149, 111, 166);
-            doc.text('BCG Matrix - Product Portfolio', 20, 20);
+            doc.text('BCG Matrix - Product Portfolio', 20, yPos);
+            yPos += 8;
             
             doc.setFontSize(10);
             doc.setTextColor(100);
-            doc.text('Generated: ' + new Date().toLocaleDateString(), 20, 28);
+            doc.text('Generated: ' + new Date().toLocaleDateString(), 20, yPos);
+            yPos += 15;
             
             const quadrants = [
-                { label: 'Stars (High Growth + High Share)', id: 'stars', color: [255, 215, 0], strategy: 'Invest Heavily' },
-                { label: 'Question Marks (High Growth + Low Share)', id: 'question-marks', color: [255, 152, 0], strategy: 'Invest or Divest' },
-                { label: 'Cash Cows (Low Growth + High Share)', id: 'cash-cows', color: [76, 175, 80], strategy: 'Maintain & Milk' },
-                { label: 'Dogs (Low Growth + Low Share)', id: 'dogs', color: [158, 158, 158], strategy: 'Divest or Reposition' }
+                { label: 'Stars', id: 'stars', enhancedId: 'enhanced-stars', color: [255, 215, 0], strategy: 'Invest Heavily' },
+                { label: 'Question Marks', id: 'question-marks', enhancedId: 'enhanced-question-marks', color: [255, 152, 0], strategy: 'Invest or Divest' },
+                { label: 'Cash Cows', id: 'cash-cows', enhancedId: 'enhanced-cash-cows', color: [76, 175, 80], strategy: 'Maintain & Milk' },
+                { label: 'Dogs', id: 'dogs', enhancedId: 'enhanced-dogs', color: [158, 158, 158], strategy: 'Divest or Reposition' }
             ];
             
-            let yPos = 40;
             quadrants.forEach(quad => {
+                if (yPos > 240) {
+                    doc.addPage();
+                    yPos = 20;
+                }
+                
                 doc.setFontSize(12);
                 doc.setTextColor(...quad.color);
                 doc.text(quad.label, 20, yPos);
-                yPos += 5;
+                yPos += 7;
+                
                 doc.setFontSize(9);
                 doc.setTextColor(100);
                 doc.text('Strategy: ' + quad.strategy, 20, yPos);
-                yPos += 6;
+                yPos += 7;
                 
                 doc.setFontSize(10);
                 doc.setTextColor(0);
                 const text = doc.splitTextToSize(document.getElementById(quad.id).value || 'None listed', 170);
                 doc.text(text, 20, yPos);
-                yPos += text.length * 5 + 10;
+                yPos += text.length * 5 + 3;
                 
-                if (yPos > 250) {
-                    doc.addPage();
-                    yPos = 20;
+                // Add AI recommendations if present
+                const enhancedEl = document.getElementById(quad.enhancedId);
+                if (enhancedEl && enhancedEl.style.display !== 'none') {
+                    doc.setFontSize(10);
+                    doc.setTextColor(149, 111, 166);
+                    doc.text('AI Recommendations:', 20, yPos);
+                    yPos += 6;
+                    
+                    doc.setFontSize(9);
+                    doc.setTextColor(0);
+                    const lis = enhancedEl.querySelectorAll('li');
+                    lis.forEach(li => {
+                        const text = doc.splitTextToSize('• ' + li.textContent, 165);
+                        doc.text(text, 25, yPos);
+                        yPos += text.length * 4 + 2;
+                    });
                 }
+                
+                yPos += 8;
             });
             
             doc.setFontSize(8);
@@ -551,6 +848,54 @@
             doc.text('https://join.bryancollins.com/bcg-matrix', 20, 290);
             
             doc.save('bcg-matrix-' + new Date().toISOString().split('T')[0] + '.pdf');
+            showNotification('PDF downloaded successfully!', 'success');
+        }
+        const mobileMenuButton = document.getElementById('mobileMenuButton');
+        const mobileNav = document.getElementById('mobileNav');
+        if (mobileMenuButton && mobileNav) {
+            mobileMenuButton.addEventListener('click', function() {
+                mobileNav.classList.toggle('active');
+                const icon = this.querySelector('i');
+                icon.classList.toggle('fa-bars');
+                icon.classList.toggle('fa-times');
+            });
+            mobileNav.querySelectorAll('.nav-link').forEach(link => {
+                link.addEventListener('click', () => {
+                    mobileNav.classList.remove('active');
+                    mobileMenuButton.querySelector('i').classList.replace('fa-times', 'fa-bars');
+                });
+            });
+        }
+    </script>
+    
+    <!-- Mobile Menu Script -->
+    <script>
+        const mobileMenuButton = document.getElementById('mobileMenuButton');
+        const mobileNav = document.getElementById('mobileNav');
+        
+        if (mobileMenuButton && mobileNav) {
+            mobileMenuButton.addEventListener('click', function() {
+                mobileNav.classList.toggle('active');
+                const icon = this.querySelector('i');
+                if (mobileNav.classList.contains('active')) {
+                    icon.classList.remove('fa-bars');
+                    icon.classList.add('fa-times');
+                } else {
+                    icon.classList.remove('fa-times');
+                    icon.classList.add('fa-bars');
+                }
+            });
+            
+            // Close menu when clicking a link
+            const mobileLinks = mobileNav.querySelectorAll('.nav-link');
+            mobileLinks.forEach(link => {
+                link.addEventListener('click', function() {
+                    mobileNav.classList.remove('active');
+                    const icon = mobileMenuButton.querySelector('i');
+                    icon.classList.remove('fa-times');
+                    icon.classList.add('fa-bars');
+                });
+            });
         }
     </script>
 </body>

@@ -6,6 +6,23 @@
     <title>Email ROI Calculator — Free Tool by Bryan Collins</title>
     <meta name="description" content="Calculate the ROI of your email list. Free Email ROI Calculator to estimate revenue potential and subscriber value for your newsletter.">
     
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://join.bryancollins.com/email-roi-calculator">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://join.bryancollins.com/email-roi-calculator">
+    <meta property="og:title" content="Free Email ROI Calculator | Bryan Collins">
+    <meta property="og:description" content="Discover the true value of your email list and revenue potential.">
+    <meta property="og:image" content="https://join.bryancollins.com/resources/bryan-collins.jpeg">
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://join.bryancollins.com/email-roi-calculator">
+    <meta property="twitter:title" content="Free Email ROI Calculator">
+    <meta property="twitter:description" content="Calculate your email list ROI and revenue potential.">
+    <meta property="twitter:image" content="https://join.bryancollins.com/resources/bryan-collins.jpeg">
+    
     <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="/favicon.svg">
     
@@ -150,6 +167,43 @@
             font-weight: 700;
             color: #000;
         }
+        .error-message {
+            background: #fee;
+            border-left: 4px solid #dc2626;
+            padding: 1rem;
+            border-radius: 4px;
+            margin-bottom: 1rem;
+        }
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border-width: 0;
+        }
+        .hidden {
+            display: none;
+        }
+        @media (max-width: 768px) {
+            .btn-primary, .btn-secondary {
+                padding: 1rem 1.5rem;
+                font-size: 1.125rem;
+                min-height: 44px;
+            }
+            .form-input {
+                min-height: 44px;
+                font-size: 16px;
+            }
+        }
+        @media print {
+            nav, footer, .btn-secondary { display: none; }
+            body { background: white; }
+            .card { box-shadow: none; border: 1px solid #ddd; page-break-inside: avoid; }
+        }
     </style>
 </head>
 <body>
@@ -184,6 +238,17 @@
                 <!-- Calculator Form -->
                 <div class="card">
                     <h2 class="text-2xl font-bold mb-6">Enter Your Email Metrics</h2>
+                    
+                    <!-- Error Message -->
+                    <div id="error-message" class="error-message hidden" role="alert" aria-live="polite">
+                        <div class="flex items-start">
+                            <i class="fas fa-exclamation-triangle text-red-600 mr-2 mt-1"></i>
+                            <div>
+                                <p class="font-bold">Error</p>
+                                <p id="error-text"></p>
+                            </div>
+                        </div>
+                    </div>
                     
                     <form id="roiForm">
                         <div class="mb-4">
@@ -234,7 +299,7 @@
                             <input type="number" id="emailsPerMonth" class="form-input" placeholder="4" value="4" min="0" required />
                         </div>
 
-                        <button type="submit" class="btn-primary">
+                        <button type="submit" id="calculateBtn" class="btn-primary">
                             <i class="fas fa-calculator mr-2"></i>Calculate My ROI
                         </button>
                     </form>
@@ -318,9 +383,14 @@
                     <i class="fas fa-rocket icon-yellow text-4xl mb-4"></i>
                     <h3 class="text-2xl font-bold mb-3">Want to 10x These Numbers?</h3>
                     <p class="text-lg text-gray-700 mb-6 max-w-2xl mx-auto">Join 15,000+ creators who are building profitable email lists. Get my free guide with 101 AI prompts to help you create better email content and grow your audience.</p>
-                    <a href="/newsletter.html" class="btn-secondary inline-block">
-                        <i class="fas fa-envelope mr-2"></i>Get Free Email Marketing Resources
-                    </a>
+                    <div class="flex gap-4 justify-center">
+                        <button onclick="resetCalculator()" class="btn-secondary">
+                            <i class="fas fa-redo mr-2"></i>Calculate Again
+                        </button>
+                        <a href="/newsletter.html" class="btn-primary">
+                            <i class="fas fa-envelope mr-2"></i>Get Free Resources
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>
@@ -355,23 +425,143 @@
         </div>
     </section>
 
-    <!-- Footer -->
-    <footer class="bg-black text-white py-8 px-4 mt-16">
-        <div class="max-w-6xl mx-auto text-center">
-            <div class="flex gap-6 justify-center mb-4">
-                <a href="https://www.youtube.com/channel/UCglNILz3uBqPer5EMJ_pzVg" target="_blank" class="hover:text-yellow-400"><i class="fab fa-youtube text-2xl"></i></a>
-                <a href="https://www.linkedin.com/in/bryancollins99/" target="_blank" class="hover:text-yellow-400"><i class="fab fa-linkedin text-2xl"></i></a>
-                <a href="https://github.com/bryancollins99" target="_blank" class="hover:text-yellow-400"><i class="fab fa-github text-2xl"></i></a>
-                <a href="https://www.amazon.com/stores/Bryan-Collins/author/B00KPFFYU6" target="_blank" class="hover:text-yellow-400"><i class="fab fa-amazon text-2xl"></i></a>
-                <a href="https://clarity.fm/bryancollins" target="_blank" class="hover:text-yellow-400"><i class="fas fa-phone text-2xl"></i></a>
+    <!-- Related Tools -->
+    <section class="py-16 px-4">
+        <div class="max-w-4xl mx-auto">
+            <h2 class="section-title text-center mb-12">Other Business Calculators</h2>
+            <div class="grid md:grid-cols-3 gap-6">
+                <a href="/burn-rate-calculator.html" class="card text-center hover:no-underline">
+                    <i class="fas fa-fire icon-yellow text-3xl mb-3"></i>
+                    <h3 class="font-bold text-lg mb-2">Burn Rate Calculator</h3>
+                    <p class="text-sm text-gray-600">Calculate your runway</p>
+                </a>
+                <a href="/break-even-calculator.html" class="card text-center hover:no-underline">
+                    <i class="fas fa-balance-scale icon-yellow text-3xl mb-3"></i>
+                    <h3 class="font-bold text-lg mb-2">Break-Even Calculator</h3>
+                    <p class="text-sm text-gray-600">Find your break-even point</p>
+                </a>
+                <a href="/freelance-rate-calculator.html" class="card text-center hover:no-underline">
+                    <i class="fas fa-money-bill-wave icon-yellow text-3xl mb-3"></i>
+                    <h3 class="font-bold text-lg mb-2">Freelance Rate Calculator</h3>
+                    <p class="text-sm text-gray-600">Determine your ideal rate</p>
+                </a>
             </div>
-            <p class="text-sm opacity-70">© 2025 Bryan Collins. All rights reserved.</p>
+            <div class="text-center mt-8">
+                <a href="/mba-frameworks.html#calculators" class="text-black font-semibold hover:underline text-lg">View All Calculators & Tools →</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-black text-white py-12 px-4 mt-16">
+        <div class="max-w-6xl mx-auto">
+            <!-- Footer Links -->
+            <div class="grid md:grid-cols-4 gap-8 mb-8">
+                <!-- Tools -->
+                <div>
+                    <h3 class="font-bold text-lg mb-4 text-yellow-400">MBA Frameworks</h3>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="/ansoff-matrix.html" class="hover:text-yellow-400">ANSOFF Matrix</a></li>
+                        <li><a href="/swot-analysis.html" class="hover:text-yellow-400">SWOT Analysis</a></li>
+                        <li><a href="/porters-five-forces.html" class="hover:text-yellow-400">Porter's Five Forces</a></li>
+                        <li><a href="/mba-frameworks.html" class="hover:text-yellow-400">View All Tools →</a></li>
+                    </ul>
+                </div>
+                
+                <!-- Calculators -->
+                <div>
+                    <h3 class="font-bold text-lg mb-4 text-yellow-400">Calculators</h3>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="/burn-rate-calculator.html" class="hover:text-yellow-400">Burn Rate Calculator</a></li>
+                        <li><a href="/break-even-calculator.html" class="hover:text-yellow-400">Break-Even Calculator</a></li>
+                        <li><a href="/email-roi-calculator.html" class="hover:text-yellow-400">Email ROI Calculator</a></li>
+                        <li><a href="/btc-dca-calculator.html" class="hover:text-yellow-400">BTC DCA Calculator</a></li>
+                        <li><a href="/freelance-rate-calculator.html" class="hover:text-yellow-400">Freelance Rate Calculator</a></li>
+                        <li><a href="/position-sizing-calculator.html" class="hover:text-yellow-400">Position Sizing Calculator</a></li>
+                    </ul>
+                </div>
+                
+                <!-- Resources -->
+                <div>
+                    <h3 class="font-bold text-lg mb-4 text-yellow-400">Resources</h3>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="/gpts.html" class="hover:text-yellow-400">Custom GPTs</a></li>
+                        <li><a href="/projects.html" class="hover:text-yellow-400">Projects</a></li>
+                        <li><a href="/books.html" class="hover:text-yellow-400">Books</a></li>
+                        <li><a href="https://newsletter.bryancollins.com" class="hover:text-yellow-400">Newsletter</a></li>
+                    </ul>
+                </div>
+                
+                <!-- Connect -->
+                <div>
+                    <h3 class="font-bold text-lg mb-4 text-yellow-400">Connect</h3>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="/now.html" class="hover:text-yellow-400">What I'm Doing Now</a></li>
+                        <li><a href="/contact.html" class="hover:text-yellow-400">Contact</a></li>
+                        <li><a href="https://clarity.fm/bryancollins" target="_blank" rel="noopener" class="hover:text-yellow-400">Book a Call</a></li>
+                        <li><a href="/work-with-me.html" class="hover:text-yellow-400">Work With Me</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <!-- Social & Copyright -->
+            <div class="text-center border-t border-gray-700 pt-8">
+                <div class="flex gap-6 justify-center mb-4">
+                    <a href="https://www.youtube.com/channel/UCglNILz3uBqPer5EMJ_pzVg" target="_blank" rel="noopener" aria-label="YouTube channel" class="hover:text-yellow-400"><i class="fab fa-youtube text-2xl"></i></a>
+                    <a href="https://www.linkedin.com/in/bryancollins99/" target="_blank" rel="noopener" aria-label="LinkedIn profile" class="hover:text-yellow-400"><i class="fab fa-linkedin text-2xl"></i></a>
+                    <a href="https://github.com/bryancollins99" target="_blank" rel="noopener" aria-label="GitHub profile" class="hover:text-yellow-400"><i class="fab fa-github text-2xl"></i></a>
+                    <a href="https://www.amazon.com/stores/Bryan-Collins/author/B00KPFFYU6" target="_blank" rel="noopener" aria-label="Amazon author page" class="hover:text-yellow-400"><i class="fab fa-amazon text-2xl"></i></a>
+                    <a href="https://clarity.fm/bryancollins" target="_blank" rel="noopener" aria-label="Book a call" class="hover:text-yellow-400"><i class="fas fa-phone text-2xl"></i></a>
+                </div>
+                <div class="flex gap-4 justify-center text-sm text-gray-400 mb-4">
+                    <a href="/privacy.html" class="hover:text-white">Privacy Policy</a>
+                    <span>•</span>
+                    <a href="/terms.html" class="hover:text-white">Terms of Service</a>
+                </div>
+                <p class="text-sm opacity-70">© 2025 Bryan Collins. All rights reserved.</p>
+            </div>
         </div>
     </footer>
 
     <script>
+        // Reset calculator
+        function resetCalculator() {
+            document.getElementById('roiForm').reset();
+            document.getElementById('results').style.display = 'none';
+            hideError();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // Error handling
+        function showError(message) {
+            const errorDiv = document.getElementById('error-message');
+            const errorText = document.getElementById('error-text');
+            errorText.textContent = message;
+            errorDiv.classList.remove('hidden');
+            errorDiv.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            setTimeout(() => errorDiv.classList.add('hidden'), 5000);
+        }
+
+        function hideError() {
+            document.getElementById('error-message').classList.add('hidden');
+        }
+
         document.getElementById('roiForm').addEventListener('submit', function(e) {
             e.preventDefault();
+            hideError();
+            
+            // Show loading state
+            const button = document.getElementById('calculateBtn');
+            const originalText = button.innerHTML;
+            button.disabled = true;
+            button.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i>Calculating...';
+            
+            setTimeout(() => {
+                calculateROI(button, originalText);
+            }, 300);
+        });
+        
+        function calculateROI(button, originalText) {
             
             // Get form values
             const listSize = parseFloat(document.getElementById('listSize').value);
@@ -482,13 +672,25 @@
             
             document.getElementById('insights').innerHTML = insightsHTML;
             
+            // Track with analytics
+            if (window.plausible) {
+                plausible('Calculator Used', {
+                    props: { calculator: 'Email ROI' }
+                });
+            }
+            
             // Show results
             document.getElementById('results').style.display = 'block';
             
+            // Restore button state
+            button.disabled = false;
+            button.innerHTML = originalText;
+            
             // Scroll to results
             document.getElementById('results').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-        });
+        }
     </script>
 </body>
 </html>
+
 

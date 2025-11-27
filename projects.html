@@ -10,9 +10,6 @@
     <link rel="icon" type="image/svg+xml" href="/favicon.svg">
 
     <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
-    <!-- Favicon -->
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
-
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     
     <!-- Privacy-friendly analytics by Plausible -->
@@ -75,14 +72,66 @@
             margin-bottom: 1rem;
             color: #000000;
         }
+        /* Mobile Navigation */
+        .mobile-menu-button {
+            display: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+            background: none;
+            border: none;
+            padding: 0.5rem;
+        }
+        .desktop-nav {
+            display: flex;
+            gap: 1.5rem;
+        }
+        .mobile-nav {
+            display: none;
+            flex-direction: column;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background: #000000;
+            border-top: 1px solid #333;
+            padding: 1rem;
+        }
+        .mobile-nav.active {
+            display: flex;
+        }
+        .mobile-nav .nav-link {
+            padding: 0.75rem 1rem;
+            border-bottom: 1px solid #333;
+        }
+        @media (max-width: 768px) {
+            .mobile-menu-button {
+                display: block;
+            }
+            .desktop-nav {
+                display: none;
+            }
+        }
     </style>
 </head>
 <body>
     <!-- Navigation -->
     <nav class="nav-bar sticky top-0 z-50">
-        <div class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
+        <div class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between relative">
             <a href="/index.html" class="text-white font-bold text-xl">Bryan Collins</a>
-            <div class="flex gap-6">
+            <button class="mobile-menu-button" id="mobileMenuButton" aria-label="Toggle menu">
+                <i class="fas fa-bars"></i>
+            </button>
+            <div class="desktop-nav">
+                <a href="/mba-frameworks.html" class="nav-link">Tools</a>
+                <a href="/gpts.html" class="nav-link">GPTs</a>
+                <a href="/projects.html" class="nav-link">Projects</a>
+                <a href="/books.html" class="nav-link">Books</a>
+                <a href="/now.html" class="nav-link">Now</a>
+                <a href="/contact.html" class="nav-link">Contact</a>
+                <a href="https://newsletter.bryancollins.com" class="nav-link">Newsletter</a>
+            </div>
+            <div class="mobile-nav" id="mobileNav">
                 <a href="/mba-frameworks.html" class="nav-link">Tools</a>
                 <a href="/gpts.html" class="nav-link">GPTs</a>
                 <a href="/projects.html" class="nav-link">Projects</a>
@@ -252,9 +301,43 @@
                 <a href="https://www.amazon.com/stores/Bryan-Collins/author/B00KPFFYU6" target="_blank" class="hover:text-yellow-400"><i class="fab fa-amazon text-2xl"></i></a>
                 <a href="https://clarity.fm/bryancollins" target="_blank" class="hover:text-yellow-400"><i class="fas fa-phone text-2xl"></i></a>
             </div>
-            <p class="text-sm opacity-70">© 2025 Bryan Collins. All rights reserved.</p>
+            <div class="flex gap-4 justify-center text-sm text-gray-400 mb-4">
+                    <a href="/privacy.html" class="hover:text-white">Privacy Policy</a>
+                    <span>•</span>
+                    <a href="/terms.html" class="hover:text-white">Terms of Service</a>
+                </div>
+                <p class="text-sm opacity-70">© 2025 Bryan Collins. All rights reserved.</p>
         </div>
     </footer>
+    
+    <!-- Mobile Menu Script -->
+    <script>
+        const mobileMenuButton = document.getElementById('mobileMenuButton');
+        const mobileNav = document.getElementById('mobileNav');
+        
+        mobileMenuButton.addEventListener('click', function() {
+            mobileNav.classList.toggle('active');
+            const icon = this.querySelector('i');
+            if (mobileNav.classList.contains('active')) {
+                icon.classList.remove('fa-bars');
+                icon.classList.add('fa-times');
+            } else {
+                icon.classList.remove('fa-times');
+                icon.classList.add('fa-bars');
+            }
+        });
+        
+        // Close menu when clicking a link
+        const mobileLinks = mobileNav.querySelectorAll('.nav-link');
+        mobileLinks.forEach(link => {
+            link.addEventListener('click', function() {
+                mobileNav.classList.remove('active');
+                const icon = mobileMenuButton.querySelector('i');
+                icon.classList.remove('fa-times');
+                icon.classList.add('fa-bars');
+            });
+        });
+    </script>
 </body>
 </html>
 

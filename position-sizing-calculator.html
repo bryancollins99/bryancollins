@@ -1,0 +1,635 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Position Sizing Calculator - Calculate Safe Position Sizes for Options Trading | Bryan Collins</title>
+    <meta name="description" content="Calculate safe position sizes for wheel strategy and options trading. Conservative risk management for systematic income investing.">
+    
+    <link rel="canonical" href="https://join.bryancollins.com/position-sizing-calculator">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://join.bryancollins.com/position-sizing-calculator">
+    <meta property="og:title" content="Position Sizing Calculator | Bryan Collins">
+    <meta property="og:description" content="Calculate safe position sizes for options trading and risk management.">
+    <meta property="og:image" content="https://join.bryancollins.com/resources/bryan-collins.jpeg">
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://join.bryancollins.com/position-sizing-calculator">
+    <meta property="twitter:title" content="Position Sizing Calculator">
+    <meta property="twitter:description" content="Free position sizing calculator for safe options trading.">
+    <meta property="twitter:image" content="https://join.bryancollins.com/resources/bryan-collins.jpeg">
+    
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    
+    <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    
+    <script async src="https://plausible.io/js/pa-UDjPfOotU07ZYjQUDU_aw.js"></script>
+    <script>
+      window.plausible=window.plausible||function(){(plausible.q=plausible.q||[]).push(arguments)},plausible.init=plausible.init||function(i){plausible.o=i||{}};
+      plausible.init()
+    </script>
+    
+    <style>
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            background-color: #EDEDEE;
+            color: #1B1B1D;
+        }
+        .hero-gradient {
+            background: linear-gradient(135deg, #000000 0%, #1a1a1a 100%);
+        }
+        .nav-bar {
+            background: #000000;
+            border-bottom: 1px solid #333;
+        }
+        .nav-link {
+            color: white;
+            padding: 0.5rem 1rem;
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+        .nav-link:hover {
+            color: #FFDE59;
+        }
+        .card {
+            background: white;
+            border-radius: 8px;
+            padding: 2rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        .btn-primary {
+            background: #FFDE59;
+            color: #000000;
+            padding: 0.75rem 1.5rem;
+            border-radius: 6px;
+            text-decoration: none;
+            display: inline-block;
+            font-weight: 600;
+            transition: all 0.3s;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .btn-primary:hover {
+            background: #ffd633;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+        }
+        .icon-yellow {
+            color: #FFDE59;
+        }
+        input[type="number"], select {
+            width: 100%;
+            padding: 0.75rem;
+            border: 2px solid #e3e3e3;
+            border-radius: 6px;
+            font-family: inherit;
+            font-size: 1rem;
+        }
+        input[type="number"]:focus, select:focus {
+            outline: none;
+            border-color: #FFDE59;
+        }
+        .result-box {
+            background: linear-gradient(135deg, #FFDE59 0%, #ffd633 100%);
+            border-radius: 8px;
+            padding: 2rem;
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+        .result-value {
+            font-size: 3rem;
+            font-weight: bold;
+            color: #000;
+            margin-bottom: 0.5rem;
+        }
+        .result-label {
+            font-size: 1.25rem;
+            color: #333;
+            font-weight: 600;
+        }
+        .metric-box {
+            background: #f8f9fa;
+            border-radius: 6px;
+            padding: 1.5rem;
+            text-align: center;
+        }
+        .metric-value {
+            font-size: 2rem;
+            font-weight: 800;
+            color: #000;
+        }
+        .metric-label {
+            font-size: 0.9rem;
+            color: #666;
+            font-weight: 600;
+            margin-top: 0.5rem;
+        }
+        .risk-gauge {
+            height: 30px;
+            background: linear-gradient(to right, #10b981 0%, #FFDE59 50%, #ef4444 100%);
+            border-radius: 15px;
+            position: relative;
+            margin: 1.5rem 0;
+        }
+        .risk-indicator {
+            position: absolute;
+            width: 4px;
+            height: 40px;
+            background: #000;
+            top: -5px;
+            transform: translateX(-2px);
+            transition: left 0.3s;
+        }
+        .risk-indicator::after {
+            content: '▼';
+            position: absolute;
+            top: -15px;
+            left: -6px;
+            font-size: 14px;
+        }
+        .warning-box {
+            background: #fef3c7;
+            border-left: 4px solid #f59e0b;
+            padding: 1rem;
+            border-radius: 4px;
+            margin-top: 1rem;
+        }
+        .danger-box {
+            background: #fee2e2;
+            border-left: 4px solid #ef4444;
+            padding: 1rem;
+            border-radius: 4px;
+            margin-top: 1rem;
+        }
+        .safe-box {
+            background: #d1fae5;
+            border-left: 4px solid #10b981;
+            padding: 1rem;
+            border-radius: 4px;
+            margin-top: 1rem;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="nav-bar sticky top-0 z-50">
+        <div class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
+            <a href="/index.html" class="text-white font-bold text-xl">Bryan Collins</a>
+            <div class="flex gap-6">
+                <a href="/mba-frameworks.html" class="nav-link">Tools</a>
+                <a href="/gpts.html" class="nav-link">GPTs</a>
+                <a href="/projects.html" class="nav-link">Projects</a>
+                <a href="/books.html" class="nav-link">Books</a>
+                <a href="/invest.html" class="nav-link">Investing</a>
+                <a href="/now.html" class="nav-link">Now</a>
+                <a href="/contact.html" class="nav-link">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="hero-gradient text-white py-16 px-4">
+        <div class="max-w-4xl mx-auto text-center">
+            <i class="fas fa-balance-scale icon-yellow text-5xl mb-6"></i>
+            <h1 class="text-4xl sm:text-5xl font-extrabold mb-4 leading-tight">Position Sizing Calculator</h1>
+            <p class="text-xl sm:text-2xl opacity-90 leading-relaxed">Calculate safe position sizes for wheel strategy and options trading.</p>
+            <p class="text-lg opacity-80 mt-4">Conservative risk management. No margin calls. No blown accounts.</p>
+        </div>
+    </header>
+
+    <!-- Calculator Section -->
+    <section class="py-16 px-4">
+        <div class="max-w-6xl mx-auto">
+            <div class="grid md:grid-cols-2 gap-8">
+                <!-- Input Panel -->
+                <div class="card">
+                    <h2 class="text-2xl font-bold mb-6">
+                        <i class="fas fa-edit icon-yellow mr-2"></i>Your Account Details
+                    </h2>
+
+                    <div class="mb-5">
+                        <label class="block text-sm font-bold mb-2" for="accountSize">
+                            <i class="fas fa-wallet mr-1"></i> Total Account Size
+                        </label>
+                        <div class="flex items-center">
+                            <span class="text-xl mr-2">$</span>
+                            <input type="number" id="accountSize" value="100000" oninput="calculate()" min="0" step="1000">
+                        </div>
+                        <p class="text-xs text-gray-600 mt-1">Your total portfolio value</p>
+                    </div>
+
+                    <div class="mb-5">
+                        <label class="block text-sm font-bold mb-2" for="riskTolerance">
+                            <i class="fas fa-percentage mr-1"></i> Risk Per Position (%)
+                        </label>
+                        <input type="number" id="riskTolerance" value="3" oninput="calculate()" min="0.5" max="20" step="0.5">
+                        <p class="text-xs text-gray-600 mt-1">Conservative: 2-5% | Aggressive: 8-10% | Very Risky: >10%</p>
+                    </div>
+
+                    <div class="mb-5">
+                        <label class="block text-sm font-bold mb-2" for="stockPrice">
+                            <i class="fas fa-dollar-sign mr-1"></i> Stock Price
+                        </label>
+                        <div class="flex items-center">
+                            <span class="text-xl mr-2">$</span>
+                            <input type="number" id="stockPrice" value="150" oninput="calculate()" min="0.01" step="0.01">
+                        </div>
+                        <p class="text-xs text-gray-600 mt-1">Current price of the underlying stock</p>
+                    </div>
+
+                    <div class="mb-5">
+                        <label class="block text-sm font-bold mb-2" for="marginType">
+                            <i class="fas fa-cog mr-1"></i> Account Type
+                        </label>
+                        <select id="marginType" onchange="calculate()">
+                            <option value="cash">Cash/Standard Margin</option>
+                            <option value="portfolio">Portfolio Margin</option>
+                        </select>
+                        <p class="text-xs text-gray-600 mt-1">Portfolio margin = lower requirements, more leverage</p>
+                    </div>
+
+                    <div class="mb-5">
+                        <label class="block text-sm font-bold mb-2" for="strategy">
+                            <i class="fas fa-chart-line mr-1"></i> Strategy
+                        </label>
+                        <select id="strategy" onchange="calculate()">
+                            <option value="csp">Cash-Secured Put</option>
+                            <option value="cc">Covered Call (Own Stock)</option>
+                            <option value="wheel">Wheel (Both)</option>
+                        </select>
+                    </div>
+
+                    <div class="p-4 bg-blue-50 border-l-4 border-blue-400 rounded">
+                        <p class="text-sm text-gray-700">
+                            <strong>Wheel Strategy Reminder:</strong> Only run the wheel on quality stocks you'd own long-term. Position sizing prevents overconcentration risk.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Results Panel -->
+                <div>
+                    <div class="card mb-6">
+                        <h2 class="text-2xl font-bold mb-6">
+                            <i class="fas fa-chart-bar icon-yellow mr-2"></i>Recommended Position Size
+                        </h2>
+
+                        <div class="result-box">
+                            <div class="result-value" id="maxContracts">0</div>
+                            <div class="result-label">Maximum Contracts</div>
+                        </div>
+
+                        <div class="grid grid-cols-2 gap-4 mb-6">
+                            <div class="metric-box">
+                                <div class="metric-value" id="maxShares">0</div>
+                                <div class="metric-label">Shares</div>
+                            </div>
+                            <div class="metric-box">
+                                <div class="metric-value" id="dollarAmount">$0</div>
+                                <div class="metric-label">Dollar Amount</div>
+                            </div>
+                        </div>
+
+                        <h3 class="font-bold mb-2">
+                            <i class="fas fa-tachometer-alt icon-yellow mr-2"></i>Risk Level
+                        </h3>
+                        <div class="risk-gauge">
+                            <div class="risk-indicator" id="riskIndicator"></div>
+                        </div>
+                        <div id="riskMessage"></div>
+                    </div>
+
+                    <div class="card">
+                        <h3 class="font-bold mb-4">
+                            <i class="fas fa-info-circle icon-yellow mr-2"></i>Position Details
+                        </h3>
+                        <div id="positionDetails"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Additional Guidance -->
+            <div class="grid md:grid-cols-2 gap-8 mt-8">
+                <div class="card">
+                    <h3 class="text-xl font-bold mb-4">
+                        <i class="fas fa-shield-alt icon-yellow mr-2"></i>Diversification Guidelines
+                    </h3>
+                    <div id="diversificationGuidance"></div>
+                </div>
+
+                <div class="card">
+                    <h3 class="text-xl font-bold mb-4">
+                        <i class="fas fa-piggy-bank icon-yellow mr-2"></i>Cash Reserve Recommendations
+                    </h3>
+                    <div id="cashReserve"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Educational Section -->
+    <section class="py-16 px-4 bg-white">
+        <div class="max-w-4xl mx-auto">
+            <h2 class="text-3xl font-bold text-center mb-12">Position Sizing Principles</h2>
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="card text-center">
+                    <i class="fas fa-percentage icon-yellow text-4xl mb-4"></i>
+                    <h3 class="text-xl font-bold mb-3">2-5% Rule</h3>
+                    <p class="text-gray-700">Conservative position sizing: 2-5% of account per position. This allows 20-50 positions for full diversification.</p>
+                </div>
+                <div class="card text-center">
+                    <i class="fas fa-random icon-yellow text-4xl mb-4"></i>
+                    <h3 class="text-xl font-bold mb-3">Sector Limits</h3>
+                    <p class="text-gray-700">Max 25-30% in any one sector. Tech crash? Energy collapse? You're diversified across the market.</p>
+                </div>
+                <div class="card text-center">
+                    <i class="fas fa-hand-paper icon-yellow text-4xl mb-4"></i>
+                    <h3 class="text-xl font-bold mb-3">Cash Buffer</h3>
+                    <p class="text-gray-700">Keep 10-20% in cash. Never fully deployed = no forced selling in downturns. Dry powder for opportunities.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Related Tools Section -->
+    <section class="py-16 px-4">
+        <div class="max-w-6xl mx-auto">
+            <h2 class="text-3xl font-bold text-center mb-12">
+                <i class="fas fa-tools icon-yellow mr-2"></i>More Investment Tools
+            </h2>
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="card">
+                    <i class="fas fa-chart-line icon-yellow text-3xl mb-4"></i>
+                    <h3 class="text-xl font-bold mb-3">The Wheel Strategy</h3>
+                    <p class="mb-4 text-gray-700">Learn my systematic approach to generating income through options.</p>
+                    <a href="/invest.html" class="text-black font-semibold hover:underline">Learn the Wheel →</a>
+                </div>
+                <div class="card">
+                    <i class="fas fa-calculator icon-yellow text-3xl mb-4"></i>
+                    <h3 class="text-xl font-bold mb-3">Break-Even Calculator</h3>
+                    <p class="mb-4 text-gray-700">Calculate when positions become profitable.</p>
+                    <a href="/break-even-calculator.html" class="text-black font-semibold hover:underline">Calculate Break-Even →</a>
+                </div>
+                <div class="card">
+                    <i class="fas fa-chess icon-yellow text-3xl mb-4"></i>
+                    <h3 class="text-xl font-bold mb-3">Porter's Five Forces</h3>
+                    <p class="mb-4 text-gray-700">Analyze company competitive positioning before trading.</p>
+                    <a href="/porters-five-forces.html" class="text-black font-semibold hover:underline">Analyze Companies →</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="py-16 px-4 bg-white">
+        <div class="max-w-3xl mx-auto">
+            <div class="card text-center">
+                <i class="fas fa-envelope icon-yellow text-4xl mb-4"></i>
+                <h2 class="text-3xl font-bold mb-4">Learn My Wheel Strategy</h2>
+                <p class="text-xl text-gray-700 mb-6">Get quarterly performance updates, position analysis, and risk management frameworks in my premium newsletter.</p>
+                <a href="https://newsletter.bryancollins.com" class="btn-primary">
+                    <i class="fas fa-envelope mr-2"></i>Subscribe to Premium Newsletter
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Disclaimer -->
+    <section class="py-8 px-4 bg-gray-100">
+        <div class="max-w-4xl mx-auto">
+            <p class="text-sm text-gray-600 text-center">
+                <strong>Disclaimer:</strong> This calculator is for educational purposes only, not financial advice. Options trading involves substantial risk. Past performance does not guarantee future results. Consult qualified professionals before making investment decisions.
+            </p>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-black text-white py-12 px-4">
+        <div class="max-w-6xl mx-auto">
+            <!-- Footer Links -->
+            <div class="grid md:grid-cols-4 gap-8 mb-8">
+                <!-- Tools -->
+                <div>
+                    <h3 class="font-bold text-lg mb-4 text-yellow-400">MBA Frameworks</h3>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="/ansoff-matrix.html" class="hover:text-yellow-400">ANSOFF Matrix</a></li>
+                        <li><a href="/swot-analysis.html" class="hover:text-yellow-400">SWOT Analysis</a></li>
+                        <li><a href="/porters-five-forces.html" class="hover:text-yellow-400">Porter's Five Forces</a></li>
+                        <li><a href="/mba-frameworks.html" class="hover:text-yellow-400">View All Tools →</a></li>
+                    </ul>
+                </div>
+                
+                <!-- Calculators -->
+                <div>
+                    <h3 class="font-bold text-lg mb-4 text-yellow-400">Calculators</h3>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="/burn-rate-calculator.html" class="hover:text-yellow-400">Burn Rate Calculator</a></li>
+                        <li><a href="/break-even-calculator.html" class="hover:text-yellow-400">Break-Even Calculator</a></li>
+                        <li><a href="/email-roi-calculator.html" class="hover:text-yellow-400">Email ROI Calculator</a></li>
+                        <li><a href="/btc-dca-calculator.html" class="hover:text-yellow-400">BTC DCA Calculator</a></li>
+                        <li><a href="/freelance-rate-calculator.html" class="hover:text-yellow-400">Freelance Rate Calculator</a></li>
+                        <li><a href="/position-sizing-calculator.html" class="hover:text-yellow-400">Position Sizing Calculator</a></li>
+                    </ul>
+                </div>
+                
+                <!-- Resources -->
+                <div>
+                    <h3 class="font-bold text-lg mb-4 text-yellow-400">Resources</h3>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="/gpts.html" class="hover:text-yellow-400">Custom GPTs</a></li>
+                        <li><a href="/projects.html" class="hover:text-yellow-400">Projects</a></li>
+                        <li><a href="/books.html" class="hover:text-yellow-400">Books</a></li>
+                        <li><a href="https://newsletter.bryancollins.com" class="hover:text-yellow-400">Newsletter</a></li>
+                    </ul>
+                </div>
+                
+                <!-- Connect -->
+                <div>
+                    <h3 class="font-bold text-lg mb-4 text-yellow-400">Connect</h3>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="/now.html" class="hover:text-yellow-400">What I'm Doing Now</a></li>
+                        <li><a href="/contact.html" class="hover:text-yellow-400">Contact</a></li>
+                        <li><a href="https://clarity.fm/bryancollins" target="_blank" rel="noopener" class="hover:text-yellow-400">Book a Call</a></li>
+                        <li><a href="/work-with-me.html" class="hover:text-yellow-400">Work With Me</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <!-- Social & Copyright -->
+            <div class="text-center border-t border-gray-700 pt-8">
+                <div class="flex gap-6 justify-center mb-4">
+                    <a href="https://www.youtube.com/channel/UCglNILz3uBqPer5EMJ_pzVg" target="_blank" rel="noopener" aria-label="YouTube channel" class="hover:text-yellow-400"><i class="fab fa-youtube text-2xl"></i></a>
+                    <a href="https://www.linkedin.com/in/bryancollins99/" target="_blank" rel="noopener" aria-label="LinkedIn profile" class="hover:text-yellow-400"><i class="fab fa-linkedin text-2xl"></i></a>
+                    <a href="https://github.com/bryancollins99" target="_blank" rel="noopener" aria-label="GitHub profile" class="hover:text-yellow-400"><i class="fab fa-github text-2xl"></i></a>
+                    <a href="https://www.amazon.com/stores/Bryan-Collins/author/B00KPFFYU6" target="_blank" rel="noopener" aria-label="Amazon author page" class="hover:text-yellow-400"><i class="fab fa-amazon text-2xl"></i></a>
+                    <a href="https://clarity.fm/bryancollins" target="_blank" rel="noopener" aria-label="Book a call" class="hover:text-yellow-400"><i class="fas fa-phone text-2xl"></i></a>
+                </div>
+                <div class="flex gap-4 justify-center text-sm text-gray-400 mb-4">
+                    <a href="/privacy.html" class="hover:text-white">Privacy Policy</a>
+                    <span>•</span>
+                    <a href="/terms.html" class="hover:text-white">Terms of Service</a>
+                </div>
+                <p class="text-sm opacity-70">© 2025 Bryan Collins. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        window.addEventListener('DOMContentLoaded', () => {
+            loadFromStorage();
+            calculate();
+        });
+
+        function calculate() {
+            // Get inputs
+            const accountSize = parseFloat(document.getElementById('accountSize').value) || 0;
+            const riskTolerance = parseFloat(document.getElementById('riskTolerance').value) || 0;
+            const stockPrice = parseFloat(document.getElementById('stockPrice').value) || 0;
+            const marginType = document.getElementById('marginType').value;
+            const strategy = document.getElementById('strategy').value;
+
+            // Calculate position size
+            const riskAmount = accountSize * (riskTolerance / 100);
+            const maxShares = stockPrice > 0 ? Math.floor(riskAmount / stockPrice) : 0;
+            const maxContracts = Math.floor(maxShares / 100);
+            const actualShares = maxContracts * 100;
+            const dollarAmount = actualShares * stockPrice;
+            const actualPercent = accountSize > 0 ? (dollarAmount / accountSize) * 100 : 0;
+
+            // Margin requirements
+            let marginRequired;
+            if (strategy === 'csp') {
+                marginRequired = marginType === 'portfolio' ? dollarAmount * 0.15 : dollarAmount;
+            } else if (strategy === 'cc') {
+                marginRequired = dollarAmount; // Own the stock
+            } else {
+                marginRequired = dollarAmount; // Assume worst case
+            }
+
+            // Update display
+            document.getElementById('maxContracts').textContent = maxContracts;
+            document.getElementById('maxShares').textContent = actualShares.toLocaleString();
+            document.getElementById('dollarAmount').textContent = formatCurrency(dollarAmount);
+
+            // Risk indicator
+            const riskIndicator = document.getElementById('riskIndicator');
+            const riskPercent = Math.min(100, (riskTolerance / 10) * 100); // 10% = max
+            riskIndicator.style.left = riskPercent + '%';
+
+            // Risk message
+            const riskMessage = document.getElementById('riskMessage');
+            if (riskTolerance <= 3) {
+                riskMessage.innerHTML = '<div class="safe-box"><i class="fas fa-check-circle mr-2"></i><strong>Conservative:</strong> Excellent risk management. Room for 30+ positions.</div>';
+            } else if (riskTolerance <= 5) {
+                riskMessage.innerHTML = '<div class="safe-box"><i class="fas fa-check-circle mr-2"></i><strong>Moderate:</strong> Solid position sizing. 20-30 positions possible.</div>';
+            } else if (riskTolerance <= 8) {
+                riskMessage.innerHTML = '<div class="warning-box"><i class="fas fa-exclamation-triangle mr-2"></i><strong>Elevated Risk:</strong> Limited diversification. Consider reducing size.</div>';
+            } else {
+                riskMessage.innerHTML = '<div class="danger-box"><i class="fas fa-times-circle mr-2"></i><strong>High Risk:</strong> Dangerous concentration. Strongly consider reducing position size.</div>';
+            }
+
+            // Position details
+            const positionDetails = document.getElementById('positionDetails');
+            positionDetails.innerHTML = `
+                <div style="display: flex; justify-content: space-between; padding: 0.75rem; background: #f8f9fa; border-radius: 4px; margin-bottom: 0.5rem;">
+                    <span><strong>Portfolio %:</strong></span>
+                    <span>${actualPercent.toFixed(2)}%</span>
+                </div>
+                <div style="display: flex; justify-content: space-between; padding: 0.75rem; background: #f8f9fa; border-radius: 4px; margin-bottom: 0.5rem;">
+                    <span><strong>Margin Required:</strong></span>
+                    <span>${formatCurrency(marginRequired)}</span>
+                </div>
+                <div style="display: flex; justify-content: space-between; padding: 0.75rem; background: #f8f9fa; border-radius: 4px; margin-bottom: 0.5rem;">
+                    <span><strong>Strategy:</strong></span>
+                    <span>${getStrategyName(strategy)}</span>
+                </div>
+                <div style="display: flex; justify-content: space-between; padding: 0.75rem; background: #f8f9fa; border-radius: 4px;">
+                    <span><strong>Account Type:</strong></span>
+                    <span>${marginType === 'portfolio' ? 'Portfolio Margin' : 'Cash/Standard'}</span>
+                </div>
+            `;
+
+            // Diversification guidance
+            const maxPositions = riskTolerance > 0 ? Math.floor(100 / riskTolerance) : 0;
+            const diversificationGuidance = document.getElementById('diversificationGuidance');
+            diversificationGuidance.innerHTML = `
+                <p class="text-gray-700 mb-4">At ${riskTolerance}% per position, you can hold:</p>
+                <div style="background: #FFDE59; padding: 1.5rem; border-radius: 8px; text-align: center; margin-bottom: 1rem;">
+                    <div style="font-size: 2.5rem; font-weight: 800;">${maxPositions}</div>
+                    <div style="font-weight: 600;">Maximum Positions</div>
+                </div>
+                <ul class="space-y-2 text-sm text-gray-700">
+                    <li><i class="fas fa-check text-green-500 mr-2"></i>Spread across 5-8 sectors</li>
+                    <li><i class="fas fa-check text-green-500 mr-2"></i>No more than 30% in one sector</li>
+                    <li><i class="fas fa-check text-green-500 mr-2"></i>Quality companies only</li>
+                    <li><i class="fas fa-check text-green-500 mr-2"></i>Stocks you'd own long-term</li>
+                </ul>
+            `;
+
+            // Cash reserve
+            const recommendedCash = accountSize * 0.15; // 15% minimum
+            const maxDeployed = accountSize - recommendedCash;
+            const cashReserve = document.getElementById('cashReserve');
+            cashReserve.innerHTML = `
+                <p class="text-gray-700 mb-4">Recommended cash buffer:</p>
+                <div style="background: #f8f9fa; padding: 1rem; border-radius: 6px; margin-bottom: 1rem;">
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
+                        <span><strong>Minimum Cash:</strong></span>
+                        <span>${formatCurrency(recommendedCash)}</span>
+                    </div>
+                    <div style="display: flex; justify-content: space-between;">
+                        <span><strong>Max to Deploy:</strong></span>
+                        <span>${formatCurrency(maxDeployed)}</span>
+                    </div>
+                </div>
+                <p class="text-sm text-gray-600">
+                    <i class="fas fa-lightbulb icon-yellow mr-1"></i>
+                    Cash buffer = no forced selling in downturns. Plus dry powder for opportunities when IV spikes.
+                </p>
+            `;
+
+            saveToStorage();
+        }
+
+        function getStrategyName(strategy) {
+            const names = {
+                'csp': 'Cash-Secured Put',
+                'cc': 'Covered Call',
+                'wheel': 'Wheel Strategy'
+            };
+            return names[strategy] || strategy;
+        }
+
+        function formatCurrency(amount) {
+            return '$' + Math.round(amount).toLocaleString();
+        }
+
+        function saveToStorage() {
+            const data = {
+                accountSize: document.getElementById('accountSize').value,
+                riskTolerance: document.getElementById('riskTolerance').value,
+                stockPrice: document.getElementById('stockPrice').value,
+                marginType: document.getElementById('marginType').value,
+                strategy: document.getElementById('strategy').value
+            };
+            localStorage.setItem('positionSizing', JSON.stringify(data));
+        }
+
+        function loadFromStorage() {
+            const saved = localStorage.getItem('positionSizing');
+            if (saved) {
+                const data = JSON.parse(saved);
+                document.getElementById('accountSize').value = data.accountSize || 100000;
+                document.getElementById('riskTolerance').value = data.riskTolerance || 3;
+                document.getElementById('stockPrice').value = data.stockPrice || 150;
+                document.getElementById('marginType').value = data.marginType || 'cash';
+                document.getElementById('strategy').value = data.strategy || 'csp';
+            }
+        }
+    </script>
+</body>
+</html>
+

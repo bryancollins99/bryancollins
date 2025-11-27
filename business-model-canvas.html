@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Business Model Canvas Tool — Design Your Business Model</title>
+    <title>Business Model Canvas — Bryan Collins</title>
     <meta name="description" content="Free interactive Business Model Canvas tool. Design your complete business model with 9 key building blocks.">
     <meta property="og:url" content="https://join.bryancollins.com/business-model-canvas/" />
     <meta property="og:title" content="Business Model Canvas Tool" />
@@ -13,9 +13,6 @@
     <link rel="icon" type="image/svg+xml" href="/favicon.svg">
 
     <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
-    <!-- Favicon -->
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
-
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <script defer data-domain="join.bryancollins.com" src="https://plausible.io/js/script.js"></script>
@@ -99,19 +96,62 @@
         }
         .canvas-box {
             background: white;
-            padding: 16px;
+            padding: 20px;
             border-radius: 12px;
             box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-            min-height: 150px;
+            min-height: 180px;
         }
         .canvas-box h5 {
             font-weight: 700;
-            margin-bottom: 8px;
-            font-size: 14px;
+            margin-bottom: 10px;
+            font-size: 15px;
         }
-        .canvas-box p {
+        .canvas-box .content {
+            font-size: 13px;
+            line-height: 1.6;
+        }
+        .enhanced-content {
+            margin-top: 10px;
+            padding-top: 10px;
+            border-top: 1px solid rgba(0, 0, 0, 0.1);
+        }
+        .enhanced-content ul {
+            list-style: none;
+            padding: 0;
+            margin: 6px 0;
+        }
+        .enhanced-content li {
+            padding: 5px 0 5px 18px;
+            position: relative;
             font-size: 12px;
-            line-height: 1.4;
+            line-height: 1.5;
+        }
+        .enhanced-content li:before {
+            content: "→";
+            position: absolute;
+            left: 0;
+            color: #956FA6;
+            font-weight: bold;
+        }
+        .loading-spinner {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(149, 111, 166, 0.3);
+            border-radius: 50%;
+            border-top-color: #956FA6;
+            animation: spin 1s ease-in-out infinite;
+        }
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        @keyframes slideIn {
+            from { transform: translateX(400px); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+        @keyframes slideOut {
+            from { transform: translateX(0); opacity: 1; }
+            to { transform: translateX(400px); opacity: 0; }
         }
         .box-key-partners { grid-column: 1; grid-row: 1 / 3; border-left: 4px solid #FF6B6B; }
         .box-key-activities { grid-column: 2; grid-row: 1; border-left: 4px solid #4ECDC4; }
@@ -177,9 +217,58 @@
                 grid-row: auto !important;
             }
         }
+        .nav-bar { background: #000000; border-bottom: 1px solid #333; }
+        .nav-link { color: white; padding: 0.5rem 1rem; text-decoration: none; transition: color 0.2s; }
+        .nav-link:hover { color: #956FA6; }
+        .mobile-menu-button { display: none; color: white; font-size: 1.5rem; cursor: pointer; background: none; border: none; padding: 0.5rem; }
+        .desktop-nav { display: flex; gap: 1.5rem; }
+        .mobile-nav { display: none; flex-direction: column; position: absolute; top: 100%; left: 0; right: 0; background: #000000; border-top: 1px solid #333; padding: 1rem; }
+        .mobile-nav.active { display: flex; }
+        .mobile-nav .nav-link { padding: 0.75rem 1rem; border-bottom: 1px solid #333; }
+        @media (max-width: 768px) { .mobile-menu-button { display: block; } .desktop-nav { display: none; } }
     </style>
 </head>
 <body>
+    <nav class="nav-bar sticky top-0 z-50">
+        <div class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between relative">
+            <a href="/index.html" class="text-white font-bold text-xl">Bryan Collins</a>
+            <button class="mobile-menu-button" id="mobileMenuButton" aria-label="Toggle menu"><i class="fas fa-bars"></i></button>
+            <div class="desktop-nav">
+                <a href="/mba-frameworks.html" class="nav-link">Tools</a>
+                <a href="/gpts.html" class="nav-link">GPTs</a>
+                <a href="/projects.html" class="nav-link">Projects</a>
+                <a href="/books.html" class="nav-link">Books</a>
+                <a href="/now.html" class="nav-link">Now</a>
+                <a href="/contact.html" class="nav-link">Contact</a>
+                <a href="https://newsletter.bryancollins.com" class="nav-link">Newsletter</a>
+            </div>
+            <div class="mobile-nav" id="mobileNav">
+                <a href="/mba-frameworks.html" class="nav-link">Tools</a>
+                <a href="/gpts.html" class="nav-link">GPTs</a>
+                <a href="/projects.html" class="nav-link">Projects</a>
+                <a href="/books.html" class="nav-link">Books</a>
+                <a href="/now.html" class="nav-link">Now</a>
+                <a href="/contact.html" class="nav-link">Contact</a>
+                <a href="https://newsletter.bryancollins.com" class="nav-link">Newsletter</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Breadcrumbs -->
+    <div class="bg-gray-100 py-3 px-4">
+        <div class="max-w-6xl mx-auto">
+            <nav aria-label="Breadcrumb">
+                <ol class="flex items-center space-x-2 text-sm">
+                    <li><a href="/index.html" class="text-gray-600 hover:text-black">Home</a></li>
+                    <li class="text-gray-400">/</li>
+                    <li><a href="/mba-frameworks.html" class="text-gray-600 hover:text-black">Tools</a></li>
+                    <li class="text-gray-400">/</li>
+                    <li class="text-black font-semibold">Business Model Canvas</li>
+                </ol>
+            </nav>
+        </div>
+    </div>
+
     <main class="min-h-screen py-12 px-4 sm:px-6 lg:px-8">
         <div class="max-w-6xl mx-auto">
             
@@ -452,42 +541,82 @@
                     <h3 class="text-2xl font-bold mb-4">Your Business Model Canvas</h3>
                     <p class="text-gray-600 mb-6">Here's your complete business model:</p>
 
+                    <!-- AI Enhancement Button -->
+                    <div class="text-center mb-6">
+                        <button id="enhance-btn" class="btn-primary" onclick="enhanceWithAI()">
+                            <i class="fas fa-magic mr-2"></i> Enhance with AI Insights
+                        </button>
+                        <p class="text-xs text-gray-600 mt-2">Get strategic recommendations powered by Claude AI</p>
+                    </div>
+
+                    <div id="loading-state" style="display: none; text-align: center; padding: 40px;">
+                        <div class="loading-spinner" style="margin: 0 auto 16px;"></div>
+                        <p class="text-gray-600">Analyzing your business model with AI...</p>
+                    </div>
+
                     <div class="canvas-grid mb-6">
                         <div class="canvas-box box-key-partners">
                             <h5><i class="fas fa-handshake mr-1"></i> Key Partners</h5>
-                            <p id="review-key-partners"></p>
+                            <div class="content">
+                                <div id="review-key-partners"></div>
+                                <div id="enhanced-key-partners" class="enhanced-content" style="display: none;"></div>
+                            </div>
                         </div>
                         <div class="canvas-box box-key-activities">
                             <h5><i class="fas fa-cogs mr-1"></i> Key Activities</h5>
-                            <p id="review-key-activities"></p>
+                            <div class="content">
+                                <div id="review-key-activities"></div>
+                                <div id="enhanced-key-activities" class="enhanced-content" style="display: none;"></div>
+                            </div>
                         </div>
                         <div class="canvas-box box-value-prop">
                             <h5><i class="fas fa-star mr-1"></i> Value Propositions</h5>
-                            <p id="review-value-propositions"></p>
+                            <div class="content">
+                                <div id="review-value-propositions"></div>
+                                <div id="enhanced-value-propositions" class="enhanced-content" style="display: none;"></div>
+                            </div>
                         </div>
                         <div class="canvas-box box-customer-rel">
                             <h5><i class="fas fa-heart mr-1"></i> Customer Relationships</h5>
-                            <p id="review-customer-relationships"></p>
+                            <div class="content">
+                                <div id="review-customer-relationships"></div>
+                                <div id="enhanced-customer-relationships" class="enhanced-content" style="display: none;"></div>
+                            </div>
                         </div>
                         <div class="canvas-box box-customer-seg">
                             <h5><i class="fas fa-users mr-1"></i> Customer Segments</h5>
-                            <p id="review-customer-segments"></p>
+                            <div class="content">
+                                <div id="review-customer-segments"></div>
+                                <div id="enhanced-customer-segments" class="enhanced-content" style="display: none;"></div>
+                            </div>
                         </div>
                         <div class="canvas-box box-key-resources">
                             <h5><i class="fas fa-briefcase mr-1"></i> Key Resources</h5>
-                            <p id="review-key-resources"></p>
+                            <div class="content">
+                                <div id="review-key-resources"></div>
+                                <div id="enhanced-key-resources" class="enhanced-content" style="display: none;"></div>
+                            </div>
                         </div>
                         <div class="canvas-box box-channels">
                             <h5><i class="fas fa-broadcast-tower mr-1"></i> Channels</h5>
-                            <p id="review-channels"></p>
+                            <div class="content">
+                                <div id="review-channels"></div>
+                                <div id="enhanced-channels" class="enhanced-content" style="display: none;"></div>
+                            </div>
                         </div>
                         <div class="canvas-box box-cost">
                             <h5><i class="fas fa-dollar-sign mr-1"></i> Cost Structure</h5>
-                            <p id="review-cost-structure"></p>
+                            <div class="content">
+                                <div id="review-cost-structure"></div>
+                                <div id="enhanced-cost-structure" class="enhanced-content" style="display: none;"></div>
+                            </div>
                         </div>
                         <div class="canvas-box box-revenue">
                             <h5><i class="fas fa-coins mr-1"></i> Revenue Streams</h5>
-                            <p id="review-revenue-streams"></p>
+                            <div class="content">
+                                <div id="review-revenue-streams"></div>
+                                <div id="enhanced-revenue-streams" class="enhanced-content" style="display: none;"></div>
+                            </div>
                         </div>
                     </div>
 
@@ -539,7 +668,12 @@
                 </div>
             </div>
 
-            <p class="text-center text-xs" style="color: #1B1B1D; opacity: 0.5;">© 2025 Bryan Collins. All rights reserved.</p>
+            <div class="flex gap-4 justify-center text-sm text-gray-400 mb-4">
+                    <a href="/privacy.html" class="hover:text-black">Privacy Policy</a>
+                    <span>•</span>
+                    <a href="/terms.html" class="hover:text-black">Terms of Service</a>
+                </div>
+                <p class="text-center text-xs" style="color: #1B1B1D; opacity: 0.5;">© 2025 Bryan Collins. All rights reserved.</p>
         </div>
     </main>
 
@@ -614,15 +748,116 @@
         }
 
         function populateReview() {
-            document.getElementById('review-customer-segments').textContent = document.getElementById('customer-segments').value || 'Not specified';
-            document.getElementById('review-value-propositions').textContent = document.getElementById('value-propositions').value || 'Not specified';
-            document.getElementById('review-channels').textContent = document.getElementById('channels').value || 'Not specified';
-            document.getElementById('review-customer-relationships').textContent = document.getElementById('customer-relationships').value || 'Not specified';
-            document.getElementById('review-revenue-streams').textContent = document.getElementById('revenue-streams').value || 'Not specified';
-            document.getElementById('review-key-resources').textContent = document.getElementById('key-resources').value || 'Not specified';
-            document.getElementById('review-key-activities').textContent = document.getElementById('key-activities').value || 'Not specified';
-            document.getElementById('review-key-partners').textContent = document.getElementById('key-partners').value || 'Not specified';
-            document.getElementById('review-cost-structure').textContent = document.getElementById('cost-structure').value || 'Not specified';
+            const blocks = ['customer-segments', 'value-propositions', 'channels', 'customer-relationships', 'revenue-streams', 'key-resources', 'key-activities', 'key-partners', 'cost-structure'];
+            blocks.forEach(block => {
+                const value = document.getElementById(block).value || 'Not specified';
+                document.getElementById(`review-${block}`).textContent = value;
+            });
+        }
+
+        async function enhanceWithAI() {
+            const enhanceBtn = document.getElementById('enhance-btn');
+            const loadingState = document.getElementById('loading-state');
+            
+            enhanceBtn.style.display = 'none';
+            loadingState.style.display = 'block';
+            
+            try {
+                const response = await fetch('/.netlify/functions/enhance-mba-content', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        tool: 'business-model-canvas',
+                        inputs: {
+                            customerSegments: document.getElementById('customer-segments').value,
+                            valuePropositions: document.getElementById('value-propositions').value,
+                            channels: document.getElementById('channels').value,
+                            customerRelationships: document.getElementById('customer-relationships').value,
+                            revenueStreams: document.getElementById('revenue-streams').value,
+                            keyResources: document.getElementById('key-resources').value,
+                            keyActivities: document.getElementById('key-activities').value,
+                            keyPartners: document.getElementById('key-partners').value,
+                            costStructure: document.getElementById('cost-structure').value
+                        }
+                    })
+                });
+
+                const data = await response.json();
+                
+                if (data.success) {
+                    displayEnhancedContent(data.enhancedContent);
+                } else {
+                    throw new Error(data.message || 'Failed to enhance content');
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                showNotification('Failed to enhance content. Please try again.', 'error');
+                enhanceBtn.style.display = 'block';
+                loadingState.style.display = 'none';
+            }
+        }
+
+        function displayEnhancedContent(content) {
+            const mapping = {
+                'customerSegments': 'enhanced-customer-segments',
+                'valuePropositions': 'enhanced-value-propositions',
+                'channels': 'enhanced-channels',
+                'customerRelationships': 'enhanced-customer-relationships',
+                'revenueStreams': 'enhanced-revenue-streams',
+                'keyResources': 'enhanced-key-resources',
+                'keyActivities': 'enhanced-key-activities',
+                'keyPartners': 'enhanced-key-partners',
+                'costStructure': 'enhanced-cost-structure'
+            };
+
+            Object.keys(mapping).forEach(key => {
+                const element = document.getElementById(mapping[key]);
+                if (content[key] && Array.isArray(content[key])) {
+                    const html = `
+                        <div style="display: inline-block; background: #956FA6; color: white; padding: 3px 10px; border-radius: 10px; font-size: 11px; font-weight: 700; margin-bottom: 8px;">
+                            <i class="fas fa-sparkles mr-1"></i> AI
+                        </div>
+                        <ul style="margin: 0;">
+                            ${content[key].map(item => `<li>${item}</li>`).join('')}
+                        </ul>
+                    `;
+                    element.innerHTML = html;
+                    element.style.display = 'block';
+                    element.style.opacity = '0';
+                    setTimeout(() => {
+                        element.style.transition = 'opacity 0.5s ease-in';
+                        element.style.opacity = '1';
+                    }, 100);
+                }
+            });
+
+            showNotification('AI analysis complete! Your business model has been enhanced.', 'success');
+        }
+
+        function showNotification(message, type = 'info') {
+            const notification = document.createElement('div');
+            notification.style.cssText = `
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                background: ${type === 'success' ? '#4CAF50' : type === 'error' ? '#f44336' : '#2196F3'};
+                color: white;
+                padding: 16px 24px;
+                border-radius: 8px;
+                box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+                z-index: 10000;
+                font-weight: 600;
+                animation: slideIn 0.3s ease-out;
+            `;
+            notification.textContent = message;
+            document.body.appendChild(notification);
+
+            setTimeout(() => {
+                notification.style.animation = 'slideOut 0.3s ease-in';
+                setTimeout(() => notification.remove(), 300);
+            }, 3000);
         }
 
         function downloadPDF() {
@@ -674,6 +909,22 @@
             doc.text('https://join.bryancollins.com/business-model-canvas', 20, 290);
             
             doc.save('business-model-canvas-' + new Date().toISOString().split('T')[0] + '.pdf');
+        }
+        const mobileMenuButton = document.getElementById('mobileMenuButton');
+        const mobileNav = document.getElementById('mobileNav');
+        if (mobileMenuButton && mobileNav) {
+            mobileMenuButton.addEventListener('click', function() {
+                mobileNav.classList.toggle('active');
+                const icon = this.querySelector('i');
+                icon.classList.toggle('fa-bars');
+                icon.classList.toggle('fa-times');
+            });
+            mobileNav.querySelectorAll('.nav-link').forEach(link => {
+                link.addEventListener('click', () => {
+                    mobileNav.classList.remove('active');
+                    mobileMenuButton.querySelector('i').classList.replace('fa-times', 'fa-bars');
+                });
+            });
         }
     </script>
 </body>

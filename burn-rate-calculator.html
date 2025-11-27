@@ -1,0 +1,1412 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Burn Rate Calculator — Free Startup Tool by Bryan Collins</title>
+    <meta name="description" content="Calculate your startup's burn rate and runway instantly. Free calculator to determine how long your cash will last and plan for profitability.">
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://join.bryancollins.com/burn-rate-calculator">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://join.bryancollins.com/burn-rate-calculator">
+    <meta property="og:title" content="Free Burn Rate Calculator | Bryan Collins">
+    <meta property="og:description" content="Calculate your startup's runway and know exactly how long your cash will last. Free tool with instant results.">
+    <meta property="og:image" content="https://join.bryancollins.com/resources/bryan-collins.jpeg">
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://join.bryancollins.com/burn-rate-calculator">
+    <meta property="twitter:title" content="Free Burn Rate Calculator">
+    <meta property="twitter:description" content="Calculate your startup's runway and know exactly how long your cash will last.">
+    <meta property="twitter:image" content="https://join.bryancollins.com/resources/bryan-collins.jpeg">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+
+    <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    
+    <!-- Chart.js for visualizations -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.9.1/dist/chart.min.js"></script>
+    
+    <!-- jsPDF for PDF generation -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    
+    <!-- Privacy-friendly analytics by Plausible -->
+    <script async src="https://plausible.io/js/pa-UDjPfOotU07ZYjQUDU_aw.js"></script>
+    <script>
+      window.plausible=window.plausible||function(){(plausible.q=plausible.q||[]).push(arguments)},plausible.init=plausible.init||function(i){plausible.o=i||{}};
+      plausible.init()
+    </script>
+    
+    <!-- Schema.org Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "Burn Rate Calculator",
+        "description": "Free burn rate and runway calculator for startups and businesses",
+        "url": "https://join.bryancollins.com/burn-rate-calculator",
+        "applicationCategory": "BusinessApplication",
+        "operatingSystem": "Any",
+        "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "USD"
+        },
+        "author": {
+            "@type": "Person",
+            "name": "Bryan Collins"
+        }
+    }
+    </script>
+    
+    <style>
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            background-color: #EDEDEE;
+            color: #1B1B1D;
+        }
+        .nav-bar {
+            background: #000000;
+            border-bottom: 1px solid #333;
+        }
+        .nav-link {
+            color: white;
+            padding: 0.5rem 1rem;
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+        .nav-link:hover {
+            color: #FFDE59;
+        }
+        .hero-gradient {
+            background: linear-gradient(135deg, #000000 0%, #1a1a1a 100%);
+        }
+        .btn-primary {
+            background: #FFDE59;
+            color: #000;
+            padding: 0.875rem 2rem;
+            border-radius: 6px;
+            border: none;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 1.125rem;
+        }
+        .btn-primary:hover {
+            background: #ffd633;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+        }
+        .btn-secondary {
+            background: white;
+            color: #000;
+            padding: 0.875rem 2rem;
+            border-radius: 6px;
+            border: 2px solid #000;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .btn-secondary:hover {
+            background: #000;
+            color: white;
+        }
+        .form-input, .form-select {
+            width: 100%;
+            padding: 0.75rem;
+            border: 2px solid #e5e5e5;
+            border-radius: 6px;
+            font-size: 1rem;
+            transition: border-color 0.2s;
+        }
+        .form-input:focus, .form-select:focus {
+            outline: none;
+            border-color: #FFDE59;
+        }
+        .info-box {
+            background: #f8f9fa;
+            border-left: 4px solid #FFDE59;
+            padding: 1rem;
+            border-radius: 4px;
+            margin: 1rem 0;
+        }
+        .metric-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+        .metric-value {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #000;
+            margin: 0.5rem 0;
+        }
+        .metric-label {
+            color: #666;
+            font-size: 0.875rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .chart-container {
+            position: relative;
+            height: 400px;
+            margin: 2rem 0;
+        }
+        .tooltip-icon {
+            display: inline-block;
+            width: 18px;
+            height: 18px;
+            background: #FFDE59;
+            color: #000;
+            border-radius: 50%;
+            text-align: center;
+            font-size: 12px;
+            font-weight: bold;
+            cursor: help;
+            margin-left: 0.5rem;
+        }
+        .related-tools {
+            background: #f8f9fa;
+            border-radius: 8px;
+            padding: 2rem;
+            margin-top: 2rem;
+        }
+        .tool-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 8px;
+            text-decoration: none;
+            color: inherit;
+            display: block;
+            transition: all 0.3s;
+            border: 2px solid transparent;
+        }
+        .tool-card:hover {
+            border-color: #FFDE59;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        .alert-critical {
+            background: #fee;
+            border-left: 4px solid #dc2626;
+        }
+        .alert-warning {
+            background: #fef3cd;
+            border-left: 4px solid #f59e0b;
+        }
+        .alert-healthy {
+            background: #d1fae5;
+            border-left: 4px solid #10b981;
+        }
+        .icon-yellow {
+            color: #FFDE59;
+        }
+        .btn-template {
+            background: white;
+            color: #000;
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            border: 2px solid #e5e5e5;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 0.875rem;
+        }
+        .btn-template:hover {
+            border-color: #FFDE59;
+            background: #fffef0;
+        }
+        .error-message {
+            background: #fee;
+            border-left: 4px solid #dc2626;
+            padding: 1rem;
+            border-radius: 4px;
+            margin-bottom: 1rem;
+        }
+        .tooltip-wrapper {
+            position: relative;
+            display: inline-block;
+        }
+        .tooltip-content {
+            visibility: hidden;
+            position: absolute;
+            z-index: 1000;
+            bottom: 125%;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: #333;
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            font-size: 0.875rem;
+            white-space: nowrap;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        .tooltip-wrapper:hover .tooltip-content,
+        .tooltip-wrapper:focus-within .tooltip-content {
+            visibility: visible;
+            opacity: 1;
+        }
+        .tooltip-content::after {
+            content: "";
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            margin-left: -5px;
+            border-width: 5px;
+            border-style: solid;
+            border-color: #333 transparent transparent transparent;
+        }
+        @media (max-width: 768px) {
+            .btn-primary, .btn-secondary {
+                padding: 1rem 1.5rem;
+                font-size: 1.125rem;
+                min-height: 44px;
+            }
+            .form-input {
+                min-height: 44px;
+                font-size: 16px; /* Prevents zoom on iOS */
+            }
+        }
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border-width: 0;
+        }
+        .hidden {
+            display: none;
+        }
+        @media print {
+            .nav-bar, footer, .btn-secondary, .related-tools, .sticky-cta { display: none; }
+            body { background: white; }
+            .metric-card, .card { box-shadow: none; border: 1px solid #ddd; page-break-inside: avoid; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="nav-bar sticky top-0 z-50">
+        <div class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
+            <a href="/index.html" class="text-white font-bold text-xl">Bryan Collins</a>
+            <div class="flex gap-6">
+                <a href="/mba-frameworks.html" class="nav-link">Tools</a>
+                <a href="/gpts.html" class="nav-link">GPTs</a>
+                <a href="/projects.html" class="nav-link">Projects</a>
+                <a href="/books.html" class="nav-link">Books</a>
+                <a href="/now.html" class="nav-link">Now</a>
+                <a href="/contact.html" class="nav-link">Contact</a>
+                <a href="https://newsletter.bryancollins.com" class="nav-link">Newsletter</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="hero-gradient text-white py-16 px-4">
+        <div class="max-w-4xl mx-auto text-center">
+            <h1 class="text-5xl font-extrabold mb-4">Burn Rate Calculator</h1>
+            <p class="text-xl opacity-90">Calculate your runway and know exactly how long your cash will last</p>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="py-12 px-4">
+        <div class="max-w-6xl mx-auto">
+            
+            <div class="grid md:grid-cols-3 gap-8 mb-8">
+                <!-- Calculator Form (2/3 width) -->
+                <div class="md:col-span-2">
+                    <div class="bg-white rounded-xl p-8 shadow-lg">
+                        <h2 class="text-3xl font-bold mb-6">Enter Your Financial Details</h2>
+                        
+                        <div class="info-box mb-6">
+                            <i class="fas fa-info-circle text-yellow-600"></i>
+                            <strong>What is Burn Rate?</strong> It's the rate at which your company spends cash. Your runway is how long you can operate before running out of money.
+                        </div>
+                        
+                        <!-- Error Message -->
+                        <div id="error-message" class="error-message hidden" role="alert" aria-live="polite">
+                            <div class="flex items-start">
+                                <i class="fas fa-exclamation-triangle text-red-600 mr-2 mt-1"></i>
+                                <div>
+                                    <p class="font-bold">Error</p>
+                                    <p id="error-text"></p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Quick Start Templates -->
+                        <div class="mb-6">
+                            <label class="block font-semibold mb-2">Quick Start Templates:</label>
+                            <div class="grid grid-cols-3 gap-2">
+                                <button type="button" onclick="loadScenario('bootstrap')" class="btn-template">
+                                    <i class="fas fa-seedling text-sm mr-1"></i> Bootstrap
+                                </button>
+                                <button type="button" onclick="loadScenario('seed')" class="btn-template">
+                                    <i class="fas fa-rocket text-sm mr-1"></i> Seed Stage
+                                </button>
+                                <button type="button" onclick="loadScenario('series-a')" class="btn-template">
+                                    <i class="fas fa-chart-line text-sm mr-1"></i> Series A
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <form id="burnRateForm">
+                            <div class="space-y-6">
+                        <!-- Cash on Hand -->
+                        <div>
+                            <label for="cashOnHand" class="block font-semibold mb-2 text-lg">
+                                Current Cash on Hand
+                                <span class="tooltip-wrapper">
+                                    <button type="button" class="tooltip-icon" aria-label="Help for cash on hand" tabindex="0">?
+                                        <span class="tooltip-content">Total available capital (bank balance, investments)</span>
+                                    </button>
+                                </span>
+                            </label>
+                            <div class="flex items-center">
+                                <span class="mr-2 text-2xl" aria-hidden="true">$</span>
+                                <input 
+                                    type="number" 
+                                    id="cashOnHand" 
+                                    name="cashOnHand"
+                                    class="form-input text-xl" 
+                                    placeholder="100000" 
+                                    value="100000" 
+                                    min="0" 
+                                    step="1000"
+                                    inputmode="decimal"
+                                    aria-required="true"
+                                    aria-describedby="cashOnHand-help"
+                                    required>
+                            </div>
+                            <span id="cashOnHand-help" class="sr-only">Enter your total available capital in dollars</span>
+                        </div>
+                        
+                        <!-- Monthly Revenue -->
+                        <div>
+                            <label for="monthlyRevenue" class="block font-semibold mb-2 text-lg">
+                                Monthly Revenue
+                                <span class="tooltip-wrapper">
+                                    <button type="button" class="tooltip-icon" aria-label="Help for monthly revenue" tabindex="0">?
+                                        <span class="tooltip-content">Total income per month (enter 0 if pre-revenue)</span>
+                                    </button>
+                                </span>
+                            </label>
+                            <div class="flex items-center">
+                                <span class="mr-2 text-2xl" aria-hidden="true">$</span>
+                                <input 
+                                    type="number" 
+                                    id="monthlyRevenue" 
+                                    name="monthlyRevenue"
+                                    class="form-input text-xl" 
+                                    placeholder="10000" 
+                                    value="0" 
+                                    min="0" 
+                                    step="1000"
+                                    inputmode="decimal"
+                                    aria-required="true"
+                                    required>
+                            </div>
+                        </div>
+                        
+                        <!-- Monthly Expenses Breakdown -->
+                        <div class="bg-gray-50 p-6 rounded-lg">
+                            <h3 class="font-bold text-xl mb-4">Monthly Operating Expenses</h3>
+                            
+                            <div class="space-y-4">
+                                <div>
+                                    <label class="block font-semibold mb-2">
+                                        Salaries & Payroll
+                                        <span class="tooltip-icon" title="Employee wages, contractor payments">?</span>
+                                    </label>
+                                    <div class="flex items-center">
+                                        <span class="mr-2 text-xl">$</span>
+                                        <input type="number" id="salaries" class="form-input" placeholder="15000" value="0" min="0" step="100">
+                                    </div>
+                                </div>
+                                
+                                <div>
+                                    <label class="block font-semibold mb-2">
+                                        Rent & Facilities
+                                        <span class="tooltip-icon" title="Office space, utilities">?</span>
+                                    </label>
+                                    <div class="flex items-center">
+                                        <span class="mr-2 text-xl">$</span>
+                                        <input type="number" id="rent" class="form-input" placeholder="2000" value="0" min="0" step="100">
+                                    </div>
+                                </div>
+                                
+                                <div>
+                                    <label class="block font-semibold mb-2">
+                                        Software & Tools
+                                        <span class="tooltip-icon" title="SaaS subscriptions, cloud hosting">?</span>
+                                    </label>
+                                    <div class="flex items-center">
+                                        <span class="mr-2 text-xl">$</span>
+                                        <input type="number" id="software" class="form-input" placeholder="1000" value="0" min="0" step="100">
+                                    </div>
+                                </div>
+                                
+                                <div>
+                                    <label class="block font-semibold mb-2">
+                                        Marketing & Sales
+                                        <span class="tooltip-icon" title="Advertising, campaigns, sales costs">?</span>
+                                    </label>
+                                    <div class="flex items-center">
+                                        <span class="mr-2 text-xl">$</span>
+                                        <input type="number" id="marketing" class="form-input" placeholder="3000" value="0" min="0" step="100">
+                                    </div>
+                                </div>
+                                
+                                <div>
+                                    <label class="block font-semibold mb-2">
+                                        Other Operating Expenses
+                                        <span class="tooltip-icon" title="Legal, accounting, insurance, etc.">?</span>
+                                    </label>
+                                    <div class="flex items-center">
+                                        <span class="mr-2 text-xl">$</span>
+                                        <input type="number" id="otherExpenses" class="form-input" placeholder="1000" value="0" min="0" step="100">
+                                    </div>
+                                </div>
+                                
+                                <div class="bg-yellow-50 p-4 rounded-lg border-2 border-yellow-400">
+                                    <div class="flex justify-between items-center">
+                                        <span class="font-bold text-lg">Total Monthly Expenses:</span>
+                                        <span class="text-2xl font-bold" id="totalExpenses">$0</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                                <div class="flex gap-4">
+                                    <button type="submit" id="calculateBtn" class="btn-primary flex-1">
+                                        <i class="fas fa-calculator mr-2"></i>Calculate My Runway
+                                    </button>
+                                    <button type="button" onclick="resetForm()" class="btn-secondary">
+                                        <i class="fas fa-redo mr-2"></i>Reset
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                
+                <!-- Why This Matters Sidebar (1/3 width) -->
+                <div>
+                    <div class="bg-white rounded-xl p-6 shadow-lg mb-6">
+                        <h2 class="text-2xl font-bold mb-4">Why Track Burn Rate?</h2>
+                        <div class="space-y-4">
+                            <div class="flex items-start">
+                                <i class="fas fa-clock icon-yellow text-xl mt-1 mr-3"></i>
+                                <div>
+                                    <h3 class="font-bold mb-1">Know Your Timeline</h3>
+                                    <p class="text-gray-700 text-sm">78% of startups fail due to running out of cash. Know exactly when that might happen.</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <i class="fas fa-chart-line icon-yellow text-xl mt-1 mr-3"></i>
+                                <div>
+                                    <h3 class="font-bold mb-1">Plan Fundraising</h3>
+                                    <p class="text-gray-700 text-sm">Investors want 12-18 months runway. Know when to start raising your next round.</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <i class="fas fa-bullseye icon-yellow text-xl mt-1 mr-3"></i>
+                                <div>
+                                    <h3 class="font-bold mb-1">Make Better Decisions</h3>
+                                    <p class="text-gray-700 text-sm">Should you hire? Increase marketing spend? Your burn rate helps you decide.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-white rounded-xl p-6 shadow-lg">
+                        <h3 class="text-xl font-bold mb-3">Industry Benchmarks</h3>
+                        <ul class="space-y-2 text-sm text-gray-700">
+                            <li><strong>Pre-seed:</strong> $15-50K/month</li>
+                            <li><strong>Seed:</strong> $50-150K/month</li>
+                            <li><strong>Series A:</strong> $150-500K/month</li>
+                            <li><strong>Target Runway:</strong> 12-18 months</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Results Section -->
+            <div id="results" class="bg-white rounded-xl p-8 shadow-lg" style="display: none;">
+                <div class="text-center mb-8">
+                    <h2 class="text-3xl font-bold mb-4">Your Burn Rate Analysis</h2>
+                    <p class="text-gray-600">Here's how long your cash will last and what you need to know.</p>
+                </div>
+                
+                <!-- Runway Alert -->
+                <div id="runwayAlert" class="info-box mb-8 p-6 rounded-lg"></div>
+                
+                <!-- Key Metrics -->
+                <div class="grid md:grid-cols-3 gap-6 mb-8">
+                    <div class="metric-card">
+                        <div class="metric-label">Runway Remaining</div>
+                        <div class="metric-value" id="runwayMonths">0</div>
+                        <div class="text-sm text-gray-600">months</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-label">Net Burn Rate</div>
+                        <div class="metric-value" id="netBurnRate">$0</div>
+                        <div class="text-sm text-gray-600">per month</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-label">Cash Out Date</div>
+                        <div class="metric-value" style="font-size: 1.5rem" id="cashOutDate">--</div>
+                        <div class="text-sm text-gray-600">projected</div>
+                    </div>
+                </div>
+                
+                <!-- Additional Metrics -->
+                <div class="grid md:grid-cols-3 gap-6 mb-8">
+                    <div class="metric-card">
+                        <div class="metric-label">Daily Burn Rate</div>
+                        <div class="metric-value" style="font-size: 1.8rem" id="dailyBurn">$0</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-label">Weekly Burn Rate</div>
+                        <div class="metric-value" style="font-size: 1.8rem" id="weeklyBurn">$0</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-label">Gross Burn Rate</div>
+                        <div class="metric-value" style="font-size: 1.8rem" id="grossBurnRate">$0</div>
+                    </div>
+                </div>
+                
+                <!-- Expense Breakdown -->
+                <div class="bg-gray-50 rounded-lg p-6 mb-8">
+                    <h3 class="text-xl font-bold mb-4">Expense Breakdown</h3>
+                    <div id="expenseBreakdown"></div>
+                </div>
+                
+                <!-- Chart -->
+                <div class="bg-gray-50 rounded-lg p-6 mb-8">
+                    <h3 class="text-xl font-bold mb-4 text-center">Cash Runway Projection</h3>
+                    <div class="chart-container">
+                        <canvas id="runwayChart"></canvas>
+                    </div>
+                </div>
+                
+                <!-- Insights -->
+                <div class="bg-yellow-50 border-2 border-yellow-400 rounded-lg p-6 mb-8">
+                    <h3 class="text-xl font-bold mb-4"><i class="fas fa-lightbulb mr-2"></i>Key Insights</h3>
+                    <div id="insights" class="space-y-3"></div>
+                </div>
+                
+                <!-- Action Items -->
+                <div class="bg-gray-50 rounded-lg p-6 mb-8">
+                    <h3 class="text-xl font-bold mb-4"><i class="fas fa-tasks mr-2"></i>Action Items</h3>
+                    <div id="actionItems" class="space-y-3"></div>
+                </div>
+                
+                <!-- Download CTA -->
+                <div class="text-center mb-8">
+                    <button onclick="downloadPDF()" class="btn-primary mr-4">
+                        <i class="fas fa-download mr-2"></i>Download Full Report (PDF)
+                    </button>
+                    <button onclick="document.getElementById('burnRateForm').scrollIntoView({ behavior: 'smooth' }); document.getElementById('cashOnHand').focus();" class="btn-secondary">
+                        <i class="fas fa-redo mr-2"></i>Try Different Scenario
+                    </button>
+                </div>
+                
+                <!-- Related Tools -->
+                <div class="related-tools">
+                    <h3 class="text-2xl font-bold mb-4 text-center">You Might Also Like</h3>
+                    <div class="grid md:grid-cols-3 gap-4">
+                        <a href="/break-even-calculator.html" class="tool-card">
+                            <i class="fas fa-balance-scale text-2xl mb-2 block text-yellow-600"></i>
+                            <h4 class="font-bold mb-1">Break-Even Calculator</h4>
+                            <p class="text-sm text-gray-600">Calculate when you'll be profitable</p>
+                        </a>
+                        <a href="/email-roi-calculator.html" class="tool-card">
+                            <i class="fas fa-envelope text-2xl mb-2 block text-yellow-600"></i>
+                            <h4 class="font-bold mb-1">Email ROI Calculator</h4>
+                            <p class="text-sm text-gray-600">Measure email marketing returns</p>
+                        </a>
+                        <a href="/freelance-rate-calculator.html" class="tool-card">
+                            <i class="fas fa-money-bill-wave text-2xl mb-2 block text-yellow-600"></i>
+                            <h4 class="font-bold mb-1">Freelance Rate Calculator</h4>
+                            <p class="text-sm text-gray-600">Determine your ideal rate</p>
+                        </a>
+                    </div>
+                    <div class="text-center mt-6">
+                        <a href="/mba-frameworks.html#calculators" class="text-black font-semibold hover:underline">View All Calculators & Tools →</a>
+                    </div>
+                </div>
+                
+                <!-- Newsletter CTA -->
+                <div class="mt-12 bg-gray-900 text-white rounded-xl p-8 text-center">
+                    <h3 class="text-2xl font-bold mb-4">Want More Business Tools & Strategies?</h3>
+                    <p class="text-lg mb-6 opacity-90">Join 15,000+ entrepreneurs getting MBA frameworks, AI prompts, and growth tactics several times a week.</p>
+                    <a href="https://newsletter.bryancollins.com" class="btn-primary inline-block">
+                        <i class="fas fa-gift mr-2"></i>Get 101 AI Prompts Free
+                    </a>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-black text-white py-12 px-4 mt-16">
+        <div class="max-w-6xl mx-auto">
+            <!-- Footer Links -->
+            <div class="grid md:grid-cols-4 gap-8 mb-8">
+                <!-- Tools -->
+                <div>
+                    <h3 class="font-bold text-lg mb-4 text-yellow-400">MBA Frameworks</h3>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="/ansoff-matrix.html" class="hover:text-yellow-400">ANSOFF Matrix</a></li>
+                        <li><a href="/swot-analysis.html" class="hover:text-yellow-400">SWOT Analysis</a></li>
+                        <li><a href="/porters-five-forces.html" class="hover:text-yellow-400">Porter's Five Forces</a></li>
+                        <li><a href="/mba-frameworks.html" class="hover:text-yellow-400">View All Tools →</a></li>
+                    </ul>
+                </div>
+                
+                <!-- Calculators -->
+                <div>
+                    <h3 class="font-bold text-lg mb-4 text-yellow-400">Calculators</h3>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="/burn-rate-calculator.html" class="hover:text-yellow-400">Burn Rate Calculator</a></li>
+                        <li><a href="/break-even-calculator.html" class="hover:text-yellow-400">Break-Even Calculator</a></li>
+                        <li><a href="/email-roi-calculator.html" class="hover:text-yellow-400">Email ROI Calculator</a></li>
+                        <li><a href="/btc-dca-calculator.html" class="hover:text-yellow-400">BTC DCA Calculator</a></li>
+                        <li><a href="/freelance-rate-calculator.html" class="hover:text-yellow-400">Freelance Rate Calculator</a></li>
+                        <li><a href="/position-sizing-calculator.html" class="hover:text-yellow-400">Position Sizing Calculator</a></li>
+                    </ul>
+                </div>
+                
+                <!-- Resources -->
+                <div>
+                    <h3 class="font-bold text-lg mb-4 text-yellow-400">Resources</h3>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="/gpts.html" class="hover:text-yellow-400">Custom GPTs</a></li>
+                        <li><a href="/projects.html" class="hover:text-yellow-400">Projects</a></li>
+                        <li><a href="/books.html" class="hover:text-yellow-400">Books</a></li>
+                        <li><a href="https://newsletter.bryancollins.com" class="hover:text-yellow-400">Newsletter</a></li>
+                    </ul>
+                </div>
+                
+                <!-- Connect -->
+                <div>
+                    <h3 class="font-bold text-lg mb-4 text-yellow-400">Connect</h3>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="/now.html" class="hover:text-yellow-400">What I'm Doing Now</a></li>
+                        <li><a href="/contact.html" class="hover:text-yellow-400">Contact</a></li>
+                        <li><a href="https://clarity.fm/bryancollins" target="_blank" rel="noopener" class="hover:text-yellow-400">Book a Call</a></li>
+                        <li><a href="/work-with-me.html" class="hover:text-yellow-400">Work With Me</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <!-- Social & Copyright -->
+            <div class="text-center border-t border-gray-700 pt-8">
+                <div class="flex gap-6 justify-center mb-4">
+                    <a href="https://www.youtube.com/channel/UCglNILz3uBqPer5EMJ_pzVg" target="_blank" rel="noopener" aria-label="YouTube channel" class="hover:text-yellow-400"><i class="fab fa-youtube text-2xl"></i></a>
+                    <a href="https://www.linkedin.com/in/bryancollins99/" target="_blank" rel="noopener" aria-label="LinkedIn profile" class="hover:text-yellow-400"><i class="fab fa-linkedin text-2xl"></i></a>
+                    <a href="https://github.com/bryancollins99" target="_blank" rel="noopener" aria-label="GitHub profile" class="hover:text-yellow-400"><i class="fab fa-github text-2xl"></i></a>
+                    <a href="https://www.amazon.com/stores/Bryan-Collins/author/B00KPFFYU6" target="_blank" rel="noopener" aria-label="Amazon author page" class="hover:text-yellow-400"><i class="fab fa-amazon text-2xl"></i></a>
+                    <a href="https://clarity.fm/bryancollins" target="_blank" rel="noopener" aria-label="Book a call" class="hover:text-yellow-400"><i class="fas fa-phone text-2xl"></i></a>
+                </div>
+                <div class="flex gap-4 justify-center text-sm text-gray-400 mb-4">
+                    <a href="/privacy.html" class="hover:text-white">Privacy Policy</a>
+                    <span>•</span>
+                    <a href="/terms.html" class="hover:text-white">Terms of Service</a>
+                </div>
+                <p class="text-sm opacity-70">© 2025 Bryan Collins. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        let chartInstance = null;
+
+        // Load from URL on page load
+        window.addEventListener('DOMContentLoaded', () => {
+            loadFromURL();
+            setupNumberFormatting();
+        });
+
+        // Auto-calculate total expenses
+        ['salaries', 'rent', 'software', 'marketing', 'otherExpenses'].forEach(id => {
+            document.getElementById(id).addEventListener('input', updateTotalExpenses);
+        });
+
+        function updateTotalExpenses() {
+            const total = 
+                parseFloat(document.getElementById('salaries').value || 0) +
+                parseFloat(document.getElementById('rent').value || 0) +
+                parseFloat(document.getElementById('software').value || 0) +
+                parseFloat(document.getElementById('marketing').value || 0) +
+                parseFloat(document.getElementById('otherExpenses').value || 0);
+            document.getElementById('totalExpenses').textContent = '$' + total.toLocaleString(undefined, {minimumFractionDigits: 0, maximumFractionDigits: 0});
+        }
+
+        // Error handling
+        function showError(message) {
+            const errorDiv = document.getElementById('error-message');
+            const errorText = document.getElementById('error-text');
+            errorText.textContent = message;
+            errorDiv.classList.remove('hidden');
+            errorDiv.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            setTimeout(() => errorDiv.classList.add('hidden'), 5000);
+        }
+
+        function hideError() {
+            document.getElementById('error-message').classList.add('hidden');
+        }
+
+        // Reset form
+        function resetForm() {
+            document.getElementById('burnRateForm').reset();
+            document.getElementById('results').style.display = 'none';
+            hideError();
+            updateTotalExpenses();
+            // Clear URL params
+            history.pushState({}, '', window.location.pathname);
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // Number formatting
+        function setupNumberFormatting() {
+            document.querySelectorAll('input[type="number"]').forEach(input => {
+                input.addEventListener('blur', function() {
+                    if (this.value && !isNaN(this.value)) {
+                        const num = parseFloat(this.value);
+                        // Store unformatted value
+                        this.dataset.value = num;
+                    }
+                });
+            });
+        }
+
+        // Save to URL
+        function saveToURL() {
+            const params = new URLSearchParams({
+                cash: document.getElementById('cashOnHand').value,
+                revenue: document.getElementById('monthlyRevenue').value,
+                salaries: document.getElementById('salaries').value,
+                rent: document.getElementById('rent').value,
+                software: document.getElementById('software').value,
+                marketing: document.getElementById('marketing').value,
+                other: document.getElementById('otherExpenses').value
+            });
+            history.pushState({}, '', '?' + params.toString());
+        }
+
+        // Load from URL
+        function loadFromURL() {
+            const params = new URLSearchParams(window.location.search);
+            if (params.has('cash')) {
+                document.getElementById('cashOnHand').value = params.get('cash');
+                document.getElementById('monthlyRevenue').value = params.get('revenue') || 0;
+                document.getElementById('salaries').value = params.get('salaries') || 0;
+                document.getElementById('rent').value = params.get('rent') || 0;
+                document.getElementById('software').value = params.get('software') || 0;
+                document.getElementById('marketing').value = params.get('marketing') || 0;
+                document.getElementById('otherExpenses').value = params.get('other') || 0;
+                updateTotalExpenses();
+                // Auto-calculate if params present
+                setTimeout(() => calculate(), 500);
+            }
+        }
+
+        // Load scenario templates
+        function loadScenario(type) {
+            const scenarios = {
+                'bootstrap': {
+                    cash: 50000,
+                    revenue: 5000,
+                    salaries: 8000,
+                    rent: 1000,
+                    software: 500,
+                    marketing: 1000,
+                    other: 500
+                },
+                'seed': {
+                    cash: 500000,
+                    revenue: 20000,
+                    salaries: 50000,
+                    rent: 3000,
+                    software: 2000,
+                    marketing: 10000,
+                    other: 5000
+                },
+                'series-a': {
+                    cash: 2000000,
+                    revenue: 100000,
+                    salaries: 150000,
+                    rent: 8000,
+                    software: 5000,
+                    marketing: 30000,
+                    other: 15000
+                }
+            };
+            
+            const scenario = scenarios[type];
+            document.getElementById('cashOnHand').value = scenario.cash;
+            document.getElementById('monthlyRevenue').value = scenario.revenue;
+            document.getElementById('salaries').value = scenario.salaries;
+            document.getElementById('rent').value = scenario.rent;
+            document.getElementById('software').value = scenario.software;
+            document.getElementById('marketing').value = scenario.marketing;
+            document.getElementById('otherExpenses').value = scenario.other;
+            updateTotalExpenses();
+        }
+
+        // Form submission
+        document.getElementById('burnRateForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            calculate();
+        });
+
+        function calculate() {
+            hideError();
+            
+            // Show loading state
+            const button = document.getElementById('calculateBtn');
+            const originalText = button.innerHTML;
+            button.disabled = true;
+            button.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i>Calculating...';
+            
+            // Small delay for UX
+            setTimeout(() => {
+                // Get values
+                const cashOnHand = parseFloat(document.getElementById('cashOnHand').value || 0);
+                const monthlyRevenue = parseFloat(document.getElementById('monthlyRevenue').value || 0);
+                const monthlyExpenses = 
+                    parseFloat(document.getElementById('salaries').value || 0) +
+                    parseFloat(document.getElementById('rent').value || 0) +
+                    parseFloat(document.getElementById('software').value || 0) +
+                    parseFloat(document.getElementById('marketing').value || 0) +
+                    parseFloat(document.getElementById('otherExpenses').value || 0);
+                
+                // Validation
+                if (cashOnHand <= 0) {
+                    showError('Please enter your current cash on hand (must be greater than $0)');
+                    button.disabled = false;
+                    button.innerHTML = originalText;
+                    return;
+                }
+                
+                if (monthlyExpenses <= 0) {
+                    showError('Please enter your monthly operating expenses (must be greater than $0)');
+                    button.disabled = false;
+                    button.innerHTML = originalText;
+                    return;
+                }
+                
+                // Track with analytics
+                if (window.plausible) {
+                    plausible('Calculator Used', {
+                        props: { calculator: 'Burn Rate' }
+                    });
+                }
+                
+                continueCalculation(cashOnHand, monthlyRevenue, monthlyExpenses, button, originalText);
+            }, 300);
+        }
+
+        function continueCalculation(cashOnHand, monthlyRevenue, monthlyExpenses, button, originalText) {
+            
+            // Calculate burn rate metrics
+            const grossBurnRate = monthlyExpenses;
+            const netBurnRate = monthlyExpenses - monthlyRevenue;
+            const dailyBurn = netBurnRate / 30;
+            const weeklyBurn = netBurnRate / 4.33;
+            
+            // Calculate runway
+            let runwayMonths;
+            let cashOutDate;
+            
+            if (netBurnRate <= 0) {
+                // Profitable or break-even
+                runwayMonths = Infinity;
+                cashOutDate = 'Never (Profitable!)';
+            } else {
+                runwayMonths = cashOnHand / netBurnRate;
+                const today = new Date();
+                const projectedDate = new Date(today.getTime() + (runwayMonths * 30 * 24 * 60 * 60 * 1000));
+                cashOutDate = projectedDate.toLocaleDateString('en-US', { month: 'short', year: 'numeric' });
+            }
+            
+            // Display results
+            if (runwayMonths === Infinity) {
+                document.getElementById('runwayMonths').textContent = '∞';
+            } else {
+                document.getElementById('runwayMonths').textContent = runwayMonths.toFixed(1);
+            }
+            
+            document.getElementById('netBurnRate').textContent = '$' + Math.abs(netBurnRate).toLocaleString(undefined, {minimumFractionDigits: 0, maximumFractionDigits: 0});
+            document.getElementById('cashOutDate').textContent = cashOutDate;
+            document.getElementById('dailyBurn').textContent = '$' + Math.abs(dailyBurn).toLocaleString(undefined, {minimumFractionDigits: 0, maximumFractionDigits: 0});
+            document.getElementById('weeklyBurn').textContent = '$' + Math.abs(weeklyBurn).toLocaleString(undefined, {minimumFractionDigits: 0, maximumFractionDigits: 0});
+            document.getElementById('grossBurnRate').textContent = '$' + grossBurnRate.toLocaleString(undefined, {minimumFractionDigits: 0, maximumFractionDigits: 0});
+            
+            // Generate runway alert
+            generateRunwayAlert(runwayMonths, netBurnRate);
+            
+            // Generate chart
+            generateChart(cashOnHand, netBurnRate, runwayMonths);
+            
+            // Generate insights
+            generateInsights(cashOnHand, monthlyRevenue, monthlyExpenses, netBurnRate, runwayMonths);
+            
+            // Generate action items
+            generateActionItems(runwayMonths, netBurnRate, monthlyRevenue, monthlyExpenses);
+            
+            // Show expense breakdown
+            showExpenseBreakdown();
+            
+            // Save to URL
+            saveToURL();
+            
+            // Show results
+            document.getElementById('results').style.display = 'block';
+            
+            // Restore button state
+            button.disabled = false;
+            button.innerHTML = originalText;
+            
+            // Scroll to results
+            document.getElementById('results').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function showExpenseBreakdown() {
+            const salaries = parseFloat(document.getElementById('salaries').value || 0);
+            const rent = parseFloat(document.getElementById('rent').value || 0);
+            const software = parseFloat(document.getElementById('software').value || 0);
+            const marketing = parseFloat(document.getElementById('marketing').value || 0);
+            const other = parseFloat(document.getElementById('otherExpenses').value || 0);
+            const total = salaries + rent + software + marketing + other;
+            
+            if (total === 0) {
+                document.getElementById('expenseBreakdown').innerHTML = '<p class="text-gray-600 text-sm">No expenses entered</p>';
+                return;
+            }
+            
+            const breakdown = [
+                { label: 'Salaries & Payroll', amount: salaries, percent: (salaries/total*100).toFixed(1), color: '#FFDE59' },
+                { label: 'Marketing & Sales', amount: marketing, percent: (marketing/total*100).toFixed(1), color: '#ffd633' },
+                { label: 'Rent & Facilities', amount: rent, percent: (rent/total*100).toFixed(1), color: '#ffed4e' },
+                { label: 'Software & Tools', amount: software, percent: (software/total*100).toFixed(1), color: '#fff5a0' },
+                { label: 'Other Expenses', amount: other, percent: (other/total*100).toFixed(1), color: '#fffad4' }
+            ].filter(item => item.amount > 0).sort((a, b) => b.amount - a.amount);
+            
+            const html = breakdown.map(item => `
+                <div class="mb-4">
+                    <div class="flex justify-between mb-1">
+                        <span class="font-semibold">${item.label}</span>
+                        <span>$${item.amount.toLocaleString()} (${item.percent}%)</span>
+                    </div>
+                    <div class="w-full bg-gray-200 rounded-full h-3">
+                        <div class="h-3 rounded-full" style="width: ${item.percent}%; background-color: ${item.color}"></div>
+                    </div>
+                </div>
+            `).join('');
+            
+            document.getElementById('expenseBreakdown').innerHTML = html;
+        }
+
+        function generateRunwayAlert(runwayMonths, netBurnRate) {
+            const alert = document.getElementById('runwayAlert');
+            
+            if (netBurnRate <= 0) {
+                alert.className = 'info-box mb-8 p-6 rounded-lg alert-healthy';
+                alert.innerHTML = `
+                    <div class="flex items-start">
+                        <i class="fas fa-check-circle text-green-600 text-3xl mr-4"></i>
+                        <div>
+                            <h3 class="font-bold text-xl mb-2 text-green-800">Congratulations! You're Profitable</h3>
+                            <p class="text-gray-700">Your revenue exceeds your expenses. You have infinite runway and are generating positive cash flow.</p>
+                        </div>
+                    </div>
+                `;
+            } else if (runwayMonths < 3) {
+                alert.className = 'info-box mb-8 p-6 rounded-lg alert-critical';
+                alert.innerHTML = `
+                    <div class="flex items-start">
+                        <i class="fas fa-exclamation-triangle text-red-600 text-3xl mr-4"></i>
+                        <div>
+                            <h3 class="font-bold text-xl mb-2 text-red-800">Critical: Immediate Action Required</h3>
+                            <p class="text-gray-700">You have less than 3 months of runway. You need to raise capital, cut costs, or increase revenue immediately.</p>
+                        </div>
+                    </div>
+                `;
+            } else if (runwayMonths < 6) {
+                alert.className = 'info-box mb-8 p-6 rounded-lg alert-warning';
+                alert.innerHTML = `
+                    <div class="flex items-start">
+                        <i class="fas fa-exclamation-circle text-yellow-600 text-3xl mr-4"></i>
+                        <div>
+                            <h3 class="font-bold text-xl mb-2 text-yellow-800">Warning: Take Action Soon</h3>
+                            <p class="text-gray-700">You have ${runwayMonths.toFixed(1)} months of runway. Start planning now to extend your runway or reach profitability.</p>
+                        </div>
+                    </div>
+                `;
+            } else if (runwayMonths < 12) {
+                alert.className = 'info-box mb-8 p-6 rounded-lg alert-warning';
+                alert.innerHTML = `
+                    <div class="flex items-start">
+                        <i class="fas fa-info-circle text-yellow-600 text-3xl mr-4"></i>
+                        <div>
+                            <h3 class="font-bold text-xl mb-2 text-yellow-800">Moderate Runway</h3>
+                            <p class="text-gray-700">You have ${runwayMonths.toFixed(1)} months of runway. You have time to grow, but keep monitoring your burn rate closely.</p>
+                        </div>
+                    </div>
+                `;
+            } else {
+                alert.className = 'info-box mb-8 p-6 rounded-lg alert-healthy';
+                alert.innerHTML = `
+                    <div class="flex items-start">
+                        <i class="fas fa-check-circle text-green-600 text-3xl mr-4"></i>
+                        <div>
+                            <h3 class="font-bold text-xl mb-2 text-green-800">Healthy Runway</h3>
+                            <p class="text-gray-700">You have ${runwayMonths.toFixed(1)} months of runway. You're in a strong position to focus on growth and experimentation.</p>
+                        </div>
+                    </div>
+                `;
+            }
+        }
+
+        function generateChart(cashOnHand, netBurnRate, runwayMonths) {
+            const ctx = document.getElementById('runwayChart').getContext('2d');
+            
+            // Destroy existing chart
+            if (chartInstance) {
+                chartInstance.destroy();
+            }
+            
+            // Generate data points
+            const maxMonths = netBurnRate <= 0 ? 12 : Math.ceil(runwayMonths) + 3;
+            const labels = [];
+            const cashData = [];
+            
+            for (let i = 0; i <= maxMonths; i++) {
+                labels.push(i === 0 ? 'Now' : `Month ${i}`);
+                const remainingCash = cashOnHand - (netBurnRate * i);
+                cashData.push(Math.max(0, remainingCash));
+            }
+            
+            chartInstance = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: labels,
+                    datasets: [
+                        {
+                            label: 'Cash Balance',
+                            data: cashData,
+                            borderColor: '#FFDE59',
+                            backgroundColor: 'rgba(255, 222, 89, 0.1)',
+                            borderWidth: 3,
+                            tension: 0.1,
+                            fill: true
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'top',
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    let label = context.dataset.label || '';
+                                    if (label) {
+                                        label += ': ';
+                                    }
+                                    label += '$' + context.parsed.y.toLocaleString();
+                                    return label;
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        x: {
+                            title: {
+                                display: true,
+                                text: 'Time'
+                            }
+                        },
+                        y: {
+                            title: {
+                                display: true,
+                                text: 'Cash Balance ($)'
+                            },
+                            ticks: {
+                                callback: function(value) {
+                                    return '$' + value.toLocaleString();
+                                }
+                            },
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+        }
+
+        function generateInsights(cashOnHand, monthlyRevenue, monthlyExpenses, netBurnRate, runwayMonths) {
+            const insights = document.getElementById('insights');
+            insights.innerHTML = '';
+            
+            const insightsList = [];
+            
+            // Revenue vs Expenses
+            if (monthlyRevenue === 0) {
+                insightsList.push(`You're currently pre-revenue. To extend your runway, focus on launching your product/service and acquiring your first customers.`);
+            } else if (netBurnRate > 0) {
+                const revenuePercent = (monthlyRevenue / monthlyExpenses) * 100;
+                insightsList.push(`Your revenue covers <strong>${revenuePercent.toFixed(0)}%</strong> of your expenses. You need to increase revenue by <strong>$${(monthlyExpenses - monthlyRevenue).toLocaleString()}</strong> per month to break even.`);
+            }
+            
+            // Burn rate analysis
+            if (netBurnRate > 0) {
+                const dailyBurn = netBurnRate / 30;
+                insightsList.push(`Every day costs you <strong>$${dailyBurn.toLocaleString(undefined, {minimumFractionDigits: 0, maximumFractionDigits: 0})}</strong>. Reducing expenses by just $1,000/month would add <strong>${(1000 / netBurnRate).toFixed(1)} months</strong> to your runway.`);
+            }
+            
+            // Capital needed
+            if (runwayMonths < 12 && netBurnRate > 0) {
+                const capitalNeeded = netBurnRate * (12 - runwayMonths);
+                insightsList.push(`To extend your runway to 12 months, you need to raise approximately <strong>$${capitalNeeded.toLocaleString(undefined, {maximumFractionDigits: 0})}</strong> in additional capital.`);
+            }
+            
+            // Expense breakdown
+            const salaries = parseFloat(document.getElementById('salaries').value || 0);
+            if (salaries > 0 && monthlyExpenses > 0) {
+                const salaryPercent = (salaries / monthlyExpenses) * 100;
+                if (salaryPercent > 70) {
+                    insightsList.push(`Salaries represent <strong>${salaryPercent.toFixed(0)}%</strong> of your expenses. While investing in talent is important, this is quite high. Consider if you can optimize team structure or explore contractors.`);
+                }
+            }
+            
+            // Time to profitability
+            if (netBurnRate > 0 && monthlyRevenue > 0) {
+                const revenueGrowthNeeded = monthlyExpenses - monthlyRevenue;
+                const monthsToBreakeven = runwayMonths;
+                const requiredMonthlyGrowth = revenueGrowthNeeded / monthsToBreakeven;
+                insightsList.push(`To reach break-even before running out of cash, you need to grow revenue by approximately <strong>$${requiredMonthlyGrowth.toLocaleString(undefined, {maximumFractionDigits: 0})}</strong> per month.`);
+            }
+            
+            insightsList.forEach(insight => {
+                const div = document.createElement('div');
+                div.innerHTML = `<i class="fas fa-check-circle text-yellow-600 mr-2"></i>${insight}`;
+                insights.appendChild(div);
+            });
+        }
+
+        function generateActionItems(runwayMonths, netBurnRate, monthlyRevenue, monthlyExpenses) {
+            const actionItems = document.getElementById('actionItems');
+            actionItems.innerHTML = '';
+            
+            const actions = [];
+            
+            if (netBurnRate <= 0) {
+                actions.push({
+                    icon: 'fa-chart-line',
+                    text: 'Focus on growth: You\'re profitable, so invest in scaling your business and expanding your market reach.'
+                });
+                actions.push({
+                    icon: 'fa-piggy-bank',
+                    text: 'Build reserves: Save 3-6 months of operating expenses as a safety buffer for unexpected challenges.'
+                });
+            } else {
+                if (runwayMonths < 6) {
+                    actions.push({
+                        icon: 'fa-exclamation-triangle',
+                        text: '<strong>Start fundraising immediately</strong> or begin conversations with investors. Fundraising takes 3-6 months on average.'
+                    });
+                    actions.push({
+                        icon: 'fa-cut',
+                        text: '<strong>Review all expenses</strong> and cut non-essential costs. Look for quick wins in subscriptions, contractors, and discretionary spending.'
+                    });
+                }
+                
+                if (monthlyRevenue > 0) {
+                    actions.push({
+                        icon: 'fa-rocket',
+                        text: 'Accelerate revenue growth: Focus on your best-performing channels and highest-converting customers.'
+                    });
+                } else {
+                    actions.push({
+                        icon: 'fa-users',
+                        text: 'Launch your MVP and get your first paying customers. Pre-revenue startups should prioritize product-market fit.'
+                    });
+                }
+                
+                actions.push({
+                    icon: 'fa-chart-bar',
+                    text: 'Set up weekly burn rate tracking to monitor your cash position and adjust quickly if needed.'
+                });
+                
+                if (runwayMonths >= 6) {
+                    actions.push({
+                        icon: 'fa-lightbulb',
+                        text: 'Plan for the future: Start building relationships with potential investors now, even if you don\'t need funding immediately.'
+                    });
+                }
+            }
+            
+            actions.forEach(action => {
+                const div = document.createElement('div');
+                div.innerHTML = `
+                    <div class="flex items-start p-4 bg-white rounded-lg">
+                        <i class="fas ${action.icon} text-yellow-600 text-xl mr-3 mt-1"></i>
+                        <p class="text-gray-700">${action.text}</p>
+                    </div>
+                `;
+                actionItems.appendChild(div);
+            });
+        }
+
+        function downloadPDF() {
+            const { jsPDF } = window.jspdf;
+            const doc = new jsPDF();
+            
+            // Title
+            doc.setFontSize(22);
+            doc.setFont(undefined, 'bold');
+            doc.text('Burn Rate & Runway Analysis', 20, 20);
+            
+            doc.setFontSize(10);
+            doc.setFont(undefined, 'normal');
+            doc.text('Generated on ' + new Date().toLocaleDateString(), 20, 28);
+            
+            // Key Metrics
+            doc.setFontSize(16);
+            doc.setFont(undefined, 'bold');
+            doc.text('Key Metrics', 20, 45);
+            
+            doc.setFontSize(11);
+            doc.setFont(undefined, 'normal');
+            let y = 55;
+            
+            const runwayMonths = document.getElementById('runwayMonths').textContent;
+            const netBurnRate = document.getElementById('netBurnRate').textContent;
+            const cashOutDate = document.getElementById('cashOutDate').textContent;
+            const dailyBurn = document.getElementById('dailyBurn').textContent;
+            const weeklyBurn = document.getElementById('weeklyBurn').textContent;
+            const grossBurnRate = document.getElementById('grossBurnRate').textContent;
+            
+            doc.text(`Runway Remaining: ${runwayMonths} months`, 20, y);
+            y += 8;
+            doc.text(`Net Burn Rate: ${netBurnRate}/month`, 20, y);
+            y += 8;
+            doc.text(`Cash Out Date: ${cashOutDate}`, 20, y);
+            y += 8;
+            doc.text(`Daily Burn Rate: ${dailyBurn}`, 20, y);
+            y += 8;
+            doc.text(`Weekly Burn Rate: ${weeklyBurn}`, 20, y);
+            y += 8;
+            doc.text(`Gross Burn Rate: ${grossBurnRate}`, 20, y);
+            y += 15;
+            
+            // Inputs
+            doc.setFontSize(16);
+            doc.setFont(undefined, 'bold');
+            doc.text('Your Inputs', 20, y);
+            y += 10;
+            
+            doc.setFontSize(11);
+            doc.setFont(undefined, 'normal');
+            
+            const cashOnHand = '$' + parseFloat(document.getElementById('cashOnHand').value).toLocaleString();
+            const monthlyRevenue = '$' + parseFloat(document.getElementById('monthlyRevenue').value).toLocaleString();
+            const totalExpenses = document.getElementById('totalExpenses').textContent;
+            
+            doc.text(`Cash on Hand: ${cashOnHand}`, 20, y);
+            y += 8;
+            doc.text(`Monthly Revenue: ${monthlyRevenue}`, 20, y);
+            y += 8;
+            doc.text(`Total Monthly Expenses: ${totalExpenses}`, 20, y);
+            y += 15;
+            
+            // Insights
+            doc.setFontSize(16);
+            doc.setFont(undefined, 'bold');
+            doc.text('Key Insights', 20, y);
+            y += 10;
+            
+            doc.setFontSize(10);
+            doc.setFont(undefined, 'normal');
+            const insights = document.getElementById('insights').children;
+            Array.from(insights).forEach(insight => {
+                if (y > 270) {
+                    doc.addPage();
+                    y = 20;
+                }
+                const text = insight.textContent.trim();
+                const lines = doc.splitTextToSize(text, 170);
+                lines.forEach(line => {
+                    doc.text(line, 20, y);
+                    y += 6;
+                });
+                y += 2;
+            });
+            
+            // Action Items
+            if (y > 220) {
+                doc.addPage();
+                y = 20;
+            } else {
+                y += 10;
+            }
+            
+            doc.setFontSize(16);
+            doc.setFont(undefined, 'bold');
+            doc.text('Action Items', 20, y);
+            y += 10;
+            
+            doc.setFontSize(10);
+            doc.setFont(undefined, 'normal');
+            const actionItems = document.getElementById('actionItems').querySelectorAll('p');
+            Array.from(actionItems).forEach(action => {
+                if (y > 270) {
+                    doc.addPage();
+                    y = 20;
+                }
+                const text = action.textContent.trim();
+                const lines = doc.splitTextToSize(text, 170);
+                lines.forEach(line => {
+                    doc.text(line, 20, y);
+                    y += 6;
+                });
+                y += 2;
+            });
+            
+            // Footer
+            const pageCount = doc.internal.getNumberOfPages();
+            for (let i = 1; i <= pageCount; i++) {
+                doc.setPage(i);
+                doc.setFontSize(8);
+                doc.text('Created with bryancollins.com', 20, 285);
+                doc.text(`Page ${i} of ${pageCount}`, 180, 285);
+            }
+            
+            doc.save('burn-rate-analysis.pdf');
+        }
+    </script>
+</body>
+</html>
+

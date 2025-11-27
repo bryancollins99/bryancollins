@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Freelance Rate Calculator - Calculate Your Minimum Hourly Rate | Bryan Collins</title>
+    <meta name="description" content="Calculate your minimum freelance rates based on expenses, income goals, and billable hours. Stop undercharging and build a sustainable freelance business.">
+    
+    <link rel="canonical" href="https://join.bryancollins.com/freelance-rate-calculator">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://join.bryancollins.com/freelance-rate-calculator">
+    <meta property="og:title" content="Freelance Rate Calculator | Bryan Collins">
+    <meta property="og:description" content="Calculate your minimum freelance rates. Stop undercharging and build a sustainable freelance business.">
+    <meta property="og:image" content="https://join.bryancollins.com/resources/bryan-collins.jpeg">
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://join.bryancollins.com/freelance-rate-calculator">
+    <meta property="twitter:title" content="Freelance Rate Calculator">
+    <meta property="twitter:description" content="Free calculator to determine your minimum freelance hourly rate.">
+    <meta property="twitter:image" content="https://join.bryancollins.com/resources/bryan-collins.jpeg">
+    
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    
+    <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    
+    <script async src="https://plausible.io/js/pa-UDjPfOotU07ZYjQUDU_aw.js"></script>
+    <script>
+      window.plausible=window.plausible||function(){(plausible.q=plausible.q||[]).push(arguments)},plausible.init=plausible.init||function(i){plausible.o=i||{}};
+      plausible.init()
+    </script>
+    
+    <style>
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            background-color: #EDEDEE;
+            color: #1B1B1D;
+        }
+        .hero-gradient {
+            background: linear-gradient(135deg, #000000 0%, #1a1a1a 100%);
+        }
+        .nav-bar {
+            background: #000000;
+            border-bottom: 1px solid #333;
+        }
+        .nav-link {
+            color: white;
+            padding: 0.5rem 1rem;
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+        .nav-link:hover {
+            color: #FFDE59;
+        }
+        .card {
+            background: white;
+            border-radius: 8px;
+            padding: 2rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        .btn-primary {
+            background: #FFDE59;
+            color: #000000;
+            padding: 0.75rem 1.5rem;
+            border-radius: 6px;
+            text-decoration: none;
+            display: inline-block;
+            font-weight: 600;
+            transition: all 0.3s;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .btn-primary:hover {
+            background: #ffd633;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+        }
+        .icon-yellow {
+            color: #FFDE59;
+        }
+        input[type="number"], input[type="text"] {
+            width: 100%;
+            padding: 0.75rem;
+            border: 2px solid #e3e3e3;
+            border-radius: 6px;
+            font-family: inherit;
+            font-size: 1rem;
+        }
+        input[type="number"]:focus, input[type="text"]:focus {
+            outline: none;
+            border-color: #FFDE59;
+        }
+        .result-box {
+            background: linear-gradient(135deg, #FFDE59 0%, #ffd633 100%);
+            border-radius: 8px;
+            padding: 2rem;
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+        .result-value {
+            font-size: 3rem;
+            font-weight: bold;
+            color: #000;
+            margin-bottom: 0.5rem;
+        }
+        .result-label {
+            font-size: 1.25rem;
+            color: #333;
+            font-weight: 600;
+        }
+        .breakdown-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 1rem;
+            background: #f8f9fa;
+            border-radius: 6px;
+            margin-bottom: 0.75rem;
+        }
+        .breakdown-label {
+            font-weight: 600;
+        }
+        .breakdown-value {
+            font-weight: 700;
+            color: #000;
+        }
+        .rate-tier {
+            background: white;
+            border: 2px solid #e3e3e3;
+            border-radius: 8px;
+            padding: 1.5rem;
+            text-align: center;
+            transition: all 0.2s;
+        }
+        .rate-tier:hover {
+            border-color: #FFDE59;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        .rate-tier-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+        .rate-tier-price {
+            font-size: 2rem;
+            font-weight: 800;
+            color: #FFDE59;
+            margin-bottom: 0.5rem;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="nav-bar sticky top-0 z-50">
+        <div class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
+            <a href="/index.html" class="text-white font-bold text-xl">Bryan Collins</a>
+            <div class="flex gap-6">
+                <a href="/mba-frameworks.html" class="nav-link">Tools</a>
+                <a href="/gpts.html" class="nav-link">GPTs</a>
+                <a href="/projects.html" class="nav-link">Projects</a>
+                <a href="/books.html" class="nav-link">Books</a>
+                <a href="/now.html" class="nav-link">Now</a>
+                <a href="/contact.html" class="nav-link">Contact</a>
+                <a href="https://newsletter.bryancollins.com" class="nav-link">Newsletter</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="hero-gradient text-white py-16 px-4">
+        <div class="max-w-4xl mx-auto text-center">
+            <i class="fas fa-calculator icon-yellow text-5xl mb-6"></i>
+            <h1 class="text-4xl sm:text-5xl font-extrabold mb-4 leading-tight">Freelance Rate Calculator</h1>
+            <p class="text-xl sm:text-2xl opacity-90 leading-relaxed">Calculate your minimum rates to build a sustainable freelance business.</p>
+            <p class="text-lg opacity-80 mt-4">Stop undercharging. Know your numbers.</p>
+        </div>
+    </header>
+
+    <!-- Calculator Section -->
+    <section class="py-16 px-4">
+        <div class="max-w-6xl mx-auto">
+            <div class="grid md:grid-cols-2 gap-8">
+                <!-- Input Panel -->
+                <div class="card">
+                    <h2 class="text-2xl font-bold mb-6">
+                        <i class="fas fa-edit icon-yellow mr-2"></i>Your Numbers
+                    </h2>
+
+                    <div class="mb-5">
+                        <label class="block text-sm font-bold mb-2" for="monthlyExpenses">
+                            <i class="fas fa-receipt mr-1"></i> Monthly Expenses (Personal + Business)
+                        </label>
+                        <div class="flex items-center">
+                            <span class="text-xl mr-2">$</span>
+                            <input type="number" id="monthlyExpenses" value="5000" oninput="calculate()" min="0" step="100">
+                        </div>
+                        <p class="text-xs text-gray-600 mt-1">Rent, food, insurance, software, equipment, etc.</p>
+                    </div>
+
+                    <div class="mb-5">
+                        <label class="block text-sm font-bold mb-2" for="desiredIncome">
+                            <i class="fas fa-trophy mr-1"></i> Desired Annual Income (Take-Home)
+                        </label>
+                        <div class="flex items-center">
+                            <span class="text-xl mr-2">$</span>
+                            <input type="number" id="desiredIncome" value="80000" oninput="calculate()" min="0" step="1000">
+                        </div>
+                        <p class="text-xs text-gray-600 mt-1">What you want to earn after expenses</p>
+                    </div>
+
+                    <div class="mb-5">
+                        <label class="block text-sm font-bold mb-2" for="billableHours">
+                            <i class="fas fa-clock mr-1"></i> Billable Hours Per Week
+                        </label>
+                        <input type="number" id="billableHours" value="25" oninput="calculate()" min="1" max="60" step="1">
+                        <p class="text-xs text-gray-600 mt-1">Realistic billable time (not total work hours)</p>
+                    </div>
+
+                    <div class="mb-5">
+                        <label class="block text-sm font-bold mb-2" for="weeksWorking">
+                            <i class="fas fa-calendar-alt mr-1"></i> Weeks Working Per Year
+                        </label>
+                        <input type="number" id="weeksWorking" value="48" oninput="calculate()" min="1" max="52" step="1">
+                        <p class="text-xs text-gray-600 mt-1">Account for vacation and sick time (52 weeks max)</p>
+                    </div>
+
+                    <div class="mb-5">
+                        <label class="block text-sm font-bold mb-2" for="taxRate">
+                            <i class="fas fa-percentage mr-1"></i> Estimated Tax Rate
+                        </label>
+                        <input type="number" id="taxRate" value="30" oninput="calculate()" min="0" max="100" step="1">
+                        <p class="text-xs text-gray-600 mt-1">Self-employment + income tax (typically 25-35%)</p>
+                    </div>
+
+                    <div class="p-4 bg-blue-50 border-l-4 border-blue-400 rounded">
+                        <p class="text-sm text-gray-700">
+                            <strong>Pro Tip:</strong> Most freelancers overestimate billable hours. Be conservative—25 hours/week is realistic when you account for admin, sales, and non-billable work.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Results Panel -->
+                <div>
+                    <div class="card mb-6">
+                        <h2 class="text-2xl font-bold mb-6">
+                            <i class="fas fa-chart-bar icon-yellow mr-2"></i>Your Rates
+                        </h2>
+
+                        <div class="result-box">
+                            <div class="result-value" id="hourlyRate">$0</div>
+                            <div class="result-label">Minimum Hourly Rate</div>
+                        </div>
+
+                        <div class="grid grid-cols-2 gap-4 mb-6">
+                            <div class="text-center p-4 bg-gray-50 rounded-lg">
+                                <div class="text-2xl font-bold text-gray-700" id="dailyRate">$0</div>
+                                <div class="text-sm text-gray-600">Daily Rate (8hrs)</div>
+                            </div>
+                            <div class="text-center p-4 bg-gray-50 rounded-lg">
+                                <div class="text-2xl font-bold text-gray-700" id="recommendedRate">$0</div>
+                                <div class="text-sm text-gray-600">Recommended (+25%)</div>
+                            </div>
+                        </div>
+
+                        <h3 class="font-bold mb-3">
+                            <i class="fas fa-info-circle icon-yellow mr-2"></i>The Math
+                        </h3>
+                        <div id="breakdown"></div>
+                    </div>
+
+                    <div class="card">
+                        <h3 class="font-bold mb-4">
+                            <i class="fas fa-briefcase icon-yellow mr-2"></i>Project Pricing Guide
+                        </h3>
+                        <div class="grid grid-cols-3 gap-3">
+                            <div class="rate-tier">
+                                <div class="rate-tier-title">Small</div>
+                                <div class="rate-tier-price" id="smallProject">$0</div>
+                                <div class="text-xs text-gray-600">10-15 hours</div>
+                            </div>
+                            <div class="rate-tier">
+                                <div class="rate-tier-title">Medium</div>
+                                <div class="rate-tier-price" id="mediumProject">$0</div>
+                                <div class="text-xs text-gray-600">30-40 hours</div>
+                            </div>
+                            <div class="rate-tier">
+                                <div class="rate-tier-title">Large</div>
+                                <div class="rate-tier-price" id="largeProject">$0</div>
+                                <div class="text-xs text-gray-600">80-100 hours</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Client Target Breakdown -->
+            <div class="card mt-8">
+                <h2 class="text-2xl font-bold mb-6 text-center">
+                    <i class="fas fa-users icon-yellow mr-2"></i>How Many Clients Do You Need?
+                </h2>
+                <div id="clientBreakdown" class="grid md:grid-cols-3 gap-6"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Understanding Section -->
+    <section class="py-16 px-4 bg-white">
+        <div class="max-w-4xl mx-auto">
+            <h2 class="text-3xl font-bold text-center mb-12">Why Most Freelancers Underprice</h2>
+            <div class="grid md:grid-cols-2 gap-8">
+                <div class="card">
+                    <i class="fas fa-exclamation-triangle icon-yellow text-3xl mb-4"></i>
+                    <h3 class="text-xl font-bold mb-3">Common Mistakes</h3>
+                    <ul class="space-y-2 text-gray-700">
+                        <li><i class="fas fa-times text-red-500 mr-2"></i>Forgetting about taxes (25-35%)</li>
+                        <li><i class="fas fa-times text-red-500 mr-2"></i>Not accounting for unbillable time</li>
+                        <li><i class="fas fa-times text-red-500 mr-2"></i>Ignoring business expenses</li>
+                        <li><i class="fas fa-times text-red-500 mr-2"></i>Comparing to employee salaries (apples to oranges)</li>
+                        <li><i class="fas fa-times text-red-500 mr-2"></i>Pricing based on fear, not value</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <i class="fas fa-check-circle icon-yellow text-3xl mb-4"></i>
+                    <h3 class="text-xl font-bold mb-3">Reality Check</h3>
+                    <ul class="space-y-2 text-gray-700">
+                        <li><i class="fas fa-check text-green-500 mr-2"></i>50% of time is typically non-billable</li>
+                        <li><i class="fas fa-check text-green-500 mr-2"></i>You need emergency savings buffer</li>
+                        <li><i class="fas fa-check text-green-500 mr-2"></i>No paid vacation = factor it in</li>
+                        <li><i class="fas fa-check text-green-500 mr-2"></i>Health insurance, retirement = your responsibility</li>
+                        <li><i class="fas fa-check text-green-500 mr-2"></i>Higher rates = better clients</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Related Tools Section -->
+    <section class="py-16 px-4">
+        <div class="max-w-6xl mx-auto">
+            <h2 class="text-3xl font-bold text-center mb-12">
+                <i class="fas fa-tools icon-yellow mr-2"></i>More Business Tools
+            </h2>
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="card">
+                    <i class="fas fa-calculator icon-yellow text-3xl mb-4"></i>
+                    <h3 class="text-xl font-bold mb-3">Break-Even Calculator</h3>
+                    <p class="mb-4 text-gray-700">Calculate when your business or product becomes profitable.</p>
+                    <a href="/break-even-calculator.html" class="text-black font-semibold hover:underline">Calculate Break-Even →</a>
+                </div>
+                <div class="card">
+                    <i class="fas fa-calendar-alt icon-yellow text-3xl mb-4"></i>
+                    <h3 class="text-xl font-bold mb-3">Content Calendar</h3>
+                    <p class="mb-4 text-gray-700">Plan your content strategy and stay consistent.</p>
+                    <a href="/content-calendar.html" class="text-black font-semibold hover:underline">Build Your Calendar →</a>
+                </div>
+                <div class="card">
+                    <i class="fas fa-table icon-yellow text-3xl mb-4"></i>
+                    <h3 class="text-xl font-bold mb-3">Business Model Canvas</h3>
+                    <p class="mb-4 text-gray-700">Map out your business model on one page.</p>
+                    <a href="/business-model-canvas.html" class="text-black font-semibold hover:underline">Create Canvas →</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="py-16 px-4 bg-white">
+        <div class="max-w-3xl mx-auto">
+            <div class="card text-center">
+                <i class="fas fa-envelope icon-yellow text-4xl mb-4"></i>
+                <h2 class="text-3xl font-bold mb-4">Build a Sustainable Freelance Business</h2>
+                <p class="text-xl text-gray-700 mb-6">Join 15,000+ creators and get business strategy frameworks, pricing insights, and practical tools delivered to your inbox.</p>
+                <a href="https://newsletter.bryancollins.com" class="btn-primary">
+                    <i class="fas fa-envelope mr-2"></i>Join My Newsletter
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-black text-white py-12 px-4">
+        <div class="max-w-6xl mx-auto">
+            <!-- Footer Links -->
+            <div class="grid md:grid-cols-4 gap-8 mb-8">
+                <!-- Tools -->
+                <div>
+                    <h3 class="font-bold text-lg mb-4 text-yellow-400">MBA Frameworks</h3>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="/ansoff-matrix.html" class="hover:text-yellow-400">ANSOFF Matrix</a></li>
+                        <li><a href="/swot-analysis.html" class="hover:text-yellow-400">SWOT Analysis</a></li>
+                        <li><a href="/porters-five-forces.html" class="hover:text-yellow-400">Porter's Five Forces</a></li>
+                        <li><a href="/mba-frameworks.html" class="hover:text-yellow-400">View All Tools →</a></li>
+                    </ul>
+                </div>
+                
+                <!-- Calculators -->
+                <div>
+                    <h3 class="font-bold text-lg mb-4 text-yellow-400">Calculators</h3>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="/burn-rate-calculator.html" class="hover:text-yellow-400">Burn Rate Calculator</a></li>
+                        <li><a href="/break-even-calculator.html" class="hover:text-yellow-400">Break-Even Calculator</a></li>
+                        <li><a href="/email-roi-calculator.html" class="hover:text-yellow-400">Email ROI Calculator</a></li>
+                        <li><a href="/btc-dca-calculator.html" class="hover:text-yellow-400">BTC DCA Calculator</a></li>
+                        <li><a href="/freelance-rate-calculator.html" class="hover:text-yellow-400">Freelance Rate Calculator</a></li>
+                        <li><a href="/position-sizing-calculator.html" class="hover:text-yellow-400">Position Sizing Calculator</a></li>
+                    </ul>
+                </div>
+                
+                <!-- Resources -->
+                <div>
+                    <h3 class="font-bold text-lg mb-4 text-yellow-400">Resources</h3>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="/gpts.html" class="hover:text-yellow-400">Custom GPTs</a></li>
+                        <li><a href="/projects.html" class="hover:text-yellow-400">Projects</a></li>
+                        <li><a href="/books.html" class="hover:text-yellow-400">Books</a></li>
+                        <li><a href="https://newsletter.bryancollins.com" class="hover:text-yellow-400">Newsletter</a></li>
+                    </ul>
+                </div>
+                
+                <!-- Connect -->
+                <div>
+                    <h3 class="font-bold text-lg mb-4 text-yellow-400">Connect</h3>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="/now.html" class="hover:text-yellow-400">What I'm Doing Now</a></li>
+                        <li><a href="/contact.html" class="hover:text-yellow-400">Contact</a></li>
+                        <li><a href="https://clarity.fm/bryancollins" target="_blank" rel="noopener" class="hover:text-yellow-400">Book a Call</a></li>
+                        <li><a href="/work-with-me.html" class="hover:text-yellow-400">Work With Me</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <!-- Social & Copyright -->
+            <div class="text-center border-t border-gray-700 pt-8">
+                <div class="flex gap-6 justify-center mb-4">
+                    <a href="https://www.youtube.com/channel/UCglNILz3uBqPer5EMJ_pzVg" target="_blank" rel="noopener" aria-label="YouTube channel" class="hover:text-yellow-400"><i class="fab fa-youtube text-2xl"></i></a>
+                    <a href="https://www.linkedin.com/in/bryancollins99/" target="_blank" rel="noopener" aria-label="LinkedIn profile" class="hover:text-yellow-400"><i class="fab fa-linkedin text-2xl"></i></a>
+                    <a href="https://github.com/bryancollins99" target="_blank" rel="noopener" aria-label="GitHub profile" class="hover:text-yellow-400"><i class="fab fa-github text-2xl"></i></a>
+                    <a href="https://www.amazon.com/stores/Bryan-Collins/author/B00KPFFYU6" target="_blank" rel="noopener" aria-label="Amazon author page" class="hover:text-yellow-400"><i class="fab fa-amazon text-2xl"></i></a>
+                    <a href="https://clarity.fm/bryancollins" target="_blank" rel="noopener" aria-label="Book a call" class="hover:text-yellow-400"><i class="fas fa-phone text-2xl"></i></a>
+                </div>
+                <div class="flex gap-4 justify-center text-sm text-gray-400 mb-4">
+                    <a href="/privacy.html" class="hover:text-white">Privacy Policy</a>
+                    <span>•</span>
+                    <a href="/terms.html" class="hover:text-white">Terms of Service</a>
+                </div>
+                <p class="text-sm opacity-70">© 2025 Bryan Collins. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        window.addEventListener('DOMContentLoaded', () => {
+            loadFromStorage();
+            calculate();
+        });
+
+        function calculate() {
+            // Get inputs
+            const monthlyExpenses = parseFloat(document.getElementById('monthlyExpenses').value) || 0;
+            const desiredIncome = parseFloat(document.getElementById('desiredIncome').value) || 0;
+            const billableHours = parseFloat(document.getElementById('billableHours').value) || 0;
+            const weeksWorking = parseFloat(document.getElementById('weeksWorking').value) || 0;
+            const taxRate = parseFloat(document.getElementById('taxRate').value) || 0;
+
+            // Calculate annual needs
+            const annualExpenses = monthlyExpenses * 12;
+            const totalAnnualNeeds = annualExpenses + desiredIncome;
+            const preTaxNeeds = totalAnnualNeeds / (1 - (taxRate / 100));
+            
+            // Calculate rates
+            const totalBillableHours = billableHours * weeksWorking;
+            const minimumHourlyRate = totalBillableHours > 0 ? preTaxNeeds / totalBillableHours : 0;
+            const recommendedHourlyRate = minimumHourlyRate * 1.25; // 25% buffer
+            const dailyRate = minimumHourlyRate * 8;
+
+            // Project rates (using recommended rate)
+            const smallProject = recommendedHourlyRate * 12.5; // 10-15 hours avg
+            const mediumProject = recommendedHourlyRate * 35; // 30-40 hours avg
+            const largeProject = recommendedHourlyRate * 90; // 80-100 hours avg
+
+            // Update display
+            document.getElementById('hourlyRate').textContent = formatCurrency(minimumHourlyRate);
+            document.getElementById('dailyRate').textContent = formatCurrency(dailyRate);
+            document.getElementById('recommendedRate').textContent = formatCurrency(recommendedHourlyRate);
+            document.getElementById('smallProject').textContent = formatCurrency(smallProject);
+            document.getElementById('mediumProject').textContent = formatCurrency(mediumProject);
+            document.getElementById('largeProject').textContent = formatCurrency(largeProject);
+
+            // Breakdown
+            const breakdown = document.getElementById('breakdown');
+            breakdown.innerHTML = `
+                <div class="breakdown-item">
+                    <span class="breakdown-label">Annual Expenses</span>
+                    <span class="breakdown-value">${formatCurrency(annualExpenses)}</span>
+                </div>
+                <div class="breakdown-item">
+                    <span class="breakdown-label">Desired Take-Home</span>
+                    <span class="breakdown-value">${formatCurrency(desiredIncome)}</span>
+                </div>
+                <div class="breakdown-item">
+                    <span class="breakdown-label">Taxes (${taxRate}%)</span>
+                    <span class="breakdown-value">${formatCurrency(preTaxNeeds - totalAnnualNeeds)}</span>
+                </div>
+                <div class="breakdown-item" style="background: #FFDE59;">
+                    <span class="breakdown-label"><strong>Total Revenue Needed</strong></span>
+                    <span class="breakdown-value">${formatCurrency(preTaxNeeds)}</span>
+                </div>
+                <div class="breakdown-item">
+                    <span class="breakdown-label">Billable Hours/Year</span>
+                    <span class="breakdown-value">${totalBillableHours} hrs</span>
+                </div>
+            `;
+
+            // Client breakdown
+            const clientBreakdown = document.getElementById('clientBreakdown');
+            const scenarios = [
+                { clients: Math.ceil(preTaxNeeds / mediumProject), size: 'Medium', price: mediumProject, desc: '~35 hrs each' },
+                { clients: Math.ceil(preTaxNeeds / largeProject), size: 'Large', price: largeProject, desc: '~90 hrs each' },
+                { clients: Math.ceil(preTaxNeeds / (recommendedHourlyRate * 520)), size: 'Retainer', price: recommendedHourlyRate * 520, desc: '$10k/yr each' }
+            ];
+
+            clientBreakdown.innerHTML = scenarios.map(s => `
+                <div class="card text-center">
+                    <div class="text-5xl font-bold text-yellow-400 mb-2">${s.clients}</div>
+                    <div class="text-xl font-bold mb-2">${s.size} Clients</div>
+                    <div class="text-gray-600 mb-1">${formatCurrency(s.price)} each</div>
+                    <div class="text-sm text-gray-500">${s.desc}</div>
+                </div>
+            `).join('');
+
+            saveToStorage();
+        }
+
+        function formatCurrency(amount) {
+            return '$' + Math.round(amount).toLocaleString();
+        }
+
+        function saveToStorage() {
+            const data = {
+                monthlyExpenses: document.getElementById('monthlyExpenses').value,
+                desiredIncome: document.getElementById('desiredIncome').value,
+                billableHours: document.getElementById('billableHours').value,
+                weeksWorking: document.getElementById('weeksWorking').value,
+                taxRate: document.getElementById('taxRate').value
+            };
+            localStorage.setItem('freelanceCalculator', JSON.stringify(data));
+        }
+
+        function loadFromStorage() {
+            const saved = localStorage.getItem('freelanceCalculator');
+            if (saved) {
+                const data = JSON.parse(saved);
+                document.getElementById('monthlyExpenses').value = data.monthlyExpenses || 5000;
+                document.getElementById('desiredIncome').value = data.desiredIncome || 80000;
+                document.getElementById('billableHours').value = data.billableHours || 25;
+                document.getElementById('weeksWorking').value = data.weeksWorking || 48;
+                document.getElementById('taxRate').value = data.taxRate || 30;
+            }
+        }
+    </script>
+</body>
+</html>
+

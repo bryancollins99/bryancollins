@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>McKinsey 7S Framework Tool — Organizational Alignment</title>
+    <title>McKinsey 7S — Bryan Collins</title>
     <meta name="description" content="Free interactive McKinsey 7S Framework tool. Align Strategy, Structure, Systems, Shared Values, Style, Staff, and Skills.">
     <meta property="og:url" content="https://join.bryancollins.com/mckinsey-7s/" />
     <meta property="og:title" content="McKinsey 7S Framework Tool" />
@@ -13,9 +13,6 @@
     <link rel="icon" type="image/svg+xml" href="/favicon.svg">
 
     <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
-    <!-- Favicon -->
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
-
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <script defer data-domain="join.bryancollins.com" src="https://plausible.io/js/script.js"></script>
@@ -191,9 +188,58 @@
                 grid-row: auto !important;
             }
         }
+        .nav-bar { background: #000000; border-bottom: 1px solid #333; }
+        .nav-link { color: white; padding: 0.5rem 1rem; text-decoration: none; transition: color 0.2s; }
+        .nav-link:hover { color: #956FA6; }
+        .mobile-menu-button { display: none; color: white; font-size: 1.5rem; cursor: pointer; background: none; border: none; padding: 0.5rem; }
+        .desktop-nav { display: flex; gap: 1.5rem; }
+        .mobile-nav { display: none; flex-direction: column; position: absolute; top: 100%; left: 0; right: 0; background: #000000; border-top: 1px solid #333; padding: 1rem; }
+        .mobile-nav.active { display: flex; }
+        .mobile-nav .nav-link { padding: 0.75rem 1rem; border-bottom: 1px solid #333; }
+        @media (max-width: 768px) { .mobile-menu-button { display: block; } .desktop-nav { display: none; } }
     </style>
 </head>
 <body>
+    <nav class="nav-bar sticky top-0 z-50">
+        <div class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between relative">
+            <a href="/index.html" class="text-white font-bold text-xl">Bryan Collins</a>
+            <button class="mobile-menu-button" id="mobileMenuButton" aria-label="Toggle menu"><i class="fas fa-bars"></i></button>
+            <div class="desktop-nav">
+                <a href="/mba-frameworks.html" class="nav-link">Tools</a>
+                <a href="/gpts.html" class="nav-link">GPTs</a>
+                <a href="/projects.html" class="nav-link">Projects</a>
+                <a href="/books.html" class="nav-link">Books</a>
+                <a href="/now.html" class="nav-link">Now</a>
+                <a href="/contact.html" class="nav-link">Contact</a>
+                <a href="https://newsletter.bryancollins.com" class="nav-link">Newsletter</a>
+            </div>
+            <div class="mobile-nav" id="mobileNav">
+                <a href="/mba-frameworks.html" class="nav-link">Tools</a>
+                <a href="/gpts.html" class="nav-link">GPTs</a>
+                <a href="/projects.html" class="nav-link">Projects</a>
+                <a href="/books.html" class="nav-link">Books</a>
+                <a href="/now.html" class="nav-link">Now</a>
+                <a href="/contact.html" class="nav-link">Contact</a>
+                <a href="https://newsletter.bryancollins.com" class="nav-link">Newsletter</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Breadcrumbs -->
+    <div class="bg-gray-100 py-3 px-4">
+        <div class="max-w-4xl mx-auto">
+            <nav aria-label="Breadcrumb">
+                <ol class="flex items-center space-x-2 text-sm">
+                    <li><a href="/index.html" class="text-gray-600 hover:text-black">Home</a></li>
+                    <li class="text-gray-400">/</li>
+                    <li><a href="/mba-frameworks.html" class="text-gray-600 hover:text-black">Tools</a></li>
+                    <li class="text-gray-400">/</li>
+                    <li class="text-black font-semibold">McKinsey 7S</li>
+                </ol>
+            </nav>
+        </div>
+    </div>
+
     <main class="min-h-screen py-12 px-4 sm:px-6 lg:px-8">
         <div class="max-w-4xl mx-auto">
             
@@ -512,7 +558,12 @@
                 </div>
             </div>
 
-            <p class="text-center text-xs" style="color: #1B1B1D; opacity: 0.5;">© 2025 Bryan Collins. All rights reserved.</p>
+            <div class="flex gap-4 justify-center text-sm text-gray-400 mb-4">
+                    <a href="/privacy.html" class="hover:text-black">Privacy Policy</a>
+                    <span>•</span>
+                    <a href="/terms.html" class="hover:text-black">Terms of Service</a>
+                </div>
+                <p class="text-center text-xs" style="color: #1B1B1D; opacity: 0.5;">© 2025 Bryan Collins. All rights reserved.</p>
         </div>
     </main>
 
@@ -639,6 +690,22 @@
             doc.text('https://join.bryancollins.com/mckinsey-7s', 20, 290);
             
             doc.save('mckinsey-7s-' + new Date().toISOString().split('T')[0] + '.pdf');
+        }
+        const mobileMenuButton = document.getElementById('mobileMenuButton');
+        const mobileNav = document.getElementById('mobileNav');
+        if (mobileMenuButton && mobileNav) {
+            mobileMenuButton.addEventListener('click', function() {
+                mobileNav.classList.toggle('active');
+                const icon = this.querySelector('i');
+                icon.classList.toggle('fa-bars');
+                icon.classList.toggle('fa-times');
+            });
+            mobileNav.querySelectorAll('.nav-link').forEach(link => {
+                link.addEventListener('click', () => {
+                    mobileNav.classList.remove('active');
+                    mobileMenuButton.querySelector('i').classList.replace('fa-times', 'fa-bars');
+                });
+            });
         }
     </script>
 </body>

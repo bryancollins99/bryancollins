@@ -3,20 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SWOT Analysis Tool — Strategic Planning for Creators</title>
+    <title>SWOT Analysis — Bryan Collins</title>
     <meta name="description" content="Free interactive SWOT Analysis tool. Identify your Strengths, Weaknesses, Opportunities, and Threats to make better strategic decisions.">
     <meta property="og:url" content="https://join.bryancollins.com/swot-analysis/" />
     <meta property="og:title" content="SWOT Analysis Tool — Strategic Planning for Creators" />
     <meta property="og:description" content="Analyze your content business with this interactive SWOT tool." />
     
-    <!-- Tailwind CSS -->
+    <!-- Tailwind CSS -->    
     <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="/favicon.svg">
 
     <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
-    <!-- Favicon -->
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
-
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     
     <!-- jsPDF for PDF generation -->
@@ -103,10 +100,60 @@
         }
         .matrix-cell {
             background: white;
-            padding: 20px;
+            padding: 28px;
             border-radius: 12px;
             box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-            min-height: 200px;
+            min-height: 250px;
+        }
+        .matrix-cell h4 {
+            font-size: 20px !important;
+        }
+        .matrix-cell .content {
+            font-size: 15px;
+            line-height: 1.7;
+        }
+        .enhanced-content {
+            margin-top: 12px;
+            padding-top: 12px;
+            border-top: 1px solid rgba(0, 0, 0, 0.1);
+        }
+        .enhanced-content ul {
+            list-style: none;
+            padding: 0;
+            margin: 8px 0;
+        }
+        .enhanced-content li {
+            padding: 6px 0 6px 20px;
+            position: relative;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+        .enhanced-content li:before {
+            content: "→";
+            position: absolute;
+            left: 0;
+            color: #956FA6;
+            font-weight: bold;
+        }
+        .loading-spinner {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(149, 111, 166, 0.3);
+            border-radius: 50%;
+            border-top-color: #956FA6;
+            animation: spin 1s ease-in-out infinite;
+        }
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        @keyframes slideIn {
+            from { transform: translateX(400px); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+        @keyframes slideOut {
+            from { transform: translateX(0); opacity: 1; }
+            to { transform: translateX(400px); opacity: 0; }
         }
         .matrix-cell.strengths {
             border-left: 4px solid #4CAF50;
@@ -175,9 +222,106 @@
                 grid-template-columns: 1fr;
             }
         }
+        /* Navigation Styles */
+        .nav-bar {
+            background: #000000;
+            border-bottom: 1px solid #333;
+        }
+        .nav-link {
+            color: white;
+            padding: 0.5rem 1rem;
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+        .nav-link:hover {
+            color: #FFDE59;
+        }
+        .mobile-menu-button {
+            display: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+            background: none;
+            border: none;
+            padding: 0.5rem;
+        }
+        .desktop-nav {
+            display: flex;
+            gap: 1.5rem;
+        }
+        .mobile-nav {
+            display: none;
+            flex-direction: column;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background: #000000;
+            border-top: 1px solid #333;
+            padding: 1rem;
+            z-index: 100;
+        }
+        .mobile-nav.active {
+            display: flex;
+        }
+        .mobile-nav .nav-link {
+            padding: 0.75rem 1rem;
+            border-bottom: 1px solid #333;
+        }
+        @media (max-width: 768px) {
+            .mobile-menu-button {
+                display: block;
+            }
+            .desktop-nav {
+                display: none;
+            }
+        }
     </style>
 </head>
 <body>
+    <!-- Navigation -->
+    <nav class="nav-bar sticky top-0 z-50">
+        <div class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between relative">
+            <a href="/index.html" class="text-white font-bold text-xl">Bryan Collins</a>
+            <button class="mobile-menu-button" id="mobileMenuButton" aria-label="Toggle menu">
+                <i class="fas fa-bars"></i>
+            </button>
+            <div class="desktop-nav">
+                <a href="/mba-frameworks.html" class="nav-link">Tools</a>
+                <a href="/gpts.html" class="nav-link">GPTs</a>
+                <a href="/projects.html" class="nav-link">Projects</a>
+                <a href="/books.html" class="nav-link">Books</a>
+                <a href="/now.html" class="nav-link">Now</a>
+                <a href="/contact.html" class="nav-link">Contact</a>
+                <a href="https://newsletter.bryancollins.com" class="nav-link">Newsletter</a>
+            </div>
+            <div class="mobile-nav" id="mobileNav">
+                <a href="/mba-frameworks.html" class="nav-link">Tools</a>
+                <a href="/gpts.html" class="nav-link">GPTs</a>
+                <a href="/projects.html" class="nav-link">Projects</a>
+                <a href="/books.html" class="nav-link">Books</a>
+                <a href="/now.html" class="nav-link">Now</a>
+                <a href="/contact.html" class="nav-link">Contact</a>
+                <a href="https://newsletter.bryancollins.com" class="nav-link">Newsletter</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Breadcrumbs -->
+    <div class="bg-gray-100 py-3 px-4">
+        <div class="max-w-4xl mx-auto">
+            <nav aria-label="Breadcrumb">
+                <ol class="flex items-center space-x-2 text-sm">
+                    <li><a href="/index.html" class="text-gray-600 hover:text-black">Home</a></li>
+                    <li class="text-gray-400">/</li>
+                    <li><a href="/mba-frameworks.html" class="text-gray-600 hover:text-black">Tools</a></li>
+                    <li class="text-gray-400">/</li>
+                    <li class="text-black font-semibold">SWOT Analysis</li>
+                </ol>
+            </nav>
+        </div>
+    </div>
+
     <main class="min-h-screen py-12 px-4 sm:px-6 lg:px-8">
         <div class="max-w-4xl mx-auto">
             
@@ -371,39 +515,64 @@
                     <h3 class="text-2xl font-bold mb-4">Your SWOT Analysis</h3>
                     <p class="text-gray-600 mb-6">Here's your complete strategic assessment:</p>
 
+                    <!-- AI Enhancement Button -->
+                    <div class="text-center mb-6">
+                        <button id="enhance-btn" class="btn-primary" onclick="enhanceWithAI()">
+                            <i class="fas fa-magic mr-2"></i> Enhance with AI Insights
+                        </button>
+                        <p class="text-xs text-gray-600 mt-2">Get strategic recommendations powered by Claude AI</p>
+                    </div>
+
+                    <div id="loading-state" style="display: none; text-align: center; padding: 40px;">
+                        <div class="loading-spinner" style="margin: 0 auto 16px;"></div>
+                        <p class="text-gray-600">Analyzing your SWOT with AI...</p>
+                    </div>
+
                     <!-- Matrix Display -->
                     <div class="matrix-grid mb-6">
                         <div class="matrix-cell strengths">
                             <div class="flex items-center mb-3">
                                 <i class="fas fa-check-circle text-green-600 text-2xl mr-3"></i>
-                                <h4 class="font-bold text-xl text-green-700">Strengths</h4>
+                                <h4 class="font-bold text-green-700">Strengths</h4>
                             </div>
                             <p class="text-sm text-gray-600 mb-2 italic">Internal Advantages</p>
-                            <p id="review-strengths" class="text-sm whitespace-pre-line"></p>
+                            <div class="content">
+                                <div id="review-strengths"></div>
+                                <div id="enhanced-strengths" class="enhanced-content" style="display: none;"></div>
+                            </div>
                         </div>
                         <div class="matrix-cell weaknesses">
                             <div class="flex items-center mb-3">
                                 <i class="fas fa-times-circle text-red-600 text-2xl mr-3"></i>
-                                <h4 class="font-bold text-xl text-red-700">Weaknesses</h4>
+                                <h4 class="font-bold text-red-700">Weaknesses</h4>
                             </div>
                             <p class="text-sm text-gray-600 mb-2 italic">Internal Limitations</p>
-                            <p id="review-weaknesses" class="text-sm whitespace-pre-line"></p>
+                            <div class="content">
+                                <div id="review-weaknesses"></div>
+                                <div id="enhanced-weaknesses" class="enhanced-content" style="display: none;"></div>
+                            </div>
                         </div>
                         <div class="matrix-cell opportunities">
                             <div class="flex items-center mb-3">
                                 <i class="fas fa-lightbulb text-blue-600 text-2xl mr-3"></i>
-                                <h4 class="font-bold text-xl text-blue-700">Opportunities</h4>
+                                <h4 class="font-bold text-blue-700">Opportunities</h4>
                             </div>
                             <p class="text-sm text-gray-600 mb-2 italic">External Advantages</p>
-                            <p id="review-opportunities" class="text-sm whitespace-pre-line"></p>
+                            <div class="content">
+                                <div id="review-opportunities"></div>
+                                <div id="enhanced-opportunities" class="enhanced-content" style="display: none;"></div>
+                            </div>
                         </div>
                         <div class="matrix-cell threats">
                             <div class="flex items-center mb-3">
                                 <i class="fas fa-exclamation-triangle text-orange-600 text-2xl mr-3"></i>
-                                <h4 class="font-bold text-xl text-orange-700">Threats</h4>
+                                <h4 class="font-bold text-orange-700">Threats</h4>
                             </div>
                             <p class="text-sm text-gray-600 mb-2 italic">External Challenges</p>
-                            <p id="review-threats" class="text-sm whitespace-pre-line"></p>
+                            <div class="content">
+                                <div id="review-threats"></div>
+                                <div id="enhanced-threats" class="enhanced-content" style="display: none;"></div>
+                            </div>
                         </div>
                     </div>
 
@@ -455,7 +624,12 @@
                 </div>
             </div>
 
-            <p class="text-center text-xs" style="color: #1B1B1D; opacity: 0.5;">© 2025 Bryan Collins. All rights reserved.</p>
+            <div class="flex gap-4 justify-center text-sm text-gray-400 mb-4">
+                    <a href="/privacy.html" class="hover:text-black">Privacy Policy</a>
+                    <span>•</span>
+                    <a href="/terms.html" class="hover:text-black">Terms of Service</a>
+                </div>
+                <p class="text-center text-xs" style="color: #1B1B1D; opacity: 0.5;">© 2025 Bryan Collins. All rights reserved.</p>
         </div>
     </main>
 
@@ -521,77 +695,227 @@
         }
 
         function populateReview() {
-            document.getElementById('review-strengths').textContent = document.getElementById('strengths').value || 'No strengths entered';
-            document.getElementById('review-weaknesses').textContent = document.getElementById('weaknesses').value || 'No weaknesses entered';
-            document.getElementById('review-opportunities').textContent = document.getElementById('opportunities').value || 'No opportunities entered';
-            document.getElementById('review-threats').textContent = document.getElementById('threats').value || 'No threats entered';
+            const strengths = document.getElementById('strengths').value || 'No strengths entered';
+            const weaknesses = document.getElementById('weaknesses').value || 'No weaknesses entered';
+            const opportunities = document.getElementById('opportunities').value || 'No opportunities entered';
+            const threats = document.getElementById('threats').value || 'No threats entered';
+            
+            document.getElementById('review-strengths').innerHTML = `<p style="margin-bottom: 8px; font-weight: 600;">Your Analysis:</p><p style="font-size: 15px;">${strengths}</p>`;
+            document.getElementById('review-weaknesses').innerHTML = `<p style="margin-bottom: 8px; font-weight: 600;">Your Analysis:</p><p style="font-size: 15px;">${weaknesses}</p>`;
+            document.getElementById('review-opportunities').innerHTML = `<p style="margin-bottom: 8px; font-weight: 600;">Your Analysis:</p><p style="font-size: 15px;">${opportunities}</p>`;
+            document.getElementById('review-threats').innerHTML = `<p style="margin-bottom: 8px; font-weight: 600;">Your Analysis:</p><p style="font-size: 15px;">${threats}</p>`;
+        }
+
+        async function enhanceWithAI() {
+            const enhanceBtn = document.getElementById('enhance-btn');
+            const loadingState = document.getElementById('loading-state');
+            
+            enhanceBtn.style.display = 'none';
+            loadingState.style.display = 'block';
+            
+            try {
+                const response = await fetch('/.netlify/functions/enhance-mba-content', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        tool: 'swot',
+                        inputs: {
+                            strengths: document.getElementById('strengths').value,
+                            weaknesses: document.getElementById('weaknesses').value,
+                            opportunities: document.getElementById('opportunities').value,
+                            threats: document.getElementById('threats').value
+                        }
+                    })
+                });
+
+                const data = await response.json();
+                
+                if (data.success) {
+                    displayEnhancedContent(data.enhancedContent);
+                } else {
+                    throw new Error(data.message || 'Failed to enhance content');
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                showNotification('Failed to enhance content. Please try again.', 'error');
+                enhanceBtn.style.display = 'block';
+                loadingState.style.display = 'none';
+            }
+        }
+
+        function displayEnhancedContent(content) {
+            const mapping = {
+                'strengths': 'enhanced-strengths',
+                'weaknesses': 'enhanced-weaknesses',
+                'opportunities': 'enhanced-opportunities',
+                'threats': 'enhanced-threats'
+            };
+
+            Object.keys(mapping).forEach(key => {
+                const element = document.getElementById(mapping[key]);
+                if (content[key] && Array.isArray(content[key])) {
+                    const html = `
+                        <div style="display: inline-block; background: #956FA6; color: white; padding: 4px 12px; border-radius: 12px; font-size: 12px; font-weight: 700; margin-bottom: 12px;">
+                            <i class="fas fa-sparkles mr-1"></i> AI ENHANCED
+                        </div>
+                        <p style="margin-bottom: 8px; font-weight: 600; color: #956FA6; font-size: 14px;">Strategic Insights:</p>
+                        <ul style="margin: 0;">
+                            ${content[key].map(item => `<li>${item}</li>`).join('')}
+                        </ul>
+                    `;
+                    element.innerHTML = html;
+                    element.style.display = 'block';
+                    
+                    element.style.opacity = '0';
+                    setTimeout(() => {
+                        element.style.transition = 'opacity 0.5s ease-in';
+                        element.style.opacity = '1';
+                    }, 100);
+                }
+            });
+
+            showNotification('AI analysis complete! Your SWOT has been enhanced.', 'success');
+        }
+
+        function showNotification(message, type = 'info') {
+            const notification = document.createElement('div');
+            notification.style.cssText = `
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                background: ${type === 'success' ? '#4CAF50' : type === 'error' ? '#f44336' : '#2196F3'};
+                color: white;
+                padding: 16px 24px;
+                border-radius: 8px;
+                box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+                z-index: 10000;
+                font-weight: 600;
+                animation: slideIn 0.3s ease-out;
+            `;
+            notification.textContent = message;
+            document.body.appendChild(notification);
+
+            setTimeout(() => {
+                notification.style.animation = 'slideOut 0.3s ease-in';
+                setTimeout(() => notification.remove(), 300);
+            }, 3000);
         }
 
         function downloadPDF() {
             const { jsPDF } = window.jspdf;
             const doc = new jsPDF();
+            let yPos = 20;
             
             doc.setFontSize(20);
             doc.setTextColor(149, 111, 166);
-            doc.text('SWOT Analysis', 20, 20);
+            doc.text('SWOT Analysis', 20, yPos);
+            yPos += 8;
             
             doc.setFontSize(10);
             doc.setTextColor(100);
-            doc.text('Generated: ' + new Date().toLocaleDateString(), 20, 28);
+            doc.text('Generated: ' + new Date().toLocaleDateString(), 20, yPos);
+            yPos += 15;
             
-            // Strengths
-            doc.setFontSize(14);
-            doc.setTextColor(76, 175, 80);
-            doc.text('Strengths (Internal Advantages)', 20, 40);
-            doc.setFontSize(10);
-            doc.setTextColor(0);
-            const strengthsText = doc.splitTextToSize(document.getElementById('strengths').value || 'No strengths entered', 170);
-            doc.text(strengthsText, 20, 48);
+            const sections = [
+                { label: 'Strengths', color: [76, 175, 80], id: 'strengths', enhancedId: 'enhanced-strengths' },
+                { label: 'Weaknesses', color: [244, 67, 54], id: 'weaknesses', enhancedId: 'enhanced-weaknesses' },
+                { label: 'Opportunities', color: [33, 150, 243], id: 'opportunities', enhancedId: 'enhanced-opportunities' },
+                { label: 'Threats', color: [255, 152, 0], id: 'threats', enhancedId: 'enhanced-threats' }
+            ];
             
-            // Weaknesses
-            doc.setFontSize(14);
-            doc.setTextColor(244, 67, 54);
-            doc.text('Weaknesses (Internal Limitations)', 20, 85);
-            doc.setFontSize(10);
-            doc.setTextColor(0);
-            const weaknessesText = doc.splitTextToSize(document.getElementById('weaknesses').value || 'No weaknesses entered', 170);
-            doc.text(weaknessesText, 20, 93);
+            sections.forEach(section => {
+                if (yPos > 230) {
+                    doc.addPage();
+                    yPos = 20;
+                }
+                
+                doc.setFontSize(14);
+                doc.setTextColor(...section.color);
+                doc.text(section.label, 20, yPos);
+                yPos += 7;
+                
+                doc.setFontSize(10);
+                doc.setTextColor(0);
+                const userInput = doc.splitTextToSize(document.getElementById(section.id).value || 'Not specified', 170);
+                doc.text(userInput, 20, yPos);
+                yPos += userInput.length * 5 + 3;
+                
+                const enhancedEl = document.getElementById(section.enhancedId);
+                if (enhancedEl && enhancedEl.style.display !== 'none') {
+                    doc.setFontSize(10);
+                    doc.setTextColor(149, 111, 166);
+                    doc.text('AI Insights:', 20, yPos);
+                    yPos += 6;
+                    
+                    doc.setFontSize(9);
+                    doc.setTextColor(0);
+                    const lis = enhancedEl.querySelectorAll('li');
+                    lis.forEach(li => {
+                        const text = doc.splitTextToSize('• ' + li.textContent, 165);
+                        doc.text(text, 25, yPos);
+                        yPos += text.length * 4 + 2;
+                    });
+                }
+                
+                yPos += 10;
+            });
             
-            // Opportunities
-            doc.setFontSize(14);
-            doc.setTextColor(33, 150, 243);
-            doc.text('Opportunities (External Advantages)', 20, 130);
-            doc.setFontSize(10);
-            doc.setTextColor(0);
-            const opportunitiesText = doc.splitTextToSize(document.getElementById('opportunities').value || 'No opportunities entered', 170);
-            doc.text(opportunitiesText, 20, 138);
-            
-            // Threats
-            doc.setFontSize(14);
-            doc.setTextColor(255, 152, 0);
-            doc.text('Threats (External Challenges)', 20, 175);
-            doc.setFontSize(10);
-            doc.setTextColor(0);
-            const threatsText = doc.splitTextToSize(document.getElementById('threats').value || 'No threats entered', 170);
-            doc.text(threatsText, 20, 183);
-            
-            // Next Steps
-            doc.setFontSize(12);
-            doc.setTextColor(0);
-            doc.text('Next Steps:', 20, 220);
-            doc.setFontSize(9);
-            doc.text('- Use your Strengths to capitalize on Opportunities', 25, 228);
-            doc.text('- Address Weaknesses to minimize Threats', 25, 234);
-            doc.text('- Build strategies that play to your strengths', 25, 240);
-            doc.text('- Create action plans to overcome weaknesses', 25, 246);
-            
-            // Footer
             doc.setFontSize(8);
             doc.setTextColor(150);
             doc.text('Created with SWOT Analysis Tool by Bryan Collins', 20, 285);
             doc.text('https://join.bryancollins.com/swot-analysis', 20, 290);
             
             doc.save('swot-analysis-' + new Date().toISOString().split('T')[0] + '.pdf');
+            showNotification('PDF downloaded successfully!', 'success');
+        }
+        const mobileMenuButton = document.getElementById('mobileMenuButton');
+        const mobileNav = document.getElementById('mobileNav');
+        if (mobileMenuButton && mobileNav) {
+            mobileMenuButton.addEventListener('click', function() {
+                mobileNav.classList.toggle('active');
+                const icon = this.querySelector('i');
+                icon.classList.toggle('fa-bars');
+                icon.classList.toggle('fa-times');
+            });
+            mobileNav.querySelectorAll('.nav-link').forEach(link => {
+                link.addEventListener('click', () => {
+                    mobileNav.classList.remove('active');
+                    mobileMenuButton.querySelector('i').classList.replace('fa-times', 'fa-bars');
+                });
+            });
+        }
+    </script>
+    
+    <!-- Mobile Menu Script -->
+    <script>
+        const mobileMenuButton = document.getElementById('mobileMenuButton');
+        const mobileNav = document.getElementById('mobileNav');
+        
+        if (mobileMenuButton && mobileNav) {
+            mobileMenuButton.addEventListener('click', function() {
+                mobileNav.classList.toggle('active');
+                const icon = this.querySelector('i');
+                if (mobileNav.classList.contains('active')) {
+                    icon.classList.remove('fa-bars');
+                    icon.classList.add('fa-times');
+                } else {
+                    icon.classList.remove('fa-times');
+                    icon.classList.add('fa-bars');
+                }
+            });
+            
+            // Close menu when clicking a link
+            const mobileLinks = mobileNav.querySelectorAll('.nav-link');
+            mobileLinks.forEach(link => {
+                link.addEventListener('click', function() {
+                    mobileNav.classList.remove('active');
+                    const icon = mobileMenuButton.querySelector('i');
+                    icon.classList.remove('fa-times');
+                    icon.classList.add('fa-bars');
+                });
+            });
         }
     </script>
 </body>
