@@ -116,18 +116,32 @@
     </style>
 </head>
 <body>
-    <!-- Navigation -->
+        <!-- Navigation -->
     <nav class="nav-bar sticky top-0 z-50">
-        <div class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
+        <div class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between relative">
             <a href="/index.html" class="text-white font-bold text-xl">Bryan Collins</a>
-            <div class="flex gap-6">
+            <button class="mobile-menu-button" id="mobileMenuButton" aria-label="Toggle menu">
+                <i class="fas fa-bars"></i>
+            </button>
+            <div class="desktop-nav">
                 <a href="/mba-frameworks.html" class="nav-link">Tools</a>
-                <a href="/gpts.html" class="nav-link">GPTs</a>
                 <a href="/projects.html" class="nav-link">Projects</a>
+                <a href="/work-with-me.html" class="nav-link text-yellow-400">Hire Me</a>
+                <a href="/gpts.html" class="nav-link">GPTs</a>
                 <a href="/books.html" class="nav-link">Books</a>
-                <a href="/invest.html" class="nav-link">Investing</a>
                 <a href="/now.html" class="nav-link">Now</a>
                 <a href="/contact.html" class="nav-link">Contact</a>
+                <a href="https://newsletter.bryancollins.com" class="nav-link">Newsletter</a>
+            </div>
+            <div class="mobile-nav" id="mobileNav">
+                <a href="/mba-frameworks.html" class="nav-link">Tools</a>
+                <a href="/projects.html" class="nav-link">Projects</a>
+                <a href="/work-with-me.html" class="nav-link" style="color: #FFDE59;">Hire Me</a>
+                <a href="/gpts.html" class="nav-link">GPTs</a>
+                <a href="/books.html" class="nav-link">Books</a>
+                <a href="/now.html" class="nav-link">Now</a>
+                <a href="/contact.html" class="nav-link">Contact</a>
+                <a href="https://newsletter.bryancollins.com" class="nav-link">Newsletter</a>
             </div>
         </div>
     </nav>
