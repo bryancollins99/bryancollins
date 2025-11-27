@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "Netlify Functions for MBA Tools",
   "dependencies": {
-    "@anthropic-ai/sdk": "^0.32.1"
+    "@anthropic-ai/sdk": "^0.32.1",
+    "node-fetch": "^3.3.2"
   }
 }
-

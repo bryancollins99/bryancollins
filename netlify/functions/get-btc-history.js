@@ -1,3 +1,5 @@
+const fetch = require('node-fetch');
+
 exports.handler = async (event, context) => {
   // Add CORS headers to all responses
   const headers = {
@@ -23,9 +25,8 @@ exports.handler = async (event, context) => {
   try {
     // Fetch historical data from CoinCap (Free, no key required usually)
     // interval=d1 for daily data
-    const response = await fetch(
-      `https://api.coincap.io/v2/assets/bitcoin/history?interval=d1&start=${start}&end=${end}`
-    );
+    const url = `https://api.coincap.io/v2/assets/bitcoin/history?interval=d1&start=${start}&end=${end}`;
+    const response = await fetch(url);
     
     if (!response.ok) {
        const errorText = await response.text();
@@ -33,7 +34,7 @@ exports.handler = async (event, context) => {
        return {
          statusCode: response.status,
          headers,
-         body: JSON.stringify({ error: `CoinCap API error: ${response.statusText}` })
+         body: JSON.stringify({ error: `CoinCap API error: ${response.statusText}`, details: errorText })
        }
     }
 
@@ -41,6 +42,10 @@ exports.handler = async (event, context) => {
     
     // CoinCap returns { data: [ { time: 15234324..., priceUsd: "3232.23" }, ... ] }
     // We need to transform it to match the frontend expectation: [[timestamp, price], ...]
+    if (!json.data) {
+        throw new Error('Invalid data format received from CoinCap');
+    }
+
     const prices = json.data.map(item => [
         item.time, 
         parseFloat(item.priceUsd)
@@ -79,7 +84,10 @@ exports.handler = async (event, context) => {
     return {
       statusCode: 500,
       headers,
-      body: JSON.stringify({ error: 'Failed to fetch Bitcoin data' }),
+      body: JSON.stringify({ 
+          error: `Failed to fetch Bitcoin data: ${error.message}`,
+          stack: error.stack 
+      }),
     };
   }
 };
