@@ -34,7 +34,7 @@
 # Redirect default Netlify subdomain to primary domain
 [[redirects]]
   from = "https://mylandingpagegenerator.netlify.app/*"
-  to = "https://join.bryancollins.com/:splat"
+  to = "https://bryancollins.com/:splat"
   status = 301
   force = true
 

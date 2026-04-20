@@ -9,17 +9,12 @@
     <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="/favicon.svg">
 
-    <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="preload" as="style" href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css"></noscript>
+    <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"></noscript>
     
     <!-- Privacy-friendly analytics by Plausible -->
-    <script async src="https://stats.bryancollins.com/js/pa-armKzBLxAwVLdEib6kivG.js"></script>
-    <script>
-      window.plausible=window.plausible||function(){(plausible.q=plausible.q||[]).push(arguments)},plausible.init=plausible.init||function(i){plausible.o=i||{}};
-      plausible.init()
-    </script>
-    
-    <!-- Privacy-friendly analytics by Plausible CE -->
     <script async src="https://stats.bryancollins.com/js/pa-bvsz2TfQenbKYMWpBJ7eS.js"></script>
     <script>
       window.plausible=window.plausible||function(){(plausible.q=plausible.q||[]).push(arguments)},plausible.init=plausible.init||function(i){plausible.o=i||{}};
@@ -127,6 +122,28 @@
             }
         }
     </style>
+    <link rel="canonical" href="https://bryancollins.com/projects.html">
+    <!-- Breadcrumb Schema -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://bryancollins.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Projects",
+          "item": "https://bryancollins.com/projects.html"
+        }
+      ]
+    }
+    </script>
 </head>
 <body>
         <!-- Navigation -->
@@ -260,6 +277,45 @@
                     </div>
                     <a href="https://readingcurator.com" target="_blank" class="text-black font-semibold hover:underline inline-flex items-center">
                         Discover books <i class="fas fa-external-link-alt ml-2 text-sm"></i>
+                    </a>
+                </div>
+
+                <div class="card">
+                    <span class="badge">B2B</span>
+                    <h3 class="text-2xl font-bold mb-2">Vendors.ie</h3>
+                    <p class="text-gray-700 mb-4">Irish B2B software comparison site helping businesses find and compare vendors across accounting, CRM, HR, and more.</p>
+                    <div class="mb-4">
+                        <i class="fas fa-store text-sm text-gray-600"></i>
+                        <span class="text-sm text-gray-600 ml-1">Software Directory</span>
+                    </div>
+                    <a href="https://vendors.ie" target="_blank" class="text-black font-semibold hover:underline inline-flex items-center">
+                        Compare vendors <i class="fas fa-external-link-alt ml-2 text-sm"></i>
+                    </a>
+                </div>
+
+                <div class="card">
+                    <span class="badge">PROCUREMENT</span>
+                    <h3 class="text-2xl font-bold mb-2">Tenderwatch.ie</h3>
+                    <p class="text-gray-700 mb-4">Irish public procurement monitor that surfaces the latest government tenders and framework opportunities for SMEs.</p>
+                    <div class="mb-4">
+                        <i class="fas fa-gavel text-sm text-gray-600"></i>
+                        <span class="text-sm text-gray-600 ml-1">Tender Intelligence</span>
+                    </div>
+                    <a href="https://tenderwatch.ie" target="_blank" class="text-black font-semibold hover:underline inline-flex items-center">
+                        Browse tenders <i class="fas fa-external-link-alt ml-2 text-sm"></i>
+                    </a>
+                </div>
+
+                <div class="card">
+                    <span class="badge">LOCAL NEWS</span>
+                    <h3 class="text-2xl font-bold mb-2">Leinster Insider</h3>
+                    <p class="text-gray-700 mb-4">Local news, events, and stories from across Leinster — covering what's happening on your doorstep.</p>
+                    <div class="mb-4">
+                        <i class="fas fa-newspaper text-sm text-gray-600"></i>
+                        <span class="text-sm text-gray-600 ml-1">Regional Publication</span>
+                    </div>
+                    <a href="https://leinsterinsider.com" target="_blank" class="text-black font-semibold hover:underline inline-flex items-center">
+                        Read Leinster Insider <i class="fas fa-external-link-alt ml-2 text-sm"></i>
                     </a>
                 </div>
             </div>

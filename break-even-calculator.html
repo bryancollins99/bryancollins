@@ -7,27 +7,29 @@
     <meta name="description" content="Calculate your break-even point instantly. Free business calculator to determine how many units you need to sell to cover costs and start making profit.">
     
     <!-- Canonical URL -->
-    <link rel="canonical" href="https://join.bryancollins.com/break-even-calculator">
+    <link rel="canonical" href="https://bryancollins.com/break-even-calculator">
     
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
-    <meta property="og:url" content="https://join.bryancollins.com/break-even-calculator">
+    <meta property="og:url" content="https://bryancollins.com/break-even-calculator">
     <meta property="og:title" content="Free Break-Even Calculator | Bryan Collins">
     <meta property="og:description" content="Calculate break-even point instantly. Determine how many units you need to sell to cover costs.">
-    <meta property="og:image" content="https://join.bryancollins.com/resources/bryan-collins.jpeg">
+    <meta property="og:image" content="https://bryancollins.com/resources/bryan-collins.jpeg">
     
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
-    <meta property="twitter:url" content="https://join.bryancollins.com/break-even-calculator">
+    <meta property="twitter:url" content="https://bryancollins.com/break-even-calculator">
     <meta property="twitter:title" content="Free Break-Even Calculator">
     <meta property="twitter:description" content="Calculate break-even point instantly. Free business calculator tool.">
-    <meta property="twitter:image" content="https://join.bryancollins.com/resources/bryan-collins.jpeg">
+    <meta property="twitter:image" content="https://bryancollins.com/resources/bryan-collins.jpeg">
     
     <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="/favicon.svg">
 
-    <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="preload" as="style" href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css"></noscript>
+    <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"></noscript>
     
     <!-- Chart.js for visualizations -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js@3.9.1/dist/chart.min.js"></script>
@@ -36,13 +38,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     
     <!-- Privacy-friendly analytics by Plausible -->
-    <script async src="https://stats.bryancollins.com/js/pa-armKzBLxAwVLdEib6kivG.js"></script>
-    <script>
-      window.plausible=window.plausible||function(){(plausible.q=plausible.q||[]).push(arguments)},plausible.init=plausible.init||function(i){plausible.o=i||{}};
-      plausible.init()
-    </script>
-    
-    <!-- Privacy-friendly analytics by Plausible CE -->
     <script async src="https://stats.bryancollins.com/js/pa-bvsz2TfQenbKYMWpBJ7eS.js"></script>
     <script>
       window.plausible=window.plausible||function(){(plausible.q=plausible.q||[]).push(arguments)},plausible.init=plausible.init||function(i){plausible.o=i||{}};
@@ -56,7 +51,7 @@
         "@type": "WebApplication",
         "name": "Break-Even Calculator",
         "description": "Free break-even analysis calculator for businesses and entrepreneurs",
-        "url": "https://join.bryancollins.com/break-even-calculator",
+        "url": "https://bryancollins.com/break-even-calculator",
         "applicationCategory": "BusinessApplication",
         "operatingSystem": "Any",
         "offers": {
@@ -313,6 +308,27 @@
             .metric-card, .card { box-shadow: none; border: 1px solid #ddd; page-break-inside: avoid; }
         }
     </style>
+    <!-- Breadcrumb Schema -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://bryancollins.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Break-Even Calculator",
+          "item": "https://bryancollins.com/break-even-calculator.html"
+        }
+      ]
+    }
+    </script>
 </head>
 <body>
         <!-- Navigation -->

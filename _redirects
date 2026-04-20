@@ -8,7 +8,7 @@
 /linkedin-hooks /linkedin-hooks/index.html 200
 /101-ai-prompts-yt /101-ai-prompts-yt/index.html 200
 /101-ai-prompts-ln /101-ai-prompts-ln/index.html 200
-/101-ai-prompts-linkedin https://join.bryancollins.com/101-ai-prompts-ln 301
+/101-ai-prompts-linkedin https://bryancollins.com/101-ai-prompts-ln 301
 # Removed prompt-writing-blueprint redirect
 /saas-founders /saas-founders/index.html 200
 /thank-you /thank-you/index.html 200
@@ -33,8 +33,8 @@
 # Since pages.bryancollins.com now points to this Netlify site, we need to serve content directly
 
 # Host-based redirects for pages.bryancollins.com domain
-http://pages.bryancollins.com/* https://join.bryancollins.com/:splat 301!
-https://pages.bryancollins.com/* https://join.bryancollins.com/:splat 301!
+http://pages.bryancollins.com/* https://bryancollins.com/:splat 301!
+https://pages.bryancollins.com/* https://bryancollins.com/:splat 301!
 
 # Direct access for pages.bryancollins.com paths
 # Removed prompt-writing-blueprint-apollo/* redirect
@@ -51,7 +51,7 @@ https://pages.bryancollins.com/* https://join.bryancollins.com/:splat 301!
 /content-multiplication-workshop/* /content-multiplication-workshop/index.html 200
 
 # Redirect becomeawritertoday.lpages.co to join.bryancollins.com
-https://becomeawritertoday.lpages.co/thank-you/* https://join.bryancollins.com/thank-you/ 301!
+https://becomeawritertoday.lpages.co/thank-you/* https://bryancollins.com/thank-you/ 301!
 
 # REVERSIBLE SECTION
 # To revert to LeadPages, you need to:
@@ -60,17 +60,17 @@ https://becomeawritertoday.lpages.co/thank-you/* https://join.bryancollins.com/t
 # Uncomment these lines after changing DNS:
 
 # Removed prompt-writing-blueprint-apollo legacy redirect
-# https://join.bryancollins.com/101-ai-prompts-apollo/* https://pages.bryancollins.com/101-ai-prompts-apollo/ 301!
-# https://join.bryancollins.com/101-ai-prompts-ap/* https://pages.bryancollins.com/101-ai-prompts-apollo/ 301!
-# https://join.bryancollins.com/101-ai-prompts-medium/* https://pages.bryancollins.com/101-ai-prompts-medium/ 301!
-# https://join.bryancollins.com/linkedin-hooks-yt/* https://pages.bryancollins.com/linkedin-hooks-yt/ 301!
-# https://join.bryancollins.com/chatgpt/* https://pages.bryancollins.com/chatgpt/ 301!
-# https://join.bryancollins.com/linkedin-hooks/* https://pages.bryancollins.com/linkedin-hooks/ 301!
-# https://join.bryancollins.com/101-ai-prompts-yt/* https://pages.bryancollins.com/101-ai-prompts-yt/ 301!
-# https://join.bryancollins.com/101-ai-prompts-ln/* https://pages.bryancollins.com/101-ai-prompts-ln/ 301!
+# https://bryancollins.com/101-ai-prompts-apollo/* https://pages.bryancollins.com/101-ai-prompts-apollo/ 301!
+# https://bryancollins.com/101-ai-prompts-ap/* https://pages.bryancollins.com/101-ai-prompts-apollo/ 301!
+# https://bryancollins.com/101-ai-prompts-medium/* https://pages.bryancollins.com/101-ai-prompts-medium/ 301!
+# https://bryancollins.com/linkedin-hooks-yt/* https://pages.bryancollins.com/linkedin-hooks-yt/ 301!
+# https://bryancollins.com/chatgpt/* https://pages.bryancollins.com/chatgpt/ 301!
+# https://bryancollins.com/linkedin-hooks/* https://pages.bryancollins.com/linkedin-hooks/ 301!
+# https://bryancollins.com/101-ai-prompts-yt/* https://pages.bryancollins.com/101-ai-prompts-yt/ 301!
+# https://bryancollins.com/101-ai-prompts-ln/* https://pages.bryancollins.com/101-ai-prompts-ln/ 301!
 # Removed prompt-writing-blueprint legacy redirect
-# https://join.bryancollins.com/saas-founders/* https://pages.bryancollins.com/saas-founders/ 301!
-# https://join.bryancollins.com/thank-you/* https://becomeawritertoday.lpages.co/thank-you/ 301!
+# https://bryancollins.com/saas-founders/* https://pages.bryancollins.com/saas-founders/ 301!
+# https://bryancollins.com/thank-you/* https://becomeawritertoday.lpages.co/thank-you/ 301!
 
 # Fallback for all other routes
 /* /index.html 404

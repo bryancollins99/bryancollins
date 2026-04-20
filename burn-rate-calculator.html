@@ -7,27 +7,29 @@
     <meta name="description" content="Calculate your startup's burn rate and runway instantly. Free calculator to determine how long your cash will last and plan for profitability.">
     
     <!-- Canonical URL -->
-    <link rel="canonical" href="https://join.bryancollins.com/burn-rate-calculator">
+    <link rel="canonical" href="https://bryancollins.com/burn-rate-calculator">
     
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
-    <meta property="og:url" content="https://join.bryancollins.com/burn-rate-calculator">
+    <meta property="og:url" content="https://bryancollins.com/burn-rate-calculator">
     <meta property="og:title" content="Free Burn Rate Calculator | Bryan Collins">
     <meta property="og:description" content="Calculate your startup's runway and know exactly how long your cash will last. Free tool with instant results.">
-    <meta property="og:image" content="https://join.bryancollins.com/resources/bryan-collins.jpeg">
+    <meta property="og:image" content="https://bryancollins.com/resources/bryan-collins.jpeg">
     
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
-    <meta property="twitter:url" content="https://join.bryancollins.com/burn-rate-calculator">
+    <meta property="twitter:url" content="https://bryancollins.com/burn-rate-calculator">
     <meta property="twitter:title" content="Free Burn Rate Calculator">
     <meta property="twitter:description" content="Calculate your startup's runway and know exactly how long your cash will last.">
-    <meta property="twitter:image" content="https://join.bryancollins.com/resources/bryan-collins.jpeg">
+    <meta property="twitter:image" content="https://bryancollins.com/resources/bryan-collins.jpeg">
     
     <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="/favicon.svg">
 
-    <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="preload" as="style" href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css"></noscript>
+    <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"></noscript>
     
     <!-- Chart.js for visualizations -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js@3.9.1/dist/chart.min.js"></script>
@@ -36,13 +38,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     
     <!-- Privacy-friendly analytics by Plausible -->
-    <script async src="https://stats.bryancollins.com/js/pa-armKzBLxAwVLdEib6kivG.js"></script>
-    <script>
-      window.plausible=window.plausible||function(){(plausible.q=plausible.q||[]).push(arguments)},plausible.init=plausible.init||function(i){plausible.o=i||{}};
-      plausible.init()
-    </script>
-    
-    <!-- Privacy-friendly analytics by Plausible CE -->
     <script async src="https://stats.bryancollins.com/js/pa-bvsz2TfQenbKYMWpBJ7eS.js"></script>
     <script>
       window.plausible=window.plausible||function(){(plausible.q=plausible.q||[]).push(arguments)},plausible.init=plausible.init||function(i){plausible.o=i||{}};
@@ -56,7 +51,7 @@
         "@type": "WebApplication",
         "name": "Burn Rate Calculator",
         "description": "Free burn rate and runway calculator for startups and businesses",
-        "url": "https://join.bryancollins.com/burn-rate-calculator",
+        "url": "https://bryancollins.com/burn-rate-calculator",
         "applicationCategory": "BusinessApplication",
         "operatingSystem": "Any",
         "offers": {
@@ -311,6 +306,27 @@
             .metric-card, .card { box-shadow: none; border: 1px solid #ddd; page-break-inside: avoid; }
         }
     </style>
+    <!-- Breadcrumb Schema -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://bryancollins.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Burn Rate Calculator",
+          "item": "https://bryancollins.com/burn-rate-calculator.html"
+        }
+      ]
+    }
+    </script>
 </head>
 <body>
         <!-- Navigation -->

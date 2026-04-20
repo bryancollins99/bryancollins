@@ -5,19 +5,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>BCG Matrix — Bryan Collins</title>
     <meta name="description" content="Free interactive BCG Matrix tool. Categorize your products/content as Stars, Cash Cows, Question Marks, or Dogs.">
-    <meta property="og:url" content="https://join.bryancollins.com/bcg-matrix/" />
+    <meta property="og:url" content="https://bryancollins.com/bcg-matrix/" />
     <meta property="og:title" content="BCG Matrix Tool — Product Portfolio Analysis" />
     <meta property="og:description" content="Analyze your product portfolio with this interactive BCG Matrix tool." />
     
     <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="/favicon.svg">
 
-    <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="preload" as="style" href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css"></noscript>
+    <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"></noscript>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-    <script defer data-domain="join.bryancollins.com" src="https://plausible.io/js/script.js"></script>
-    
-    <!-- Privacy-friendly analytics by Plausible CE -->
+    <!-- Privacy-friendly analytics by Plausible -->
     <script async src="https://stats.bryancollins.com/js/pa-bvsz2TfQenbKYMWpBJ7eS.js"></script>
     <script>
       window.plausible=window.plausible||function(){(plausible.q=plausible.q||[]).push(arguments)},plausible.init=plausible.init||function(i){plausible.o=i||{}};
@@ -312,6 +312,34 @@
             }
         }
     </style>
+    <link rel="canonical" href="https://bryancollins.com/bcg-matrix.html">
+    <!-- Breadcrumb Schema -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://bryancollins.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "MBA Frameworks",
+          "item": "https://bryancollins.com/mba-frameworks.html"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "BCG Matrix",
+          "item": "https://bryancollins.com/bcg-matrix.html"
+        }
+      ]
+    }
+    </script>
 </head>
 <body>
         <!-- Navigation -->
@@ -861,7 +889,7 @@
             doc.setFontSize(8);
             doc.setTextColor(150);
             doc.text('Created with BCG Matrix Tool by Bryan Collins', 20, 285);
-            doc.text('https://join.bryancollins.com/bcg-matrix', 20, 290);
+            doc.text('https://bryancollins.com/bcg-matrix', 20, 290);
             
             doc.save('bcg-matrix-' + new Date().toISOString().split('T')[0] + '.pdf');
             showNotification('PDF downloaded successfully!', 'success');
