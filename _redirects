@@ -64,6 +64,14 @@
 /thank-you/                 https://bryancollins.substack.com/  301!
 /thank-you/*                https://bryancollins.substack.com/  301!
 
+# newsletter.bryancollins.com subdomain (Kit creator-profile page)
+# NOTE: these rules only fire once DNS for newsletter.bryancollins.com points
+# at Netlify AND newsletter.bryancollins.com is added as a domain alias on
+# the bryancollins Netlify site. Until then, Kit still serves the subdomain.
+# Pattern mirrors the existing pages.bryancollins.com host-based rules below.
+http://newsletter.bryancollins.com/*   https://bryancollins.substack.com/  301!
+https://newsletter.bryancollins.com/*  https://bryancollins.substack.com/  301!
+
 # ============================================================================
 # === END: lead-magnet → Substack redirect ===
 # ============================================================================
