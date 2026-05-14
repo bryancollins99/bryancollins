@@ -1,3 +1,74 @@
+# ============================================================================
+# === BEGIN: lead-magnet → Substack redirect (added 2026-05-14) ===
+# ============================================================================
+# WHY: Kit-hosted lead-magnet landing pages are being collapsed onto Substack.
+# REVERT: delete this entire block (down to the END marker). Old rules below
+# are untouched, so removing this block restores prior behaviour exactly.
+# WHY THIS WORKS: _redirects is first-match-wins. Block sits above old rules
+# so these 301!s win. The `!` force flag overrides the static .html files
+# that Netlify would otherwise serve via pretty_urls.
+# TARGET: https://bryancollins.substack.com/ (root, not path-preserving).
+# NOT COVERED HERE: newsletter.bryancollins.com (Cloudflare DNS, separate
+# task) and the inline Kit form embed on the homepage (source edit).
+# ----------------------------------------------------------------------------
+
+# 101 AI Prompts — channel variants
+/101-ai-prompts-yt          https://bryancollins.substack.com/  301!
+/101-ai-prompts-yt/         https://bryancollins.substack.com/  301!
+/101-ai-prompts-yt/*        https://bryancollins.substack.com/  301!
+/101-ai-prompts-ln          https://bryancollins.substack.com/  301!
+/101-ai-prompts-ln/         https://bryancollins.substack.com/  301!
+/101-ai-prompts-ln/*        https://bryancollins.substack.com/  301!
+/101-ai-prompts-medium      https://bryancollins.substack.com/  301!
+/101-ai-prompts-medium/     https://bryancollins.substack.com/  301!
+/101-ai-prompts-medium/*    https://bryancollins.substack.com/  301!
+/101-ai-prompts-apollo      https://bryancollins.substack.com/  301!
+/101-ai-prompts-apollo/     https://bryancollins.substack.com/  301!
+/101-ai-prompts-apollo/*    https://bryancollins.substack.com/  301!
+
+# LinkedIn Hooks variants
+/linkedin-hooks             https://bryancollins.substack.com/  301!
+/linkedin-hooks/            https://bryancollins.substack.com/  301!
+/linkedin-hooks/*           https://bryancollins.substack.com/  301!
+/linkedin-hooks-yt          https://bryancollins.substack.com/  301!
+/linkedin-hooks-yt/         https://bryancollins.substack.com/  301!
+/linkedin-hooks-yt/*        https://bryancollins.substack.com/  301!
+
+# Other lead magnets
+/chatgpt                    https://bryancollins.substack.com/  301!
+/chatgpt/                   https://bryancollins.substack.com/  301!
+/chatgpt/*                  https://bryancollins.substack.com/  301!
+/saas-founders              https://bryancollins.substack.com/  301!
+/saas-founders/             https://bryancollins.substack.com/  301!
+/saas-founders/*            https://bryancollins.substack.com/  301!
+
+# Generic newsletter signup + workshops
+/newsletter                 https://bryancollins.substack.com/  301!
+/newsletter/                https://bryancollins.substack.com/  301!
+/newsletter/*               https://bryancollins.substack.com/  301!
+/ai-writing-workshop        https://bryancollins.substack.com/  301!
+/ai-writing-workshop/       https://bryancollins.substack.com/  301!
+/ai-writing-workshop/*      https://bryancollins.substack.com/  301!
+/content-multiplication-workshop   https://bryancollins.substack.com/  301!
+/content-multiplication-workshop/  https://bryancollins.substack.com/  301!
+/content-multiplication-workshop/* https://bryancollins.substack.com/  301!
+
+# Short-slug aliases (previously 301'd to canonical slugs)
+/101-ai-prompts-ap          https://bryancollins.substack.com/  301!
+/101-ai-prompts-ap/         https://bryancollins.substack.com/  301!
+/101-ai-prompts-linkedin    https://bryancollins.substack.com/  301!
+/101-ai-prompts-linkedin/   https://bryancollins.substack.com/  301!
+
+# Post-signup page (orphaned once forms die)
+/thank-you                  https://bryancollins.substack.com/  301!
+/thank-you/                 https://bryancollins.substack.com/  301!
+/thank-you/*                https://bryancollins.substack.com/  301!
+
+# ============================================================================
+# === END: lead-magnet → Substack redirect ===
+# ============================================================================
+
+
 # Redirects for clean URLs (no file extension)
 # Removed prompt-writing-blueprint-apollo redirect
 /101-ai-prompts-apollo /101-ai-prompts-apollo/index.html 200
