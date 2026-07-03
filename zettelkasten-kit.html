@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Zettelkasten for Creators Kit: A Note System You Own for Good</title>
+    <meta name="description" content="The plain-markdown, git-based note system I use to capture ideas, connect them, and find them years later. Starter vault, 5 templates, the method, hygiene scripts. $39, one-time.">
+    <meta name="author" content="Bryan Collins">
+    <link rel="canonical" href="https://bryancollins.com/zettelkasten-kit.html">
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://bryancollins.com/zettelkasten-kit.html">
+    <meta property="og:title" content="The Zettelkasten for Creators Kit: A Note System You Own for Good">
+    <meta property="og:description" content="A plain-markdown, git-based note system you own for good. Starter vault, 5 templates, the method, hygiene scripts. $39, one-time.">
+    <meta property="og:image" content="https://bryancollins.com/resources/bryan-collins.jpeg">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <meta name="theme-color" content="#000000">
+
+    <link rel="preload" as="style" href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css"></noscript>
+    <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"></noscript>
+
+    <!-- Privacy-friendly analytics by Plausible -->
+    <script async src="https://stats.bryancollins.com/js/pa-bvsz2TfQenbKYMWpBJ7eS.js"></script>
+    <script>
+      window.plausible=window.plausible||function(){(plausible.q=plausible.q||[]).push(arguments)},plausible.init=plausible.init||function(i){plausible.o=i||{}};
+      plausible.init()
+    </script>
+
+    <!-- Product Schema -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Product",
+      "name": "The Zettelkasten for Creators Kit",
+      "description": "A plain-markdown, git-based knowledge system for writers and creators: starter vault, five templates, the note-taking method, and hygiene scripts.",
+      "brand": { "@type": "Person", "name": "Bryan Collins" },
+      "offers": {
+        "@type": "Offer",
+        "price": "39.00",
+        "priceCurrency": "USD",
+        "availability": "https://schema.org/InStock",
+        "url": "https://bryancollins.com/zettelkasten-kit.html"
+      }
+    }
+    </script>
+
+    <style>
+        html { overflow-y: scroll; }
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            background-color: #EDEDEE;
+            color: #1B1B1D;
+        }
+        .nav-bar { background: #000000; border-bottom: 1px solid #333; font-family: inherit; }
+        .nav-link { color: white; padding: 0.5rem 1rem; text-decoration: none; transition: color 0.2s; }
+        .nav-link:hover { color: #FFDE59; }
+        .hero-gradient { background: linear-gradient(135deg, #000000 0%, #1a1a1a 100%); }
+        .card {
+            background: white; border-radius: 8px; padding: 2rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        .icon-yellow { color: #FFDE59; }
+        .btn-primary {
+            background: #FFDE59; color: #000000; padding: 0.9rem 2rem; border-radius: 6px;
+            text-decoration: none; display: inline-block; font-weight: 700; font-size: 1.1rem;
+            transition: all 0.3s; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .btn-primary:hover { background: #ffd633; transform: translateY(-2px); box-shadow: 0 6px 12px rgba(0,0,0,0.15); }
+        .section-title { font-size: 2rem; font-weight: 700; margin-bottom: 1rem; color: #000000; }
+        .terminal {
+            background: #0d0d0d; color: #e8e8e8; border-radius: 8px; padding: 1.25rem 1.5rem;
+            font-family: 'SF Mono', SFMono-Regular, ui-monospace, Menlo, monospace;
+            font-size: 0.9rem; line-height: 1.7; overflow-x: auto;
+        }
+        .terminal .cmd { color: #FFDE59; }
+        .terminal .dim { color: #8a8a8a; }
+        .mobile-menu-button { display: none; color: white; font-size: 1.5rem; cursor: pointer; background: none; border: none; padding: 0.5rem; }
+        .desktop-nav { display: flex; gap: 1.5rem; }
+        .mobile-nav { display: none; flex-direction: column; position: absolute; top: 100%; left: 0; right: 0; background: #000000; border-top: 1px solid #333; padding: 1rem; }
+        .mobile-nav.active { display: flex; }
+        .mobile-nav .nav-link { padding: 0.75rem 1rem; border-bottom: 1px solid #333; }
+        @media (max-width: 768px) {
+            .mobile-menu-button { display: block; }
+            .desktop-nav { display: none; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="nav-bar sticky top-0 z-50">
+        <div class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between relative">
+            <a href="/index.html" class="text-white font-bold text-xl">Bryan Collins</a>
+            <button class="mobile-menu-button" id="mobileMenuButton" aria-label="Toggle menu">
+                <i class="fas fa-bars"></i>
+            </button>
+            <div class="desktop-nav">
+                <a href="/mba-frameworks.html" class="nav-link">Tools</a>
+                <a href="/projects.html" class="nav-link">Projects</a>
+                <a href="/builders-pipeline.html" class="nav-link text-yellow-400">Builder's Pipeline</a>
+                <a href="/books.html" class="nav-link">Books</a>
+                <a href="/now.html" class="nav-link">Now</a>
+                <a href="/contact.html" class="nav-link">Contact</a>
+                <a href="https://newsletter.bryancollins.com" class="nav-link">Newsletter</a>
+            </div>
+            <div class="mobile-nav" id="mobileNav">
+                <a href="/mba-frameworks.html" class="nav-link">Tools</a>
+                <a href="/projects.html" class="nav-link">Projects</a>
+                <a href="/builders-pipeline.html" class="nav-link" style="color: #FFDE59;">Builder's Pipeline</a>
+                <a href="/books.html" class="nav-link">Books</a>
+                <a href="/now.html" class="nav-link">Now</a>
+                <a href="/contact.html" class="nav-link">Contact</a>
+                <a href="https://newsletter.bryancollins.com" class="nav-link">Newsletter</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero -->
+    <header class="hero-gradient text-white py-20 px-4">
+        <div class="max-w-4xl mx-auto text-center">
+            <p class="text-yellow-400 font-semibold mb-4 uppercase tracking-wide text-sm">The Zettelkasten for Creators Kit</p>
+            <h1 class="text-4xl sm:text-5xl font-extrabold mb-6 leading-tight">Never lose an idea again. In plain files you own for good.</h1>
+            <p class="text-xl opacity-90 mb-8 max-w-2xl mx-auto">The exact plain-markdown-plus-git knowledge system I use to capture ideas, connect them, and find them years later. Starter vault, five templates, the method, and the hygiene scripts. No app, no lock-in, no subscription.</p>
+            <a href="https://buy.stripe.com/28EcN62rR7mjdIG3LqbZe0t" class="btn-primary" data-purchase-cta><!-- BUILDERS-PIPELINE-CHECKOUT -->
+                <i class="fas fa-download mr-2"></i>Get the Zettelkasten Kit ($39)
+            </a>
+            <p class="text-sm opacity-70 mt-4">One-time payment via Stripe. Instant download the moment you pay. No subscription, no lock-in.</p>
+        </div>
+    </header>
+
+    <!-- Proof / credibility -->
+    <section class="py-14 px-4">
+        <div class="max-w-3xl mx-auto">
+            <div class="card" style="border-left: 4px solid #FFDE59;">
+                <h2 class="text-xl font-bold mb-3">This is the exact system I take everywhere</h2>
+                <p class="text-gray-700 mb-3">Every note I have written in years lives in one folder of plain text files, connected by links, that opens on any machine and will still open in twenty years. No database, no proprietary app, no export button to worry about. This kit is that system, ready to clone.</p>
+                <p class="text-gray-700 mb-0">And you do not have to take my word for it. The starter vault ships with real, filled-in example notes, so you see exactly how it works before you write a single one of your own. If it is not how you think, you will know in two minutes. If it is, it is $39 once, and yours for good.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- The problem -->
+    <section class="py-14 px-4">
+        <div class="max-w-3xl mx-auto">
+            <h2 class="section-title">"Where did I write that down?"</h2>
+            <p class="text-gray-700 mb-4">For years my ideas lived everywhere and nowhere: a note in one app, a highlight in another, a thought in a notebook I never opened again. When I needed an idea, I could not find it. When I wanted to connect two thoughts, they were trapped in different silos. So I stopped trusting any of it.</p>
+            <p class="text-gray-700 mb-4">The fix was not another app. It was one folder of plain markdown files, in git, with a simple naming rule and a few templates. One idea per note. Links between the notes. That is the whole system, and it is the reason I can pull up something I thought about three years ago in about ten seconds.</p>
+            <div class="terminal mb-4">
+<span class="dim"># your notes folder, plain files, forever</span><br>
+<span class="cmd">~/notes/</span><br>
+&nbsp;&nbsp;202607-atomic-notes-beat-folders.md<br>
+&nbsp;&nbsp;202607-the-map-of-content-pattern.md<br>
+&nbsp;&nbsp;<span class="dim">MOC - Newsletter ideas.md</span><br>
+&nbsp;&nbsp;<span class="dim">Project-Index.md</span><br>
+&nbsp;&nbsp;<span class="dim">Active-Projects.md</span>
+            </div>
+            <p class="text-gray-700">One folder. Plain files. Yours forever. <strong>Own your notes, or an app owns them.</strong></p>
+        </div>
+    </section>
+
+    <!-- What's inside -->
+    <section class="py-14 px-4 bg-white">
+        <div class="max-w-5xl mx-auto">
+            <h2 class="section-title text-center mb-10">What's inside</h2>
+            <div class="grid md:grid-cols-2 gap-6">
+                <div class="card">
+                    <i class="fas fa-folder-open icon-yellow text-2xl mb-3"></i>
+                    <h3 class="text-lg font-bold mb-2">1. The starter vault</h3>
+                    <p class="text-gray-700 text-sm">A ready-to-clone folder with the structure and naming convention already set up. Copy it, point your editor at it, and you have a working second brain in five minutes.</p>
+                </div>
+                <div class="card">
+                    <i class="fas fa-file-alt icon-yellow text-2xl mb-3"></i>
+                    <h3 class="text-lg font-bold mb-2">2. Five templates</h3>
+                    <p class="text-gray-700 text-sm">Permanent note, literature note, Map of Content, Project Index, and the max-three-active-projects tracker. The building blocks, ready to fill in.</p>
+                </div>
+                <div class="card">
+                    <i class="fas fa-project-diagram icon-yellow text-2xl mb-3"></i>
+                    <h3 class="text-lg font-bold mb-2">3. The method (in plain English)</h3>
+                    <p class="text-gray-700 text-sm">Capture, write one idea per note, link them, build Maps of Content, and find anything later. The thinking system, not app tips or productivity theatre.</p>
+                </div>
+                <div class="card">
+                    <i class="fas fa-broom icon-yellow text-2xl mb-3"></i>
+                    <h3 class="text-lg font-bold mb-2">4. Three hygiene scripts</h3>
+                    <p class="text-gray-700 text-sm">Optional helpers that keep a growing vault clean: find duplicates, auto-tag, and rename generic filenames. Deterministic, no API, skip them entirely if you like.</p>
+                </div>
+                <div class="card">
+                    <i class="fas fa-book-open icon-yellow text-2xl mb-3"></i>
+                    <h3 class="text-lg font-bold mb-2">5. A filled example vault</h3>
+                    <p class="text-gray-700 text-sm">Real sample notes (a freelance food writer's) so you see the format and the linking in action before you write your own. The format, not just the theory.</p>
+                </div>
+                <div class="card">
+                    <i class="fas fa-shield-alt icon-yellow text-2xl mb-3"></i>
+                    <h3 class="text-lg font-bold mb-2">6. Assume-nothing setup</h3>
+                    <p class="text-gray-700 text-sm">A setup guide for plain markdown plus git that assumes you have never used a terminal. Own your files, no Notion, no lock-in, no subscription, ever.</p>
+                </div>
+            </div>
+            <div class="card mt-6" style="background: #fffbe8;">
+                <h3 class="text-lg font-bold mb-2"><i class="fas fa-link icon-yellow mr-2"></i>Pairs with The Builder's Pipeline</h3>
+                <p class="text-gray-700 text-sm mb-0">This kit is the thinking layer: how you capture and connect ideas. <a href="/builders-pipeline.html" class="font-semibold underline">The Builder's Pipeline</a> is the output layer: how those notes become published content. Build the vault here, then point the Pipeline at it. Each stands alone; together they are the whole system.</p>
+            </div>
+            <p class="text-center text-gray-600 text-sm mt-6">Also included: a naming-convention cheatsheet, a filled Project Index example, and free updates to this version. A small zip of plain files you keep forever.</p>
+        </div>
+    </section>
+
+    <!-- Requirements / honesty -->
+    <section class="py-14 px-4">
+        <div class="max-w-3xl mx-auto">
+            <h2 class="section-title">What you'll need (read this before buying)</h2>
+            <div class="card">
+                <ul class="space-y-3 text-gray-700">
+                    <li><i class="fas fa-check icon-yellow mr-2"></i><strong>For the vault:</strong> any plain-text editor. VS Code, iA Writer, Obsidian, even TextEdit. That is it. The templates are just files you copy and fill in.</li>
+                    <li><i class="fas fa-check icon-yellow mr-2"></i><strong>Optional, for the hygiene scripts:</strong> git and Python 3.9+ (already on every Mac). The vault and templates work with zero tools installed.</li>
+                    <li><i class="fas fa-check icon-yellow mr-2"></i><strong>Sync however you like:</strong> git, iCloud, Dropbox, a USB stick. Plain files go anywhere. No app to buy, ever.</li>
+                    <li><i class="fas fa-times text-gray-400 mr-2"></i><strong>Not included:</strong> a course, coaching, or a community. This is the system and the templates, not a curriculum.</li>
+                </ul>
+            </div>
+            <div class="card mt-6">
+                <h3 class="text-lg font-bold mb-2">Who it's for (and not for)</h3>
+                <p class="text-gray-700 mb-3"><strong>For you if:</strong> your ideas are scattered across apps and notebooks and you keep losing them, and you want a system you own that still works in ten years.</p>
+                <p class="text-gray-700 mb-0"><strong>Not for you if:</strong> you want a polished all-in-one app with sync and mobile widgets. This is deliberately plain files. That is the point, and the reason it lasts.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Price / CTA -->
+    <section class="py-14 px-4 bg-white">
+        <div class="max-w-3xl mx-auto text-center">
+            <div class="card">
+                <h2 class="text-3xl font-bold mb-2">$39, one-time</h2>
+                <p class="text-gray-600 mb-6">The starter vault, all five templates, the method guide, the three hygiene scripts, the example vault, and any future updates to this version.</p>
+                <a href="https://buy.stripe.com/28EcN62rR7mjdIG3LqbZe0t" class="btn-primary" data-purchase-cta><!-- BUILDERS-PIPELINE-CHECKOUT -->
+                    <i class="fas fa-download mr-2"></i>Get the Zettelkasten Kit ($39)
+                </a>
+                <p class="text-sm text-gray-500 mt-4">Secure payment via Stripe. Instant download the moment you pay (a small zip of plain-text templates, scripts, and guides, no video bloat).</p>
+                <p class="text-sm text-gray-500 mt-2">No fake timer. But I take products down when I move on to the next build. If it is useful to you, grab it while it is here.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="py-14 px-4">
+        <div class="max-w-3xl mx-auto">
+            <h2 class="section-title text-center mb-8">Questions you should ask</h2>
+            <div class="space-y-4">
+                <div class="card">
+                    <h3 class="font-bold mb-2">I already use Notion or Obsidian. Why plain files?</h3>
+                    <p class="text-gray-700 text-sm mb-0">Because apps come and go, and your notes should not. Plain markdown in git opens on any machine, in any editor, with no export step, and will still open in twenty years. If your current app vanished tomorrow, would your notes survive intact? This system is built so the answer is always yes. (And it works fine inside Obsidian too, if you like the editor.)</p>
+                </div>
+                <div class="card">
+                    <h3 class="font-bold mb-2">Do I need to be technical?</h3>
+                    <p class="text-gray-700 text-sm mb-0">No. The vault and templates are just text files you copy and fill in. The three hygiene scripts are optional extras for when your vault gets big. Skip them entirely and the system still works exactly the same.</p>
+                </div>
+                <div class="card">
+                    <h3 class="font-bold mb-2">Is this the old Zettelkasten Method course?</h3>
+                    <p class="text-gray-700 text-sm mb-0">No. That course is closed. This is the system itself: the structure, the templates, and the method, as a self-serve kit you set up yourself. No videos, no cohort, just the working system at a fraction of the price.</p>
+                </div>
+                <div class="card">
+                    <h3 class="font-bold mb-2">How is this different from The Builder's Pipeline?</h3>
+                    <p class="text-gray-700 text-sm mb-0">This kit is how you <em>think</em>: capture and connect ideas in a vault you own. <a href="/builders-pipeline.html" class="font-semibold underline">The Builder's Pipeline</a> is how you <em>publish</em>: turn those notes into content. Buy this to build the second brain; add the Pipeline when you want it writing for you. Each works alone.</p>
+                </div>
+                <div class="card">
+                    <h3 class="font-bold mb-2">Refunds?</h3>
+                    <p class="text-gray-700 text-sm mb-0">It's a digital download, so I can't take the bits back. But if it doesn't work for you, email me within 30 days and I'll refund it. Reply-to-any-email support is included either way.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-black text-white py-12 px-4">
+        <div class="max-w-6xl mx-auto text-center">
+            <div class="flex gap-6 justify-center mb-4">
+                <a href="https://www.youtube.com/channel/UCglNILz3uBqPer5EMJ_pzVg" target="_blank" rel="noopener" aria-label="YouTube" class="hover:text-yellow-400"><i class="fab fa-youtube text-2xl"></i></a>
+                <a href="https://www.linkedin.com/in/bryancollins99/" target="_blank" rel="noopener" aria-label="LinkedIn" class="hover:text-yellow-400"><i class="fab fa-linkedin text-2xl"></i></a>
+                <a href="https://github.com/bryancollins99" target="_blank" rel="noopener" aria-label="GitHub" class="hover:text-yellow-400"><i class="fab fa-github text-2xl"></i></a>
+            </div>
+            <div class="flex gap-4 justify-center text-sm text-gray-400 mb-4">
+                <a href="/privacy.html" class="hover:text-white">Privacy Policy</a>
+                <span>•</span>
+                <a href="/terms.html" class="hover:text-white">Terms of Service</a>
+            </div>
+            <p class="text-sm opacity-70">© 2026 Bryan Collins. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        const mobileMenuButton = document.getElementById('mobileMenuButton');
+        const mobileNav = document.getElementById('mobileNav');
+        mobileMenuButton.addEventListener('click', function() {
+            mobileNav.classList.toggle('active');
+            const icon = this.querySelector('i');
+            icon.classList.toggle('fa-bars');
+            icon.classList.toggle('fa-times');
+        });
+    </script>
+</body>
+</html>
