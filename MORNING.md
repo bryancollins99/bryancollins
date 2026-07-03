@@ -1,3 +1,5 @@
+> **CORRECTION (2026-07-03) — read first.** The premise below is wrong. The March offer was NOT "promised then never delivered." It was a live **pre-order** page that 305 people saw and **zero bought**. Demand at the point of payment was tested and it failed; only *interest* was proven. This overturns this doc's core claim ("demand proven / IOU to clear") and its revenue estimate (revised down from $585-1,365 to a realistic $0-585). The product still ships, reframed as an honest retry ("this time you can look before you pay"), not an apology. Sales page and launch email have been corrected. Everything after this line is the original, mistaken analysis, kept as a dated snapshot.
+
 # MORNING.md — overnight mission report (2026-07-01)
 
 ## TL;DR

@@ -42,7 +42,7 @@ $39 one-time product: a clone-and-run GitHub repo of Bryan's 6 content-automatio
 305 unique clicks on the buy link (7.8% of openers — biggest product-click event in the
 account). Purchase ledger: ZERO Builder's Pipeline sales. The product URL
 (newsletter.becomeawritertoday.com/products/the-builders-pipeline) no longer resolves.
-Demand proven; fulfilment apparently never shipped.
+Demand proven? No — CORRECTED 2026-07-03: this was a live pre-order page, 305 clicked, ZERO bought. Interest proven, willingness-to-pay disproven. The 'never delivered' read was wrong.
 All 6 scripts EXIST in ~/src/zettelkasten/scripts/ (2,626 lines, env-based secrets, only
 2 files carry personal references). Packaging is a one-night job.
 

@@ -39,7 +39,7 @@ The hero already committed to identity #3. The rest of the site hasn't caught up
 - Purchase history (9 months): $197 launches ≈ 3 units each; $97 ≈ 5 units; $20–47 sells
   steadily in small numbers. **Historical revenue ceiling per campaign ≈ $600.**
 - The single largest product-intent event ever recorded: 305 unique clicks on a **$39
-  clone-and-run repo of Bryan's own automation scripts** — which was never delivered.
+  clone-and-run repo of Bryan's own automation scripts** — a live pre-order that **nobody bought** (CORRECTED 2026-07-03: originally mis-read as 'never delivered'; it was delivered as a pre-order and declined at checkout by all 305).
 
 ## 4. The gap between site and actual work
 
@@ -67,11 +67,11 @@ model). The books are back-catalogue. The MBA frameworks are undifferentiated fr
 demonstrably click hardest on one thing: watching him actually build, and wanting the
 system he builds with.** Ten years of writing-era trust, already half-bridged to the
 builder era by the newsletter itself. The list is flat but not dead — it's engaged and
-un-monetised, and it has one outstanding IOU: a $39 product 305 of them tried to buy
-four months ago that never existed.
+un-monetised. It also carries one hard data point: a $39 pre-order 305 of them clicked
+and none of them bought (CORRECTED 2026-07-03 — not an 'IOU', a failed price test; interest without purchase).
 
-The site's job is not to be a portfolio brochure. It's to be the place where that IOU
-gets honoured — a shopfront for productised versions of the workflows the list already
+The site's job is not to be a portfolio brochure. It's to be the place where that failed
+pre-order gets a fair second test as a finished, look-before-you-pay product — a shopfront for productised versions of the workflows the list already
 clicks on.
 
 ## Annex: full page inventory

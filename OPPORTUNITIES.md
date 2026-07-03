@@ -1,3 +1,5 @@
+> **CORRECTION (2026-07-03) — read first.** The winning candidate's #1 rationale below ("305 clicks = direct price-specific demand evidence") is half-right: 305 clicks measured *interest*, but 0 of them purchased on the live pre-order page, so willingness-to-pay was NOT proven — it was disproven, once. Builder's Pipeline still wins the scan, but on near-zero build cost and audience-fit, not on demonstrated demand. Revenue expectations revised down accordingly. Scores below unchanged as a snapshot.
+
 # OPPORTUNITIES.md — Candidate assets, scored (2026-07-01 overnight)
 
 Scoring 1–5 per dimension. Revenue model uses OBSERVED Kit purchase history

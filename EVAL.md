@@ -1,3 +1,5 @@
+> **CORRECTION (2026-07-03) — read first.** This sceptic pass was built on a false premise (an apology for a "broken promise"). The truth: the March pre-order ran, 305 clicked, **nobody bought**. So the pass's central defence (the apology framing) is void, and the real risk is sharper: the market already declined this once at $39. The counter-argument that survives: it was a *pre-order* (pay for a promise), and what ships now is materially different (finished, sample output visible before paying, a no-code path). Verdict downgraded from "genuine evolution, will likely land" to "worth trying at near-zero marginal cost, expect little." Original text kept below as a snapshot.
+
 # EVAL.md — the sceptical-subscriber read (2026-07-01, overnight)
 
 Persona: signed up in 2021 for writing help via a "101 writing prompts" style
