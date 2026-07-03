@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Builder's Pipeline: Turn Your Worklog Into a Week of Content</title>
+    <meta name="description" content="Six Python scripts + copy-paste prompts that turn a week of scrappy notes into LinkedIn drafts, newsletter emails, and YouTube ideas. $39, one-time.">
+    <meta name="author" content="Bryan Collins">
+    <link rel="canonical" href="https://bryancollins.com/builders-pipeline.html">
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://bryancollins.com/builders-pipeline.html">
+    <meta property="og:title" content="The Builder's Pipeline: Turn Your Worklog Into a Week of Content">
+    <meta property="og:description" content="Six scripts + copy-paste prompts that turn a week of scrappy notes into ready-to-publish content. $39, one-time.">
+    <meta property="og:image" content="https://bryancollins.com/resources/bryan-collins.jpeg">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <meta name="theme-color" content="#000000">
+
+    <link rel="preload" as="style" href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css"></noscript>
+    <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"></noscript>
+
+    <!-- Privacy-friendly analytics by Plausible -->
+    <script async src="https://stats.bryancollins.com/js/pa-bvsz2TfQenbKYMWpBJ7eS.js"></script>
+    <script>
+      window.plausible=window.plausible||function(){(plausible.q=plausible.q||[]).push(arguments)},plausible.init=plausible.init||function(i){plausible.o=i||{}};
+      plausible.init()
+    </script>
+
+    <!-- Product Schema -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Product",
+      "name": "The Builder's Pipeline",
+      "description": "Six Python scripts plus copy-paste AI prompts that turn a weekly worklog into LinkedIn drafts, newsletter emails, and YouTube ideas.",
+      "brand": { "@type": "Person", "name": "Bryan Collins" },
+      "offers": {
+        "@type": "Offer",
+        "price": "39.00",
+        "priceCurrency": "USD",
+        "availability": "https://schema.org/InStock",
+        "url": "https://bryancollins.com/builders-pipeline.html"
+      }
+    }
+    </script>
+
+    <style>
+        html { overflow-y: scroll; }
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            background-color: #EDEDEE;
+            color: #1B1B1D;
+        }
+        .nav-bar { background: #000000; border-bottom: 1px solid #333; font-family: inherit; }
+        .nav-link { color: white; padding: 0.5rem 1rem; text-decoration: none; transition: color 0.2s; }
+        .nav-link:hover { color: #FFDE59; }
+        .hero-gradient { background: linear-gradient(135deg, #000000 0%, #1a1a1a 100%); }
+        .card {
+            background: white; border-radius: 8px; padding: 2rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        .icon-yellow { color: #FFDE59; }
+        .btn-primary {
+            background: #FFDE59; color: #000000; padding: 0.9rem 2rem; border-radius: 6px;
+            text-decoration: none; display: inline-block; font-weight: 700; font-size: 1.1rem;
+            transition: all 0.3s; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .btn-primary:hover { background: #ffd633; transform: translateY(-2px); box-shadow: 0 6px 12px rgba(0,0,0,0.15); }
+        .section-title { font-size: 2rem; font-weight: 700; margin-bottom: 1rem; color: #000000; }
+        .terminal {
+            background: #0d0d0d; color: #e8e8e8; border-radius: 8px; padding: 1.25rem 1.5rem;
+            font-family: 'SF Mono', SFMono-Regular, ui-monospace, Menlo, monospace;
+            font-size: 0.9rem; line-height: 1.7; overflow-x: auto;
+        }
+        .terminal .cmd { color: #FFDE59; }
+        .terminal .dim { color: #8a8a8a; }
+        .mobile-menu-button { display: none; color: white; font-size: 1.5rem; cursor: pointer; background: none; border: none; padding: 0.5rem; }
+        .desktop-nav { display: flex; gap: 1.5rem; }
+        .mobile-nav { display: none; flex-direction: column; position: absolute; top: 100%; left: 0; right: 0; background: #000000; border-top: 1px solid #333; padding: 1rem; }
+        .mobile-nav.active { display: flex; }
+        .mobile-nav .nav-link { padding: 0.75rem 1rem; border-bottom: 1px solid #333; }
+        @media (max-width: 768px) {
+            .mobile-menu-button { display: block; }
+            .desktop-nav { display: none; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="nav-bar sticky top-0 z-50">
+        <div class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between relative">
+            <a href="/index.html" class="text-white font-bold text-xl">Bryan Collins</a>
+            <button class="mobile-menu-button" id="mobileMenuButton" aria-label="Toggle menu">
+                <i class="fas fa-bars"></i>
+            </button>
+            <div class="desktop-nav">
+                <a href="/mba-frameworks.html" class="nav-link">Tools</a>
+                <a href="/projects.html" class="nav-link">Projects</a>
+                <a href="/builders-pipeline.html" class="nav-link text-yellow-400">Builder's Pipeline</a>
+                <a href="/books.html" class="nav-link">Books</a>
+                <a href="/now.html" class="nav-link">Now</a>
+                <a href="/contact.html" class="nav-link">Contact</a>
+                <a href="https://newsletter.bryancollins.com" class="nav-link">Newsletter</a>
+            </div>
+            <div class="mobile-nav" id="mobileNav">
+                <a href="/mba-frameworks.html" class="nav-link">Tools</a>
+                <a href="/projects.html" class="nav-link">Projects</a>
+                <a href="/builders-pipeline.html" class="nav-link" style="color: #FFDE59;">Builder's Pipeline</a>
+                <a href="/books.html" class="nav-link">Books</a>
+                <a href="/now.html" class="nav-link">Now</a>
+                <a href="/contact.html" class="nav-link">Contact</a>
+                <a href="https://newsletter.bryancollins.com" class="nav-link">Newsletter</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero -->
+    <header class="hero-gradient text-white py-20 px-4">
+        <div class="max-w-4xl mx-auto text-center">
+            <p class="text-yellow-400 font-semibold mb-4 uppercase tracking-wide text-sm">The Builder's Pipeline</p>
+            <h1 class="text-4xl sm:text-5xl font-extrabold mb-6 leading-tight">Turn a week of scrappy notes into ready-to-publish content. In one command.</h1>
+            <p class="text-xl opacity-90 mb-8 max-w-2xl mx-auto">The six scripts I use every Friday to turn my worklog into LinkedIn drafts, newsletter emails, and YouTube ideas, packaged so you can run them on your notes. Plus every script as a copy-paste prompt, so it works even if you never touch Python.</p>
+            <!-- CHECKOUT: swap this span back to <a href="KIT_OR_STRIPE_PRODUCT_URL" class="btn-primary" data-purchase-cta>...</a> once the $39 product URL exists. Grep BUILDERS-PIPELINE-CHECKOUT. -->
+            <span class="btn-primary" style="opacity:0.6;cursor:default;" data-purchase-cta="pending"><!-- BUILDERS-PIPELINE-CHECKOUT -->
+                <i class="fas fa-clock mr-2"></i>Checkout opens shortly ($39)
+            </span>
+            <p class="text-sm opacity-70 mt-4">The product is finished. Payment link goes live within a day. One-time payment, instant download, no subscription, no countdown.</p>
+        </div>
+    </header>
+
+    <!-- The honest bit -->
+    <section class="py-14 px-4">
+        <div class="max-w-3xl mx-auto">
+            <div class="card" style="border-left: 4px solid #FFDE59;">
+                <h2 class="text-xl font-bold mb-3">First, some honesty</h2>
+                <p class="text-gray-700 mb-3">In March I put this up as a pre-order for $39. Three hundred and five people clicked the link. Nobody bought. Fair enough: I was asking people to pay upfront for something they could not see, on my word that I would finish it.</p>
+                <p class="text-gray-700 mb-0">So I finished it, and this time you can look before you pay. Same product I described, same price I quoted, built properly, with sample output for every tool right here on this page. If it is not for you, that is a real answer. But at least now you are judging a finished thing you can see, not a promise.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- The problem -->
+    <section class="py-14 px-4">
+        <div class="max-w-3xl mx-auto">
+            <h2 class="section-title">Friday, 4pm: "What should I post next week?"</h2>
+            <p class="text-gray-700 mb-4">I used to spend Friday afternoons staring at a blank content calendar, scrolling LinkedIn for inspiration, and cobbling together something generic. It felt like fraud because it was: the content had nothing to do with my actual week.</p>
+            <p class="text-gray-700 mb-4">The fix wasn't a content strategy. It was a logging habit plus automation. I write one line in a worklog whenever I finish something: <em>"Built the CSV import. Took 2 hours. Skipped the API route."</em> Then, on Friday, scripts read those notes and do the blank-page part for me.</p>
+            <div class="terminal mb-4">
+<span class="dim"># Friday, 9:00am</span><br>
+<span class="cmd">$ python3 scripts/content-pipeline.py</span><br>
+Reading worklog... 23 entries found<br>
+Scanning recent notes... 7 notes<br>
+Generating content ideas...<br>
+<span class="dim">✓ Report saved: Content-Pipeline-2026-07-03.md</span><br>
+<span class="dim">  → 4 LinkedIn drafts, 1 newsletter topic, 2 YouTube ideas</span>
+            </div>
+            <p class="text-gray-700">Twenty minutes of editing later, my content for the week exists, and every piece of it is true, because it came from what I actually did. <strong>Content is the exhaust, not the engine.</strong></p>
+        </div>
+    </section>
+
+    <!-- What's inside -->
+    <section class="py-14 px-4 bg-white">
+        <div class="max-w-5xl mx-auto">
+            <h2 class="section-title text-center mb-10">What's inside</h2>
+            <div class="grid md:grid-cols-2 gap-6">
+                <div class="card">
+                    <i class="fas fa-lightbulb icon-yellow text-2xl mb-3"></i>
+                    <h3 class="text-lg font-bold mb-2">1. Content Pipeline</h3>
+                    <p class="text-gray-700 text-sm">Scans your worklog and recent notes, outputs 3-5 LinkedIn post ideas with hooks already written, a newsletter topic with structure, and 2 YouTube ideas. ~30 seconds.</p>
+                </div>
+                <div class="card">
+                    <i class="fas fa-search icon-yellow text-2xl mb-3"></i>
+                    <h3 class="text-lg font-bold mb-2">2. Deep Pattern Analyzer</h3>
+                    <p class="text-gray-700 text-sm">Finds the themes across your week, and the contradictions between what you say you value and where the time actually went. The honest Friday review.</p>
+                </div>
+                <div class="card">
+                    <i class="fas fa-file-alt icon-yellow text-2xl mb-3"></i>
+                    <h3 class="text-lg font-bold mb-2">3. Draft Generator</h3>
+                    <p class="text-gray-700 text-sm">Doesn't stop at ideas: writes the actual drafts. 2-3 newsletter emails (500-800 words), 3 LinkedIn posts, and permanent-note templates. Copy, edit, publish.</p>
+                </div>
+                <div class="card">
+                    <i class="fas fa-edit icon-yellow text-2xl mb-3"></i>
+                    <h3 class="text-lg font-bold mb-2">4. Email Analyzer</h3>
+                    <p class="text-gray-700 text-sm">Paste in any draft, get 10-section editorial feedback: subject lines, hooks, structure, big-idea check, line-level critique, CTA suggestions.</p>
+                </div>
+                <div class="card">
+                    <i class="fas fa-paper-plane icon-yellow text-2xl mb-3"></i>
+                    <h3 class="text-lg font-bold mb-2">5. Newsletter Scheduler</h3>
+                    <p class="text-gray-700 text-sm">Reads a markdown draft, converts it to clean email HTML, and creates it in Kit via the API, auto-detecting your next open send slot. Ships in safe draft-only mode.</p>
+                </div>
+                <div class="card">
+                    <i class="fab fa-youtube icon-yellow text-2xl mb-3"></i>
+                    <h3 class="text-lg font-bold mb-2">6. YouTube Email Generator</h3>
+                    <p class="text-gray-700 text-sm">Paste a YouTube URL. It fetches the transcript and writes the 300-400 word promotional email in your voice, ready to schedule.</p>
+                </div>
+            </div>
+            <div class="card mt-6" style="background: #fffbe8;">
+                <h3 class="text-lg font-bold mb-2"><i class="fas fa-comment-dots icon-yellow mr-2"></i>Plus: manual mode (no Python required)</h3>
+                <p class="text-gray-700 text-sm mb-0">Every script's brain ships as a standalone copy-paste prompt. If you never open a terminal, you can still run the entire system by pasting the prompts into Claude with your notes. Ten minutes a week, zero installation. The scripts automate it; the prompts guarantee you're never locked out by the tech.</p>
+            </div>
+            <p class="text-center text-gray-600 text-sm mt-6">Also included: the worklog + note templates the system reads, sample output for every script so you can see the format before running anything, a 10-step assume-nothing setup guide, and a setup checker that tells you exactly what to fix.</p>
+        </div>
+    </section>
+
+    <!-- Requirements / honesty -->
+    <section class="py-14 px-4">
+        <div class="max-w-3xl mx-auto">
+            <h2 class="section-title">What you'll need (read this before buying)</h2>
+            <div class="card">
+                <ul class="space-y-3 text-gray-700">
+                    <li><i class="fas fa-check icon-yellow mr-2"></i><strong>For the scripts:</strong> Python 3.9+ (already on every Mac) and an Anthropic API key: pay-as-you-go, roughly <strong>$0.15-0.25/week</strong> at normal usage. The setup guide assumes you've never used a terminal.</li>
+                    <li><i class="fas fa-check icon-yellow mr-2"></i><strong>For manual mode:</strong> just a Claude account (free tier works). No installation at all.</li>
+                    <li><i class="fas fa-check icon-yellow mr-2"></i><strong>For the scheduler only:</strong> a Kit (ConvertKit) account. The other five pieces work with any platform: Substack, Mailchimp, beehiiv, wherever.</li>
+                    <li><i class="fas fa-times text-gray-400 mr-2"></i><strong>Not included:</strong> a content strategy course, coaching, or a community. This is a working system, not a curriculum.</li>
+                </ul>
+            </div>
+            <div class="card mt-6">
+                <h3 class="text-lg font-bold mb-2">Who it's for (and not for)</h3>
+                <p class="text-gray-700 mb-3"><strong>For you if:</strong> you make things (posts, sites, books, products, a business) and struggle to consistently turn that real work into content. The system's whole premise is documenting work that already happens.</p>
+                <p class="text-gray-700 mb-0"><strong>Not for you if:</strong> you want AI to invent content from nothing. The pipeline reads your worklog; an empty worklog produces empty content. That's a feature.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Price / CTA -->
+    <section class="py-14 px-4 bg-white">
+        <div class="max-w-3xl mx-auto text-center">
+            <div class="card">
+                <h2 class="text-3xl font-bold mb-2">$39, one-time</h2>
+                <p class="text-gray-600 mb-6">The price I quoted in March. All six scripts, all six prompts, templates, samples, setup guide, and any future updates to this version.</p>
+                <!-- CHECKOUT: swap this span back to <a href="KIT_OR_STRIPE_PRODUCT_URL" class="btn-primary" data-purchase-cta>...</a> once the $39 product URL exists. Grep BUILDERS-PIPELINE-CHECKOUT. -->
+                <span class="btn-primary" style="opacity:0.6;cursor:default;" data-purchase-cta="pending"><!-- BUILDERS-PIPELINE-CHECKOUT -->
+                    <i class="fas fa-clock mr-2"></i>Checkout opens shortly ($39)
+                </span>
+                <p class="text-sm text-gray-500 mt-4">The product is finished; the payment link goes live within a day. Instant download (zip, ~50KB of scripts and guides, no video bloat).</p>
+                <p class="text-sm text-gray-500 mt-2">No countdown timer, no "closing forever". It's $39 today and it'll be $39 next month. Buy it when you need it.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="py-14 px-4">
+        <div class="max-w-3xl mx-auto">
+            <h2 class="section-title text-center mb-8">Questions you should ask</h2>
+            <div class="space-y-4">
+                <div class="card">
+                    <h3 class="font-bold mb-2">I'm a writer, not a programmer. Is this really for me?</h3>
+                    <p class="text-gray-700 text-sm mb-0">That's exactly who the manual-mode prompts exist for. You can use the full system in Claude's chat window without installing anything, today. If you later want the one-command version, the setup guide walks you from zero. Most people are running in 15 minutes.</p>
+                </div>
+                <div class="card">
+                    <h3 class="font-bold mb-2">Won't the output sound like AI?</h3>
+                    <p class="text-gray-700 text-sm mb-0">The drafts are built from your worklog (your projects, your numbers, your lessons) in a voice you describe in the config. The rule baked into every prompt: if a detail isn't in the worklog, it leaves a placeholder rather than inventing one. You still edit before publishing. It kills the blank page; it doesn't replace you.</p>
+                </div>
+                <div class="card">
+                    <h3 class="font-bold mb-2">What are the ongoing costs?</h3>
+                    <p class="text-gray-700 text-sm mb-0">Your own Anthropic API usage: about $0.15 to $0.25 for a full weekly run of everything. There is no subscription to me - $39 is the whole relationship.</p>
+                </div>
+                <div class="card">
+                    <h3 class="font-bold mb-2">Is this the same thing you use?</h3>
+                    <p class="text-gray-700 text-sm mb-0">Yes. These are my Friday scripts, cleaned up, made configurable, and documented for someone who isn't me. The newsletter announcing this product was drafted by script #3 and scheduled by script #5.</p>
+                </div>
+                <div class="card">
+                    <h3 class="font-bold mb-2">Refunds?</h3>
+                    <p class="text-gray-700 text-sm mb-0">It's a digital download, so I can't take the bits back. But if it doesn't work for you, email me within 30 days and I'll refund it. Reply-to-any-email support is included either way.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-black text-white py-12 px-4">
+        <div class="max-w-6xl mx-auto text-center">
+            <div class="flex gap-6 justify-center mb-4">
+                <a href="https://www.youtube.com/channel/UCglNILz3uBqPer5EMJ_pzVg" target="_blank" rel="noopener" aria-label="YouTube" class="hover:text-yellow-400"><i class="fab fa-youtube text-2xl"></i></a>
+                <a href="https://www.linkedin.com/in/bryancollins99/" target="_blank" rel="noopener" aria-label="LinkedIn" class="hover:text-yellow-400"><i class="fab fa-linkedin text-2xl"></i></a>
+                <a href="https://github.com/bryancollins99" target="_blank" rel="noopener" aria-label="GitHub" class="hover:text-yellow-400"><i class="fab fa-github text-2xl"></i></a>
+            </div>
+            <div class="flex gap-4 justify-center text-sm text-gray-400 mb-4">
+                <a href="/privacy.html" class="hover:text-white">Privacy Policy</a>
+                <span>•</span>
+                <a href="/terms.html" class="hover:text-white">Terms of Service</a>
+            </div>
+            <p class="text-sm opacity-70">© 2026 Bryan Collins. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        const mobileMenuButton = document.getElementById('mobileMenuButton');
+        const mobileNav = document.getElementById('mobileNav');
+        mobileMenuButton.addEventListener('click', function() {
+            mobileNav.classList.toggle('active');
+            const icon = this.querySelector('i');
+            icon.classList.toggle('fa-bars');
+            icon.classList.toggle('fa-times');
+        });
+    </script>
+</body>
+</html>
