@@ -7,6 +7,7 @@ Disallow: /base-template.html
 Disallow: /thank-you.html
 Disallow: /builders-pipeline-thanks.html
 Disallow: /zettelkasten-kit-thanks.html
+Disallow: /filler-word-editor-pack-thanks.html
 
 # Block demo/test theme pages
 Disallow: /astropaper-*.html

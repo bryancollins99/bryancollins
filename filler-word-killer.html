@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Filler-Word Killer: Cut the Weak Words From Your Draft (Free, Private)</title>
+    <meta name="description" content="Paste a draft and instantly see filler and weak words highlighted, with a density read. Free, runs entirely in your browser, your text never leaves the page.">
+    <meta name="author" content="Bryan Collins">
+    <link rel="canonical" href="https://bryancollins.com/filler-word-killer.html">
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://bryancollins.com/filler-word-killer.html">
+    <meta property="og:title" content="Filler-Word Killer: Cut the Weak Words From Your Draft">
+    <meta property="og:description" content="Paste a draft, see filler and weak words highlighted instantly. Free, private, runs in your browser.">
+    <meta property="og:image" content="https://bryancollins.com/resources/bryan-collins.jpeg">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <meta name="theme-color" content="#000000">
+
+    <link rel="preload" as="style" href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css"></noscript>
+    <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"></noscript>
+
+    <!-- Privacy-friendly analytics by Plausible (page-load pageview only; no events fire during analyse) -->
+    <script async src="https://stats.bryancollins.com/js/pa-bvsz2TfQenbKYMWpBJ7eS.js"></script>
+    <script>
+      window.plausible=window.plausible||function(){(plausible.q=plausible.q||[]).push(arguments)},plausible.init=plausible.init||function(i){plausible.o=i||{}};
+      plausible.init()
+    </script>
+
+    <!-- Software Application Schema -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "Filler-Word Killer",
+      "applicationCategory": "Writing tool",
+      "operatingSystem": "Any (browser)",
+      "description": "A free, client-side tool that highlights filler and weak words in a draft so writers can cut them. Deterministic, no account, no upload.",
+      "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+      "author": { "@type": "Person", "name": "Bryan Collins" }
+    }
+    </script>
+
+    <style>
+        html { overflow-y: scroll; }
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            background-color: #EDEDEE;
+            color: #1B1B1D;
+        }
+        .nav-bar { background: #000000; border-bottom: 1px solid #333; font-family: inherit; }
+        .nav-link { color: white; padding: 0.5rem 1rem; text-decoration: none; transition: color 0.2s; }
+        .nav-link:hover { color: #FFDE59; }
+        .hero-gradient { background: linear-gradient(135deg, #000000 0%, #1a1a1a 100%); }
+        .card {
+            background: white; border-radius: 8px; padding: 2rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        .icon-yellow { color: #FFDE59; }
+        .btn-primary {
+            background: #FFDE59; color: #000000; padding: 0.9rem 2rem; border-radius: 6px;
+            text-decoration: none; display: inline-block; font-weight: 700; font-size: 1.1rem;
+            transition: all 0.3s; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); border: none; cursor: pointer;
+        }
+        .btn-primary:hover { background: #ffd633; transform: translateY(-2px); box-shadow: 0 6px 12px rgba(0,0,0,0.15); }
+        .btn-secondary {
+            background: #ffffff; color: #000000; padding: 0.7rem 1.4rem; border-radius: 6px;
+            display: inline-block; font-weight: 600; font-size: 0.95rem; border: 1px solid #ccc; cursor: pointer;
+            transition: all 0.2s;
+        }
+        .btn-secondary:hover { background: #f4f4f4; }
+        .section-title { font-size: 2rem; font-weight: 700; margin-bottom: 1rem; color: #000000; }
+        .mobile-menu-button { display: none; color: white; font-size: 1.5rem; cursor: pointer; background: none; border: none; padding: 0.5rem; }
+        .desktop-nav { display: flex; gap: 1.5rem; }
+        .mobile-nav { display: none; flex-direction: column; position: absolute; top: 100%; left: 0; right: 0; background: #000000; border-top: 1px solid #333; padding: 1rem; }
+        .mobile-nav.active { display: flex; }
+        .mobile-nav .nav-link { padding: 0.75rem 1rem; border-bottom: 1px solid #333; }
+        @media (max-width: 768px) {
+            .mobile-menu-button { display: block; }
+            .desktop-nav { display: none; }
+        }
+
+        /* Tool-specific */
+        #fwk-input {
+            width: 100%; min-height: 260px; border: 1px solid #ccc; border-radius: 8px;
+            padding: 1rem; font-size: 1rem; line-height: 1.7; font-family: inherit; resize: vertical;
+            background: #fff;
+        }
+        #fwk-input:focus { outline: none; border-color: #FFDE59; box-shadow: 0 0 0 3px rgba(255,222,89,0.35); }
+        #fwk-output {
+            min-height: 260px; border: 1px solid #e2e2e2; border-radius: 8px; padding: 1rem;
+            font-size: 1rem; line-height: 1.9; background: #fff; white-space: pre-wrap; word-wrap: break-word;
+            overflow-y: auto; max-height: 520px;
+        }
+        #fwk-output .placeholder { color: #9a9a9a; }
+        mark.fwk-flag {
+            background: #FFE9A8; color: #1B1B1D; border-bottom: 2px solid #E0A800;
+            border-radius: 3px; padding: 0 2px; cursor: help;
+        }
+        mark.fwk-flag.fwk-adverb { background: #FBD9C4; border-bottom-color: #D2691E; }
+        mark.fwk-flag.fwk-weak-verb { background: #DDE7F7; border-bottom-color: #4C6FBF; }
+        mark.fwk-flag.fwk-hedge { background: #E4D6F5; border-bottom-color: #8154C4; }
+        mark.fwk-flag.fwk-redundancy { background: #F7C9CE; border-bottom-color: #C0392B; }
+        .stat-num { font-size: 2rem; font-weight: 800; line-height: 1; color: #000; }
+        .stat-label { font-size: 0.8rem; color: #666; text-transform: uppercase; letter-spacing: 0.04em; }
+        .legend-chip { display: inline-flex; align-items: center; gap: 0.4rem; font-size: 0.82rem; margin-right: 0.9rem; margin-bottom: 0.4rem; }
+        .legend-swatch { width: 14px; height: 14px; border-radius: 3px; display: inline-block; }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="nav-bar sticky top-0 z-50">
+        <div class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between relative">
+            <a href="/index.html" class="text-white font-bold text-xl">Bryan Collins</a>
+            <button class="mobile-menu-button" id="mobileMenuButton" aria-label="Toggle menu">
+                <i class="fas fa-bars"></i>
+            </button>
+            <div class="desktop-nav">
+                <a href="/mba-frameworks.html" class="nav-link">Tools</a>
+                <a href="/projects.html" class="nav-link">Projects</a>
+                <a href="/builders-pipeline.html" class="nav-link">Builder's Pipeline</a>
+                <a href="/books.html" class="nav-link">Books</a>
+                <a href="/now.html" class="nav-link">Now</a>
+                <a href="/contact.html" class="nav-link">Contact</a>
+                <a href="https://newsletter.bryancollins.com" class="nav-link">Newsletter</a>
+            </div>
+            <div class="mobile-nav" id="mobileNav">
+                <a href="/mba-frameworks.html" class="nav-link">Tools</a>
+                <a href="/projects.html" class="nav-link">Projects</a>
+                <a href="/builders-pipeline.html" class="nav-link">Builder's Pipeline</a>
+                <a href="/books.html" class="nav-link">Books</a>
+                <a href="/now.html" class="nav-link">Now</a>
+                <a href="/contact.html" class="nav-link">Contact</a>
+                <a href="https://newsletter.bryancollins.com" class="nav-link">Newsletter</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero -->
+    <header class="hero-gradient text-white py-16 px-4">
+        <div class="max-w-4xl mx-auto text-center">
+            <p class="text-yellow-400 font-semibold mb-4 uppercase tracking-wide text-sm">Free Writing Tool</p>
+            <h1 class="text-4xl sm:text-5xl font-extrabold mb-6 leading-tight">Filler-Word Killer</h1>
+            <p class="text-xl opacity-90 mb-4 max-w-2xl mx-auto">Paste a draft. See every filler word, weak verb, hedge, and redundancy highlighted in one click. Then cut them and watch your prose tighten.</p>
+            <p class="text-sm opacity-80"><i class="fas fa-lock icon-yellow mr-2"></i>Your text never leaves your browser. No upload, no account, no cost.</p>
+        </div>
+    </header>
+
+    <!-- The tool -->
+    <section class="py-12 px-4">
+        <div class="max-w-6xl mx-auto">
+            <div class="grid lg:grid-cols-2 gap-6">
+                <!-- Input -->
+                <div>
+                    <label for="fwk-input" class="block font-bold mb-2">Paste your draft</label>
+                    <textarea id="fwk-input" placeholder="Paste or type your draft here. Then press Analyse."></textarea>
+                    <div class="flex flex-wrap items-center gap-3 mt-3">
+                        <button id="fwk-analyse" class="btn-primary" type="button"><i class="fas fa-highlighter mr-2"></i>Analyse</button>
+                        <button id="fwk-clear" class="btn-secondary" type="button">Clear</button>
+                        <span id="fwk-wordcount" class="text-sm text-gray-500 ml-auto">0 words</span>
+                    </div>
+                    <p id="fwk-message" class="text-sm mt-2" style="min-height: 1.2rem; color: #C0392B;"></p>
+                </div>
+
+                <!-- Output -->
+                <div>
+                    <label class="block font-bold mb-2">Highlighted draft</label>
+                    <div id="fwk-output" aria-live="polite"><span class="placeholder">Your highlighted draft appears here after you press Analyse.</span></div>
+                </div>
+            </div>
+
+            <!-- Stats -->
+            <div id="fwk-stats" class="grid grid-cols-2 sm:grid-cols-4 gap-4 mt-6" style="display:none;">
+                <div class="card text-center" style="padding:1.25rem;">
+                    <div class="stat-num" id="stat-flags">0</div>
+                    <div class="stat-label">Words flagged</div>
+                </div>
+                <div class="card text-center" style="padding:1.25rem;">
+                    <div class="stat-num" id="stat-words">0</div>
+                    <div class="stat-label">Total words</div>
+                </div>
+                <div class="card text-center" style="padding:1.25rem;">
+                    <div class="stat-num" id="stat-density">0%</div>
+                    <div class="stat-label">Filler density</div>
+                </div>
+                <div class="card text-center" style="padding:1.25rem;">
+                    <div class="stat-num" id="stat-verdict" style="font-size:1.15rem;">-</div>
+                    <div class="stat-label">Read</div>
+                </div>
+            </div>
+
+            <!-- Legend -->
+            <div id="fwk-legend" class="mt-5" style="display:none;">
+                <span class="legend-chip"><span class="legend-swatch" style="background:#FFE9A8;border:1px solid #E0A800;"></span>Filler / intensifier</span>
+                <span class="legend-chip"><span class="legend-swatch" style="background:#FBD9C4;border:1px solid #D2691E;"></span>-ly adverb</span>
+                <span class="legend-chip"><span class="legend-swatch" style="background:#DDE7F7;border:1px solid #4C6FBF;"></span>Weak / passive-ish verb</span>
+                <span class="legend-chip"><span class="legend-swatch" style="background:#E4D6F5;border:1px solid #8154C4;"></span>Hedge</span>
+                <span class="legend-chip"><span class="legend-swatch" style="background:#F7C9CE;border:1px solid #C0392B;"></span>Redundancy</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Privacy + how it works -->
+    <section class="py-10 px-4 bg-white">
+        <div class="max-w-4xl mx-auto grid md:grid-cols-2 gap-6">
+            <div class="card">
+                <h2 class="text-xl font-bold mb-3"><i class="fas fa-shield-alt icon-yellow mr-2"></i>Your text never leaves your browser</h2>
+                <p class="text-gray-700 text-sm mb-0">This tool runs entirely as JavaScript on this page. When you press Analyse, nothing is sent anywhere: no upload, no API, no server. You can open your browser dev tools, watch the network tab, and confirm zero requests fire while it works. Paste a confidential draft without a second thought.</p>
+            </div>
+            <div class="card">
+                <h2 class="text-xl font-bold mb-3"><i class="fas fa-cogs icon-yellow mr-2"></i>How it works</h2>
+                <p class="text-gray-700 text-sm mb-0">It checks your draft against a fixed, human-readable dictionary of filler words, empty intensifiers, hedges, weak verbs, redundant pairs, and over-used -ly adverbs. The rules are deterministic, so the same draft always gets the same read. It is a first-pass editor, not a grammar checker. You still make the calls.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Upgrade / Editor Pack -->
+    <section class="py-14 px-4">
+        <div class="max-w-3xl mx-auto text-center">
+            <div class="card">
+                <p class="text-yellow-600 font-semibold mb-2 uppercase tracking-wide text-sm">Optional upgrade</p>
+                <h2 class="text-2xl font-bold mb-3">The Filler-Word Killer Editor Pack</h2>
+                <p class="text-gray-700 mb-6">The free tool cleans one draft at a time in your browser. The Editor Pack is for writers and editors who want to run the same check in bulk: a command-line version that scans a whole folder of drafts and prints a report, a much bigger categorised dictionary (crutch words, corporate jargon, cliche phrases, redundancy pairs), a self-host copy of this tool you can put on your own site, and a one-page style checklist.</p>
+                <a href="https://buy.stripe.com/8x2cN69UjfSP1ZYgycbZe0u" class="btn-primary" data-purchase-cta><!-- FWK-EDITOR-PACK-CHECKOUT -->
+                    <i class="fas fa-download mr-2"></i>Get the Editor Pack ($29)
+                </a>
+                <p class="text-gray-500 text-sm mt-4">One-time payment via Stripe. Instant download. The tool above stays free, forever.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-black text-white py-12 px-4">
+        <div class="max-w-6xl mx-auto text-center">
+            <div class="flex gap-6 justify-center mb-4">
+                <a href="https://www.youtube.com/channel/UCglNILz3uBqPer5EMJ_pzVg" target="_blank" rel="noopener" aria-label="YouTube" class="hover:text-yellow-400"><i class="fab fa-youtube text-2xl"></i></a>
+                <a href="https://www.linkedin.com/in/bryancollins99/" target="_blank" rel="noopener" aria-label="LinkedIn" class="hover:text-yellow-400"><i class="fab fa-linkedin text-2xl"></i></a>
+                <a href="https://github.com/bryancollins99" target="_blank" rel="noopener" aria-label="GitHub" class="hover:text-yellow-400"><i class="fab fa-github text-2xl"></i></a>
+            </div>
+            <div class="flex gap-4 justify-center text-sm text-gray-400 mb-4">
+                <a href="/privacy.html" class="hover:text-white">Privacy Policy</a>
+                <span>&bull;</span>
+                <a href="/terms.html" class="hover:text-white">Terms of Service</a>
+            </div>
+            <p class="text-sm opacity-70">&copy; 2026 Bryan Collins. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // ---- Mobile menu ----
+        (function () {
+            var btn = document.getElementById('mobileMenuButton');
+            var nav = document.getElementById('mobileNav');
+            btn.addEventListener('click', function () {
+                nav.classList.toggle('active');
+                var icon = this.querySelector('i');
+                icon.classList.toggle('fa-bars');
+                icon.classList.toggle('fa-times');
+            });
+        })();
+
+        // ============================================================
+        //  Filler-Word Killer  ---  deterministic, client-side only.
+        //  No network calls run during analyse. Dictionary is below,
+        //  in plain sight, so you can see exactly what it flags.
+        // ============================================================
+        var FWK_DICTIONARY = {
+            // Empty intensifiers and crutch fillers (single words).
+            filler: [
+                "very", "really", "just", "actually", "basically", "quite", "simply",
+                "literally", "honestly", "totally", "definitely", "certainly", "essentially",
+                "virtually", "extremely", "absolutely", "particularly", "especially",
+                "somewhat", "rather", "fairly", "truly", "completely", "entirely",
+                "highly", "incredibly", "seriously", "obviously", "clearly", "generally",
+                "ultimately", "effectively", "surely", "utterly", "downright", "kinda",
+                "sorta", "stuff", "things", "somehow", "anyway", "anyways"
+            ],
+            // Hedges: single words and multi-word phrases that soften a claim.
+            hedge: [
+                "maybe", "perhaps", "possibly", "probably", "presumably", "arguably",
+                "i think", "i believe", "i feel", "i guess", "i suppose", "i assume",
+                "in my opinion", "in my view", "it seems", "it appears", "sort of",
+                "kind of", "a bit", "a little", "more or less", "to be honest",
+                "if you ask me", "for what it is worth", "or something"
+            ],
+            // Weak / passive-ish verbs. Flagged as a nudge to use a stronger verb.
+            weakVerb: [
+                "is", "are", "was", "were", "be", "been", "being", "am",
+                "has", "have", "had", "get", "got", "getting", "make", "makes",
+                "made", "do", "does", "did"
+            ],
+            // Redundancy pairs and cliche padding (multi-word phrases).
+            redundancy: [
+                "end result", "free gift", "added bonus", "past history", "future plans",
+                "advance planning", "close proximity", "each and every", "first and foremost",
+                "basic fundamentals", "unexpected surprise", "final outcome", "past experience",
+                "completely eliminate", "absolutely essential", "new innovation", "revert back",
+                "join together", "final conclusion", "true fact", "personal opinion",
+                "general consensus", "close scrutiny", "over exaggerate", "small in size",
+                "large in size", "period of time", "point in time", "in order to",
+                "due to the fact that", "at this moment in time", "the reason why",
+                "each individual", "brief summary", "future prospects", "past memories",
+                "sudden impulse", "advance warning", "actual fact", "end product"
+            ],
+            // Words ending in -ly that are NOT adverbs, so we never flag them.
+            adverbWhitelist: [
+                "family", "reply", "apply", "supply", "comply", "imply", "multiply",
+                "ally", "rally", "tally", "belly", "jelly", "bully", "folly", "holy",
+                "italy", "only", "early", "ugly", "silly", "lonely", "likely", "lovely",
+                "lively", "daily", "weekly", "monthly", "yearly", "hourly", "assembly",
+                "july", "anomaly", "monopoly", "melancholy", "apply", "supply", "reply",
+                "gully", "dolly", "wholly", "chilly", "fully", "duly", "unduly"
+            ]
+        };
+
+        // Build fast lookup sets. Phrases are stored by their word-length.
+        var FWK = (function () {
+            function toSet(arr) { var s = {}; for (var i = 0; i < arr.length; i++) s[arr[i]] = true; return s; }
+            var single = {}; // lowercase word -> category
+            var phrases = {}; // "length" -> { "the phrase": category }
+            function addSingle(word, cat) { if (word.indexOf(' ') === -1) single[word] = single[word] || cat; }
+            function addPhrase(text, cat) {
+                var n = text.split(/\s+/).length;
+                phrases[n] = phrases[n] || {};
+                if (!phrases[n][text]) phrases[n][text] = cat;
+            }
+            function load(arr, cat) {
+                for (var i = 0; i < arr.length; i++) {
+                    var t = arr[i].toLowerCase();
+                    if (t.indexOf(' ') === -1) addSingle(t, cat); else addPhrase(t, cat);
+                }
+            }
+            load(FWK_DICTIONARY.filler, 'filler');
+            load(FWK_DICTIONARY.hedge, 'hedge');
+            load(FWK_DICTIONARY.weakVerb, 'weak-verb');
+            load(FWK_DICTIONARY.redundancy, 'redundancy');
+            var maxPhrase = 0;
+            for (var k in phrases) { var kn = parseInt(k, 10); if (kn > maxPhrase) maxPhrase = kn; }
+            return {
+                single: single,
+                phrases: phrases,
+                maxPhrase: maxPhrase,
+                whitelist: toSet(FWK_DICTIONARY.adverbWhitelist)
+            };
+        })();
+
+        var CAT_CLASS = {
+            'filler': 'fwk-filler',
+            'adverb': 'fwk-adverb',
+            'weak-verb': 'fwk-weak-verb',
+            'hedge': 'fwk-hedge',
+            'redundancy': 'fwk-redundancy'
+        };
+        var CAT_LABEL = {
+            'filler': 'Filler / intensifier',
+            'adverb': '-ly adverb',
+            'weak-verb': 'Weak / passive-ish verb',
+            'hedge': 'Hedge',
+            'redundancy': 'Redundancy'
+        };
+
+        var MAX_WORDS = 5000;
+
+        function escapeHtml(s) {
+            return s.replace(/&/g, '&amp;').replace(/</g, '&lt;')
+                    .replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+        }
+
+        // Tokenise into words and separators, preserving order and spacing.
+        function tokenise(text) {
+            var tokens = [];
+            var re = /[A-Za-z][A-Za-z'’]*/g; // a word: letters, apostrophes
+            var last = 0, m;
+            while ((m = re.exec(text)) !== null) {
+                if (m.index > last) tokens.push({ value: text.slice(last, m.index), isWord: false });
+                tokens.push({ value: m[0], isWord: true, lower: m[0].toLowerCase() });
+                last = re.lastIndex;
+            }
+            if (last < text.length) tokens.push({ value: text.slice(last), isWord: false });
+            return tokens;
+        }
+
+        // Is the separator between two words "clean" (whitespace only, no sentence break)?
+        function cleanSeparator(sep) {
+            return /^\s+$/.test(sep);
+        }
+
+        function isLyAdverb(lower) {
+            if (lower.length < 5) return false;
+            if (lower.slice(-2) !== 'ly') return false;
+            if (FWK.whitelist[lower]) return false;
+            if (FWK.single[lower]) return false; // already caught as filler etc.
+            return true;
+        }
+
+        function analyse() {
+            var input = document.getElementById('fwk-input');
+            var output = document.getElementById('fwk-output');
+            var message = document.getElementById('fwk-message');
+            var text = input.value;
+
+            var tokens = tokenise(text);
+
+            // Count words.
+            var wordIdx = [];
+            for (var i = 0; i < tokens.length; i++) if (tokens[i].isWord) wordIdx.push(i);
+            var totalWords = wordIdx.length;
+
+            if (totalWords > MAX_WORDS) {
+                message.textContent = 'That draft is ' + totalWords.toLocaleString() +
+                    ' words, over the ' + MAX_WORDS.toLocaleString() +
+                    '-word limit for this browser tool. Trim it, split it, or grab the Editor Pack for batch runs.';
+                return;
+            }
+            message.textContent = '';
+
+            // Decide flags. units = [{start, end, category}] over token indices.
+            var flaggedToken = new Array(tokens.length); // token index -> unit id
+            var units = [];
+
+            for (var wi = 0; wi < wordIdx.length; /* advance inside */) {
+                var startTok = wordIdx[wi];
+                var matched = false;
+
+                // Try phrases, longest first.
+                for (var plen = FWK.maxPhrase; plen >= 2 && !matched; plen--) {
+                    if (wi + plen - 1 >= wordIdx.length) continue;
+                    var bank = FWK.phrases[plen];
+                    if (!bank) continue;
+                    // Gather the candidate word tokens and check separators are clean.
+                    var ok = true;
+                    var words = [];
+                    for (var p = 0; p < plen; p++) {
+                        var ti = wordIdx[wi + p];
+                        words.push(tokens[ti].lower);
+                        if (p > 0) {
+                            var prevTi = wordIdx[wi + p - 1];
+                            // Every token strictly between prevTi and ti must be a clean separator.
+                            for (var mid = prevTi + 1; mid < ti; mid++) {
+                                if (tokens[mid].isWord || !cleanSeparator(tokens[mid].value)) { ok = false; break; }
+                            }
+                            if (!ok) break;
+                        }
+                    }
+                    if (!ok) continue;
+                    var phrase = words.join(' ');
+                    if (bank[phrase]) {
+                        var endTok = wordIdx[wi + plen - 1];
+                        var uid = units.length;
+                        units.push({ start: startTok, end: endTok, category: bank[phrase] });
+                        for (var t = startTok; t <= endTok; t++) flaggedToken[t] = uid;
+                        wi += plen;
+                        matched = true;
+                    }
+                }
+                if (matched) continue;
+
+                // Single-word rules.
+                var lower = tokens[startTok].lower;
+                var cat = null;
+                if (FWK.single[lower]) cat = FWK.single[lower];
+                else if (isLyAdverb(lower)) cat = 'adverb';
+
+                if (cat) {
+                    var uid2 = units.length;
+                    units.push({ start: startTok, end: startTok, category: cat });
+                    flaggedToken[startTok] = uid2;
+                }
+                wi += 1;
+            }
+
+            // Build the highlighted HTML.
+            var html = '';
+            for (var idx = 0; idx < tokens.length; idx++) {
+                var uid3 = flaggedToken[idx];
+                if (uid3 !== undefined && units[uid3].start === idx) {
+                    var u = units[uid3];
+                    var cls = CAT_CLASS[u.category] || 'fwk-filler';
+                    var lbl = CAT_LABEL[u.category] || 'Filler';
+                    html += '<mark class="fwk-flag ' + cls + '" data-cat="' + u.category + '" title="' + lbl + '">';
+                    for (var e = u.start; e <= u.end; e++) html += escapeHtml(tokens[e].value);
+                    html += '</mark>';
+                    idx = u.end;
+                } else if (uid3 === undefined) {
+                    html += escapeHtml(tokens[idx].value);
+                }
+                // tokens inside a unit (not the start) are consumed by the idx jump above.
+            }
+
+            if (text.trim() === '') {
+                output.innerHTML = '<span class="placeholder">Paste a draft above, then press Analyse.</span>';
+            } else {
+                output.innerHTML = html;
+            }
+
+            // Stats.
+            var flagCount = 0;
+            for (var f = 0; f < tokens.length; f++) {
+                if (flaggedToken[f] !== undefined && tokens[f].isWord) flagCount++;
+            }
+            var density = totalWords > 0 ? (flagCount / totalWords) * 100 : 0;
+            document.getElementById('stat-flags').textContent = flagCount.toLocaleString();
+            document.getElementById('stat-words').textContent = totalWords.toLocaleString();
+            document.getElementById('stat-density').textContent = density.toFixed(1) + '%';
+
+            var verdict, color;
+            if (totalWords === 0) { verdict = '-'; color = '#000'; }
+            else if (density < 4) { verdict = 'Tight'; color = '#1E8449'; }
+            else if (density < 8) { verdict = 'Solid'; color = '#B7950B'; }
+            else if (density < 14) { verdict = 'Loose'; color = '#CA6F1E'; }
+            else { verdict = 'Padded'; color = '#C0392B'; }
+            var vEl = document.getElementById('stat-verdict');
+            vEl.textContent = verdict;
+            vEl.style.color = color;
+
+            document.getElementById('fwk-stats').style.display = '';
+            document.getElementById('fwk-legend').style.display = '';
+        }
+
+        function updateWordCount() {
+            var text = document.getElementById('fwk-input').value;
+            var m = text.match(/[A-Za-z][A-Za-z'’]*/g);
+            var n = m ? m.length : 0;
+            document.getElementById('fwk-wordcount').textContent = n.toLocaleString() + (n === 1 ? ' word' : ' words');
+        }
+
+        document.getElementById('fwk-analyse').addEventListener('click', analyse);
+        document.getElementById('fwk-input').addEventListener('input', updateWordCount);
+        document.getElementById('fwk-clear').addEventListener('click', function () {
+            var input = document.getElementById('fwk-input');
+            input.value = '';
+            updateWordCount();
+            document.getElementById('fwk-message').textContent = '';
+            document.getElementById('fwk-output').innerHTML =
+                '<span class="placeholder">Your highlighted draft appears here after you press Analyse.</span>';
+            document.getElementById('fwk-stats').style.display = 'none';
+            document.getElementById('fwk-legend').style.display = 'none';
+        });
+    </script>
+</body>
+</html>
