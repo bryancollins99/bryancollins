@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Claude Code for Writers: The Setup Nobody Shows You</title>
+    <meta name="description" content="You installed Claude Code and it felt built for programmers. This is the writer's setup: 3 ready-to-use CLAUDE.md templates, the memory system explained, a zero-terminal quickstart, and worked examples. $39, one-time.">
+    <meta name="author" content="Bryan Collins">
+    <link rel="canonical" href="https://bryancollins.com/claude-code-for-writers.html">
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://bryancollins.com/claude-code-for-writers.html">
+    <meta property="og:title" content="Claude Code for Writers: The Setup Nobody Shows You">
+    <meta property="og:description" content="The writer's setup for Claude Code: 3 CLAUDE.md templates, the memory system explained, a zero-terminal quickstart, worked examples. $39, one-time.">
+    <meta property="og:image" content="https://bryancollins.com/resources/bryan-collins.jpeg">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <meta name="theme-color" content="#000000">
+
+    <link rel="preload" as="style" href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css"></noscript>
+    <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"></noscript>
+
+    <!-- Privacy-friendly analytics by Plausible -->
+    <script async src="https://stats.bryancollins.com/js/pa-bvsz2TfQenbKYMWpBJ7eS.js"></script>
+    <script>
+      window.plausible=window.plausible||function(){(plausible.q=plausible.q||[]).push(arguments)},plausible.init=plausible.init||function(i){plausible.o=i||{}};
+      plausible.init()
+    </script>
+
+    <!-- Product Schema -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Product",
+      "name": "Claude Code for Writers",
+      "description": "The writer's setup for Claude Code: three CLAUDE.md templates, the memory system explained, a zero-terminal quickstart, file-safety basics, and three worked example sessions.",
+      "brand": { "@type": "Person", "name": "Bryan Collins" },
+      "offers": {
+        "@type": "Offer",
+        "price": "39.00",
+        "priceCurrency": "USD",
+        "availability": "https://schema.org/InStock",
+        "url": "https://bryancollins.com/claude-code-for-writers.html"
+      }
+    }
+    </script>
+
+    <style>
+        html { overflow-y: scroll; }
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            background-color: #EDEDEE;
+            color: #1B1B1D;
+        }
+        .nav-bar { background: #000000; border-bottom: 1px solid #333; font-family: inherit; }
+        .nav-link { color: white; padding: 0.5rem 1rem; text-decoration: none; transition: color 0.2s; }
+        .nav-link:hover { color: #FFDE59; }
+        .hero-gradient { background: linear-gradient(135deg, #000000 0%, #1a1a1a 100%); }
+        .card {
+            background: white; border-radius: 8px; padding: 2rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        .icon-yellow { color: #FFDE59; }
+        .btn-primary {
+            background: #FFDE59; color: #000000; padding: 0.9rem 2rem; border-radius: 6px;
+            text-decoration: none; display: inline-block; font-weight: 700; font-size: 1.1rem;
+            transition: all 0.3s; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .btn-primary:hover { background: #ffd633; transform: translateY(-2px); box-shadow: 0 6px 12px rgba(0,0,0,0.15); }
+        .section-title { font-size: 2rem; font-weight: 700; margin-bottom: 1rem; color: #000000; }
+        .terminal {
+            background: #0d0d0d; color: #e8e8e8; border-radius: 8px; padding: 1.25rem 1.5rem;
+            font-family: 'SF Mono', SFMono-Regular, ui-monospace, Menlo, monospace;
+            font-size: 0.9rem; line-height: 1.7; overflow-x: auto;
+        }
+        .terminal .cmd { color: #FFDE59; }
+        .terminal .dim { color: #8a8a8a; }
+        .mobile-menu-button { display: none; color: white; font-size: 1.5rem; cursor: pointer; background: none; border: none; padding: 0.5rem; }
+        .desktop-nav { display: flex; gap: 1.5rem; }
+        .mobile-nav { display: none; flex-direction: column; position: absolute; top: 100%; left: 0; right: 0; background: #000000; border-top: 1px solid #333; padding: 1rem; }
+        .mobile-nav.active { display: flex; }
+        .mobile-nav .nav-link { padding: 0.75rem 1rem; border-bottom: 1px solid #333; }
+        @media (max-width: 768px) {
+            .mobile-menu-button { display: block; }
+            .desktop-nav { display: none; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="nav-bar sticky top-0 z-50">
+        <div class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between relative">
+            <a href="/index.html" class="text-white font-bold text-xl">Bryan Collins</a>
+            <button class="mobile-menu-button" id="mobileMenuButton" aria-label="Toggle menu">
+                <i class="fas fa-bars"></i>
+            </button>
+            <div class="desktop-nav">
+                <a href="/mba-frameworks.html" class="nav-link">Tools</a>
+                <a href="/projects.html" class="nav-link">Projects</a>
+                <a href="/builders-pipeline.html" class="nav-link text-yellow-400">Builder's Pipeline</a>
+                <a href="/books.html" class="nav-link">Books</a>
+                <a href="/now.html" class="nav-link">Now</a>
+                <a href="/contact.html" class="nav-link">Contact</a>
+                <a href="https://newsletter.bryancollins.com" class="nav-link">Newsletter</a>
+            </div>
+            <div class="mobile-nav" id="mobileNav">
+                <a href="/mba-frameworks.html" class="nav-link">Tools</a>
+                <a href="/projects.html" class="nav-link">Projects</a>
+                <a href="/builders-pipeline.html" class="nav-link" style="color: #FFDE59;">Builder's Pipeline</a>
+                <a href="/books.html" class="nav-link">Books</a>
+                <a href="/now.html" class="nav-link">Now</a>
+                <a href="/contact.html" class="nav-link">Contact</a>
+                <a href="https://newsletter.bryancollins.com" class="nav-link">Newsletter</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero -->
+    <header class="hero-gradient text-white py-20 px-4">
+        <div class="max-w-4xl mx-auto text-center">
+            <p class="text-yellow-400 font-semibold mb-4 uppercase tracking-wide text-sm">Claude Code for Writers</p>
+            <h1 class="text-4xl sm:text-5xl font-extrabold mb-6 leading-tight">You installed Claude Code. Here is the writer's setup nobody shows you.</h1>
+            <p class="text-xl opacity-90 mb-8 max-w-2xl mx-auto">Three ready-to-use CLAUDE.md templates, the memory system explained in plain English, a first-five-things quickstart that assumes zero terminal experience, and worked examples. Go from "installed, now what" to a setup where Claude knows your voice, in under an hour.</p>
+            <a href="https://buy.stripe.com/cNi5kE2rRfSP8om1DibZe0v" class="btn-primary" data-purchase-cta><!-- BUILDERS-PIPELINE-CHECKOUT -->
+                <i class="fas fa-download mr-2"></i>Get Claude Code for Writers ($39)
+            </a>
+            <p class="text-sm opacity-70 mt-4">One-time payment via Stripe. Instant download the moment you pay. No subscription.</p>
+        </div>
+    </header>
+
+    <!-- Proof / credibility -->
+    <section class="py-14 px-4">
+        <div class="max-w-3xl mx-auto">
+            <div class="card" style="border-left: 4px solid #FFDE59;">
+                <h2 class="text-xl font-bold mb-3">This is the setup I actually write with</h2>
+                <p class="text-gray-700 mb-3">Most people open Claude Code, start typing, and get generic AI writing back. The difference is setup: a CLAUDE.md file that tells Claude your voice and rules, and a memory that remembers them between sessions. These are the exact templates and habits I use, translated for writers instead of programmers.</p>
+                <p class="text-gray-700 mb-0">And you do not have to take my word for it. It ships with three worked example sessions, real transcripts of notes becoming a post, a rough draft becoming a clean one, and a question becoming a researched brief, so you see exactly how it works before you set anything up. If it is not for you, you will know in two minutes. If it is, it is $39 once, and yours for good.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- The problem -->
+    <section class="py-14 px-4">
+        <div class="max-w-3xl mx-auto">
+            <h2 class="section-title">"I installed it, and then it felt like homework."</h2>
+            <p class="text-gray-700 mb-4">For years my ideas lived everywhere and nowhere: a note in one app, a highlight in another, a thought in a notebook I never opened again. When I needed an idea, I could not find it. When I wanted to connect two thoughts, they were trapped in different silos. So I stopped trusting any of it.</p>
+            <p class="text-gray-700 mb-4">The fix is not more technical knowledge. It is three files that configure Claude for writing before you type a word, and a plain-English explanation of the two things that actually matter: the CLAUDE.md that carries your voice, and the memory that keeps it. Copy a template into your writing folder and you are set up.</p>
+            <div class="terminal mb-4">
+<span class="dim"># drop one file in your writing folder and Claude knows you</span><br>
+<span class="cmd">~/my-book/</span><br>
+&nbsp;&nbsp;<span class="dim">CLAUDE.md</span>&nbsp;&nbsp;<span class="dim"># your voice + rules, loaded every session</span><br>
+&nbsp;&nbsp;chapters/<br>
+&nbsp;&nbsp;research/<br>
+<span class="dim"># "remember I never use em dashes" -> Claude keeps it, next time too</span>
+            </div>
+            <p class="text-gray-700">Set it up once, and every session starts knowing your voice. <strong>The tool was never the problem. The setup was.</strong></p>
+        </div>
+    </section>
+
+    <!-- What's inside -->
+    <section class="py-14 px-4 bg-white">
+        <div class="max-w-5xl mx-auto">
+            <h2 class="section-title text-center mb-10">What's inside</h2>
+            <div class="grid md:grid-cols-2 gap-6">
+                <div class="card">
+                    <i class="fas fa-file-code icon-yellow text-2xl mb-3"></i>
+                    <h3 class="text-lg font-bold mb-2">1. Three CLAUDE.md templates</h3>
+                    <p class="text-gray-700 text-sm">Ready to drop into a writing project, a newsletter, or a research project. Each one is pre-loaded with voice rules, file-safety rules, and house-style hooks. Fill in the blanks and Claude writes like you, not like a robot.</p>
+                </div>
+                <div class="card">
+                    <i class="fas fa-brain icon-yellow text-2xl mb-3"></i>
+                    <h3 class="text-lg font-bold mb-2">2. The memory system, explained</h3>
+                    <p class="text-gray-700 text-sm">The thing nobody shows writers: how to make Claude remember your voice and preferences between sessions, so you are not re-explaining yourself every time. Plain English, no jargon.</p>
+                </div>
+                <div class="card">
+                    <i class="fas fa-route icon-yellow text-2xl mb-3"></i>
+                    <h3 class="text-lg font-bold mb-2">3. The workflow</h3>
+                    <p class="text-gray-700 text-sm">"What I do instead of just typing." Working in passes, teaching Claude as you go, using the tool as a drafting partner rather than a vending machine.</p>
+                </div>
+                <div class="card">
+                    <i class="fas fa-rocket icon-yellow text-2xl mb-3"></i>
+                    <h3 class="text-lg font-bold mb-2">4. A first-five-things quickstart</h3>
+                    <p class="text-gray-700 text-sm">Assumes you have never used a terminal. The five things to set up on day one, in order, so you are productive in under an hour instead of lost in settings.</p>
+                </div>
+                <div class="card">
+                    <i class="fas fa-shield-alt icon-yellow text-2xl mb-3"></i>
+                    <h3 class="text-lg font-bold mb-2">5. File-safety basics</h3>
+                    <p class="text-gray-700 text-sm">How not to let an AI overwrite your manuscript: git as an undo button, new files over edits, and worktrees in one plain paragraph. The guardrails, without the lecture.</p>
+                </div>
+                <div class="card">
+                    <i class="fas fa-play-circle icon-yellow text-2xl mb-3"></i>
+                    <h3 class="text-lg font-bold mb-2">6. Three worked examples</h3>
+                    <p class="text-gray-700 text-sm">Real annotated sessions: notes into a post, a rough draft into a clean one, a question into a researched brief. See the actual back-and-forth before you try it yourself.</p>
+                </div>
+            </div>
+            </div>
+            <div class="card mt-6" style="background: #fffbe8;">
+                <h3 class="text-lg font-bold mb-2"><i class="fas fa-graduation-cap icon-yellow mr-2"></i>Written for writers, not developers</h3>
+                <p class="text-gray-700 text-sm mb-0">Every guide assumes your job is words. No code to read, no code to write, no assumed knowledge of git or the terminal. If you can copy a file and type a sentence to Claude, you can use this. It pairs naturally with <a href="/builders-pipeline.html" class="font-semibold underline">The Builder's Pipeline</a> once you want Claude generating content from your notes.</p>
+            </div>
+            <p class="text-center text-gray-600 text-sm mt-6">Also included: free updates to this version. A small zip of plain markdown files, no video bloat, nothing to install beyond Claude Code itself.</p>
+        </div>
+    </section>
+
+    <!-- Requirements / honesty -->
+    <section class="py-14 px-4">
+        <div class="max-w-3xl mx-auto">
+            <h2 class="section-title">What you'll need (read this before buying)</h2>
+            <div class="card">
+                <ul class="space-y-3 text-gray-700">
+                    <li><i class="fas fa-check icon-yellow mr-2"></i><strong>Claude Code installed.</strong> This is the writer's setup FOR Claude Code, not Claude Code itself. If you have not installed it yet, it is free to set up (a Claude subscription or API key runs it); the quickstart points you to the official install.</li>
+                    <li><i class="fas fa-check icon-yellow mr-2"></i><strong>A folder of your writing.</strong> A book, a newsletter, a research project. Anything. You drop a CLAUDE.md into it and you are configured.</li>
+                    <li><i class="fas fa-check icon-yellow mr-2"></i><strong>Zero coding.</strong> No code to read or write. If you can copy a file and type a sentence, you can use this.</li>
+                    <li><i class="fas fa-times text-gray-400 mr-2"></i><strong>Not included:</strong> Claude Code itself, a Claude subscription, or a course. This is the configuration and the method, not the software.</li>
+                </ul>
+            </div>
+            <div class="card mt-6">
+                <h3 class="text-lg font-bold mb-2">Who it's for (and not for)</h3>
+                <p class="text-gray-700 mb-3"><strong>For you if:</strong> you have heard Claude Code is powerful, maybe even installed it, but bounced off the developer framing and want the writer's version.</p>
+                <p class="text-gray-700 mb-0"><strong>Not for you if:</strong> you are already a developer comfortable writing your own CLAUDE.md and settings. You know this stuff; save your $39.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Price / CTA -->
+    <section class="py-14 px-4 bg-white">
+        <div class="max-w-3xl mx-auto text-center">
+            <div class="card">
+                <h2 class="text-3xl font-bold mb-2">$39, one-time</h2>
+                <p class="text-gray-600 mb-6">All three CLAUDE.md templates, the memory guide, the workflow, the quickstart, the file-safety basics, the three worked examples, and any future updates to this version.</p>
+                <a href="https://buy.stripe.com/cNi5kE2rRfSP8om1DibZe0v" class="btn-primary" data-purchase-cta><!-- BUILDERS-PIPELINE-CHECKOUT -->
+                    <i class="fas fa-download mr-2"></i>Get Claude Code for Writers ($39)
+                </a>
+                <p class="text-sm text-gray-500 mt-4">Secure payment via Stripe. Instant download the moment you pay (a small zip of plain markdown templates and guides, no video bloat).</p>
+                <p class="text-sm text-gray-500 mt-2">No fake timer. But I take products down when I move on to the next build. If it is useful to you, grab it while it is here.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="py-14 px-4">
+        <div class="max-w-3xl mx-auto">
+            <h2 class="section-title text-center mb-8">Questions you should ask</h2>
+            <div class="space-y-4">
+                <div class="card">
+                    <h3 class="font-bold mb-2">Do I need to know how to code?</h3>
+                    <p class="text-gray-700 text-sm mb-0">No. That is the entire point of this. There is no code to read or write. You copy a template file into your writing folder and talk to Claude in plain English. The quickstart assumes you have never opened a terminal.</p>
+                </div>
+                <div class="card">
+                    <h3 class="font-bold mb-2">Does this include Claude Code?</h3>
+                    <p class="text-gray-700 text-sm mb-0">No. Claude Code is Anthropic's free tool; you install that separately (the quickstart shows you how). This is the writer's configuration and method that makes it actually useful for writing instead of coding.</p>
+                </div>
+                <div class="card">
+                    <h3 class="font-bold mb-2">Will it be out of date next month?</h3>
+                    <p class="text-gray-700 text-sm mb-0">The core, what a CLAUDE.md is for and how the memory works, is durable. Where I reference a specific command, it is verified against the current docs and dated. You get free updates to this version if anything shifts.</p>
+                </div>
+                <div class="card">
+                    <h3 class="font-bold mb-2">How is this different from The Builder's Pipeline?</h3>
+                    <p class="text-gray-700 text-sm mb-0">This teaches you to <em>drive</em> Claude Code as a writer: the setup, the memory, the workflow. <a href="/builders-pipeline.html" class="font-semibold underline">The Builder's Pipeline</a> is a specific set of scripts that turn your notes into content. Start here if you want the skill; add the Pipeline when you want a ready-made system on top of it.</p>
+                </div>
+                <div class="card">
+                    <h3 class="font-bold mb-2">Refunds?</h3>
+                    <p class="text-gray-700 text-sm mb-0">It's a digital download, so I can't take the bits back. But if it doesn't work for you, email me within 30 days and I'll refund it. Reply-to-any-email support is included either way.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-black text-white py-12 px-4">
+        <div class="max-w-6xl mx-auto text-center">
+            <div class="flex gap-6 justify-center mb-4">
+                <a href="https://www.youtube.com/channel/UCglNILz3uBqPer5EMJ_pzVg" target="_blank" rel="noopener" aria-label="YouTube" class="hover:text-yellow-400"><i class="fab fa-youtube text-2xl"></i></a>
+                <a href="https://www.linkedin.com/in/bryancollins99/" target="_blank" rel="noopener" aria-label="LinkedIn" class="hover:text-yellow-400"><i class="fab fa-linkedin text-2xl"></i></a>
+                <a href="https://github.com/bryancollins99" target="_blank" rel="noopener" aria-label="GitHub" class="hover:text-yellow-400"><i class="fab fa-github text-2xl"></i></a>
+            </div>
+            <div class="flex gap-4 justify-center text-sm text-gray-400 mb-4">
+                <a href="/privacy.html" class="hover:text-white">Privacy Policy</a>
+                <span>•</span>
+                <a href="/terms.html" class="hover:text-white">Terms of Service</a>
+            </div>
+            <p class="text-sm opacity-70">© 2026 Bryan Collins. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        const mobileMenuButton = document.getElementById('mobileMenuButton');
+        const mobileNav = document.getElementById('mobileNav');
+        mobileMenuButton.addEventListener('click', function() {
+            mobileNav.classList.toggle('active');
+            const icon = this.querySelector('i');
+            icon.classList.toggle('fa-bars');
+            icon.classList.toggle('fa-times');
+        });
+    </script>
+</body>
+</html>

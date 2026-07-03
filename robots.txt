@@ -8,6 +8,7 @@ Disallow: /thank-you.html
 Disallow: /builders-pipeline-thanks.html
 Disallow: /zettelkasten-kit-thanks.html
 Disallow: /filler-word-editor-pack-thanks.html
+Disallow: /claude-code-for-writers-thanks.html
 
 # Block demo/test theme pages
 Disallow: /astropaper-*.html
