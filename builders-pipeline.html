@@ -126,11 +126,11 @@
             <p class="text-yellow-400 font-semibold mb-4 uppercase tracking-wide text-sm">The Builder's Pipeline</p>
             <h1 class="text-4xl sm:text-5xl font-extrabold mb-6 leading-tight">Turn a week of scrappy notes into ready-to-publish content. In one command.</h1>
             <p class="text-xl opacity-90 mb-8 max-w-2xl mx-auto">The six scripts I use every Friday to turn my worklog into LinkedIn drafts, newsletter emails, and YouTube ideas, packaged so you can run them on your notes. Plus every script as a copy-paste prompt, so it works even if you never touch Python.</p>
-            <!-- TODO(bryan): replace with real Stripe Payment Link for $39 product, or point at Kit Commerce product URL. Pattern: strategy-audit.html uses buy.stripe.com link. -->
-            <a href="https://buy.stripe.com/REPLACE_WITH_BUILDERS_PIPELINE_LINK" class="btn-primary" data-purchase-cta>
-                <i class="fas fa-download mr-2"></i>Get The Builder's Pipeline ($39)
-            </a>
-            <p class="text-sm opacity-70 mt-4">One-time payment. Instant download. No subscription, no upsell, no countdown timer.</p>
+            <!-- CHECKOUT: swap this span back to <a href="KIT_OR_STRIPE_PRODUCT_URL" class="btn-primary" data-purchase-cta>...</a> once the $39 product URL exists. Grep BUILDERS-PIPELINE-CHECKOUT. -->
+            <span class="btn-primary" style="opacity:0.6;cursor:default;" data-purchase-cta="pending"><!-- BUILDERS-PIPELINE-CHECKOUT -->
+                <i class="fas fa-clock mr-2"></i>Checkout opens shortly ($39)
+            </span>
+            <p class="text-sm opacity-70 mt-4">The product is finished. Payment link goes live within a day. One-time payment, instant download, no subscription, no countdown.</p>
         </div>
     </header>
 
@@ -138,9 +138,9 @@
     <section class="py-14 px-4">
         <div class="max-w-3xl mx-auto">
             <div class="card" style="border-left: 4px solid #FFDE59;">
-                <h2 class="text-xl font-bold mb-3">First, an apology</h2>
-                <p class="text-gray-700 mb-3">In March I emailed my list about this system and said I was packaging it up for $39. Three hundred of you clicked the link. Then life, a portfolio of sites, and an MBA got in the way, and the product page quietly died before most of you could buy it.</p>
-                <p class="text-gray-700 mb-0">This page is me fixing that. Same product I described, same price I quoted, built properly. If you were one of the people who clicked in March: thank you for the patience, and I'm sorry it took four months.</p>
+                <h2 class="text-xl font-bold mb-3">First, some honesty</h2>
+                <p class="text-gray-700 mb-3">In March I put this up as a pre-order for $39. Three hundred and five people clicked the link. Nobody bought. Fair enough: I was asking people to pay upfront for something they could not see, on my word that I would finish it.</p>
+                <p class="text-gray-700 mb-0">So I finished it, and this time you can look before you pay. Same product I described, same price I quoted, built properly, with sample output for every tool right here on this page. If it is not for you, that is a real answer. But at least now you are judging a finished thing you can see, not a promise.</p>
             </div>
         </div>
     </section>
@@ -234,11 +234,11 @@ Generating content ideas...<br>
             <div class="card">
                 <h2 class="text-3xl font-bold mb-2">$39, one-time</h2>
                 <p class="text-gray-600 mb-6">The price I quoted in March. All six scripts, all six prompts, templates, samples, setup guide, and any future updates to this version.</p>
-                <!-- TODO(bryan): replace with real Stripe Payment Link or Kit Commerce URL -->
-                <a href="https://buy.stripe.com/REPLACE_WITH_BUILDERS_PIPELINE_LINK" class="btn-primary" data-purchase-cta>
-                    <i class="fas fa-download mr-2"></i>Get The Builder's Pipeline ($39)
-                </a>
-                <p class="text-sm text-gray-500 mt-4">Secure payment via Stripe. Instant download (zip, ~50KB of scripts and guides, no video bloat).</p>
+                <!-- CHECKOUT: swap this span back to <a href="KIT_OR_STRIPE_PRODUCT_URL" class="btn-primary" data-purchase-cta>...</a> once the $39 product URL exists. Grep BUILDERS-PIPELINE-CHECKOUT. -->
+                <span class="btn-primary" style="opacity:0.6;cursor:default;" data-purchase-cta="pending"><!-- BUILDERS-PIPELINE-CHECKOUT -->
+                    <i class="fas fa-clock mr-2"></i>Checkout opens shortly ($39)
+                </span>
+                <p class="text-sm text-gray-500 mt-4">The product is finished; the payment link goes live within a day. Instant download (zip, ~50KB of scripts and guides, no video bloat).</p>
                 <p class="text-sm text-gray-500 mt-2">No countdown timer, no "closing forever". It's $39 today and it'll be $39 next month. Buy it when you need it.</p>
             </div>
         </div>
