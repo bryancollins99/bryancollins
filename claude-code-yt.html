@@ -50,6 +50,9 @@
     <link rel="canonical" href="https://bryancollins.com/claude-code-yt">
 </head>
 <body>
+    <script>
+      try { localStorage.setItem('bc_lm', 'claude'); } catch (e) {}
+    </script>
     <main class="min-h-screen flex flex-col items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
         <div class="w-full max-w-2xl">
             <div class="bg-white rounded-xl overflow-hidden shadow-xl">
@@ -84,7 +87,7 @@
                         <div class="max-w-lg mx-auto mt-8">
                             <!-- NOT LIVE YET. This lane needs its own Kit form so the right
                                  asset is delivered and the redirect lands on
-                                 /claude-code-yt-thanks. Swap the UID in both places below,
+                                 /thank-you. Swap the UID in both places below,
                                  then remove this comment and the noindex tag in <head>. -->
                             <div class="border-2 border-dashed rounded-lg p-6 text-center" style="border-color:#A6B6CF;">
                                 <p class="text-base font-semibold">Form pending</p>

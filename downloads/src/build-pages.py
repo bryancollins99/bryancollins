@@ -7,11 +7,19 @@ Writes six files into the repo root. Every page clones the structure, palette an
 Kit-embed pattern of 101-ai-prompts-yt.html, which is the only opt-in page on the
 site with measured conversions (19 Kit subscribers in the 59 days to 2026-09-15).
 
-Kit form UIDs: each lane needs its OWN Kit form so that (a) Kit's attribution API
-reports the lane by name and (b) the form delivers the right asset and redirects to
-the right thank-you page. Kit forms cannot be created over the API, so until Bryan
-creates them the UID below stays as the placeholder and the page must NOT be linked
-from YouTube — a shared form would deliver the wrong asset.
+Form strategy (Bryan's call, 2026-09-17): no new Kit forms. Every bryancollins.com
+lane reuses the one existing YouTube form, `426c2157ed` ("YouTube (AI Prompts)",
+id 7308877). A Kit form has exactly one incentive email and one redirect, so the
+asset CANNOT be delivered per-lane by Kit.
+
+Delivery therefore happens on the thank-you page instead. Each opt-in page stamps
+its lane into localStorage on load; `/thank-you.html` (the form's existing redirect
+target) reads the stamp and surfaces the matching PDF. No Kit configuration changes,
+so the live /101-ai-prompts-yt funnel is untouched, which matters because it is
+mid-measurement until 2026-10-13.
+
+Lane B (writers and books) is NOT here. It goes to becomeawritertoday.com on Resend,
+since that is the writing audience and BAWT already owns a hardened capture endpoint.
 """
 import os
 import re
@@ -20,12 +28,15 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 SITE = os.path.dirname(os.path.dirname(HERE))  # downloads/src -> downloads -> repo root
 
 PLACEHOLDER = "REPLACE_WITH_KIT_FORM_UID"
+# The one live YouTube Kit form. Shared by every bryancollins.com lane.
+SHARED_UID = "426c2157ed"
 
 LANES = [
     {
         "slug": "note-system-yt",
-        "thanks": "note-system-yt-thanks",
-        "uid": PLACEHOLDER,
+        "thanks": "thank-you",
+        "uid": SHARED_UID,
+        "lane": "note",
         "title": "The Plain-Text Note System",
         "meta_title": "The Plain-Text Note System (Free) - Bryan Collins",
         "meta_desc": ("Free: the four-folder note system I use. Plain text files you own for good, "
@@ -45,8 +56,9 @@ LANES = [
     },
     {
         "slug": "claude-code-yt",
-        "thanks": "claude-code-yt-thanks",
+        "thanks": "thank-you",
         "uid": PLACEHOLDER,
+        "lane": "claude",
         "title": "The Claude Code Starter Pack",
         "meta_title": "The Claude Code Starter Pack (Free) - Bryan Collins",
         "meta_desc": ("Free: the Claude Code setup I wish I had on day one. The CLAUDE.md template, "
@@ -63,25 +75,6 @@ LANES = [
         "upsell": ("My skills are public, free and MIT licensed at "
                    "<a href=\"https://github.com/bryancollins99/agent-skills\">"
                    "github.com/bryancollins99/agent-skills</a>."),
-    },
-    {
-        "slug": "writing-career-map",
-        "thanks": "writing-career-map-thanks",
-        "uid": PLACEHOLDER,
-        "title": "The Writing Career Map",
-        "meta_title": "The Writing Career Map (Free) - Bryan Collins",
-        "meta_desc": ("Free: seven ways writers actually get paid, what each one pays, who it suits, "
-                      "and the first three steps into each."),
-        "sub": "Seven ways writers get paid, and the first three steps into each.",
-        "pdf": "writing-career-map-2w7c6b5.pdf",
-        "pages": 7,
-        "benefits": [
-            "Seven paid writing paths, with honest pay ranges for each",
-            "Who each one actually suits, and who should avoid it",
-            "The first three steps into every path, starting this week",
-            "A straight read on which paths AI is taking and which it is not",
-        ],
-        "upsell": "I write about the work, including the parts that fail, at bryancollins.com.",
     },
 ]
 
@@ -164,8 +157,19 @@ def optin(lane):
     robots = ("\n    <meta name=\"robots\" content=\"noindex\">"
               if lane["uid"] == PLACEHOLDER else "")
 
+    # The shared Kit form can only redirect to ONE page, so the page cannot tell
+    # /thank-you.html which asset was promised. Stamp the lane here, on load rather
+    # than on submit, because the Kit embed renders its own form in its own script
+    # and there is no reliable submit hook to attach to. A visitor who never
+    # subscribes just carries a harmless key: the only way to reach /thank-you is
+    # through the form.
+    stamp = f"""    <script>
+      try {{ localStorage.setItem('bc_lm', '{lane["lane"]}'); }} catch (e) {{}}
+    </script>"""
+
     return f"""{head(lane['meta_title'], lane['meta_desc'], lane['slug'], robots)}
 <body>
+{stamp}
     <main class="min-h-screen flex flex-col items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
         <div class="w-full max-w-2xl">
             <div class="bg-white rounded-xl overflow-hidden shadow-xl">
@@ -201,42 +205,92 @@ def optin(lane):
 """
 
 
-def thanks(lane):
-    return f"""{head('Your download is ready - ' + lane['title'],
-                     'Download ' + lane['title'] + '.',
-                     lane['thanks'], chr(10) + '    <meta name="robots" content="noindex">')}
-<body>
-    <main class="min-h-screen flex flex-col items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
-        <div class="w-full max-w-2xl">
-            <div class="bg-white rounded-xl overflow-hidden shadow-xl">
-                <div class="hero-gradient px-8 py-12 text-center">
-                    <h1 class="hero-text text-4xl sm:text-5xl font-extrabold mb-4 leading-tight">Here it is</h1>
-                    <p class="hero-text text-xl max-w-xl mx-auto">{lane['title']}</p>
-                </div>
+BEGIN = "<!-- LEAD-MAGNET-DOWNLOAD:BEGIN (generated by downloads/src/build-pages.py) -->"
+END = "<!-- LEAD-MAGNET-DOWNLOAD:END -->"
 
-                <div class="px-8 py-10 text-center">
-                    <a class="cta-button" href="/downloads/{lane['pdf']}" download>
-                        <i class="fas fa-download mr-2"></i>Download the PDF
-                    </a>
-                    <p class="text-sm mt-4" style="opacity:.7;">A copy is on its way to your inbox too. If it does not arrive in a few minutes, check your promotions folder.</p>
 
-                    <div class="text-left mt-10 pt-8 social-proof border-t">
-                        <p class="text-base">{lane['upsell']}</p>
-                    </div>
-                </div>
-            </div>
-            <p class="text-center text-xs mt-8" style="color: #1B1B1D; opacity: 0.5;">&copy; Bryan Collins. All rights reserved. &middot; <a href="/privacy">Privacy</a></p>
-        </div>
-    </main>
-</body>
-</html>
-"""
+def download_block():
+    """The lane-aware download panel injected into the shared /thank-you.html.
+
+    Every bryancollins.com lane shares one Kit form, so the form always redirects
+    here and cannot say which asset was promised. This reads the stamp the opt-in
+    page left in localStorage and reveals the matching PDF.
+
+    It degrades on purpose: private windows, cleared storage and a viewer arriving
+    from an older funnel all leave no stamp, so the panel then offers EVERY asset
+    rather than nothing. Nobody who subscribed should ever hit a dead end.
+    """
+    assets = ",\n".join(
+        f"      {l['lane']}: {{ title: {l['title']!r}, pdf: '/downloads/{l['pdf']}' }}"
+        for l in LANES)
+    return f"""{BEGIN}
+<div id="lm-download" class="max-w-lg mx-auto mb-10" hidden>
+  <div class="rounded-xl p-6 text-center" style="background:#EDEDEE;">
+    <p class="text-sm font-semibold uppercase tracking-wider mb-2" style="color:#956FA6;">Your download</p>
+    <h2 id="lm-title" class="text-2xl font-bold mb-4"></h2>
+    <div id="lm-links"></div>
+    <p class="text-sm mt-4" style="opacity:.7;">A copy is on its way to your inbox too.</p>
+  </div>
+</div>
+<script>
+  (function () {{
+    var ASSETS = {{
+{assets}
+    }};
+    var lane = null;
+    try {{ lane = localStorage.getItem('bc_lm'); }} catch (e) {{}}
+    var box = document.getElementById('lm-download');
+    var links = document.getElementById('lm-links');
+    var title = document.getElementById('lm-title');
+    if (!box || !links || !title) return;
+
+    function button(a) {{
+      var el = document.createElement('a');
+      el.className = 'cta-button';
+      el.style.margin = '6px';
+      el.setAttribute('href', a.pdf);
+      el.setAttribute('download', '');
+      el.textContent = 'Download ' + a.title;
+      return el;
+    }}
+
+    var picked = lane && ASSETS[lane];
+    if (picked) {{
+      title.textContent = picked.title;
+      links.appendChild(button(picked));
+    }} else {{
+      // No stamp: offer everything rather than guess wrong.
+      title.textContent = 'Grab your guides';
+      Object.keys(ASSETS).forEach(function (k) {{ links.appendChild(button(ASSETS[k])); }});
+    }}
+    box.hidden = false;
+  }})();
+</script>
+{END}"""
+
+
+def patch_thanks():
+    path = os.path.join(SITE, "thank-you.html")
+    html = open(path).read()
+    block = download_block()
+    if BEGIN in html and END in html:
+        start = html.index(BEGIN)
+        stop = html.index(END) + len(END)
+        html = html[:start] + block + html[stop:]
+    else:
+        # First run: drop it in immediately after <body>, above the existing copy.
+        anchor = html.index("<body>") + len("<body>")
+        html = html[:anchor] + "\n" + block + "\n" + html[anchor:]
+    open(path, "w").write(html)
+    return path
 
 
 if __name__ == "__main__":
     for lane in LANES:
-        for name, body in ((lane["slug"], optin(lane)), (lane["thanks"], thanks(lane))):
-            path = os.path.join(SITE, f"{name}.html")
-            with open(path, "w") as fh:
-                fh.write(body)
-            print(f"wrote {name}.html  ({len(body)} bytes)")
+        path = os.path.join(SITE, f"{lane['slug']}.html")
+        body = optin(lane)
+        with open(path, "w") as fh:
+            fh.write(body)
+        state = "PENDING" if lane["uid"] == PLACEHOLDER else f"live on {lane['uid']}"
+        print(f"wrote {lane['slug']}.html  ({len(body)} bytes)  {state}")
+    print("patched " + os.path.basename(patch_thanks()))
