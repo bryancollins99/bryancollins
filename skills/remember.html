@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>/remember: a Claude Code skill · Bryan Collins</title>
+    <meta name="description" content="Captures what the session taught into a file-based memory store, and separately flags memories whose commitment date has passed.">
+    <meta name="author" content="Bryan Collins">
+    <link rel="canonical" href="https://bryancollins.com/skills/remember">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://bryancollins.com/skills/remember">
+    <meta property="og:title" content="/remember: a Claude Code skill · Bryan Collins">
+    <meta property="og:description" content="Captures what the session taught into a file-based memory store, and separately flags memories whose commitment date has passed.">
+    <meta property="og:image" content="https://bryancollins.com/resources/bryan-collins.jpeg">
+    <meta name="twitter:card" content="summary">
+    <meta name="theme-color" media="(prefers-color-scheme: light)" content="#fdfdfc">
+    <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#121211">
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <link rel="stylesheet" href="/assets/hub.css">
+    <script async src="https://stats.bryancollins.com/js/pa-bvsz2TfQenbKYMWpBJ7eS.js"></script>
+    <script>
+      window.plausible=window.plausible||function(){(plausible.q=plausible.q||[]).push(arguments)},plausible.init=plausible.init||function(i){plausible.o=i||{}};
+      plausible.init()
+    </script>
+    <script type="application/ld+json">{"@context": "https://schema.org", "@type": "SoftwareSourceCode", "name": "/remember", "description": "Captures what the session taught into a file-based memory store, and separately flags memories whose commitment date has passed.", "codeRepository": "https://github.com/bryancollins99/agent-skills", "license": "https://opensource.org/licenses/MIT", "programmingLanguage": "Markdown", "author": {"@type": "Person", "name": "Bryan Collins", "url": "https://bryancollins.com/"}}</script>
+</head>
+<body>
+<a class="skip" href="#content">Skip to content</a>
+<header class="site-header">
+    <a class="brand" href="/">Bryan Collins</a>
+    <nav aria-label="Main"><a href="/videos">Videos</a><a href="/projects">Projects</a><a href="/skills/">Skills</a><a href="/books">Books</a><a href="/work-with-me">Work</a><a href="/#newsletter">Newsletter</a></nav>
+</header>
+<main id="content">
+<nav class="crumbs"><a href="/skills/">Agent skills</a> /</nav>
+<section class="hero">
+    <h1><code>/remember</code></h1>
+    <p class="muted">Thinking and communicating</p>
+    <p>Captures what the session taught into a file-based memory store, and separately flags memories whose commitment date has passed.</p>
+<p>Agent memory rots in two directions and most setups only watch one. Forgetting is the obvious failure. Accumulation is the expensive one: a store that only grows fills with reversed decisions and dead projects, gets loaded into context on every single run, and makes the agent act on things that stopped being true.</p>
+<p>The design constraint that makes it usable daily is that the staleness pass is a deterministic script, not a model pass. It reads the files outside the model and prints a shortlist; the model only looks at what it surfaced. A version that reads the whole store to decide what is stale is one you stop running.</p>
+</section>
+<section class="block install">
+    <h2>Install</h2>
+<pre><code>curl -o ~/.claude/commands/remember.md \
+  https://raw.githubusercontent.com/bryancollins99/agent-skills/main/skills/remember.md</code></pre>
+    <p class="small">Then run <code>/remember</code> in Claude Code. For any other agent, paste the procedure below as its instruction. <a href="https://github.com/bryancollins99/agent-skills/blob/main/skills/remember.md">View on GitHub</a>.</p>
+</section>
+<section class="block">
+    <h2>The procedure</h2>
+    <article class="prose"><p>Reviews the session for facts worth keeping, writes them to a file-based memory store, and periodically flags memories whose commitment date has passed. Cheap by design: it never reads the store in bulk.</p>
+<h3>Purpose</h3>
+<p>Agent memory rots in two directions and most setups only notice the first.</p>
+<p>The obvious failure is forgetting: you tell the agent something, and next session it has no idea. The less obvious one is accumulation. A memory store that only ever grows fills with decisions that were reversed, projects that died, gates whose dates passed months ago, and near-duplicate entries written because nobody checked whether the fact was already there. Every one of those is loaded into context at the start of every session, so a stale store is not neutral. You pay for it on every single run, and worse, the agent acts on facts that stopped being true.</p>
+<p>This skill does both halves. It captures what the session taught, and it flags what has expired, without ever loading the whole store to do either.</p>
+<p>The cost discipline is the part that makes it usable daily. A naive version reads every memory file to decide what is stale, which turns a routine end-of-session habit into an expensive one and you stop running it. Here the staleness pass is a deterministic script that reads the files outside the model and prints a shortlist, and the model only looks at what the script surfaced.</p>
+<h3>When to use</h3>
+<ul><li>At the end of a working session, when a decision was made, a preference was stated, or something cost you real time to discover.</li><li>Any time you catch yourself explaining something to the agent for the second time.</li><li>Weekly, for the staleness pass, which throttles itself so daily use costs one script call.</li></ul>
+<p>Not for: notes about what code does. That belongs in the repo or in a <code>CLAUDE.md</code>, which the agent already reads.</p>
+<h3>Steps</h3>
+<p><strong>1. Extract from the session. No tool calls needed.</strong></p>
+<p>The conversation is already in context, so this phase is free. Look for facts that will still matter in a month and that are <strong>not derivable</strong> from the repo, git history or a config file.</p>
+<p>Worth saving: a decision and the reasoning behind it, a correction the user made, a gotcha that cost real time, a constraint, where a credential lives, a piece of live state that exists nowhere in code.</p>
+<p>Not worth saving: what a file does, what a commit changed, anything true only for this session, anything already written in a config file the agent loads anyway.</p>
+<p><strong>2. Check the index before writing.</strong></p>
+<p>The index is already in context. If a memory on the topic exists, update that file rather than adding a near-duplicate. Duplicates are the main reason these stores double in size without gaining information.</p>
+<p><strong>3. One fact per file.</strong></p>
+<p>A session that produced three lessons is three files, not one. Granular files mean the agent can pull in exactly the relevant one instead of the whole store. Use frontmatter for a <code>name</code>, a one-line <code>description</code> used to judge relevance, and a <code>type</code>. Link related memories so a retrieved memory can pull its neighbours.</p>
+<p><strong>4. Date every future commitment, in the body, explicitly.</strong></p>
+<p>&quot;hold until 2026-10-01&quot;. &quot;gate reads about 2026-11-15&quot;. &quot;expires 2026-12-02&quot;.</p>
+<p>That wording is the entire mechanism behind step 5. A commitment written as &quot;revisit this later&quot; is invisible forever.</p>
+<p><strong>5. The staleness pass, as a script rather than a model pass.</strong></p>
+<p>Write a small script that walks the store and prints only what needs attention. It should:</p>
+<ul><li>Parse ISO dates out of each file&#x27;s body, skipping the frontmatter and any line that is describing history rather than a commitment (<code>why:</code>, <code>source:</code>, <code>description:</code>) - otherwise every &quot;the user said this on 2026-04-25&quot; fires as an expiry.</li><li>Report a file only when a <strong>future-tense commitment date has passed</strong>. Historical dates are noise.</li><li>Honour a review stamp: a comment such as <code>&lt;!-- reviewed: YYYY-MM-DD --&gt;</code> at the end of a file. Skip any file whose reviewed date is at or after its passed commitment. Without this, a memory you already settled reappears on every sweep forever.</li><li>Self-throttle. Run a full pass only if none has run in the last seven days, with a <code>--force</code> flag to override.</li><li>Print the store size and the index&#x27;s per-session token cost, so the growth is visible.</li></ul>
+<p><strong>6. Verify before proposing a delete, with one subagent at most.</strong></p>
+<p>A passed date means &quot;check this&quot;, not &quot;delete this&quot;. When a candidate&#x27;s status can be settled from live state - a pull request merged, a domain lapsed, a threshold reached - hand the whole candidate list to a single read-only subagent and have it return one line each: STILL TRUE, SUPERSEDED, EXPIRED, or NEEDS USER. Its file reads stay out of the main context, which is the point.</p>
+<p>Anything resting on human judgement - is that project really dead, does that preference still hold - is always NEEDS USER. Never decide those on the user&#x27;s behalf.</p>
+<p><strong>7. Stamp everything you reviewed, whatever the verdict</strong>, and write the finding into the file. A stamp with no note tells the next session nothing.</p>
+<p><strong>8. Propose, then write.</strong></p>
+<p>Show one numbered list and change nothing until the user replies:</p>
+<pre><code>ADD    &lt;name&gt;  what it says, in one line
+UPDATE &lt;name&gt;  what changes
+DELETE &lt;name&gt;  why it is dead, and the evidence
+ASK    &lt;name&gt;  the question only the user can answer</code></pre>
+<p>On approval, write the files and update the index in the same pass.</p>
+<h3>Failure modes</h3>
+<ul><li><strong>Reading the store in bulk defeats the whole design.</strong> Not with a glob, not with a loop, not &quot;just to check&quot;. If you are about to read more files than the script shortlisted, stop. This is the failure mode the split between script and model exists to prevent.</li></ul>
+<ul><li><strong>Undated commitments are permanently invisible.</strong> The sweep can only find what was written as a date. A memory saying &quot;revisit when traffic picks up&quot; will never surface again. Push back at write time and get a date, even a rough one.</li></ul>
+<ul><li><strong>Historical dates masquerade as expiries.</strong> Every memory contains dates that are provenance rather than commitment. Without a skip rule the sweep flags the entire store on its first run, you learn to ignore it, and it becomes decoration.</li></ul>
+<ul><li><strong>A store that only grows is a tax on every session.</strong> The index loads every time. A line added there costs the user tokens on every run for the rest of its life, so it has to earn the place. When the index gets too big, compact it: group related entries, cut restated detail, keep every filename. Compacting the index is not deleting memories, and the two must never be conflated.</li></ul>
+<ul><li><strong>Softening a stated preference is worse than forgetting it.</strong> When the user says never do X, the memory says never, not &quot;prefers not to&quot;. An agent that rounds a hard rule down to a preference will break it and believe it complied.</li></ul>
+<ul><li><strong>The store must be the same store everywhere.</strong> If you run the agent on more than one machine, memory written on one and not synced to the other is worse than no memory, because behaviour silently diverges and you cannot tell which machine is right. Keep the store in a directory that is version controlled and synced, and check that the sync actually ran rather than assuming it did.</li></ul></article>
+</section>
+<section class="block"><h2>More skills</h2><ul class="inline"><li><a href="/skills/pre-commit-review"><code>/pre-commit-review</code></a></li><li><a href="/skills/merge-conflict-walkthrough"><code>/merge-conflict-walkthrough</code></a></li><li><a href="/skills/rebase-plan"><code>/rebase-plan</code></a></li><li><a href="/skills/branch-cleanup"><code>/branch-cleanup</code></a></li><li><a href="/skills/wiring"><code>/wiring</code></a></li><li><a href="/skills/log-issue"><code>/log-issue</code></a></li><li><a href="/skills/fix-cluster"><code>/fix-cluster</code></a></li><li><a href="/skills/best-of-both"><code>/best-of-both</code></a></li><li><a href="/skills/cron-staleness"><code>/cron-staleness</code></a></li><li><a href="/skills/decide"><code>/decide</code></a></li><li><a href="/skills/explain"><code>/explain</code></a></li><li><a href="/skills/notes-to-ideas"><code>/notes-to-ideas</code></a></li></ul></section>
+<section id="newsletter" class="block newsletter">
+    <h2>Get new skills by email</h2>
+    <p>What I'm building with AI coding agents, what broke, and what I'd do differently. Straight to your inbox.</p>
+    <form action="https://app.kit.com/forms/8058199/subscriptions" method="post" data-sv-form="8058199" data-uid="4914fa2338" class="signup">
+        <label class="sr" for="nl-email">Email address</label>
+        <input id="nl-email" name="email_address" type="email" placeholder="Email address" autocomplete="email" required>
+        <button type="submit">Subscribe</button>
+    </form>
+    <p class="muted small">Unsubscribe any time. Or read the archive at <a href="https://newsletter.bryancollins.com">newsletter.bryancollins.com</a>.</p>
+</section>
+</main>
+<footer class="site-footer">
+    <p><a href="https://www.youtube.com/channel/UCglNILz3uBqPer5EMJ_pzVg">YouTube</a> · <a href="https://github.com/bryancollins99">GitHub</a> · <a href="https://www.linkedin.com/in/bryancollins99/">LinkedIn</a> · <a href="https://substack.com/@bryancollins">Substack</a> · <a href="/products">Products</a> · <a href="/mba-frameworks">Strategy tools</a> · <a href="/now">Now</a> · <a href="/contact">Contact</a></p>
+    <p class="muted">© 2026 Bryan Collins · <a href="/privacy">Privacy</a> · <a href="/terms">Terms</a></p>
+</footer>
+</body>
+</html>

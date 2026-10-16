@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>/merge-conflict-walkthrough: a Claude Code skill · Bryan Collins</title>
+    <meta name="description" content="Reads both sides of every conflicted file and proposes a resolution with its reasoning.">
+    <meta name="author" content="Bryan Collins">
+    <link rel="canonical" href="https://bryancollins.com/skills/merge-conflict-walkthrough">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://bryancollins.com/skills/merge-conflict-walkthrough">
+    <meta property="og:title" content="/merge-conflict-walkthrough: a Claude Code skill · Bryan Collins">
+    <meta property="og:description" content="Reads both sides of every conflicted file and proposes a resolution with its reasoning.">
+    <meta property="og:image" content="https://bryancollins.com/resources/bryan-collins.jpeg">
+    <meta name="twitter:card" content="summary">
+    <meta name="theme-color" media="(prefers-color-scheme: light)" content="#fdfdfc">
+    <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#121211">
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <link rel="stylesheet" href="/assets/hub.css">
+    <script async src="https://stats.bryancollins.com/js/pa-bvsz2TfQenbKYMWpBJ7eS.js"></script>
+    <script>
+      window.plausible=window.plausible||function(){(plausible.q=plausible.q||[]).push(arguments)},plausible.init=plausible.init||function(i){plausible.o=i||{}};
+      plausible.init()
+    </script>
+    <script type="application/ld+json">{"@context": "https://schema.org", "@type": "SoftwareSourceCode", "name": "/merge-conflict-walkthrough", "description": "Reads both sides of every conflicted file and proposes a resolution with its reasoning.", "codeRepository": "https://github.com/bryancollins99/agent-skills", "license": "https://opensource.org/licenses/MIT", "programmingLanguage": "Markdown", "author": {"@type": "Person", "name": "Bryan Collins", "url": "https://bryancollins.com/"}}</script>
+</head>
+<body>
+<a class="skip" href="#content">Skip to content</a>
+<header class="site-header">
+    <a class="brand" href="/">Bryan Collins</a>
+    <nav aria-label="Main"><a href="/videos">Videos</a><a href="/projects">Projects</a><a href="/skills/">Skills</a><a href="/books">Books</a><a href="/work-with-me">Work</a><a href="/#newsletter">Newsletter</a></nav>
+</header>
+<main id="content">
+<nav class="crumbs"><a href="/skills/">Agent skills</a> /</nav>
+<section class="hero">
+    <h1><code>/merge-conflict-walkthrough</code></h1>
+    <p class="muted">Git hygiene</p>
+    <p>Reads both sides of every conflicted file and proposes a resolution with its reasoning.</p>
+<p>It classifies each conflict first - additive, version bump, semantic clash, rename-plus-edit - because those need different treatment and only the first two are safe to resolve mechanically. Semantic clashes are reported and left alone. It never writes to disk and never runs <code>git add</code> or <code>git rebase --continue</code>.</p>
+</section>
+<section class="block install">
+    <h2>Install</h2>
+<pre><code>curl -o ~/.claude/commands/merge-conflict-walkthrough.md \
+  https://raw.githubusercontent.com/bryancollins99/agent-skills/main/skills/merge-conflict-walkthrough.md</code></pre>
+    <p class="small">Then run <code>/merge-conflict-walkthrough</code> in Claude Code. For any other agent, paste the procedure below as its instruction. <a href="https://github.com/bryancollins99/agent-skills/blob/main/skills/merge-conflict-walkthrough.md">View on GitHub</a>.</p>
+</section>
+<section class="block">
+    <h2>The procedure</h2>
+    <article class="prose"><p>Walks through each conflicted file in a merge or rebase - lists files, reads markers, proposes a resolution with rationale.</p>
+<h3>Purpose</h3>
+<p>Merge conflicts are where solo developers lose the most time. This skill removes the &quot;which side was mine again?&quot; confusion by reading both sides of each conflict, proposing a resolution that preserves both intents where possible, and explaining its reasoning.</p>
+<h3>When to use</h3>
+<ul><li>Any merge or rebase with 3+ conflicted files.</li><li>A single file with non-obvious conflicts (renames, import reorders, formatting clashes).</li><li>Mid-rebase when you&#x27;ve lost track of which commit you&#x27;re replaying.</li></ul>
+<h3>Steps</h3>
+<ol><li>Run <code>git status</code> and <code>git diff --name-only --diff-filter=U</code> to list conflicted files.</li><li>For each conflicted file, read the <code>&lt;&lt;&lt;&lt;&lt;&lt;&lt;</code> / <code>=======</code> / <code>&gt;&gt;&gt;&gt;&gt;&gt;&gt;</code> blocks.</li><li>Classify the conflict:</li><li><strong>Additive</strong>: both sides added different entries to a list → keep both</li><li><strong>Version bump</strong>: both sides changed the same version number → keep the newer</li><li><strong>Semantic clash</strong>: same logic changed two different ways → human judgment needed</li><li><strong>Rename + edit</strong>: one side renamed, other edited → flag for manual review</li><li>Propose a merged version inline. Show what each side contributed in a one-line comment.</li><li>Do not write the resolution to disk. Present it; the human copies or asks for the Edit.</li></ol>
+<h3>Output format</h3>
+<pre><code>4 conflicted files:
+
+1. pages/sitemap.js - ADDITIVE
+   Both sides added sitemap entries. Merge is concatenation.
+   Proposed: [merged block]
+
+2. package.json - VERSION BUMP
+   Your side: 1.4.2. Their side: 1.4.1. Keep HEAD.
+
+3. src/auth.ts - SEMANTIC CLASH
+   Your side refactored to async. Their side added retry logic.
+   Needs human - both behaviours matter.
+
+4. README.md - RENAME + EDIT
+   Flag for manual review.</code></pre>
+<h3>Failure modes</h3>
+<ul><li>Do not auto-resolve semantic clashes - report them and stop.</li><li>If the conflict involves binary files, report and stop.</li><li>Do not run <code>git add</code> or <code>git rebase --continue</code> - the human confirms before advancing.</li><li>If you can&#x27;t parse the conflict markers (nested conflicts, corrupted file), stop and report.</li></ul></article>
+</section>
+<section class="block"><h2>More skills</h2><ul class="inline"><li><a href="/skills/pre-commit-review"><code>/pre-commit-review</code></a></li><li><a href="/skills/rebase-plan"><code>/rebase-plan</code></a></li><li><a href="/skills/branch-cleanup"><code>/branch-cleanup</code></a></li><li><a href="/skills/wiring"><code>/wiring</code></a></li><li><a href="/skills/log-issue"><code>/log-issue</code></a></li><li><a href="/skills/fix-cluster"><code>/fix-cluster</code></a></li><li><a href="/skills/best-of-both"><code>/best-of-both</code></a></li><li><a href="/skills/cron-staleness"><code>/cron-staleness</code></a></li><li><a href="/skills/decide"><code>/decide</code></a></li><li><a href="/skills/explain"><code>/explain</code></a></li><li><a href="/skills/notes-to-ideas"><code>/notes-to-ideas</code></a></li><li><a href="/skills/remember"><code>/remember</code></a></li></ul></section>
+<section id="newsletter" class="block newsletter">
+    <h2>Get new skills by email</h2>
+    <p>What I'm building with AI coding agents, what broke, and what I'd do differently. Straight to your inbox.</p>
+    <form action="https://app.kit.com/forms/8058199/subscriptions" method="post" data-sv-form="8058199" data-uid="4914fa2338" class="signup">
+        <label class="sr" for="nl-email">Email address</label>
+        <input id="nl-email" name="email_address" type="email" placeholder="Email address" autocomplete="email" required>
+        <button type="submit">Subscribe</button>
+    </form>
+    <p class="muted small">Unsubscribe any time. Or read the archive at <a href="https://newsletter.bryancollins.com">newsletter.bryancollins.com</a>.</p>
+</section>
+</main>
+<footer class="site-footer">
+    <p><a href="https://www.youtube.com/channel/UCglNILz3uBqPer5EMJ_pzVg">YouTube</a> · <a href="https://github.com/bryancollins99">GitHub</a> · <a href="https://www.linkedin.com/in/bryancollins99/">LinkedIn</a> · <a href="https://substack.com/@bryancollins">Substack</a> · <a href="/products">Products</a> · <a href="/mba-frameworks">Strategy tools</a> · <a href="/now">Now</a> · <a href="/contact">Contact</a></p>
+    <p class="muted">© 2026 Bryan Collins · <a href="/privacy">Privacy</a> · <a href="/terms">Terms</a></p>
+</footer>
+</body>
+</html>

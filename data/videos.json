@@ -1,0 +1,3093 @@
+{
+ "source": "dump-2026-10-16.json",
+ "count": 441,
+ "videos": [
+  {
+   "id": "FA3pwVlEqXw",
+   "title": "Resend Email Marketing With Claude Code: Full Walkthrough",
+   "published": "2026-10-05",
+   "views": 263,
+   "minutes": 18
+  },
+  {
+   "id": "ya8bKtpT-GY",
+   "title": "How I Audited My Claude Code Skills and Cut 30,000 Tokens",
+   "published": "2026-10-02",
+   "views": 405,
+   "minutes": 18
+  },
+  {
+   "id": "90Nv-cY6XcU",
+   "title": "How I Built a $100 SEO Stack With Claude Code",
+   "published": "2026-09-30",
+   "views": 177,
+   "minutes": 20
+  },
+  {
+   "id": "nlN7p7Jo8hM",
+   "title": "I Fixed My Claude Code Memory Problem",
+   "published": "2026-09-28",
+   "views": 278,
+   "minutes": 13
+  },
+  {
+   "id": "C6od4WxxQG8",
+   "title": "Claude Code Monitoring: How It Fixes My Broken Websites",
+   "published": "2026-09-25",
+   "views": 254,
+   "minutes": 13
+  },
+  {
+   "id": "jYZaS4XJnKU",
+   "title": "Claude Cowork: I Connected It to 7,000+ Markdown Notes",
+   "published": "2026-09-23",
+   "views": 321,
+   "minutes": 23
+  },
+  {
+   "id": "a7Ro4mzohic",
+   "title": "CLAUDE.md Best Practices: Global, Project and Local Files",
+   "published": "2026-09-21",
+   "views": 179,
+   "minutes": 20
+  },
+  {
+   "id": "08FMWCMrWxI",
+   "title": "How I Ran GPT 6 Astra Against Claude Code on My Site",
+   "published": "2026-09-18",
+   "views": 775,
+   "minutes": 11
+  },
+  {
+   "id": "GInVBLQku8k",
+   "title": "I Connected Claude to My Brokerage Account",
+   "published": "2026-09-16",
+   "views": 1352,
+   "minutes": 16
+  },
+  {
+   "id": "UhayGkHrUL8",
+   "title": "How I Use Claude Code Sub Agents for Multiple Builds",
+   "published": "2026-09-14",
+   "views": 131,
+   "minutes": 10
+  },
+  {
+   "id": "oQdiGvUftb0",
+   "title": "How I Scope a Claude Code Build With a PRD (Site Search Fix)",
+   "published": "2026-09-11",
+   "views": 178,
+   "minutes": 9
+  },
+  {
+   "id": "eWQ5Bku7rgg",
+   "title": "Netlify Form Not Working? I Debugged Mine With Claude Code",
+   "published": "2026-09-09",
+   "views": 113,
+   "minutes": 12
+  },
+  {
+   "id": "uMwMiZUMhak",
+   "title": "Repurpose Old Content Into Instagram Posts With Claude AI + Buffer",
+   "published": "2026-09-07",
+   "views": 312,
+   "minutes": 16
+  },
+  {
+   "id": "yP9I3G6JbxM",
+   "title": "Claude Code Automation: Workflows That Run While I Sleep",
+   "published": "2026-09-04",
+   "views": 270,
+   "minutes": 8
+  },
+  {
+   "id": "cc9oiOPFMWY",
+   "title": "Claude Code Code Review: How I Review Code as a Non-Developer",
+   "published": "2026-09-02",
+   "views": 188,
+   "minutes": 15
+  },
+  {
+   "id": "7c0n513OzqM",
+   "title": "Claude Code for Content Creators: How It Runs My YouTube Strategy",
+   "published": "2026-08-31",
+   "views": 306,
+   "minutes": 14
+  },
+  {
+   "id": "Qkc8EkJWwyo",
+   "title": "Claude Design vs Claude Code: How I Fixed My Website Design",
+   "published": "2026-08-26",
+   "views": 458,
+   "minutes": 6
+  },
+  {
+   "id": "HfD_QTqpvus",
+   "title": "AI YouTube Thumbnails With Claude Code: My Full Process",
+   "published": "2026-08-24",
+   "views": 853,
+   "minutes": 6
+  },
+  {
+   "id": "1wZSPc9p6t0",
+   "title": "How to Create Pinterest Pins With Claude AI (Full Workflow)",
+   "published": "2026-08-21",
+   "views": 1143,
+   "minutes": 11
+  },
+  {
+   "id": "NTL9An_JeMg",
+   "title": "Claude Code Skills: How I Built an AI Business Strategist",
+   "published": "2026-08-20",
+   "views": 154,
+   "minutes": 9
+  },
+  {
+   "id": "AJmgH3xhw0s",
+   "title": "Install Analytics FAST with Cursor AI",
+   "published": "2026-02-13",
+   "views": 209,
+   "minutes": 3
+  },
+  {
+   "id": "EfBdQYpfmRY",
+   "title": "I Broke My Analytics Live (Watch Me Fix It with Cursor AI)",
+   "published": "2026-02-11",
+   "views": 117,
+   "minutes": 7
+  },
+  {
+   "id": "yGs7WVcozbQ",
+   "title": "How to Build a Website With Cursor AI",
+   "published": "2026-02-05",
+   "views": 2370,
+   "minutes": 1
+  },
+  {
+   "id": "Af4ED8YIJgA",
+   "title": "Creating a Map of Contents With Claude Code",
+   "published": "2026-02-04",
+   "views": 209,
+   "minutes": 8
+  },
+  {
+   "id": "TGy3DLIC9Gw",
+   "title": "I Used Claude Code on my Zettelkasten!",
+   "published": "2026-01-31",
+   "views": 811,
+   "minutes": 12
+  },
+  {
+   "id": "JDbYjgGMEeo",
+   "title": "My Note-Taking Was Too Slow (So I Built This CLI Tool)",
+   "published": "2026-01-29",
+   "views": 453,
+   "minutes": 11
+  },
+  {
+   "id": "YhnqBRcZaA4",
+   "title": "How to Publish and Host a Website on Replit (Step by Step)",
+   "published": "2025-12-21",
+   "views": 6082,
+   "minutes": 8
+  },
+  {
+   "id": "nyA-sTFQ69o",
+   "title": "How to Make Money Vibe Coding (9 $$$ Ideas)",
+   "published": "2025-12-19",
+   "views": 565,
+   "minutes": 10
+  },
+  {
+   "id": "xWZg_-8Zz1k",
+   "title": "How To Make Money With Replit (Steal This)",
+   "published": "2025-12-13",
+   "views": 3219,
+   "minutes": 10
+  },
+  {
+   "id": "rISdtudCrj0",
+   "title": "McKinsey 7S Framework Explained: MBA Strategy Guide",
+   "published": "2025-11-19",
+   "views": 1537,
+   "minutes": 10
+  },
+  {
+   "id": "AzYpYD--gN8",
+   "title": "How to Write an Abstract for a Research Paper (7 Parts)",
+   "published": "2025-11-17",
+   "views": 130,
+   "minutes": 9
+  },
+  {
+   "id": "CqrndNKhs3w",
+   "title": "Google Business Profile Setup: Local Newsletter Guide",
+   "published": "2025-11-13",
+   "views": 189,
+   "minutes": 12
+  },
+  {
+   "id": "0yYjABE_1Ck",
+   "title": "ChatGPT for Accounting? How I Built a Bot to Pass My MBA Exam",
+   "published": "2025-11-10",
+   "views": 170,
+   "minutes": 6
+  },
+  {
+   "id": "n5QWsvgZ0kU",
+   "title": "I'm Building A Web Design Business Through My Newsletter (Case Study)",
+   "published": "2025-11-02",
+   "views": 109,
+   "minutes": 8
+  },
+  {
+   "id": "LqpcCKxL-vU",
+   "title": "The 7-Day MBA Reading Sprint That Changed My Strategy Thinking\"",
+   "published": "2025-10-31",
+   "views": 59,
+   "minutes": 7
+  },
+  {
+   "id": "ZCnd6S8j5ek",
+   "title": "MBA Cost 2025: Real Numbers from an Irish Business School Student",
+   "published": "2025-10-13",
+   "views": 111,
+   "minutes": 7
+  },
+  {
+   "id": "ZCnd6S8j5ek",
+   "title": "MBA Cost 2025: Real Numbers from an Irish Business School Student",
+   "published": "2025-10-13",
+   "views": 111,
+   "minutes": 7
+  },
+  {
+   "id": "8Ngrm0Xf_lU",
+   "title": "Should You Do an MBA in 2025? My Honest Answer After 1 Month",
+   "published": "2025-10-08",
+   "views": 136,
+   "minutes": 8
+  },
+  {
+   "id": "Me1ekYtu-l8",
+   "title": "Build a Newsletter with AI: Vibe Coding Tutorial",
+   "published": "2025-10-01",
+   "views": 183,
+   "minutes": 15
+  },
+  {
+   "id": "xPnO3GILP8g",
+   "title": "WordPress to Static Site Tutorial: 10x Faster Load Times with AI",
+   "published": "2025-09-25",
+   "views": 144,
+   "minutes": 12
+  },
+  {
+   "id": "9xJuUnAIRtk",
+   "title": "I Tested Every AI Tool for Creators—Here's What Won",
+   "published": "2025-09-23",
+   "views": 175,
+   "minutes": 12
+  },
+  {
+   "id": "FhYnvR4enQQ",
+   "title": "How I Fix Bugs for My Vibe Coding Projects (Full Guide)",
+   "published": "2025-09-17",
+   "views": 264,
+   "minutes": 14
+  },
+  {
+   "id": "SAYkAPeeE1w",
+   "title": "How To Use Replit AI: Full Tutorial",
+   "published": "2025-09-12",
+   "views": 580,
+   "minutes": 12
+  },
+  {
+   "id": "yRMCSueiMTU",
+   "title": "Cursor vs VS Code: Why I Switched (Honest Comparison)",
+   "published": "2025-09-05",
+   "views": 26531,
+   "minutes": 9
+  },
+  {
+   "id": "RDu4CKjeRjY",
+   "title": "I Use This Minimalist Writing App to Publish Without Overthinking",
+   "published": "2025-09-03",
+   "views": 1118,
+   "minutes": 12
+  },
+  {
+   "id": "rcv5Yy6sOTA",
+   "title": "How I Supercharge My Vibe Coding Projects With APIs",
+   "published": "2025-08-30",
+   "views": 151,
+   "minutes": 5
+  },
+  {
+   "id": "OqJaLihH66E",
+   "title": "I Fix My Vibe Coding Project LIVE",
+   "published": "2025-08-30",
+   "views": 132,
+   "minutes": 1
+  },
+  {
+   "id": "zblCzJb3btE",
+   "title": "How to Use Cursor AI Models",
+   "published": "2025-08-28",
+   "views": 729,
+   "minutes": 2
+  },
+  {
+   "id": "1h_PvAkFFR8",
+   "title": "I Caught ChatGPT Stealing My Content!",
+   "published": "2025-08-27",
+   "views": 342,
+   "minutes": 8
+  },
+  {
+   "id": "U5l5JWY8ufY",
+   "title": "Inside My AI Toolstack",
+   "published": "2025-08-23",
+   "views": 482,
+   "minutes": 1
+  },
+  {
+   "id": "CYkPMt_n_wo",
+   "title": "Secret Writing App I Love",
+   "published": "2025-08-22",
+   "views": 84,
+   "minutes": 2
+  },
+  {
+   "id": "vskDa7L6VIs",
+   "title": "How to Use Cursor Live Preview (See Your App as You Build)",
+   "published": "2025-08-21",
+   "views": 4663,
+   "minutes": 2
+  },
+  {
+   "id": "xa0rQo7xVf8",
+   "title": "ChatGPT Agent Mode: Cool AI Trick or Total Time Sink?",
+   "published": "2025-08-21",
+   "views": 222,
+   "minutes": 9
+  },
+  {
+   "id": "hTPf4Vii0LY",
+   "title": "Cursor or VSCode?",
+   "published": "2025-08-20",
+   "views": 1411,
+   "minutes": 2
+  },
+  {
+   "id": "9LCOJOvktoM",
+   "title": "Big ChatGPT-5 Annoyance FIXED!",
+   "published": "2025-08-20",
+   "views": 174,
+   "minutes": 3
+  },
+  {
+   "id": "6PkAr_RKzlY",
+   "title": "How I Started a Profitable Local Newsletter",
+   "published": "2025-07-28",
+   "views": 1436,
+   "minutes": 11
+  },
+  {
+   "id": "xEYOURgf0UU",
+   "title": "Don't Make This Vibe Coding Mistake With Cursor AI",
+   "published": "2025-07-11",
+   "views": 139,
+   "minutes": 6
+  },
+  {
+   "id": "FMIPvjZxVIA",
+   "title": "Writing Vibe Coding Rules for Cursors",
+   "published": "2025-07-10",
+   "views": 1167,
+   "minutes": 1
+  },
+  {
+   "id": "0H8hxaSOMho",
+   "title": "How to Connect a Namecheap Domain to Netlify (Custom Domain Setup)",
+   "published": "2025-07-09",
+   "views": 3862,
+   "minutes": 2
+  },
+  {
+   "id": "1xufb9h1Tjw",
+   "title": "How to Connect Cursor to GitHub (Beginner Tutorial)",
+   "published": "2025-07-07",
+   "views": 39090,
+   "minutes": 5
+  },
+  {
+   "id": "cHkBSjLR4Yk",
+   "title": "How I Write Rules for Cursor AI",
+   "published": "2025-07-05",
+   "views": 3302,
+   "minutes": 5
+  },
+  {
+   "id": "wAB14C1kpAc",
+   "title": "How to Store Your AI Prompts",
+   "published": "2025-07-05",
+   "views": 3472,
+   "minutes": 6
+  },
+  {
+   "id": "bBRfJzM9Ka4",
+   "title": "7 Essential Cursor Tips Every Creator Needs",
+   "published": "2025-07-04",
+   "views": 209,
+   "minutes": 11
+  },
+  {
+   "id": "zTI3XKutm3o",
+   "title": "How I Use Trello for Vibe Coding",
+   "published": "2025-07-02",
+   "views": 190,
+   "minutes": 7
+  },
+  {
+   "id": "zTSQ4N_r3yI",
+   "title": "Fixing Broken Site Breadcrumbs With AI",
+   "published": "2025-07-01",
+   "views": 73,
+   "minutes": 1
+  },
+  {
+   "id": "TVLfhUOnUAA",
+   "title": "How to Use Netlify with Github",
+   "published": "2025-06-30",
+   "views": 1372,
+   "minutes": 3
+  },
+  {
+   "id": "HdLdPCwgPj8",
+   "title": "Trello Rocks for Vibe Coders #artificialintelligence #ai",
+   "published": "2025-06-28",
+   "views": 1541,
+   "minutes": 1
+  },
+  {
+   "id": "cyAJOdB1jBs",
+   "title": "Setting Up ChatGPT: BEGINNER Guide",
+   "published": "2025-06-24",
+   "views": 1793,
+   "minutes": 15
+  },
+  {
+   "id": "EEi1dQZYq9I",
+   "title": "Google Says My Site Navigation Is Broken (FIXED with AI in 20 mins)",
+   "published": "2025-06-24",
+   "views": 99,
+   "minutes": 6
+  },
+  {
+   "id": "xmioV6HmmBo",
+   "title": "How To Get The Latest AI News",
+   "published": "2025-06-18",
+   "views": 284,
+   "minutes": 6
+  },
+  {
+   "id": "VlXX5Kr5LGM",
+   "title": "Vibe Coding With Lovable  #coding #ai",
+   "published": "2025-06-13",
+   "views": 274,
+   "minutes": 1
+  },
+  {
+   "id": "VlXX5Kr5LGM",
+   "title": "Vibe Coding With Lovable  #coding #ai",
+   "published": "2025-06-13",
+   "views": 274,
+   "minutes": 1
+  },
+  {
+   "id": "zTTbSphPf8o",
+   "title": "Grammarly vs ChatGPT BIG update",
+   "published": "2025-06-12",
+   "views": 1622,
+   "minutes": 1
+  },
+  {
+   "id": "zTTbSphPf8o",
+   "title": "Grammarly vs ChatGPT BIG update",
+   "published": "2025-06-12",
+   "views": 1622,
+   "minutes": 1
+  },
+  {
+   "id": "LUv_zFDAgPw",
+   "title": "ChatGPT Prompt Writing Tip!",
+   "published": "2025-06-11",
+   "views": 789,
+   "minutes": 1
+  },
+  {
+   "id": "uaLiIdYnrqw",
+   "title": "Manage Your AI Prompts",
+   "published": "2025-06-08",
+   "views": 901,
+   "minutes": 1
+  },
+  {
+   "id": "e9Xkt69tC6g",
+   "title": "Lovable AI Tutorial: Build a Website With No Code (Step by Step)",
+   "published": "2025-04-16",
+   "views": 18550,
+   "minutes": 11
+  },
+  {
+   "id": "Y5FJNdXPWGs",
+   "title": "Grammarly vs ChatGPT: 2025 Update",
+   "published": "2025-04-15",
+   "views": 4618,
+   "minutes": 15
+  },
+  {
+   "id": "AJnrFA21o9I",
+   "title": "How to Add Calendly to LeadPages",
+   "published": "2025-03-12",
+   "views": 170,
+   "minutes": 3
+  },
+  {
+   "id": "-Dtj9E1l6dE",
+   "title": "How To Use ChatGPT Projects: Full Guide",
+   "published": "2025-03-10",
+   "views": 6675,
+   "minutes": 9
+  },
+  {
+   "id": "dzYzavMbo3c",
+   "title": "Find Content Ideas FAST With Claude",
+   "published": "2025-03-07",
+   "views": 1202,
+   "minutes": 14
+  },
+  {
+   "id": "sO-Hcwr_0nA",
+   "title": "Using ChatGPT projects",
+   "published": "2025-03-05",
+   "views": 267,
+   "minutes": 1
+  },
+  {
+   "id": "QspL1e5Oh4w",
+   "title": "Using Claude to Find Content Ideas",
+   "published": "2025-03-04",
+   "views": 183,
+   "minutes": 1
+  },
+  {
+   "id": "zULAjic69CQ",
+   "title": "The Easiest and Fastest Way to Get Client Testimonials",
+   "published": "2025-02-25",
+   "views": 353,
+   "minutes": 9
+  },
+  {
+   "id": "BecoVb96rUY",
+   "title": "Using ChatGPT Tasks",
+   "published": "2025-02-19",
+   "views": 97,
+   "minutes": 1
+  },
+  {
+   "id": "r2DhTN40cWA",
+   "title": "Getting Client Testimonials",
+   "published": "2025-02-17",
+   "views": 79,
+   "minutes": 1
+  },
+  {
+   "id": "DYEwFw28Fjs",
+   "title": "Maximize Productivity: How to Use ChatGPT Tasks",
+   "published": "2025-02-17",
+   "views": 5007,
+   "minutes": 5
+  },
+  {
+   "id": "uKmZkUu1tOM",
+   "title": "The Secret Formula For Writing ChatGPT Prompts",
+   "published": "2025-02-12",
+   "views": 4547,
+   "minutes": 10
+  },
+  {
+   "id": "HKzcMmFYprc",
+   "title": "How to Grow on Substack: 0 to 1,000 Subscribers",
+   "published": "2025-02-08",
+   "views": 11509,
+   "minutes": 8
+  },
+  {
+   "id": "QUoxvf4tZHQ",
+   "title": "How to Write Gemini Prompts: Google's 4-Part Prompt Formula",
+   "published": "2025-02-07",
+   "views": 32162,
+   "minutes": 7
+  },
+  {
+   "id": "cEi763PosiA",
+   "title": "How to Grow on Substack Fast",
+   "published": "2025-02-04",
+   "views": 329,
+   "minutes": 1
+  },
+  {
+   "id": "4fi57qjE3X8",
+   "title": "How to Grow on Substack Fast",
+   "published": "2025-01-31",
+   "views": 2082,
+   "minutes": 1
+  },
+  {
+   "id": "EUpgroPaQ2w",
+   "title": "Gemini Gems or Custom GPTs?",
+   "published": "2025-01-20",
+   "views": 4042,
+   "minutes": 17
+  },
+  {
+   "id": "lVVjtQGszs8",
+   "title": "How I Use Trello for YouTube Management",
+   "published": "2025-01-16",
+   "views": 1076,
+   "minutes": 18
+  },
+  {
+   "id": "yWNEeigvkOw",
+   "title": "Steal This LinkedIn Personal Brand Tutorial",
+   "published": "2025-01-13",
+   "views": 983,
+   "minutes": 16
+  },
+  {
+   "id": "lo4v4t06uD0",
+   "title": "The Zettelkasten Method Explained: Full Guide",
+   "published": "2025-01-08",
+   "views": 16240,
+   "minutes": 13
+  },
+  {
+   "id": "dZx_EI6TnOU",
+   "title": "How I Use Trello To Organize My Blog (and You Can Too!)",
+   "published": "2025-01-03",
+   "views": 292,
+   "minutes": 11
+  },
+  {
+   "id": "5HXXbJCSwfI",
+   "title": "ChatGPT Vs Perplexity: What's Best for Content Creators?",
+   "published": "2024-12-28",
+   "views": 2986,
+   "minutes": 14
+  },
+  {
+   "id": "4whf_RHvxQw",
+   "title": "Creating Article Summaries with ChatGPT",
+   "published": "2024-12-23",
+   "views": 922,
+   "minutes": 8
+  },
+  {
+   "id": "YcfPdNYMyxc",
+   "title": "Is the online course model dead?",
+   "published": "2024-12-22",
+   "views": 356,
+   "minutes": 8
+  },
+  {
+   "id": "SoMeFhSkwzg",
+   "title": "Create a Style Guide With Claude: BIG Update",
+   "published": "2024-12-19",
+   "views": 1959,
+   "minutes": 11
+  },
+  {
+   "id": "cNMjsKotTeM",
+   "title": "Leadpages Landing Page Tutorial (For Beginners)",
+   "published": "2024-12-17",
+   "views": 633,
+   "minutes": 9
+  },
+  {
+   "id": "iVcgiArm5Bg",
+   "title": "Profitable Email Marketing Strategies for Creators",
+   "published": "2024-12-16",
+   "views": 132,
+   "minutes": 8
+  },
+  {
+   "id": "d-EXvNDabmA",
+   "title": "Claude vs ChatGPT: What's Best For Content Creation?",
+   "published": "2024-12-09",
+   "views": 6201,
+   "minutes": 12
+  },
+  {
+   "id": "QaT1p6W1xPY",
+   "title": "The PAS Copywriting Formula: Why It’s Still Effective (and How to Use It)",
+   "published": "2024-11-27",
+   "views": 794,
+   "minutes": 10
+  },
+  {
+   "id": "O5zrolrvslk",
+   "title": "How to Design a Lead Magnet (With Examples)",
+   "published": "2024-11-21",
+   "views": 1744,
+   "minutes": 12
+  },
+  {
+   "id": "hJirgmHdcqI",
+   "title": "8 Best LinkedIn Post Ideas For MASSIVE Growth",
+   "published": "2024-11-20",
+   "views": 3417,
+   "minutes": 14
+  },
+  {
+   "id": "wijQgL5uN10",
+   "title": "How to Use Trello: FULL Guide",
+   "published": "2024-11-18",
+   "views": 1792,
+   "minutes": 19
+  },
+  {
+   "id": "Rm7a5pGrHwQ",
+   "title": "How to Write LinkedIn Opening Hooks (And Go Viral)",
+   "published": "2024-11-16",
+   "views": 958,
+   "minutes": 10
+  },
+  {
+   "id": "3T7L61kMDv4",
+   "title": "Writing With ChatGPT Canvas: FULL Guide",
+   "published": "2024-11-14",
+   "views": 3529,
+   "minutes": 11
+  },
+  {
+   "id": "QHgb2isJNmA",
+   "title": "How to Use LinkedIn Private Mode",
+   "published": "2024-11-13",
+   "views": 1210,
+   "minutes": 5
+  },
+  {
+   "id": "p3lrs2E-N0Y",
+   "title": "Adding Grammarly to Google Docs",
+   "published": "2024-11-11",
+   "views": 16634,
+   "minutes": 2
+  },
+  {
+   "id": "PWqrYMvD3jA",
+   "title": "LinkedIn Tips: Commenting",
+   "published": "2024-11-07",
+   "views": 675,
+   "minutes": 9
+  },
+  {
+   "id": "CxJIdUWOQp4",
+   "title": "How to Create a Lead Magnet With Leadpages",
+   "published": "2024-11-06",
+   "views": 278,
+   "minutes": 4
+  },
+  {
+   "id": "McLbXK0Uefo",
+   "title": "How to Grow Your LinkedIn Followers FAST",
+   "published": "2024-11-05",
+   "views": 1495,
+   "minutes": 12
+  },
+  {
+   "id": "McLbXK0Uefo",
+   "title": "How to Grow Your LinkedIn Followers FAST",
+   "published": "2024-11-05",
+   "views": 1495,
+   "minutes": 12
+  },
+  {
+   "id": "5dgVwvJ8aMs",
+   "title": "How to Use LinkedIn Analytics (And Grow Your Account)",
+   "published": "2024-11-02",
+   "views": 7229,
+   "minutes": 9
+  },
+  {
+   "id": "u4oyDTHjmmE",
+   "title": "Creating LinkedIn Profile Banners",
+   "published": "2024-11-01",
+   "views": 323,
+   "minutes": 6
+  },
+  {
+   "id": "0N3s0EGCGqE",
+   "title": "How To Make a Professional LinkedIn Headshot (With AI)",
+   "published": "2024-10-30",
+   "views": 277,
+   "minutes": 5
+  },
+  {
+   "id": "lhf3Q4Tt40I",
+   "title": "9 Websites That Pay Writers $$$",
+   "published": "2024-10-30",
+   "views": 1567,
+   "minutes": 17
+  },
+  {
+   "id": "lhf3Q4Tt40I",
+   "title": "9 Websites That Pay Writers $$$",
+   "published": "2024-10-30",
+   "views": 1567,
+   "minutes": 17
+  },
+  {
+   "id": "nIM1VsJu4MM",
+   "title": "Upgrade Your Writing With AI",
+   "published": "2024-10-29",
+   "views": 480,
+   "minutes": 12
+  },
+  {
+   "id": "nIM1VsJu4MM",
+   "title": "Upgrade Your Writing With AI",
+   "published": "2024-10-29",
+   "views": 480,
+   "minutes": 12
+  },
+  {
+   "id": "ADkXtpNTlXM",
+   "title": "How to Add to The Featured Section on LinkedIn",
+   "published": "2024-10-24",
+   "views": 4494,
+   "minutes": 7
+  },
+  {
+   "id": "OfBIxvEeTVk",
+   "title": "How Much Can You Earn From the Medium Partner Program?",
+   "published": "2024-10-20",
+   "views": 2579,
+   "minutes": 7
+  },
+  {
+   "id": "p1ujOyFwXl0",
+   "title": "Buffer Review: Is It the Best Social Media Management Tool?",
+   "published": "2024-10-11",
+   "views": 5257,
+   "minutes": 20
+  },
+  {
+   "id": "aepXod3rI0M",
+   "title": "How to Schedule LinkedIn Posts",
+   "published": "2024-10-10",
+   "views": 3018,
+   "minutes": 3
+  },
+  {
+   "id": "GRylWQKlN8U",
+   "title": "How to Train Claude AI to Write like You",
+   "published": "2024-10-03",
+   "views": 8096,
+   "minutes": 10
+  },
+  {
+   "id": "FJVkhZYvkLw",
+   "title": "Repurposing Content? Steal My Strategy",
+   "published": "2024-09-26",
+   "views": 306,
+   "minutes": 12
+  },
+  {
+   "id": "pDBd9MfNWDc",
+   "title": "How to Not Procrastinate as a Content Creator",
+   "published": "2024-09-20",
+   "views": 226,
+   "minutes": 8
+  },
+  {
+   "id": "Ay5Isyz7YoU",
+   "title": "How a Newsletter Business Makes Money",
+   "published": "2024-09-05",
+   "views": 881,
+   "minutes": 12
+  },
+  {
+   "id": "e2Jw-rq1rz0",
+   "title": "Can you write with a full time job?",
+   "published": "2024-08-07",
+   "views": 246,
+   "minutes": 12
+  },
+  {
+   "id": "dxfGH1852j0",
+   "title": "Are Niche Websites Dead?",
+   "published": "2024-06-27",
+   "views": 906,
+   "minutes": 11
+  },
+  {
+   "id": "7eOvNs4Ju6M",
+   "title": "How to Avoid Plagiarism",
+   "published": "2024-06-20",
+   "views": 286,
+   "minutes": 9
+  },
+  {
+   "id": "AI3Nn6jlwlw",
+   "title": "Why Newsletters Will Never Go Out of Style",
+   "published": "2024-06-03",
+   "views": 325,
+   "minutes": 10
+  },
+  {
+   "id": "rL5kQQxyoRA",
+   "title": "Can you still make money with ebooks?",
+   "published": "2024-05-25",
+   "views": 378,
+   "minutes": 12
+  },
+  {
+   "id": "q161QeRhJ2Y",
+   "title": "Writing on LinkedIn Tutorial for Beginners: Convert Connections into Clients",
+   "published": "2024-05-03",
+   "views": 1965,
+   "minutes": 17
+  },
+  {
+   "id": "GVr5YUL2S3c",
+   "title": "A Simple Notion Tutorial For Writers",
+   "published": "2024-04-26",
+   "views": 593,
+   "minutes": 14
+  },
+  {
+   "id": "8TPgulABL_U",
+   "title": "Taplio Review: Is It Worth it?",
+   "published": "2024-04-12",
+   "views": 7178,
+   "minutes": 12
+  },
+  {
+   "id": "ie6ZEBVF65Y",
+   "title": "How To Take Notes Effectively",
+   "published": "2024-04-06",
+   "views": 747,
+   "minutes": 11
+  },
+  {
+   "id": "zvVGeUrkhrM",
+   "title": "Grammarly Citation Generator: How to Create Citations (With AI)",
+   "published": "2024-03-27",
+   "views": 9908,
+   "minutes": 4
+  },
+  {
+   "id": "Z-OnNSA5TZg",
+   "title": "How I Use Grammarly AI To Write",
+   "published": "2024-03-20",
+   "views": 16111,
+   "minutes": 11
+  },
+  {
+   "id": "HyTA0Ew8v20",
+   "title": "Build Your Own ChatGPT Writing Bot",
+   "published": "2024-02-22",
+   "views": 2397,
+   "minutes": 9
+  },
+  {
+   "id": "jeclD6hwt74",
+   "title": "Grammarly App: How to Use It",
+   "published": "2024-02-16",
+   "views": 6407,
+   "minutes": 17
+  },
+  {
+   "id": "bRL381nukZo",
+   "title": "How To Find Viral-Worthy Content Ideas For Social Media",
+   "published": "2024-01-26",
+   "views": 184,
+   "minutes": 8
+  },
+  {
+   "id": "kmNiSAHWDwY",
+   "title": "How to Create a Content Marketing Plan",
+   "published": "2024-01-19",
+   "views": 595,
+   "minutes": 17
+  },
+  {
+   "id": "gHnhVQWl6qU",
+   "title": "How to Set Goals for Yourself (And Stick to Them)",
+   "published": "2024-01-05",
+   "views": 457,
+   "minutes": 12
+  },
+  {
+   "id": "_LoEj7_P2kg",
+   "title": "LinkedIn Profile Optimization: A Proven Guide",
+   "published": "2023-12-15",
+   "views": 815,
+   "minutes": 10
+  },
+  {
+   "id": "NiPT1FvVKAg",
+   "title": "Writing Advice From Famous Authors and Celebrities",
+   "published": "2023-12-07",
+   "views": 280,
+   "minutes": 10
+  },
+  {
+   "id": "tj7vHbNwGOQ",
+   "title": "My Home Office Set Up For Writers",
+   "published": "2023-12-01",
+   "views": 964,
+   "minutes": 9
+  },
+  {
+   "id": "slMltjrK0oo",
+   "title": "SEO Content Writing Tutorial... For Beginners",
+   "published": "2023-11-16",
+   "views": 1261,
+   "minutes": 20
+  },
+  {
+   "id": "v_XN07D37jc",
+   "title": "On-Page SEO Tutorial: It's THIS Easy",
+   "published": "2023-11-09",
+   "views": 285,
+   "minutes": 8
+  },
+  {
+   "id": "bktZ1ReeAis",
+   "title": "9 Best ChatGPT Plugins for Content Creators",
+   "published": "2023-11-02",
+   "views": 2046,
+   "minutes": 14
+  },
+  {
+   "id": "-yNzQiVYV1s",
+   "title": "NeuronWriter Review: Is This AI Tool Worth It?",
+   "published": "2023-10-27",
+   "views": 2648,
+   "minutes": 18
+  },
+  {
+   "id": "q7fVycz39s8",
+   "title": "Follow This Content Planning Strategy",
+   "published": "2023-10-17",
+   "views": 341,
+   "minutes": 11
+  },
+  {
+   "id": "CUUDI7nkOnw",
+   "title": "7 SEO Writing Tips and Tricks",
+   "published": "2023-10-08",
+   "views": 209,
+   "minutes": 9
+  },
+  {
+   "id": "rGhS1Y5w8FA",
+   "title": "Creating content to market your business?",
+   "published": "2023-10-05",
+   "views": 136,
+   "minutes": 10
+  },
+  {
+   "id": "Qa4hT43sCVo",
+   "title": "How I Fixed a Big Drop in Website Traffic",
+   "published": "2023-09-24",
+   "views": 1129,
+   "minutes": 9
+  },
+  {
+   "id": "cIC1DQEUp34",
+   "title": "Copywriting Examples From Apple.. That Work",
+   "published": "2023-09-14",
+   "views": 736,
+   "minutes": 13
+  },
+  {
+   "id": "jtjukhcXL-A",
+   "title": "Homepage Copywriting Tutorial (With Examples)",
+   "published": "2023-08-19",
+   "views": 355,
+   "minutes": 14
+  },
+  {
+   "id": "URxE4TQgnA4",
+   "title": "7 Proven Tips for Writing Better ChatGPT Prompts",
+   "published": "2023-08-08",
+   "views": 687,
+   "minutes": 10
+  },
+  {
+   "id": "Z54EHqLZIdA",
+   "title": "6 ChatGPT Mistakes Writers Make",
+   "published": "2023-08-01",
+   "views": 491,
+   "minutes": 15
+  },
+  {
+   "id": "Mz-6QCFIq8U",
+   "title": "I Tried 9 of The Best AI Writing Assistants",
+   "published": "2023-07-25",
+   "views": 2094,
+   "minutes": 12
+  },
+  {
+   "id": "LmQHjxxdATA",
+   "title": "7 Best AI Content Detection Tools",
+   "published": "2023-07-18",
+   "views": 6993,
+   "minutes": 10
+  },
+  {
+   "id": "zcbqTSQRk-s",
+   "title": "Cohesive AI: ChatGPT Killer?",
+   "published": "2023-07-16",
+   "views": 2398,
+   "minutes": 14
+  },
+  {
+   "id": "tN_m_rKA-pI",
+   "title": "Surfer AI: Can It Write 100s of Articles?",
+   "published": "2023-07-11",
+   "views": 1355,
+   "minutes": 18
+  },
+  {
+   "id": "Z2KLz7207Hs",
+   "title": "10 Best Copywriting Books $$$ You MUST Read",
+   "published": "2023-07-09",
+   "views": 3166,
+   "minutes": 13
+  },
+  {
+   "id": "XHizNQ8pe-8",
+   "title": "Attention copywriters! Sales copy not converting?",
+   "published": "2023-07-08",
+   "views": 160,
+   "minutes": 1
+  },
+  {
+   "id": "cpl4FqTAbzI",
+   "title": "The Best Mouse for Writers, Bloggers and Creators",
+   "published": "2023-07-04",
+   "views": 685,
+   "minutes": 13
+  },
+  {
+   "id": "EAnCjtXiuAQ",
+   "title": "Writesonic Review: Should Create Content With It?",
+   "published": "2023-07-02",
+   "views": 5644,
+   "minutes": 17
+  },
+  {
+   "id": "AZpPPes7LMk",
+   "title": "How to Summarize an Article",
+   "published": "2023-06-27",
+   "views": 479,
+   "minutes": 13
+  },
+  {
+   "id": "jZbEu27rT1s",
+   "title": "AI Blogging Tutorial: Step-by-Step",
+   "published": "2023-06-25",
+   "views": 398,
+   "minutes": 16
+  },
+  {
+   "id": "LK_f0S9Ac60",
+   "title": "Wordtune Review: Should You Use This AI Tool To Write?",
+   "published": "2023-06-20",
+   "views": 6164,
+   "minutes": 13
+  },
+  {
+   "id": "feI137pCkYg",
+   "title": "Google Bard vs ChatGPT: Which is the Ultimate AI Tool for Creators ?",
+   "published": "2023-06-18",
+   "views": 126,
+   "minutes": 12
+  },
+  {
+   "id": "A3g4x4jw2Tg",
+   "title": "I Used ChatGPT to Write Like My Favourite Author",
+   "published": "2023-06-13",
+   "views": 371,
+   "minutes": 14
+  },
+  {
+   "id": "26_qsN7CSbw",
+   "title": "How Writers Can Use GrammarlyGO",
+   "published": "2023-06-11",
+   "views": 3209,
+   "minutes": 12
+  },
+  {
+   "id": "CIE1slnCb5o",
+   "title": "7 Top Grammarly Features You Must Use",
+   "published": "2023-06-07",
+   "views": 2873,
+   "minutes": 16
+  },
+  {
+   "id": "4nSJUq2m0Ek",
+   "title": "How to Write a Headline Using AI",
+   "published": "2023-06-03",
+   "views": 726,
+   "minutes": 16
+  },
+  {
+   "id": "FyOPp3uNmTY",
+   "title": "Online Writers: 7 Things You Must Know",
+   "published": "2023-06-01",
+   "views": 434,
+   "minutes": 10
+  },
+  {
+   "id": "BGd9JcevlcM",
+   "title": "Grammarly vs. Wordtune: Which Tool is Best?",
+   "published": "2023-05-25",
+   "views": 4206,
+   "minutes": 14
+  },
+  {
+   "id": "XtroHi0dkf4",
+   "title": "Grammarly vs. LanguageTool: Which Tool is Best?",
+   "published": "2023-05-24",
+   "views": 10903,
+   "minutes": 16
+  },
+  {
+   "id": "gLqHo0iUsdU",
+   "title": "How to Add Grammarly to Firefox",
+   "published": "2023-05-23",
+   "views": 355,
+   "minutes": 2
+  },
+  {
+   "id": "J6fJEb4kT_Y",
+   "title": "Using Grammarly with Google Docs",
+   "published": "2023-05-21",
+   "views": 394,
+   "minutes": 1
+  },
+  {
+   "id": "snjDRctAszE",
+   "title": "Setting Goals With Grammarly",
+   "published": "2023-05-14",
+   "views": 1632,
+   "minutes": 1
+  },
+  {
+   "id": "mr0_kDluh5Q",
+   "title": "You'll Love These ChatGPT Alternatives",
+   "published": "2023-05-02",
+   "views": 637,
+   "minutes": 19
+  },
+  {
+   "id": "KpQ5cLLhZIA",
+   "title": "How to Use Grammarly on Mac (Desktop App Tutorial)",
+   "published": "2023-04-30",
+   "views": 27787,
+   "minutes": 14
+  },
+  {
+   "id": "h3vFnW273qM",
+   "title": "8 Best Books for Entrepreneurs",
+   "published": "2023-04-25",
+   "views": 363,
+   "minutes": 12
+  },
+  {
+   "id": "m_OKWCQrU44",
+   "title": "Mastering Apple Notes: A Comprehensive Tutorial for Writers",
+   "published": "2023-04-20",
+   "views": 2949,
+   "minutes": 21
+  },
+  {
+   "id": "itzutkWkl40",
+   "title": "Writing Advice That Made Me a Better Author and Entrepreneur",
+   "published": "2023-04-17",
+   "views": 403,
+   "minutes": 8
+  },
+  {
+   "id": "Gq8jifr2LQY",
+   "title": "Creativity Book Reviews: 12  Top Reads",
+   "published": "2023-04-02",
+   "views": 2536,
+   "minutes": 17
+  },
+  {
+   "id": "Gq8jifr2LQY",
+   "title": "Creativity Book Reviews: 12  Top Reads",
+   "published": "2023-04-02",
+   "views": 2536,
+   "minutes": 17
+  },
+  {
+   "id": "MTAD21KL1nc",
+   "title": "10 Best War Books You Must Read",
+   "published": "2023-03-30",
+   "views": 7130,
+   "minutes": 11
+  },
+  {
+   "id": "MTAD21KL1nc",
+   "title": "10 Best War Books You Must Read",
+   "published": "2023-03-30",
+   "views": 7130,
+   "minutes": 11
+  },
+  {
+   "id": "icvPANY1hCI",
+   "title": "Koala Writer: Bye, Bye ChatGPT?",
+   "published": "2023-03-27",
+   "views": 7815,
+   "minutes": 16
+  },
+  {
+   "id": "QEwXf94QndI",
+   "title": "13 Best Irish Authors You Must Read",
+   "published": "2023-03-26",
+   "views": 5478,
+   "minutes": 12
+  },
+  {
+   "id": "X0Uoc_fDmlI",
+   "title": "How to Use Grammarly With Apple Mail",
+   "published": "2023-03-22",
+   "views": 8349,
+   "minutes": 3
+  },
+  {
+   "id": "c22SzjFIAeY",
+   "title": "Movies That Follow The Hero's Journey: 10 Top Examples",
+   "published": "2023-03-21",
+   "views": 11055,
+   "minutes": 11
+  },
+  {
+   "id": "aUvK0BLcIKE",
+   "title": "Writers Work Review: Is It Worth It?",
+   "published": "2023-03-19",
+   "views": 20715,
+   "minutes": 13
+  },
+  {
+   "id": "gTlG90dad6w",
+   "title": "Best Memoirs: A List of Must-Reads",
+   "published": "2023-03-14",
+   "views": 1700,
+   "minutes": 12
+  },
+  {
+   "id": "ZrZg48oOQQc",
+   "title": "27 Must Read Classic Literature Books",
+   "published": "2023-03-12",
+   "views": 14348,
+   "minutes": 23
+  },
+  {
+   "id": "5Tf3uJvBLlQ",
+   "title": "Grammarly vs. Quillbot: What's Best?",
+   "published": "2023-03-07",
+   "views": 33202,
+   "minutes": 15
+  },
+  {
+   "id": "pgvF3F0c5XI",
+   "title": "Zettelkasten Note Examples",
+   "published": "2023-03-05",
+   "views": 5100,
+   "minutes": 19
+  },
+  {
+   "id": "66A15j-rdBI",
+   "title": "How to Use ChatGPT for Blogging",
+   "published": "2023-02-28",
+   "views": 738,
+   "minutes": 13
+  },
+  {
+   "id": "5xkdKqoaT64",
+   "title": "Zettelkasten Note Example",
+   "published": "2023-02-28",
+   "views": 575,
+   "minutes": 1
+  },
+  {
+   "id": "d6VSq5AHTjE",
+   "title": "26 of The Best 21st Century Authors",
+   "published": "2023-02-26",
+   "views": 2532,
+   "minutes": 21
+  },
+  {
+   "id": "d6VSq5AHTjE",
+   "title": "26 of The Best 21st Century Authors",
+   "published": "2023-02-26",
+   "views": 2532,
+   "minutes": 21
+  },
+  {
+   "id": "0U9ZXaq4Vs0",
+   "title": "Markdown Tutorial For Writers and Bloggers",
+   "published": "2023-02-21",
+   "views": 1249,
+   "minutes": 16
+  },
+  {
+   "id": "iAbjnk-9eJc",
+   "title": "How to Use ChatGPT To Write Essays",
+   "published": "2023-02-19",
+   "views": 422,
+   "minutes": 10
+  },
+  {
+   "id": "8T7BabuhRk0",
+   "title": "How to Use ChatGPT For Copywriting",
+   "published": "2023-02-14",
+   "views": 2243,
+   "minutes": 10
+  },
+  {
+   "id": "qGgj_zBFeGI",
+   "title": "How To Use ChatGPT To Write YouTube Scripts",
+   "published": "2023-02-12",
+   "views": 7037,
+   "minutes": 10
+  },
+  {
+   "id": "8Int1vKcWuQ",
+   "title": "Grammarly vs. Hemingway Editor: What's the Difference?",
+   "published": "2023-02-05",
+   "views": 12679,
+   "minutes": 10
+  },
+  {
+   "id": "iyG9H1ZCebc",
+   "title": "Obsidian Notes Review: Is It Worth It?",
+   "published": "2023-01-31",
+   "views": 9286,
+   "minutes": 21
+  },
+  {
+   "id": "qcbaYO9mJbo",
+   "title": "ProWritingAid Review: Is It Worth It?",
+   "published": "2023-01-29",
+   "views": 16286,
+   "minutes": 20
+  },
+  {
+   "id": "tYVgLb4guVQ",
+   "title": "My EXACT Zettelkasten Obsidian Workflow",
+   "published": "2023-01-24",
+   "views": 17767,
+   "minutes": 22
+  },
+  {
+   "id": "GxxhOYQwpLE",
+   "title": "Best Keyboards for Writers 2023",
+   "published": "2023-01-22",
+   "views": 9156,
+   "minutes": 16
+  },
+  {
+   "id": "8nTPynaSR2s",
+   "title": "Inside Obsidian",
+   "published": "2023-01-18",
+   "views": 179,
+   "minutes": 1
+  },
+  {
+   "id": "SlABqr9T9bs",
+   "title": "Writing With The Zettelkasten Method",
+   "published": "2023-01-18",
+   "views": 174,
+   "minutes": 1
+  },
+  {
+   "id": "cQI3FHleH68",
+   "title": "18 Best British Authors: A Reading List for British Literature",
+   "published": "2023-01-17",
+   "views": 18035,
+   "minutes": 12
+  },
+  {
+   "id": "jUGsQpXXz4E",
+   "title": "Grammarly Review: Is It Worth It?",
+   "published": "2023-01-11",
+   "views": 10807,
+   "minutes": 19
+  },
+  {
+   "id": "u9q-k4GPJ3s",
+   "title": "Best Science Fiction Authors of All Time",
+   "published": "2023-01-10",
+   "views": 3756,
+   "minutes": 9
+  },
+  {
+   "id": "irYtOr9Iu5Y",
+   "title": "How Can Writers Use Chat GPT",
+   "published": "2023-01-06",
+   "views": 10554,
+   "minutes": 19
+  },
+  {
+   "id": "Ow9nh0ewJvo",
+   "title": "Weird GPT3 Use Cases for Writers",
+   "published": "2023-01-06",
+   "views": 384,
+   "minutes": 1
+  },
+  {
+   "id": "UniItL5Xauw",
+   "title": "Watch Me Write With Chat GPT",
+   "published": "2023-01-06",
+   "views": 214,
+   "minutes": 1
+  },
+  {
+   "id": "xVY4ULH8QpY",
+   "title": "Save Hours on Research With Chat GPT",
+   "published": "2023-01-06",
+   "views": 175,
+   "minutes": 1
+  },
+  {
+   "id": "mO7mJwomxfc",
+   "title": "11+ Best Motivational Books You Must Read",
+   "published": "2023-01-06",
+   "views": 6371,
+   "minutes": 12
+  },
+  {
+   "id": "S6DOmF-YASI",
+   "title": "15 Grammarly Tips and Tricks",
+   "published": "2022-12-21",
+   "views": 3361,
+   "minutes": 13
+  },
+  {
+   "id": "1bOzOmzFUPc",
+   "title": "How To Add Grammarly To Powerpoint",
+   "published": "2022-12-20",
+   "views": 18484,
+   "minutes": 3
+  },
+  {
+   "id": "Y8IhR1M3ixw",
+   "title": "How to Add Grammarly to Safari for Mac and iOS",
+   "published": "2022-12-20",
+   "views": 8863,
+   "minutes": 3
+  },
+  {
+   "id": "1HL30Ny9tyI",
+   "title": "Grammarly Tutorial: A Beginner's Guide",
+   "published": "2022-12-18",
+   "views": 49194,
+   "minutes": 29
+  },
+  {
+   "id": "f4lWypq4Waw",
+   "title": "How to Change Your Grammarly Language Preferences",
+   "published": "2022-12-15",
+   "views": 2924,
+   "minutes": 2
+  },
+  {
+   "id": "Zl23vnJ1HwY",
+   "title": "How to Add Grammarly To MS Word",
+   "published": "2022-12-14",
+   "views": 1010,
+   "minutes": 3
+  },
+  {
+   "id": "F-X9IdoDQIU",
+   "title": "15 Best Horror Authors: Alive and Dead",
+   "published": "2022-12-13",
+   "views": 6898,
+   "minutes": 11
+  },
+  {
+   "id": "XYFfpgyC8gQ",
+   "title": "Add Grammarly To Outlook: Step-by-Step",
+   "published": "2022-12-12",
+   "views": 27057,
+   "minutes": 4
+  },
+  {
+   "id": "UCfKWSf0PrA",
+   "title": "How to Write a Memoir",
+   "published": "2022-12-11",
+   "views": 777,
+   "minutes": 11
+  },
+  {
+   "id": "9JZIDzSAURQ",
+   "title": "How to Add Grammarly to Chrome",
+   "published": "2022-12-10",
+   "views": 3144,
+   "minutes": 2
+  },
+  {
+   "id": "ThHXmk8bzlE",
+   "title": "Writing Advice For Beginners: Start Here!",
+   "published": "2022-12-07",
+   "views": 555,
+   "minutes": 25
+  },
+  {
+   "id": "38grIKsSRJA",
+   "title": "11 Best American Authors: A Reading List for American Literature",
+   "published": "2022-12-04",
+   "views": 22031,
+   "minutes": 13
+  },
+  {
+   "id": "81N_7xmHVbU",
+   "title": "Automatic Citations With Grammarly: Tutorial",
+   "published": "2022-12-03",
+   "views": 32902,
+   "minutes": 3
+  },
+  {
+   "id": "iwyPiFr_Ufo",
+   "title": "17 Best Selling Stephen King Books",
+   "published": "2022-11-22",
+   "views": 610,
+   "minutes": 9
+  },
+  {
+   "id": "mc-4Hrd65Hs",
+   "title": "15 Best Fantasy Books and Authors You Must Read",
+   "published": "2022-11-20",
+   "views": 1043,
+   "minutes": 12
+  },
+  {
+   "id": "kS5E_zZQb9s",
+   "title": "How to Activate Flow State On Demand",
+   "published": "2022-11-15",
+   "views": 301,
+   "minutes": 12
+  },
+  {
+   "id": "NlPsrP3LLy0",
+   "title": "Byword App Review",
+   "published": "2022-11-13",
+   "views": 2696,
+   "minutes": 11
+  },
+  {
+   "id": "HxQmpuSRydc",
+   "title": "9 Best Writing Apps for iPad",
+   "published": "2022-11-11",
+   "views": 35340,
+   "minutes": 18
+  },
+  {
+   "id": "7rSjED1ryfM",
+   "title": "Audible Review 2023: Is It Worth It?",
+   "published": "2022-11-06",
+   "views": 2837,
+   "minutes": 15
+  },
+  {
+   "id": "87HACMFAPBU",
+   "title": "Master 13 Types of Writing from Scratch in 2024",
+   "published": "2022-11-01",
+   "views": 694,
+   "minutes": 12
+  },
+  {
+   "id": "TnOgiT55Dh4",
+   "title": "How To Publish 1000 Blog Posts Fast",
+   "published": "2022-10-30",
+   "views": 2644,
+   "minutes": 17
+  },
+  {
+   "id": "6HfDFwbghIE",
+   "title": "Boost Your Reach With These SEO Writing Tools",
+   "published": "2022-10-25",
+   "views": 155,
+   "minutes": 21
+  },
+  {
+   "id": "EyeKyUdlxzc",
+   "title": "The Secret to Creative Thinking (How to be more creative)",
+   "published": "2022-10-23",
+   "views": 182,
+   "minutes": 11
+  },
+  {
+   "id": "HSS7r8Y7z1I",
+   "title": "What Is Flow State?",
+   "published": "2022-10-19",
+   "views": 104,
+   "minutes": 1
+  },
+  {
+   "id": "9k4OMNQFG8w",
+   "title": "Antidote Review",
+   "published": "2022-10-18",
+   "views": 6949,
+   "minutes": 14
+  },
+  {
+   "id": "qoblu6RholU",
+   "title": "Writing Advice From Famous Authors You Can't Ignore!",
+   "published": "2022-10-16",
+   "views": 544,
+   "minutes": 14
+  },
+  {
+   "id": "yUqHYeJg4xY",
+   "title": "9 Best Crime Thriller Authors That'll Keep You Up At Night",
+   "published": "2022-10-11",
+   "views": 1223,
+   "minutes": 10
+  },
+  {
+   "id": "erCEPCPpOdM",
+   "title": "9 Best Grammar Books Every Writer Must Read",
+   "published": "2022-10-09",
+   "views": 7376,
+   "minutes": 11
+  },
+  {
+   "id": "P6IbcWsp3ic",
+   "title": "Get Into Flow State",
+   "published": "2022-10-06",
+   "views": 24,
+   "minutes": 1
+  },
+  {
+   "id": "LTef1vM1O-Q",
+   "title": "Cut These 25 Filler Words In English!",
+   "published": "2022-10-04",
+   "views": 471,
+   "minutes": 9
+  },
+  {
+   "id": "7Sxb_ifRwaU",
+   "title": "Zettelkasten 101: 8 Easy To Follow Lessons",
+   "published": "2022-10-02",
+   "views": 2239,
+   "minutes": 23
+  },
+  {
+   "id": "6bCqbZ3IwD8",
+   "title": "SEO Tools Specifically For Writers",
+   "published": "2022-09-30",
+   "views": 60,
+   "minutes": 1
+  },
+  {
+   "id": "6txoGF_HzMU",
+   "title": "Best Proofreading Software: 6 Top Options",
+   "published": "2022-09-27",
+   "views": 16900,
+   "minutes": 23
+  },
+  {
+   "id": "icF1uHWVx-4",
+   "title": "First Time Author Advice!",
+   "published": "2022-09-25",
+   "views": 157,
+   "minutes": 19
+  },
+  {
+   "id": "MptzSvDJ0v8",
+   "title": "Best Book On Creative Habits I Ever Read",
+   "published": "2022-09-23",
+   "views": 30,
+   "minutes": 1
+  },
+  {
+   "id": "3zRsGgll8Ec",
+   "title": "Top SEO Tools For Writers",
+   "published": "2022-09-21",
+   "views": 23,
+   "minutes": 1
+  },
+  {
+   "id": "Ie9SD0cHW7I",
+   "title": "11 Best Mystery Novels and Their Authors",
+   "published": "2022-09-20",
+   "views": 3667,
+   "minutes": 10
+  },
+  {
+   "id": "SgsskS_nPXU",
+   "title": "Need An Early Morning Writing Routine?",
+   "published": "2022-09-18",
+   "views": 320,
+   "minutes": 15
+  },
+  {
+   "id": "SgsskS_nPXU",
+   "title": "Need An Early Morning Writing Routine?",
+   "published": "2022-09-18",
+   "views": 320,
+   "minutes": 15
+  },
+  {
+   "id": "bvgZXy9e6Ig",
+   "title": "9 Great Philosophy Books For Beginners",
+   "published": "2022-09-13",
+   "views": 197,
+   "minutes": 15
+  },
+  {
+   "id": "bvgZXy9e6Ig",
+   "title": "9 Great Philosophy Books For Beginners",
+   "published": "2022-09-13",
+   "views": 197,
+   "minutes": 15
+  },
+  {
+   "id": "0FoKtbS_pxk",
+   "title": "Should I Upgrade to Grammarly Premium: 7 Signs It’s time to Switch",
+   "published": "2022-09-11",
+   "views": 405,
+   "minutes": 15
+  },
+  {
+   "id": "0FoKtbS_pxk",
+   "title": "Should I Upgrade to Grammarly Premium: 7 Signs It’s time to Switch",
+   "published": "2022-09-11",
+   "views": 405,
+   "minutes": 15
+  },
+  {
+   "id": "yVQFGishucc",
+   "title": "Zettelkasten 101: 8 Tips That Work!",
+   "published": "2022-09-08",
+   "views": 6457,
+   "minutes": 1
+  },
+  {
+   "id": "yXF-UIB93U8",
+   "title": "Workout your creativity!",
+   "published": "2022-09-06",
+   "views": 103,
+   "minutes": 12
+  },
+  {
+   "id": "yXF-UIB93U8",
+   "title": "Workout your creativity!",
+   "published": "2022-09-06",
+   "views": 103,
+   "minutes": 12
+  },
+  {
+   "id": "0n7mPhoMv5E",
+   "title": "8 Super Easy Tips For Focusing On Your Writing",
+   "published": "2022-09-03",
+   "views": 158,
+   "minutes": 11
+  },
+  {
+   "id": "aJPjOmJaRsc",
+   "title": "Avoid This BIG Mistake If You Want to Write a Book",
+   "published": "2022-08-27",
+   "views": 143,
+   "minutes": 10
+  },
+  {
+   "id": "wyGGSTxg4w0",
+   "title": "Do you find writing embarrassing?",
+   "published": "2022-08-23",
+   "views": 75,
+   "minutes": 11
+  },
+  {
+   "id": "mKYhiSrjYXQ",
+   "title": "7 Richest Authors in the World Share This Advice",
+   "published": "2022-08-20",
+   "views": 370,
+   "minutes": 13
+  },
+  {
+   "id": "qw8k80mUhvg",
+   "title": "How to Write an Essay",
+   "published": "2022-08-19",
+   "views": 705,
+   "minutes": 18
+  },
+  {
+   "id": "7sykTqfmL-0",
+   "title": "How Not to Be A Perfectionist While Writing",
+   "published": "2022-08-13",
+   "views": 260,
+   "minutes": 10
+  },
+  {
+   "id": "cUSD58O53LQ",
+   "title": "A simple journaling trick anyone can use",
+   "published": "2022-08-12",
+   "views": 48,
+   "minutes": 1
+  },
+  {
+   "id": "2yWg1LJ228Q",
+   "title": "9 Best Substack Newsletters Worth Reading Today",
+   "published": "2022-08-10",
+   "views": 1662,
+   "minutes": 16
+  },
+  {
+   "id": "rV0ALI34ZGE",
+   "title": "Becoming A Copywriter: How To Launch Your Career Fast",
+   "published": "2022-08-03",
+   "views": 210,
+   "minutes": 12
+  },
+  {
+   "id": "OVYgrsKK80A",
+   "title": "2 rules for new writers",
+   "published": "2022-08-01",
+   "views": 294,
+   "minutes": 1
+  },
+  {
+   "id": "PaiN7mZyd_o",
+   "title": "9 Best Markdown Editors For Writers",
+   "published": "2022-07-28",
+   "views": 16071,
+   "minutes": 13
+  },
+  {
+   "id": "uq8kcb6Ny2c",
+   "title": "The 7 Work Habits of Successful Writers",
+   "published": "2022-07-26",
+   "views": 389,
+   "minutes": 12
+  },
+  {
+   "id": "KHq28ckE88A",
+   "title": "9 Writing Outline Tips EVERY Writer Must Know",
+   "published": "2022-07-09",
+   "views": 416,
+   "minutes": 13
+  },
+  {
+   "id": "g_5lcWBkQ-0",
+   "title": "Avoid These 12 English Grammar Mistakes!",
+   "published": "2022-07-02",
+   "views": 112,
+   "minutes": 12
+  },
+  {
+   "id": "Ozbg-SmpdWU",
+   "title": "So You Want To Improve Your English Grammar Skills",
+   "published": "2022-06-28",
+   "views": 131,
+   "minutes": 16
+  },
+  {
+   "id": "NGER2Xspsj0",
+   "title": "Top 9 Grammar Tips EVERY Writer Needs to Know!",
+   "published": "2022-06-25",
+   "views": 1685,
+   "minutes": 17
+  },
+  {
+   "id": "f2UDLT43tf4",
+   "title": "Grammarly Business Review: Is It Worth It?",
+   "published": "2022-06-22",
+   "views": 3033,
+   "minutes": 21
+  },
+  {
+   "id": "vLMwtObYZrs",
+   "title": "9 Self-Editing Tips For Writers",
+   "published": "2022-06-21",
+   "views": 1382,
+   "minutes": 18
+  },
+  {
+   "id": "Zl0rXxkef48",
+   "title": "How to Write a Chapter Outline",
+   "published": "2022-06-17",
+   "views": 2369,
+   "minutes": 18
+  },
+  {
+   "id": "QNNc9sHsGCc",
+   "title": "PlagiarismCheck Review: Is It Worth It?",
+   "published": "2022-06-12",
+   "views": 702,
+   "minutes": 11
+  },
+  {
+   "id": "UMuQ6j78wXA",
+   "title": "Jasper Review: Is This AI Writing Software Worth It?",
+   "published": "2022-06-07",
+   "views": 498,
+   "minutes": 17
+  },
+  {
+   "id": "_kWwlwRQdGE",
+   "title": "How Writers Can Create an NFT",
+   "published": "2022-06-02",
+   "views": 478,
+   "minutes": 12
+  },
+  {
+   "id": "wEEApojpNJs",
+   "title": "7 Best Paraphraser Tools For Writers and Creators",
+   "published": "2022-05-31",
+   "views": 586,
+   "minutes": 17
+  },
+  {
+   "id": "8-tRy0srsLw",
+   "title": "8 Best Outliner Apps For Writers",
+   "published": "2022-05-23",
+   "views": 4922,
+   "minutes": 16
+  },
+  {
+   "id": "v6QxJbw4A_E",
+   "title": "9 Best Essay Writing Apps",
+   "published": "2022-05-21",
+   "views": 6060,
+   "minutes": 15
+  },
+  {
+   "id": "0R5f2VV58pw",
+   "title": "How To Write an Article Outline Tutorial",
+   "published": "2022-05-11",
+   "views": 5021,
+   "minutes": 11
+  },
+  {
+   "id": "btQXofgH0fA",
+   "title": "9 Best Zettelkasten Apps For Writers",
+   "published": "2022-05-04",
+   "views": 2304,
+   "minutes": 16
+  },
+  {
+   "id": "ZZk5s6zH4bQ",
+   "title": "Dynalist Review: Is It Worth It?",
+   "published": "2022-04-27",
+   "views": 4670,
+   "minutes": 14
+  },
+  {
+   "id": "rrgSYvIo914",
+   "title": "Workflowy Review: Is It Worth It?",
+   "published": "2022-04-27",
+   "views": 5230,
+   "minutes": 16
+  },
+  {
+   "id": "dbLf5vAikMs",
+   "title": "Where To Submit Your Writing",
+   "published": "2022-04-27",
+   "views": 478,
+   "minutes": 11
+  },
+  {
+   "id": "hL6PULvgRto",
+   "title": "What Is Obsidian Notes?",
+   "published": "2022-04-25",
+   "views": 3477,
+   "minutes": 13
+  },
+  {
+   "id": "nLdDYU2Gm-s",
+   "title": "How to Use The Grammarly Plagiarism Detector",
+   "published": "2022-04-09",
+   "views": 31739,
+   "minutes": 3
+  },
+  {
+   "id": "tJCqlDLw6sk",
+   "title": "The Best Plagiarism Checker For Your Money",
+   "published": "2022-04-05",
+   "views": 3904,
+   "minutes": 26
+  },
+  {
+   "id": "vSoOjPTWH9c",
+   "title": "Vellum Review: Should You Use It For Book Design?",
+   "published": "2022-04-02",
+   "views": 6990,
+   "minutes": 14
+  },
+  {
+   "id": "dHkZBafVSOk",
+   "title": "Quillbot Review: Should You Try It?",
+   "published": "2022-04-01",
+   "views": 22089,
+   "minutes": 13
+  },
+  {
+   "id": "g0z-6Ahgf8U",
+   "title": "Best Grammar Checker: 8 Top Choices",
+   "published": "2022-03-17",
+   "views": 11396,
+   "minutes": 18
+  },
+  {
+   "id": "NTiGGguwAkg",
+   "title": "Microsoft Editor Review: Is It Worth It?",
+   "published": "2022-03-11",
+   "views": 1962,
+   "minutes": 14
+  },
+  {
+   "id": "C3zz-pgvxlw",
+   "title": "Clearscope Review: Is It Worth It?",
+   "published": "2022-03-11",
+   "views": 1032,
+   "minutes": 14
+  },
+  {
+   "id": "oiCzb26sKVk",
+   "title": "How To Become More Productive Writing",
+   "published": "2022-03-04",
+   "views": 202,
+   "minutes": 16
+  },
+  {
+   "id": "PzGtlXDjYYk",
+   "title": "Should You Use ProWritingAid?",
+   "published": "2022-03-04",
+   "views": 3115,
+   "minutes": 11
+  },
+  {
+   "id": "J2fnZTfA-xc",
+   "title": "Ghost Review: Is It Worth It?",
+   "published": "2022-02-18",
+   "views": 802,
+   "minutes": 19
+  },
+  {
+   "id": "YRST631Vcgk",
+   "title": "The Best Writing Productivity System? 4 Top Choices",
+   "published": "2022-02-11",
+   "views": 366,
+   "minutes": 13
+  },
+  {
+   "id": "lRuqAVPykM0",
+   "title": "Writing Goals: How To Set Ones That Stick",
+   "published": "2022-01-29",
+   "views": 90,
+   "minutes": 12
+  },
+  {
+   "id": "X-qsY5fgLBk",
+   "title": "iA Writer Review: Is It Worth It? (Mac, iPad and iPhone)",
+   "published": "2022-01-27",
+   "views": 38312,
+   "minutes": 12
+  },
+  {
+   "id": "VJKnEGkyL7U",
+   "title": "Ulysses Review: Is It Worth It?",
+   "published": "2022-01-27",
+   "views": 25352,
+   "minutes": 12
+  },
+  {
+   "id": "f-UrS3IAYGY",
+   "title": "Writer’s Cramp: 10 Top Tips For Beating it",
+   "published": "2022-01-14",
+   "views": 2504,
+   "minutes": 8
+  },
+  {
+   "id": "qIXNeTGlwjQ",
+   "title": "How To Build a Daily Writing Habit",
+   "published": "2021-12-23",
+   "views": 981,
+   "minutes": 11
+  },
+  {
+   "id": "RDuDp92Dd2U",
+   "title": "8 Dictation Tips That Really Work",
+   "published": "2021-12-20",
+   "views": 9829,
+   "minutes": 11
+  },
+  {
+   "id": "evLE8hS_d0Q",
+   "title": "How to Write Fast: 8 Super Speedy Tips",
+   "published": "2021-12-20",
+   "views": 400,
+   "minutes": 12
+  },
+  {
+   "id": "GzPdrE0SUow",
+   "title": "Need help overcoming fear of writing? So did I.",
+   "published": "2021-12-15",
+   "views": 363,
+   "minutes": 12
+  },
+  {
+   "id": "GzUK--AuwJM",
+   "title": "11 Top Self-Publishing Tips For Aspiring Authors",
+   "published": "2021-12-15",
+   "views": 328,
+   "minutes": 17
+  },
+  {
+   "id": "3TYwIcXbJXs",
+   "title": "How to Get Paid To Write: 14 Profitable Strategies",
+   "published": "2021-12-07",
+   "views": 9515,
+   "minutes": 15
+  },
+  {
+   "id": "qeUSlWJ2Id0",
+   "title": "How to Start A Journaling Habit That Sticks",
+   "published": "2021-12-03",
+   "views": 60,
+   "minutes": 13
+  },
+  {
+   "id": "Bmk8C0toWOM",
+   "title": "Freewriting: A Bulletproof Guide",
+   "published": "2021-12-03",
+   "views": 866,
+   "minutes": 11
+  },
+  {
+   "id": "YrXl9GBiZvc",
+   "title": "The Zettelkasten Method: How to Use This Research System To Write",
+   "published": "2021-12-03",
+   "views": 4563,
+   "minutes": 18
+  },
+  {
+   "id": "jw1PRvmskME",
+   "title": "Beat Writer's Block!",
+   "published": "2021-11-23",
+   "views": 102,
+   "minutes": 12
+  },
+  {
+   "id": "Qsrl7N9F_TM",
+   "title": "11 Writing Challenges You Can Easily Beat",
+   "published": "2021-11-23",
+   "views": 225,
+   "minutes": 18
+  },
+  {
+   "id": "_cMHxzmM-aE",
+   "title": "Grammarly Review: Free Vs Premium",
+   "published": "2021-11-11",
+   "views": 2570,
+   "minutes": 19
+  },
+  {
+   "id": "hmKCQQO_ELc",
+   "title": "7 Best Grammarly Alternatives",
+   "published": "2021-11-11",
+   "views": 5271,
+   "minutes": 10
+  },
+  {
+   "id": "dj7aVPVDpi0",
+   "title": "What Most Writers Get Wrong About Personal Branding",
+   "published": "2020-08-18",
+   "views": 100,
+   "minutes": 8
+  },
+  {
+   "id": "d_D8Rmny3is",
+   "title": "Why Creatives Need a Business Disaster Recovery Plan With Sally Binard",
+   "published": "2020-08-13",
+   "views": 42,
+   "minutes": 24
+  },
+  {
+   "id": "QkPWWxvJA7o",
+   "title": "5 Great Ways to Get Paid to Write",
+   "published": "2020-08-11",
+   "views": 168,
+   "minutes": 11
+  },
+  {
+   "id": "w3BrXnZefjY",
+   "title": "Writing Children's Books and Storytelling for Brands with Leah Komaiko",
+   "published": "2020-08-06",
+   "views": 184,
+   "minutes": 34
+  },
+  {
+   "id": "0eywdxWDHlw",
+   "title": "3 Strategies for Becoming a More Efficient Writer",
+   "published": "2020-08-04",
+   "views": 45,
+   "minutes": 11
+  },
+  {
+   "id": "I8IGR9wuh6A",
+   "title": "How Newsletters Make Money for Writers with Hamish McKenzie of Substack",
+   "published": "2020-07-30",
+   "views": 949,
+   "minutes": 26
+  },
+  {
+   "id": "UzJtlAE4IYA",
+   "title": "Unlocking Your Extraordinary Mind with Vishen Lakhiani of Mindvalley",
+   "published": "2020-07-28",
+   "views": 210,
+   "minutes": 32
+  },
+  {
+   "id": "qfqFFifpokM",
+   "title": "Nir Eyal Indistractable Interview: How He Writes",
+   "published": "2020-07-23",
+   "views": 28,
+   "minutes": 31
+  },
+  {
+   "id": "XUBfa0tjTXo",
+   "title": "The Fiction Formula And Self-Publishing Quickly with Sean Platt and Johnny B. Truant",
+   "published": "2020-07-22",
+   "views": 212,
+   "minutes": 44
+  },
+  {
+   "id": "xQExqvXKIjs",
+   "title": "How Meditation Helps Creativity with Dr. Megan Jones of Headspace",
+   "published": "2020-07-14",
+   "views": 40,
+   "minutes": 24
+  },
+  {
+   "id": "xEFIhkAOFIM",
+   "title": "Creativity for Writers with Dr. Roger Firestien",
+   "published": "2020-07-09",
+   "views": 27,
+   "minutes": 38
+  },
+  {
+   "id": "ywgQmw7-eNw",
+   "title": "Writing a Book About Leadership With Mark Brown, of Outward Bound",
+   "published": "2020-07-07",
+   "views": 90,
+   "minutes": 33
+  },
+  {
+   "id": "DcIc-z0tlik",
+   "title": "How to Write a Good Recipe Book With Sean McCormack, Head Vet of Tails",
+   "published": "2020-07-02",
+   "views": 38,
+   "minutes": 24
+  },
+  {
+   "id": "bbC-NqvKgDk",
+   "title": "Turn Your Writing Into a Course That You Love Launching With Laura Philips",
+   "published": "2020-06-30",
+   "views": 50,
+   "minutes": 30
+  },
+  {
+   "id": "X4UaFQvKMGY",
+   "title": "How to Work With An Editor With Neha Vaidya of PaperTrue",
+   "published": "2020-06-25",
+   "views": 326,
+   "minutes": 27
+  },
+  {
+   "id": "-8z-x8nyLsk",
+   "title": "How Journaling Helps Writers Find Better Ideas With Michal Korzonek",
+   "published": "2020-06-23",
+   "views": 63,
+   "minutes": 28
+  },
+  {
+   "id": "7oANYjWjL7o",
+   "title": "Want to Earn More From Creative Work? Give Your Best Stuff Away For Free",
+   "published": "2020-06-19",
+   "views": 5,
+   "minutes": 25
+  },
+  {
+   "id": "LF1V331MElQ",
+   "title": "Diversify Your Income With Magician and Author Joshua Jay",
+   "published": "2020-06-05",
+   "views": 73,
+   "minutes": 26
+  },
+  {
+   "id": "2F4Yo14pBOI",
+   "title": "How To Become More Creative With Michael Gelb",
+   "published": "2020-06-03",
+   "views": 66,
+   "minutes": 32
+  },
+  {
+   "id": "S6lsCXrYMaQ",
+   "title": "How to Write a Novel in 90 Days With Man Booker Nominated Author Louise Dean",
+   "published": "2020-05-28",
+   "views": 155,
+   "minutes": 28
+  },
+  {
+   "id": "FFdXwIGTxho",
+   "title": "How To Standout on Social Media and Grow Your Business Using Content Marketing With Timothy Sykes",
+   "published": "2020-05-27",
+   "views": 7,
+   "minutes": 27
+  },
+  {
+   "id": "S0bO09FC3II",
+   "title": "What's Your Book's Big Idea? Building a Culture of Good With Scott Moorehead",
+   "published": "2020-05-21",
+   "views": 24,
+   "minutes": 27
+  },
+  {
+   "id": "kzS4HLmvbow",
+   "title": "Change Your Mindset, Change Your Life With Garrain Jones",
+   "published": "2020-05-19",
+   "views": 133,
+   "minutes": 26
+  },
+  {
+   "id": "S-0_RpAmpxI",
+   "title": "How to Build a 7 Figure Business in 12 Months With Ryan Daniel Moran",
+   "published": "2020-05-14",
+   "views": 36,
+   "minutes": 27
+  },
+  {
+   "id": "GCRhpvgRaS4",
+   "title": "Finding Your Motivation and Writing Viral Nonfiction with Jeff Hayden",
+   "published": "2020-05-12",
+   "views": 21,
+   "minutes": 24
+  },
+  {
+   "id": "iXXSyoxk-CQ",
+   "title": "Joanna Penn of the Creative Penn Interview: How To Write a Nonfiction Book",
+   "published": "2020-05-07",
+   "views": 276,
+   "minutes": 27
+  },
+  {
+   "id": "mlQacjBnf20",
+   "title": "The Creative Process Behind Writing a Memorable Business Book with Ajit Nawalkha",
+   "published": "2020-05-05",
+   "views": 19,
+   "minutes": 30
+  },
+  {
+   "id": "kPejvD9_YIw",
+   "title": "Alex Newton of K-Lytics On Selling More Non-Fiction Books",
+   "published": "2020-04-30",
+   "views": 35,
+   "minutes": 22
+  },
+  {
+   "id": "NVc5uIjSGk0",
+   "title": "Self-Publishing Your Non-Fiction Book",
+   "published": "2020-04-28",
+   "views": 45,
+   "minutes": 15
+  },
+  {
+   "id": "3VwMx5taZhA",
+   "title": "Self-editing Your Book Until It's Good Enough to Publish",
+   "published": "2020-04-23",
+   "views": 23,
+   "minutes": 14
+  },
+  {
+   "id": "ZnlZTmrt0c8",
+   "title": "Adam Jelic of MiGoals On Creating and Selling a Daily Planner",
+   "published": "2020-04-21",
+   "views": 30,
+   "minutes": 20
+  },
+  {
+   "id": "zj--DxnRMjs",
+   "title": "How to Handle Critical Feedback From Your Book Editor",
+   "published": "2020-04-16",
+   "views": 72,
+   "minutes": 8
+  },
+  {
+   "id": "Y6II2NGbtYI",
+   "title": "How To Set Goals For Your Writing",
+   "published": "2020-04-14",
+   "views": 16,
+   "minutes": 9
+  },
+  {
+   "id": "P9ud2rdlCDc",
+   "title": "Creating Remarkable Content with Nate Weiner, CEO of Pocket",
+   "published": "2020-04-10",
+   "views": 35,
+   "minutes": 16
+  },
+  {
+   "id": "4Lx4ira_1ao",
+   "title": "7 Odd Productivity Tricks for Writers",
+   "published": "2020-04-04",
+   "views": 22,
+   "minutes": 9
+  },
+  {
+   "id": "F_ZnXEDQDSo",
+   "title": "How to Conquer the Loneliness That Comes With Being a Writer",
+   "published": "2020-03-28",
+   "views": 130,
+   "minutes": 9
+  },
+  {
+   "id": "B27rtGBv5zQ",
+   "title": "How To Become a Prolific Writer With Pascal Gambardella",
+   "published": "2020-02-03",
+   "views": 184,
+   "minutes": 23
+  },
+  {
+   "id": "poWLDDnHIZk",
+   "title": "What You Can Learn About Success from Malcolm Gladwell",
+   "published": "2020-01-25",
+   "views": 67,
+   "minutes": 9
+  },
+  {
+   "id": "ZiC7N3M7Zic",
+   "title": "Marianne McGuire On Meditation Creativity and Art",
+   "published": "2020-01-23",
+   "views": 27,
+   "minutes": 18
+  },
+  {
+   "id": "1pbg__aW1L0",
+   "title": "Howard H. White on Setting Audacious Goals and Writing a Best-Selling Business Book",
+   "published": "2020-01-22",
+   "views": 28,
+   "minutes": 33
+  },
+  {
+   "id": "jjTsZ5iE8aI",
+   "title": "Find a Creative Master from The Power of Creativity",
+   "published": "2020-01-21",
+   "views": 15,
+   "minutes": 19
+  },
+  {
+   "id": "HAktxW8qcvI",
+   "title": "Creating Remarkable Content with Nate Weiner CEO of Pocket",
+   "published": "2020-01-20",
+   "views": 33,
+   "minutes": 16
+  },
+  {
+   "id": "BSuIZDEB-kI",
+   "title": "James Clear Interview: How He Wrote Atomic Habits",
+   "published": "2020-01-19",
+   "views": 163,
+   "minutes": 22
+  },
+  {
+   "id": "OujqqI2T0DE",
+   "title": "Anthony Metivier on Memory Palaces Mind-Mapping and Self-Publishing Non-fiction Books",
+   "published": "2020-01-18",
+   "views": 51,
+   "minutes": 26
+  },
+  {
+   "id": "JER908YeWWQ",
+   "title": "Alex Newton of K-Lytics On Selling More Non-Fiction Books",
+   "published": "2020-01-17",
+   "views": 50,
+   "minutes": 22
+  },
+  {
+   "id": "gJpAcRrSatQ",
+   "title": "Adam Jelic of MiGoals On Creating and Selling a Daily Planner",
+   "published": "2020-01-16",
+   "views": 44,
+   "minutes": 20
+  },
+  {
+   "id": "io4YcPyxr-I",
+   "title": "How to Write & Publish a Novel in 90 days with Louise Dean",
+   "published": "2020-01-15",
+   "views": 293,
+   "minutes": 28
+  },
+  {
+   "id": "_sKfADaVzjA",
+   "title": "How to Tell Stories on Instagram With Screenwriter Max Marlow",
+   "published": "2020-01-14",
+   "views": 80,
+   "minutes": 29
+  },
+  {
+   "id": "VBDA_lh6h7c",
+   "title": "How To Write SEO Friendly Articles With Abidemi Sanusi",
+   "published": "2020-01-13",
+   "views": 48,
+   "minutes": 26
+  },
+  {
+   "id": "d3GKoxo-_2k",
+   "title": "Scott Young Interview: How He Wrote Ultralearning",
+   "published": "2020-01-12",
+   "views": 107,
+   "minutes": 35
+  },
+  {
+   "id": "exFIWfJVxIc",
+   "title": "Turning Your Writing Into a Million Dollar Business With Elaine Pofeldt",
+   "published": "2020-01-11",
+   "views": 152,
+   "minutes": 25
+  },
+  {
+   "id": "zZzXF-c74uI",
+   "title": "6 Best Grammarly Alternatives",
+   "published": "2020-01-10",
+   "views": 6917,
+   "minutes": 4
+  },
+  {
+   "id": "4jGxqNH2MEk",
+   "title": "The Creative Process Behind Writing a Memorable Business Book With Ajit Nawalkha",
+   "published": "2020-01-10",
+   "views": 17,
+   "minutes": 30
+  },
+  {
+   "id": "lNdex2E-s-0",
+   "title": "Jason Chicola Weighs in on How to Make More Money as a Freelancer",
+   "published": "2020-01-09",
+   "views": 110,
+   "minutes": 23
+  },
+  {
+   "id": "z6YPC97mXq0",
+   "title": "Gaming Storytelling and Creative Projects With John Romero",
+   "published": "2020-01-08",
+   "views": 40,
+   "minutes": 22
+  },
+  {
+   "id": "mf_65DxwMoE",
+   "title": "Daniel Pink on When You Should Write Research Work and Play",
+   "published": "2020-01-07",
+   "views": 76,
+   "minutes": 25
+  },
+  {
+   "id": "S6EJd3NC26Y",
+   "title": "How to Unlock Creative Thinking With Best-Selling Author Professor Michael A. Roberto",
+   "published": "2020-01-06",
+   "views": 45,
+   "minutes": 28
+  },
+  {
+   "id": "D7h_is9lQ2o",
+   "title": "How To Write a Nonfiction Book With Joanna Penn",
+   "published": "2020-01-05",
+   "views": 371,
+   "minutes": 27
+  },
+  {
+   "id": "c0UoK9G6Bac",
+   "title": "Make Your Business Run Like Clockwork and Put Your Profits First -  With Mike Michalowicz",
+   "published": "2020-01-04",
+   "views": 36,
+   "minutes": 28
+  },
+  {
+   "id": "hbGPY6ffxDI",
+   "title": "Sisu: The Finnish Art of Courage With Joanna Nylund",
+   "published": "2020-01-03",
+   "views": 814,
+   "minutes": 19
+  },
+  {
+   "id": "EvisePr0bFA",
+   "title": "Change Your Mindset, Change Your Life With Garrain Jones",
+   "published": "2020-01-02",
+   "views": 201,
+   "minutes": 26
+  },
+  {
+   "id": "o1VlEdqUWY8",
+   "title": "Grammarly updates - Become a Writer Today",
+   "published": "2019-11-01",
+   "views": 1315,
+   "minutes": 8
+  },
+  {
+   "id": "SU31_yCrb4E",
+   "title": "ProWritingAid Review 2020 - Become a Writer Today",
+   "published": "2019-04-04",
+   "views": 3514,
+   "minutes": 7
+  },
+  {
+   "id": "ddaBuIzlnUs",
+   "title": "How to Use Hemingway Editor for Self-Editing Your Writing",
+   "published": "2019-02-13",
+   "views": 25315,
+   "minutes": 8
+  },
+  {
+   "id": "PbTpRERGLag",
+   "title": "The Top 7 Writing Apps You Must Use",
+   "published": "2018-09-10",
+   "views": 2611,
+   "minutes": 2
+  },
+  {
+   "id": "KFfVaWMLvt8",
+   "title": "Audible Review: Is It Worth It?",
+   "published": "2018-08-29",
+   "views": 9897,
+   "minutes": 4
+  },
+  {
+   "id": "GMzdIfn1kZ8",
+   "title": "English Isn't My Native Language? How Can I Write?",
+   "published": "2018-08-10",
+   "views": 500,
+   "minutes": 2
+  },
+  {
+   "id": "PO9X9ankPyU",
+   "title": "What to Do if You Find the Writer's Journey Intimidating",
+   "published": "2018-08-10",
+   "views": 37,
+   "minutes": 2
+  },
+  {
+   "id": "K9QEyv_vlO4",
+   "title": "How Can I Get Started Blogging?",
+   "published": "2018-08-10",
+   "views": 101,
+   "minutes": 3
+  },
+  {
+   "id": "GKql9I1cnBY",
+   "title": "Grammarly vs WhiteSmoke vs Ginger - What's the Best Grammar Checker in 2020?",
+   "published": "2018-06-11",
+   "views": 61254,
+   "minutes": 9
+  },
+  {
+   "id": "84_4sPXVMIM",
+   "title": "What Do When You've Lots of Great Writing Ideas - Become a Writer Today",
+   "published": "2018-04-02",
+   "views": 33,
+   "minutes": 3
+  },
+  {
+   "id": "yE-gSYtrzNw",
+   "title": "How Do I Know When To Stop Researching and Start Writing? - Become a Writer Today",
+   "published": "2018-03-23",
+   "views": 159,
+   "minutes": 2
+  },
+  {
+   "id": "2y2omemX5P8",
+   "title": "How Can I Conquer Overwhelm? - Become a Writer Today",
+   "published": "2018-03-13",
+   "views": 34,
+   "minutes": 2
+  },
+  {
+   "id": "dgJy5tS7sQk",
+   "title": "On Writing by Stephen King - Book Review - Become a Writer Today",
+   "published": "2018-03-09",
+   "views": 468,
+   "minutes": 4
+  },
+  {
+   "id": "wQQvqCOUpkQ",
+   "title": "Total Recall by Arnold Schwarzenegger - Book Review  - Become a Writer Today",
+   "published": "2018-03-09",
+   "views": 290,
+   "minutes": 3
+  },
+  {
+   "id": "132z31Gb_Ck",
+   "title": "Principles by Ray Dalio -  Book Review - Become a Writer Today",
+   "published": "2018-03-09",
+   "views": 306,
+   "minutes": 3
+  },
+  {
+   "id": "Mt_IWn5RkqM",
+   "title": "Crushing It by Gary Vaynerchuk - Book Review - Become a Writer Today",
+   "published": "2018-02-11",
+   "views": 123,
+   "minutes": 4
+  },
+  {
+   "id": "eyBaX5KzsJs",
+   "title": "Tribes of Mentors by Tim Ferrriss - Book Review - Become a Writer Today",
+   "published": "2018-02-10",
+   "views": 92,
+   "minutes": 3
+  },
+  {
+   "id": "PNKa3CCQuNw",
+   "title": "How to Double Space Lines in Word",
+   "published": "2018-02-10",
+   "views": 547,
+   "minutes": 2
+  },
+  {
+   "id": "d3kPKZYm8J0",
+   "title": "- Become a Writer Today",
+   "published": "2017-09-02",
+   "views": 425,
+   "minutes": 15
+  },
+  {
+   "id": "3Rp-5VaPAYI",
+   "title": "How to Use Creative Writing Prompts",
+   "published": "2017-06-29",
+   "views": 790,
+   "minutes": 5
+  },
+  {
+   "id": "GLny601lZWk",
+   "title": "What Can Sumo Do For You? Find Out In this Review",
+   "published": "2017-06-29",
+   "views": 1115,
+   "minutes": 8
+  },
+  {
+   "id": "pWo_ckacrJ0",
+   "title": "An In-depth ConvertKit Tutorial for Writers and Bloggers - Become a Writer Today",
+   "published": "2017-06-29",
+   "views": 298,
+   "minutes": 9
+  },
+  {
+   "id": "uuDO9j2Cs60",
+   "title": "How to Find Great Creative Writing Ideas",
+   "published": "2017-06-27",
+   "views": 1067,
+   "minutes": 5
+  },
+  {
+   "id": "esPpeo-ynCg",
+   "title": "Interview with Chandler Bolt",
+   "published": "2017-02-09",
+   "views": 196,
+   "minutes": 23
+  },
+  {
+   "id": "9uI6BPTJFpU",
+   "title": "Annual review 2016",
+   "published": "2016-12-21",
+   "views": 30,
+   "minutes": 5
+  },
+  {
+   "id": "wIJL23On_v0",
+   "title": "Experiment with form and substance",
+   "published": "2016-12-02",
+   "views": 44,
+   "minutes": 4
+  },
+  {
+   "id": "v3zy9wL1bfk",
+   "title": "The Power of Creativity",
+   "published": "2016-11-04",
+   "views": 119,
+   "minutes": 3
+  },
+  {
+   "id": "o3soNr1WauQ",
+   "title": "LeadPages Review - How to Make a Landing Page",
+   "published": "2016-10-24",
+   "views": 271,
+   "minutes": 7
+  },
+  {
+   "id": "dXfvXQPje2U",
+   "title": "The Power of Creativity",
+   "published": "2016-10-16",
+   "views": 132,
+   "minutes": 3
+  },
+  {
+   "id": "rIw2ES62bsM",
+   "title": "How to Use Speech to Text Software To Write Faster Than You Can Imagine",
+   "published": "2016-10-06",
+   "views": 5048,
+   "minutes": 14
+  },
+  {
+   "id": "5xHrZKn2L04",
+   "title": "How do I handle distraction?",
+   "published": "2016-09-22",
+   "views": 24,
+   "minutes": 1
+  },
+  {
+   "id": "FLtjh__jqNQ",
+   "title": "How can I read more often?",
+   "published": "2016-09-22",
+   "views": 53,
+   "minutes": 1
+  },
+  {
+   "id": "dW13z6YMpNQ",
+   "title": "What you need to know about journal writing",
+   "published": "2016-09-22",
+   "views": 28,
+   "minutes": 1
+  },
+  {
+   "id": "mr81dVnBSLg",
+   "title": "Do I need to write every day?",
+   "published": "2016-09-22",
+   "views": 41,
+   "minutes": 1
+  },
+  {
+   "id": "FlXXcNtB0_c",
+   "title": "How To Write a Book For the First Time",
+   "published": "2016-08-04",
+   "views": 892,
+   "minutes": 11
+  },
+  {
+   "id": "FlXXcNtB0_c",
+   "title": "How To Write a Book For the First Time",
+   "published": "2016-08-04",
+   "views": 892,
+   "minutes": 11
+  },
+  {
+   "id": "4QnPsiIXE8s",
+   "title": "Writing tip #9: Organising Ideas",
+   "published": "2016-07-29",
+   "views": 149,
+   "minutes": 1
+  },
+  {
+   "id": "BefjQf8zgjo",
+   "title": "The 7 Habits of Highly Successful Writers",
+   "published": "2016-07-14",
+   "views": 241,
+   "minutes": 4
+  },
+  {
+   "id": "psh8Bn_YK9w",
+   "title": "Self-Care For Writers: What You Need To Know",
+   "published": "2016-06-07",
+   "views": 614,
+   "minutes": 33
+  },
+  {
+   "id": "CbY-ljaID1Y",
+   "title": "How To Create a Mind Map For Writing, Blogging and More",
+   "published": "2016-03-31",
+   "views": 11156,
+   "minutes": 8
+  },
+  {
+   "id": "rCk6YPcqCMY",
+   "title": "If I Knew Then About Writing What I Know Now",
+   "published": "2016-03-02",
+   "views": 200,
+   "minutes": 9
+  },
+  {
+   "id": "R6NQWvZ9YlU",
+   "title": "Is LeadPages Worth It? Find Out in this Review & Demo",
+   "published": "2015-12-30",
+   "views": 316,
+   "minutes": 11
+  },
+  {
+   "id": "d0TyJHe2CJQ",
+   "title": "Is Grammarly Worth It? Find Out in this Review",
+   "published": "2015-08-08",
+   "views": 147836,
+   "minutes": 5
+  },
+  {
+   "id": "6FO3_Fl5a5U",
+   "title": "From the diary of Anne Frank",
+   "published": "2015-04-14",
+   "views": 56,
+   "minutes": 2
+  },
+  {
+   "id": "CvCZsQp_2PE",
+   "title": "How to Use Scrivener For Blogging (Part 5) - From Scrivener to WordPress",
+   "published": "2015-03-05",
+   "views": 2937,
+   "minutes": 3
+  },
+  {
+   "id": "2XMWZCujB0E",
+   "title": "How to Use Scrivener for Blogging (Part 4) - Tips and Tricks",
+   "published": "2015-03-05",
+   "views": 1707,
+   "minutes": 3
+  },
+  {
+   "id": "DtQMkBJYvdM",
+   "title": "How to Use Scrivener for Blogging (Part 2) - Managing All Your Writing Projects",
+   "published": "2015-03-05",
+   "views": 3575,
+   "minutes": 4
+  },
+  {
+   "id": "aaaxmSKcujU",
+   "title": "How to Use  Scrivener for Blogging (Part 1) - What is Scrivener?",
+   "published": "2015-03-05",
+   "views": 7815,
+   "minutes": 6
+  },
+  {
+   "id": "kG3YSFgOgeg",
+   "title": "How to Use Scrivener for Blogging (Part 3) - Managing Your Posts",
+   "published": "2015-03-05",
+   "views": 2080,
+   "minutes": 4
+  },
+  {
+   "id": "OsjtRPMIztE",
+   "title": "How to Become a Freelance Writer and Get Paid for Your Work",
+   "published": "2015-02-28",
+   "views": 418,
+   "minutes": 3
+  }
+ ]
+}

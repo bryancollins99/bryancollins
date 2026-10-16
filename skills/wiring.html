@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>/wiring: a Claude Code skill · Bryan Collins</title>
+    <meta name="description" content="Compares the secrets and env vars your code declares against what is actually set, on both GitHub Actions and Netlify.">
+    <meta name="author" content="Bryan Collins">
+    <link rel="canonical" href="https://bryancollins.com/skills/wiring">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://bryancollins.com/skills/wiring">
+    <meta property="og:title" content="/wiring: a Claude Code skill · Bryan Collins">
+    <meta property="og:description" content="Compares the secrets and env vars your code declares against what is actually set, on both GitHub Actions and Netlify.">
+    <meta property="og:image" content="https://bryancollins.com/resources/bryan-collins.jpeg">
+    <meta name="twitter:card" content="summary">
+    <meta name="theme-color" media="(prefers-color-scheme: light)" content="#fdfdfc">
+    <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#121211">
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <link rel="stylesheet" href="/assets/hub.css">
+    <script async src="https://stats.bryancollins.com/js/pa-bvsz2TfQenbKYMWpBJ7eS.js"></script>
+    <script>
+      window.plausible=window.plausible||function(){(plausible.q=plausible.q||[]).push(arguments)},plausible.init=plausible.init||function(i){plausible.o=i||{}};
+      plausible.init()
+    </script>
+    <script type="application/ld+json">{"@context": "https://schema.org", "@type": "SoftwareSourceCode", "name": "/wiring", "description": "Compares the secrets and env vars your code declares against what is actually set, on both GitHub Actions and Netlify.", "codeRepository": "https://github.com/bryancollins99/agent-skills", "license": "https://opensource.org/licenses/MIT", "programmingLanguage": "Markdown", "author": {"@type": "Person", "name": "Bryan Collins", "url": "https://bryancollins.com/"}}</script>
+</head>
+<body>
+<a class="skip" href="#content">Skip to content</a>
+<header class="site-header">
+    <a class="brand" href="/">Bryan Collins</a>
+    <nav aria-label="Main"><a href="/videos">Videos</a><a href="/projects">Projects</a><a href="/skills/">Skills</a><a href="/books">Books</a><a href="/work-with-me">Work</a><a href="/#newsletter">Newsletter</a></nav>
+</header>
+<main id="content">
+<nav class="crumbs"><a href="/skills/">Agent skills</a> /</nav>
+<section class="hero">
+    <h1><code>/wiring</code></h1>
+    <p class="muted">Wiring and environment</p>
+    <p>Compares the secrets and env vars your code declares against what is actually set, on both GitHub Actions and Netlify. Derived from the repo every run, no registry to drift.</p>
+<p>The reason it exists: <strong>a site could not send email for months while every check was green.</strong> The API key was set; three other variables the function needed were not. Workflow green, deploy green, variable absent. It also encodes the traps found while validating it: <code>netlify env:list --plain</code> redacts secrets as empty (not absent), vars set only on deploy-preview read as wired and are not, and <code>gh secret list --org</code> 403s without admin while the per-repo org-secrets endpoint does not. Helper script in <code>scripts/wiring.py</code>, stdlib only.</p>
+</section>
+<section class="block install">
+    <h2>Install</h2>
+<pre><code>curl -o ~/.claude/commands/wiring.md \
+  https://raw.githubusercontent.com/bryancollins99/agent-skills/main/skills/wiring.md</code></pre>
+    <p class="small">Then run <code>/wiring</code> in Claude Code. For any other agent, paste the procedure below as its instruction. <a href="https://github.com/bryancollins99/agent-skills/blob/main/skills/wiring.md">View on GitHub</a>.</p>
+</section>
+<section class="block">
+    <h2>The procedure</h2>
+    <article class="prose"><p>Compare the secrets and env vars your code declares against what is actually set on GitHub Actions and Netlify. Catches the green-workflow, green-deploy, variable-simply-absent defect that no status page shows.</p>
+<h2>/wiring - is the plumbing actually connected?</h2>
+<h3>Purpose</h3>
+<p>A site could not send email for months. The mail API key was set and valid, so every surface-level check passed. But three other variables the send function needed were never added, so three scheduled digests never went out and the unsubscribe check failed open. Ten form submissions got silence.</p>
+<p>Nothing in a workflow-failure audit, a deploy-status check or an uptime monitor can see that class of defect: the workflow runs, the deploy is green, the variable is simply absent. This skill is the check for it. Run it after any launch, and before saying a flow is live.</p>
+<h3>When to use</h3>
+<ul><li>After adding any integration that reads a secret or env var (email, payments, analytics, an API key).</li><li>Before telling anyone a scheduled job or serverless function is live.</li><li>When a function &quot;works locally&quot; and silently does nothing in production.</li></ul>
+<h3>Steps</h3>
+<ol><li>From the repo checkout, run the helper. It needs the <code>gh</code> CLI (authed) for the GitHub side and the <code>netlify</code> CLI (authed) for the Netlify side; either side degrades to UNKNOWN rather than guessing.</li></ol>
+<pre><code>   python3 scripts/wiring.py .                       # repo from `gh repo view`, site from .netlify/state.json
+   python3 scripts/wiring.py . --repo owner/name --netlify-site &lt;site_id&gt;</code></pre>
+<p>It derives the required set from the code every run. There is deliberately no hand-maintained registry of required vars, because those drift:</p>
+<div class="table"><table><thead><tr><th>Side</th><th>Declared</th><th>Actually set</th></tr></thead><tbody><tr><td>GitHub Actions</td><td><code>secrets.X</code> in <code>.github/workflows/*</code></td><td>repo secrets plus org secrets</td></tr><tr><td>Netlify runtime</td><td><code>process.env.X</code> / <code>import.meta.env.X</code> in <code>netlify/</code>, <code>src/</code>, <code>functions/</code>, <code>edge-functions/</code></td><td><code>getEnvVars</code>, production context only</td></tr></tbody></table></div>
+<ol start="2"><li>Report. Lead with <strong>GH SECRET MISSING</strong> and <strong>NETLIFY ENV MISSING</strong>; those are live defects. Then <strong>NETLIFY ENV NOT ON PRODUCTION</strong>, then <strong>UNKNOWN</strong>. Give one clickable line per side:</li></ol>
+<ul><li>GitHub secrets: <code>https://github.com/{repo}/settings/secrets/actions</code></li><li>Netlify env: <code>https://app.netlify.com/sites/{site name}/settings/env</code></li></ul>
+<ol start="3"><li>For every missing var, say <strong>what breaks</strong>. Trace it to the workflow or function that references it. &quot;NETLIFY_ACCESS_TOKEN missing&quot; is not actionable; &quot;the three scheduled digests in <code>send-digest.yml</code> cannot authenticate, so they have never sent&quot; is.</li></ol>
+<ol start="4"><li>Anything not verified against the API gets an <code>UNVERIFIED:</code> prefix.</li></ol>
+<h3>Failure modes</h3>
+<p>These are encoded in the script. Do not work around them.</p>
+<ul><li><strong>Never read <code>netlify env:list --plain</code> as truth.</strong> It prints secret-scoped vars as <code>KEY=</code> with an empty value. That is redaction, not absence, and reading it as absence is how a valid key got wrongly called empty. The script uses the <code>getEnvVars</code> API, which reports real value presence.</li><li><strong>A var set only on deploy-preview or branch-deploy is not wired.</strong> It reads as present in the dashboard and fails in production. Only <code>all</code> and <code>production</code> contexts count; anything else lands in NOT ON PRODUCTION.</li><li><strong><code>gh secret list --org</code> returns 403 without org-admin.</strong> Org secrets are still visible per repo via <code>repos/{repo}/actions/organization-secrets</code>, which needs only repo read. Skipping that reports every org-inherited secret as missing.</li><li><strong>If either lookup fails, no diff is run for that side.</strong> A partial &quot;available&quot; set makes every unseen secret look missing. UNKNOWN is the honest answer.</li><li><strong>Some absences are correct.</strong> Add them to <code>INTENTIONAL</code> in the script with a written reason. Example: when a platform AI gateway is in use, a user-set provider key switches the gateway off, so its absence is the wired state. An unexplained suppression is worse than a false positive.</li><li><strong><code>scripts/</code> is excluded from the Netlify scan.</strong> Those run in GitHub Actions; including them reported every cron key as a missing Netlify var.</li><li><strong>A guarded reference is not a defect.</strong> <code>process.env.X || &#x27;default&#x27;</code>, <code>?? y</code>, a ternary, or <code>=== &#x27;true&#x27;</code> all work when unset. Those land in the &quot;probably fine&quot; line, not in MISSING.</li></ul></article>
+</section>
+<section class="block"><h2>More skills</h2><ul class="inline"><li><a href="/skills/pre-commit-review"><code>/pre-commit-review</code></a></li><li><a href="/skills/merge-conflict-walkthrough"><code>/merge-conflict-walkthrough</code></a></li><li><a href="/skills/rebase-plan"><code>/rebase-plan</code></a></li><li><a href="/skills/branch-cleanup"><code>/branch-cleanup</code></a></li><li><a href="/skills/log-issue"><code>/log-issue</code></a></li><li><a href="/skills/fix-cluster"><code>/fix-cluster</code></a></li><li><a href="/skills/best-of-both"><code>/best-of-both</code></a></li><li><a href="/skills/cron-staleness"><code>/cron-staleness</code></a></li><li><a href="/skills/decide"><code>/decide</code></a></li><li><a href="/skills/explain"><code>/explain</code></a></li><li><a href="/skills/notes-to-ideas"><code>/notes-to-ideas</code></a></li><li><a href="/skills/remember"><code>/remember</code></a></li></ul></section>
+<section id="newsletter" class="block newsletter">
+    <h2>Get new skills by email</h2>
+    <p>What I'm building with AI coding agents, what broke, and what I'd do differently. Straight to your inbox.</p>
+    <form action="https://app.kit.com/forms/8058199/subscriptions" method="post" data-sv-form="8058199" data-uid="4914fa2338" class="signup">
+        <label class="sr" for="nl-email">Email address</label>
+        <input id="nl-email" name="email_address" type="email" placeholder="Email address" autocomplete="email" required>
+        <button type="submit">Subscribe</button>
+    </form>
+    <p class="muted small">Unsubscribe any time. Or read the archive at <a href="https://newsletter.bryancollins.com">newsletter.bryancollins.com</a>.</p>
+</section>
+</main>
+<footer class="site-footer">
+    <p><a href="https://www.youtube.com/channel/UCglNILz3uBqPer5EMJ_pzVg">YouTube</a> · <a href="https://github.com/bryancollins99">GitHub</a> · <a href="https://www.linkedin.com/in/bryancollins99/">LinkedIn</a> · <a href="https://substack.com/@bryancollins">Substack</a> · <a href="/products">Products</a> · <a href="/mba-frameworks">Strategy tools</a> · <a href="/now">Now</a> · <a href="/contact">Contact</a></p>
+    <p class="muted">© 2026 Bryan Collins · <a href="/privacy">Privacy</a> · <a href="/terms">Terms</a></p>
+</footer>
+</body>
+</html>

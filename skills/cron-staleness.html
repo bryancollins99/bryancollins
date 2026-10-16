@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>/cron-staleness: a Claude Code skill · Bryan Collins</title>
+    <meta name="description" content="Audits every scheduled GitHub Actions workflow for silent death: not the runs that failed, the runs that should have happened and did not.">
+    <meta name="author" content="Bryan Collins">
+    <link rel="canonical" href="https://bryancollins.com/skills/cron-staleness">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://bryancollins.com/skills/cron-staleness">
+    <meta property="og:title" content="/cron-staleness: a Claude Code skill · Bryan Collins">
+    <meta property="og:description" content="Audits every scheduled GitHub Actions workflow for silent death: not the runs that failed, the runs that should have happened and did not.">
+    <meta property="og:image" content="https://bryancollins.com/resources/bryan-collins.jpeg">
+    <meta name="twitter:card" content="summary">
+    <meta name="theme-color" media="(prefers-color-scheme: light)" content="#fdfdfc">
+    <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#121211">
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <link rel="stylesheet" href="/assets/hub.css">
+    <script async src="https://stats.bryancollins.com/js/pa-bvsz2TfQenbKYMWpBJ7eS.js"></script>
+    <script>
+      window.plausible=window.plausible||function(){(plausible.q=plausible.q||[]).push(arguments)},plausible.init=plausible.init||function(i){plausible.o=i||{}};
+      plausible.init()
+    </script>
+    <script type="application/ld+json">{"@context": "https://schema.org", "@type": "SoftwareSourceCode", "name": "/cron-staleness", "description": "Audits every scheduled GitHub Actions workflow for silent death: not the runs that failed, the runs that should have happened and did not.", "codeRepository": "https://github.com/bryancollins99/agent-skills", "license": "https://opensource.org/licenses/MIT", "programmingLanguage": "Markdown", "author": {"@type": "Person", "name": "Bryan Collins", "url": "https://bryancollins.com/"}}</script>
+</head>
+<body>
+<a class="skip" href="#content">Skip to content</a>
+<header class="site-header">
+    <a class="brand" href="/">Bryan Collins</a>
+    <nav aria-label="Main"><a href="/videos">Videos</a><a href="/projects">Projects</a><a href="/skills/">Skills</a><a href="/books">Books</a><a href="/work-with-me">Work</a><a href="/#newsletter">Newsletter</a></nav>
+</header>
+<main id="content">
+<nav class="crumbs"><a href="/skills/">Agent skills</a> /</nav>
+<section class="hero">
+    <h1><code>/cron-staleness</code></h1>
+    <p class="muted">Keeping automation honest</p>
+    <p>Audits every scheduled GitHub Actions workflow for silent death: not the runs that failed, the runs that should have happened and did not.</p>
+<p><code>gh run list --status failure</code> cannot see a cron that stopped firing, because a workflow that never runs produces no failed run and no notification. The dashboard stays green on checks that are not executing. This derives each workflow&#x27;s expected cadence from its own cron expression, compares it against the last successful run, and separately flags anything GitHub auto-disabled after 60 days of repository inactivity.</p>
+<p>Run on my own portfolio it found a build check, a Core Web Vitals check and two link scrapers that had not fired in weeks, while a weekly monitoring email reported on them the entire time.</p>
+</section>
+<section class="block install">
+    <h2>Install</h2>
+<pre><code>curl -o ~/.claude/commands/cron-staleness.md \
+  https://raw.githubusercontent.com/bryancollins99/agent-skills/main/skills/cron-staleness.md</code></pre>
+    <p class="small">Then run <code>/cron-staleness</code> in Claude Code. For any other agent, paste the procedure below as its instruction. <a href="https://github.com/bryancollins99/agent-skills/blob/main/skills/cron-staleness.md">View on GitHub</a>.</p>
+</section>
+<section class="block">
+    <h2>The procedure</h2>
+    <article class="prose"><p>Audits every scheduled GitHub Actions workflow in a repo or org for silent death: not just failures, but crons that stopped firing while reporting nothing at all.</p>
+<h3>Purpose</h3>
+<p><code>gh run list --status failure</code> tells you what broke. It cannot tell you what stopped.</p>
+<p>A scheduled workflow that never fires produces no failed runs, no red X, no notification. The dashboard is green because the dashboard only knows about runs that happened. On my own portfolio this hid a Netlify build check, a Core Web Vitals check and two link scrapers that had not fired in weeks. A weekly monitoring email had been arriving the whole time, reporting on checks that were not running.</p>
+<p>The signal is not the run that failed. It is the run that should have happened and did not. That requires comparing each workflow&#x27;s last successful run against the cadence its own cron expression promises, which nothing in the GitHub UI does for you.</p>
+<p>Three specific ways a cron dies quietly:</p>
+<ul><li><strong>GitHub disables schedules after 60 days of repository inactivity.</strong> No email to the org, no run history entry. A stable repo that needs no commits is exactly the repo whose crons get switched off.</li><li><strong>A workflow file renamed or moved</strong> keeps its old run history under the old name and starts fresh under the new one, so recent-runs views look empty.</li><li><strong>A secret expired.</strong> Depending on where it is read, the job can exit 0 having done nothing.</li></ul>
+<h3>When to use</h3>
+<ul><li>Weekly or monthly on any repo with scheduled workflows you rely on but do not watch.</li><li>Before trusting any automated report, dashboard or digest that a cron produces. Audit the checks before you audit their output.</li><li>After a quiet period on a repo, or after a rename or secrets rotation.</li><li>Whenever a monitoring email has looked healthy for a suspiciously long time.</li></ul>
+<p>Not useful on repos with no <code>schedule:</code> triggers. Push-triggered workflows fail loudly and need no staleness check.</p>
+<h3>Steps</h3>
+<ol><li><strong>Enumerate the scheduled workflows.</strong> Do not keep a hand-maintained registry; it drifts the moment someone adds a workflow. Read the repo&#x27;s own workflow files and keep the ones with a <code>schedule:</code> trigger:</li></ol>
+<pre><code>   gh api repos/{owner}/{repo}/actions/workflows --jq &#x27;.workflows[] | {name, path, state, id}&#x27;</code></pre>
+<p>Note the <code>state</code> field. <code>disabled_inactivity</code> is the 60-day auto-disable and is the single most valuable row in the output. Report it as a finding, not as a footnote.</p>
+<ol start="2"><li><strong>Derive the expected cadence from each workflow&#x27;s own cron.</strong> Read the <code>schedule.cron</code> expression out of the workflow file rather than asking the user how often it should run. Convert it to an expected interval in hours: <code>0 6 * * *</code> is 24, <code>0 6 * * 1</code> is 168, <code>0 6 1 * *</code> is roughly 730. The tolerance window should be about 1.5x the interval, so one skipped run flags but ordinary jitter does not.</li></ol>
+<ol start="3"><li><strong>Get the last successful run per workflow.</strong></li></ol>
+<pre><code>   gh api &quot;repos/{owner}/{repo}/actions/workflows/{id}/runs?status=success&amp;per_page=1&quot; \
+     --jq &#x27;.workflow_runs[0].updated_at // &quot;none&quot;&#x27;</code></pre>
+<p>Do this per workflow rather than pulling the whole run list and grouping. It is one cheap call each and it does not silently truncate on a busy repo.</p>
+<ol start="4"><li><strong>Classify every workflow into exactly one bucket</strong>, and sort the report in this order:</li></ol>
+<ul><li><strong>DISABLED</strong> - <code>state</code> is not <code>active</code>. Nothing will fire. Say which flavour, since <code>disabled_inactivity</code> is fixed with a click and <code>disabled_manually</code> was somebody&#x27;s decision.</li><li><strong>FAILING</strong> - latest run errored. Include the age of the last success, because a job failing for six weeks is a different problem from one that failed this morning.</li><li><strong>STALE</strong> - no successful run inside the tolerance window, or no runs on record at all. This is the bucket the whole skill exists for.</li><li><strong>UNKNOWN</strong> - the API call errored or timed out. Never fold these into OK.</li><li><strong>OK</strong> - one summary count. Do not list them.</li></ul>
+<ol start="5"><li><strong>Report with full clickable URLs</strong>, one per finding:</li></ol>
+<p><code>https://github.com/{owner}/{repo}/actions/workflows/{workflow file}</code></p>
+<p>A workflow name alone means opening the Actions tab and hunting. The URL means one click.</p>
+<ol start="6"><li><strong>State what you did not check.</strong> Name it explicitly rather than letting the green count imply full coverage. This audit does not verify that a workflow which ran actually did its job, and step 5 of the failure modes below explains why that gap matters more than it sounds.</li></ol>
+<h3>Failure modes</h3>
+<ul><li><strong>&quot;No runs on record&quot; is not always death.</strong> GitHub retains run history for about 90 days. On a monthly or quarterly workflow, an empty history often means the runs expired, not that the cron stopped. Flag it for a manual check and say which of the two you think it is. Raising it as a dead cron when it fired fine last month costs you trust in the whole report.</li></ul>
+<ul><li><strong>A workflow that has never run may be deliberate.</strong> Read the workflow&#x27;s own header and trigger block before calling it dead. Manual-dispatch-only workflows, disaster-recovery scripts and one-shot migrations all correctly show zero scheduled runs. I found seven zero-run workflows in one sweep and every single one was intentional.</li></ul>
+<ul><li><strong>A green run does not mean the work happened.</strong> This audit checks that a workflow ran and exited 0. A job whose API call returned an empty list, whose credentials silently expired, or whose script guarded on a directory that no longer exists will exit 0 having done nothing at all. If the workflow produces an artefact, a commit, a file or a row, assert on that artefact&#x27;s freshness too. An empty result and a successful run look identical from the outside.</li></ul>
+<ul><li><strong>Do not stop at the checks and skip their output.</strong> The inverse trap is just as expensive. If a monitoring workflow emails or files a report, read one and ask whether a human can act on it. A report nobody reads and a check that never fires produce the same outcome, and both of them feel fine from the inbox.</li></ul>
+<ul><li><strong>Retire a healthcheck together with the thing it watches.</strong> A staleness checker pointed at a workflow that was deliberately deleted files false alarms forever, and false alarms are how you learn to ignore the real ones.</li></ul>
+<ul><li><strong>Do not fix inside the audit.</strong> Report, then let the operator decide. A cron that stopped firing on purpose looks exactly like one that died, and only the person who turned it off knows which it was.</li></ul></article>
+</section>
+<section class="block"><h2>More skills</h2><ul class="inline"><li><a href="/skills/pre-commit-review"><code>/pre-commit-review</code></a></li><li><a href="/skills/merge-conflict-walkthrough"><code>/merge-conflict-walkthrough</code></a></li><li><a href="/skills/rebase-plan"><code>/rebase-plan</code></a></li><li><a href="/skills/branch-cleanup"><code>/branch-cleanup</code></a></li><li><a href="/skills/wiring"><code>/wiring</code></a></li><li><a href="/skills/log-issue"><code>/log-issue</code></a></li><li><a href="/skills/fix-cluster"><code>/fix-cluster</code></a></li><li><a href="/skills/best-of-both"><code>/best-of-both</code></a></li><li><a href="/skills/decide"><code>/decide</code></a></li><li><a href="/skills/explain"><code>/explain</code></a></li><li><a href="/skills/notes-to-ideas"><code>/notes-to-ideas</code></a></li><li><a href="/skills/remember"><code>/remember</code></a></li></ul></section>
+<section id="newsletter" class="block newsletter">
+    <h2>Get new skills by email</h2>
+    <p>What I'm building with AI coding agents, what broke, and what I'd do differently. Straight to your inbox.</p>
+    <form action="https://app.kit.com/forms/8058199/subscriptions" method="post" data-sv-form="8058199" data-uid="4914fa2338" class="signup">
+        <label class="sr" for="nl-email">Email address</label>
+        <input id="nl-email" name="email_address" type="email" placeholder="Email address" autocomplete="email" required>
+        <button type="submit">Subscribe</button>
+    </form>
+    <p class="muted small">Unsubscribe any time. Or read the archive at <a href="https://newsletter.bryancollins.com">newsletter.bryancollins.com</a>.</p>
+</section>
+</main>
+<footer class="site-footer">
+    <p><a href="https://www.youtube.com/channel/UCglNILz3uBqPer5EMJ_pzVg">YouTube</a> · <a href="https://github.com/bryancollins99">GitHub</a> · <a href="https://www.linkedin.com/in/bryancollins99/">LinkedIn</a> · <a href="https://substack.com/@bryancollins">Substack</a> · <a href="/products">Products</a> · <a href="/mba-frameworks">Strategy tools</a> · <a href="/now">Now</a> · <a href="/contact">Contact</a></p>
+    <p class="muted">© 2026 Bryan Collins · <a href="/privacy">Privacy</a> · <a href="/terms">Terms</a></p>
+</footer>
+</body>
+</html>

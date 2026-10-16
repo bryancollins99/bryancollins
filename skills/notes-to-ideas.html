@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>/notes-to-ideas: a Claude Code skill · Bryan Collins</title>
+    <meta name="description" content="Mines a folder of your own notes for things worth writing, weighted to recent material but forced to resurface older notes that connect to a current thread.">
+    <meta name="author" content="Bryan Collins">
+    <link rel="canonical" href="https://bryancollins.com/skills/notes-to-ideas">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://bryancollins.com/skills/notes-to-ideas">
+    <meta property="og:title" content="/notes-to-ideas: a Claude Code skill · Bryan Collins">
+    <meta property="og:description" content="Mines a folder of your own notes for things worth writing, weighted to recent material but forced to resurface older notes that connect to a current thread.">
+    <meta property="og:image" content="https://bryancollins.com/resources/bryan-collins.jpeg">
+    <meta name="twitter:card" content="summary">
+    <meta name="theme-color" media="(prefers-color-scheme: light)" content="#fdfdfc">
+    <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#121211">
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <link rel="stylesheet" href="/assets/hub.css">
+    <script async src="https://stats.bryancollins.com/js/pa-bvsz2TfQenbKYMWpBJ7eS.js"></script>
+    <script>
+      window.plausible=window.plausible||function(){(plausible.q=plausible.q||[]).push(arguments)},plausible.init=plausible.init||function(i){plausible.o=i||{}};
+      plausible.init()
+    </script>
+    <script type="application/ld+json">{"@context": "https://schema.org", "@type": "SoftwareSourceCode", "name": "/notes-to-ideas", "description": "Mines a folder of your own notes for things worth writing, weighted to recent material but forced to resurface older notes that connect to a current thread.", "codeRepository": "https://github.com/bryancollins99/agent-skills", "license": "https://opensource.org/licenses/MIT", "programmingLanguage": "Markdown", "author": {"@type": "Person", "name": "Bryan Collins", "url": "https://bryancollins.com/"}}</script>
+</head>
+<body>
+<a class="skip" href="#content">Skip to content</a>
+<header class="site-header">
+    <a class="brand" href="/">Bryan Collins</a>
+    <nav aria-label="Main"><a href="/videos">Videos</a><a href="/projects">Projects</a><a href="/skills/">Skills</a><a href="/books">Books</a><a href="/work-with-me">Work</a><a href="/#newsletter">Newsletter</a></nav>
+</header>
+<main id="content">
+<nav class="crumbs"><a href="/skills/">Agent skills</a> /</nav>
+<section class="hero">
+    <h1><code>/notes-to-ideas</code></h1>
+    <p class="muted">Thinking and communicating</p>
+    <p>Mines a folder of your own notes for things worth writing, weighted to recent material but forced to resurface older notes that connect to a current thread. Ideation only. It never drafts.</p>
+<p>Pointing an agent at your notes to write for you produces an impression of you. The job it is actually better at than you are is retrieval: finding the note from two years ago that answers what you are stuck on this week, which no tagging system fixes because you did not know to make the connection at the time.</p>
+<p>The rule that keeps it working past the third run is the distinction between an idea that has been <em>drafted</em> and one that was merely <em>surfaced</em>. Retiring surfaced-but-unwritten ideas feels like hygiene and degrades the list to the bottom of the barrel within a month.</p>
+</section>
+<section class="block install">
+    <h2>Install</h2>
+<pre><code>curl -o ~/.claude/commands/notes-to-ideas.md \
+  https://raw.githubusercontent.com/bryancollins99/agent-skills/main/skills/notes-to-ideas.md</code></pre>
+    <p class="small">Then run <code>/notes-to-ideas</code> in Claude Code. For any other agent, paste the procedure below as its instruction. <a href="https://github.com/bryancollins99/agent-skills/blob/main/skills/notes-to-ideas.md">View on GitHub</a>.</p>
+</section>
+<section class="block">
+    <h2>The procedure</h2>
+    <article class="prose"><p>Mines your own notes folder for content ideas: mostly recent material, plus a few deliberately resurfaced older notes. Ideation only. It never drafts.</p>
+<h3>Purpose</h3>
+<p>Most people point an AI at their notes and ask it to write something. That is the wrong job. The draft comes back sounding like an impression of you, and the actual value of a few thousand accumulated notes goes untouched.</p>
+<p>The value is retrieval. You wrote something two years ago that answers the thing you are stuck on this week, and you have forgotten it exists. No amount of careful tagging fixes that, because the connection is semantic and you did not know to make it at the time. That is the one job an agent reading a whole folder at once is genuinely better at than you are.</p>
+<p>So this skill finds and cites. You write.</p>
+<p>The second thing it fixes is that ideation without memory degrades. Run any &quot;give me ten ideas&quot; prompt weekly with no record and you get the same six ideas every time, because the same notes are the most findable. This writes a dated ledger and reads the previous ones, so each run has to work harder than the last.</p>
+<h3>When to use</h3>
+<ul><li>Weekly or fortnightly, when you need a queue of things to write rather than one thing to write now.</li><li>When you have a folder of notes, work logs or journals you have stopped mining.</li><li>After a stretch of building, when the lessons are still in the log and have not been written up.</li></ul>
+<p>Not for drafting. Not for research on a topic you have no notes about. If you already know what you want to write, this is the wrong tool.</p>
+<h3>Steps</h3>
+<ol><li><strong>Establish the folder and the window.</strong> Ask once for the notes directory if it is not obvious, then work from there regardless of the current working directory. Default window is 90 days: <code>date -v-90d +%Y-%m-%d</code> on macOS, <code>date -d &#x27;90 days ago&#x27; +%Y-%m-%d</code> on Linux.</li></ol>
+<ol start="2"><li><strong>Mine the recent window for most of the list.</strong> Rank the sources by yield, not by tidiness:</li></ol>
+<ul><li><strong>A work log or daily journal file is almost always the richest seam.</strong> If entries are already shaped as &quot;what I did, and what it taught me&quot;, the lesson clause is the idea, already written. Check whether entries are newest-first or oldest-first before you start walking, and check whether the date headers carry a year.</li><li><strong>Files modified in the window</strong>, minus the noise: <code>find . -name &#x27;*.md&#x27; -not -path &#x27;./.git/*&#x27; -mtime -90</code>. Exclude imported highlights, generated output, scripts and media directories.</li><li><strong>Anything already shaped as a brief or an idea file</strong>, by whatever naming convention you use.</li></ul>
+<p>Glob each pattern separately. In zsh, a single non-matching pattern in a multi-pattern <code>ls</code> aborts the whole command and returns nothing, so <code>ls Idea-*.md Draft-*.md</code> silently yields nothing at all when only the second has no matches.</p>
+<ol start="3"><li><strong>Deliberately resurface a few older notes.</strong> Take the two or three dominant themes from step 2, then search outside the window for notes that speak to them and were never used. This is the part that justifies the whole exercise, so do not let it become a token gesture.</li></ol>
+<p>An old note earns a slot only if you can name the <strong>current thread it connects to</strong>: &quot;this note from two years ago is the missing frame for the thing you shipped last week&quot;. A note that is merely old and unused is not an idea. Cut it and take another from the recent window instead.</p>
+<ol start="4"><li><strong>Separate drafted from surfaced, and treat them completely differently.</strong> Conflating these two states is what ruins the skill on its third run.</li></ol>
+<ul><li><strong>Drafted</strong> - a draft file for it already exists. May still appear, but only as a flagged re-cut, and a re-cut must target a different format than the one it was drafted for. Cap re-cuts at two of ten. Ten things you already wrote, re-badged, is the failure mode.</li><li><strong>Surfaced but unwritten</strong> - it appeared in an earlier ledger and no draft exists. Fully eligible, unrestricted, and it does not count against the re-cut cap. Label it as carried over.</li></ul>
+<p>Retiring surfaced-but-unwritten ideas feels like good hygiene and quietly destroys the output. After a month every strong candidate in the folder is &quot;previously surfaced&quot;, and the list degrades to the bottom of the barrel by construction. An unwritten idea is pending, not spent.</p>
+<ol start="5"><li><strong>Output the list and stop.</strong> For each idea: the format, the angle in one sentence, the one load-bearing specific it rests on, and the source file it came from.</li></ol>
+<p>Two rules do most of the work here. <strong>Every number is lifted from a file, never recalled</strong> - if you cannot point at the line, drop the number or drop the idea. And <strong>one hard specific per idea</strong>: a concrete artefact, a count, a bill, a failure, leading to one generalisable lesson. An idea with a lesson and no artefact is a platitude with a source citation.</p>
+<p>Spread across themes. Ten variations on one insight is one idea, not ten.</p>
+<ol start="6"><li><strong>Write a dated ledger</strong> to the same folder, at the top level rather than in a subfolder, recording every idea with its state tag. This is what the next run reads. Then close with one line telling the user what to run when they want something drafted, and stop. No summary, no offer to expand, no sample opening line.</li></ol>
+<h3>Failure modes</h3>
+<ul><li><strong>File modification time is not authorship time.</strong> Any bulk operation stamps every file at once: a sync migration, a mass find-and-replace, an export and re-import, a <code>git clone</code>. Every note then appears to have been written on the same day and your 90-day window becomes meaningless. Date a note from a date line inside the file, or from <code>git log -1 --format=%ad -- &lt;file&gt;</code>. Never from <code>mtime</code> alone. Check this before the first run: if hundreds of files share one mtime, you have found it.</li></ul>
+<ul><li><strong>Private journals are theme signal only.</strong> If the folder mixes work notes with a personal journal, read the journal to see what the person keeps circling back to, then source the actual idea from a work note. Never surface a personal entry as a content idea, and never write to that file.</li></ul>
+<ul><li><strong>The subfolder problem.</strong> Output written to a nested directory is output the user never sees. They work from the top level. Write the ledger there, and if a previous run buried one, move it rather than leaving two conventions in play.</li></ul>
+<ul><li><strong>Drafting is not a bonus.</strong> The pull to write &quot;just the opening line&quot; is strong and it is the single thing that makes this skill worthless. If an idea is good, its reward is a place on the list.</li></ul>
+<ul><li><strong>Do not let the agent tidy the folder mid-run.</strong> Renaming, retagging and reorganising notes is a separate job with separate risk. Ask before touching a single file. It is worth confirming the folder is backed up or version controlled before any run that will write to it.</li></ul></article>
+</section>
+<section class="block"><h2>More skills</h2><ul class="inline"><li><a href="/skills/pre-commit-review"><code>/pre-commit-review</code></a></li><li><a href="/skills/merge-conflict-walkthrough"><code>/merge-conflict-walkthrough</code></a></li><li><a href="/skills/rebase-plan"><code>/rebase-plan</code></a></li><li><a href="/skills/branch-cleanup"><code>/branch-cleanup</code></a></li><li><a href="/skills/wiring"><code>/wiring</code></a></li><li><a href="/skills/log-issue"><code>/log-issue</code></a></li><li><a href="/skills/fix-cluster"><code>/fix-cluster</code></a></li><li><a href="/skills/best-of-both"><code>/best-of-both</code></a></li><li><a href="/skills/cron-staleness"><code>/cron-staleness</code></a></li><li><a href="/skills/decide"><code>/decide</code></a></li><li><a href="/skills/explain"><code>/explain</code></a></li><li><a href="/skills/remember"><code>/remember</code></a></li></ul></section>
+<section id="newsletter" class="block newsletter">
+    <h2>Get new skills by email</h2>
+    <p>What I'm building with AI coding agents, what broke, and what I'd do differently. Straight to your inbox.</p>
+    <form action="https://app.kit.com/forms/8058199/subscriptions" method="post" data-sv-form="8058199" data-uid="4914fa2338" class="signup">
+        <label class="sr" for="nl-email">Email address</label>
+        <input id="nl-email" name="email_address" type="email" placeholder="Email address" autocomplete="email" required>
+        <button type="submit">Subscribe</button>
+    </form>
+    <p class="muted small">Unsubscribe any time. Or read the archive at <a href="https://newsletter.bryancollins.com">newsletter.bryancollins.com</a>.</p>
+</section>
+</main>
+<footer class="site-footer">
+    <p><a href="https://www.youtube.com/channel/UCglNILz3uBqPer5EMJ_pzVg">YouTube</a> · <a href="https://github.com/bryancollins99">GitHub</a> · <a href="https://www.linkedin.com/in/bryancollins99/">LinkedIn</a> · <a href="https://substack.com/@bryancollins">Substack</a> · <a href="/products">Products</a> · <a href="/mba-frameworks">Strategy tools</a> · <a href="/now">Now</a> · <a href="/contact">Contact</a></p>
+    <p class="muted">© 2026 Bryan Collins · <a href="/privacy">Privacy</a> · <a href="/terms">Terms</a></p>
+</footer>
+</body>
+</html>

@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>/rebase-plan: a Claude Code skill · Bryan Collins</title>
+    <meta name="description" content="Drafts the pick / squash / reword todo list for git rebase -i before you open the editor.">
+    <meta name="author" content="Bryan Collins">
+    <link rel="canonical" href="https://bryancollins.com/skills/rebase-plan">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://bryancollins.com/skills/rebase-plan">
+    <meta property="og:title" content="/rebase-plan: a Claude Code skill · Bryan Collins">
+    <meta property="og:description" content="Drafts the pick / squash / reword todo list for git rebase -i before you open the editor.">
+    <meta property="og:image" content="https://bryancollins.com/resources/bryan-collins.jpeg">
+    <meta name="twitter:card" content="summary">
+    <meta name="theme-color" media="(prefers-color-scheme: light)" content="#fdfdfc">
+    <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#121211">
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <link rel="stylesheet" href="/assets/hub.css">
+    <script async src="https://stats.bryancollins.com/js/pa-bvsz2TfQenbKYMWpBJ7eS.js"></script>
+    <script>
+      window.plausible=window.plausible||function(){(plausible.q=plausible.q||[]).push(arguments)},plausible.init=plausible.init||function(i){plausible.o=i||{}};
+      plausible.init()
+    </script>
+    <script type="application/ld+json">{"@context": "https://schema.org", "@type": "SoftwareSourceCode", "name": "/rebase-plan", "description": "Drafts the pick / squash / reword todo list for git rebase -i before you open the editor.", "codeRepository": "https://github.com/bryancollins99/agent-skills", "license": "https://opensource.org/licenses/MIT", "programmingLanguage": "Markdown", "author": {"@type": "Person", "name": "Bryan Collins", "url": "https://bryancollins.com/"}}</script>
+</head>
+<body>
+<a class="skip" href="#content">Skip to content</a>
+<header class="site-header">
+    <a class="brand" href="/">Bryan Collins</a>
+    <nav aria-label="Main"><a href="/videos">Videos</a><a href="/projects">Projects</a><a href="/skills/">Skills</a><a href="/books">Books</a><a href="/work-with-me">Work</a><a href="/#newsletter">Newsletter</a></nav>
+</header>
+<main id="content">
+<nav class="crumbs"><a href="/skills/">Agent skills</a> /</nav>
+<section class="hero">
+    <h1><code>/rebase-plan</code></h1>
+    <p class="muted">Git hygiene</p>
+    <p>Drafts the pick / squash / reword todo list for <code>git rebase -i</code> before you open the editor.</p>
+<p>Interactive rebase is the right tool for consolidating wip commits and the one most people get wrong on the first try. This prints exactly what your editor will show, so you walk in knowing what to do. Advisory only: it refuses on branches that track a shared remote, and it never runs the rebase itself.</p>
+</section>
+<section class="block install">
+    <h2>Install</h2>
+<pre><code>curl -o ~/.claude/commands/rebase-plan.md \
+  https://raw.githubusercontent.com/bryancollins99/agent-skills/main/skills/rebase-plan.md</code></pre>
+    <p class="small">Then run <code>/rebase-plan</code> in Claude Code. For any other agent, paste the procedure below as its instruction. <a href="https://github.com/bryancollins99/agent-skills/blob/main/skills/rebase-plan.md">View on GitHub</a>.</p>
+</section>
+<section class="block">
+    <h2>The procedure</h2>
+    <article class="prose"><p>Drafts a pick / squash / reword plan for <code>git rebase -i</code> to clean up a feature branch before PR. Advisory only - never executes the rebase.</p>
+<h3>Purpose</h3>
+<p>Interactive rebase is the right tool for consolidating wip commits - and the one most people get wrong on their first try. This skill proposes the todo-list your editor will show, so you walk into the rebase knowing what to do.</p>
+<h3>When to use</h3>
+<ul><li>Branch has typo/fixup/wip commits you want to consolidate into 1-3 clean commits before opening a PR.</li><li>You want to reword a vague message (&quot;stuff&quot; → &quot;refactor: extract parser&quot;) before it lands on main.</li></ul>
+<p><strong>Never on branches already pushed to a shared remote</strong> - rebase rewrites history other people may have cloned.</p>
+<h3>Steps</h3>
+<ol><li>Run <code>git log main..HEAD --oneline --reverse</code> to list commits on the current branch.</li><li>Refuse if the branch tracks a remote that has commits others may be using (<code>git branch -vv</code> shows <code>[origin/...]</code>) unless the user explicitly confirms they&#x27;re the only collaborator.</li><li>Propose a rebase-todo grouping related commits:</li><li><code>pick</code> the first logical commit in each group</li><li><code>squash</code> (or <code>fixup</code>) follow-ups that fix typos or add missing changes</li><li><code>reword</code> any commit whose message is vague or wrong</li><li>Print the proposed todo in the exact format git will show, and print the command to run (<code>git rebase -i main</code>).</li><li>Do not run the rebase. The human drives the editor.</li></ol>
+<h3>Output format</h3>
+<pre><code>Proposed rebase-todo:
+  pick a1b2c3 feat: add Skills hub
+  squash d4e5f6 fixup
+  squash g7h8i9 typo in heading
+  reword j0k1l2 → feat: wire cross-links
+
+Run: git rebase -i main</code></pre>
+<h3>Failure modes</h3>
+<ul><li>If the branch has ≤2 commits, report &quot;no cleanup needed&quot; and stop.</li><li>Do not propose squashing across unrelated changes.</li><li>Never run <code>git rebase</code> itself - advisory only.</li><li>If <code>git log main..HEAD</code> returns empty, stop - branch may already match main.</li></ul></article>
+</section>
+<section class="block"><h2>More skills</h2><ul class="inline"><li><a href="/skills/pre-commit-review"><code>/pre-commit-review</code></a></li><li><a href="/skills/merge-conflict-walkthrough"><code>/merge-conflict-walkthrough</code></a></li><li><a href="/skills/branch-cleanup"><code>/branch-cleanup</code></a></li><li><a href="/skills/wiring"><code>/wiring</code></a></li><li><a href="/skills/log-issue"><code>/log-issue</code></a></li><li><a href="/skills/fix-cluster"><code>/fix-cluster</code></a></li><li><a href="/skills/best-of-both"><code>/best-of-both</code></a></li><li><a href="/skills/cron-staleness"><code>/cron-staleness</code></a></li><li><a href="/skills/decide"><code>/decide</code></a></li><li><a href="/skills/explain"><code>/explain</code></a></li><li><a href="/skills/notes-to-ideas"><code>/notes-to-ideas</code></a></li><li><a href="/skills/remember"><code>/remember</code></a></li></ul></section>
+<section id="newsletter" class="block newsletter">
+    <h2>Get new skills by email</h2>
+    <p>What I'm building with AI coding agents, what broke, and what I'd do differently. Straight to your inbox.</p>
+    <form action="https://app.kit.com/forms/8058199/subscriptions" method="post" data-sv-form="8058199" data-uid="4914fa2338" class="signup">
+        <label class="sr" for="nl-email">Email address</label>
+        <input id="nl-email" name="email_address" type="email" placeholder="Email address" autocomplete="email" required>
+        <button type="submit">Subscribe</button>
+    </form>
+    <p class="muted small">Unsubscribe any time. Or read the archive at <a href="https://newsletter.bryancollins.com">newsletter.bryancollins.com</a>.</p>
+</section>
+</main>
+<footer class="site-footer">
+    <p><a href="https://www.youtube.com/channel/UCglNILz3uBqPer5EMJ_pzVg">YouTube</a> · <a href="https://github.com/bryancollins99">GitHub</a> · <a href="https://www.linkedin.com/in/bryancollins99/">LinkedIn</a> · <a href="https://substack.com/@bryancollins">Substack</a> · <a href="/products">Products</a> · <a href="/mba-frameworks">Strategy tools</a> · <a href="/now">Now</a> · <a href="/contact">Contact</a></p>
+    <p class="muted">© 2026 Bryan Collins · <a href="/privacy">Privacy</a> · <a href="/terms">Terms</a></p>
+</footer>
+</body>
+</html>

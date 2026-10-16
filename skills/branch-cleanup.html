@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>/branch-cleanup: a Claude Code skill · Bryan Collins</title>
+    <meta name="description" content="Lists merged and stale local branches, deletes the safe ones, flags the rest.">
+    <meta name="author" content="Bryan Collins">
+    <link rel="canonical" href="https://bryancollins.com/skills/branch-cleanup">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://bryancollins.com/skills/branch-cleanup">
+    <meta property="og:title" content="/branch-cleanup: a Claude Code skill · Bryan Collins">
+    <meta property="og:description" content="Lists merged and stale local branches, deletes the safe ones, flags the rest.">
+    <meta property="og:image" content="https://bryancollins.com/resources/bryan-collins.jpeg">
+    <meta name="twitter:card" content="summary">
+    <meta name="theme-color" media="(prefers-color-scheme: light)" content="#fdfdfc">
+    <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#121211">
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <link rel="stylesheet" href="/assets/hub.css">
+    <script async src="https://stats.bryancollins.com/js/pa-bvsz2TfQenbKYMWpBJ7eS.js"></script>
+    <script>
+      window.plausible=window.plausible||function(){(plausible.q=plausible.q||[]).push(arguments)},plausible.init=plausible.init||function(i){plausible.o=i||{}};
+      plausible.init()
+    </script>
+    <script type="application/ld+json">{"@context": "https://schema.org", "@type": "SoftwareSourceCode", "name": "/branch-cleanup", "description": "Lists merged and stale local branches, deletes the safe ones, flags the rest.", "codeRepository": "https://github.com/bryancollins99/agent-skills", "license": "https://opensource.org/licenses/MIT", "programmingLanguage": "Markdown", "author": {"@type": "Person", "name": "Bryan Collins", "url": "https://bryancollins.com/"}}</script>
+</head>
+<body>
+<a class="skip" href="#content">Skip to content</a>
+<header class="site-header">
+    <a class="brand" href="/">Bryan Collins</a>
+    <nav aria-label="Main"><a href="/videos">Videos</a><a href="/projects">Projects</a><a href="/skills/">Skills</a><a href="/books">Books</a><a href="/work-with-me">Work</a><a href="/#newsletter">Newsletter</a></nav>
+</header>
+<main id="content">
+<nav class="crumbs"><a href="/skills/">Agent skills</a> /</nav>
+<section class="hero">
+    <h1><code>/branch-cleanup</code></h1>
+    <p class="muted">Git hygiene</p>
+    <p>Lists merged and stale local branches, deletes the safe ones, flags the rest. Never touches <code>main</code>, <code>master</code> or <code>release</code>.</p>
+<p>The reason it exists: <strong><code>git branch -d</code> does not understand squash merges.</strong> If you squash-merge pull requests, git refuses to delete branches whose work is already in <code>main</code>, so they pile up for months. This checks merge state externally with <code>gh pr list</code> instead of trusting git, so squash-merged branches are correctly identified as safe.</p>
+<p>Run on my own repos, it found 31 branches in exactly that state.</p>
+</section>
+<section class="block install">
+    <h2>Install</h2>
+<pre><code>curl -o ~/.claude/commands/branch-cleanup.md \
+  https://raw.githubusercontent.com/bryancollins99/agent-skills/main/skills/branch-cleanup.md</code></pre>
+    <p class="small">Then run <code>/branch-cleanup</code> in Claude Code. For any other agent, paste the procedure below as its instruction. <a href="https://github.com/bryancollins99/agent-skills/blob/main/skills/branch-cleanup.md">View on GitHub</a>.</p>
+</section>
+<section class="block">
+    <h2>The procedure</h2>
+    <article class="prose"><p>Lists merged + stale local branches, deletes safe ones, flags the rest. Never main/master/release. Optionally cleans corresponding remote branches.</p>
+<h3>Purpose</h3>
+<p>Keep local + remote branches tidy after shipping. Verifies merge state externally via <code>gh pr list</code> so it works in repos that squash-merge (where <code>git branch -d</code> refuses even though the PR is closed and merged).</p>
+<h3>When to use</h3>
+<ul><li>After merging 3+ PRs in a week</li><li>When <code>git branch</code> output spills past one screen</li><li>As monthly hygiene</li><li>Whenever automatic branch deletion has not been catching everything, for example branches whose PRs squash-merged before auto-delete-on-merge was switched on</li></ul>
+<p>Skip when: mid-feature with unpushed work on sibling branches, or shared repos where collaborators may still be using stale-looking branches.</p>
+<h3>Steps</h3>
+<ol><li><strong>Prerequisite checks.</strong> If no remote configured, stop. If <code>gh auth status</code> fails, stop (the skill needs gh to verify PR state).</li><li><strong>Fetch + prune.</strong> <code>git fetch --prune origin --quiet</code>. If this fails (network/auth), stop.</li><li><strong>Pull PR data.</strong> <code>gh pr list --state all --json number,headRefName,state --limit 500</code> - get every PR with its head branch + state. Repos with &gt;500 PRs need <code>--limit</code> raised.</li><li><strong>Classify every local branch:</strong></li><li><strong>Protected</strong> (skip always): <code>main</code>, <code>master</code>, <code>develop</code>, <code>staging</code>, branches matching <code>release/*</code></li><li><strong>No upstream</strong> (skip, surface): never pushed; might be local-only WIP - manual review</li><li><strong>Open PR</strong>: branch&#x27;s PR is OPEN - preserve</li><li><strong>Merged PR + <code>[gone]</code> upstream</strong>: PR merged AND remote already auto-deleted - safest deletion target</li><li><strong>Merged PR + live upstream</strong>: PR squash-merged but remote-delete didn&#x27;t happen (auto-delete-on-merge was off, or PR predates the setting) - also safe to delete locally; offer to delete remote too</li><li><strong>No PR record</strong>: branch was pushed but no PR was opened - surface for manual review</li><li><strong>Unusual states</strong> (closed-not-merged, etc.): surface for manual review</li><li><strong>Worktree map.</strong> <code>git worktree list --porcelain</code> to find worktrees holding to-delete branches. Parse the lock-pid from any <code>locked …pid N</code> reason. If pid is alive (<code>os.kill(pid, 0)</code>), the worktree belongs to another live session - skip those branches and report them. If the pid is dead (or no lock), the worktree is reapable.</li><li><strong>Sanity check gate.</strong> If <code>&gt;10</code> branches would be deleted, present the full list grouped by category and <strong>stop for explicit confirmation</strong> before any destructive action. Below 10, present the list and ask once.</li><li><strong>Execute (after confirmation):</strong></li><li>For each safe-to-delete branch: <code>git worktree remove -f -f &lt;path&gt;</code> first if a reapable worktree holds it, then <code>git branch -D &lt;name&gt;</code>. Use <code>-D</code> (force) intentionally - gh&#x27;s MERGED state is the safety check, not git&#x27;s local merge-base check, because squash-merge defeats the latter.</li><li><code>git worktree prune</code> at the end (cleans orphan metadata).</li><li><strong>Optional remote cleanup.</strong> If any deleted branches still have live remote tracking refs, ask: &quot;Delete N corresponding remote branches?&quot; If yes: <code>cat &lt;list&gt; | xargs git push origin --delete</code> (one round trip). Also offer to enable repo-level auto-delete-on-merge: <code>gh repo edit &lt;owner&gt;/&lt;repo&gt; --delete-branch-on-merge</code>.</li><li><strong>Report.</strong> Counts before/after for local + remote branches and worktrees. Surface any branches skipped (open PR, no PR, no upstream, alive lock pid) so the user knows what they need to look at.</li></ol>
+<h3>Output format</h3>
+<pre><code>Pre-classification (94 local branches):
+ DELETE-SAFE - gone + merged: 12
+ DELETE-SAFE - live remote + merged (squash orphans): 8
+ PRESERVE - open PR: 6
+ SKIP - no PR record (manual review): 4
+ SKIP - no upstream (never pushed): 3
+ SKIP - alive worktree lock (other session): 2
+ PROTECTED: main
+
+20 branches to delete. Confirm? [y/N]</code></pre>
+<h3>Failure modes</h3>
+<ul><li><strong>Use <code>-D</code> (force) only for gh-verified MERGED branches.</strong> Never force-delete a branch the gh check didn&#x27;t confirm. The whole safety contract is gh&#x27;s MERGED state - without that, fall back to <code>-d</code> (safe) and report refusals.</li><li>If <code>gh</code> is unavailable, fall back to the legacy <code>-d</code>-only mode and report that you can&#x27;t verify squash-merged branches - the user gets a partial cleanup.</li><li>If <code>gh pr list</code> returns fewer PRs than expected (the <code>--limit 500</code> cap), retry with a higher limit. The skill MUST cover every PR in the repo or its classification is unsafe.</li><li>If <code>&gt;10</code> branches qualify for deletion, ALWAYS pause for confirmation. Even if the user said &quot;go ahead&quot; earlier in the session, re-confirm at this gate - bulk deletion is irreversible from CLI.</li><li>If a branch is checked out by another live process (lock pid alive), do NOT force-unlock the worktree. Skip it and tell the user to re-run after that session ends.</li><li>Never touch branches matching <code>release/*</code>, even if they appear merged.</li><li>If the repo has no remote, report and stop - the verify pattern doesn&#x27;t apply.</li></ul>
+<h3>Notes on the squash-merge default</h3>
+<p>Most modern repos squash-merge. <code>git branch -d</code> checks whether the branch tip&#x27;s commit appears in HEAD&#x27;s history; squash creates a new commit on main with a different SHA, so <code>-d</code> refuses even though the work is merged. The legacy &quot;use <code>-d</code>, stop on refuse&quot; pattern is wrong for squash-merge repos - it leaves ~95% of stale branches uncleaned. This skill defaults to gh-verify + <code>-D</code> precisely to handle that.</p>
+<p>If you&#x27;re in a merge-commit-only repo (rare these days), the gh check will still confirm MERGED and <code>-D</code> will still do the right thing - just slightly more aggressive than <code>-d</code> would be in that environment, but with the same end state since the branch IS in main&#x27;s history.</p></article>
+</section>
+<section class="block"><h2>More skills</h2><ul class="inline"><li><a href="/skills/pre-commit-review"><code>/pre-commit-review</code></a></li><li><a href="/skills/merge-conflict-walkthrough"><code>/merge-conflict-walkthrough</code></a></li><li><a href="/skills/rebase-plan"><code>/rebase-plan</code></a></li><li><a href="/skills/wiring"><code>/wiring</code></a></li><li><a href="/skills/log-issue"><code>/log-issue</code></a></li><li><a href="/skills/fix-cluster"><code>/fix-cluster</code></a></li><li><a href="/skills/best-of-both"><code>/best-of-both</code></a></li><li><a href="/skills/cron-staleness"><code>/cron-staleness</code></a></li><li><a href="/skills/decide"><code>/decide</code></a></li><li><a href="/skills/explain"><code>/explain</code></a></li><li><a href="/skills/notes-to-ideas"><code>/notes-to-ideas</code></a></li><li><a href="/skills/remember"><code>/remember</code></a></li></ul></section>
+<section id="newsletter" class="block newsletter">
+    <h2>Get new skills by email</h2>
+    <p>What I'm building with AI coding agents, what broke, and what I'd do differently. Straight to your inbox.</p>
+    <form action="https://app.kit.com/forms/8058199/subscriptions" method="post" data-sv-form="8058199" data-uid="4914fa2338" class="signup">
+        <label class="sr" for="nl-email">Email address</label>
+        <input id="nl-email" name="email_address" type="email" placeholder="Email address" autocomplete="email" required>
+        <button type="submit">Subscribe</button>
+    </form>
+    <p class="muted small">Unsubscribe any time. Or read the archive at <a href="https://newsletter.bryancollins.com">newsletter.bryancollins.com</a>.</p>
+</section>
+</main>
+<footer class="site-footer">
+    <p><a href="https://www.youtube.com/channel/UCglNILz3uBqPer5EMJ_pzVg">YouTube</a> · <a href="https://github.com/bryancollins99">GitHub</a> · <a href="https://www.linkedin.com/in/bryancollins99/">LinkedIn</a> · <a href="https://substack.com/@bryancollins">Substack</a> · <a href="/products">Products</a> · <a href="/mba-frameworks">Strategy tools</a> · <a href="/now">Now</a> · <a href="/contact">Contact</a></p>
+    <p class="muted">© 2026 Bryan Collins · <a href="/privacy">Privacy</a> · <a href="/terms">Terms</a></p>
+</footer>
+</body>
+</html>
