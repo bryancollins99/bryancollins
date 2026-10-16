@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Build the bryancollins.com hub pages from data/.
 
-Generates: index.html, videos.html, projects.html, work-with-me.html,
+Generates: index.html, videos.html, projects.html, books.html, work-with-me.html,
 skills/index.html and one skills/<name>.html per skill.
 
 Inputs (all committed, so a build needs nothing outside this repo):
@@ -242,7 +242,7 @@ def page(path, title, desc, body, hub, jsonld=None, depth=0):
 {body}
 </main>
 <footer class="site-footer">
-    <p><a href="{L['youtube']}">YouTube</a> · <a href="{L['github']}">GitHub</a> · <a href="{L['linkedin']}">LinkedIn</a> · <a href="{L['substack']}">Substack</a> · <a href="/products">Products</a> · <a href="/mba-frameworks">Strategy tools</a> · <a href="/now">Now</a> · <a href="/contact">Contact</a></p>
+    <p><a href="{L['youtube']}">YouTube</a> · <a href="{L['github']}">GitHub</a> · <a href="{L['linkedin']}">LinkedIn</a> · <a href="{L['substack']}">Substack</a> · <a href="/products">Products</a> · <a href="/mba-frameworks">Strategy tools</a> · <a href="/contact">Contact</a></p>
     <p class="muted">© {dt.date.today().year} Bryan Collins · <a href="/privacy">Privacy</a> · <a href="/terms">Terms</a></p>
 </footer>
 </body>
@@ -250,16 +250,24 @@ def page(path, title, desc, body, hub, jsonld=None, depth=0):
 """
 
 
+# Kit's ck.5.js submits the form; a plain no-JS POST is accepted with a 302 but creates no subscriber (tested 2026-10-16).
+KIT_OPTIONS = json.dumps({"settings": {"after_subscribe": {"action": "message", "success_message": "Thanks. Check your inbox to confirm your subscription.", "redirect_url": ""}, "recaptcha": {"enabled": False}}, "version": "5"})
+
+
 def newsletter(hub, heading="Newsletter"):
     f = hub["kit_form"]
     return f"""<section id="newsletter" class="block newsletter">
     <h2>{esc(heading)}</h2>
     <p>What I'm building with AI coding agents, what broke, and what I'd do differently. Straight to your inbox.</p>
-    <form action="https://app.kit.com/forms/{f['id']}/subscriptions" method="post" data-sv-form="{f['id']}" data-uid="{f['uid']}" class="signup">
-        <label class="sr" for="nl-email">Email address</label>
-        <input id="nl-email" name="email_address" type="email" placeholder="Email address" autocomplete="email" required>
-        <button type="submit">Subscribe</button>
+    <form action="https://app.kit.com/forms/{f['id']}/subscriptions" method="post" class="seva-form formkit-form signup" data-sv-form="{f['id']}" data-uid="{f['uid']}" data-format="inline" data-version="5" data-options='{KIT_OPTIONS}' onsubmit="window.plausible &amp;&amp; plausible('Newsletter Signup', {{props: {{page: location.pathname}}}})">
+        <ul class="formkit-alert formkit-alert-error" data-element="errors" data-group="alert"></ul>
+        <div data-element="fields" class="seva-fields formkit-fields">
+            <label class="sr" for="nl-email">Email address</label>
+            <input id="nl-email" class="formkit-input" name="email_address" type="email" placeholder="Email address" autocomplete="email" required>
+            <button type="submit" data-element="submit" class="formkit-submit"><span>Subscribe</span></button>
+        </div>
     </form>
+    <script src="https://f.convertkit.com/ckjs/ck.5.js" async></script>
     <p class="muted small">Unsubscribe any time. Or read the archive at <a href="{hub['links']['newsletter']}">newsletter.bryancollins.com</a>.</p>
 </section>"""
 
@@ -297,7 +305,8 @@ def build_index(hub, videos, skills):
     sk = "".join(
         f'<li><a href="/skills/{esc(s["name"])}"><code>/{esc(s["name"])}</code></a> {esc(first_sentence(s["blurb"]))}</li>'
         for s in skills[:6])
-    books = "".join(f'<li><strong>{esc(b["title"])}</strong>. {esc(b["desc"])}</li>' for b in hub["books"])
+    books = "".join(f'<li><strong>{esc(b["title"])}</strong>. {esc(b["desc"])}</li>' for b in hub["books"][:3])
+    tools = "".join(f'<li><a href="{esc(t["url"])}">{esc(t["name"])}</a>. {esc(t["desc"])}</li>' for t in hub["tools"])
     body = f"""<section class="hero">
     <h1>{esc(hub['name'])}</h1>
     <p class="lede">{esc(hub['tagline'])}</p>
@@ -323,6 +332,11 @@ def build_index(hub, videos, skills):
     <div class="block-head"><h2>Agent skills</h2><a href="/skills/">All {len(skills)} skills</a></div>
     <p>The workflows I run Claude Code with every day, published as plain Markdown. MIT licensed, <a href="{hub['links']['skills_repo']}">on GitHub</a>.</p>
     <ul class="skills-short">{sk}</ul>
+</section>
+
+<section class="block">
+    <div class="block-head"><h2>Tools and products</h2><a href="/products">All products</a></div>
+    <ul class="plain">{tools}</ul>
 </section>
 
 <section class="block">
@@ -430,6 +444,21 @@ def build_skill(hub, s, skills):
     return page(f"/skills/{s['name']}", f"/{s['name']}: a Claude Code skill · Bryan Collins", desc, body, hub, ld)
 
 
+def build_books(hub):
+    rows = "".join(
+        f'<li><strong>{esc(b["title"])}</strong>. {esc(b["desc"])} <a href="{esc(b["payhip"])}">Buy direct</a></li>'
+        for b in hub["books"])
+    body = f"""<section class="hero">
+    <h1>Books</h1>
+    <p class="lede">Books on writing, creativity and building a creative business. Buy direct to support my work, or find them on Amazon with Kindle Unlimited.</p>
+    <p class="links"><a href="{hub['links']['amazon']}">Amazon author page</a></p>
+</section>
+<section class="block"><ul class="plain">{rows}</ul></section>
+{newsletter(hub)}"""
+    return page("/books", "Books · Bryan Collins",
+                "Books by USA Today bestselling author Bryan Collins on writing, creativity and creative business.", body, hub)
+
+
 def build_work(hub, skills):
     w = hub["work"]
     roles = "".join(
@@ -515,6 +544,7 @@ def main():
         write("index.html", build_index(hub, videos, skills)),
         write("videos.html", build_videos(hub, videos, vsnap)),
         write("projects.html", build_projects(hub)),
+        write("books.html", build_books(hub)),
         write("work-with-me.html", build_work(hub, skills)),
         write("skills/index.html", build_skills_index(hub, skills, ssnap)),
     ]
@@ -524,7 +554,7 @@ def main():
     for name in sorted(stale):
         (ROOT / "skills" / name).unlink()
         print(f"removed skills/{name} (no longer in agent-skills)")
-    update_sitemap(["/", "/videos", "/projects", "/work-with-me", "/skills/"] + [f"/skills/{s['name']}" for s in skills])
+    update_sitemap(["/", "/videos", "/projects", "/books", "/work-with-me", "/skills/"] + [f"/skills/{s['name']}" for s in skills])
     print(f"wrote {len(written)} pages")
 
 

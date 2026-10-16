@@ -24,30 +24,100 @@
     {
       "group": "Running now",
       "items": [
-        {"name": "Vendors.ie", "url": "https://vendors.ie", "desc": "The dataset of business software available in Ireland. Verified Irish vendors, compliance mapped across Revenue, PAYE, GDPR and Irish bank feeds, re-checked weekly."},
-        {"name": "Tenderwatch.ie", "url": "https://tenderwatch.ie", "desc": "Built for Irish SMEs bidding for their first public contracts. Live tender feed, a plain-English jargon translator, bid or no-bid scoring and readiness checks."},
-        {"name": "Leinster Insider", "url": "https://leinsterinsider.com", "desc": "Leinster town by town: what to do, and what it actually costs to live there, from official house prices, rents and yields."},
-        {"name": "becomeawriter.com", "url": "https://becomeawriter.com", "desc": "Freelance writing and content-marketing jobs from 14 boards and career pages. Deduplicated, scam-filtered, pay listed first, published every Tuesday."},
-        {"name": "AI Flash Report", "url": "https://aiflashreport.com", "desc": "A tracker for frontier AI model releases, with benchmarks, pricing and launch coverage."},
-        {"name": "Wellkept", "url": "https://wellkept.ie", "desc": "A one-off website health check for Irish small businesses. Speed, security, email delivery, broken forms and what Google sees, for a flat fee."}
+        {
+          "name": "Vendors.ie",
+          "url": "https://vendors.ie",
+          "desc": "The dataset of business software available in Ireland. Verified Irish vendors, compliance mapped across Revenue, PAYE, GDPR and Irish bank feeds, re-checked weekly."
+        },
+        {
+          "name": "Tenderwatch.ie",
+          "url": "https://tenderwatch.ie",
+          "desc": "Built for Irish SMEs bidding for their first public contracts. Live tender feed, a plain-English jargon translator, bid or no-bid scoring and readiness checks."
+        },
+        {
+          "name": "Leinster Insider",
+          "url": "https://leinsterinsider.com",
+          "desc": "Leinster town by town: what to do, and what it actually costs to live there, from official house prices, rents and yields."
+        },
+        {
+          "name": "becomeawriter.com",
+          "url": "https://becomeawriter.com",
+          "desc": "Freelance writing and content-marketing jobs from 14 boards and career pages. Deduplicated, scam-filtered, pay listed first, published every Tuesday."
+        },
+        {
+          "name": "AI Flash Report",
+          "url": "https://aiflashreport.com",
+          "desc": "A tracker for frontier AI model releases, with benchmarks, pricing and launch coverage."
+        },
+        {
+          "name": "Wellkept",
+          "url": "https://wellkept.ie",
+          "desc": "A one-off website health check for Irish small businesses. Speed, security, email delivery, broken forms and what Google sees, for a flat fee."
+        }
       ]
     },
     {
       "group": "Built and still live",
       "items": [
-        {"name": "Become a Writer Today", "url": "https://becomeawritertoday.com", "desc": "The site I built and ran for most of my career. Now a set of free tools for writers: living databases of contests, literary magazines and residencies, word banks and an editing sandbox."},
-        {"name": "Prompt Writing Studio", "url": "https://promptwritingstudio.com", "desc": "Working guides and templates for Claude Code, MCP, skills and sub-agents."},
-        {"name": "Reading Curator", "url": "https://readingcurator.com", "desc": "Book discovery: authors similar to the ones you like, and curated reading lists."},
-        {"name": "FluentAtDesk", "url": "https://fluentatdesk.com", "desc": "Templates and tools for professionals who write at work in their second language."},
-        {"name": "My Triathlon Calculator", "url": "https://mytriathloncalculator.com", "desc": "Free race-day calculators for triathletes: sweat rate, electrolytes, carb timing and pacing."},
-        {"name": "Glitch Text Generator", "url": "https://glitchtextgenerator.com", "desc": "A small, silly Zalgo text tool. Proof that not everything needs a business model."}
+        {
+          "name": "Become a Writer Today",
+          "url": "https://becomeawritertoday.com",
+          "desc": "The site I built and ran for most of my career. Now a set of free tools for writers: living databases of contests, literary magazines and residencies, word banks and an editing sandbox."
+        },
+        {
+          "name": "Prompt Writing Studio",
+          "url": "https://promptwritingstudio.com",
+          "desc": "Working guides and templates for Claude Code, MCP, skills and sub-agents."
+        },
+        {
+          "name": "Reading Curator",
+          "url": "https://readingcurator.com",
+          "desc": "Book discovery: authors similar to the ones you like, and curated reading lists."
+        },
+        {
+          "name": "FluentAtDesk",
+          "url": "https://fluentatdesk.com",
+          "desc": "Templates and tools for professionals who write at work in their second language."
+        },
+        {
+          "name": "My Triathlon Calculator",
+          "url": "https://mytriathloncalculator.com",
+          "desc": "Free race-day calculators for triathletes: sweat rate, electrolytes, carb timing and pacing."
+        },
+        {
+          "name": "Glitch Text Generator",
+          "url": "https://glitchtextgenerator.com",
+          "desc": "A small, silly Zalgo text tool. Proof that not everything needs a business model."
+        }
       ]
     }
   ],
   "books": [
-    {"title": "The Power of Creativity", "desc": "USA Today bestseller on building a creative practice and a creative business."},
-    {"title": "Become a Writer Today: The Complete Series", "desc": "The craft and the business of a writing career."},
-    {"title": "This Is Working", "desc": "Building a sustainable creative business without burning out."}
+    {
+      "title": "The Power of Creativity",
+      "desc": "USA Today bestseller on building a creative practice and a creative business.",
+      "payhip": "https://payhip.com/b/4HIq"
+    },
+    {
+      "title": "Become a Writer Today: The Complete Series",
+      "desc": "The craft and the business of a writing career.",
+      "payhip": "https://payhip.com/b/VJoYC"
+    },
+    {
+      "title": "This Is Working",
+      "desc": "Building a sustainable creative business without burning out.",
+      "payhip": "https://payhip.com/b/working"
+    },
+    {
+      "title": "I Can't Believe I'm a Dad!",
+      "desc": "An honest, funny take on fatherhood and creative work.",
+      "payhip": "https://payhip.com/b/dad"
+    },
+    {
+      "title": "The Art of Writing a Non-Fiction Book",
+      "desc": "Writing, publishing and marketing a non-fiction book.",
+      "payhip": "https://payhip.com/b/nonfiction"
+    }
   ],
   "work": {
     "headline": "I build products, grow audiences and ship with AI.",
@@ -76,9 +146,60 @@
       }
     ],
     "skills": [
-      {"name": "Product", "items": ["Zero-to-one builds", "PRDs and scoping", "Pricing and payments", "Analytics and experiments"]},
-      {"name": "Growth", "items": ["SEO and programmatic content", "Newsletters and lifecycle email", "YouTube packaging", "Funnels and lead capture"]},
-      {"name": "AI engineering", "items": ["Claude Code and agent workflows", "Data pipelines and scrapers", "Netlify, Astro and serverless", "Monitoring and QA automation"]}
+      {
+        "name": "Product",
+        "items": [
+          "Zero-to-one builds",
+          "PRDs and scoping",
+          "Pricing and payments",
+          "Analytics and experiments"
+        ]
+      },
+      {
+        "name": "Growth",
+        "items": [
+          "SEO and programmatic content",
+          "Newsletters and lifecycle email",
+          "YouTube packaging",
+          "Funnels and lead capture"
+        ]
+      },
+      {
+        "name": "AI engineering",
+        "items": [
+          "Claude Code and agent workflows",
+          "Data pipelines and scrapers",
+          "Netlify, Astro and serverless",
+          "Monitoring and QA automation"
+        ]
+      }
     ]
-  }
+  },
+  "tools": [
+    {
+      "name": "Filler-Word Killer",
+      "url": "/filler-word-killer",
+      "desc": "Free. Paste a draft and see filler and weak words highlighted, in your browser, no signup."
+    },
+    {
+      "name": "Strategy frameworks",
+      "url": "/mba-frameworks",
+      "desc": "Free interactive SWOT, Ansoff, Porter's Five Forces, Business Model Canvas and more."
+    },
+    {
+      "name": "Claude Code for Writers",
+      "url": "/claude-code-for-writers",
+      "desc": "CLAUDE.md templates and a zero-terminal quickstart for writers. $39."
+    },
+    {
+      "name": "The Builder's Pipeline",
+      "url": "/builders-pipeline",
+      "desc": "Scripts and prompts that turn a week of worklog notes into posts, emails and video ideas. $39."
+    },
+    {
+      "name": "The Zettelkasten for Creators Kit",
+      "url": "/zettelkasten-kit",
+      "desc": "A plain-Markdown, git-based note system you own. $39."
+    }
+  ]
 }

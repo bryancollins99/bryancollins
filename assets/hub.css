@@ -66,7 +66,12 @@ h3 { font-size: 1rem; margin: 24px 0 8px; font-weight: 600; color: var(--muted);
 
 /* newsletter */
 .newsletter p { margin: 0 0 12px; }
-.signup { display: flex; gap: 8px; flex-wrap: wrap; margin: 4px 0 12px; }
+.signup { margin: 4px 0 12px; }
+.signup .formkit-fields { display: flex; gap: 8px; flex-wrap: wrap; }
+.formkit-alert { list-style: none; margin: 0 0 10px; padding: 10px 12px; border-radius: 6px; border: 1px solid var(--line); background: var(--soft); }
+.formkit-alert:empty { display: none; }
+.formkit-alert-error { color: #c0392b; }
+.formkit-alert-success { color: inherit; border-color: var(--accent); }
 .signup input {
   flex: 1 1 220px; min-width: 0; font: inherit; padding: 10px 12px;
   border: 1px solid var(--line); border-radius: 6px; background: var(--soft); color: var(--fg);
