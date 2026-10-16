@@ -68,9 +68,10 @@
 <ul><li><strong>Never read <code>netlify env:list --plain</code> as truth.</strong> It prints secret-scoped vars as <code>KEY=</code> with an empty value. That is redaction, not absence, and reading it as absence is how a valid key got wrongly called empty. The script uses the <code>getEnvVars</code> API, which reports real value presence.</li><li><strong>A var set only on deploy-preview or branch-deploy is not wired.</strong> It reads as present in the dashboard and fails in production. Only <code>all</code> and <code>production</code> contexts count; anything else lands in NOT ON PRODUCTION.</li><li><strong><code>gh secret list --org</code> returns 403 without org-admin.</strong> Org secrets are still visible per repo via <code>repos/{repo}/actions/organization-secrets</code>, which needs only repo read. Skipping that reports every org-inherited secret as missing.</li><li><strong>If either lookup fails, no diff is run for that side.</strong> A partial &quot;available&quot; set makes every unseen secret look missing. UNKNOWN is the honest answer.</li><li><strong>Some absences are correct.</strong> Add them to <code>INTENTIONAL</code> in the script with a written reason. Example: when a platform AI gateway is in use, a user-set provider key switches the gateway off, so its absence is the wired state. An unexplained suppression is worse than a false positive.</li><li><strong><code>scripts/</code> is excluded from the Netlify scan.</strong> Those run in GitHub Actions; including them reported every cron key as a missing Netlify var.</li><li><strong>A guarded reference is not a defect.</strong> <code>process.env.X || &#x27;default&#x27;</code>, <code>?? y</code>, a ternary, or <code>=== &#x27;true&#x27;</code> all work when unset. Those land in the &quot;probably fine&quot; line, not in MISSING.</li></ul></article>
 </section>
 <section class="block"><h2>More skills</h2><ul class="inline"><li><a href="/skills/pre-commit-review"><code>/pre-commit-review</code></a></li><li><a href="/skills/merge-conflict-walkthrough"><code>/merge-conflict-walkthrough</code></a></li><li><a href="/skills/rebase-plan"><code>/rebase-plan</code></a></li><li><a href="/skills/branch-cleanup"><code>/branch-cleanup</code></a></li><li><a href="/skills/log-issue"><code>/log-issue</code></a></li><li><a href="/skills/fix-cluster"><code>/fix-cluster</code></a></li><li><a href="/skills/best-of-both"><code>/best-of-both</code></a></li><li><a href="/skills/cron-staleness"><code>/cron-staleness</code></a></li><li><a href="/skills/decide"><code>/decide</code></a></li><li><a href="/skills/explain"><code>/explain</code></a></li><li><a href="/skills/notes-to-ideas"><code>/notes-to-ideas</code></a></li><li><a href="/skills/remember"><code>/remember</code></a></li></ul></section>
-<section id="newsletter" class="block newsletter">
-    <h2>Get new skills by email</h2>
-    <p>What I'm building with AI coding agents, what broke, and what I'd do differently. Straight to your inbox.</p>
+<section id="newsletter" class="newsletter-band"><div class="newsletter">
+    <div><h2>Get new skills by email</h2>
+    <p>What I'm building with AI coding agents, what broke, and what I'd do differently. Straight to your inbox.</p></div>
+    <div>
     <form action="https://app.kit.com/forms/8058199/subscriptions" method="post" class="seva-form formkit-form signup" data-sv-form="8058199" data-uid="4914fa2338" data-format="inline" data-version="5" data-options='{"settings": {"after_subscribe": {"action": "message", "success_message": "Thanks. Check your inbox to confirm your subscription.", "redirect_url": ""}, "recaptcha": {"enabled": false}}, "version": "5"}' onsubmit="window.plausible &amp;&amp; plausible('Newsletter Signup', {props: {page: location.pathname}})">
         <ul class="formkit-alert formkit-alert-error" data-element="errors" data-group="alert"></ul>
         <div data-element="fields" class="seva-fields formkit-fields">
@@ -81,6 +82,7 @@
     </form>
     <script src="https://f.convertkit.com/ckjs/ck.5.js" async></script>
     <p class="muted small">Unsubscribe any time. Or read the archive at <a href="https://newsletter.bryancollins.com">newsletter.bryancollins.com</a>.</p>
+</div></div>
 </section>
 </main>
 <footer class="site-footer">

@@ -256,9 +256,10 @@ KIT_OPTIONS = json.dumps({"settings": {"after_subscribe": {"action": "message", 
 
 def newsletter(hub, heading="Newsletter"):
     f = hub["kit_form"]
-    return f"""<section id="newsletter" class="block newsletter">
-    <h2>{esc(heading)}</h2>
-    <p>What I'm building with AI coding agents, what broke, and what I'd do differently. Straight to your inbox.</p>
+    return f"""<section id="newsletter" class="newsletter-band"><div class="newsletter">
+    <div><h2>{esc(heading)}</h2>
+    <p>What I'm building with AI coding agents, what broke, and what I'd do differently. Straight to your inbox.</p></div>
+    <div>
     <form action="https://app.kit.com/forms/{f['id']}/subscriptions" method="post" class="seva-form formkit-form signup" data-sv-form="{f['id']}" data-uid="{f['uid']}" data-format="inline" data-version="5" data-options='{KIT_OPTIONS}' onsubmit="window.plausible &amp;&amp; plausible('Newsletter Signup', {{props: {{page: location.pathname}}}})">
         <ul class="formkit-alert formkit-alert-error" data-element="errors" data-group="alert"></ul>
         <div data-element="fields" class="seva-fields formkit-fields">
@@ -269,6 +270,7 @@ def newsletter(hub, heading="Newsletter"):
     </form>
     <script src="https://f.convertkit.com/ckjs/ck.5.js" async></script>
     <p class="muted small">Unsubscribe any time. Or read the archive at <a href="{hub['links']['newsletter']}">newsletter.bryancollins.com</a>.</p>
+</div></div>
 </section>"""
 
 
@@ -291,9 +293,9 @@ def project_list(groups):
     out = []
     for g in groups:
         rows = "".join(
-            f'<li><a href="{esc(p["url"])}">{esc(p["name"])}</a><span class="host">{esc(re.sub(r"^https?://", "", p["url"]))}</span><p>{esc(p["desc"])}</p></li>'
+            f'<li class="card"><h3><a href="{esc(p["url"])}">{esc(p["name"])}</a></h3><span class="host">{esc(re.sub(r"^https?://", "", p["url"]))}</span><p>{esc(p["desc"])}</p><a class="more" href="{esc(p["url"])}">Visit site</a></li>'
             for p in g["items"])
-        out.append(f'<h3>{esc(g["group"])}</h3><ul class="projects">{rows}</ul>')
+        out.append(f'<p class="group-title">{esc(g["group"])}</p><ul class="grid">{rows}</ul>')
     return "\n".join(out)
 
 
@@ -303,18 +305,18 @@ def build_index(hub, videos, skills):
     latest = videos[:6]
     intro = "".join(f"<p>{esc(p)}</p>" for p in hub["intro"])
     sk = "".join(
-        f'<li><a href="/skills/{esc(s["name"])}"><code>/{esc(s["name"])}</code></a> {esc(first_sentence(s["blurb"]))}</li>'
+        f'<li class="card skill-card"><h3><a href="/skills/{esc(s["name"])}">/{esc(s["name"])}</a></h3><p>{esc(first_sentence(s["blurb"]))}</p><a class="more internal" href="/skills/{esc(s["name"])}">Read and install</a></li>'
         for s in skills[:6])
-    books = "".join(f'<li><strong>{esc(b["title"])}</strong>. {esc(b["desc"])}</li>' for b in hub["books"][:3])
-    tools = "".join(f'<li><a href="{esc(t["url"])}">{esc(t["name"])}</a>. {esc(t["desc"])}</li>' for t in hub["tools"])
-    body = f"""<section class="hero">
-    <h1>{esc(hub['name'])}</h1>
-    <p class="lede">{esc(hub['tagline'])}</p>
+    books = "".join(f'<li class="card"><span class="tag">{"USA Today bestseller" if i == 0 else "Book"}</span><h3>{esc(b["title"])}</h3><p>{esc(b["desc"])}</p><a class="more" href="{esc(b["payhip"])}">Buy direct</a></li>' for i, b in enumerate(hub["books"][:3]))
+    tools = "".join(f'<li class="card"><h3><a href="{esc(t["url"])}">{esc(t["name"])}</a></h3><p>{esc(t["desc"])}</p><a class="more internal" href="{esc(t["url"])}">Take a look</a></li>' for t in hub["tools"])
+    body = f"""<section class="hero"><div class="hero-inner">
+    <img class="avatar" src="/resources/bryan-collins-320.jpg" alt="Bryan Collins" width="132" height="132">
+    <div>
+    <h1>{esc(hub['tagline'])}</h1>
     {intro}
-    <p class="links"><a href="{hub['links']['youtube']}">YouTube</a> · <a href="{hub['links']['github']}">GitHub</a> · <a href="/work-with-me">Work with me</a></p>
-</section>
-
-{newsletter(hub)}
+    <div class="actions"><a class="btn btn-primary" href="#newsletter">Join the newsletter</a><a class="btn btn-ghost" href="{hub['links']['youtube']}">Watch on YouTube</a><a class="btn btn-ghost" href="/work-with-me">Work with me</a></div>
+    </div>
+</div></section>
 
 <section class="block">
     <div class="block-head"><h2>Latest videos</h2><a href="/videos">All videos</a></div>
@@ -330,19 +332,21 @@ def build_index(hub, videos, skills):
 
 <section class="block">
     <div class="block-head"><h2>Agent skills</h2><a href="/skills/">All {len(skills)} skills</a></div>
-    <p>The workflows I run Claude Code with every day, published as plain Markdown. MIT licensed, <a href="{hub['links']['skills_repo']}">on GitHub</a>.</p>
-    <ul class="skills-short">{sk}</ul>
+    <p class="sub">The workflows I run Claude Code with every day, published as plain Markdown. MIT licensed, <a href="{hub['links']['skills_repo']}">on GitHub</a>.</p>
+    <ul class="grid">{sk}</ul>
 </section>
 
 <section class="block">
     <div class="block-head"><h2>Tools and products</h2><a href="/products">All products</a></div>
-    <ul class="plain">{tools}</ul>
+    <ul class="grid">{tools}</ul>
 </section>
 
 <section class="block">
     <div class="block-head"><h2>Books</h2><a href="/books">All books</a></div>
-    <ul class="plain">{books}</ul>
-</section>"""
+    <ul class="grid">{books}</ul>
+</section>
+
+{newsletter(hub)}"""
     ld = {"@context": "https://schema.org", "@type": "Person", "name": hub["name"], "url": SITE + "/",
           "description": hub["tagline"], "image": SITE + "/resources/bryan-collins.jpeg",
           "sameAs": [hub["links"][k] for k in ("youtube", "github", "linkedin", "substack", "amazon")]}
@@ -355,7 +359,7 @@ def build_videos(hub, videos, snap):
     body = f"""<section class="hero">
     <h1>Videos</h1>
     <p class="lede">I film the builds: Claude Code, AI agents and the sites I run. Older videos cover writing tools and the craft of writing.</p>
-    <p class="links"><a href="{hub['links']['youtube']}">Subscribe on YouTube</a></p>
+    <div class="actions"><a class="btn btn-ghost" href="{hub['links']['youtube']}">Subscribe on YouTube</a></div>
 </section>
 <section class="block">
     <h2>Latest</h2>
@@ -389,14 +393,14 @@ def build_skills_index(hub, skills, snap):
             groups.append(s["group"])
     for g in groups:
         rows = "".join(
-            f'<li><a href="/skills/{esc(s["name"])}"><code>/{esc(s["name"])}</code></a><p>{esc(first_sentence(s["blurb"]))}</p></li>'
+            f'<li class="card skill-card"><h3><a href="/skills/{esc(s["name"])}">/{esc(s["name"])}</a></h3><p>{esc(first_sentence(s["blurb"]))}</p><a class="more internal" href="/skills/{esc(s["name"])}">Read and install</a></li>'
             for s in skills if s["group"] == g)
-        out.append(f'<h2>{esc(g)}</h2><ul class="skills">{rows}</ul>')
+        out.append(f'<p class="group-title">{esc(g)}</p><ul class="grid">{rows}</ul>')
     body = f"""<section class="hero">
     <h1>Agent skills</h1>
     <p class="lede">Skills and workflows for AI coding agents, taken from my own setup and made generic so they work in any repo.</p>
     <p>Each one is a plain Markdown procedure. They ship as Claude Code slash commands, but the same text works as a Cursor rule or a prompt for any capable agent. Every skill here earned its place by catching something real. MIT licensed.</p>
-    <p class="links"><a href="https://github.com/{SKILLS_REPO}">github.com/{SKILLS_REPO}</a></p>
+    <div class="actions"><a class="btn btn-ghost" href="https://github.com/{SKILLS_REPO}">github.com/{SKILLS_REPO}</a></div>
 </section>
 <section class="block install">
     <h2>Install all of them</h2>
@@ -446,14 +450,14 @@ def build_skill(hub, s, skills):
 
 def build_books(hub):
     rows = "".join(
-        f'<li><strong>{esc(b["title"])}</strong>. {esc(b["desc"])} <a href="{esc(b["payhip"])}">Buy direct</a></li>'
+        f'<li class="card"><h3>{esc(b["title"])}</h3><p>{esc(b["desc"])}</p><a class="more" href="{esc(b["payhip"])}">Buy direct</a></li>'
         for b in hub["books"])
     body = f"""<section class="hero">
     <h1>Books</h1>
     <p class="lede">Books on writing, creativity and building a creative business. Buy direct to support my work, or find them on Amazon with Kindle Unlimited.</p>
-    <p class="links"><a href="{hub['links']['amazon']}">Amazon author page</a></p>
+    <div class="actions"><a class="btn btn-ghost" href="{hub['links']['amazon']}">Amazon author page</a></div>
 </section>
-<section class="block"><ul class="plain">{rows}</ul></section>
+<section class="block"><ul class="grid">{rows}</ul></section>
 {newsletter(hub)}"""
     return page("/books", "Books · Bryan Collins",
                 "Books by USA Today bestselling author Bryan Collins on writing, creativity and creative business.", body, hub)
@@ -462,16 +466,16 @@ def build_books(hub):
 def build_work(hub, skills):
     w = hub["work"]
     roles = "".join(
-        f'<li><p class="meta">{esc(r["dates"])}</p><h3>{esc(r["title"])}</h3><p class="muted">{esc(r["org"])}</p>'
+        f'<li class="card"><p class="meta">{esc(r["dates"])}</p><h3>{esc(r["title"])}</h3><p class="muted">{esc(r["org"])}</p>'
         f'<ul>{"".join(f"<li>{esc(p)}</li>" for p in r["points"])}</ul></li>' for r in w["roles"])
-    sk = "".join(f'<div><h3>{esc(g["name"])}</h3><ul>{"".join(f"<li>{esc(i)}</li>" for i in g["items"])}</ul></div>'
+    sk = "".join(f'<div class="card"><h3>{esc(g["name"])}</h3><ul>{"".join(f"<li>{esc(i)}</li>" for i in g["items"])}</ul></div>'
                  for g in w["skills"])
     L = hub["links"]
     body = f"""<section class="hero">
     <h1>{esc(w['headline'])}</h1>
     <p class="lede">{esc(w['summary'])}</p>
     <p>{esc(w['open_to'])}</p>
-    <p class="links"><a href="{L['email']}">Email me</a> · <a href="{L['linkedin']}">LinkedIn</a> · <a href="https://clarity.fm/bryancollins">Book a call</a></p>
+    <div class="actions"><a class="btn btn-ghost" href="{L['email']}">Email me</a><a class="btn btn-ghost" href="{L['linkedin']}">LinkedIn</a><a class="btn btn-ghost" href="https://clarity.fm/bryancollins">Book a call</a></div>
 </section>
 <section class="block">
     <h2>Proof of work</h2>
@@ -484,11 +488,11 @@ def build_work(hub, skills):
 </section>
 <section class="block">
     <h2>Experience</h2>
-    <ul class="roles">{roles}</ul>
+    <ul class="roles grid">{roles}</ul>
 </section>
 <section class="block">
     <h2>What I bring</h2>
-    <div class="cols">{sk}</div>
+    <div class="grid cols">{sk}</div>
 </section>"""
     return page("/work-with-me", "Work with Bryan Collins",
                 "Product and growth operator who builds with AI coding agents. Open to product leadership and head of growth roles.",
