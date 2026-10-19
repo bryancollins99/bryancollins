@@ -132,7 +132,7 @@
     <p class="text-sm font-semibold uppercase tracking-wider mb-2" style="color:#956FA6;">Your download</p>
     <h2 id="lm-title" class="text-2xl font-bold mb-4"></h2>
     <div id="lm-links"></div>
-    <p class="text-sm mt-4" style="opacity:.7;">A copy is on its way to your inbox too.</p>
+    <p class="text-sm mt-4" style="opacity:.7;">Your download is ready above. Confirm your email to get the newsletter.</p>
   </div>
 </div>
 <script>
@@ -158,10 +158,29 @@
       return el;
     }
 
+    // 'none' is stamped by the non-lane opt-ins (101-ai-prompts-yt, linkedin-hooks-yt),
+    // which share this form. Their subscribers keep today's page: no panel, PWS pitch
+    // visible. Without this, a visitor who saw a lane page first carried its stamp here.
+    if (lane === 'none') return;
+
     var picked = lane && ASSETS[lane];
     if (picked) {
       title.textContent = picked.title;
       links.appendChild(button(picked));
+      // The static page promises an inbox delivery and pitches AI prompts. Neither is
+      // true for a lane subscriber, so hide the hero line and the pitch and make the
+      // meta copy neutral. Those elements sit below this script, hence the wait.
+      var neutral = 'Thank you for subscribing. Your download is ready on this page.';
+      document.addEventListener('DOMContentLoaded', function () {
+        ['ty-hero-sub', 'pws-pitch'].forEach(function (id) {
+          var el = document.getElementById(id);
+          if (el) el.hidden = true;
+        });
+        ['meta[name="description"]', 'meta[property="og:description"]'].forEach(function (q) {
+          var m = document.querySelector(q);
+          if (m) m.setAttribute('content', neutral);
+        });
+      });
     } else {
       // No stamp: offer everything rather than guess wrong.
       title.textContent = 'Grab your guides';
@@ -180,7 +199,7 @@
                 <!-- Header -->
                 <div class="hero-gradient px-8 py-12 text-center">
                     <h1 class="hero-text text-4xl sm:text-5xl font-extrabold mb-4 leading-tight">Thank You!</h1>
-                    <p class="hero-text text-xl sm:text-2xl max-w-xl mx-auto">Your resource is on its way to your inbox</p>
+                    <p id="ty-hero-sub" class="hero-text text-xl sm:text-2xl max-w-xl mx-auto">Your resource is on its way to your inbox</p>
                 </div>
                 
                 <!-- Content -->
@@ -194,7 +213,7 @@
                         </div>
                         
                         <!-- PromptWritingStudio Pitch -->
-                        <div class="mt-12 max-w-lg mx-auto">
+                        <div id="pws-pitch" class="mt-12 max-w-lg mx-auto">
                             <h2 class="text-2xl font-bold mb-6 text-center">Try PromptWritingStudio</h2>
                             
                             <p class="text-gray-700 mb-6">It's a popular all-in-one course for creating, storing, and optimizing your AI prompts. Boost your productivity and get consistently better results from AI tools.</p>
