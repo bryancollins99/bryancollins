@@ -43,6 +43,7 @@ LANES = [
                       "the naming convention, the three note types, and ten prompts that turn "
                       "notes into drafts."),
         "sub": "The four-folder system I use. Plain files you own for good.",
+        "for": "For writers and researchers who want their notes in plain files they own, not locked in an app.",
         "pdf": "note-system-starter-6p3n9k2.pdf",
         "pages": 6,
         "benefits": [
@@ -57,13 +58,14 @@ LANES = [
     {
         "slug": "claude-code-yt",
         "thanks": "thank-you",
-        "uid": PLACEHOLDER,
+        "uid": SHARED_UID,
         "lane": "claude",
         "title": "The Claude Code Starter Pack",
         "meta_title": "The Claude Code Starter Pack (Free) - Bryan Collins",
         "meta_desc": ("Free: the Claude Code setup I wish I had on day one. The CLAUDE.md template, "
                       "the eleven commands worth learning, and the three mistakes that cost me days."),
         "sub": "The setup I wish someone had handed me on day one.",
+        "for": "For people starting with Claude Code who want a working setup on day one.",
         "pdf": "claude-code-starter-8h5r4t1.pdf",
         "pages": 5,
         "benefits": [
@@ -187,6 +189,7 @@ def optin(lane):
                         </div>
 
                         <div class="max-w-lg mx-auto mt-8">
+                            <p class="text-center text-lg font-semibold mb-4">{lane['for']}</p>
 {form}
                             <p class="text-sm text-center mt-3" style="color: #1B1B1D; opacity: 0.7;">We respect your privacy. Unsubscribe anytime.</p>
                         </div>
@@ -229,7 +232,7 @@ def download_block():
     <p class="text-sm font-semibold uppercase tracking-wider mb-2" style="color:#956FA6;">Your download</p>
     <h2 id="lm-title" class="text-2xl font-bold mb-4"></h2>
     <div id="lm-links"></div>
-    <p class="text-sm mt-4" style="opacity:.7;">A copy is on its way to your inbox too.</p>
+    <p class="text-sm mt-4" style="opacity:.7;">Your download is ready above. Confirm your email to get the newsletter.</p>
   </div>
 </div>
 <script>
@@ -254,10 +257,29 @@ def download_block():
       return el;
     }}
 
+    // 'none' is stamped by the non-lane opt-ins (101-ai-prompts-yt, linkedin-hooks-yt),
+    // which share this form. Their subscribers keep today's page: no panel, PWS pitch
+    // visible. Without this, a visitor who saw a lane page first carried its stamp here.
+    if (lane === 'none') return;
+
     var picked = lane && ASSETS[lane];
     if (picked) {{
       title.textContent = picked.title;
       links.appendChild(button(picked));
+      // The static page promises an inbox delivery and pitches AI prompts. Neither is
+      // true for a lane subscriber, so hide the hero line and the pitch and make the
+      // meta copy neutral. Those elements sit below this script, hence the wait.
+      var neutral = 'Thank you for subscribing. Your download is ready on this page.';
+      document.addEventListener('DOMContentLoaded', function () {{
+        ['ty-hero-sub', 'pws-pitch'].forEach(function (id) {{
+          var el = document.getElementById(id);
+          if (el) el.hidden = true;
+        }});
+        ['meta[name="description"]', 'meta[property="og:description"]'].forEach(function (q) {{
+          var m = document.querySelector(q);
+          if (m) m.setAttribute('content', neutral);
+        }});
+      }});
     }} else {{
       // No stamp: offer everything rather than guess wrong.
       title.textContent = 'Grab your guides';
@@ -281,6 +303,20 @@ def patch_thanks():
         # First run: drop it in immediately after <body>, above the existing copy.
         anchor = html.index("<body>") + len("<body>")
         html = html[:anchor] + "\n" + block + "\n" + html[anchor:]
+    # The hero line and the PWS pitch have no ids in the hand-written page; give them
+    # ids the panel script can hide. Idempotent: a second run finds the ids already set.
+    for marker, ident in (
+        ('<p class="hero-text text-xl sm:text-2xl max-w-xl mx-auto">Your resource is on its way',
+         "ty-hero-sub"),
+        ('<!-- PromptWritingStudio Pitch -->\n                        <div class="mt-12 max-w-lg mx-auto">',
+         "pws-pitch"),
+    ):
+        if f'id="{ident}"' in html:
+            continue
+        if marker not in html:
+            raise SystemExit(f"thank-you.html: anchor for #{ident} not found; page changed by hand?")
+        tag_at = html.index(marker) + marker.rindex("<")
+        html = html[:tag_at] + html[tag_at:].replace(" class=", f' id="{ident}" class=', 1)
     open(path, "w").write(html)
     return path
 
