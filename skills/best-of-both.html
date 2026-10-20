@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>/best-of-both: a Claude Code skill · Bryan Collins</title>
+    <meta name="description" content="Compares two agents&#x27; builds of the same spec section by section, picks a base, and writes one brief that folds the other build&#x27;s best ideas into it.">
+    <meta name="author" content="Bryan Collins">
+    <link rel="canonical" href="https://bryancollins.com/skills/best-of-both">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://bryancollins.com/skills/best-of-both">
+    <meta property="og:title" content="/best-of-both: a Claude Code skill · Bryan Collins">
+    <meta property="og:description" content="Compares two agents&#x27; builds of the same spec section by section, picks a base, and writes one brief that folds the other build&#x27;s best ideas into it.">
+    <meta property="og:image" content="https://bryancollins.com/resources/bryan-collins.jpeg">
+    <meta name="twitter:card" content="summary">
+    <meta name="theme-color" media="(prefers-color-scheme: light)" content="#fdfdfc">
+    <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#121211">
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <link rel="stylesheet" href="/assets/hub.css">
+    <script async src="https://stats.bryancollins.com/js/pa-bvsz2TfQenbKYMWpBJ7eS.js"></script>
+    <script>
+      window.plausible=window.plausible||function(){(plausible.q=plausible.q||[]).push(arguments)},plausible.init=plausible.init||function(i){plausible.o=i||{}};
+      plausible.init()
+    </script>
+    <script type="application/ld+json">{"@context": "https://schema.org", "@type": "SoftwareSourceCode", "name": "/best-of-both", "description": "Compares two agents' builds of the same spec section by section, picks a base, and writes one brief that folds the other build's best ideas into it.", "codeRepository": "https://github.com/bryancollins99/agent-skills", "license": "https://opensource.org/licenses/MIT", "programmingLanguage": "Markdown", "author": {"@type": "Person", "name": "Bryan Collins", "url": "https://bryancollins.com/"}}</script>
+</head>
+<body>
+<a class="skip" href="#content">Skip to content</a>
+<header class="site-header">
+    <a class="brand" href="/">Bryan Collins</a>
+    <nav aria-label="Main"><a href="/videos">Videos</a><a href="/projects">Projects</a><a href="/skills/">Skills</a><a href="/books">Books</a><a href="/work-with-me">Work</a><a href="/#newsletter">Newsletter</a></nav>
+</header>
+<main id="content">
+<nav class="crumbs"><a href="/skills/">Agent skills</a> /</nav>
+<section class="hero">
+    <h1><code>/best-of-both</code></h1>
+    <p class="muted">Issues to shipped code</p>
+    <p>Compares two agents&#x27; builds of the same spec section by section, picks a base, and writes one brief that folds the other build&#x27;s best ideas into it.</p>
+<p>The reason it exists: <strong>picking a winner throws away what the loser got right.</strong> On a paid-placement leaderboard the GPT build was the better page, but the Claude build handled empty categories far better, and on launch day every category was empty. It forces a check of the empty, first-use and error states, counts over-building as a cost, and replaces &quot;can you improve your version?&quot; with a named keep / adopt / drop list.</p>
+</section>
+<section class="block install">
+    <h2>Install</h2>
+<pre><code>curl -o ~/.claude/commands/best-of-both.md \
+  https://raw.githubusercontent.com/bryancollins99/agent-skills/main/skills/best-of-both.md</code></pre>
+    <p class="small">Then run <code>/best-of-both</code> in Claude Code. For any other agent, paste the procedure below as its instruction. <a href="https://github.com/bryancollins99/agent-skills/blob/main/skills/best-of-both.md">View on GitHub</a>.</p>
+</section>
+<section class="block">
+    <h2>The procedure</h2>
+    <article class="prose"><p>Compare two AI agents&#x27; builds of the same spec, name what each did better, and write one brief that folds the loser&#x27;s best ideas into the winner&#x27;s branch. Args: the spec path plus two preview URLs or branch names.</p>
+<h3>Purpose</h3>
+<p>When you run the same spec through two coding agents, the natural move is to pick a winner and delete the other branch. That throws away whatever the losing build got right.</p>
+<p>It happened on a paid-placement leaderboard: the GPT build was the better page overall, but the Claude build handled empty categories far better, filling them with existing site content so the page never looked dead. Picking GPT outright would have shipped empty pages for every category with no paying vendor yet, which on launch day was all of them.</p>
+<p>This skill makes the comparison explicit and turns it into a single, specific improvement brief instead of a vague &quot;can you improve your version?&quot;.</p>
+<h3>When to use</h3>
+<ul><li>You built the same feature twice, with two agents or two models, from one spec.</li><li>Both builds are viewable: a preview deploy, a local branch, or screenshots.</li><li>You prefer one overall but keep noticing things the other did better.</li></ul>
+<p>Not for choosing between two specs. Settle the spec first; this compares implementations of the same one.</p>
+<h3>Steps</h3>
+<h4>1. Load the spec and both builds</h4>
+<ul><li>Read the spec in full. Its sections (reader experience, states, money, boundaries, metrics) become the comparison rows.</li><li>For each build, get something you can actually look at: a preview URL, or <code>git diff main...&lt;branch&gt; --stat</code> plus the rendered page. If a build only exists as code, run it locally before judging it. Do not compare from diffs alone.</li></ul>
+<h4>2. Compare section by section</h4>
+<p>Write a table, one row per spec section:</p>
+<div class="table"><table><thead><tr><th>Spec section</th><th>Build A</th><th>Build B</th><th>Better</th><th>Why (one line)</th></tr></thead><tbody></tbody></table></div>
+<p>Rules:</p>
+<ul><li>Judge against the spec, not against each other&#x27;s style.</li><li>Call out anything a build added that the spec never asked for (extra states, extra pages, extra settings). Over-building is a cost, not a feature, especially from high-effort runs.</li><li>Check the empty, first-use and error cases explicitly. That is where builds differ most and where the losing build often wins.</li></ul>
+<h4>3. Pick the base</h4>
+<p>Pick the build that wins on the most important rows as the base branch. Say why in one sentence. Everything else is a donor.</p>
+<h4>4. Write the merge brief</h4>
+<p>One brief for the agent that owns the base branch:</p>
+<ul><li><strong>Keep:</strong> the base build&#x27;s winning sections, named, so it does not regress them.</li><li><strong>Adopt:</strong> each donor idea, described concretely (what it does, where on the page), with the donor&#x27;s preview URL and a screenshot of that exact part.</li><li><strong>Drop:</strong> anything over-built that the spec did not ask for.</li><li><strong>Do not:</strong> copy code across branches. The donor build is a reference for behaviour, not a source to paste from; the base agent re-implements in its own structure.</li></ul>
+<p>Print the brief. Do not send it or run it.</p>
+<h4>5. After the merge</h4>
+<p>Re-open the merged preview and re-check every row the donor won. A donor idea that did not survive the merge is the most common failure here.</p>
+<h3>Failure modes</h3>
+<ul><li><strong>&quot;Improve your version&quot; with no specifics.</strong> The agent polishes what it already built and ignores the other build. Name each idea to adopt.</li><li><strong>Judging from code instead of the rendered page.</strong> Two builds can look equivalent in a diff and very different on screen, especially empty and error states.</li><li><strong>Rewarding volume.</strong> The build with more states, toggles and pages looks more complete. Check each extra against the spec before counting it as a win.</li><li><strong>Cherry-picking commits between agents&#x27; branches.</strong> Different file layouts and naming make this a conflict mess. Re-implement from the description instead.</li></ul></article>
+</section>
+<section class="block"><h2>More skills</h2><ul class="inline"><li><a href="/skills/pre-commit-review"><code>/pre-commit-review</code></a></li><li><a href="/skills/merge-conflict-walkthrough"><code>/merge-conflict-walkthrough</code></a></li><li><a href="/skills/rebase-plan"><code>/rebase-plan</code></a></li><li><a href="/skills/branch-cleanup"><code>/branch-cleanup</code></a></li><li><a href="/skills/wiring"><code>/wiring</code></a></li><li><a href="/skills/log-issue"><code>/log-issue</code></a></li><li><a href="/skills/fix-cluster"><code>/fix-cluster</code></a></li><li><a href="/skills/cron-staleness"><code>/cron-staleness</code></a></li><li><a href="/skills/decide"><code>/decide</code></a></li><li><a href="/skills/explain"><code>/explain</code></a></li><li><a href="/skills/notes-to-ideas"><code>/notes-to-ideas</code></a></li><li><a href="/skills/remember"><code>/remember</code></a></li></ul></section>
+<section id="newsletter" class="newsletter-band"><div class="newsletter">
+    <div><h2>Get new skills by email</h2>
+    <p>What I'm building with AI coding agents, what broke, and what I'd do differently. Straight to your inbox.</p></div>
+    <div>
+    <form action="https://app.kit.com/forms/8058199/subscriptions" method="post" class="seva-form formkit-form signup" data-sv-form="8058199" data-uid="4914fa2338" data-format="inline" data-version="5" data-options='{"settings": {"after_subscribe": {"action": "message", "success_message": "Thanks. Check your inbox to confirm your subscription.", "redirect_url": ""}, "recaptcha": {"enabled": false}}, "version": "5"}' onsubmit="window.plausible &amp;&amp; plausible('Newsletter Signup', {props: {page: location.pathname}})">
+        <ul class="formkit-alert formkit-alert-error" data-element="errors" data-group="alert"></ul>
+        <div data-element="fields" class="seva-fields formkit-fields">
+            <label class="sr" for="nl-email">Email address</label>
+            <input id="nl-email" class="formkit-input" name="email_address" type="email" placeholder="Email address" autocomplete="email" required>
+            <button type="submit" data-element="submit" class="formkit-submit"><span>Subscribe</span></button>
+        </div>
+    </form>
+    <script src="https://f.convertkit.com/ckjs/ck.5.js" async></script>
+    <p class="muted small">Unsubscribe any time. Or read the archive at <a href="https://newsletter.bryancollins.com">newsletter.bryancollins.com</a>.</p>
+</div></div>
+</section>
+</main>
+<footer class="site-footer">
+    <p><a href="https://www.youtube.com/channel/UCglNILz3uBqPer5EMJ_pzVg">YouTube</a> · <a href="https://github.com/bryancollins99">GitHub</a> · <a href="https://www.linkedin.com/in/bryancollins99/">LinkedIn</a> · <a href="https://substack.com/@bryancollins">Substack</a> · <a href="/products">Products</a> · <a href="/mba-frameworks">Strategy tools</a> · <a href="/contact">Contact</a></p>
+    <p class="muted">© 2026 Bryan Collins · <a href="/privacy">Privacy</a> · <a href="/terms">Terms</a></p>
+</footer>
+</body>
+</html>

@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>/decide: a Claude Code skill · Bryan Collins</title>
+    <meta name="description" content="Takes the &quot;Open questions&quot; section that every plan grows and forces each item to a lock, one question at a time, then writes the answers back into the doc.">
+    <meta name="author" content="Bryan Collins">
+    <link rel="canonical" href="https://bryancollins.com/skills/decide">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://bryancollins.com/skills/decide">
+    <meta property="og:title" content="/decide: a Claude Code skill · Bryan Collins">
+    <meta property="og:description" content="Takes the &quot;Open questions&quot; section that every plan grows and forces each item to a lock, one question at a time, then writes the answers back into the doc.">
+    <meta property="og:image" content="https://bryancollins.com/resources/bryan-collins.jpeg">
+    <meta name="twitter:card" content="summary">
+    <meta name="theme-color" media="(prefers-color-scheme: light)" content="#fdfdfc">
+    <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#121211">
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <link rel="stylesheet" href="/assets/hub.css">
+    <script async src="https://stats.bryancollins.com/js/pa-bvsz2TfQenbKYMWpBJ7eS.js"></script>
+    <script>
+      window.plausible=window.plausible||function(){(plausible.q=plausible.q||[]).push(arguments)},plausible.init=plausible.init||function(i){plausible.o=i||{}};
+      plausible.init()
+    </script>
+    <script type="application/ld+json">{"@context": "https://schema.org", "@type": "SoftwareSourceCode", "name": "/decide", "description": "Takes the \"Open questions\" section that every plan grows and forces each item to a lock, one question at a time, then writes the answers back into the doc.", "codeRepository": "https://github.com/bryancollins99/agent-skills", "license": "https://opensource.org/licenses/MIT", "programmingLanguage": "Markdown", "author": {"@type": "Person", "name": "Bryan Collins", "url": "https://bryancollins.com/"}}</script>
+</head>
+<body>
+<a class="skip" href="#content">Skip to content</a>
+<header class="site-header">
+    <a class="brand" href="/">Bryan Collins</a>
+    <nav aria-label="Main"><a href="/videos">Videos</a><a href="/projects">Projects</a><a href="/skills/">Skills</a><a href="/books">Books</a><a href="/work-with-me">Work</a><a href="/#newsletter">Newsletter</a></nav>
+</header>
+<main id="content">
+<nav class="crumbs"><a href="/skills/">Agent skills</a> /</nav>
+<section class="hero">
+    <h1><code>/decide</code></h1>
+    <p class="muted">Thinking and communicating</p>
+    <p>Takes the &quot;Open questions&quot; section that every plan grows and forces each item to a lock, one question at a time, then writes the answers back into the doc.</p>
+<p>Decision tables rot as leans. A plan that says <code>Lean: probably Postgres</code> is not a decision, and six weeks later nobody can tell whether it was made or just muttered. This asks, waits, and persists - including a note when the answer overrides the lean, because future you will want to know the recommendation lost.</p>
+</section>
+<section class="block install">
+    <h2>Install</h2>
+<pre><code>curl -o ~/.claude/commands/decide.md \
+  https://raw.githubusercontent.com/bryancollins99/agent-skills/main/skills/decide.md</code></pre>
+    <p class="small">Then run <code>/decide</code> in Claude Code. For any other agent, paste the procedure below as its instruction. <a href="https://github.com/bryancollins99/agent-skills/blob/main/skills/decide.md">View on GitHub</a>.</p>
+</section>
+<section class="block">
+    <h2>The procedure</h2>
+    <article class="prose"><p>Turns a doc&#x27;s open decisions into one question at a time, then writes the locked answers back into the doc. Args: a file path, a PR/issue number, or nothing (harvest from the current conversation).</p>
+<h3>Purpose</h3>
+<p>Decision tables rot as &quot;leans&quot;. A plan says <code>Lean: probably Postgres</code> and six weeks later nobody knows whether that was decided or just muttered. This skill forces each open decision to a lock, then persists the answer where the question lived, so the doc stops lying about its own state.</p>
+<h3>When to use</h3>
+<ul><li>A PRD, plan or design doc with an &quot;Open questions&quot; section you keep scrolling past.</li><li>After a review that returned a list of &quot;needs a human call&quot; items.</li><li>End of a long conversation where you deferred four things with &quot;later&quot;.</li></ul>
+<h3>Steps</h3>
+<h4>1. Resolve the source</h4>
+<ul><li><strong>File path</strong> (any <code>.md</code> or text doc) - harvest decisions from that file.</li><li><strong><code>#N</code> or a bare number</strong> - <code>gh pr view N --json body,title</code>, falling back to <code>gh issue view N</code>. Harvest from the body.</li><li><strong>No argument</strong> - harvest from the current conversation: questions you asked that were never answered, <code>Lean:</code> statements, anything deferred with &quot;later&quot; or &quot;TBD&quot;.</li></ul>
+<h4>2. Harvest the decisions</h4>
+<p>Scan for, in priority order:</p>
+<ol><li>An explicit section - headings matching <code>Open decisions|Open questions|Decisions|TBD|Unresolved</code>, case-insensitive.</li><li>Inline markers - lines containing <code>Lean:</code>, <code>TBD</code>, <code>TODO(decide)</code>, <code>open question</code>, or an <code>(a)/(b)/(c)</code> option list.</li><li>Review output - <code>needs a human</code> / <code>blocking</code> / <code>for ratification</code> blocks.</li></ol>
+<p>For each decision extract: the question, the enumerated options if any, and the stated lean if any.</p>
+<p>Skip anything marked mandatory or already locked - there is nothing to decide. Report those separately as &quot;already locked&quot;.</p>
+<p><strong>If nothing harvests, say so and stop. Never invent decisions to ask about.</strong></p>
+<h4>3. Ask, one at a time</h4>
+<ul><li>One question per decision. Highest-stakes first.</li><li>The stated lean becomes the first option, marked <strong>(Recommended)</strong>. No lean means you order by your own judgment and still mark a recommendation.</li><li>2-4 options per question. Each option&#x27;s description states the trade-off in one sentence: what it costs, what it buys.</li><li>Do not batch. A wall of nineteen questions is unanswerable; one question with its context attached is.</li><li>Wait for the answer before moving to the next.</li><li>If a decision has no enumerable options and is genuinely free-text, offer the lean against &quot;something else&quot; and let the freeform answer carry it.</li></ul>
+<p>In Claude Code this is the one place an interactive picker earns its keep - <code>AskUserQuestion</code> with previews is the delivery mechanism. In any other agent, ask in plain text and wait.</p>
+<h4>4. Write the resolutions back</h4>
+<ul><li><strong>File source:</strong> rewrite the open-decisions section in place. Retitle it <code>Decisions (resolved YYYY-MM-DD)</code> and give each decision one row: the bolded resolution, plus a one-line consequence note where the answer overrode the lean (mark it &quot;overrides the lean&quot; - future you will want to know the recommendation lost). If an answer creates a new follow-on question, add it as a clearly marked open item rather than silently resolving it.</li><li><strong>PR or issue source:</strong> append a <code>## Decisions (YYYY-MM-DD)</code> section via <code>gh pr edit --body</code> or <code>gh issue comment</code>.</li><li><strong>Conversation source:</strong> there is no doc to edit. Print the resolved table and offer exactly one save target, only if an obvious home exists.</li></ul>
+<p>Never touch any other part of the doc. Preserve its formatting conventions: tables stay tables, prose stays prose.</p>
+<h4>5. Report</h4>
+<p>One line: <code>N decisions resolved (M overrode the lean) -&gt; written to &lt;target&gt;</code>. Then the resolved table. Flag any follow-on questions the answers created. Nothing else.</p>
+<h3>Failure modes</h3>
+<ul><li>Do not answer on the human&#x27;s behalf, even when the lean is obvious. The point of the skill is the lock, and a lock you applied yourself is worth nothing.</li><li>Do not rewrite surrounding prose while editing the decisions section.</li><li>Do not batch questions to save round-trips.</li><li>If the doc is under version control and dirty, say so before writing - the human may want the edit isolated.</li></ul></article>
+</section>
+<section class="block"><h2>More skills</h2><ul class="inline"><li><a href="/skills/pre-commit-review"><code>/pre-commit-review</code></a></li><li><a href="/skills/merge-conflict-walkthrough"><code>/merge-conflict-walkthrough</code></a></li><li><a href="/skills/rebase-plan"><code>/rebase-plan</code></a></li><li><a href="/skills/branch-cleanup"><code>/branch-cleanup</code></a></li><li><a href="/skills/wiring"><code>/wiring</code></a></li><li><a href="/skills/log-issue"><code>/log-issue</code></a></li><li><a href="/skills/fix-cluster"><code>/fix-cluster</code></a></li><li><a href="/skills/best-of-both"><code>/best-of-both</code></a></li><li><a href="/skills/cron-staleness"><code>/cron-staleness</code></a></li><li><a href="/skills/explain"><code>/explain</code></a></li><li><a href="/skills/notes-to-ideas"><code>/notes-to-ideas</code></a></li><li><a href="/skills/remember"><code>/remember</code></a></li></ul></section>
+<section id="newsletter" class="newsletter-band"><div class="newsletter">
+    <div><h2>Get new skills by email</h2>
+    <p>What I'm building with AI coding agents, what broke, and what I'd do differently. Straight to your inbox.</p></div>
+    <div>
+    <form action="https://app.kit.com/forms/8058199/subscriptions" method="post" class="seva-form formkit-form signup" data-sv-form="8058199" data-uid="4914fa2338" data-format="inline" data-version="5" data-options='{"settings": {"after_subscribe": {"action": "message", "success_message": "Thanks. Check your inbox to confirm your subscription.", "redirect_url": ""}, "recaptcha": {"enabled": false}}, "version": "5"}' onsubmit="window.plausible &amp;&amp; plausible('Newsletter Signup', {props: {page: location.pathname}})">
+        <ul class="formkit-alert formkit-alert-error" data-element="errors" data-group="alert"></ul>
+        <div data-element="fields" class="seva-fields formkit-fields">
+            <label class="sr" for="nl-email">Email address</label>
+            <input id="nl-email" class="formkit-input" name="email_address" type="email" placeholder="Email address" autocomplete="email" required>
+            <button type="submit" data-element="submit" class="formkit-submit"><span>Subscribe</span></button>
+        </div>
+    </form>
+    <script src="https://f.convertkit.com/ckjs/ck.5.js" async></script>
+    <p class="muted small">Unsubscribe any time. Or read the archive at <a href="https://newsletter.bryancollins.com">newsletter.bryancollins.com</a>.</p>
+</div></div>
+</section>
+</main>
+<footer class="site-footer">
+    <p><a href="https://www.youtube.com/channel/UCglNILz3uBqPer5EMJ_pzVg">YouTube</a> · <a href="https://github.com/bryancollins99">GitHub</a> · <a href="https://www.linkedin.com/in/bryancollins99/">LinkedIn</a> · <a href="https://substack.com/@bryancollins">Substack</a> · <a href="/products">Products</a> · <a href="/mba-frameworks">Strategy tools</a> · <a href="/contact">Contact</a></p>
+    <p class="muted">© 2026 Bryan Collins · <a href="/privacy">Privacy</a> · <a href="/terms">Terms</a></p>
+</footer>
+</body>
+</html>

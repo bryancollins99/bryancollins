@@ -2,466 +2,60 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Projects — Bryan Collins</title>
-    <meta name="description" content="Explore my websites, books, courses, and coaching programs for writers and readers.">
-    
-    <!-- Favicon -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Projects · Bryan Collins</title>
+    <meta name="description" content="Sites and data products built and run by Bryan Collins: Vendors.ie, Tenderwatch.ie, Leinster Insider and more.">
+    <meta name="author" content="Bryan Collins">
+    <link rel="canonical" href="https://bryancollins.com/projects">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://bryancollins.com/projects">
+    <meta property="og:title" content="Projects · Bryan Collins">
+    <meta property="og:description" content="Sites and data products built and run by Bryan Collins: Vendors.ie, Tenderwatch.ie, Leinster Insider and more.">
+    <meta property="og:image" content="https://bryancollins.com/resources/bryan-collins.jpeg">
+    <meta name="twitter:card" content="summary">
+    <meta name="theme-color" media="(prefers-color-scheme: light)" content="#fdfdfc">
+    <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#121211">
     <link rel="icon" type="image/svg+xml" href="/favicon.svg">
-
-    <link rel="preload" as="style" href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" onload="this.onload=null;this.rel='stylesheet'">
-    <noscript><link rel="stylesheet" href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css"></noscript>
-    <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" onload="this.onload=null;this.rel='stylesheet'">
-    <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"></noscript>
-    
-    <!-- Privacy-friendly analytics by Plausible -->
+    <link rel="stylesheet" href="/assets/hub.css">
     <script async src="https://stats.bryancollins.com/js/pa-bvsz2TfQenbKYMWpBJ7eS.js"></script>
     <script>
       window.plausible=window.plausible||function(){(plausible.q=plausible.q||[]).push(arguments)},plausible.init=plausible.init||function(i){plausible.o=i||{}};
       plausible.init()
     </script>
-    
-    <style>
-        html {
-            overflow-y: scroll;
-        }
-        .nav-bar {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-        }
-
-        body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            line-height: 1.6;
-            background-color: #EDEDEE;
-            color: #1B1B1D;
-        }
-        .nav-bar {
-            background: #000000;
-            border-bottom: 1px solid #333;
-        }
-        .nav-link {
-            color: white;
-            padding: 0.5rem 1rem;
-            text-decoration: none;
-            transition: color 0.2s;
-        }
-        .nav-link:hover {
-            color: #FFDE59;
-        }
-        .hero-gradient {
-            background: linear-gradient(135deg, #000000 0%, #1a1a1a 100%);
-        }
-        .card {
-            background: white;
-            border-radius: 8px;
-            padding: 2rem;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-            transition: transform 0.2s, box-shadow 0.2s;
-        }
-        .card:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 4px 16px rgba(0,0,0,0.15);
-        }
-        .icon-yellow {
-            color: #FFDE59;
-        }
-        .badge {
-            background: #FFDE59;
-            color: #000;
-            padding: 0.25rem 0.75rem;
-            border-radius: 20px;
-            font-size: 0.875rem;
-            font-weight: 600;
-            display: inline-block;
-            margin-bottom: 1rem;
-        }
-        .section-title {
-            font-size: 2rem;
-            font-weight: 700;
-            margin-bottom: 1rem;
-            color: #000000;
-        }
-        /* Mobile Navigation */
-        .mobile-menu-button {
-            display: none;
-            color: white;
-            font-size: 1.5rem;
-            cursor: pointer;
-            background: none;
-            border: none;
-            padding: 0.5rem;
-        }
-        .desktop-nav {
-            display: flex;
-            gap: 1.5rem;
-        }
-        .mobile-nav {
-            display: none;
-            flex-direction: column;
-            position: absolute;
-            top: 100%;
-            left: 0;
-            right: 0;
-            background: #000000;
-            border-top: 1px solid #333;
-            padding: 1rem;
-        }
-        .mobile-nav.active {
-            display: flex;
-        }
-        .mobile-nav .nav-link {
-            padding: 0.75rem 1rem;
-            border-bottom: 1px solid #333;
-        }
-        @media (max-width: 768px) {
-            .mobile-menu-button {
-                display: block;
-            }
-            .desktop-nav {
-                display: none;
-            }
-        }
-    </style>
-    <link rel="canonical" href="https://bryancollins.com/projects.html">
-    <!-- Breadcrumb Schema -->
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "BreadcrumbList",
-      "itemListElement": [
-        {
-          "@type": "ListItem",
-          "position": 1,
-          "name": "Home",
-          "item": "https://bryancollins.com/"
-        },
-        {
-          "@type": "ListItem",
-          "position": 2,
-          "name": "Projects",
-          "item": "https://bryancollins.com/projects.html"
-        }
-      ]
-    }
-    </script>
 </head>
 <body>
-        <!-- Navigation -->
-    <nav class="nav-bar sticky top-0 z-50">
-        <div class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between relative">
-            <a href="/index.html" class="text-white font-bold text-xl">Bryan Collins</a>
-            <button class="mobile-menu-button" id="mobileMenuButton" aria-label="Toggle menu">
-                <i class="fas fa-bars"></i>
-            </button>
-            <div class="desktop-nav">
-                <a href="/mba-frameworks.html" class="nav-link">Tools</a>
-                <a href="/projects.html" class="nav-link">Projects</a>
-                <a href="/work-with-me.html" class="nav-link text-yellow-400">Hire Me</a>
-                <a href="/gpts.html" class="nav-link">GPTs</a>
-                <a href="/books.html" class="nav-link">Books</a>
-                <a href="/now.html" class="nav-link">Now</a>
-                <a href="/contact.html" class="nav-link">Contact</a>
-                <a href="https://newsletter.bryancollins.com" class="nav-link">Newsletter</a>
-            </div>
-            <div class="mobile-nav" id="mobileNav">
-                <a href="/mba-frameworks.html" class="nav-link">Tools</a>
-                <a href="/projects.html" class="nav-link">Projects</a>
-                <a href="/work-with-me.html" class="nav-link" style="color: #FFDE59;">Hire Me</a>
-                <a href="/gpts.html" class="nav-link">GPTs</a>
-                <a href="/books.html" class="nav-link">Books</a>
-                <a href="/now.html" class="nav-link">Now</a>
-                <a href="/contact.html" class="nav-link">Contact</a>
-                <a href="https://newsletter.bryancollins.com" class="nav-link">Newsletter</a>
-            </div>
+<a class="skip" href="#content">Skip to content</a>
+<header class="site-header">
+    <a class="brand" href="/">Bryan Collins</a>
+    <nav aria-label="Main"><a href="/videos">Videos</a><a href="/projects">Projects</a><a href="/skills/">Skills</a><a href="/books">Books</a><a href="/work-with-me">Work</a><a href="/#newsletter">Newsletter</a></nav>
+</header>
+<main id="content">
+<section class="hero">
+    <h1>Projects</h1>
+    <p class="lede">The sites and products I build and run. The code for the businesses stays private; the reusable parts are <a href="/skills/">open source</a>.</p>
+</section>
+<section class="block"><p class="group-title">Running now</p><ul class="grid"><li class="card"><h3><a href="https://vendors.ie">Vendors.ie</a></h3><span class="host">vendors.ie</span><p>The dataset of business software available in Ireland. Verified Irish vendors, compliance mapped across Revenue, PAYE, GDPR and Irish bank feeds, re-checked weekly.</p><a class="more" href="https://vendors.ie">Visit site</a></li><li class="card"><h3><a href="https://tenderwatch.ie">Tenderwatch.ie</a></h3><span class="host">tenderwatch.ie</span><p>Built for Irish SMEs bidding for their first public contracts. Live tender feed, a plain-English jargon translator, bid or no-bid scoring and readiness checks.</p><a class="more" href="https://tenderwatch.ie">Visit site</a></li><li class="card"><h3><a href="https://leinsterinsider.com">Leinster Insider</a></h3><span class="host">leinsterinsider.com</span><p>Leinster town by town: what to do, and what it actually costs to live there, from official house prices, rents and yields.</p><a class="more" href="https://leinsterinsider.com">Visit site</a></li><li class="card"><h3><a href="https://becomeawriter.com">becomeawriter.com</a></h3><span class="host">becomeawriter.com</span><p>Freelance writing and content-marketing jobs from 14 boards and career pages. Deduplicated, scam-filtered, pay listed first, published every Tuesday.</p><a class="more" href="https://becomeawriter.com">Visit site</a></li><li class="card"><h3><a href="https://aiflashreport.com">AI Flash Report</a></h3><span class="host">aiflashreport.com</span><p>A tracker for frontier AI model releases, with benchmarks, pricing and launch coverage.</p><a class="more" href="https://aiflashreport.com">Visit site</a></li><li class="card"><h3><a href="https://wellkept.ie">Wellkept</a></h3><span class="host">wellkept.ie</span><p>A one-off website health check for Irish small businesses. Speed, security, email delivery, broken forms and what Google sees, for a flat fee.</p><a class="more" href="https://wellkept.ie">Visit site</a></li></ul>
+<p class="group-title">Built and still live</p><ul class="grid"><li class="card"><h3><a href="https://becomeawritertoday.com">Become a Writer Today</a></h3><span class="host">becomeawritertoday.com</span><p>The site I built and ran for most of my career. Now a set of free tools for writers: living databases of contests, literary magazines and residencies, word banks and an editing sandbox.</p><a class="more" href="https://becomeawritertoday.com">Visit site</a></li><li class="card"><h3><a href="https://promptwritingstudio.com">Prompt Writing Studio</a></h3><span class="host">promptwritingstudio.com</span><p>Working guides and templates for Claude Code, MCP, skills and sub-agents.</p><a class="more" href="https://promptwritingstudio.com">Visit site</a></li><li class="card"><h3><a href="https://readingcurator.com">Reading Curator</a></h3><span class="host">readingcurator.com</span><p>Book discovery: authors similar to the ones you like, and curated reading lists.</p><a class="more" href="https://readingcurator.com">Visit site</a></li><li class="card"><h3><a href="https://fluentatdesk.com">FluentAtDesk</a></h3><span class="host">fluentatdesk.com</span><p>Templates and tools for professionals who write at work in their second language.</p><a class="more" href="https://fluentatdesk.com">Visit site</a></li><li class="card"><h3><a href="https://mytriathloncalculator.com">My Triathlon Calculator</a></h3><span class="host">mytriathloncalculator.com</span><p>Free race-day calculators for triathletes: sweat rate, electrolytes, carb timing and pacing.</p><a class="more" href="https://mytriathloncalculator.com">Visit site</a></li><li class="card"><h3><a href="https://glitchtextgenerator.com">Glitch Text Generator</a></h3><span class="host">glitchtextgenerator.com</span><p>A small, silly Zalgo text tool. Proof that not everything needs a business model.</p><a class="more" href="https://glitchtextgenerator.com">Visit site</a></li></ul></section>
+<section id="newsletter" class="newsletter-band"><div class="newsletter">
+    <div><h2>Newsletter</h2>
+    <p>What I'm building with AI coding agents, what broke, and what I'd do differently. Straight to your inbox.</p></div>
+    <div>
+    <form action="https://app.kit.com/forms/8058199/subscriptions" method="post" class="seva-form formkit-form signup" data-sv-form="8058199" data-uid="4914fa2338" data-format="inline" data-version="5" data-options='{"settings": {"after_subscribe": {"action": "message", "success_message": "Thanks. Check your inbox to confirm your subscription.", "redirect_url": ""}, "recaptcha": {"enabled": false}}, "version": "5"}' onsubmit="window.plausible &amp;&amp; plausible('Newsletter Signup', {props: {page: location.pathname}})">
+        <ul class="formkit-alert formkit-alert-error" data-element="errors" data-group="alert"></ul>
+        <div data-element="fields" class="seva-fields formkit-fields">
+            <label class="sr" for="nl-email">Email address</label>
+            <input id="nl-email" class="formkit-input" name="email_address" type="email" placeholder="Email address" autocomplete="email" required>
+            <button type="submit" data-element="submit" class="formkit-submit"><span>Subscribe</span></button>
         </div>
-    </nav>
-
-    <!-- Hero Section -->
-    <header class="hero-gradient text-white py-16 px-4">
-        <div class="max-w-4xl mx-auto text-center">
-            <h1 class="text-5xl font-extrabold mb-4 leading-tight">Projects & Websites</h1>
-            <p class="text-xl opacity-90">Sites and platforms I've built for writers, creators, and entrepreneurs.</p>
-        </div>
-    </header>
-
-    <!-- Websites -->
-    <section class="py-16 px-4">
-        <div class="max-w-6xl mx-auto">
-            <h2 class="section-title mb-8">🌐 Websites</h2>
-            <div class="grid md:grid-cols-2 gap-8">
-                <div class="card">
-                    <span class="badge">PRIMARY</span>
-                    <h3 class="text-2xl font-bold mb-2">Become a Writer Today</h3>
-                    <p class="text-gray-700 mb-4">The #1 resource for writers and content creators. Articles, courses, and resources to help you build a successful writing career.</p>
-                    <div class="mb-4">
-                        <i class="fas fa-users text-sm text-gray-600"></i>
-                        <span class="text-sm text-gray-600 ml-1">100,000+ monthly readers</span>
-                    </div>
-                    <a href="https://becomeawritertoday.com" target="_blank" class="text-black font-semibold hover:underline inline-flex items-center">
-                        Visit site <i class="fas fa-external-link-alt ml-2 text-sm"></i>
-                    </a>
-                </div>
-
-                <div class="card">
-                    <span class="badge">COURSE</span>
-                    <h3 class="text-2xl font-bold mb-2">Prompt Writing Studio</h3>
-                    <p class="text-gray-700 mb-4">Master AI prompt writing with expert-crafted templates, frameworks, and strategies. Complete course with 100+ templates.</p>
-                    <div class="mb-4">
-                        <i class="fas fa-dollar-sign text-sm text-gray-600"></i>
-                        <span class="text-sm text-gray-600 ml-1">Enrollment currently closed</span>
-                    </div>
-                    <a href="https://promptwritingstudio.com" target="_blank" class="text-black font-semibold hover:underline inline-flex items-center">
-                        Learn more <i class="fas fa-external-link-alt ml-2 text-sm"></i>
-                    </a>
-                </div>
-
-                <div class="card">
-                    <span class="badge">AI NEWS</span>
-                    <h3 class="text-2xl font-bold mb-2">AI Flash Report</h3>
-                    <p class="text-gray-700 mb-4">Stay updated with the latest AI news, tools, and developments. Curated insights for busy professionals.</p>
-                    <div class="mb-4">
-                        <i class="fas fa-clock text-sm text-gray-600"></i>
-                        <span class="text-sm text-gray-600 ml-1">Daily updates</span>
-                    </div>
-                    <a href="https://aiflashreport.com" target="_blank" class="text-black font-semibold hover:underline inline-flex items-center">
-                        Read latest <i class="fas fa-external-link-alt ml-2 text-sm"></i>
-                    </a>
-                </div>
-
-                <div class="card">
-                    <span class="badge">CRYPTO NEWS</span>
-                    <h3 class="text-2xl font-bold mb-2">Crypto Flash Report</h3>
-                    <p class="text-gray-700 mb-4">Lightning-fast blockchain and cryptocurrency news. Daily market updates, DeFi insights, and breaking crypto developments.</p>
-                    <div class="mb-4">
-                        <i class="fas fa-bitcoin text-sm text-gray-600"></i>
-                        <span class="text-sm text-gray-600 ml-1">Daily crypto updates</span>
-                    </div>
-                    <a href="https://cryptoflashreport.com" target="_blank" class="text-black font-semibold hover:underline inline-flex items-center">
-                        Read latest <i class="fas fa-external-link-alt ml-2 text-sm"></i>
-                    </a>
-                </div>
-
-                <div class="card">
-                    <span class="badge">TOOL</span>
-                    <h3 class="text-2xl font-bold mb-2">PromptSnips</h3>
-                    <p class="text-gray-700 mb-4">Share and discover AI prompts. A tool for writers to save, organize, and share their best prompts.</p>
-                    <div class="mb-4">
-                        <i class="fas fa-lightbulb text-sm text-gray-600"></i>
-                        <span class="text-sm text-gray-600 ml-1">AI Prompt Library</span>
-                    </div>
-                    <a href="https://promptsnips.com" target="_blank" class="text-black font-semibold hover:underline inline-flex items-center">
-                        Try it now <i class="fas fa-external-link-alt ml-2 text-sm"></i>
-                    </a>
-                </div>
-
-                <div class="card">
-                    <span class="badge">FITNESS</span>
-                    <h3 class="text-2xl font-bold mb-2">My Triathlon Calculator</h3>
-                    <p class="text-gray-700 mb-4">Training tools and calculators for triathletes to track progress and plan races.</p>
-                    <div class="mb-4">
-                        <i class="fas fa-running text-sm text-gray-600"></i>
-                        <span class="text-sm text-gray-600 ml-1">Triathlon Training</span>
-                    </div>
-                    <a href="https://mytriathloncalculator.com" target="_blank" class="text-black font-semibold hover:underline inline-flex items-center">
-                        Check it out <i class="fas fa-external-link-alt ml-2 text-sm"></i>
-                    </a>
-                </div>
-
-                <div class="card">
-                    <span class="badge">BOOKS</span>
-                    <h3 class="text-2xl font-bold mb-2">Reading Curator</h3>
-                    <p class="text-gray-700 mb-4">Book discovery platform with AI-powered recommendations, author profiles, and comprehensive genre guides for readers.</p>
-                    <div class="mb-4">
-                        <i class="fas fa-book-reader text-sm text-gray-600"></i>
-                        <span class="text-sm text-gray-600 ml-1">Book Discovery</span>
-                    </div>
-                    <a href="https://readingcurator.com" target="_blank" class="text-black font-semibold hover:underline inline-flex items-center">
-                        Discover books <i class="fas fa-external-link-alt ml-2 text-sm"></i>
-                    </a>
-                </div>
-
-                <div class="card">
-                    <span class="badge">B2B</span>
-                    <h3 class="text-2xl font-bold mb-2">Vendors.ie</h3>
-                    <p class="text-gray-700 mb-4">Irish B2B software comparison site helping businesses find and compare vendors across accounting, CRM, HR, and more.</p>
-                    <div class="mb-4">
-                        <i class="fas fa-store text-sm text-gray-600"></i>
-                        <span class="text-sm text-gray-600 ml-1">Software Directory</span>
-                    </div>
-                    <a href="https://vendors.ie" target="_blank" class="text-black font-semibold hover:underline inline-flex items-center">
-                        Compare vendors <i class="fas fa-external-link-alt ml-2 text-sm"></i>
-                    </a>
-                </div>
-
-                <div class="card">
-                    <span class="badge">PROCUREMENT</span>
-                    <h3 class="text-2xl font-bold mb-2">Tenderwatch.ie</h3>
-                    <p class="text-gray-700 mb-4">Irish public procurement monitor that surfaces the latest government tenders and framework opportunities for SMEs.</p>
-                    <div class="mb-4">
-                        <i class="fas fa-gavel text-sm text-gray-600"></i>
-                        <span class="text-sm text-gray-600 ml-1">Tender Intelligence</span>
-                    </div>
-                    <a href="https://tenderwatch.ie" target="_blank" class="text-black font-semibold hover:underline inline-flex items-center">
-                        Browse tenders <i class="fas fa-external-link-alt ml-2 text-sm"></i>
-                    </a>
-                </div>
-
-                <div class="card">
-                    <span class="badge">LOCAL NEWS</span>
-                    <h3 class="text-2xl font-bold mb-2">Leinster Insider</h3>
-                    <p class="text-gray-700 mb-4">Local news, events, and stories from across Leinster — covering what's happening on your doorstep.</p>
-                    <div class="mb-4">
-                        <i class="fas fa-newspaper text-sm text-gray-600"></i>
-                        <span class="text-sm text-gray-600 ml-1">Regional Publication</span>
-                    </div>
-                    <a href="https://leinsterinsider.com" target="_blank" class="text-black font-semibold hover:underline inline-flex items-center">
-                        Read Leinster Insider <i class="fas fa-external-link-alt ml-2 text-sm"></i>
-                    </a>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Coaching & Consulting -->
-    <section class="py-16 px-4">
-        <div class="max-w-4xl mx-auto">
-            <div class="card text-center">
-                <i class="fas fa-phone icon-yellow text-4xl mb-4"></i>
-                <h2 class="section-title mb-4">1-on-1 Coaching</h2>
-                <p class="text-xl text-gray-700 mb-6">Get personalized guidance on content strategy, AI integration, and building your creator business.</p>
-                <a href="https://clarity.fm/bryancollins" target="_blank" class="inline-flex items-center bg-black text-white px-6 py-3 rounded-lg font-semibold hover:bg-gray-800 transition">
-                    Book a call on Clarity.fm <i class="fas fa-external-link-alt ml-2"></i>
-                </a>
-            </div>
-        </div>
-    </section>
-
-    <!-- Social & Newsletter -->
-    <section class="py-16 px-4 bg-white">
-        <div class="max-w-4xl mx-auto">
-            <div class="card text-center">
-                <h2 class="section-title mb-6">Connect & Subscribe</h2>
-                <div class="grid md:grid-cols-2 gap-6 mb-8">
-                    <div>
-                        <i class="fab fa-youtube icon-yellow text-3xl mb-3"></i>
-                        <h3 class="font-bold mb-2">YouTube Channel</h3>
-                        <p class="text-gray-700 mb-3">Writing tips, AI tutorials, and creator strategies</p>
-                        <a href="https://www.youtube.com/channel/UCglNILz3uBqPer5EMJ_pzVg" target="_blank" class="text-black font-semibold hover:underline">
-                            Subscribe →
-                        </a>
-                    </div>
-                    <div>
-                        <i class="fas fa-envelope icon-yellow text-3xl mb-3"></i>
-                        <h3 class="font-bold mb-2">Newsletter</h3>
-                        <p class="text-gray-700 mb-3">MBA frameworks, AI prompts, and strategic insights several times a week</p>
-                        <a href="/newsletter.html" class="text-black font-semibold hover:underline">
-                            Join 15,000+ subscribers →
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-        <!-- Footer -->
-    <footer class="bg-black text-white py-12 px-4">
-        <div class="max-w-6xl mx-auto">
-            <!-- Footer Links -->
-            <div class="grid md:grid-cols-4 gap-8 mb-8">
-                <!-- Tools -->
-                <div>
-                    <h3 class="font-bold text-lg mb-4 text-yellow-400">MBA Frameworks</h3>
-                    <ul class="space-y-2 text-sm">
-                        <li><a href="/ansoff-matrix.html" class="hover:text-yellow-400">ANSOFF Matrix</a></li>
-                        <li><a href="/swot-analysis.html" class="hover:text-yellow-400">SWOT Analysis</a></li>
-                        <li><a href="/porters-five-forces.html" class="hover:text-yellow-400">Porter's Five Forces</a></li>
-                        <li><a href="/mba-frameworks.html" class="hover:text-yellow-400">View All Tools →</a></li>
-                    </ul>
-                </div>
-                
-                <!-- Calculators -->
-                <div>
-                    <h3 class="font-bold text-lg mb-4 text-yellow-400">Calculators</h3>
-                    <ul class="space-y-2 text-sm">
-                        <li><a href="/burn-rate-calculator.html" class="hover:text-yellow-400">Burn Rate Calculator</a></li>
-                        <li><a href="/break-even-calculator.html" class="hover:text-yellow-400">Break-Even Calculator</a></li>
-                        <li><a href="/email-roi-calculator.html" class="hover:text-yellow-400">Email ROI Calculator</a></li>
-                        <li><a href="/btc-dca-calculator.html" class="hover:text-yellow-400">BTC DCA Calculator</a></li>
-                        <li><a href="/freelance-rate-calculator.html" class="hover:text-yellow-400">Freelance Rate Calculator</a></li>
-                        <li><a href="/position-sizing-calculator.html" class="hover:text-yellow-400">Position Sizing Calculator</a></li>
-                    </ul>
-                </div>
-                
-                <!-- Resources -->
-                <div>
-                    <h3 class="font-bold text-lg mb-4 text-yellow-400">Resources</h3>
-                    <ul class="space-y-2 text-sm">
-                        <li><a href="/gpts.html" class="hover:text-yellow-400">Custom GPTs</a></li>
-                        <li><a href="/projects.html" class="hover:text-yellow-400">Projects</a></li>
-                        <li><a href="/books.html" class="hover:text-yellow-400">Books</a></li>
-                        <li><a href="https://newsletter.bryancollins.com" class="hover:text-yellow-400">Newsletter</a></li>
-                    </ul>
-                </div>
-                
-                <!-- Connect -->
-                <div>
-                    <h3 class="font-bold text-lg mb-4 text-yellow-400">Connect</h3>
-                    <ul class="space-y-2 text-sm">
-                        <li><a href="/now.html" class="hover:text-yellow-400">What I'm Doing Now</a></li>
-                        <li><a href="/contact.html" class="hover:text-yellow-400">Contact</a></li>
-                        <li><a href="https://clarity.fm/bryancollins" target="_blank" rel="noopener" class="hover:text-yellow-400">Book a Call</a></li>
-                        <li><a href="/work-with-me.html" class="hover:text-yellow-400">Work With Me</a></li>
-                    </ul>
-                </div>
-            </div>
-            
-            <!-- Social & Copyright -->
-            <div class="text-center border-t border-gray-700 pt-8">
-                <div class="flex gap-6 justify-center mb-4">
-                    <a href="https://www.youtube.com/channel/UCglNILz3uBqPer5EMJ_pzVg" target="_blank" rel="noopener" aria-label="YouTube channel - MBA frameworks and writing tutorials" class="hover:text-yellow-400"><i class="fab fa-youtube text-2xl"></i></a>
-                    <a href="https://www.linkedin.com/in/bryancollins99/" target="_blank" rel="noopener" aria-label="LinkedIn profile - Connect with Bryan Collins" class="hover:text-yellow-400"><i class="fab fa-linkedin text-2xl"></i></a>
-                    <a href="https://github.com/bryancollins99" target="_blank" rel="noopener" aria-label="GitHub profile - Open source projects" class="hover:text-yellow-400"><i class="fab fa-github text-2xl"></i></a>
-                    <a href="https://www.amazon.com/stores/Bryan-Collins/author/B00KPFFYU6" target="_blank" rel="noopener" aria-label="Amazon author page - USA Today bestselling books" class="hover:text-yellow-400"><i class="fab fa-amazon text-2xl"></i></a>
-                    <a href="https://clarity.fm/bryancollins" target="_blank" rel="noopener" aria-label="Book a consulting call on Clarity.fm" class="hover:text-yellow-400"><i class="fas fa-phone text-2xl"></i></a>
-                </div>
-                <div class="flex gap-4 justify-center text-sm text-gray-400 mb-4">
-                    <a href="/privacy.html" class="hover:text-white">Privacy Policy</a>
-                    <span>•</span>
-                    <a href="/terms.html" class="hover:text-white">Terms of Service</a>
-                </div>
-                <p class="text-sm opacity-70">© 2025 Bryan Collins. All rights reserved.</p>
-            </div>
-        </div>
-    </footer>
-    
-    <!-- Mobile Menu Script -->
-    <script>
-        const mobileMenuButton = document.getElementById('mobileMenuButton');
-        const mobileNav = document.getElementById('mobileNav');
-        
-        mobileMenuButton.addEventListener('click', function() {
-            mobileNav.classList.toggle('active');
-            const icon = this.querySelector('i');
-            if (mobileNav.classList.contains('active')) {
-                icon.classList.remove('fa-bars');
-                icon.classList.add('fa-times');
-            } else {
-                icon.classList.remove('fa-times');
-                icon.classList.add('fa-bars');
-            }
-        });
-        
-        // Close menu when clicking a link
-        const mobileLinks = mobileNav.querySelectorAll('.nav-link');
-        mobileLinks.forEach(link => {
-            link.addEventListener('click', function() {
-                mobileNav.classList.remove('active');
-                const icon = mobileMenuButton.querySelector('i');
-                icon.classList.remove('fa-times');
-                icon.classList.add('fa-bars');
-            });
-        });
-    </script>
+    </form>
+    <script src="https://f.convertkit.com/ckjs/ck.5.js" async></script>
+    <p class="muted small">Unsubscribe any time. Or read the archive at <a href="https://newsletter.bryancollins.com">newsletter.bryancollins.com</a>.</p>
+</div></div>
+</section>
+</main>
+<footer class="site-footer">
+    <p><a href="https://www.youtube.com/channel/UCglNILz3uBqPer5EMJ_pzVg">YouTube</a> · <a href="https://github.com/bryancollins99">GitHub</a> · <a href="https://www.linkedin.com/in/bryancollins99/">LinkedIn</a> · <a href="https://substack.com/@bryancollins">Substack</a> · <a href="/products">Products</a> · <a href="/mba-frameworks">Strategy tools</a> · <a href="/contact">Contact</a></p>
+    <p class="muted">© 2026 Bryan Collins · <a href="/privacy">Privacy</a> · <a href="/terms">Terms</a></p>
+</footer>
 </body>
 </html>
-
