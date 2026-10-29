@@ -64,11 +64,11 @@ const LANES = {
 // -- Same-origin gate ---------------------------------------------------------
 const ALLOWED_HOSTS = new Set([
   "bryancollins.com", "www.bryancollins.com", "newsletter.bryancollins.com",
-  "join.bryancollins.com", "mylandingpagegenerator.netlify.app", "localhost", "127.0.0.1",
+  "join.bryancollins.com", "bryancollins.netlify.app", "localhost", "127.0.0.1",
 ]);
 function allowedHost(h) {
-  // Deploy previews / branch deploys: <context>--mylandingpagegenerator.netlify.app
-  return ALLOWED_HOSTS.has(h) || h.endsWith("--mylandingpagegenerator.netlify.app");
+  // Deploy previews / branch deploys: <context>--bryancollins.netlify.app (site 1571a0c8)
+  return ALLOWED_HOSTS.has(h) || h.endsWith("--bryancollins.netlify.app");
 }
 function originAllowed(req) {
   for (const name of ["origin", "referer"]) {
