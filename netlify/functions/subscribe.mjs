@@ -147,7 +147,9 @@ async function upsertContact(email, lane) {
   await fetch(`${RESEND}/contacts/${existing.id}`, {
     method: "PATCH", headers: auth(), body: JSON.stringify({ properties: { lane } }),
   }).catch(e => console.warn("lane property update failed (non-fatal):", e?.message));
-  return { ok: true, isNew: true };
+  // Someone who left every list (unsubscribed account-wide) cannot receive a broadcast,
+  // so they are not a new reader: no welcome, and no Email Signup in the kill-gate metric.
+  return { ok: true, isNew: !existing.unsubscribed };
 }
 
 function deliveryHtml(asset) {

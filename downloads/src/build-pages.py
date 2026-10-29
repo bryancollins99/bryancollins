@@ -246,11 +246,24 @@ def download_block():
       document.addEventListener('DOMContentLoaded', function () {{
         var el = document.getElementById('ty-hero-sub');
         if (el) el.textContent = "You're subscribed. My next email is on its way.";
+        var inbox = document.getElementById('ty-inbox');
+        if (inbox) inbox.hidden = true;
       }});
       return;
     }}
-    // Every other non-PDF lane (the AI prompts pages, LinkedIn hooks, MBA, POC, ChatGPT),
-    // and 'none' from the older stamp, keeps today's page: no panel, PWS pitch visible.
+    // These lanes get no download email yet (their Kit incentive is unknown), so the
+    // page must not promise one. The AI prompts link further down still works.
+    if (['linkedin-hooks', 'mba', 'poc', 'chatgpt'].indexOf(lane) !== -1) {{
+      document.addEventListener('DOMContentLoaded', function () {{
+        var el = document.getElementById('ty-hero-sub');
+        if (el) el.textContent = "You're subscribed.";
+        var inbox = document.getElementById('ty-inbox');
+        if (inbox) inbox.hidden = true;
+      }});
+      return;
+    }}
+    // The AI prompts lanes (their email carries the doc) and 'none' from the older
+    // stamp keep today's page: no panel, PWS pitch visible.
     if (lane && !ASSETS[lane]) return;
 
     var picked = lane && ASSETS[lane];
