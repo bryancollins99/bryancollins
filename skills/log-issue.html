@@ -89,15 +89,17 @@ EOF
     <div><h2>Get new skills by email</h2>
     <p>What I'm building with AI coding agents, what broke, and what I'd do differently. Straight to your inbox.</p></div>
     <div>
-    <form action="https://app.kit.com/forms/8058199/subscriptions" method="post" class="seva-form formkit-form signup" data-sv-form="8058199" data-uid="4914fa2338" data-format="inline" data-version="5" data-options='{"settings": {"after_subscribe": {"action": "message", "success_message": "Thanks. Check your inbox to confirm your subscription.", "redirect_url": ""}, "recaptcha": {"enabled": false}}, "version": "5"}' onsubmit="window.plausible &amp;&amp; plausible('Newsletter Signup', {props: {page: location.pathname}})">
-        <ul class="formkit-alert formkit-alert-error" data-element="errors" data-group="alert"></ul>
-        <div data-element="fields" class="seva-fields formkit-fields">
+    <form class="bc-subscribe signup" action="/.netlify/functions/subscribe" method="post">
+        <input type="hidden" name="lane" value="hub">
+        <input type="hidden" name="elapsed" value="">
+        <div style="position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden;" aria-hidden="true"><label>Leave this empty<input type="text" name="website" tabindex="-1" autocomplete="off"></label></div>
+        <div class="signup-fields">
             <label class="sr" for="nl-email">Email address</label>
-            <input id="nl-email" class="formkit-input" name="email_address" type="email" placeholder="Email address" autocomplete="email" required>
-            <button type="submit" data-element="submit" class="formkit-submit"><span>Subscribe</span></button>
+            <input id="nl-email" name="email" type="email" placeholder="Email address" autocomplete="email" required>
+            <button type="submit"><span>Subscribe</span></button>
         </div>
     </form>
-    <script src="https://f.convertkit.com/ckjs/ck.5.js" async></script>
+    <script defer src="/resources/subscribe.js"></script>
     <p class="muted small">Unsubscribe any time. Or read the archive at <a href="https://newsletter.bryancollins.com">newsletter.bryancollins.com</a>.</p>
 </div></div>
 </section>
