@@ -4,6 +4,7 @@
   "description": "Netlify Functions for MBA Tools",
   "dependencies": {
     "@anthropic-ai/sdk": "^0.32.1",
+    "@netlify/blobs": "^8.2.0",
     "node-fetch": "^2.7.0"
   }
 }

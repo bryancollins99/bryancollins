@@ -250,25 +250,28 @@ def page(path, title, desc, body, hub, jsonld=None, depth=0):
 """
 
 
-# Kit's ck.5.js submits the form; a plain no-JS POST is accepted with a 302 but creates no subscriber (tested 2026-10-16).
-KIT_OPTIONS = json.dumps({"settings": {"after_subscribe": {"action": "message", "success_message": "Thanks. Check your inbox to confirm your subscription.", "redirect_url": ""}, "recaptcha": {"enabled": False}}, "version": "5"})
+# Posts to netlify/functions/subscribe.mjs (Resend). Plain HTML POST, works without JS;
+# resources/subscribe.js only stamps `elapsed` for the bot time-trap. `website` is the honeypot.
+HONEYPOT = ('<div style="position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden;" aria-hidden="true">'
+            '<label>Leave this empty<input type="text" name="website" tabindex="-1" autocomplete="off"></label></div>')
 
 
 def newsletter(hub, heading="Newsletter"):
-    f = hub["kit_form"]
     return f"""<section id="newsletter" class="newsletter-band"><div class="newsletter">
     <div><h2>{esc(heading)}</h2>
     <p>What I'm building with AI coding agents, what broke, and what I'd do differently. Straight to your inbox.</p></div>
     <div>
-    <form action="https://app.kit.com/forms/{f['id']}/subscriptions" method="post" class="seva-form formkit-form signup" data-sv-form="{f['id']}" data-uid="{f['uid']}" data-format="inline" data-version="5" data-options='{KIT_OPTIONS}' onsubmit="window.plausible &amp;&amp; plausible('Newsletter Signup', {{props: {{page: location.pathname}}}})">
-        <ul class="formkit-alert formkit-alert-error" data-element="errors" data-group="alert"></ul>
-        <div data-element="fields" class="seva-fields formkit-fields">
+    <form class="bc-subscribe signup" action="/.netlify/functions/subscribe" method="post">
+        <input type="hidden" name="lane" value="hub">
+        <input type="hidden" name="elapsed" value="">
+        {HONEYPOT}
+        <div class="signup-fields">
             <label class="sr" for="nl-email">Email address</label>
-            <input id="nl-email" class="formkit-input" name="email_address" type="email" placeholder="Email address" autocomplete="email" required>
-            <button type="submit" data-element="submit" class="formkit-submit"><span>Subscribe</span></button>
+            <input id="nl-email" name="email" type="email" placeholder="Email address" autocomplete="email" required>
+            <button type="submit"><span>Subscribe</span></button>
         </div>
     </form>
-    <script src="https://f.convertkit.com/ckjs/ck.5.js" async></script>
+    <script defer src="/resources/subscribe.js"></script>
     <p class="muted small">Unsubscribe any time. Or read the archive at <a href="{hub['links']['newsletter']}">newsletter.bryancollins.com</a>.</p>
 </div></div>
 </section>"""

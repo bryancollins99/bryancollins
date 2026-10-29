@@ -19,6 +19,7 @@
   "homepage": "https://github.com/bryancollins99/bryancollins#readme",
   "dependencies": {
     "@anthropic-ai/sdk": "^0.71.0",
+    "@netlify/blobs": "^8.2.0",
     "node-fetch": "^2.7.0"
   }
 }
