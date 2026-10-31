@@ -1,0 +1,57 @@
+name: Kit to Resend weekly sync
+
+# Kit is on its free plan as an intake only. Every Monday, copy its new
+# subscribers into the Resend newsletter list. See scripts/kit_to_resend_sync.py.
+on:
+  schedule:
+    - cron: "0 6 * * 1"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  issues: write
+
+concurrency:
+  group: kit-sync
+  cancel-in-progress: false
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Sync new Kit subscribers to Resend
+        id: sync
+        env:
+          KIT_API_KEY: ${{ secrets.KIT_API_KEY }}
+          RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
+        run: |
+          set +e
+          python3 scripts/kit_to_resend_sync.py | tee sync.log
+          code=${PIPESTATUS[0]}
+          echo "code=$code" >> "$GITHUB_OUTPUT"
+          {
+            echo "### Kit to Resend sync"
+            echo '```'
+            cat sync.log
+            echo '```'
+          } >> "$GITHUB_STEP_SUMMARY"
+          exit $code
+
+      - name: Open an issue if Kit refused the API (free plan?)
+        if: failure() && steps.sync.outputs.code == '3'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh issue create --title "Kit sync: API refused (plan?)" \
+            --body "The weekly Kit to Resend sync got a 401/403 from Kit. The free plan may have lost API access. Fallback: export subscribers as CSV from Kit, then run \`python3 scripts/kit_to_resend_sync.py --csv <file>\` with RESEND_API_KEY set. Run: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
+
+      - name: Save the watermark
+        if: success()
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898299+github-actions[bot]@users.noreply.github.com"
+          git add data/kit-sync-state.json
+          git diff --cached --quiet || git commit -m "Kit sync: update watermark [skip ci]"
+          git push
