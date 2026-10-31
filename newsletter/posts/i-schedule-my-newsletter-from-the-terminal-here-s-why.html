@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>I schedule my newsletter from the terminal (here&#x27;s why) · Bryan Collins</title>
+    <meta name="description" content="Last Tuesday I scheduled 5 newsletter emails in under 3 minutes. Not from the ConvertKit dashboard. Not from some Zapier automation. From my terminal.…">
+    <meta name="author" content="Bryan Collins">
+    <link rel="canonical" href="https://bryancollins.com/newsletter/posts/i-schedule-my-newsletter-from-the-terminal-here-s-why">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://bryancollins.com/newsletter/posts/i-schedule-my-newsletter-from-the-terminal-here-s-why">
+    <meta property="og:title" content="I schedule my newsletter from the terminal (here&#x27;s why) · Bryan Collins">
+    <meta property="og:description" content="Last Tuesday I scheduled 5 newsletter emails in under 3 minutes. Not from the ConvertKit dashboard. Not from some Zapier automation. From my terminal.…">
+    <meta property="og:image" content="https://bryancollins.com/resources/bryan-collins.jpeg">
+    <meta name="twitter:card" content="summary">
+    <meta name="theme-color" media="(prefers-color-scheme: light)" content="#fdfdfc">
+    <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#121211">
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <link rel="stylesheet" href="/assets/hub.css">
+    <script async src="https://stats.bryancollins.com/js/pa-bvsz2TfQenbKYMWpBJ7eS.js"></script>
+    <script>
+      window.plausible=window.plausible||function(){(plausible.q=plausible.q||[]).push(arguments)},plausible.init=plausible.init||function(i){plausible.o=i||{}};
+      plausible.init()
+    </script>
+    <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "I schedule my newsletter from the terminal (here's why)", "datePublished": "2026-03-15", "author": {"@type": "Person", "name": "Bryan Collins"}, "url": "https://bryancollins.com/newsletter/posts/i-schedule-my-newsletter-from-the-terminal-here-s-why"}</script>
+</head>
+<body>
+<a class="skip" href="#content">Skip to content</a>
+<header class="site-header">
+    <a class="brand" href="/">Bryan Collins</a>
+    <nav aria-label="Main"><a href="/videos">Videos</a><a href="/projects">Projects</a><a href="/skills/">Skills</a><a href="/books">Books</a><a href="/work-with-me">Work</a><a href="/#newsletter">Newsletter</a></nav>
+</header>
+<main id="content">
+<article class="block issue">
+    <p class="muted"><a href="/newsletter/archive">Newsletter archive</a> · 15 Mar 2026</p>
+    <h1>I schedule my newsletter from the terminal (here&#x27;s why)</h1>
+    <div class="issue-body">
+<p>Last Tuesday I scheduled 5 newsletter emails in under 3 minutes.</p>
+
+<p>Not from the ConvertKit dashboard. Not from some Zapier automation. From my terminal.</p>
+
+<p>Here's what that looks like:</p>
+
+<p>```</p>
+<p>python3 schedule-newsletter.py --next-slots</p>
+<p>```</p>
+
+<p>That shows me the next 3 open send slots. Then:</p>
+
+<p>```</p>
+<p>python3 schedule-newsletter.py "newsletter-draft-1.md"</p>
+<p>```</p>
+
+<p>It reads the markdown file. Converts it to HTML. Checks which days already have emails queued. Picks the next open slot. Schedules it for 10am. Confirms.</p>
+
+<p>One command per email. No browser. No drag-and-drop editor. No "are you sure?" modals.</p>
+
+<p><strong>Why this matters more than convenience.</strong></p>
+
+<p>The real problem with email dashboards isn't that they're slow. It's that they separate writing from publishing.</p>
+
+<p>You write in Google Docs or Notion. Then you copy it into ConvertKit's editor. Then you fix the formatting that broke. Then you preview. Then you schedule.</p>
+
+<p>That gap between "draft done" and "email scheduled" is where most newsletters die. I'd have 4 drafts sitting in a folder and none of them queued.</p>
+
+<p>Now my drafts are markdown files. My scripts generate them on Friday. I schedule them on Friday. By the time I close my laptop, next week's content is done.</p>
+
+<p><strong>The scheduling script also handles the annoying stuff:</strong></p>
+
+<ul>
+<li>Checks Kit for existing scheduled broadcasts (no double-booking)</li>
+<li>Converts markdown formatting to clean HTML (bold, lists, links)</li>
+<li>Sets preview text from the first line (not the subject)</li>
+<li>Supports draft mode if I want to review in Kit's dashboard first</li>
+<li>Auto-removes the tag from my file after scheduling</li>
+</ul>
+<p>It's one of 6 scripts in the content pipeline I've been building. The others generate the drafts. This one ships them.</p>
+
+<p>I'm packaging the whole system into a repo called The Builder's Pipeline. 6 scripts. $39. One-time.</p>
+
+<p><a href="https://newsletter.becomeawritertoday.com/products/the-builders-pipeline">Get The Builder's Pipeline</a></p>
+
+<p>P.S. The script works with Kit (ConvertKit) via their v4 API. If you use a different email provider, the analyzer scripts still work standalone — they just generate markdown files you can copy into whatever you use.</p>
+    </div>
+    <p class="issue-nav"><a href="/newsletter/posts/i-automated-my-content-calendar-with-6-python-scripts">Older: I automated my content calendar with 6 Python scripts</a> · <a href="/newsletter/posts/i-turned-a-youtube-video-into-a-newsletter-email-in-30-seconds">Newer: I turned a YouTube video into a newsletter email in 30 seconds</a></p>
+</article>
+<section id="newsletter" class="newsletter-band"><div class="newsletter">
+    <div><h2>Get the next issue</h2>
+    <p>What I'm building with AI coding agents, what broke, and what I'd do differently. Straight to your inbox.</p></div>
+    <div>
+    <form class="bc-subscribe signup" action="/.netlify/functions/subscribe" method="post">
+        <input type="hidden" name="lane" value="hub">
+        <input type="hidden" name="elapsed" value="">
+        <div style="position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden;" aria-hidden="true"><label>Leave this empty<input type="text" name="website" tabindex="-1" autocomplete="off"></label></div>
+        <div class="signup-fields">
+            <label class="sr" for="nl-email">Email address</label>
+            <input id="nl-email" name="email" type="email" placeholder="Email address" autocomplete="email" required>
+            <button type="submit"><span>Subscribe</span></button>
+        </div>
+    </form>
+    <script defer src="/resources/subscribe.js"></script>
+    <p class="muted small">Unsubscribe any time. Or read <a href="https://bryancollins.com/newsletter/archive">past issues</a>.</p>
+</div></div>
+</section>
+</main>
+<footer class="site-footer">
+    <p><a href="https://www.youtube.com/channel/UCglNILz3uBqPer5EMJ_pzVg">YouTube</a> · <a href="https://github.com/bryancollins99">GitHub</a> · <a href="https://www.linkedin.com/in/bryancollins99/">LinkedIn</a> · <a href="https://substack.com/@bryancollins">Substack</a> · <a href="/products">Products</a> · <a href="/mba-frameworks">Strategy tools</a> · <a href="/contact">Contact</a></p>
+    <p class="muted">© 2026 Bryan Collins · <a href="/privacy">Privacy</a> · <a href="/terms">Terms</a></p>
+</footer>
+</body>
+</html>

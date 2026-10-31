@@ -178,3 +178,14 @@ th, td { text-align: left; padding: 6px 10px 6px 0; border-bottom: 1px solid var
 .site-footer { background: var(--ink); color: var(--ink-muted); padding: 32px var(--gutter) 40px; margin-top: 64px; font-size: 15px; }
 .site-footer a:hover { color: var(--accent); }
 .site-footer p { margin: 0 0 6px; }
+
+/* newsletter archive (scripts/build-newsletter-archive.py): issues are Kit email HTML,
+   so neutralise their table backgrounds and fixed widths */
+.issue h1 { margin-top: 4px; }
+.issue-body { line-height: 1.7; overflow-wrap: anywhere; }
+.issue-body table, .issue-body td, .issue-body div { background: transparent !important; width: auto !important; max-width: 100% !important; color: inherit !important; }
+.issue-body img { max-width: 100%; height: auto; }
+.issue-nav { margin-top: 32px; display: flex; flex-wrap: wrap; gap: 8px 24px; }
+.archive-list { list-style: none; padding: 0; margin: 0 0 24px; }
+.archive-list li { padding: 8px 0; border-bottom: 1px solid color-mix(in srgb, currentColor 12%, transparent); }
+.archive-list .meta { opacity: .65; font-size: .9em; margin-left: 6px; }

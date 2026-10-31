@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>I asked AI to test itself (it found a bug I missed) · Bryan Collins</title>
+    <meta name="description" content="I&#x27;ve been building software with AI coding assistants for a few months now. Last night I added a Monte Carlo simulation tool to a project. The AI wrote…">
+    <meta name="author" content="Bryan Collins">
+    <link rel="canonical" href="https://bryancollins.com/newsletter/posts/i-asked-ai-to-test-itself-it-found-a-bug-i-missed">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://bryancollins.com/newsletter/posts/i-asked-ai-to-test-itself-it-found-a-bug-i-missed">
+    <meta property="og:title" content="I asked AI to test itself (it found a bug I missed) · Bryan Collins">
+    <meta property="og:description" content="I&#x27;ve been building software with AI coding assistants for a few months now. Last night I added a Monte Carlo simulation tool to a project. The AI wrote…">
+    <meta property="og:image" content="https://bryancollins.com/resources/bryan-collins.jpeg">
+    <meta name="twitter:card" content="summary">
+    <meta name="theme-color" media="(prefers-color-scheme: light)" content="#fdfdfc">
+    <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#121211">
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <link rel="stylesheet" href="/assets/hub.css">
+    <script async src="https://stats.bryancollins.com/js/pa-bvsz2TfQenbKYMWpBJ7eS.js"></script>
+    <script>
+      window.plausible=window.plausible||function(){(plausible.q=plausible.q||[]).push(arguments)},plausible.init=plausible.init||function(i){plausible.o=i||{}};
+      plausible.init()
+    </script>
+    <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "I asked AI to test itself (it found a bug I missed)", "datePublished": "2026-02-20", "author": {"@type": "Person", "name": "Bryan Collins"}, "url": "https://bryancollins.com/newsletter/posts/i-asked-ai-to-test-itself-it-found-a-bug-i-missed"}</script>
+</head>
+<body>
+<a class="skip" href="#content">Skip to content</a>
+<header class="site-header">
+    <a class="brand" href="/">Bryan Collins</a>
+    <nav aria-label="Main"><a href="/videos">Videos</a><a href="/projects">Projects</a><a href="/skills/">Skills</a><a href="/books">Books</a><a href="/work-with-me">Work</a><a href="/#newsletter">Newsletter</a></nav>
+</header>
+<main id="content">
+<article class="block issue">
+    <p class="muted"><a href="/newsletter/archive">Newsletter archive</a> · 20 Feb 2026</p>
+    <h1>I asked AI to test itself (it found a bug I missed)</h1>
+    <div class="issue-body">
+<p>I've been building software with AI coding assistants for a few months now.</p>
+
+<p>Last night I added a Monte Carlo simulation tool to a project. The AI wrote the function, the schema, the docs. Everything looked right.</p>
+
+<p>Then I tried something different.</p>
+
+<p>Instead of eyeballing the diff, I asked the AI: "Import all the modules. Call the new functions. Prove this works."</p>
+
+<p>30 seconds later, the AI reported 7 tools registered instead of 8.</p>
+
+<p>The Monte Carlo handler was fully coded but never wired up. Dead code. It would have failed silently every time someone used it.</p>
+
+<p>Here's what's interesting.</p>
+
+<p>When I asked the AI to "review the code," it said "looks good." Pattern matching. No actual verification.</p>
+
+<p>When I asked it to <em>run</em> the code, import errors and missing connections surfaced immediately.</p>
+
+<p>But then I realized... this is the whole pattern.</p>
+
+<p>AI writes confident-looking code. It compiles. It reads well. But the wiring between components? That's where it drops the ball.</p>
+
+<p>So now I use this prompt before every commit:</p>
+
+<p><em>"Before we commit, verify these changes work:</em></p>
+
+<p><em>1. Import the new modules. Do they load without errors?</em></p>
+<p><em>2. Call the main functions with test data. Do they return what you expect?</em></p>
+<p><em>3. Check integration. Is the new code actually reachable from where it needs to be called?</em></p>
+
+<p><em>Run these as scripts, not a code review."</em></p>
+
+<p>Copy that. Use it with Claude Code, Cursor, Copilot, whatever.</p>
+
+<p>Three checks. 30 seconds. Catches real bugs.</p>
+
+<p>I also learned something about how AI follows instructions. I had a rule in my system prompt: "Silently verify rules before responding."</p>
+
+<p>The AI ignored it. Every time.</p>
+
+<p>I changed it to: "STOP and show the specific rule violation."</p>
+
+<p>Night and day.</p>
+
+<p>Soft instructions get skipped. Concrete, explicit instructions get followed. Same principle for code verification. Same principle for prompts.</p>
+
+<p>If you're using AI to write code, don't just review what it writes.</p>
+
+<p>Ask it to prove it works.</p>
+
+<p>P.S. This works because it forces <em>execution</em>, not <em>opinion</em>. I teach this exact approach to AI prompting inside <a href="https://newsletter.becomeawritertoday.com/products/prompt-writing-studio">Prompt Writing Studio</a> — concrete instructions that get followed, not soft suggestions that get ignored.</p>
+    </div>
+    <p class="issue-nav"><a href="/newsletter/posts/how-i-manage-7-000-notes-with-claude-code">Older: How I manage 7,000 notes with Claude Code</a> · <a href="/newsletter/posts/i-coded-an-ai-endurance-coach-in-30-minutes">Newer: I coded an AI endurance coach in 30 minutes</a></p>
+</article>
+<section id="newsletter" class="newsletter-band"><div class="newsletter">
+    <div><h2>Get the next issue</h2>
+    <p>What I'm building with AI coding agents, what broke, and what I'd do differently. Straight to your inbox.</p></div>
+    <div>
+    <form class="bc-subscribe signup" action="/.netlify/functions/subscribe" method="post">
+        <input type="hidden" name="lane" value="hub">
+        <input type="hidden" name="elapsed" value="">
+        <div style="position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden;" aria-hidden="true"><label>Leave this empty<input type="text" name="website" tabindex="-1" autocomplete="off"></label></div>
+        <div class="signup-fields">
+            <label class="sr" for="nl-email">Email address</label>
+            <input id="nl-email" name="email" type="email" placeholder="Email address" autocomplete="email" required>
+            <button type="submit"><span>Subscribe</span></button>
+        </div>
+    </form>
+    <script defer src="/resources/subscribe.js"></script>
+    <p class="muted small">Unsubscribe any time. Or read <a href="https://bryancollins.com/newsletter/archive">past issues</a>.</p>
+</div></div>
+</section>
+</main>
+<footer class="site-footer">
+    <p><a href="https://www.youtube.com/channel/UCglNILz3uBqPer5EMJ_pzVg">YouTube</a> · <a href="https://github.com/bryancollins99">GitHub</a> · <a href="https://www.linkedin.com/in/bryancollins99/">LinkedIn</a> · <a href="https://substack.com/@bryancollins">Substack</a> · <a href="/products">Products</a> · <a href="/mba-frameworks">Strategy tools</a> · <a href="/contact">Contact</a></p>
+    <p class="muted">© 2026 Bryan Collins · <a href="/privacy">Privacy</a> · <a href="/terms">Terms</a></p>
+</footer>
+</body>
+</html>

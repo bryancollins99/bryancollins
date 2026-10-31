@@ -272,7 +272,7 @@ def newsletter(hub, heading="Newsletter"):
         </div>
     </form>
     <script defer src="/resources/subscribe.js"></script>
-    <p class="muted small">Unsubscribe any time. Or read the archive at <a href="{hub['links']['newsletter']}">newsletter.bryancollins.com</a>.</p>
+    <p class="muted small">Unsubscribe any time. Or read <a href="{hub['links']['newsletter']}">past issues</a>.</p>
 </div></div>
 </section>"""
 

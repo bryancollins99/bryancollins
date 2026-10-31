@@ -1,5 +1,7 @@
 # newsletter.bryancollins.com was Kit's hosted newsletter site (linked from ~811 YouTube
-# descriptions). Kit is retired, so every path on it lands on the Resend signup page.
+# descriptions). Kit is retired: issue URLs map 1:1 to the static archive, anything else
+# lands on the Resend signup page.
+https://newsletter.bryancollins.com/posts/* https://bryancollins.com/newsletter/posts/:splat 301!
 https://newsletter.bryancollins.com/* https://bryancollins.com/newsletter 301!
 
 # Redirects for clean URLs (no file extension)

@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Most people open Claude Code and start typing. Here&#x27;s what I do instead. · Bryan Collins</title>
+    <meta name="description" content="Most people open Claude Code and start typing. Here&#x27;s what I do instead. I&#x27;ve spent the past few months using Claude Code for my AI coding projects. I…">
+    <meta name="author" content="Bryan Collins">
+    <link rel="canonical" href="https://bryancollins.com/newsletter/posts/most-people-open-claude-code-and-start-typing-here-s-what-i-do-instead">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://bryancollins.com/newsletter/posts/most-people-open-claude-code-and-start-typing-here-s-what-i-do-instead">
+    <meta property="og:title" content="Most people open Claude Code and start typing. Here&#x27;s what I do instead. · Bryan Collins">
+    <meta property="og:description" content="Most people open Claude Code and start typing. Here&#x27;s what I do instead. I&#x27;ve spent the past few months using Claude Code for my AI coding projects. I…">
+    <meta property="og:image" content="https://bryancollins.com/resources/bryan-collins.jpeg">
+    <meta name="twitter:card" content="summary">
+    <meta name="theme-color" media="(prefers-color-scheme: light)" content="#fdfdfc">
+    <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#121211">
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <link rel="stylesheet" href="/assets/hub.css">
+    <script async src="https://stats.bryancollins.com/js/pa-bvsz2TfQenbKYMWpBJ7eS.js"></script>
+    <script>
+      window.plausible=window.plausible||function(){(plausible.q=plausible.q||[]).push(arguments)},plausible.init=plausible.init||function(i){plausible.o=i||{}};
+      plausible.init()
+    </script>
+    <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "Most people open Claude Code and start typing. Here's what I do instead.", "datePublished": "2026-05-22", "author": {"@type": "Person", "name": "Bryan Collins"}, "url": "https://bryancollins.com/newsletter/posts/most-people-open-claude-code-and-start-typing-here-s-what-i-do-instead"}</script>
+</head>
+<body>
+<a class="skip" href="#content">Skip to content</a>
+<header class="site-header">
+    <a class="brand" href="/">Bryan Collins</a>
+    <nav aria-label="Main"><a href="/videos">Videos</a><a href="/projects">Projects</a><a href="/skills/">Skills</a><a href="/books">Books</a><a href="/work-with-me">Work</a><a href="/#newsletter">Newsletter</a></nav>
+</header>
+<main id="content">
+<article class="block issue">
+    <p class="muted"><a href="/newsletter/archive">Newsletter archive</a> · 22 May 2026</p>
+    <h1>Most people open Claude Code and start typing. Here&#x27;s what I do instead.</h1>
+    <div class="issue-body">
+<table cellpadding="0" cellspacing="0" style="width:100%;margin:0 auto"><tbody><tr><td><div>
+<h1>Most people open Claude Code and start typing. Here's what I do instead.</h1>
+
+<p>I've spent the past few months using Claude Code for my AI coding projects. I started out with the basic Claude subscription. Then I quickly upgraded to Claude Pro and then Claude Max. I've spent several thousand dollars on Claude Code over the past few months, including my API bills for my apps!</p>
+
+<p>Some of my AI coding projects include:</p>
+
+<ul>
+<li>
+<strong>Wheelhouse</strong>: An app for trading options as part of the wheel (paid for itself after a few weeks!)</li>
+<li>
+<strong>The Operator</strong>: An app for managing training for triathlons in Ireland (fun hobby coding project)</li>
+<li>
+<strong>Vendors.ie</strong>: An Irish business intelligence site (potential new biz)</li>
+</ul>
+
+<p>While building these projects, I made many coding mistakes, but I also learned a few things about refining my AI coding workflow.</p>
+
+<h2>Run /init</h2>
+
+<p>When firing up a new AI project, start with <code>/init</code>. Claude creates a CLAUDE.md file that you (or the AI) can populate with project instructions and guidelines. Claude reads this file automatically every time you start a new session for that project. No more tangents or re-explaining your codebase.</p>
+
+<p>If you don't know what to put in this file? Just get Claude to ask you a couple of questions about your goals and what you're trying to do. It'll help you write.</p>
+
+<p><strong>Pro tip</strong>: CLAUDE.md works at three levels — <code>~/.claude/CLAUDE.md</code> (global, all projects), project root <code>CLAUDE.md</code> (per project), and <code>.claude/settings.json</code> for permissions.</p>
+
+<h2>Spend 5 Minutes In Plan Mode</h2>
+
+<p>It's tempting to start AI coding straight away, but you'll save yourself a few hours if you spend at least five minutes in plan mode before coding.</p>
+
+<p>Before I started doing this, Claude Code kept rambling time-consuming, and pricey token-burning tangents. I spent hours unravelling a mess while building a tool on Vendors.ie.</p>
+
+<p>Now I start every AI coding session by tabbing over to plan mode.</p>
+
+<p>After a brief chat, Claude presents a markdown doc of exactly what it's going to do, which I review before sending the agent to work. Think of it as a PRD before every coding session.</p>
+
+<h2>Turn Auto Accept Edits On</h2>
+
+<p>In a 1995 Simpsons episode, Homer wants to qualify for a work-from-disability programme so he can stay on the couch. So, he rigs a drinking bird to repeatedly tap the Y key on his keyboard to answer "yes" to every safety prompt at the power plant.</p>
+
+<p>The bird works fine until it falls over, and the plant nearly melts down... kind of like AI coding a disaster.</p>
+
+<p>If you find yourself tapping "Accept" over and over and over, just keep tapping until you turn auto-accept edits on. Once Claude Code has a clear remit, it can quickly work through everything you wanted to do without you having to tap Enter or 1 like a drinking bird.</p>
+
+<h2>Skip Permissions (Dangerous Mode)</h2>
+
+<p>If you find yourself stuck in auto-accept mode for longer than you'd like, try this:</p>
+
+<p>Fire up a new instance of Claude Code with <code>claude --dangerously-skip-permissions</code>.</p>
+
+<p>Be warned: with great power comes great responsibility.</p>
+
+<p>Claude automatically accepts all edits, bash commands, and file changes without asking for permission. Be warned, Claude will do exactly what you tell it, including destructive stuff.</p>
+
+<h2>Compact Your Context</h2>
+
+<p>The context window fills up fast in long sessions. When it's getting full, use <code>/compact</code> to compress the conversation. Claude summarises everything and continues with a refined, shorter context.</p>
+
+<p>You get more runway without losing the thread. If you want to start up a new chat with Claude without actually exiting and restarting, simply use the <code>/clear</code> command, and Claude will forget all of its context.</p>
+
+<h2>Save Repeatable Workflows as Skills</h2>
+
+<p>If you find yourself prompting and reprompting Claude, ask it to save your chat and the output as a skill. Then, you can invoke the entire workflow with a single command.</p>
+
+<p>For example, lately I've been drafting my content using the app Wispr Flow. It's much faster than typing, and it's nearly 99% accurate. However, I still want to tidy up my dictated drafts and copy them to my clipboard for posting.</p>
+
+<p>When I explained my problem to Claude Code, it turned my chat into an edit skill I use almost daily.</p>
+
+<h2>Mine Your Coding Insights</h2>
+
+<p>Self-knowledge is power. The <code>/insights</code> command reviews all your sessions from the last 7 days and generates an HTML report. What you worked on, where you wasted time, mistakes you kept making.</p>
+
+<p>Mine told me a single 6-hour session is far less effective than starting a new chat for each job. It even suggested updates to my CLAUDE.md file and spotted automation opportunities in my coding workflow. I run this once per week, then copy the output back into Claude Code and ask it to review my skills and improve my CLAUDE.md file. It's also helped me learn a lot more about prompt engineering as I build.</p>
+
+<h2>Check Your Spend with /cost</h2>
+
+<p>Use <code>/cost</code> to see how much your current session has burned in tokens. This is useful when you're deep in a build and want to know if that refactor was worth it.</p>
+
+<p>After using this a few times, Claude gave me some suggestions on how to cut my bill. For example, it helped me cache a system prompt for one of my apps and cut API costs by 80%.</p>
+
+<h2>Switch Models with /model</h2>
+
+<p>You can easily switch models mid-session. Plan with a cheaper model, then switch to Opus for the heavy lifting. There's no need to burn expensive tokens on architecture discussions.</p>
+
+<h2>Fire Up Multiple Instances</h2>
+
+<p>When working on a project with Claude, I open four or five windows in Warp (my terminal app of choice). I use one window per job. I give each window a name and use tabs to check what my agents are doing. Each agent stays focused because its context is clean.</p>
+
+<h2>Harness the Swarm (Sub-Agents)</h2>
+
+<p>Claude Opus can spawn sub-agents that work on your projects. One for UX, one for copy, one for debugging, one for frontend QA. The sub-agents report back to the master agent, which analyses all their feedback and gets to work. It's like employing a senior dev with a team.</p>
+
+<p>A good swarm will cost you a lot of tokens, and you'll hit a session usage limit quickly, but the output quality and speed to production are meaningful. I upgraded to Claude Max after seeing how powerful swarms are.</p>
+
+<h2>Teleport Your Session</h2>
+
+<p>I usually run Claude Code on my MacBook, but when I'm on the go, I hit <code>/teleport</code>. It sends the coding session to claude.ai in a browser. I can continue working on my phone, then teleport back to my Mac later.</p>
+
+<h2>Connect External Tools with MCP</h2>
+
+<p>Claude Code can connect to GitHub, Slack, databases, and other tools via MCP (Model Context Protocol) servers. If you're running multiple agents on a real project, this is a big unlock — the agent can read issues, check PRs, query your database, and post updates without leaving the terminal.</p>
+
+<p>I set up MCPs for Kit, Google Calendar, Apple Reminders and more. That last one is fun. If I type <em>remind me</em> in Claude Code, it automatically adds a To Do to my Reminders list.</p>
+
+<h2>Build Systems with Claude Design</h2>
+
+<p>Claude Design is super powerful and also super heavy on token usage. It's superb for creating a design system that you can quickly and easily import into Claude Code.</p>
+
+<p>Come up with a few ideas for what you want your app or website to look like, taking screenshots and noting the style in question. Ideate directly in the Claude Chat.</p>
+
+<p>Once you have an idea of what your app will look like, head over to Claude Design and ask them to create a complete design system.</p>
+
+<p>It'll ask you a series of questions, and it can take 10-15 minutes to create a design system. When it's done, you can import it into Claude Code and iterate.</p>
+
+<p>I've also experimented with using Claude Design to create presentations for an MBA that I'm doing. No more messing around with breakpoints, line spacing, and capitalisation in PowerPoint or Google Slides.</p>
+
+<hr>
+
+<p><em>Get started with AI coding using <a href="https://lovable.dev/?via=bryan-collins">Lovable</a>.</em></p>
+
+<p><em>Need an AI writing assistant? Try Grammarly with this <a href="http://becomeawritertoday.com/try-grammarly">25% discount</a>.</em></p>
+</div></td></tr></tbody></table>
+    </div>
+    <p class="issue-nav"><a href="/newsletter/posts/the-1m-offer-i-refused-and-what-i-m-building-instead">Older: The $1M offer I refused (and what I&#x27;m building instead)</a> · <a href="/newsletter/posts/i-built-my-own-training-coach-in-an-afternoon-no-subscription">Newer: I built my own training coach in an afternoon (no subscription)</a></p>
+</article>
+<section id="newsletter" class="newsletter-band"><div class="newsletter">
+    <div><h2>Get the next issue</h2>
+    <p>What I'm building with AI coding agents, what broke, and what I'd do differently. Straight to your inbox.</p></div>
+    <div>
+    <form class="bc-subscribe signup" action="/.netlify/functions/subscribe" method="post">
+        <input type="hidden" name="lane" value="hub">
+        <input type="hidden" name="elapsed" value="">
+        <div style="position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden;" aria-hidden="true"><label>Leave this empty<input type="text" name="website" tabindex="-1" autocomplete="off"></label></div>
+        <div class="signup-fields">
+            <label class="sr" for="nl-email">Email address</label>
+            <input id="nl-email" name="email" type="email" placeholder="Email address" autocomplete="email" required>
+            <button type="submit"><span>Subscribe</span></button>
+        </div>
+    </form>
+    <script defer src="/resources/subscribe.js"></script>
+    <p class="muted small">Unsubscribe any time. Or read <a href="https://bryancollins.com/newsletter/archive">past issues</a>.</p>
+</div></div>
+</section>
+</main>
+<footer class="site-footer">
+    <p><a href="https://www.youtube.com/channel/UCglNILz3uBqPer5EMJ_pzVg">YouTube</a> · <a href="https://github.com/bryancollins99">GitHub</a> · <a href="https://www.linkedin.com/in/bryancollins99/">LinkedIn</a> · <a href="https://substack.com/@bryancollins">Substack</a> · <a href="/products">Products</a> · <a href="/mba-frameworks">Strategy tools</a> · <a href="/contact">Contact</a></p>
+    <p class="muted">© 2026 Bryan Collins · <a href="/privacy">Privacy</a> · <a href="/terms">Terms</a></p>
+</footer>
+</body>
+</html>
