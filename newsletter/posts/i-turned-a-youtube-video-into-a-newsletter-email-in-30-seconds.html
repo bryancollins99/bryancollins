@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>I turned a YouTube video into a newsletter email in 30 seconds · Bryan Collins</title>
+    <meta name="description" content="I published a YouTube video last week. 12 minutes on how I use Claude Code for note-taking. Then I ran this: ``` python3 generate-youtube-email.py &quot;…">
+    <meta name="author" content="Bryan Collins">
+    <link rel="canonical" href="https://bryancollins.com/newsletter/posts/i-turned-a-youtube-video-into-a-newsletter-email-in-30-seconds">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://bryancollins.com/newsletter/posts/i-turned-a-youtube-video-into-a-newsletter-email-in-30-seconds">
+    <meta property="og:title" content="I turned a YouTube video into a newsletter email in 30 seconds · Bryan Collins">
+    <meta property="og:description" content="I published a YouTube video last week. 12 minutes on how I use Claude Code for note-taking. Then I ran this: ``` python3 generate-youtube-email.py &quot;…">
+    <meta property="og:image" content="https://bryancollins.com/resources/bryan-collins.jpeg">
+    <meta name="twitter:card" content="summary">
+    <meta name="theme-color" media="(prefers-color-scheme: light)" content="#fdfdfc">
+    <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#121211">
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <link rel="stylesheet" href="/assets/hub.css">
+    <script async src="https://stats.bryancollins.com/js/pa-bvsz2TfQenbKYMWpBJ7eS.js"></script>
+    <script>
+      window.plausible=window.plausible||function(){(plausible.q=plausible.q||[]).push(arguments)},plausible.init=plausible.init||function(i){plausible.o=i||{}};
+      plausible.init()
+    </script>
+    <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "I turned a YouTube video into a newsletter email in 30 seconds", "datePublished": "2026-03-16", "author": {"@type": "Person", "name": "Bryan Collins"}, "url": "https://bryancollins.com/newsletter/posts/i-turned-a-youtube-video-into-a-newsletter-email-in-30-seconds"}</script>
+</head>
+<body>
+<a class="skip" href="#content">Skip to content</a>
+<header class="site-header">
+    <a class="brand" href="/">Bryan Collins</a>
+    <nav aria-label="Main"><a href="/videos">Videos</a><a href="/projects">Projects</a><a href="/skills/">Skills</a><a href="/books">Books</a><a href="/work-with-me">Work</a><a href="/#newsletter">Newsletter</a></nav>
+</header>
+<main id="content">
+<article class="block issue">
+    <p class="muted"><a href="/newsletter/archive">Newsletter archive</a> · 16 Mar 2026</p>
+    <h1>I turned a YouTube video into a newsletter email in 30 seconds</h1>
+    <div class="issue-body">
+<p>I published a YouTube video last week. 12 minutes on how I use Claude Code for note-taking.</p>
+
+<p>Then I ran this:</p>
+
+<p>```</p>
+<p>python3 generate-youtube-email.py "<a href="https://youtube.com/watch?v=xxxxx">https://youtube.com/watch?v=xxxxx</a>"</p>
+<p>```</p>
+
+<p>30 seconds later, a markdown file appeared in my notes folder. Full newsletter email. Subject line, body, CTA. 350 words, ready to edit.</p>
+
+<p>The script fetched the transcript, fed it to Claude, and generated a promotional email that sounds like me — not like a robot summarising a video.</p>
+
+<p>I spent 5 minutes editing it. Then:</p>
+
+<p>```</p>
+<p>python3 schedule-newsletter.py "the-email-draft.md"</p>
+<p>```</p>
+
+<p>Scheduled for 10am the next morning. Done.</p>
+
+<p><strong>Here's why this matters.</strong></p>
+
+<p>Most creators treat YouTube and email as separate channels. Make a video. Then separately, sit down and write a newsletter about... something. Maybe the same topic, maybe not. Two creative sessions for what should be one.</p>
+
+<p>The YouTube-to-email script collapses that into one workflow. The video IS the content. The email is just a way to push it to people who don't check YouTube.</p>
+
+<p><strong>What the script actually does:</strong></p>
+
+<ol>
+<li>Takes a YouTube URL</li>
+<li>Pulls the full transcript via the YouTube API</li>
+<li>Sends it to Claude with a prompt tuned for my writing style</li>
+<li>Generates a 300-400 word email with subject line</li>
+<li>Saves it as a markdown file in my notes folder</li>
+<li>Ready to schedule with the newsletter scheduler</li>
+</ol>
+<p>No copy-pasting transcripts. No rewriting from scratch. No "let me open ChatGPT and explain what this video was about."</p>
+
+<p><strong>One video, two distribution channels, 5 minutes of work.</strong></p>
+
+<p>This is one of 6 scripts in The Builder's Pipeline. The full system:</p>
+
+<ul>
+<li>4 analyzers that scan your notes and generate content</li>
+<li>Newsletter scheduler that sends to Kit from terminal</li>
+<li>YouTube email generator that turns videos into newsletters</li>
+</ul>
+<p>$39. One-time. Private GitHub repo.</p>
+
+<p><a href="https://newsletter.becomeawritertoday.com/products/the-builders-pipeline">Get The Builder's Pipeline</a></p>
+
+<p>P.S. I know what you're thinking — "won't the email just sound like a transcript summary?" No. The prompt is designed to extract the 2-3 most interesting points and write a standalone email that makes people want to watch. Not a summary. An invitation.</p>
+    </div>
+    <p class="issue-nav"><a href="/newsletter/posts/i-schedule-my-newsletter-from-the-terminal-here-s-why">Older: I schedule my newsletter from the terminal (here&#x27;s why)</a> · <a href="/newsletter/posts/what-s-actually-inside-prompt-writing-studio">Newer: What&#x27;s actually inside Prompt Writing Studio</a></p>
+</article>
+<section id="newsletter" class="newsletter-band"><div class="newsletter">
+    <div><h2>Get the next issue</h2>
+    <p>What I'm building with AI coding agents, what broke, and what I'd do differently. Straight to your inbox.</p></div>
+    <div>
+    <form class="bc-subscribe signup" action="/.netlify/functions/subscribe" method="post">
+        <input type="hidden" name="lane" value="hub">
+        <input type="hidden" name="elapsed" value="">
+        <div style="position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden;" aria-hidden="true"><label>Leave this empty<input type="text" name="website" tabindex="-1" autocomplete="off"></label></div>
+        <div class="signup-fields">
+            <label class="sr" for="nl-email">Email address</label>
+            <input id="nl-email" name="email" type="email" placeholder="Email address" autocomplete="email" required>
+            <button type="submit"><span>Subscribe</span></button>
+        </div>
+    </form>
+    <script defer src="/resources/subscribe.js"></script>
+    <p class="muted small">Unsubscribe any time. Or read <a href="https://bryancollins.com/newsletter/archive">past issues</a>.</p>
+</div></div>
+</section>
+</main>
+<footer class="site-footer">
+    <p><a href="https://www.youtube.com/channel/UCglNILz3uBqPer5EMJ_pzVg">YouTube</a> · <a href="https://github.com/bryancollins99">GitHub</a> · <a href="https://www.linkedin.com/in/bryancollins99/">LinkedIn</a> · <a href="https://substack.com/@bryancollins">Substack</a> · <a href="/products">Products</a> · <a href="/mba-frameworks">Strategy tools</a> · <a href="/contact">Contact</a></p>
+    <p class="muted">© 2026 Bryan Collins · <a href="/privacy">Privacy</a> · <a href="/terms">Terms</a></p>
+</footer>
+</body>
+</html>

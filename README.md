@@ -69,7 +69,7 @@ Primary goal: maximize direct response email list growth via organic social traf
 - **Frontend:** Static HTML/CSS/JS or Static Site Generator (e.g., Next.js, Astro, Eleventy, Hugo)
 - **Hosting:** Netlify (connected to GitHub repo)
 - **Analytics:** Plausible Analytics
-- **Forms:** Integrate with ConvertKit for email capture
+- **Forms:** Post to the Resend subscribe function (see section 7)
 
 ## 3. Project Structure
 - **Single repository** containing all landing pages.
@@ -116,48 +116,29 @@ Primary goal: maximize direct response email list growth via organic social traf
 
 ## 7. Forms & Integrations
 
-### ConvertKit Form Implementation
+### Newsletter forms (Resend)
 
-This project uses ConvertKit forms for email capture on all landing pages. There are two implementation approaches:
-
-#### JavaScript Embed Approach (Recommended)
+Every email form posts to `netlify/functions/subscribe.mjs`, which adds the contact to
+the Resend segment `Bryan Collins Newsletter`, emails the lane's download (if it has
+one), fires `bc.subscribed` (the `BC 1 · Welcome` automation) and a PostHog
+`Email Signup` event, then redirects to `/thank-you?lane=<lane>`. Kit is retired.
+Full detail in [NEWSLETTER-FORMS.md](NEWSLETTER-FORMS.md).
 
 ```html
-<script async data-uid="UNIQUE_FORM_ID" src="https://become-a-writer-today.kit.com/UNIQUE_FORM_ID/index.js"></script>
+<form class="bc-subscribe" action="/.netlify/functions/subscribe" method="post">
+  <input type="hidden" name="lane" value="ai-prompts">
+  <input type="hidden" name="elapsed" value="">
+  <!-- honeypot: a visually hidden text input named "website" -->
+  <input type="email" name="email" required>
+  <button type="submit">Send it to me</button>
+</form>
+<script defer src="/resources/subscribe.js"></script>
 ```
 
-- Each form has a unique ID that must be configured in ConvertKit as a modal form
-- The domain must be `become-a-writer-today.kit.com`
-- The URL format must follow the pattern: `/{form-id}/index.js`
-- Place the script tag exactly where you want the form to appear in the HTML
-
-#### Current Form IDs
-
-- LinkedIn: `73ff0be26f`
-- Medium: `ebb3352c56`
-- Apollo: `9f849f222b`
-- LN (LinkedIn alternate): `40609e45cc`
-- YouTube: `426c2157ed`
-- SaaS Founders: `a691970cbd`
-
-#### Troubleshooting Forms
-
-If a form doesn't display correctly:
-
-1. Verify the form ID is correct and active in ConvertKit
-2. Ensure the form is published in ConvertKit (Grow tab > Landing Pages & Forms > Your form > Publish)
-3. Check that the domain is `become-a-writer-today.kit.com`
-4. Verify the URL format follows `/{form-id}/index.js`
-5. Ensure there's only one ConvertKit script on the page
-6. Check browser console for errors
-7. Form must be an inline form from Kit and the javascript must be placed where the form should appear
-
-#### Content Security Policy Requirements
-
-The ConvertKit forms require specific domains to be allowed in the Content Security Policy. The following domains must be included in your CSP directives:
-
-- `https://*.convertkit.com`
-- `https://*.kit.com`
+The lane must be one of the keys in `LANES` in the function; anything else is
+treated as `hub`. Subjects, asset links and redirects live in the function, never in
+the form. The hub pages get their form from `scripts/build-hub.py`, the two YouTube
+lane pages from `downloads/src/build-pages.py`: edit the generator, not the output.
 
 The current CSP configuration in `netlify.toml` includes these domains in the following directives:
 

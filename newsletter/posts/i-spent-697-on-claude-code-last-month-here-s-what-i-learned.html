@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>I spent $697 on Claude Code last month. Here&#x27;s what I learned. · Bryan Collins</title>
+    <meta name="description" content="I spent $697 on Claude Code last month. Not on a course about it. Not on a wrapper tool. On raw API usage. Tokens in, tokens out. Building things. Some…">
+    <meta name="author" content="Bryan Collins">
+    <link rel="canonical" href="https://bryancollins.com/newsletter/posts/i-spent-697-on-claude-code-last-month-here-s-what-i-learned">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://bryancollins.com/newsletter/posts/i-spent-697-on-claude-code-last-month-here-s-what-i-learned">
+    <meta property="og:title" content="I spent $697 on Claude Code last month. Here&#x27;s what I learned. · Bryan Collins">
+    <meta property="og:description" content="I spent $697 on Claude Code last month. Not on a course about it. Not on a wrapper tool. On raw API usage. Tokens in, tokens out. Building things. Some…">
+    <meta property="og:image" content="https://bryancollins.com/resources/bryan-collins.jpeg">
+    <meta name="twitter:card" content="summary">
+    <meta name="theme-color" media="(prefers-color-scheme: light)" content="#fdfdfc">
+    <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#121211">
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <link rel="stylesheet" href="/assets/hub.css">
+    <script async src="https://stats.bryancollins.com/js/pa-bvsz2TfQenbKYMWpBJ7eS.js"></script>
+    <script>
+      window.plausible=window.plausible||function(){(plausible.q=plausible.q||[]).push(arguments)},plausible.init=plausible.init||function(i){plausible.o=i||{}};
+      plausible.init()
+    </script>
+    <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "I spent $697 on Claude Code last month. Here's what I learned.", "datePublished": "2026-03-12", "author": {"@type": "Person", "name": "Bryan Collins"}, "url": "https://bryancollins.com/newsletter/posts/i-spent-697-on-claude-code-last-month-here-s-what-i-learned"}</script>
+</head>
+<body>
+<a class="skip" href="#content">Skip to content</a>
+<header class="site-header">
+    <a class="brand" href="/">Bryan Collins</a>
+    <nav aria-label="Main"><a href="/videos">Videos</a><a href="/projects">Projects</a><a href="/skills/">Skills</a><a href="/books">Books</a><a href="/work-with-me">Work</a><a href="/#newsletter">Newsletter</a></nav>
+</header>
+<main id="content">
+<article class="block issue">
+    <p class="muted"><a href="/newsletter/archive">Newsletter archive</a> · 12 Mar 2026</p>
+    <h1>I spent $697 on Claude Code last month. Here&#x27;s what I learned.</h1>
+    <div class="issue-body">
+<table cellpadding="0" cellspacing="0" style="width:100%;margin:0 auto"><tbody><tr><td><div>
+<p>I spent $697 on Claude Code last month.</p>
+
+<p>Not on a course about it. Not on a wrapper tool. On raw API usage. Tokens in, tokens out. Building things.</p>
+
+<p>Some of that money was well spent. Some of it was burnt on stupid mistakes I could have avoided.</p>
+
+<p>Here's what I learned.</p>
+
+<p><strong>1. Start with a PRD, not a prompt.</strong></p>
+
+<p>My most expensive sessions were the ones where I opened Claude Code and typed "build me a dashboard." No spec. No requirements. No constraints.</p>
+
+<p>The AI happily built something. Then I realised it wasn't what I wanted. So it rebuilt. And rebuilt again. Each rebuild burning through tokens on code that got deleted.</p>
+
+<p>Now I write a PRD first. One page. What it does, who it's for, what's out of scope. I paste it into the CLAUDE.md file so every session starts with context.</p>
+
+<p>The PRD costs me 20 minutes. It saves me hours of token-burning tangents.</p>
+
+<p><strong>2. Plan with an affordable model. Build in the CLI.</strong></p>
+
+<p>Claude Code defaults to the most powerful (and most expensive) model for everything. Including planning.</p>
+
+<p>I stopped doing that.</p>
+
+<p>Now I plan in Claude.com using Sonnet. It's fast and cheap. I hash out the architecture, the file structure, the implementation steps. I ask it to poke holes in my approach.</p>
+
+<p>Then I take that plan into Claude Code (running Opus in the CLI) and execute it. The expensive model does what it's good at: writing code, handling complexity, managing multi-file changes.</p>
+
+<p>Planning in Sonnet costs pennies. Building in Opus costs dollars. Don't use dollars for planning.</p>
+
+<p><strong>3. Use multiple agents, not one mega-session.</strong></p>
+
+<p>My biggest waste was running single sessions for hours. One agent trying to do everything: plan the feature, write the code, debug the tests, update the docs.</p>
+
+<p>By hour three, the agent was hallucinating. Referencing functions that didn't exist. Suggesting fixes for problems it created two hours earlier.</p>
+
+<p>Now I split the work:</p>
+
+<p>Agent 1: Write the feature</p>
+<p>Agent 2: Write the tests</p>
+<p>Agent 3: Review and debug</p>
+<p>Agent 4: Update docs</p>
+
+<p>Each agent gets a clean context window. Each one does one job well. I run them in parallel across multiple terminal windows.</p>
+
+<p>More agents = more tokens. But the output quality is so much higher that I actually spend less overall. Fewer rewrites. Fewer debugging spirals. Fewer "let's start over" moments.</p>
+
+<p><strong>4. /init every project. Every time.</strong></p>
+
+<p>The /init command creates a CLAUDE.md file for your project. It's the AI's instruction manual. What the project does. What conventions to follow. What mistakes to avoid.</p>
+
+<p>Without it, every new session starts from zero. The AI asks questions you've already answered. Makes assumptions you've already corrected.</p>
+
+<p>With it, every session starts informed. The AI reads the file, understands the project, and gets to work.</p>
+
+<p>20 minutes setting up CLAUDE.md saves hours across every future session.</p>
+
+<p><strong>The real lesson:</strong></p>
+
+<p>$697 sounds like a lot. But I shipped a trading CLI, a newsletter scheduling system, an AI email analyzer, and three automation scripts. In one month. As a solo developer.</p>
+
+<p>The cost wasn't the problem. The waste was. And most of the waste came from skipping the boring stuff: planning, context, constraints.</p>
+
+<p>AI coding tools reward structure over speed. Every time.</p>
+
+<p>Want to learn the exact prompts and frameworks I use to build faster with AI? Check out my <a href="https://courses.becomeawritertoday.com/purchase?product_id=6640678">Prompt Writing Studio course</a></p>
+
+</div></td></tr></tbody></table>
+    </div>
+    <p class="issue-nav"><a href="/newsletter/posts/james-patterson-popped-into-my-inbox">Older: James Patterson popped into my inbox</a> · <a href="/newsletter/posts/i-automated-my-content-calendar-with-6-python-scripts">Newer: I automated my content calendar with 6 Python scripts</a></p>
+</article>
+<section id="newsletter" class="newsletter-band"><div class="newsletter">
+    <div><h2>Get the next issue</h2>
+    <p>What I'm building with AI coding agents, what broke, and what I'd do differently. Straight to your inbox.</p></div>
+    <div>
+    <form class="bc-subscribe signup" action="/.netlify/functions/subscribe" method="post">
+        <input type="hidden" name="lane" value="hub">
+        <input type="hidden" name="elapsed" value="">
+        <div style="position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden;" aria-hidden="true"><label>Leave this empty<input type="text" name="website" tabindex="-1" autocomplete="off"></label></div>
+        <div class="signup-fields">
+            <label class="sr" for="nl-email">Email address</label>
+            <input id="nl-email" name="email" type="email" placeholder="Email address" autocomplete="email" required>
+            <button type="submit"><span>Subscribe</span></button>
+        </div>
+    </form>
+    <script defer src="/resources/subscribe.js"></script>
+    <p class="muted small">Unsubscribe any time. Or read <a href="https://bryancollins.com/newsletter/archive">past issues</a>.</p>
+</div></div>
+</section>
+</main>
+<footer class="site-footer">
+    <p><a href="https://www.youtube.com/channel/UCglNILz3uBqPer5EMJ_pzVg">YouTube</a> · <a href="https://github.com/bryancollins99">GitHub</a> · <a href="https://www.linkedin.com/in/bryancollins99/">LinkedIn</a> · <a href="https://substack.com/@bryancollins">Substack</a> · <a href="/products">Products</a> · <a href="/mba-frameworks">Strategy tools</a> · <a href="/contact">Contact</a></p>
+    <p class="muted">© 2026 Bryan Collins · <a href="/privacy">Privacy</a> · <a href="/terms">Terms</a></p>
+</footer>
+</body>
+</html>

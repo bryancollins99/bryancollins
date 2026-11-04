@@ -133,7 +133,7 @@ h3 { font-size: 1.05rem; margin: 0 0 6px; font-weight: 650; }
 .newsletter h2 { color: var(--ink-fg); }
 .newsletter p { margin: 0; color: var(--ink-muted); }
 .newsletter a { color: var(--ink-fg); }
-.signup .formkit-fields { display: flex; gap: 8px; flex-wrap: wrap; }
+.signup .signup-fields { display: flex; gap: 8px; flex-wrap: wrap; }
 .signup input {
   flex: 1 1 200px; min-width: 0; font: inherit; padding: 11px 13px;
   border: 1px solid #3a3a40; border-radius: 8px; background: #19191c; color: #fafafa;
@@ -141,10 +141,6 @@ h3 { font-size: 1.05rem; margin: 0 0 6px; font-weight: 650; }
 .signup input:focus { outline: 2px solid var(--accent); outline-offset: 1px; }
 .signup button { font: inherit; font-weight: 700; padding: 11px 20px; border: 0; border-radius: 8px; background: var(--accent); color: var(--accent-ink); cursor: pointer; }
 .signup button:hover { filter: brightness(1.05); }
-.formkit-alert { list-style: none; margin: 0 0 10px; padding: 10px 12px; border-radius: 8px; border: 1px solid #3a3a40; }
-.formkit-alert:empty { display: none; }
-.formkit-alert-error { color: #fca5a5; }
-.formkit-alert-success { color: var(--ink-fg); border-color: var(--accent); }
 .newsletter .small { margin-top: 10px; }
 
 /* lists */
@@ -182,3 +178,14 @@ th, td { text-align: left; padding: 6px 10px 6px 0; border-bottom: 1px solid var
 .site-footer { background: var(--ink); color: var(--ink-muted); padding: 32px var(--gutter) 40px; margin-top: 64px; font-size: 15px; }
 .site-footer a:hover { color: var(--accent); }
 .site-footer p { margin: 0 0 6px; }
+
+/* newsletter archive (scripts/build-newsletter-archive.py): issues are Kit email HTML,
+   so neutralise their table backgrounds and fixed widths */
+.issue h1 { margin-top: 4px; }
+.issue-body { line-height: 1.7; overflow-wrap: anywhere; }
+.issue-body table, .issue-body td, .issue-body div { background: transparent !important; width: auto !important; max-width: 100% !important; color: inherit !important; }
+.issue-body img { max-width: 100%; height: auto; }
+.issue-nav { margin-top: 32px; display: flex; flex-wrap: wrap; gap: 8px 24px; }
+.archive-list { list-style: none; padding: 0; margin: 0 0 24px; }
+.archive-list li { padding: 8px 0; border-bottom: 1px solid color-mix(in srgb, currentColor 12%, transparent); }
+.archive-list .meta { opacity: .65; font-size: .9em; margin-left: 6px; }

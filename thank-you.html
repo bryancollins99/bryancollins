@@ -132,7 +132,7 @@
     <p class="text-sm font-semibold uppercase tracking-wider mb-2" style="color:#956FA6;">Your download</p>
     <h2 id="lm-title" class="text-2xl font-bold mb-4"></h2>
     <div id="lm-links"></div>
-    <p class="text-sm mt-4" style="opacity:.7;">Your download is ready above. Confirm your email to get the newsletter.</p>
+    <p class="text-sm mt-4" style="opacity:.7;">Your download is ready above. A copy is on its way to your inbox too.</p>
   </div>
 </div>
 <script>
@@ -142,7 +142,8 @@
       claude: { title: 'The Claude Code Starter Pack', pdf: '/downloads/claude-code-starter-8h5r4t1.pdf' }
     };
     var lane = null;
-    try { lane = localStorage.getItem('bc_lm'); } catch (e) {}
+    try { lane = new URLSearchParams(location.search).get('lane'); } catch (e) {}
+    if (!lane) { try { lane = localStorage.getItem('bc_lm'); } catch (e) {} }
     var box = document.getElementById('lm-download');
     var links = document.getElementById('lm-links');
     var title = document.getElementById('lm-title');
@@ -158,10 +159,30 @@
       return el;
     }
 
-    // 'none' is stamped by the non-lane opt-ins (101-ai-prompts-yt, linkedin-hooks-yt),
-    // which share this form. Their subscribers keep today's page: no panel, PWS pitch
-    // visible. Without this, a visitor who saw a lane page first carried its stamp here.
-    if (lane === 'none') return;
+    // A plain newsletter signup has no download: say so instead of promising one.
+    if (lane === 'hub' || lane === 'newsletter') {
+      document.addEventListener('DOMContentLoaded', function () {
+        var el = document.getElementById('ty-hero-sub');
+        if (el) el.textContent = "You're subscribed. My next email is on its way.";
+        var inbox = document.getElementById('ty-inbox');
+        if (inbox) inbox.hidden = true;
+      });
+      return;
+    }
+    // These lanes get no download email yet (their Kit incentive is unknown), so the
+    // page must not promise one. The AI prompts link further down still works.
+    if (['linkedin-hooks', 'mba', 'poc', 'chatgpt'].indexOf(lane) !== -1) {
+      document.addEventListener('DOMContentLoaded', function () {
+        var el = document.getElementById('ty-hero-sub');
+        if (el) el.textContent = "You're subscribed.";
+        var inbox = document.getElementById('ty-inbox');
+        if (inbox) inbox.hidden = true;
+      });
+      return;
+    }
+    // The AI prompts lanes (their email carries the doc) and 'none' from the older
+    // stamp keep today's page: no panel, PWS pitch visible.
+    if (lane && !ASSETS[lane]) return;
 
     var picked = lane && ASSETS[lane];
     if (picked) {
@@ -208,8 +229,8 @@
                         <!-- Confirmation Message -->
                         <div class="text-center max-w-lg mx-auto">
                             <i class="fas fa-check-circle text-5xl mb-4" style="color: #956FA6;"></i>
-                            <p class="text-lg mb-2">Check your email in the next few minutes.</p>
-                            <p class="text-gray-600">If you don't see it, please check your spam folder.</p>
+                            <div id="ty-inbox"><p class="text-lg mb-2">Check your email in the next few minutes.</p>
+                            <p class="text-gray-600">If you don't see it, please check your spam folder.</p></div>
                         </div>
                         
                         <!-- PromptWritingStudio Pitch -->

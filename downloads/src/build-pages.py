@@ -4,19 +4,13 @@
     python3 build-pages.py
 
 Writes six files into the repo root. Every page clones the structure, palette and
-Kit-embed pattern of 101-ai-prompts-yt.html, which is the only opt-in page on the
+opt-in pattern of 101-ai-prompts-yt.html, which is the only opt-in page on the
 site with measured conversions (19 Kit subscribers in the 59 days to 2026-09-15).
 
-Form strategy (Bryan's call, 2026-09-17): no new Kit forms. Every bryancollins.com
-lane reuses the one existing YouTube form, `426c2157ed` ("YouTube (AI Prompts)",
-id 7308877). A Kit form has exactly one incentive email and one redirect, so the
-asset CANNOT be delivered per-lane by Kit.
-
-Delivery therefore happens on the thank-you page instead. Each opt-in page stamps
-its lane into localStorage on load; `/thank-you.html` (the form's existing redirect
-target) reads the stamp and surfaces the matching PDF. No Kit configuration changes,
-so the live /101-ai-prompts-yt funnel is untouched, which matters because it is
-mid-measurement until 2026-10-13.
+Forms post to netlify/functions/subscribe.mjs (Resend, 2026-10-29; Kit is retired).
+The form carries the lane, the function emails that lane's asset and redirects to
+/thank-you?lane=<lane>, and the download panel on /thank-you reads the lane from the
+query string (localStorage stamp as a fallback) and surfaces the matching PDF.
 
 Lane B (writers and books) is NOT here. It goes to becomeawritertoday.com on Resend,
 since that is the writing audience and BAWT already owns a hardened capture endpoint.
@@ -27,15 +21,13 @@ import re
 HERE = os.path.dirname(os.path.abspath(__file__))
 SITE = os.path.dirname(os.path.dirname(HERE))  # downloads/src -> downloads -> repo root
 
-PLACEHOLDER = "REPLACE_WITH_KIT_FORM_UID"
-# The one live YouTube Kit form. Shared by every bryancollins.com lane.
-SHARED_UID = "426c2157ed"
+HONEYPOT = ('<div style="position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden;" aria-hidden="true">'
+            '<label>Leave this empty<input type="text" name="website" tabindex="-1" autocomplete="off"></label></div>')
 
 LANES = [
     {
         "slug": "note-system-yt",
         "thanks": "thank-you",
-        "uid": SHARED_UID,
         "lane": "note",
         "title": "The Plain-Text Note System",
         "meta_title": "The Plain-Text Note System (Free) - Bryan Collins",
@@ -58,7 +50,6 @@ LANES = [
     {
         "slug": "claude-code-yt",
         "thanks": "thank-you",
-        "uid": SHARED_UID,
         "lane": "claude",
         "title": "The Claude Code Starter Pack",
         "meta_title": "The Claude Code Starter Pack (Free) - Bryan Collins",
@@ -143,28 +134,20 @@ def optin(lane):
                                 <p class="ml-4 text-lg">{b}</p>
                             </div>""" for b in lane["benefits"])
 
-    if lane["uid"] == PLACEHOLDER:
-        form = f"""                            <!-- NOT LIVE YET. This lane needs its own Kit form so the right
-                                 asset is delivered and the redirect lands on
-                                 /{lane['thanks']}. Swap the UID in both places below,
-                                 then remove this comment and the noindex tag in <head>. -->
-                            <div class="border-2 border-dashed rounded-lg p-6 text-center" style="border-color:#A6B6CF;">
-                                <p class="text-base font-semibold">Form pending</p>
-                                <p class="text-sm mt-1" style="opacity:.7;">Kit form UID not yet wired for this lane.</p>
-                            </div>"""
-    else:
-        form = (f"""                            <script async data-uid="{lane['uid']}" """
-                f"""src="https://become-a-writer-today.kit.com/{lane['uid']}/index.js"></script>""")
+    form = f"""                            <form class="bc-subscribe space-y-4" action="/.netlify/functions/subscribe" method="post">
+                                <input type="hidden" name="lane" value="{lane['lane']}">
+                                <input type="hidden" name="elapsed" value="">
+                                {HONEYPOT}
+                                <label class="sr-only" for="bc-email">Email address</label>
+                                <input id="bc-email" type="email" name="email" placeholder="Enter your email address" autocomplete="email" required
+                                    class="w-full px-5 py-4 text-lg rounded-lg border border-gray-300 focus:outline-none">
+                                <button type="submit" class="w-full cta-button font-bold">Send it to me</button>
+                            </form>
+                            <script defer src="/resources/subscribe.js"></script>"""
+    robots = ""
 
-    robots = ("\n    <meta name=\"robots\" content=\"noindex\">"
-              if lane["uid"] == PLACEHOLDER else "")
-
-    # The shared Kit form can only redirect to ONE page, so the page cannot tell
-    # /thank-you.html which asset was promised. Stamp the lane here, on load rather
-    # than on submit, because the Kit embed renders its own form in its own script
-    # and there is no reliable submit hook to attach to. A visitor who never
-    # subscribes just carries a harmless key: the only way to reach /thank-you is
-    # through the form.
+    # Fallback for /thank-you.html: the subscribe function puts ?lane= on the redirect,
+    # and this stamp covers a visitor who reaches the page without it.
     stamp = f"""    <script>
       try {{ localStorage.setItem('bc_lm', '{lane["lane"]}'); }} catch (e) {{}}
     </script>"""
@@ -215,9 +198,9 @@ END = "<!-- LEAD-MAGNET-DOWNLOAD:END -->"
 def download_block():
     """The lane-aware download panel injected into the shared /thank-you.html.
 
-    Every bryancollins.com lane shares one Kit form, so the form always redirects
-    here and cannot say which asset was promised. This reads the stamp the opt-in
-    page left in localStorage and reveals the matching PDF.
+    The subscribe function redirects every lane here with ?lane=<lane>. This reads
+    that (or, failing it, the stamp the opt-in page left in localStorage) and reveals
+    the matching PDF.
 
     It degrades on purpose: private windows, cleared storage and a viewer arriving
     from an older funnel all leave no stamp, so the panel then offers EVERY asset
@@ -232,7 +215,7 @@ def download_block():
     <p class="text-sm font-semibold uppercase tracking-wider mb-2" style="color:#956FA6;">Your download</p>
     <h2 id="lm-title" class="text-2xl font-bold mb-4"></h2>
     <div id="lm-links"></div>
-    <p class="text-sm mt-4" style="opacity:.7;">Your download is ready above. Confirm your email to get the newsletter.</p>
+    <p class="text-sm mt-4" style="opacity:.7;">Your download is ready above. A copy is on its way to your inbox too.</p>
   </div>
 </div>
 <script>
@@ -241,7 +224,8 @@ def download_block():
 {assets}
     }};
     var lane = null;
-    try {{ lane = localStorage.getItem('bc_lm'); }} catch (e) {{}}
+    try {{ lane = new URLSearchParams(location.search).get('lane'); }} catch (e) {{}}
+    if (!lane) {{ try {{ lane = localStorage.getItem('bc_lm'); }} catch (e) {{}} }}
     var box = document.getElementById('lm-download');
     var links = document.getElementById('lm-links');
     var title = document.getElementById('lm-title');
@@ -257,10 +241,30 @@ def download_block():
       return el;
     }}
 
-    // 'none' is stamped by the non-lane opt-ins (101-ai-prompts-yt, linkedin-hooks-yt),
-    // which share this form. Their subscribers keep today's page: no panel, PWS pitch
-    // visible. Without this, a visitor who saw a lane page first carried its stamp here.
-    if (lane === 'none') return;
+    // A plain newsletter signup has no download: say so instead of promising one.
+    if (lane === 'hub' || lane === 'newsletter') {{
+      document.addEventListener('DOMContentLoaded', function () {{
+        var el = document.getElementById('ty-hero-sub');
+        if (el) el.textContent = "You're subscribed. My next email is on its way.";
+        var inbox = document.getElementById('ty-inbox');
+        if (inbox) inbox.hidden = true;
+      }});
+      return;
+    }}
+    // These lanes get no download email yet (their Kit incentive is unknown), so the
+    // page must not promise one. The AI prompts link further down still works.
+    if (['linkedin-hooks', 'mba', 'poc', 'chatgpt'].indexOf(lane) !== -1) {{
+      document.addEventListener('DOMContentLoaded', function () {{
+        var el = document.getElementById('ty-hero-sub');
+        if (el) el.textContent = "You're subscribed.";
+        var inbox = document.getElementById('ty-inbox');
+        if (inbox) inbox.hidden = true;
+      }});
+      return;
+    }}
+    // The AI prompts lanes (their email carries the doc) and 'none' from the older
+    // stamp keep today's page: no panel, PWS pitch visible.
+    if (lane && !ASSETS[lane]) return;
 
     var picked = lane && ASSETS[lane];
     if (picked) {{
@@ -327,6 +331,5 @@ if __name__ == "__main__":
         body = optin(lane)
         with open(path, "w") as fh:
             fh.write(body)
-        state = "PENDING" if lane["uid"] == PLACEHOLDER else f"live on {lane['uid']}"
-        print(f"wrote {lane['slug']}.html  ({len(body)} bytes)  {state}")
+        print(f"wrote {lane['slug']}.html  ({len(body)} bytes)")
     print("patched " + os.path.basename(patch_thanks()))
