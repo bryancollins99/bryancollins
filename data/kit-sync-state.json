@@ -1,10 +1,10 @@
 {
   "watermark": "2026-11-04T06:35:59Z",
-  "last_run": "2026-11-04T12:22:52Z",
+  "last_run": "2026-11-04T12:23:15Z",
   "last_counts": {
-    "read": 22,
-    "created": 7,
-    "existing": 15,
+    "read": 3,
+    "created": 0,
+    "existing": 3,
     "invalid": 0
   }
 }
