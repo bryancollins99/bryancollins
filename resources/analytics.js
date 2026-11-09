@@ -37,9 +37,12 @@ function setupOutboundLinkTracking() {
 // Track thank you page conversions
 function trackConversion() {
     if (window.location.pathname.includes('thank-you')) {
+        var form = '';
+        try { form = new URLSearchParams(window.location.search).get('form') || ''; } catch (e) {}
         plausible('Conversion', {
             props: {
-                source: document.referrer
+                source: document.referrer,
+                form: form
             }
         });
     }

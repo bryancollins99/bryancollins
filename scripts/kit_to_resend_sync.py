@@ -9,12 +9,13 @@ Kit is on its free plan and sends nothing. It only collects Creator Network
 referrals and anything an old Kit form still catches. This job moves those new
 arrivals to Resend, where the newsletter goes out.
 
-Create-only, on purpose: a contact that already exists in Resend is never
-touched, so a Resend unsubscribe always wins over Kit. Re-running over the same
-window creates nothing new.
+Existing contacts are never resubscribed or added to segments (a Resend
+unsubscribe always wins over Kit). If an existing contact has an empty or
+`unknown` `source_surface`, only that property is backfilled to
+`bryancollins@kit-sync`.
 
 Env: KIT_API_KEY (v4, kit_...), RESEND_API_KEY. State: data/kit-sync-state.json.
-PRD: ~/.claude/handoff/kit-to-resend-2026-10-28 (Phase 7b).
+PRD: ~/.claude/handoff/kit-to-resend-2026-10-28 (Phase 7b), R268 attribution.
 """
 import argparse
 import csv
@@ -35,6 +36,16 @@ START = "2026-10-31T00:00:00Z"  # the day the engaged Kit list was imported
 OVERLAP = dt.timedelta(days=2)
 MAX_CREATES = 200  # a normal week is ~7; more than this is a bot or a bug
 EMAIL = re.compile(r"^[^@\s]+@[^@\s]+\.[^@\s]+$")
+SOURCE_SURFACE = "bryancollins@kit-sync"
+CREATE_PROPERTIES = {
+    "lane": "kit-intake",
+    "kit_source": "kit-sync",
+    "source_surface": SOURCE_SURFACE,
+}
+FALLBACK_PROPERTIES = {
+    "lane": "kit-intake",
+    "kit_source": "kit-sync",
+}
 # Resend sits behind Cloudflare, which rejects urllib's default User-Agent.
 UA = "bryancollins-kit-sync/1.0"
 
@@ -101,6 +112,10 @@ def resend(method, path, body=None):
                 {"Authorization": f"Bearer {os.environ['RESEND_API_KEY']}"}, body)
 
 
+def is_empty_surface(val):
+    return val is None or val == "" or val == "unknown"
+
+
 def sync(rows, dry_run):
     counts = {"read": 0, "created": 0, "existing": 0, "invalid": 0}
     newest = None
@@ -112,18 +127,39 @@ def sync(rows, dry_run):
         if not EMAIL.match(email) or len(email) > 254:
             counts["invalid"] += 1
             continue
-        status, _ = resend("GET", f"/contacts/{urllib.parse.quote(email)}")
+        status, existing = resend("GET", f"/contacts/{urllib.parse.quote(email)}")
         if status == 200:
-            counts["existing"] += 1  # never update: a Resend unsubscribe must win
+            counts["existing"] += 1  # never update unsubscribed or segments: a Resend unsubscribe must win
+            props = (existing.get("properties") if isinstance(existing, dict) else None) or {}
+            if is_empty_surface(props.get("source_surface")):
+                target = (existing.get("id") if isinstance(existing, dict) else None) or urllib.parse.quote(email)
+                patch_body = {"properties": {"source_surface": SOURCE_SURFACE}}
+                if dry_run:
+                    print(f"dry-run patch: {email} {json.dumps(patch_body)}")
+                else:
+                    p_status, p_resp = resend("PATCH", f"/contacts/{target}", patch_body)
+                    if p_status not in (200, 201):
+                        print(f"WARN: source_surface PATCH returned {p_status} (non-fatal): {p_resp}", file=sys.stderr)
             continue
         if status != 404:
             raise RuntimeError(f"Resend contact lookup returned {status}")
         if counts["created"] >= MAX_CREATES:
             raise RuntimeError(f"More than {MAX_CREATES} new contacts in one run; stopping for a human check.")
-        if not dry_run:
-            status, body = resend("POST", "/contacts", {
-                "email": email, "first_name": s["first_name"], "unsubscribed": False,
-                "segments": [{"id": SEGMENT}], "properties": {"lane": "kit-intake", "kit_source": "kit-sync"}})
+        create_payload = {
+            "email": email,
+            "first_name": s["first_name"],
+            "unsubscribed": False,
+            "segments": [{"id": SEGMENT}],
+            "properties": dict(CREATE_PROPERTIES),
+        }
+        if dry_run:
+            print(f"dry-run create: {email} {json.dumps(create_payload)}")
+        else:
+            status, body = resend("POST", "/contacts", create_payload)
+            if status in (400, 422):
+                print(f"WARN: signup attribution dropped ({status}), retrying without source_surface: {body}", file=sys.stderr)
+                fallback_payload = dict(create_payload, properties=dict(FALLBACK_PROPERTIES))
+                status, body = resend("POST", "/contacts", fallback_payload)
             if status not in (200, 201):
                 raise RuntimeError(f"Resend contact create returned {status}: {body}")
             resend("POST", "/events/send", {"event": "bc.subscribed", "email": email,
@@ -142,6 +178,12 @@ def main():
     state = json.load(open(STATE)) if os.path.exists(STATE) else {"watermark": START}
     since_dt = dt.datetime.fromisoformat(state["watermark"].replace("Z", "+00:00")) - OVERLAP
     since = since_dt.strftime("%Y-%m-%dT%H:%M:%SZ")
+
+    if a.dry_run and not os.environ.get("RESEND_API_KEY") and (a.csv or not os.environ.get("KIT_API_KEY")):
+        print(f"dry-run (no API keys set): planned create properties={json.dumps(CREATE_PROPERTIES)}, "
+              f"existing fill-empty PATCH={json.dumps({'properties': {'source_surface': SOURCE_SURFACE}})}")
+        print(f"since {since}: read 0, created 0, already in Resend 0, invalid 0 (dry run)")
+        return
 
     if a.csv:
         counts, newest = sync(csv_subscribers(a.csv), a.dry_run)

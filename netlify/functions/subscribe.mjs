@@ -1,9 +1,11 @@
 // Newsletter capture for bryancollins.com -> Resend. Replaces every Kit form on the site.
 // PRD: ~/.claude/handoff/kit-to-resend-2026-10-28/PRD-kit-to-resend-migration.md (Phase 3).
+// Attribution PRD: ~/.claude/handoff/signup-attribution-2026-11-09/bryancollins-PRD-1-signup-attribution.md (R268).
 //
 // A plain HTML form POST (works without JS) to /.netlify/functions/subscribe with
 // `email`, `lane`, an optional `elapsed` (ms since page load, set by
-// /resources/subscribe.js) and the `website` honeypot. Answers 303 to the lane's
+// /resources/subscribe.js), attribution fields (`form`, `signup_utm_*`,
+// `signup_referrer`, `ph_id`) and the `website` honeypot. Answers 303 to the lane's
 // thank-you page.
 //
 // Abuse guards, ported from bawt-astro src/pages/api/subscribe.ts. A bot here lands
@@ -26,13 +28,15 @@
 // account-wide and would resubscribe someone who left Become a Writer Today.
 import { getStore } from "@netlify/blobs";
 
-const KEY = process.env.RESEND_API_KEY || process.env.RESEND_API;
+const apiKey = () => process.env.RESEND_API_KEY || process.env.RESEND_API;
 // Segment names are code keys in this account; the id is pinned, env can override.
 const SEGMENT = process.env.RESEND_SEGMENT_ID || "389c476f-521e-444d-9932-770c5a443645";
 const FROM = process.env.FROM_EMAIL || "Bryan Collins <bryan@bryancollins.com>";
 const SUBSCRIBED_EVENT = "bc.subscribed";
 // Public project token (it ships in every site's snippet). EU project 229393.
 const POSTHOG_KEY = process.env.POSTHOG_API_KEY || "phc_pBxJ3BtqHYzDS52caeqcRBzEmSd697fSc6BwCfnrLTXR";
+const SITE = "bryancollins";
+const HOST = "bryancollins.com";
 
 const AI_PROMPTS = {
   title: "101 AI Prompts",
@@ -46,6 +50,7 @@ const CLAUDE = { title: "The Claude Code Starter Pack", url: "https://bryancolli
 // linkedin-hooks, mba, poc and chatgpt delivered whatever Kit's incentive was set to,
 // which the API cannot read. They land on /thank-you, which links the AI prompts doc
 // exactly as it did under Kit, until their own asset links are added here.
+// Every lane currently points `thanks` to `/thank-you`; kept per-lane so a lane can override later.
 const LANES = {
   "ai-prompts":     { thanks: "/thank-you", asset: AI_PROMPTS },
   medium:           { thanks: "/thank-you", asset: AI_PROMPTS },
@@ -60,6 +65,57 @@ const LANES = {
   hub:              { thanks: "/thank-you", asset: null },
   newsletter:       { thanks: "/thank-you", asset: null },
 };
+
+// -- Attribution label validation ---------------------------------------------
+const FORM_SLUG_RE = /^[a-z0-9][a-z0-9._-]{0,39}$/;
+const UTM_VALUE_RE = /^[A-Za-z0-9._~+:-]{1,60}$/;
+const HOSTNAME_RE = /^[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?(?:\.[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?)+$/i;
+const PH_ID_RE = /^[a-z0-9-]{8,40}$/;
+
+function cleanUtm(v) {
+  if (typeof v !== "string" || !UTM_VALUE_RE.test(v)) return undefined;
+  return v.toLowerCase();
+}
+
+function cleanReferrerHost(v) {
+  if (typeof v !== "string" || v.length === 0 || v.length > 80) return undefined;
+  if (!HOSTNAME_RE.test(v)) return undefined;
+  return v.toLowerCase();
+}
+
+function cleanSignupPage(refererHeader) {
+  if (!refererHeader) return undefined;
+  try {
+    const pathname = new URL(refererHeader).pathname;
+    if (!pathname) return undefined;
+    return pathname.slice(0, 120);
+  } catch {
+    return undefined;
+  }
+}
+
+function extractLabels(form, lane, req) {
+  const rawSlug = typeof form.form === "string" ? form.form.trim().toLowerCase() : "";
+  const slug = FORM_SLUG_RE.test(rawSlug) ? rawSlug : lane;
+  const formId = `${SITE}@${slug}`;
+  const signup_page = cleanSignupPage(req.headers.get("referer"));
+  const signup_utm_source = cleanUtm(form.signup_utm_source ?? form.utm_source);
+  const signup_utm_medium = cleanUtm(form.signup_utm_medium ?? form.utm_medium);
+  const signup_utm_campaign = cleanUtm(form.signup_utm_campaign ?? form.utm_campaign);
+  const signup_referrer = cleanReferrerHost(form.signup_referrer);
+  const rawPhId = typeof form.ph_id === "string" ? form.ph_id : "";
+  const ph_id = PH_ID_RE.test(rawPhId) ? rawPhId : undefined;
+  return {
+    form_id: formId,
+    source_surface: formId,
+    signup_page,
+    signup_utm_source,
+    signup_utm_medium,
+    signup_utm_campaign,
+    signup_referrer,
+    ph_id,
+  };
+}
 
 // -- Same-origin gate ---------------------------------------------------------
 const ALLOWED_HOSTS = new Set([
@@ -106,7 +162,7 @@ async function rateLimited(req, context) {
 
 // -- Resend -------------------------------------------------------------------
 const RESEND = "https://api.resend.com";
-const auth = () => ({ Authorization: `Bearer ${KEY}`, "Content-Type": "application/json" });
+const auth = () => ({ Authorization: `Bearer ${apiKey()}`, "Content-Type": "application/json" });
 
 // The contact record, null when it does not exist, undefined when the lookup failed.
 async function getContact(email) {
@@ -125,31 +181,95 @@ async function inSegment(contactId) {
   return (body.data || []).some(s => s.id === SEGMENT);
 }
 
-// Returns { ok, isNew }. ok:false only when the contact write itself failed.
-async function upsertContact(email, lane) {
+const isEmptyProp = (v) => v === undefined || v === null || v === "" || v === "unknown";
+
+async function patchEmptyLabels(existing, labels) {
+  const existingProps = (existing && typeof existing.properties === "object" && existing.properties) || {};
+  // Fill-empty PATCH: never includes `lane`; only sets empty or "unknown" attribution keys.
+  const patchProps = {
+    ...(isEmptyProp(existingProps.source_surface) && labels.source_surface ? { source_surface: labels.source_surface } : {}),
+    ...(isEmptyProp(existingProps.signup_page) && labels.signup_page ? { signup_page: labels.signup_page } : {}),
+    ...(isEmptyProp(existingProps.signup_utm_source) && labels.signup_utm_source ? { signup_utm_source: labels.signup_utm_source } : {}),
+    ...(isEmptyProp(existingProps.signup_utm_medium) && labels.signup_utm_medium ? { signup_utm_medium: labels.signup_utm_medium } : {}),
+    ...(isEmptyProp(existingProps.signup_utm_campaign) && labels.signup_utm_campaign ? { signup_utm_campaign: labels.signup_utm_campaign } : {}),
+    ...(isEmptyProp(existingProps.signup_referrer) && labels.signup_referrer ? { signup_referrer: labels.signup_referrer } : {}),
+  };
+  let patchOk = true;
+  if (Object.keys(patchProps).length > 0) {
+    try {
+      const pr = await fetch(`${RESEND}/contacts/${existing.id}`, {
+        method: "PATCH", headers: auth(), body: JSON.stringify({ properties: patchProps }),
+      });
+      if (pr.status === 400 || pr.status === 422) {
+        console.warn(`signup attribution dropped: ${pr.status}`);
+        patchOk = false;
+      } else if (!pr.ok) {
+        console.warn("signup attribution patch failed (non-fatal):", pr.status);
+        patchOk = false;
+      }
+    } catch (e) {
+      console.warn("signup attribution patch failed (non-fatal):", e?.message);
+      patchOk = false;
+    }
+  }
+  const finalSurface = !isEmptyProp(existingProps.source_surface)
+    ? existingProps.source_surface
+    : (patchOk ? patchProps.source_surface : "");
+  const finalPage = !isEmptyProp(existingProps.signup_page)
+    ? existingProps.signup_page
+    : (patchOk ? patchProps.signup_page : "");
+  return Boolean(finalSurface && finalPage);
+}
+
+// Returns { ok, isNew, labelled }. ok:false only when the contact write itself failed.
+async function upsertContact(email, lane, labels = {}) {
   const existing = await getContact(email);
-  if (existing === undefined) return { ok: false, status: "lookup" };
+  if (existing === undefined) return { ok: false, status: "lookup", isNew: false, labelled: false };
 
   if (existing === null) {
-    const r = await fetch(`${RESEND}/contacts`, {
+    const postProps = {
+      lane,
+      ...(labels.source_surface ? { source_surface: labels.source_surface } : {}),
+      ...(labels.signup_page ? { signup_page: labels.signup_page } : {}),
+      ...(labels.signup_utm_source ? { signup_utm_source: labels.signup_utm_source } : {}),
+      ...(labels.signup_utm_medium ? { signup_utm_medium: labels.signup_utm_medium } : {}),
+      ...(labels.signup_utm_campaign ? { signup_utm_campaign: labels.signup_utm_campaign } : {}),
+      ...(labels.signup_referrer ? { signup_referrer: labels.signup_referrer } : {}),
+    };
+    let r = await fetch(`${RESEND}/contacts`, {
       method: "POST", headers: auth(),
-      body: JSON.stringify({ email, unsubscribed: false, segments: [{ id: SEGMENT }], properties: { lane } }),
+      body: JSON.stringify({ email, unsubscribed: false, segments: [{ id: SEGMENT }], properties: postProps }),
     });
-    if (!r.ok) return { ok: false, status: r.status };
-    return { ok: true, isNew: true };
+    let dropped = false;
+    if (r.status === 400 || r.status === 422) {
+      // Retry without source_surface / signup_page / signup_utm_* / signup_referrer so a rejected property cannot block signup.
+      console.warn(`signup attribution dropped: ${r.status}`);
+      dropped = true;
+      r = await fetch(`${RESEND}/contacts`, {
+        method: "POST", headers: auth(),
+        body: JSON.stringify({ email, unsubscribed: false, segments: [{ id: SEGMENT }], properties: { lane } }),
+      });
+    }
+    if (!r.ok) return { ok: false, status: r.status, isNew: false, labelled: false };
+    const labelled = !dropped && Boolean(postProps.source_surface && postProps.signup_page);
+    return { ok: true, isNew: true, labelled };
   }
 
-  if (await inSegment(existing.id)) return { ok: true, isNew: false };
+  if (await inSegment(existing.id)) {
+    const labelled = await patchEmptyLabels(existing, labels);
+    return { ok: true, isNew: false, labelled };
+  }
   const r = await fetch(`${RESEND}/contacts/${existing.id}/segments/${SEGMENT}`, { method: "POST", headers: auth() });
-  if (!r.ok) return { ok: false, status: r.status };
+  if (!r.ok) return { ok: false, status: r.status, isNew: false, labelled: false };
   // Record the lane on an existing contact too, so the newsletter can segment by it.
   // Non-fatal: the segment membership is the KPI.
   await fetch(`${RESEND}/contacts/${existing.id}`, {
     method: "PATCH", headers: auth(), body: JSON.stringify({ properties: { lane } }),
   }).catch(e => console.warn("lane property update failed (non-fatal):", e?.message));
+  const labelled = await patchEmptyLabels(existing, labels);
   // Someone who left every list (unsubscribed account-wide) cannot receive a broadcast,
   // so they are not a new reader: no welcome, and no Email Signup in the kill-gate metric.
-  return { ok: true, isNew: !existing.unsubscribed };
+  return { ok: true, isNew: !existing.unsubscribed, labelled };
 }
 
 function deliveryHtml(asset) {
@@ -185,26 +305,71 @@ function fireSubscribed(email, lane, path) {
   }).catch(e => console.warn("bc.subscribed event failed (non-fatal):", e?.message));
 }
 
-// Server-side capture: distinct_id is a hash, never the address.
-async function captureSignup(email, lane, path) {
+async function resolveDistinctId(email, labels) {
+  if (labels?.ph_id && PH_ID_RE.test(labels.ph_id)) return labels.ph_id;
+  const seed = (email || "anonymous").toLowerCase();
+  const digest = await crypto.subtle.digest("SHA-256", new TextEncoder().encode(seed));
+  const id = [...new Uint8Array(digest)].map(b => b.toString(16).padStart(2, "0")).join("").slice(0, 32);
+  return `bc_${id}`;
+}
+
+function buildPostHogProps(labels, extra = {}) {
+  return {
+    $host: HOST,
+    site: SITE,
+    form_id: labels.form_id,
+    ...(labels.signup_page ? { signup_page: labels.signup_page } : {}),
+    ...(labels.signup_utm_source ? { utm_source: labels.signup_utm_source } : {}),
+    ...(labels.signup_utm_medium ? { utm_medium: labels.signup_utm_medium } : {}),
+    ...(labels.signup_utm_campaign ? { utm_campaign: labels.signup_utm_campaign } : {}),
+    ...(labels.signup_referrer ? { signup_referrer: labels.signup_referrer } : {}),
+    ...extra,
+    $process_person_profile: false,
+  };
+}
+
+async function capturePostHog(event, email, labels, extra = {}) {
   try {
-    const digest = await crypto.subtle.digest("SHA-256", new TextEncoder().encode(email.toLowerCase()));
-    const id = [...new Uint8Array(digest)].map(b => b.toString(16).padStart(2, "0")).join("").slice(0, 32);
+    const distinct_id = await resolveDistinctId(email, labels);
     await fetch("https://eu.i.posthog.com/i/v0/e/", {
       method: "POST", headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
-        api_key: POSTHOG_KEY, event: "Email Signup", distinct_id: `bc_${id}`,
-        properties: { $host: "bryancollins.com", $pathname: path, lane, $process_person_profile: false },
+        api_key: POSTHOG_KEY,
+        event,
+        distinct_id,
+        properties: buildPostHogProps(labels, extra),
       }),
     });
   } catch (e) { console.warn("PostHog capture failed (non-fatal):", e?.message); }
 }
 
+// Server-side capture: distinct_id is ph_id when valid, else a hash (never the address).
+function captureSignup(email, lane, path, labels) {
+  return capturePostHog("Email Signup", email, labels, {
+    $pathname: path,
+    lane,
+    source_surface: labels.source_surface,
+  });
+}
+
+function captureConfirmed(email, lane, labels, isNew, labelled) {
+  return capturePostHog("Signup Confirmed", email, labels, {
+    lane,
+    source_surface: labels.source_surface,
+    is_new: Boolean(isNew),
+    labelled: Boolean(labelled),
+  });
+}
+
+function captureFailed(email, labels, reason) {
+  return capturePostHog("Signup Failed", email, labels, { reason });
+}
+
 // -- Handler ------------------------------------------------------------------
 const redirect = (to) => new Response(null, { status: 303, headers: { Location: to } });
-const thanks = (lane) => `${LANES[lane].thanks}?lane=${encodeURIComponent(lane)}`;
+const thanks = (lane, formId) => `${LANES[lane].thanks}?lane=${encodeURIComponent(lane)}&form=${encodeURIComponent(formId)}`;
 const fail = (status, msg) => new Response(
-  `<!doctype html><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Subscribe</title><body style="font-family:system-ui,sans-serif;max-width:32rem;margin:4rem auto;padding:0 16px;line-height:1.6"><p>${msg}</p><p><a href="javascript:history.back()">Go back</a></p></body>`,
+  `<!doctype html><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Subscribe</title><body style="font-family:system-ui,sans-serif;max-width:32rem;margin:4rem auto;padding:0 16px;line-height:1.6"><p role="alert">${msg}</p><p><a href="javascript:history.back()">Go back</a></p></body>`,
   { status, headers: { "content-type": "text/html; charset=utf-8" } });
 
 export default async (req, context) => {
@@ -213,41 +378,62 @@ export default async (req, context) => {
   let form;
   try {
     const type = req.headers.get("content-type") || "";
+    // Nothing on the site posts JSON; kept as a harmless fallback alongside form-urlencoded.
     form = type.includes("application/json")
       ? await req.json()
       : Object.fromEntries(new URLSearchParams(await req.text()));
   } catch { return fail(400, "That did not go through. Please try again."); }
 
+  // form.email_address is a Kit-form leftover; no current form on the site sends it.
   const email = String(form.email || form.email_address || "").trim();
   const lane = Object.hasOwn(LANES, form.lane) ? form.lane : "hub";
+  const labels = extractLabels(form, lane, req);
+
   if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email) || email.length > 254) {
+    await captureFailed(email, labels, "invalid_email");
     return fail(400, "That email address does not look right. Please check it and try again.");
   }
-  if (!originAllowed(req)) return new Response(JSON.stringify({ error: "forbidden" }), { status: 403, headers: { "content-type": "application/json" } });
+  if (!originAllowed(req)) {
+    await captureFailed(email, labels, "forbidden_origin");
+    return new Response(JSON.stringify({ error: "forbidden" }), { status: 403, headers: { "content-type": "application/json" } });
+  }
 
   // Bots get a normal-looking success and nothing is written.
-  if (typeof form.website === "string" && form.website.trim() !== "") return redirect(thanks(lane));
+  if (typeof form.website === "string" && form.website.trim() !== "") {
+    await captureFailed(email, labels, "bot_honeypot");
+    return redirect(thanks(lane, labels.form_id));
+  }
   const elapsed = form.elapsed === undefined || form.elapsed === "" ? null : Number(form.elapsed);
-  if (elapsed !== null && Number.isFinite(elapsed) && elapsed >= 0 && elapsed < 2500) return redirect(thanks(lane));
+  if (elapsed !== null && Number.isFinite(elapsed) && elapsed >= 0 && elapsed < 2500) {
+    await captureFailed(email, labels, "too_fast");
+    return redirect(thanks(lane, labels.form_id));
+  }
 
-  if (await rateLimited(req, context)) return fail(429, "Too many signups from this connection. Please try again in an hour.");
+  if (await rateLimited(req, context)) {
+    await captureFailed(email, labels, "rate_limited");
+    return fail(429, "Too many signups from this connection. Please try again in an hour.");
+  }
 
-  if (!KEY) { console.log("subscribe dry-run (no RESEND_API_KEY):", lane); return redirect(thanks(lane)); }
+  if (!apiKey()) {
+    console.log("subscribe dry-run (no RESEND_API_KEY):", lane);
+    await captureFailed(email, labels, "dry_run_no_key");
+    return redirect(thanks(lane, labels.form_id));
+  }
 
-  let path = "/";
-  try { path = new URL(req.headers.get("referer")).pathname; } catch { /* keep "/" */ }
+  const path = labels.signup_page || "/";
 
   let result;
-  try { result = await upsertContact(email, lane); } catch (e) { result = { ok: false, status: e?.message }; }
+  try { result = await upsertContact(email, lane, labels); } catch (e) { result = { ok: false, status: e?.message }; }
   if (!result.ok) {
     console.error("subscribe: Resend contact write failed", result.status);
+    await captureFailed(email, labels, result.status === "lookup" ? "resend_lookup_failed" : "resend_write_failed");
     return fail(502, "Something went wrong on our side. Please try again in a minute.");
   }
 
-  const jobs = [];
+  const jobs = [captureConfirmed(email, lane, labels, result.isNew, result.labelled)];
   if (LANES[lane].asset) jobs.push(sendDelivery(email, LANES[lane].asset));
-  if (result.isNew) jobs.push(fireSubscribed(email, lane, path), captureSignup(email, lane, path));
+  if (result.isNew) jobs.push(fireSubscribed(email, lane, path), captureSignup(email, lane, path, labels));
   await Promise.all(jobs);
 
-  return redirect(thanks(lane));
+  return redirect(thanks(lane, labels.form_id));
 };
