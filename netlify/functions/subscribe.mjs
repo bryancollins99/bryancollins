@@ -126,6 +126,14 @@ function allowedHost(h) {
   // Deploy previews / branch deploys: <context>--bryancollins.netlify.app (site 1571a0c8)
   return ALLOWED_HOSTS.has(h) || h.endsWith("--bryancollins.netlify.app");
 }
+// Throwaway-address domains seen signing up by bot (Resend audit, 2026-11-17).
+// Matched on the exact domain or any subdomain of it.
+const BLOCKED_DOMAINS = new Set(["mailchuwee.com", "eagereverest.com"]);
+function blockedDomain(email) {
+  const domain = email.slice(email.lastIndexOf("@") + 1).toLowerCase();
+  for (const d of BLOCKED_DOMAINS) if (domain === d || domain.endsWith("." + d)) return true;
+  return false;
+}
 function originAllowed(req) {
   for (const name of ["origin", "referer"]) {
     const v = req.headers.get(name);
@@ -401,6 +409,10 @@ export default async (req, context) => {
   // Bots get a normal-looking success and nothing is written.
   if (typeof form.website === "string" && form.website.trim() !== "") {
     await captureFailed(email, labels, "bot_honeypot");
+    return redirect(thanks(lane, labels.form_id));
+  }
+  if (blockedDomain(email)) {
+    await captureFailed(email, labels, "blocked_domain");
     return redirect(thanks(lane, labels.form_id));
   }
   const elapsed = form.elapsed === undefined || form.elapsed === "" ? null : Number(form.elapsed);
