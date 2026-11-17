@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thanks for picking - Bryan Collins</title>
+    <meta name="description" content="Thanks for telling me what would help. It shapes what I make next.">
+    <meta name="robots" content="noindex">
+    <link rel="canonical" href="https://bryancollins.com/welcome-pick">
+
+    <!-- Privacy-friendly analytics by Plausible -->
+    <script async src="https://stats.bryancollins.com/js/pa-bvsz2TfQenbKYMWpBJ7eS.js"></script>
+    <script>
+      window.plausible=window.plausible||function(){(plausible.q=plausible.q||[]).push(arguments)},plausible.init=plausible.init||function(i){plausible.o=i||{}};
+      plausible.init()
+    </script>
+
+    <style>
+        :root { --ink:#1B1B1D; --bg:#EDEDEE; --card:#FFFFFF; --accent:#956FA6; --gold:#F3C972; }
+        * { box-sizing:border-box; }
+        body { margin:0; padding:48px 16px; background:var(--bg); color:var(--ink);
+               font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif; line-height:1.6; }
+        .card { max-width:560px; margin:0 auto; background:var(--card); border-radius:12px; padding:32px 24px;
+                border-left:4px solid var(--accent); }
+        h1 { font-size:1.75rem; line-height:1.25; margin:0 0 12px; }
+        p { margin:0 0 16px; font-size:1.0625rem; }
+        .cta { display:inline-block; background:var(--gold); color:var(--ink); font-weight:700; text-decoration:none;
+               padding:14px 24px; border-radius:8px; margin-top:8px; }
+        .cta:hover { background:#eab94a; }
+        .small { font-size:.9rem; opacity:.75; margin-top:24px; }
+        .small a { color:var(--accent); }
+    </style>
+</head>
+<body>
+<main class="card">
+    <h1 id="pick-title">Thanks, that helps.</h1>
+    <p id="pick-line">What readers pick here shapes what I build next.</p>
+    <p id="next-line" hidden></p>
+    <a id="next-cta" class="cta" href="/claude-code-yt" hidden></a>
+    <p class="small">Back to <a href="/">bryancollins.com</a></p>
+</main>
+<script>
+  (function () {
+    // Each option in the BC 1 welcome email links here with ?choice=<key>.
+    // The Plausible "Welcome Pick" event is the count that matters.
+    var CHOICES = {
+      commands: {
+        line: 'You picked: the Claude Code commands I use every day, ready to copy.',
+        next: 'While I put that together, the free Starter Pack has my setup and first commands.',
+        cta: 'Get the Claude Code Starter Pack', href: '/claude-code-yt'
+      },
+      course: {
+        line: 'You picked: a step-by-step course on building and shipping a small product with Claude Code.',
+        next: 'The free Starter Pack is the first step. It has the setup I use on every build.',
+        cta: 'Get the Claude Code Starter Pack', href: '/claude-code-yt'
+      },
+      notes: {
+        line: 'You picked: a short daily note on writing and creativity.',
+        next: 'In the meantime, here is the plain-text system I use to capture those notes.',
+        cta: 'Get the Plain-Text Note System', href: '/note-system-yt'
+      },
+      ideas: {
+        line: 'You picked: how I find, score and pick what to build next.',
+        next: 'I wrote up how that works here.',
+        cta: 'Read how I decide what to build', href: '/newsletter/posts/i-used-to-decide-what-to-build-next-by-guessing'
+      },
+      // Easter egg: the hidden link on "Write on," in the welcome email.
+      egg: {
+        title: 'You found it.',
+        line: 'Most people never click that link.',
+        next: "Here's something I don't link anywhere else on this site: the Writing Career Map, the paths I've seen writers take to get paid.",
+        cta: 'Download the Writing Career Map', href: '/downloads/writing-career-map-2w7c6b5.pdf'
+      }
+    };
+    var key = null;
+    try { key = new URLSearchParams(location.search).get('choice'); } catch (e) {}
+    var c = key && Object.prototype.hasOwnProperty.call(CHOICES, key) ? CHOICES[key] : null;
+    if (!c) return;
+    try { plausible('Welcome Pick', { props: { choice: key } }); } catch (e) {}
+    if (c.title) document.getElementById('pick-title').textContent = c.title;
+    document.getElementById('pick-line').textContent = key === 'egg' ? c.line : c.line + ' What readers pick here shapes what I build next.';
+    var next = document.getElementById('next-line');
+    next.textContent = c.next; next.hidden = false;
+    var cta = document.getElementById('next-cta');
+    cta.textContent = c.cta; cta.setAttribute('href', c.href); cta.hidden = false;
+  })();
+</script>
+</body>
+</html>
