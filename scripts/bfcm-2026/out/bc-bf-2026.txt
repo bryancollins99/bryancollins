@@ -1,0 +1,28 @@
+Every November my inbox fills up with $997 video courses promising to teach me an operating system for content or AI.
+
+I bought plenty of them in my thirties. Almost every one sat at 18% completion while I went back to work.
+
+When I started rebuilding my portfolio with Claude Code this year, I stopped keeping ideas inside SaaS dashboards and course portals. Everything that runs my week lives in plain Markdown files and small Python scripts on my Mac: my note vault, my voice memory files, my Friday content pipeline, and my prose checker.
+
+For Black Friday through Cyber Monday, I bundled all four of those working kits onto one page for $69 one-time (normally $146 bought separately):
+
+- The Builder's Pipeline ($39): six scripts and prompts that turn one-line daily build notes into a week of LinkedIn posts, newsletter drafts and YouTube ideas.
+- Claude Code for Writers ($39): zero-terminal quickstart, persistent MEMORY.md voice rules, undo safety, and three CLAUDE.md project briefs.
+- The Zettelkasten for Creators Kit ($39): git-backed plain-Markdown starter vault, five note templates and three cleanup scripts.
+- Filler-Word Killer Editor Pack ($29): batch CLI prose checker for an entire folder of Markdown drafts plus eight editable word lists.
+
+See the Solo Operator Stack ($69):
+https://bryancollins.com/black-friday.html?utm_source=resend&utm_medium=email&utm_campaign=bc-bfcm-2026-bf
+
+On the same page I listed the four paid tools that survived my SaaS cull this year and run Cyber Week offers:
+- Lovable: https://tfr-affiliate-hub.netlify.app/e/lovable-labs-incorporated
+- Grammarly Pro: https://becomeawritertoday.com/try-grammarly/
+- Kit: https://tfr-affiliate-hub.netlify.app/e/kit-formerly-convertkit
+- Teachable: https://tfr-affiliate-hub.netlify.app/e/teachable
+(All four are affiliate links.)
+
+Write on,
+Bryan Collins
+
+Consistent Publishing Ltd, Landscape House, Baldonnell Business Park, Dublin D22 P3K7, Ireland
+Unsubscribe: {{{RESEND_UNSUBSCRIBE_URL}}}
