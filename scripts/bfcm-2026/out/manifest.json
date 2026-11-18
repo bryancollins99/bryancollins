@@ -51,7 +51,7 @@
     ],
     "subject": "Why I stopped buying $997 courses (and my $69 Cyber Week stack)",
     "previewText": "Four plain-text Markdown and Claude Code kits I use every day to run nine sites without a team.",
-    "previewPageUrl": "https://bryancollins.com/black-friday.html",
+    "previewPageUrl": "https://deploy-preview-16--bryancollins.netlify.app/black-friday.html",
     "livePageUrl": "https://bryancollins.com/black-friday.html",
     "htmlFile": "scripts/bfcm-2026/out/bc-bf-2026.html",
     "textFile": "scripts/bfcm-2026/out/bc-bf-2026.txt"
@@ -70,7 +70,7 @@
     ],
     "subject": "Last call tonight: my 4 Claude Code and Markdown kits ($69)",
     "previewText": "The Solo Operator bundle comes down at midnight, back to $146 across individual pages tomorrow.",
-    "previewPageUrl": "https://bryancollins.com/black-friday.html",
+    "previewPageUrl": "https://deploy-preview-16--bryancollins.netlify.app/black-friday.html",
     "livePageUrl": "https://bryancollins.com/black-friday.html",
     "htmlFile": "scripts/bfcm-2026/out/bc-cm-2026.html",
     "textFile": "scripts/bfcm-2026/out/bc-cm-2026.txt"
@@ -146,7 +146,7 @@
     ],
     "subject": "Cyber Monday note: frontier API costs fell, wrapper subscriptions did not",
     "previewText": "How we replaced half our monthly AI SaaS bill with local Markdown + Claude Code scripts.",
-    "previewPageUrl": "https://bryancollins.com/black-friday.html",
+    "previewPageUrl": "https://deploy-preview-16--bryancollins.netlify.app/black-friday.html",
     "livePageUrl": "https://bryancollins.com/black-friday.html",
     "htmlFile": "scripts/bfcm-2026/out/aifr-cm-2026.html",
     "textFile": "scripts/bfcm-2026/out/aifr-cm-2026.txt"
@@ -165,7 +165,7 @@
     ],
     "subject": "Skip giant prompt packs this Black Friday (use project memory files instead)",
     "previewText": "Four downloadable Claude Code and plain-Markdown kits for $69 one-time through Cyber Monday.",
-    "previewPageUrl": "https://bryancollins.com/black-friday.html",
+    "previewPageUrl": "https://deploy-preview-16--bryancollins.netlify.app/black-friday.html",
     "livePageUrl": "https://bryancollins.com/black-friday.html",
     "htmlFile": "scripts/bfcm-2026/out/pws-bf-2026.html",
     "textFile": "scripts/bfcm-2026/out/pws-bf-2026.txt"
