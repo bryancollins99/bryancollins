@@ -1,0 +1,18 @@
+If you follow our weekly model tracker on AI Flash Report (https://aiflashreport.com/changes/), you have watched per-token inference prices drop steadily across 2026 while wrapper SaaS apps keep charging $29 to $99 a month per seat.
+
+Behind AI Flash Report, our Dublin publishing group runs nine sites using plain-text Markdown files, Python scripts and Claude Code skills instead of recurring SaaS wrappers.
+
+Until midnight tonight (Cyber Monday), our founder Bryan Collins has bundled all four of those local plain-text and Claude Code kits together for $69 one-time (normally $146):
+
+- The Builder's Pipeline: six Python scripts and prompts turning daily build logs into weekly drafts.
+- Claude Code for Writers & Operators: persistent MEMORY.md setup, undo safety and three CLAUDE.md project specs.
+- The Zettelkasten for Creators Kit: git-backed plain-Markdown vault and cleanup scripts.
+- Filler-Word Killer Editor Pack: local CLI prose linter + eight editable JSON dictionaries.
+
+Inspect the $69 Cyber Monday Builder Stack:
+https://bryancollins.com/black-friday.html?utm_source=aiflashreport&utm_medium=email&utm_campaign=aifr-bfcm-2026
+
+Also worth checking today: Lovable for rapid UI prototyping from a prompt (affiliate link: https://tfr-affiliate-hub.netlify.app/e/lovable-labs-incorporated), and Irish B2B AI benchmarks at https://vendors.ie/ai-tools-ireland.
+
+Consistent Publishing Ltd, CRO 742884, Landscape House, Baldonnell Business Park, Dublin D22 P3K7, Ireland
+Unsubscribe: {{{RESEND_UNSUBSCRIBE_URL}}}
