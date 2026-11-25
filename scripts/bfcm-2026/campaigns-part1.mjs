@@ -1,9 +1,9 @@
 // scripts/bfcm-2026/campaigns-part1.mjs
 //
-// Campaign emails 1 to 9 (3 per site):
-//  1-3. Become a Writer Today (BAWT · newsletter, 7db2686b-5e9c-4782-886e-7ccb3c5fe674)
-//  4-6. Bryan Collins Personal Brand (Bryan Collins Newsletter, 389c476f-521e-444d-9932-770c5a443645 + Kit)
-//  7-9. Leinster Insider (Leinster Insider · newsletter, 726f5926-ad5f-4f79-a77c-9a7408578623 + County Planning lists)
+// Campaign emails 1 to 11 (5 BAWT + 3 Bryan Collins + 3 Leinster Insider):
+//  1-5. Become a Writer Today (BAWT · newsletter, 7db2686b-5e9c-4782-886e-7ccb3c5fe674)
+//  6-8. Bryan Collins Personal Brand (Bryan Collins Newsletter, 389c476f-521e-444d-9932-770c5a443645 + Kit)
+//  9-11. Leinster Insider (Leinster Insider · newsletter, 726f5926-ad5f-4f79-a77c-9a7408578623 + County Planning lists)
 
 import {
   p,
@@ -29,7 +29,7 @@ export const CAMPAIGNS_PART_1 = [
     sendSlot: "Black Friday · Fri 27 Nov 2026, 13:00 UTC",
     from: "Become a Writer Today <bryan@becomeawritertoday.com>",
     replyTo: ["bryan@becomeawritertoday.com"],
-    subject: "5 writing packs for $59 (normally $118)",
+    subject: "My Black Friday vault for writers",
     previewText: "Get the complete Become a Writer Today download vault for $59 (save $59), plus honest notes on ProWritingAid and Grammarly.",
     previewPageUrl: "https://deploy-preview-276--becomeawriter.netlify.app/black-friday/",
     livePageUrl: "https://becomeawritertoday.com/black-friday/",
@@ -125,29 +125,41 @@ Unsubscribe: {{{RESEND_UNSUBSCRIBE_URL}}}`,
     segmentName: "BAWT · newsletter",
     segmentId: "7db2686b-5e9c-4782-886e-7ccb3c5fe674",
     audienceNote: "~5,700 writers",
-    offerType: "Creator White Space Challenge ($97) + 5-Pack Vault Reminder",
+    offerType: "Creator White Space Challenge ($97) Launch Email",
     sendSlot: "Saturday · Sat 28 Nov 2026, 13:00 UTC",
     from: "Become a Writer Today <bryan@becomeawritertoday.com>",
     replyTo: ["bryan@becomeawritertoday.com"],
-    subject: "30 mornings to protect your 2027 writing time",
-    previewText: "30 daily morning emails to carve out protected time and mental space for your book, newsletter or creative project.",
+    subject: "The project still sitting in your head",
+    previewText: "White space is not about finding more time. It is about protecting the time you already have.",
     previewPageUrl: "https://deploy-preview-276--becomeawriter.netlify.app/black-friday/#creator-white-space",
     livePageUrl: "https://becomeawritertoday.com/black-friday/#creator-white-space",
     html: wrapBawtEmail({
       title: "The Creator White Space Challenge",
-      previewText: "30 daily morning emails to carve out protected time and mental space for your book, newsletter or creative project.",
+      previewText: "White space is not about finding more time. It is about protecting the time you already have.",
       kicker: "Cyber Weekend · 30-Day Email Course",
       bodyHtml: [
-        p("Most writers I speak with do not have an ideas problem. They have a time and mental-bandwidth problem.", SERIF, "#1C1917"),
-        p("If you want to finish a book, build a newsletter or Substack, or launch a creative project in 2027 without burning out, doors are open through Monday night for <strong>The Creator White Space Challenge ($97)</strong>.", SERIF, "#1C1917"),
-        p("It is a 30-day daily email course. Each morning you get one short, practical lesson that ends with a concrete Creative Action Plan you can finish in a busy day. No bloated video portal.", SERIF, "#1C1917"),
+        p("You know that project? The one you have been thinking about for months (or years). The manuscript, the newsletter, the passion project that keeps showing up in your late-night thoughts.", SERIF, "#1C1917"),
+        p("You are not putting it off because you are lazy or untalented. You are putting it off because you do not have a system for protecting your creative time from the noise of daily life.", SERIF, "#1C1917"),
+        p("I have spent years studying how prolific creators work. Robert Heinlein. Brian Eno. John Cleese. They do not wait for inspiration. They build creative white space into their lives, then they show up and create.", SERIF, "#1C1917"),
+        p("White space is not about finding more time. It is about protecting the time you already have.", SERIF, "#1C1917"),
+        p("Through Monday night, doors are open for <strong>The Creator White Space Challenge ($97)</strong>. It is a 30-day email course. Each morning you get one short, practical lesson ending with a specific 3-point Creative Action Plan you can finish in a busy day:", SERIF, "#1C1917"),
+        bulletList(
+          [
+            "Create before you consume so your best attention goes to your own work.",
+            "Use time-boxing to beat procrastination and endless tinkering.",
+            "Build a 'done file' instead of an endless ideas list.",
+            "Establish daily rituals that signal to your brain it is time to create.",
+          ],
+          SERIF,
+          "#1C1917",
+        ),
         calloutBox({
           title: "What past participants said",
           border: "#E7E2DA",
           bg: "#FAF7F2",
           font: SERIF,
           bodyHtml:
-            "\"You communicate each lesson so clearly and with a length that makes reading each email easy to fit into any busy day. I also love how you end each challenge with a Creative Action Plan in specific, practical steps.\" (Patricia)<br><br>\"I've been knowing that I am building something worth sharing. I am really glad I signed up for this course.\" (Craig)",
+            "\"Thank you for offering the Creative White Space Challenge and making each daily entry not just educational, but entertaining. I love all the episodes from creators and from your own life, and you communicate them so clearly and with a length that makes reading each email easy to fit into any busy day. I also love how you end each challenge with a Creative Action Plan in specific, practical steps.\" (Patricia)<br><br>\"I've been quite literally standing and looking in the mirrors around my house a lot lately, knowing that I am building something worth sharing. And ironically enough, all of my writing is centred on the same concept: Creativity and Curiosity as Humanity's Destiny. I am really glad I signed up for this course.\" (Craig)",
         }),
         ctaButton({
           label: "Join the Creator White Space Challenge ($97)",
@@ -156,27 +168,169 @@ Unsubscribe: {{{RESEND_UNSUBSCRIBE_URL}}}`,
           fg: "#FFFFFF",
           font: SERIF,
         }),
-        p("Try it for a few days. If it is not a fit, reply to any email for a full refund. And if you also want all five Become a Writer Today downloadable packs bundled together ($59 vs $118, saving $59), they are on the same page until midnight UTC on Monday.", SERIF, "#1C1917"),
+        p("Try it for a few days. If it is not a fit, let me know and I will refund you in full. And if you also want all five Become a Writer Today downloadable packs bundled together ($59 vs $118, saving $59), they are on the same page until midnight UTC on Monday.", SERIF, "#1C1917"),
         p("Write on,<br>Bryan Collins", SERIF, "#1C1917"),
       ].join("\n"),
     }),
-    text: `Most writers I speak with do not have an ideas problem. They have a time and mental-bandwidth problem.
+    text: `You know that project? The one you have been thinking about for months (or years). The manuscript, the newsletter, the passion project that keeps showing up in your late-night thoughts.
 
-If you want to finish a book, build a newsletter or Substack, or launch a creative project in 2027 without burning out, doors are open through Monday night for The Creator White Space Challenge ($97).
+You are not putting it off because you are lazy or untalented. You are putting it off because you do not have a system for protecting your creative time from the noise of daily life.
 
-It is a 30-day daily email course. Each morning you get one short, practical lesson that ends with a concrete Creative Action Plan you can finish in a busy day. No bloated video portal.
+I have spent years studying how prolific creators work. Robert Heinlein. Brian Eno. John Cleese. They do not wait for inspiration. They build creative white space into their lives, then they show up and create.
 
-Patricia wrote: "You communicate each lesson so clearly and with a length that makes reading each email easy to fit into any busy day. I also love how you end each challenge with a Creative Action Plan in specific, practical steps."
+White space is not about finding more time. It is about protecting the time you already have.
 
-Craig wrote: "I am really glad I signed up for this course."
+Through Monday night, doors are open for The Creator White Space Challenge ($97). It is a 30-day email course. Each morning you get one short, practical lesson ending with a specific 3-point Creative Action Plan you can finish in a busy day:
+
+- Create before you consume so your best attention goes to your own work.
+- Use time-boxing to beat procrastination and endless tinkering.
+- Build a "done file" instead of an endless ideas list.
+- Establish daily rituals that signal to your brain it is time to create.
+
+Patricia wrote: "Thank you for offering the Creative White Space Challenge and making each daily entry not just educational, but entertaining. I love all the episodes from creators and from your own life, and you communicate them so clearly and with a length that makes reading each email easy to fit into any busy day. I also love how you end each challenge with a Creative Action Plan in specific, practical steps."
+
+Craig wrote: "I've been quite literally standing and looking in the mirrors around my house a lot lately, knowing that I am building something worth sharing. And ironically enough, all of my writing is centred on the same concept: Creativity and Curiosity as Humanity's Destiny. I am really glad I signed up for this course."
 
 Join the Creator White Space Challenge ($97):
 https://becomeawritertoday.com/black-friday/?utm_source=resend&utm_medium=email&utm_campaign=bfcm-2026-sat#creator-white-space
 
-Try it for a few days. If it is not a fit, reply to any email for a full refund. All five Become a Writer Today downloadable packs ($59 vs $118, saving $59) are on the same page until midnight UTC on Monday.
+Try it for a few days. If it is not a fit, let me know and I will refund you in full. All five Become a Writer Today downloadable packs ($59 vs $118, saving $59) are on the same page until midnight UTC on Monday.
 
 Write on,
 Bryan Collins
+
+Become a Writer Today, Consistent Publishing Ltd, Landscape House, Baldonnell Business Park, Dublin D22 P3K7, Ireland
+Unsubscribe: {{{RESEND_UNSUBSCRIBE_URL}}}`,
+  },
+
+  {
+    id: "bawt-sun-2026",
+    property: "Become a Writer Today",
+    segmentName: "BAWT · newsletter",
+    segmentId: "7db2686b-5e9c-4782-886e-7ccb3c5fe674",
+    audienceNote: "~5,700 writers",
+    offerType: "Creator White Space Challenge ($97) FAQ & Objection-Buster + Vault Option",
+    sendSlot: "Sunday · Sun 29 Nov 2026, 14:00 UTC",
+    from: "Become a Writer Today <bryan@becomeawritertoday.com>",
+    replyTo: ["bryan@becomeawritertoday.com"],
+    subject: "Should you join the Creator White Space Challenge?",
+    previewText: "Who the 30-day email challenge is for, who should skip it, and why it arrives by email instead of a video portal.",
+    previewPageUrl: "https://deploy-preview-276--becomeawriter.netlify.app/black-friday/#creator-white-space",
+    livePageUrl: "https://becomeawritertoday.com/black-friday/#creator-white-space",
+    html: wrapBawtEmail({
+      title: "Should you join the Creator White Space Challenge?",
+      previewText: "Who the 30-day email challenge is for, who should skip it, and why it arrives by email instead of a video portal.",
+      kicker: "Sunday Q&A · Doors Close Tomorrow Night",
+      bodyHtml: [
+        p("When I first ran the Creator White Space Challenge, I refined the lessons based on feedback from early readers. Now that doors are open again for Cyber Weekend, here is the honest answer to whether you should sign up.", SERIF, "#1C1917"),
+        h2("Who it is for", SERIF, "#1C1917"),
+        p("This challenge is built for you if you want to work on a real creative project in 2027, whether that is writing a book, starting a newsletter or Substack, launching a YouTube channel, publishing articles or even coding a side project, and you are struggling to find time, space or mental bandwidth.", SERIF, "#1C1917"),
+        h2("Who should skip it", SERIF, "#1C1917"),
+        p("If you already ship consistently every week and protect your mornings without effort, save your money. And if you want a 40-hour video portal with community chat rooms and weekly Zoom calls, this is not that.", SERIF, "#1C1917"),
+        h2("Why 30 daily morning emails instead of a course portal", SERIF, "#1C1917"),
+        p("Most video courses sit unfinished because logging into another dashboard feels like homework. The Creator White Space Challenge arrives in your inbox first thing each morning for 30 days. Every email takes a few minutes to read with your coffee and ends with a practical Creative Action Plan you can apply that same day.", SERIF, "#1C1917"),
+        p("As Patricia put it after finishing the challenge: \"You communicate them so clearly and with a length that makes reading each email easy to fit into any busy day. I also love how you end each challenge with a Creative Action Plan in specific, practical steps.\"", SERIF, "#1C1917"),
+        h2("Simple price and refund guarantee", SERIF, "#1C1917"),
+        p("I priced the challenge at <strong>$97</strong> so it stays affordable. Try it for a few days. If you do not like it, let me know and I will refund you in full.", SERIF, "#1C1917"),
+        ctaButton({
+          label: "Join the Creator White Space Challenge ($97)",
+          href: "https://becomeawritertoday.com/black-friday/?utm_source=resend&utm_medium=email&utm_campaign=bfcm-2026-sun#creator-white-space",
+          bg: "#B23A48",
+          fg: "#FFFFFF",
+          font: SERIF,
+        }),
+        p("Already have a rock-solid writing habit and just want practical files? On the same page through midnight UTC tomorrow, all five Become a Writer Today downloadable packs (Deadlines Database, Zettelkasten Kit, Claude Code for Writers, Filler-Word Killer and Prompt Pack) are bundled in the <strong>Writer's Download Vault for $59</strong> (normally $118, saving $59).", SERIF, "#1C1917"),
+        p("Write on,<br>Bryan Collins", SERIF, "#1C1917"),
+      ].join("\n"),
+    }),
+    text: `When I first ran the Creator White Space Challenge, I refined the lessons based on feedback from early readers. Now that doors are open again for Cyber Weekend, here is the honest answer to whether you should sign up.
+
+WHO IT IS FOR
+This challenge is built for you if you want to work on a real creative project in 2027, whether that is writing a book, starting a newsletter or Substack, launching a YouTube channel, publishing articles or even coding a side project, and you are struggling to find time, space or mental bandwidth.
+
+WHO SHOULD SKIP IT
+If you already ship consistently every week and protect your mornings without effort, save your money. And if you want a 40-hour video portal with community chat rooms and weekly Zoom calls, this is not that.
+
+WHY 30 DAILY MORNING EMAILS INSTEAD OF A COURSE PORTAL
+Most video courses sit unfinished because logging into another dashboard feels like homework. The Creator White Space Challenge arrives in your inbox first thing each morning for 30 days. Every email takes a few minutes to read with your coffee and ends with a practical Creative Action Plan you can apply that same day.
+
+As Patricia put it: "You communicate them so clearly and with a length that makes reading each email easy to fit into any busy day. I also love how you end each challenge with a Creative Action Plan in specific, practical steps."
+
+SIMPLE PRICE AND REFUND GUARANTEE
+I priced the challenge at $97 so it stays affordable. Try it for a few days. If you do not like it, let me know and I will refund you in full.
+
+Join the Creator White Space Challenge ($97):
+https://becomeawritertoday.com/black-friday/?utm_source=resend&utm_medium=email&utm_campaign=bfcm-2026-sun#creator-white-space
+
+Already have a rock-solid writing habit and just want practical files? On the same page through midnight UTC tomorrow, all five Become a Writer Today downloadable packs are bundled in the Writer's Download Vault for $59 (normally $118, saving $59):
+https://becomeawritertoday.com/black-friday/?utm_source=resend&utm_medium=email&utm_campaign=bfcm-2026-sun
+
+Write on,
+Bryan Collins
+
+Become a Writer Today, Consistent Publishing Ltd, Landscape House, Baldonnell Business Park, Dublin D22 P3K7, Ireland
+Unsubscribe: {{{RESEND_UNSUBSCRIBE_URL}}}`,
+  },
+
+  {
+    id: "bawt-cm-am-2026",
+    property: "Become a Writer Today",
+    segmentName: "BAWT · newsletter",
+    segmentId: "7db2686b-5e9c-4782-886e-7ccb3c5fe674",
+    audienceNote: "~5,700 writers",
+    offerType: "Cyber Monday Morning Check-In ($59 Vault + $97 Challenge + Editing Deals)",
+    sendSlot: "Cyber Monday · Mon 30 Nov 2026, 11:00 UTC",
+    from: "Become a Writer Today <bryan@becomeawritertoday.com>",
+    replyTo: ["bryan@becomeawritertoday.com"],
+    subject: "Quick check-in before Cyber Monday wraps up",
+    previewText: "Both Become a Writer Today Cyber Week offers and the annual editing deals close at midnight UTC tonight.",
+    previewPageUrl: "https://deploy-preview-276--becomeawriter.netlify.app/black-friday/",
+    livePageUrl: "https://becomeawritertoday.com/black-friday/",
+    html: wrapBawtEmail({
+      title: "Cyber Monday Morning Check-In",
+      previewText: "Both Become a Writer Today Cyber Week offers and the annual editing deals close at midnight UTC tonight.",
+      kicker: "Cyber Monday · Closes Midnight UTC Tonight",
+      bodyHtml: [
+        p("Quick Monday morning recap before the Cyber Week page comes down at midnight UTC tonight.", SERIF, "#1C1917"),
+        p("Everything I put together for writers this weekend sits on one clean page:", SERIF, "#1C1917"),
+        bulletList(
+          [
+            "<strong>The 5-Pack Writer's Download Vault ($59 one-time, normally $118, save $59):</strong> Writers' Deadline Database, Zettelkasten for Creators Kit, Claude Code for Writers, Filler-Word Killer Editor Pack and Prompt &amp; Word-Bank Pack in one zip email. No subscription.",
+            "<strong>The Creator White Space Challenge ($97):</strong> 30 daily morning emails with a short lesson and Creative Action Plan to protect time for your 2027 book, newsletter or creative project. Try it for a few days with a full refund if it is not a fit.",
+            "<strong>Annual editing tool deals ending tonight:</strong> <a href=\"https://becomeawritertoday.com/try-prowritingaid/\" style=\"color:#B23A48;font-weight:bold;text-decoration:underline;\">ProWritingAid</a> (up to 50% off Annual and Lifetime for book-length drafts) and <a href=\"https://becomeawritertoday.com/try-grammarly/\" style=\"color:#B23A48;font-weight:bold;text-decoration:underline;\">Grammarly Pro</a> (annual plan cut for articles and client copy).",
+          ],
+          SERIF,
+          "#1C1917",
+        ),
+        ctaButton({
+          label: "See All Cyber Monday Offers Before Midnight",
+          href: "https://becomeawritertoday.com/black-friday/?utm_source=resend&utm_medium=email&utm_campaign=bfcm-2026-cm-am",
+          bg: "#B23A48",
+          fg: "#FFFFFF",
+          font: SERIF,
+        }),
+        p("I will send one short final reminder tonight before doors close at midnight UTC.", SERIF, "#1C1917"),
+        p("Write on,<br>Bryan Collins", SERIF, "#1C1917"),
+        `<p style="margin-top:0;margin-bottom:8px;font-family:Arial,Helvetica,sans-serif;font-size:12px;line-height:18px;color:#78716C;">Disclosure: the ProWritingAid and Grammarly links are affiliate links. If you buy through them I may earn a commission at no extra cost to you.</p>`,
+      ].join("\n"),
+    }),
+    text: `Quick Monday morning recap before the Cyber Week page comes down at midnight UTC tonight.
+
+Everything I put together for writers this weekend sits on one clean page:
+
+- The 5-Pack Writer's Download Vault ($59 one-time, normally $118, save $59): Writers' Deadline Database, Zettelkasten for Creators Kit, Claude Code for Writers, Filler-Word Killer Editor Pack and Prompt & Word-Bank Pack in one zip email. No subscription.
+- The Creator White Space Challenge ($97): 30 daily morning emails with a short lesson and Creative Action Plan to protect time for your 2027 book, newsletter or creative project. Try it for a few days with a full refund if it is not a fit.
+- Annual editing tool deals ending tonight: ProWritingAid (https://becomeawritertoday.com/try-prowritingaid/) and Grammarly Pro (https://becomeawritertoday.com/try-grammarly/).
+
+See all Cyber Monday offers before midnight:
+https://becomeawritertoday.com/black-friday/?utm_source=resend&utm_medium=email&utm_campaign=bfcm-2026-cm-am
+
+I will send one short final reminder tonight before doors close at midnight UTC.
+
+Write on,
+Bryan Collins
+
+Disclosure: the ProWritingAid and Grammarly links are affiliate links. If you buy through them I may earn a commission at no extra cost to you.
 
 Become a Writer Today, Consistent Publishing Ltd, Landscape House, Baldonnell Business Park, Dublin D22 P3K7, Ireland
 Unsubscribe: {{{RESEND_UNSUBSCRIBE_URL}}}`,
@@ -188,34 +342,31 @@ Unsubscribe: {{{RESEND_UNSUBSCRIBE_URL}}}`,
     segmentName: "BAWT · newsletter",
     segmentId: "7db2686b-5e9c-4782-886e-7ccb3c5fe674",
     audienceNote: "~5,700 writers",
-    offerType: "Cyber Monday Final Call ($59 Vault + ProWritingAid/Grammarly)",
-    sendSlot: "Cyber Monday · Mon 30 Nov 2026, 15:00 UTC",
+    offerType: "Cyber Monday Final Call ($59 Vault + $97 Challenge + ProWritingAid/Grammarly)",
+    sendSlot: "Cyber Monday · Mon 30 Nov 2026, 19:00 UTC",
     from: "Become a Writer Today <bryan@becomeawritertoday.com>",
     replyTo: ["bryan@becomeawritertoday.com"],
-    subject: "Midnight cutoff: 5 writing packs for $59",
-    previewText: "Last call for the bundled Writers' Deadline Database, Zettelkasten Kit, Claude Code guide and editor packs (save $59).",
+    subject: "Closing the doors at midnight tonight",
+    previewText: "Last call before midnight UTC for the 5-pack Writer's Vault ($59 vs $118), Creator White Space Challenge ($97) and editing deals.",
     previewPageUrl: "https://deploy-preview-276--becomeawriter.netlify.app/black-friday/",
     livePageUrl: "https://becomeawritertoday.com/black-friday/",
     html: wrapBawtEmail({
-      title: "Closing tonight: the 5-pack Writer's Vault",
-      previewText: "Last call for the bundled Writers' Deadline Database, Zettelkasten Kit, Claude Code guide and editor packs (save $59).",
-      kicker: "Cyber Monday Final Call",
+      title: "Closing at midnight tonight",
+      previewText: "Last call before midnight UTC for the 5-pack Writer's Vault ($59 vs $118), Creator White Space Challenge ($97) and editing deals.",
+      kicker: "Cyber Monday Final Call · Closes Midnight UTC",
       bodyHtml: [
-        p("A quick reminder before I take down the Cyber Week page tonight.", SERIF, "#1C1917"),
-        p("Until midnight, all five Become a Writer Today downloads are bundled together for <strong>$59 one-time</strong> instead of $118 bought separately (50% off, saving $59). Everything arrives as plain-text Markdown, CSV, calendar and Python files you keep on your own computer:", SERIF, "#1C1917"),
+        p("Last quick note from me before I close the Cyber Week page at midnight UTC tonight.", SERIF, "#1C1917"),
+        p("If you meant to grab either offer over the weekend, you have a few hours left:", SERIF, "#1C1917"),
         bulletList(
           [
-            "Writers' Deadline Database (all four submission datasets + .ics calendars)",
-            "The Zettelkasten for Creators Kit (starter vault + 5 templates)",
-            "Claude Code for Writers (voice memory + book/newsletter CLAUDE.md briefs)",
-            "Filler-Word Killer Editor Pack (batch CLI manuscript checker + 8 JSON lists)",
-            "Prompt &amp; Word-Bank Pack (every site word bank + genre prompts offline)",
+            "<strong>The 5-Pack Writer's Download Vault ($59 one-time, normally $118):</strong> all five offline Become a Writer Today packs in one purchase (50% off, saving $59).",
+            "<strong>The Creator White Space Challenge ($97):</strong> 30 daily morning emails and Creative Action Plans to protect your writing time in 2027, backed by a simple refund guarantee.",
           ],
           SERIF,
           "#1C1917",
         ),
         ctaButton({
-          label: "Grab all 5 packs for $59 before midnight",
+          label: "Open the Cyber Week Page Before Midnight",
           href: "https://becomeawritertoday.com/black-friday/?utm_source=resend&utm_medium=email&utm_campaign=bfcm-2026-cm",
           bg: "#B23A48",
           fg: "#FFFFFF",
@@ -227,17 +378,14 @@ Unsubscribe: {{{RESEND_UNSUBSCRIBE_URL}}}`,
         `<p style="margin-top:0;margin-bottom:8px;font-family:Arial,Helvetica,sans-serif;font-size:12px;line-height:18px;color:#78716C;">Disclosure: the ProWritingAid and Grammarly links are affiliate links. If you buy through them I may earn a commission at no extra cost to you.</p>`,
       ].join("\n"),
     }),
-    text: `A quick reminder before I take down the Cyber Week page tonight.
+    text: `Last quick note from me before I close the Cyber Week page at midnight UTC tonight.
 
-Until midnight, all five Become a Writer Today downloads are bundled together for $59 one-time instead of $118 bought separately (50% off, saving $59). Everything arrives as plain-text Markdown, CSV, calendar and Python files you keep on your own computer:
+If you meant to grab either offer over the weekend, you have a few hours left:
 
-- Writers' Deadline Database (all four submission datasets + .ics calendars)
-- The Zettelkasten for Creators Kit (starter vault + 5 templates)
-- Claude Code for Writers (voice memory + book/newsletter CLAUDE.md briefs)
-- Filler-Word Killer Editor Pack (batch CLI manuscript checker + 8 JSON lists)
-- Prompt & Word-Bank Pack (every site word bank + genre prompts offline)
+- The 5-Pack Writer's Download Vault ($59 one-time, normally $118): all five offline Become a Writer Today packs in one purchase (50% off, saving $59).
+- The Creator White Space Challenge ($97): 30 daily morning emails and Creative Action Plans to protect your writing time in 2027, backed by a simple refund guarantee.
 
-Grab all 5 packs for $59 before midnight:
+Open the Cyber Week page before midnight:
 https://becomeawritertoday.com/black-friday/?utm_source=resend&utm_medium=email&utm_campaign=bfcm-2026-cm
 
 Tonight is also the cutoff for the annual Black Friday discounts on ProWritingAid (https://becomeawritertoday.com/try-prowritingaid/) and Grammarly Pro (https://becomeawritertoday.com/try-grammarly/) if you plan to edit a manuscript over the winter.
@@ -263,7 +411,7 @@ Unsubscribe: {{{RESEND_UNSUBSCRIBE_URL}}}`,
     sendSlot: "Black Friday · Fri 27 Nov 2026, 10:00 UTC",
     from: "Bryan Collins <bryan@bryancollins.com>",
     replyTo: ["bryan@bryancollins.com"],
-    subject: "Why I ditched $997 courses for 1 private repo ($79)",
+    subject: "Why I ditched bloated video courses for one private repo",
     previewText: "Private GitHub access to my sanitised .claude/ skills, Builder's Pipeline, Zettelkasten vault and 9-site Astro blueprint.",
     previewPageUrl: "https://deploy-preview-16--bryancollins.netlify.app/black-friday.html",
     livePageUrl: "https://bryancollins.com/black-friday.html",
@@ -389,7 +537,7 @@ Unsubscribe: {{{RESEND_UNSUBSCRIBE_URL}}}`,
     sendSlot: "Cyber Monday · Mon 30 Nov 2026, 16:00 UTC",
     from: "Bryan Collins <bryan@bryancollins.com>",
     replyTo: ["bryan@bryancollins.com"],
-    subject: "The private repo behind my 9 sites ($79 ends tonight)",
+    subject: "Closing my private GitHub repo launch tonight",
     previewText: "Cyber Week $79 access to bryancollins99/solo-operator-stack ends at midnight UTC tonight (normally $149).",
     previewPageUrl: "https://deploy-preview-16--bryancollins.netlify.app/black-friday.html",
     livePageUrl: "https://bryancollins.com/black-friday.html",
@@ -437,7 +585,7 @@ Unsubscribe: {{{RESEND_UNSUBSCRIBE_URL}}}`,
     sendSlot: "Small Business Saturday · Sat 28 Nov 2026, 10:30 UTC",
     from: "Leinster Insider <info@leinsterinsider.ie>",
     replyTo: ["info@leinsterinsider.ie"],
-    subject: "2-for-1 Leinster feature: December + January included",
+    subject: "A December + January feature for Leinster businesses",
     previewText: "Book a December feature or event slot by Cyber Monday and get a bonus January 2027 placement included.",
     previewPageUrl: "https://deploy-preview-201--leinsterinsider.netlify.app/sponsor/cyber-week/",
     livePageUrl: "https://leinsterinsider.ie/sponsor/cyber-week/",
@@ -503,7 +651,7 @@ Unsubscribe: {{{RESEND_UNSUBSCRIBE_URL}}}`,
     sendSlot: "Cyber Monday · Mon 30 Nov 2026, 11:00 UTC",
     from: "Leinster Insider <info@leinsterinsider.ie>",
     replyTo: ["info@leinsterinsider.ie"],
-    subject: "1 sponsor per Leinster county for 2027 (EUR 99/mo)",
+    subject: "One founding sponsor per Leinster county for 2027",
     previewText: "One founding sponsor slot per county for estate agents, architects, surveyors, solicitors and builders.",
     previewPageUrl: "https://deploy-preview-201--leinsterinsider.netlify.app/sponsor/cyber-week/",
     livePageUrl: "https://leinsterinsider.ie/sponsor/cyber-week/",
@@ -560,7 +708,7 @@ Unsubscribe: {{{RESEND_UNSUBSCRIBE_URL}}}`,
     sendSlot: "Cyber Monday · Mon 30 Nov 2026, 17:30 UTC",
     from: "Leinster Insider <info@leinsterinsider.ie>",
     replyTo: ["info@leinsterinsider.ie"],
-    subject: "Final hours: 2-for-1 Leinster pass + 12 county slots",
+    subject: "Last call for 2027 Leinster county slots",
     previewText: "Closes at midnight UTC: book a December feature or event and get January included, or lock in a EUR 99/mo county planning slot.",
     previewPageUrl: "https://deploy-preview-201--leinsterinsider.netlify.app/sponsor/cyber-week/",
     livePageUrl: "https://leinsterinsider.ie/sponsor/cyber-week/",

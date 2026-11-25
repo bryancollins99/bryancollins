@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 // scripts/bfcm-2026/build-and-verify.mjs
 //
-// Deterministically compiles all 24 Black Friday / Cyber Monday 2026 campaign
+// Deterministically compiles all 26 Black Friday / Cyber Monday 2026 campaign
 // emails into standalone .html + .txt payloads, enforces strict Resend and
 // house-voice lint checks, and builds bfcm-2026-review.html (noindex operator
 // inbox previewer).
@@ -20,7 +20,7 @@ mkdirSync(OUT_DIR, { recursive: true });
 
 export const ALL_CAMPAIGNS = [...CAMPAIGNS_PART_1, ...CAMPAIGNS_PART_2];
 
-assert.equal(ALL_CAMPAIGNS.length, 24, "Expected 24 campaign emails (3 per site across 8 lists)");
+assert.equal(ALL_CAMPAIGNS.length, 26, "Expected 26 campaign emails (5 BAWT + 3 per site across 7 other lists)");
 
 for (const c of ALL_CAMPAIGNS) {
   for (const field of ["subject", "previewText", "html", "text"]) {
@@ -31,6 +31,11 @@ for (const c of ALL_CAMPAIGNS) {
       `${c.id}: em-dash or en-dash found in ${field}`,
     );
   }
+  assert.equal(
+    /(\$|€|\bEUR\b)/i.test(c.subject),
+    false,
+    `${c.id}: currency symbol or EUR forbidden in subject line (${c.subject})`,
+  );
   assert.ok(c.html.includes("<!DOCTYPE html>"), `${c.id}: missing DOCTYPE`);
   assert.ok(c.html.includes("<table"), `${c.id}: must use table-based HTML`);
   assert.equal(/<style/i.test(c.html), false, `${c.id}: <style> tag forbidden in Resend HTML`);
@@ -91,7 +96,7 @@ const reviewHtml = `<!DOCTYPE html>
 </head>
 <body>
   <header>
-    <h1>Black Friday &amp; Cyber Monday 2026 Campaign Pack (24 Emails &middot; 6 Site Previews)</h1>
+    <h1>Black Friday &amp; Cyber Monday 2026 Campaign Pack (26 Emails &middot; 6 Site Previews)</h1>
     <span class="badge">UNPUBLISHED &middot; NOTHING SENT OR MERGED</span>
   </header>
   <div class="pages-bar">
@@ -176,4 +181,4 @@ const reviewHtml = `<!DOCTYPE html>
 `;
 
 writeFileSync(path.join(REPO_ROOT, "bfcm-2026-review.html"), reviewHtml, "utf8");
-console.log(`Built & verified ${ALL_CAMPAIGNS.length} emails (0 em/en dashes, 0 Amazon links, table-based HTML) + bfcm-2026-review.html`);
+console.log(`Built & verified ${ALL_CAMPAIGNS.length} emails (0 em/en dashes, 0 currency in subjects, 0 Amazon links, table-based HTML) + bfcm-2026-review.html`);
