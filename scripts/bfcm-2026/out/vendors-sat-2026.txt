@@ -1,0 +1,17 @@
+Year-end close is when finance teams and practices discover a supplier's VAT number lapsed, a Form B1 went overdue, or a contractor landed on the CRO strike-off list.
+
+Ahead of the 1 January 2027 Revenue Peppol Authority handover, you can screen your entire supplier or client book in one pass instead of checking numbers one by one:
+- Rows per upload: Up to 100
+- Live checks: EU VIES + CRO status + Peppol EN 16931
+- VIES outage retries: 24h automatic
+- Price: EUR 19 one-time
+
+BULK VAT & CRO CHECKER: Verify up to 100 suppliers or clients at once
+Run a Bulk Audit (EUR 19): https://vendors.ie/tools/bulk-vat-checker?utm_source=resend&utm_medium=email&utm_campaign=vendors-bfcm-2
+
+Want Friday alerts when a key supplier or customer changes status on the CRO register? Watch up to 3 companies free, or cover 25 companies with Company Watch Pro (EUR 149/year):
+https://vendors.ie/company-watch-pro?utm_source=resend&utm_medium=email&utm_campaign=vendors-bfcm-2
+
+Vendors.ie Data Desk
+Consistent Publishing Ltd, Dublin · CRO 742884 · vendors.ie
+Unsubscribe from all Vendors.ie email: {{{RESEND_UNSUBSCRIBE_URL}}}

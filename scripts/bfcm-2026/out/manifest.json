@@ -209,22 +209,60 @@
     "textFile": "scripts/bfcm-2026/out/tenderwatch-q1-cm-2026.txt"
   },
   {
-    "id": "vendors-q1-brief-2026",
-    "property": "Vendors.ie (STRICTLY NON-DISCOUNT — Hold Gate Respected)",
+    "id": "vendors-bf-2026",
+    "property": "Vendors.ie (Email 1 of 3 · Non-Discount · ven-style2)",
     "segmentName": "Vendors · newsletter",
     "segmentId": "ed4b926c-07ef-43a8-a4af-c11b001969b3",
-    "audienceNote": "72 contacts (~69 real Irish & international B2B buyers/vendors; unscheduled per 100-sub gate)",
-    "offerType": "NON-DISCOUNT: Free 24-Month SaaS Renewal Trap Calculator + 48h Q1 Vendor Verification (EUR 99/yr)",
-    "sendSlot": "UNSCHEDULED DRAFT (Hold until Bryan approves or 100-real-sub gate clears) · Fri 27 Nov 2026",
+    "audienceNote": "Vendors · newsletter (Bryan approved 3-email BFCM/Q1 sequence)",
+    "offerType": "NON-DISCOUNT: Free 24-Month Software Renewal & FX Check + Price Change Log",
+    "sendSlot": "Black Friday · Fri 27 Nov 2026, 09:00 UTC",
     "from": "Vendors.ie <hello@vendors.ie>",
     "replyTo": [
       "hello@vendors.ie"
     ],
-    "subject": "Before your Irish team signs a '50% off' annual software contract this week",
-    "previewText": "Run our free 24-month EUR renewal and FX check, or claim your Vendors.ie record with 48-hour Q1 verification.",
+    "subject": "Before your Irish team signs a '50% off' annual software deal this week",
+    "previewText": "Three numbers missing from Cyber Week SaaS banners: Year-2 list price, 2.25% FX card drag and IE VAT reverse-charge.",
     "previewPageUrl": "https://deploy-preview-1445--vendorsie.netlify.app/q1-software-audit",
     "livePageUrl": "https://vendors.ie/q1-software-audit",
-    "htmlFile": "scripts/bfcm-2026/out/vendors-q1-brief-2026.html",
-    "textFile": "scripts/bfcm-2026/out/vendors-q1-brief-2026.txt"
+    "htmlFile": "scripts/bfcm-2026/out/vendors-bf-2026.html",
+    "textFile": "scripts/bfcm-2026/out/vendors-bf-2026.txt"
+  },
+  {
+    "id": "vendors-sat-2026",
+    "property": "Vendors.ie (Email 2 of 3 · Non-Discount · ven-style2)",
+    "segmentName": "Vendors · newsletter",
+    "segmentId": "ed4b926c-07ef-43a8-a4af-c11b001969b3",
+    "audienceNote": "Vendors · newsletter (Year-end supplier compliance & Company Watch)",
+    "offerType": "NON-DISCOUNT: EUR 19 Bulk VAT & CRO Audit + Free Company Watch / EUR 149/yr Pro",
+    "sendSlot": "Saturday · Sat 28 Nov 2026, 10:00 UTC",
+    "from": "Vendors.ie <hello@vendors.ie>",
+    "replyTo": [
+      "hello@vendors.ie"
+    ],
+    "subject": "Check your 2027 supplier list before year-end close (CRO, VAT and Peppol)",
+    "previewText": "Verify up to 100 Irish CRO companies or EU VAT numbers in one CSV pass, or watch key suppliers weekly.",
+    "previewPageUrl": "https://deploy-preview-1445--vendorsie.netlify.app/q1-software-audit",
+    "livePageUrl": "https://vendors.ie/tools/bulk-vat-checker",
+    "htmlFile": "scripts/bfcm-2026/out/vendors-sat-2026.html",
+    "textFile": "scripts/bfcm-2026/out/vendors-sat-2026.txt"
+  },
+  {
+    "id": "vendors-cm-2026",
+    "property": "Vendors.ie (Email 3 of 3 · Non-Discount · ven-style2)",
+    "segmentName": "Vendors · newsletter",
+    "segmentId": "ed4b926c-07ef-43a8-a4af-c11b001969b3",
+    "audienceNote": "Vendors · newsletter (Cyber Monday Q1 Vendor Readiness, EUR 99/yr non-discount)",
+    "offerType": "NON-DISCOUNT: EUR 99/yr Founding Vendor Claim + Priority 48h Q1 Setup",
+    "sendSlot": "Cyber Monday · Mon 30 Nov 2026, 10:00 UTC",
+    "from": "Bryan Collins <hello@vendors.ie>",
+    "replyTo": [
+      "hello@vendors.ie"
+    ],
+    "subject": "January software renewals start in 32 days (48h Vendors.ie profile setup)",
+    "previewText": "We never discount our EUR 99/yr founding claim rate. Claim by midnight tonight for priority 48-hour setup before December sign-offs.",
+    "previewPageUrl": "https://deploy-preview-1445--vendorsie.netlify.app/q1-software-audit",
+    "livePageUrl": "https://vendors.ie/q1-software-audit#vendor-q1-readiness",
+    "htmlFile": "scripts/bfcm-2026/out/vendors-cm-2026.html",
+    "textFile": "scripts/bfcm-2026/out/vendors-cm-2026.txt"
   }
 ]

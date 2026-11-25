@@ -1,13 +1,23 @@
 // scripts/bfcm-2026/campaigns-part2.mjs
 //
-// Campaign emails 7 to 12:
+// Campaign emails 7 to 14:
 //  7. Tri-Fuel Magic (Tri-Fuel · newsletter, 85a7b202-ab77-4bec-8cfd-5925b0d3a2d3)
 //  8. AI Flash Report (AI Flash Report · newsletter, e5f436a2-86f0-42bc-a277-5f8733bcc7eb)
 //  9. Prompt Writing Studio (PromptWritingStudio · newsletter, 8758d410-436e-49f5-b20f-a0623a976242)
 // 10-11. TenderWatch.ie NON-DISCOUNT (Tenderwatch · newsletter, 7e80858a-80e0-4eef-b6a3-780ab6541bc2 + Pro waitlist d38a0c6b)
-// 12. Vendors.ie NON-DISCOUNT (Vendors · newsletter, ed4b926c-07ef-43a8-a4af-c11b001969b3)
+// 12-14. Vendors.ie NON-DISCOUNT (Vendors · newsletter, ed4b926c-07ef-43a8-a4af-c11b001969b3, ven-style2 template)
 
-import { p, h2, ctaButton, bulletList, calloutBox, wrapBrandCardEmail } from "./email-shell.mjs";
+import {
+  p,
+  h2,
+  ctaButton,
+  bulletList,
+  calloutBox,
+  wrapBrandCardEmail,
+  wrapVendorsEmail,
+  vendorsDataCard,
+  vendorsToolBlock,
+} from "./email-shell.mjs";
 
 export const CAMPAIGNS_PART_2 = [
   {
@@ -300,57 +310,186 @@ Unsubscribe: {{{RESEND_UNSUBSCRIBE_URL}}}`,
   },
 
   {
-    id: "vendors-q1-brief-2026",
-    property: "Vendors.ie (STRICTLY NON-DISCOUNT — Hold Gate Respected)",
+    id: "vendors-bf-2026",
+    property: "Vendors.ie (Email 1 of 3 · Non-Discount · ven-style2)",
     segmentName: "Vendors · newsletter",
     segmentId: "ed4b926c-07ef-43a8-a4af-c11b001969b3",
-    audienceNote: "72 contacts (~69 real Irish & international B2B buyers/vendors; unscheduled per 100-sub gate)",
-    offerType: "NON-DISCOUNT: Free 24-Month SaaS Renewal Trap Calculator + 48h Q1 Vendor Verification (EUR 99/yr)",
-    sendSlot: "UNSCHEDULED DRAFT (Hold until Bryan approves or 100-real-sub gate clears) · Fri 27 Nov 2026",
+    audienceNote: "Vendors · newsletter (Bryan approved 3-email BFCM/Q1 sequence)",
+    offerType: "NON-DISCOUNT: Free 24-Month Software Renewal & FX Check + Price Change Log",
+    sendSlot: "Black Friday · Fri 27 Nov 2026, 09:00 UTC",
     from: "Vendors.ie <hello@vendors.ie>",
     replyTo: ["hello@vendors.ie"],
-    subject: "Before your Irish team signs a '50% off' annual software contract this week",
-    previewText: "Run our free 24-month EUR renewal and FX check, or claim your Vendors.ie record with 48-hour Q1 verification.",
+    subject: "Before your Irish team signs a '50% off' annual software deal this week",
+    previewText: "Three numbers missing from Cyber Week SaaS banners: Year-2 list price, 2.25% FX card drag and IE VAT reverse-charge.",
     previewPageUrl: "https://deploy-preview-1445--vendorsie.netlify.app/q1-software-audit",
     livePageUrl: "https://vendors.ie/q1-software-audit",
-    html: wrapBrandCardEmail({
-      title: "Cyber Week Software Contract Check & Q1 Vendor Readiness",
-      previewText: "Run our free 24-month EUR renewal and FX check, or claim your Vendors.ie record with 48-hour Q1 verification.",
-      brandName: "Vendors.ie",
-      kicker: "Irish B2B Software Intelligence · Year-End Contract Brief",
-      accentColor: "#0F172A",
+    html: wrapVendorsEmail({
+      title: "Cyber Week Software Contract Check",
+      previewText: "Three numbers missing from Cyber Week SaaS banners: Year-2 list price, 2.25% FX card drag and IE VAT reverse-charge.",
+      kicker: "Year-end contract check · 27 Nov 2026",
       bodyHtml: [
-        p("Between Black Friday and Cyber Monday, US and UK software vendors push steep introductory discounts on annual plans."),
-        p("Before an Irish finance lead or founder puts a corporate card down on a '50% off first year' deal, check three numbers that rarely appear on the promo banner: the automatic Year-2 list-price jump once your data is migrated, the 2.25% non-EUR card FX spread on USD or GBP billing, and whether the discounted tier supports IE VAT reverse-charge invoicing and EU/EEA data residency."),
-        p("We built a free, deterministic <strong>24-Month Software Renewal and FX Check</strong> on Vendors.ie so you can model the true euro cost in thirty seconds, alongside our daily <a href=\"https://vendors.ie/pricing-changes\" style=\"color:#0052FF;text-decoration:underline;\">Irish software price change log</a>:"),
-        ctaButton({
-          label: "Run the 24-Month Cyber Week Contract Check (Free)",
-          href: "https://vendors.ie/q1-software-audit?utm_source=resend&utm_medium=email&utm_campaign=vendors-q1-audit",
-          bg: "#0F172A",
-          fg: "#FFFFFF",
+        p("Between Black Friday and Cyber Monday, US and UK software vendors push steep introductory discounts on annual plans.", "Arial,Helvetica,sans-serif", "#1E293B"),
+        p("Before an Irish finance lead or founder puts a corporate card down on a '50% off first year' offer, check the three numbers that rarely appear on the promo banner:", "Arial,Helvetica,sans-serif", "#1E293B"),
+        vendorsDataCard({
+          heading: "What to check before signing",
+          subheading: "24-month euro cost, not Year-1 headline discount",
+          subColor: "#0B5FFF",
+          rows: [
+            ["Year-2 renewal jump", "Full list price"],
+            ["USD / GBP card FX spread", "2.25% typical"],
+            ["Irish VAT & compliance", "IE VAT / EU EEA"],
+          ],
         }),
-        calloutBox({
-          title: "For Software Vendors & Irish CRO-Registered Firms (EUR 99/yr, No Discount)",
-          bodyHtml:
-            "January is peak software-switching season for Irish SMEs starting a new tax year. We never discount our <strong>EUR 99/year founding claim rate</strong>, and paying never affects rankings, scores or compliance verdicts. Claim your profile by Cyber Monday (30 November) and we include <strong>priority 48-hour manual verification and done-for-you profile setup</strong> (screenshots, EUR pricing and compliance links live before December budget sign-offs): <a href=\"https://vendors.ie/q1-software-audit#vendor-q1-readiness\" style=\"color:#0052FF;font-weight:bold;text-decoration:underline;\">claim with 48h Q1 setup</a>.",
+        vendorsToolBlock({
+          kicker: "Free Contract Check",
+          title: "Model the true 24-month euro cost in 30 seconds",
+          body: "Enter the Cyber Week discount, normal renewal price and billing currency. The calculator shows the two-year euro total, card FX drag and a 4-point Irish VAT, SEPA and GDPR checklist.",
+          href: "https://vendors.ie/q1-software-audit?utm_source=resend&utm_medium=email&utm_campaign=vendors-bfcm-1",
+          cta: "Run the 24-Month Contract Check",
+          note: "You can also inspect confirmed published price movements on our daily log at vendors.ie/pricing-changes.",
         }),
       ].join("\n"),
     }),
     text: `Between Black Friday and Cyber Monday, US and UK software vendors push steep introductory discounts on annual plans.
 
-Before an Irish finance lead or founder puts a corporate card down on a '50% off first year' deal, check three numbers that rarely appear on the promo banner: the automatic Year-2 list-price jump once your data is migrated, the 2.25% non-EUR card FX spread on USD or GBP billing, and whether the discounted tier supports IE VAT reverse-charge invoicing and EU/EEA data residency.
+Before an Irish finance lead or founder puts a corporate card down on a '50% off first year' offer, check the three numbers that rarely appear on the promo banner:
+- Year-2 renewal jump: automatic step-up to full list price once your data is migrated
+- USD / GBP card FX spread: 2.25% typical non-EUR corporate card drag
+- Irish VAT & compliance: IE VAT reverse-charge invoicing, SEPA and EU/EEA data residency
 
-We built a free, deterministic 24-Month Software Renewal and FX Check on Vendors.ie so you can model the true euro cost in thirty seconds:
+FREE CONTRACT CHECK: Model the true 24-month euro cost in 30 seconds
+Run the 24-Month Contract Check: https://vendors.ie/q1-software-audit?utm_source=resend&utm_medium=email&utm_campaign=vendors-bfcm-1
 
-https://vendors.ie/q1-software-audit?utm_source=resend&utm_medium=email&utm_campaign=vendors-q1-audit
+You can also inspect confirmed published price movements on our daily log at https://vendors.ie/pricing-changes.
 
-You can also inspect confirmed published price movements on our daily watchlist at https://vendors.ie/pricing-changes.
+Vendors.ie Data Desk
+Consistent Publishing Ltd, Dublin · CRO 742884 · vendors.ie
+Unsubscribe from all Vendors.ie email: {{{RESEND_UNSUBSCRIBE_URL}}}`,
+  },
 
-FOR SOFTWARE VENDORS & IRISH CRO-REGISTERED FIRMS (EUR 99/YR, NO DISCOUNT)
-January is peak software-switching season for Irish SMEs starting a new tax year. We never discount our EUR 99/year founding claim rate, and paying never affects rankings, scores or compliance verdicts. Claim your profile by Cyber Monday (30 November) and we include priority 48-hour manual verification and done-for-you profile setup:
-https://vendors.ie/q1-software-audit#vendor-q1-readiness
+  {
+    id: "vendors-sat-2026",
+    property: "Vendors.ie (Email 2 of 3 · Non-Discount · ven-style2)",
+    segmentName: "Vendors · newsletter",
+    segmentId: "ed4b926c-07ef-43a8-a4af-c11b001969b3",
+    audienceNote: "Vendors · newsletter (Year-end supplier compliance & Company Watch)",
+    offerType: "NON-DISCOUNT: EUR 19 Bulk VAT & CRO Audit + Free Company Watch / EUR 149/yr Pro",
+    sendSlot: "Saturday · Sat 28 Nov 2026, 10:00 UTC",
+    from: "Vendors.ie <hello@vendors.ie>",
+    replyTo: ["hello@vendors.ie"],
+    subject: "Check your 2027 supplier list before year-end close (CRO, VAT and Peppol)",
+    previewText: "Verify up to 100 Irish CRO companies or EU VAT numbers in one CSV pass, or watch key suppliers weekly.",
+    previewPageUrl: "https://deploy-preview-1445--vendorsie.netlify.app/q1-software-audit",
+    livePageUrl: "https://vendors.ie/tools/bulk-vat-checker",
+    html: wrapVendorsEmail({
+      title: "Year-End Supplier Compliance Check",
+      previewText: "Verify up to 100 Irish CRO companies or EU VAT numbers in one CSV pass, or watch key suppliers weekly.",
+      kicker: "Year-end supplier check · 28 Nov 2026",
+      bodyHtml: [
+        p("Year-end close is when finance teams and practices discover a supplier's VAT number lapsed, a Form B1 went overdue, or a contractor landed on the CRO strike-off list.", "Arial,Helvetica,sans-serif", "#1E293B"),
+        p("Ahead of the 1 January 2027 Revenue Peppol Authority handover, you can screen your entire supplier or client book in one pass instead of checking numbers one by one:", "Arial,Helvetica,sans-serif", "#1E293B"),
+        vendorsDataCard({
+          heading: "Bulk VAT & CRO Compliance Audit",
+          subheading: "One CSV upload, dated audit certificate",
+          subColor: "#15803D",
+          rows: [
+            ["Rows per upload", "Up to 100"],
+            ["Live checks", "EU VIES + CRO + Peppol"],
+            ["VIES outage retries", "24h automatic"],
+            ["Price (one-time)", "EUR 19"],
+          ],
+        }),
+        vendorsToolBlock({
+          kicker: "Bulk VAT & CRO Checker",
+          title: "Verify up to 100 suppliers or clients at once",
+          body: "Upload a CSV of Irish CRO numbers or EU VAT numbers and get a dated compliance report you can drop straight into your year-end file.",
+          href: "https://vendors.ie/tools/bulk-vat-checker?utm_source=resend&utm_medium=email&utm_campaign=vendors-bfcm-2",
+          cta: "Run a Bulk Audit (EUR 19)",
+          note: "Want Friday alerts when a key supplier or customer changes status on the CRO register? Watch up to 3 companies free, or cover 25 companies with Company Watch Pro (EUR 149/year) at vendors.ie/company-watch-pro.",
+        }),
+      ].join("\n"),
+    }),
+    text: `Year-end close is when finance teams and practices discover a supplier's VAT number lapsed, a Form B1 went overdue, or a contractor landed on the CRO strike-off list.
 
-Consistent Publishing Ltd, CRO 742884, Landscape House, Baldonnell Business Park, Dublin D22 P3K7, Ireland
-Unsubscribe: {{{RESEND_UNSUBSCRIBE_URL}}}`,
+Ahead of the 1 January 2027 Revenue Peppol Authority handover, you can screen your entire supplier or client book in one pass instead of checking numbers one by one:
+- Rows per upload: Up to 100
+- Live checks: EU VIES + CRO status + Peppol EN 16931
+- VIES outage retries: 24h automatic
+- Price: EUR 19 one-time
+
+BULK VAT & CRO CHECKER: Verify up to 100 suppliers or clients at once
+Run a Bulk Audit (EUR 19): https://vendors.ie/tools/bulk-vat-checker?utm_source=resend&utm_medium=email&utm_campaign=vendors-bfcm-2
+
+Want Friday alerts when a key supplier or customer changes status on the CRO register? Watch up to 3 companies free, or cover 25 companies with Company Watch Pro (EUR 149/year):
+https://vendors.ie/company-watch-pro?utm_source=resend&utm_medium=email&utm_campaign=vendors-bfcm-2
+
+Vendors.ie Data Desk
+Consistent Publishing Ltd, Dublin · CRO 742884 · vendors.ie
+Unsubscribe from all Vendors.ie email: {{{RESEND_UNSUBSCRIBE_URL}}}`,
+  },
+
+  {
+    id: "vendors-cm-2026",
+    property: "Vendors.ie (Email 3 of 3 · Non-Discount · ven-style2)",
+    segmentName: "Vendors · newsletter",
+    segmentId: "ed4b926c-07ef-43a8-a4af-c11b001969b3",
+    audienceNote: "Vendors · newsletter (Cyber Monday Q1 Vendor Readiness, EUR 99/yr non-discount)",
+    offerType: "NON-DISCOUNT: EUR 99/yr Founding Vendor Claim + Priority 48h Q1 Setup",
+    sendSlot: "Cyber Monday · Mon 30 Nov 2026, 10:00 UTC",
+    from: "Bryan Collins <hello@vendors.ie>",
+    replyTo: ["hello@vendors.ie"],
+    subject: "January software renewals start in 32 days (48h Vendors.ie profile setup)",
+    previewText: "We never discount our EUR 99/yr founding claim rate. Claim by midnight tonight for priority 48-hour setup before December sign-offs.",
+    previewPageUrl: "https://deploy-preview-1445--vendorsie.netlify.app/q1-software-audit",
+    livePageUrl: "https://vendors.ie/q1-software-audit#vendor-q1-readiness",
+    html: wrapVendorsEmail({
+      title: "Q1 Vendor Profile Readiness",
+      previewText: "We never discount our EUR 99/yr founding claim rate. Claim by midnight tonight for priority 48-hour setup before December sign-offs.",
+      kicker: "Q1 vendor readiness · 30 Nov 2026",
+      bodyHtml: [
+        p("January is peak software-switching season for Irish SMEs starting a new tax year. Buyers comparing payroll, accounting, banking and compliance tools on Vendors.ie are already shortlisting for Q1.", "Arial,Helvetica,sans-serif", "#1E293B"),
+        p("We do not run Black Friday discounts on Vendors.ie listings, and paying never affects rankings, scores or compliance verdicts. The founding claim rate stays locked at <strong>EUR 99/year</strong> (standard rate EUR 49/month).", "Arial,Helvetica,sans-serif", "#1E293B"),
+        p("If you claim your software profile or Irish CRO company record by midnight tonight (30 November), we include <strong>priority 48-hour manual verification and done-for-you profile setup</strong> so your logo, screenshots, EUR pricing and direct enquiry button are live before December budget sign-offs.", "Arial,Helvetica,sans-serif", "#1E293B"),
+        vendorsDataCard({
+          heading: "Founding Vendor Claim",
+          subheading: "Locked annual rate, editorial firewall preserved",
+          subColor: "#0B5FFF",
+          rows: [
+            ["Founding rate (locked)", "EUR 99 / year"],
+            ["Standard rate", "EUR 49 / month"],
+            ["Verification turnaround", "48 hours (by 30 Nov)"],
+            ["Direct CTA + verified badge", "Included"],
+          ],
+        }),
+        vendorsToolBlock({
+          kicker: "Claim Your Record",
+          title: "Get verified before Q1 buyer shortlists close",
+          body: "Nothing on your profile changes until you review it. Claim today and we build out your verified listing with your logo, pricing, compliance links and direct enquiry button within 48 hours.",
+          href: "https://vendors.ie/q1-software-audit?utm_source=resend&utm_medium=email&utm_campaign=vendors-bfcm-3#vendor-q1-readiness",
+          cta: "Claim with 48h Q1 setup (EUR 99/yr)",
+          note: "Covers both software profiles and Irish CRO-registered company records.",
+        }),
+      ].join("\n"),
+      signoffHtml: `<p style="margin-top:24px;margin-bottom:0;font-family:Arial,Helvetica,sans-serif;font-size:14px;line-height:20px;color:#0F172A;">Bryan Collins<br /><span style="color:#64748B;">Founder, Vendors.ie</span></p>`,
+    }),
+    text: `January is peak software-switching season for Irish SMEs starting a new tax year. Buyers comparing payroll, accounting, banking and compliance tools on Vendors.ie are already shortlisting for Q1.
+
+We do not run Black Friday discounts on Vendors.ie listings, and paying never affects rankings, scores or compliance verdicts. The founding claim rate stays locked at EUR 99/year (standard rate EUR 49/month).
+
+If you claim your software profile or Irish CRO company record by midnight tonight (30 November), we include priority 48-hour manual verification and done-for-you profile setup so your logo, screenshots, EUR pricing and direct enquiry button are live before December budget sign-offs.
+
+FOUNDING VENDOR CLAIM
+- Founding rate (locked): EUR 99 / year
+- Standard rate: EUR 49 / month
+- Verification turnaround: 48 hours (for claims by 30 Nov)
+- Direct CTA button + verified badge: Included
+
+Claim with 48h Q1 setup (EUR 99/yr):
+https://vendors.ie/q1-software-audit?utm_source=resend&utm_medium=email&utm_campaign=vendors-bfcm-3#vendor-q1-readiness
+
+Bryan Collins
+Founder, Vendors.ie
+Consistent Publishing Ltd, Dublin · CRO 742884 · vendors.ie
+Unsubscribe from all Vendors.ie email: {{{RESEND_UNSUBSCRIBE_URL}}}`,
   },
 ];

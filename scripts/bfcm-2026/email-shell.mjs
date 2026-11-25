@@ -83,3 +83,46 @@ ${bodyHtml}
 </td></tr></table>
 </body></html>`;
 }
+
+// Vendors.ie ven-style2 shell matching netlify/functions/lib/templates.mjs + weekly-personal.mjs (R345)
+export function vendorsDataCard({ heading, subheading, subColor = "#0F172A", rows }) {
+  const rowsHtml = rows
+    .map(
+      ([k, v]) =>
+        `<tr><td style="padding-top:6px;padding-bottom:6px;color:#64748B;border-top:1px solid #E2E8F0;font-family:Arial,Helvetica,sans-serif;font-size:14px;line-height:20px;">${esc(k)}</td><td align="right" style="padding-top:6px;padding-bottom:6px;border-top:1px solid #E2E8F0;font-family:'Courier New',Courier,monospace;color:#0F172A;font-size:14px;line-height:20px;font-weight:bold;">${esc(v)}</td></tr>`,
+    )
+    .join("");
+  return `<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="border:1px solid #E2E8F0;border-radius:8px;margin-top:4px;margin-bottom:20px;"><tr><td style="padding-top:18px;padding-bottom:18px;padding-left:18px;padding-right:18px;">
+<p style="margin-top:0;margin-bottom:4px;font-family:Arial,Helvetica,sans-serif;font-size:18px;line-height:24px;font-weight:bold;color:#0F172A;">${esc(heading)}</p>
+<p style="margin-top:0;margin-bottom:14px;font-family:Arial,Helvetica,sans-serif;font-size:14px;line-height:20px;font-weight:bold;color:${subColor};">${esc(subheading)}</p>
+<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">${rowsHtml}</table>
+</td></tr></table>`;
+}
+
+export function vendorsToolBlock({ kicker, title, body, href, cta, note }) {
+  return `<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" bgcolor="#F8FAFC" style="background-color:#F8FAFC;border:1px solid #E2E8F0;border-radius:8px;margin-top:22px;margin-bottom:20px;"><tr><td style="padding-top:18px;padding-bottom:18px;padding-left:18px;padding-right:18px;">
+<p style="margin-top:0;margin-bottom:4px;font-family:Arial,Helvetica,sans-serif;font-size:12px;line-height:16px;font-weight:bold;letter-spacing:1px;text-transform:uppercase;color:#64748B;">${esc(kicker)}</p>
+<p style="margin-top:0;margin-bottom:6px;font-family:Arial,Helvetica,sans-serif;font-size:16px;line-height:22px;font-weight:bold;color:#0F172A;">${esc(title)}</p>
+<p style="margin-top:0;margin-bottom:14px;font-family:Arial,Helvetica,sans-serif;font-size:14px;line-height:22px;color:#334155;">${esc(body)}</p>
+<table role="presentation" cellpadding="0" cellspacing="0" border="0"><tr><td align="center" bgcolor="#0B5FFF" style="background-color:#0B5FFF;border-radius:6px;padding-top:11px;padding-bottom:11px;padding-left:18px;padding-right:18px;"><a href="${href}" style="font-family:Arial,Helvetica,sans-serif;font-size:15px;line-height:20px;font-weight:bold;color:#FFFFFF;text-decoration:none;display:inline-block;">${esc(cta)}</a></td></tr></table>
+${note ? `<p style="margin-top:10px;margin-bottom:0;font-family:Arial,Helvetica,sans-serif;font-size:13px;line-height:19px;color:#64748B;">${esc(note)}</p>` : ""}
+</td></tr></table>`;
+}
+
+export function wrapVendorsEmail({ title, previewText, kicker, bodyHtml, signoffHtml = `<p style="margin-top:24px;margin-bottom:0;font-family:Arial,Helvetica,sans-serif;font-size:14px;line-height:20px;color:#0F172A;">Vendors.ie Data Desk</p>` }) {
+  return `<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta http-equiv="X-UA-Compatible" content="IE=edge"><title>${esc(title)}</title></head>
+<body class="ven-style2" style="margin-top:0;margin-bottom:0;margin-left:0;margin-right:0;padding-top:0;padding-bottom:0;padding-left:0;padding-right:0;background-color:#FFFFFF;">
+<div style="display:none;max-height:0;overflow:hidden;opacity:0;font-size:1px;line-height:1px;color:#FFFFFF;">${esc(previewText)}</div>
+<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" bgcolor="#FFFFFF" style="background-color:#FFFFFF;"><tr><td align="center" style="padding-top:32px;padding-bottom:32px;padding-left:20px;padding-right:20px;">
+<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="max-width:520px;"><tr><td>
+<div style="font-family:Arial,Helvetica,sans-serif;font-size:15px;line-height:20px;font-weight:bold;color:#0B5FFF;margin-bottom:16px;">Vendors<span style="color:#0F172A;">.ie</span></div>
+${kicker ? `<p style="margin-top:0;margin-bottom:14px;font-family:Arial,Helvetica,sans-serif;font-size:13px;line-height:18px;color:#64748B;">${esc(kicker)}</p>` : ""}
+${bodyHtml}
+${signoffHtml}
+<p style="margin-top:12px;margin-bottom:0;font-family:Arial,Helvetica,sans-serif;font-size:12px;line-height:18px;color:#64748B;"><a href="{{{RESEND_UNSUBSCRIBE_URL}}}" style="color:#64748B;text-decoration:underline;">Unsubscribe from all Vendors.ie email</a></p>
+<div style="border-top:1px solid #F1F5F9;padding-top:14px;margin-top:20px;font-family:Arial,Helvetica,sans-serif;font-size:12px;line-height:18px;color:#94A3B8;">Consistent Publishing Ltd, Dublin &middot; CRO 742884 &middot; <a href="https://vendors.ie" style="color:#94A3B8;text-decoration:underline;">vendors.ie</a></div>
+</td></tr></table>
+</td></tr></table>
+</body></html>`;
+}

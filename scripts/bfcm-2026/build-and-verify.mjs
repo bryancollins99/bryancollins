@@ -20,7 +20,7 @@ mkdirSync(OUT_DIR, { recursive: true });
 
 export const ALL_CAMPAIGNS = [...CAMPAIGNS_PART_1, ...CAMPAIGNS_PART_2];
 
-assert.equal(ALL_CAMPAIGNS.length, 12, "Expected 12 campaign emails across 8 lists");
+assert.equal(ALL_CAMPAIGNS.length, 14, "Expected 14 campaign emails across 8 lists");
 
 for (const c of ALL_CAMPAIGNS) {
   for (const field of ["subject", "previewText", "html", "text"]) {
@@ -91,13 +91,13 @@ const reviewHtml = `<!DOCTYPE html>
 </head>
 <body>
   <header>
-    <h1>Black Friday &amp; Cyber Monday 2026 Campaign Pack (12 Emails &middot; 6 Site Previews)</h1>
+    <h1>Black Friday &amp; Cyber Monday 2026 Campaign Pack (14 Emails &middot; 6 Site Previews)</h1>
     <span class="badge">UNPUBLISHED &middot; NOTHING SENT OR MERGED</span>
   </header>
   <div class="pages-bar">
     <strong>Landing Page Previews:</strong>
     <a href="/black-friday.html" target="_blank" rel="noopener">1. BryanCollins ($69 Stack)</a>
-    <a href="https://deploy-preview-276--becomeawriter.netlify.app/black-friday/" target="_blank" rel="noopener">2. BAWT ($49 Vault)</a>
+    <a href="https://deploy-preview-276--becomeawriter.netlify.app/black-friday/" target="_blank" rel="noopener">2. BAWT ($49 Vault + $97 Challenge)</a>
     <a href="https://deploy-preview-201--leinsterinsider.netlify.app/sponsor/cyber-week/" target="_blank" rel="noopener">3. Leinster Insider (2-for-1 Local Pass)</a>
     <a href="https://deploy-preview-79--mytriathloncalculator.netlify.app/winter-fuel-pack/" target="_blank" rel="noopener">4. Tri-Fuel (25% Hexis + Planner)</a>
     <a href="https://deploy-preview-602--tenderwatchirl.netlify.app/q1-readiness" target="_blank" rel="noopener">5. TenderWatch (Non-Discount Q1 Pass)</a>
