@@ -1,0 +1,62 @@
+# Bryan Collins
+
+> USA Today bestselling author and Irish product operator building software and data businesses with AI coding agents. Canonical directory of open-source Claude Code skills, interactive MBA strategy calculators, creator and operator calculators, projects, and newsletter issues on bryancollins.com.
+
+Bryan Collins builds and operates Irish B2B and consumer data products (including Vendors.ie, Tenderwatch.ie, and Leinster Insider) alongside Become a Writer Today, documenting real AI coding workflows on YouTube and in his newsletter. All interactive tools below run in the browser without login gates, and all agent skills are MIT licensed.
+
+## Claude Code Skills & Stack Bundle Builder
+
+- [Claude Code Skills & Agent Stack Bundle Builder](https://bryancollins.com/skills/): Interactive generator for tailored `AGENTS.md` and `CLAUDE.md` repository rules plus a `.claude/commands/` shell installer across 13 open-source Claude Code workflows.
+- [/pre-commit-review](https://bryancollins.com/skills/pre-commit-review): Read-only diff reviewer that catches numerical, parser, pagination-then-filter, off-by-one, and retired-code bugs before commit.
+- [/merge-conflict-walkthrough](https://bryancollins.com/skills/merge-conflict-walkthrough): Classifies conflicted files in a merge or rebase and proposes safe resolutions with rationale without modifying disk state.
+- [/rebase-plan](https://bryancollins.com/skills/rebase-plan): Drafts an advisory `git rebase -i` pick, squash, and reword plan before opening a pull request.
+- [/branch-cleanup](https://bryancollins.com/skills/branch-cleanup): Verifies squash-merged pull requests via `gh pr list` and cleans safe local branches and stale worktrees while protecting `main`.
+- [/wiring](https://bryancollins.com/skills/wiring): Compares secrets and environment variables declared in repository code against live GitHub Actions and Netlify production settings.
+- [/log-issue](https://bryancollins.com/skills/log-issue): Files bugs spotted mid-session as deduplicated GitHub issues and stops immediately without derailing current work.
+- [/fix-cluster](https://bryancollins.com/skills/fix-cluster): Groups related open GitHub issues into one scoped implementation plan, branch, and pull request.
+- [/best-of-both](https://bryancollins.com/skills/best-of-both): Compares two coding-agent implementations of the same specification section by section and writes a concrete merge brief.
+- [/cron-staleness](https://bryancollins.com/skills/cron-staleness): Audits scheduled GitHub Actions workflows against their cron cadences to surface silent inactivity and missed runs.
+- [/decide](https://bryancollins.com/skills/decide): Extracts open questions from a PRD, design document, or pull request one at a time and writes locked resolutions back into the file.
+- [/explain](https://bryancollins.com/skills/explain): Translates technical engineering diffs and audits into plain-language use cases from the end user's perspective.
+- [/notes-to-ideas](https://bryancollins.com/skills/notes-to-ideas): Mines a Markdown notes folder for recent and archival content angles with file citations, strictly separating ideation from drafting.
+- [/remember](https://bryancollins.com/skills/remember): Captures durable session facts into file-based agent memory and runs a deterministic sweep for expired commitment dates.
+- [Agent Skills GitHub Repository](https://github.com/bryancollins99/agent-skills): Public MIT-licensed Markdown source for all published Claude Code slash commands and helper scripts.
+
+## MBA Strategy Calculators & Frameworks
+
+- [MBA Strategy Tools Directory](https://bryancollins.com/mba-frameworks): Overview of interactive business strategy builders with PDF and Markdown brief exports.
+- [Ansoff Matrix Calculator & Growth Risk Planner](https://bryancollins.com/ansoff-matrix): Maps market penetration, market development, product development, and diversification bets with AI-optional review and Markdown strategy brief export.
+- [Porter's Five Forces Calculator & Competitive Moat Analyzer](https://bryancollins.com/porters-five-forces): Rates entrant threat, buyer power, substitute risk, supplier leverage, and competitive rivalry with exportable Markdown briefs.
+- [PESTEL Analysis Builder & Macro Risk Calculator](https://bryancollins.com/pestel-analysis): Structures political, economic, social, technological, environmental, and legal external factors into an actionable brief.
+- [SWOT Analysis Builder & Strategic Matrix Calculator](https://bryancollins.com/swot-analysis): Maps internal strengths and weaknesses against external opportunities and threats with PDF and Markdown brief export.
+- [Value Chain Analysis Builder & Margin Mapper](https://bryancollins.com/value-chain): Separates primary production and distribution steps from support infrastructure to pinpoint margin and differentiation levers.
+- [McKinsey 7S Alignment Calculator & Diagnostic Builder](https://bryancollins.com/mckinsey-7s): Audits organizational alignment across shared values, strategy, structure, systems, style, staff, and skills.
+- [BCG Matrix Portfolio Tool](https://bryancollins.com/bcg-matrix): Classifies products and channels into stars, cash cows, question marks, and dogs.
+- [Business Model Canvas Builder](https://bryancollins.com/business-model-canvas): Nine-block interactive canvas covering value propositions, customer segments, channels, cost structure, and revenue streams.
+- [Competitive Positioning Tool](https://bryancollins.com/competitive-positioning): Maps market positioning axes and differentiation gaps against alternatives.
+- [Strategy Audit Diagnostic](https://bryancollins.com/strategy-audit): Guided strategic health check for digital product and media businesses.
+
+## Creator & Operator Calculators
+
+- [Email List ROI & Subscriber Value Calculator](https://bryancollins.com/email-roi-calculator): Multi-input model estimating monthly revenue, annual revenue, customer conversions, and annual value per subscriber from list size, open rate, click rate, conversion rate, order value, and send cadence.
+- [Freelance Hourly, Day & Project Rate Calculator](https://bryancollins.com/freelance-rate-calculator): Computes minimum hourly rate, recommended buffer rate, day rate, and tiered project pricing from expenses, take-home target, billable hours, working weeks, and tax rate.
+- [Options & Wheel Strategy Position Sizing Calculator](https://bryancollins.com/position-sizing-calculator): Calculates maximum option contracts, share exposure, capital allocation, margin requirements, and cash reserve buffers from portfolio size, per-trade risk percentage, underlying price, and account type.
+- [Startup Burn Rate & Runway Calculator](https://bryancollins.com/burn-rate-calculator): Calculates net monthly burn and cash runway in months from cash balance, monthly revenue, and operating expenses.
+- [Break-Even Point Calculator](https://bryancollins.com/break-even-calculator): Computes break-even unit volume and revenue from fixed costs, unit price, and variable cost per unit.
+- [Bitcoin DCA Calculator](https://bryancollins.com/btc-dca-calculator): Models historical dollar-cost averaging schedules and cost basis.
+- [Filler-Word Killer](https://bryancollins.com/filler-word-killer): Browser-side draft editor that highlights filler words, hedging phrases, and weak modifiers with zero signup required.
+- [Lead Magnet Validator](https://bryancollins.com/lead-magnet-validator): Scores opt-in incentives on specificity, speed to value, and product alignment.
+- [Content Calendar Planner](https://bryancollins.com/content-calendar): Maps publishing cadence across YouTube, newsletter, and social channels.
+- [Content Repurposing Matrix](https://bryancollins.com/content-repurposing): Turns one core essay or video into channel-native derivative assets.
+- [Rolling Launch Calendar](https://bryancollins.com/rolling-launch-calendar): Sequences product promotions and list warm-up windows across quarters.
+
+## Hub Pages, Projects & Newsletter Archive
+
+- [Home](https://bryancollins.com/): Profile, recent build videos, active products, open-source agent skills, and books.
+- [Projects](https://bryancollins.com/projects): Portfolio of live software, procurement, property, and publishing products operated by Bryan Collins.
+- [Videos](https://bryancollins.com/videos): Long-form YouTube tutorials covering Claude Code, AI agent workflows, and digital product builds.
+- [Newsletter Signup](https://bryancollins.com/newsletter): Operator newsletter covering AI coding agents, software builds, and practical strategy.
+- [Newsletter Archive](https://bryancollins.com/newsletter/archive): Public archive of past newsletter issues sent by Bryan Collins.
+- [Products & Kits](https://bryancollins.com/products): Practical templates and guides including Claude Code for Writers, The Builder's Pipeline, and The Zettelkasten for Creators Kit.
+- [Books](https://bryancollins.com/books): Non-fiction books by Bryan Collins including The Power of Creativity and This Is Working.
+- [Work With Bryan Collins](https://bryancollins.com/work-with-me): Product leadership, growth operations, and AI engineering background and contact options.

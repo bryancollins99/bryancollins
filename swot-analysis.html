@@ -3,11 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SWOT Analysis — Bryan Collins</title>
-    <meta name="description" content="Free interactive SWOT Analysis tool. Identify your Strengths, Weaknesses, Opportunities, and Threats to make better strategic decisions.">
-    <meta property="og:url" content="https://bryancollins.com/swot-analysis/" />
-    <meta property="og:title" content="SWOT Analysis Tool — Strategic Planning for Creators" />
-    <meta property="og:description" content="Analyze your content business with this interactive SWOT tool." />
+    <title>SWOT Analysis Builder &amp; Strategic Matrix Calculator | Bryan Collins</title>
+    <meta name="description" content="Interactive SWOT Analysis builder to map internal strengths and weaknesses against external opportunities and threats, then export a Markdown brief or PDF.">
+    <meta property="og:url" content="https://bryancollins.com/swot-analysis" />
+    <meta property="og:title" content="SWOT Analysis Builder &amp; Strategic Matrix Calculator | Bryan Collins" />
+    <meta property="og:description" content="Build a structured SWOT matrix with optional AI recommendations, PDF download, and Markdown brief copy." />
     
     <!-- Tailwind CSS -->    
     <!-- Favicon -->
@@ -290,7 +290,7 @@
             }
         }
     </style>
-    <link rel="canonical" href="https://bryancollins.com/swot-analysis.html">
+    <link rel="canonical" href="https://bryancollins.com/swot-analysis">
     <!-- Breadcrumb Schema -->
     <script type="application/ld+json">
     {
@@ -307,13 +307,67 @@
           "@type": "ListItem",
           "position": 2,
           "name": "MBA Frameworks",
-          "item": "https://bryancollins.com/mba-frameworks.html"
+          "item": "https://bryancollins.com/mba-frameworks"
         },
         {
           "@type": "ListItem",
           "position": 3,
-          "name": "SWOT Analysis",
-          "item": "https://bryancollins.com/swot-analysis.html"
+          "name": "SWOT Analysis Builder",
+          "item": "https://bryancollins.com/swot-analysis"
+        }
+      ]
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "SWOT Analysis Builder & Strategic Matrix Calculator",
+      "url": "https://bryancollins.com/swot-analysis",
+      "description": "Interactive 5-step SWOT matrix builder with browser autosave, optional AI recommendations, PDF export, and Markdown strategy brief copy.",
+      "applicationCategory": "BusinessApplication",
+      "operatingSystem": "Any",
+      "isAccessibleForFree": true,
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      },
+      "author": {
+        "@type": "Person",
+        "name": "Bryan Collins",
+        "url": "https://bryancollins.com/"
+      }
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "What separates internal SWOT factors from external SWOT factors?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Strengths and Weaknesses are internal assets or constraints you directly control, such as proprietary datasets, audience trust, or engineering bandwidth. Opportunities and Threats are external market shifts, competitor moves, or platform changes outside your direct control."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How do you turn a completed SWOT matrix into concrete actions?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Use TOWS pairing: match your strongest internal advantage with the most urgent external opportunity for offensive bets, and pair known internal weaknesses against external threats to decide which risks must be hedged or fixed immediately."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How many items belong in each SWOT quadrant?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Keep each quadrant to three to five specific, evidence-backed points rather than an unranked brainstorm list. Fewer, sharper items make trade-offs obvious when exporting your brief to a team doc or AI coding agent."
+          }
         }
       ]
     }
@@ -661,11 +715,33 @@
                     </div>
                 </div>
                 <div class="text-center mt-6">
-                    <a href="mba-frameworks.html" class="text-lg font-semibold" style="color: #956FA6;">
-                        <i class="fas fa-arrow-left mr-2"></i>Back to All Frameworks
+                    <a href="/mba-frameworks" class="text-lg font-semibold mr-6" style="color: #956FA6;">
+                        <i class="fas fa-arrow-left mr-2"></i>All MBA Strategy Frameworks
+                    </a>
+                    <a href="/skills/" class="text-lg font-semibold" style="color: #956FA6;">
+                        Claude Code Agent Skills <i class="fas fa-arrow-right ml-2"></i>
                     </a>
                 </div>
             </div>
+
+            <!-- FAQ Section -->
+            <section class="bg-white rounded-xl p-8 mb-8" aria-labelledby="swot-faq-heading">
+                <h2 id="swot-faq-heading" class="text-2xl font-bold mb-6">SWOT Analysis Frequently Asked Questions</h2>
+                <div class="space-y-6">
+                    <div>
+                        <h3 class="text-lg font-bold mb-2">What separates internal SWOT factors from external SWOT factors?</h3>
+                        <p class="text-gray-700">Strengths and Weaknesses are internal assets or constraints you directly control, such as proprietary datasets, audience trust, or engineering bandwidth. Opportunities and Threats are external market shifts, competitor moves, or platform changes outside your direct control.</p>
+                    </div>
+                    <div>
+                        <h3 class="text-lg font-bold mb-2">How do you turn a completed SWOT matrix into concrete actions?</h3>
+                        <p class="text-gray-700">Use TOWS pairing: match your strongest internal advantage with the most urgent external opportunity for offensive bets, and pair known internal weaknesses against external threats to decide which risks must be hedged or fixed immediately.</p>
+                    </div>
+                    <div>
+                        <h3 class="text-lg font-bold mb-2">How many items belong in each SWOT quadrant?</h3>
+                        <p class="text-gray-700">Keep each quadrant to three to five specific, evidence-backed points rather than an unranked brainstorm list. Fewer, sharper items make trade-offs obvious when exporting your brief to a team doc or AI coding agent.</p>
+                    </div>
+                </div>
+            </section>
 
             <div class="flex gap-4 justify-center text-sm text-gray-400 mb-4">
                     <a href="/privacy.html" class="hover:text-black">Privacy Policy</a>
@@ -961,6 +1037,7 @@
             });
         }
     </script>
+    <script defer src="/resources/framework-brief.js" data-framework="swot"></script>
 </body>
 </html>
 

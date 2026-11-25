@@ -3,11 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Value Chain Analysis — Bryan Collins</title>
-    <meta name="description" content="Free interactive Value Chain Analysis tool. Identify where you create value from content production to delivery.">
-    <meta property="og:url" content="https://bryancollins.com/value-chain/" />
-    <meta property="og:title" content="Value Chain Analysis Tool — Content Business Strategy" />
-    <meta property="og:description" content="Map your value creation activities with this interactive tool for creators." />
+    <title>Value Chain Analysis Builder &amp; Margin Mapper | Bryan Collins</title>
+    <meta name="description" content="Interactive Value Chain Analysis builder to map primary production, distribution, and support activities, then export a Markdown strategy brief or PDF.">
+    <meta property="og:url" content="https://bryancollins.com/value-chain" />
+    <meta property="og:title" content="Value Chain Analysis Builder &amp; Margin Mapper | Bryan Collins" />
+    <meta property="og:description" content="Map primary and support value-creation steps and export a paste-ready Markdown brief or PDF." />
     
     <!-- Tailwind CSS -->    
     <!-- Favicon -->
@@ -262,7 +262,7 @@
             }
         }
     </style>
-    <link rel="canonical" href="https://bryancollins.com/value-chain.html">
+    <link rel="canonical" href="https://bryancollins.com/value-chain">
     <!-- Breadcrumb Schema -->
     <script type="application/ld+json">
     {
@@ -279,13 +279,67 @@
           "@type": "ListItem",
           "position": 2,
           "name": "MBA Frameworks",
-          "item": "https://bryancollins.com/mba-frameworks.html"
+          "item": "https://bryancollins.com/mba-frameworks"
         },
         {
           "@type": "ListItem",
           "position": 3,
-          "name": "Value Chain Analysis",
-          "item": "https://bryancollins.com/value-chain.html"
+          "name": "Value Chain Analysis Builder",
+          "item": "https://bryancollins.com/value-chain"
+        }
+      ]
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "Value Chain Analysis Builder & Margin Mapper",
+      "url": "https://bryancollins.com/value-chain",
+      "description": "Interactive 10-step Porter Value Chain builder separating primary value-creation workflows from support infrastructure with PDF and Markdown brief export.",
+      "applicationCategory": "BusinessApplication",
+      "operatingSystem": "Any",
+      "isAccessibleForFree": true,
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      },
+      "author": {
+        "@type": "Person",
+        "name": "Bryan Collins",
+        "url": "https://bryancollins.com/"
+      }
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "What is the difference between Primary and Support activities in a Value Chain?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Primary activities directly research, build, ship, market, and support the product a customer pays for. Support activities such as infrastructure, tooling, hiring, and vendor procurement keep primary workflows running reliably without directly facing the buyer."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How do lean operators use Value Chain Analysis to decide what to automate?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Automate or delegate repetitive steps that do not differentiate your product in the buyer's eyes, such as formatting, cross-posting, or routine QA checks, while keeping proprietary research, product taste, and customer insight in-house."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Where do margins usually leak in a digital product or media business?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Margins commonly leak through bloated SaaS procurement stacks, manual outbound publishing steps repeated across channels, and unmeasured marketing activities that generate impressions without email or product conversion."
+          }
         }
       ]
     }
@@ -431,7 +485,7 @@
                             Your Operations Activities
                             <span class="tooltip ml-2">
                                 <i class="fas fa-question-circle text-gray-400"></i>
-                                <span class="tooltiptext">Writing, filming, editing, designing, recording, producing—the core creation process.</span>
+                                <span class="tooltiptext">Writing, filming, editing, designing, recording, producing: the core creation process.</span>
                             </span>
                         </label>
                         <textarea id="operations" rows="4" placeholder="e.g., Script writing, video recording, editing in Premiere Pro, designing thumbnails, adding captions"></textarea>
@@ -727,11 +781,33 @@
                     </div>
                 </div>
                 <div class="text-center mt-6">
-                    <a href="mba-frameworks.html" class="text-lg font-semibold" style="color: #956FA6;">
-                        <i class="fas fa-arrow-left mr-2"></i>Back to All Frameworks
+                    <a href="/mba-frameworks" class="text-lg font-semibold mr-6" style="color: #956FA6;">
+                        <i class="fas fa-arrow-left mr-2"></i>All MBA Strategy Frameworks
+                    </a>
+                    <a href="/skills/" class="text-lg font-semibold" style="color: #956FA6;">
+                        Claude Code Agent Skills <i class="fas fa-arrow-right ml-2"></i>
                     </a>
                 </div>
             </div>
+
+            <!-- FAQ Section -->
+            <section class="bg-white rounded-xl p-8 mb-8" aria-labelledby="vc-faq-heading">
+                <h2 id="vc-faq-heading" class="text-2xl font-bold mb-6">Value Chain Analysis Frequently Asked Questions</h2>
+                <div class="space-y-6">
+                    <div>
+                        <h3 class="text-lg font-bold mb-2">What is the difference between Primary and Support activities in a Value Chain?</h3>
+                        <p class="text-gray-700">Primary activities directly research, build, ship, market, and support the product a customer pays for. Support activities such as infrastructure, tooling, hiring, and vendor procurement keep primary workflows running reliably without directly facing the buyer.</p>
+                    </div>
+                    <div>
+                        <h3 class="text-lg font-bold mb-2">How do lean operators use Value Chain Analysis to decide what to automate?</h3>
+                        <p class="text-gray-700">Automate or delegate repetitive steps that do not differentiate your product in the buyer's eyes, such as formatting, cross-posting, or routine QA checks, while keeping proprietary research, product taste, and customer insight in-house.</p>
+                    </div>
+                    <div>
+                        <h3 class="text-lg font-bold mb-2">Where do margins usually leak in a digital product or media business?</h3>
+                        <p class="text-gray-700">Margins commonly leak through bloated SaaS procurement stacks, manual outbound publishing steps repeated across channels, and unmeasured marketing activities that generate impressions without email or product conversion.</p>
+                    </div>
+                </div>
+            </section>
 
             <div class="flex gap-4 justify-center text-sm text-gray-400 mb-4">
                     <a href="/privacy.html" class="hover:text-black">Privacy Policy</a>
@@ -952,6 +1028,7 @@
             });
         }
     </script>
+    <script defer src="/resources/framework-brief.js" data-framework="value-chain"></script>
 </body>
 </html>
 

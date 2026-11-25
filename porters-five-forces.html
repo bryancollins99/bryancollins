@@ -3,11 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Porter's Five Forces — Bryan Collins</title>
-    <meta name="description" content="Free interactive Porter's Five Forces tool. Analyze your competitive environment and market position.">
-    <meta property="og:url" content="https://bryancollins.com/porters-five-forces/" />
-    <meta property="og:title" content="Porter's Five Forces Tool — Competitive Analysis" />
-    <meta property="og:description" content="Understand your competitive position with this interactive tool." />
+    <title>Porter's Five Forces Calculator &amp; Competitive Moat Analyzer | Bryan Collins</title>
+    <meta name="description" content="Interactive Porter's Five Forces calculator to score entrant threat, buyer power, substitute risk, supplier leverage, and rivalry, then export a Markdown brief or PDF.">
+    <meta property="og:url" content="https://bryancollins.com/porters-five-forces" />
+    <meta property="og:title" content="Porter's Five Forces Calculator &amp; Competitive Moat Analyzer | Bryan Collins" />
+    <meta property="og:description" content="Score all five competitive forces in your market and export a structured Markdown brief or PDF." />
     
     <!-- Tailwind CSS -->    
     <!-- Favicon -->
@@ -238,7 +238,7 @@
         .mobile-nav .nav-link { padding: 0.75rem 1rem; border-bottom: 1px solid #333; }
         @media (max-width: 768px) { .mobile-menu-button { display: block; } .desktop-nav { display: none; } }
     </style>
-    <link rel="canonical" href="https://bryancollins.com/porters-five-forces.html">
+    <link rel="canonical" href="https://bryancollins.com/porters-five-forces">
     <!-- Breadcrumb Schema -->
     <script type="application/ld+json">
     {
@@ -255,13 +255,67 @@
           "@type": "ListItem",
           "position": 2,
           "name": "MBA Frameworks",
-          "item": "https://bryancollins.com/mba-frameworks.html"
+          "item": "https://bryancollins.com/mba-frameworks"
         },
         {
           "@type": "ListItem",
           "position": 3,
-          "name": "Porter's Five Forces",
-          "item": "https://bryancollins.com/porters-five-forces.html"
+          "name": "Porter's Five Forces Calculator",
+          "item": "https://bryancollins.com/porters-five-forces"
+        }
+      ]
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "Porter's Five Forces Calculator & Competitive Moat Analyzer",
+      "url": "https://bryancollins.com/porters-five-forces",
+      "description": "Interactive 6-step Porter's Five Forces analyzer that scores entrant threat, buyer bargaining power, substitute threat, supplier power, and competitive rivalry with PDF and Markdown brief export.",
+      "applicationCategory": "BusinessApplication",
+      "operatingSystem": "Any",
+      "isAccessibleForFree": true,
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      },
+      "author": {
+        "@type": "Person",
+        "name": "Bryan Collins",
+        "url": "https://bryancollins.com/"
+      }
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "What does a high rating mean in Porter's Five Forces?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "A high rating on any of the five forces indicates stronger downward pressure on pricing power and profit margins. Multiple high-intensity forces signal a commoditized market where you need proprietary data, switching costs, or direct audience ownership to defend margins."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How does supplier power apply to digital creators and software operators?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "For online businesses, platforms, ad networks, API providers, and distribution algorithms act as suppliers. Relying on a single social feed or API creates high supplier leverage, whereas owning a direct email list and portable web properties lowers supplier risk."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What is the difference between Competitive Rivalry and Threat of Substitutes?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Competitive Rivalry measures direct competition from peers offering the same format or product category. Threat of Substitutes measures alternative ways a buyer can solve the same problem, such as replacing a paid course or directory lookup with an AI prompt or free spreadsheet."
+          }
         }
       ]
     }
@@ -669,11 +723,33 @@
                     </div>
                 </div>
                 <div class="text-center mt-6">
-                    <a href="mba-frameworks.html" class="text-lg font-semibold" style="color: #956FA6;">
-                        <i class="fas fa-arrow-left mr-2"></i>Back to All Frameworks
+                    <a href="/mba-frameworks" class="text-lg font-semibold mr-6" style="color: #956FA6;">
+                        <i class="fas fa-arrow-left mr-2"></i>All MBA Strategy Frameworks
+                    </a>
+                    <a href="/skills/" class="text-lg font-semibold" style="color: #956FA6;">
+                        Claude Code Agent Skills <i class="fas fa-arrow-right ml-2"></i>
                     </a>
                 </div>
             </div>
+
+            <!-- FAQ Section -->
+            <section class="bg-white rounded-xl p-8 mb-8" aria-labelledby="porters-faq-heading">
+                <h2 id="porters-faq-heading" class="text-2xl font-bold mb-6">Porter's Five Forces Frequently Asked Questions</h2>
+                <div class="space-y-6">
+                    <div>
+                        <h3 class="text-lg font-bold mb-2">What does a high rating mean in Porter's Five Forces?</h3>
+                        <p class="text-gray-700">A high rating on any of the five forces indicates stronger downward pressure on pricing power and profit margins. Multiple high-intensity forces signal a commoditized market where you need proprietary data, switching costs, or direct audience ownership to defend margins.</p>
+                    </div>
+                    <div>
+                        <h3 class="text-lg font-bold mb-2">How does supplier power apply to digital creators and software operators?</h3>
+                        <p class="text-gray-700">For online businesses, platforms, ad networks, API providers, and distribution algorithms act as suppliers. Relying on a single social feed or API creates high supplier leverage, whereas owning a direct email list and portable web properties lowers supplier risk.</p>
+                    </div>
+                    <div>
+                        <h3 class="text-lg font-bold mb-2">What is the difference between Competitive Rivalry and Threat of Substitutes?</h3>
+                        <p class="text-gray-700">Competitive Rivalry measures direct competition from peers offering the same format or product category. Threat of Substitutes measures alternative ways a buyer can solve the same problem, such as replacing a paid course or directory lookup with an AI prompt or free spreadsheet.</p>
+                    </div>
+                </div>
+            </section>
 
             <div class="flex gap-4 justify-center text-sm text-gray-400 mb-4">
                     <a href="/privacy.html" class="hover:text-black">Privacy Policy</a>
@@ -861,6 +937,7 @@
             });
         }
     </script>
+    <script defer src="/resources/framework-brief.js" data-framework="porters-five-forces"></script>
 </body>
 </html>
 

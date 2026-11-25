@@ -3,11 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ANSOFF Matrix — Bryan Collins</title>
-    <meta name="description" content="Free interactive ANSOFF Matrix tool to plan your growth strategy. Map market penetration, development, product development, and diversification options.">
-    <meta property="og:url" content="https://bryancollins.com/ansoff-matrix/" />
-    <meta property="og:title" content="ANSOFF Matrix Tool — Growth Strategy for Creators" />
-    <meta property="og:description" content="Plan your content business growth with this interactive ANSOFF Matrix tool." />
+    <title>Ansoff Matrix Calculator &amp; Growth Risk Planner | Bryan Collins</title>
+    <meta name="description" content="Interactive Ansoff Matrix calculator to map market penetration, market development, product development, and diversification bets, then export a PDF or Markdown strategy brief.">
+    <meta property="og:url" content="https://bryancollins.com/ansoff-matrix" />
+    <meta property="og:title" content="Ansoff Matrix Calculator &amp; Growth Risk Planner | Bryan Collins" />
+    <meta property="og:description" content="Map your four growth quadrants by risk and export a paste-ready Markdown brief or PDF." />
     
     <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="/favicon.svg">
@@ -311,7 +311,7 @@
             color: #ffffff !important;
         }
     </style>
-    <link rel="canonical" href="https://bryancollins.com/ansoff-matrix.html">
+    <link rel="canonical" href="https://bryancollins.com/ansoff-matrix">
     <!-- Breadcrumb Schema -->
     <script type="application/ld+json">
     {
@@ -328,13 +328,67 @@
           "@type": "ListItem",
           "position": 2,
           "name": "MBA Frameworks",
-          "item": "https://bryancollins.com/mba-frameworks.html"
+          "item": "https://bryancollins.com/mba-frameworks"
         },
         {
           "@type": "ListItem",
           "position": 3,
-          "name": "ANSOFF Matrix",
-          "item": "https://bryancollins.com/ansoff-matrix.html"
+          "name": "Ansoff Matrix Calculator",
+          "item": "https://bryancollins.com/ansoff-matrix"
+        }
+      ]
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "Ansoff Matrix Calculator & Growth Risk Planner",
+      "url": "https://bryancollins.com/ansoff-matrix",
+      "description": "Interactive 6-step Ansoff Matrix growth planner for creators and operators with local autosave, optional AI recommendations, PDF export, and Markdown strategy brief copy.",
+      "applicationCategory": "BusinessApplication",
+      "operatingSystem": "Any",
+      "isAccessibleForFree": true,
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      },
+      "author": {
+        "@type": "Person",
+        "name": "Bryan Collins",
+        "url": "https://bryancollins.com/"
+      }
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Which Ansoff Matrix quadrant has the lowest risk?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Market Penetration carries the lowest execution risk because you sell an existing product to an audience you already understand. Improving conversion, retention, or publishing cadence tests demand before committing capital to new products or unfamiliar markets."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "When should an operator choose Product Development over Market Development?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Choose Product Development when you already own high-trust distribution with a defined buyer segment and hear repeated requests for an adjacent tool, tier, or service. Choose Market Development when your core product already converts reliably and can reach a second channel or geography without a rebuild."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Why is Diversification the riskiest Ansoff growth strategy?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Diversification compounds product risk and distribution risk at the same time because both the offer and the buyer are unproven. Most lean operators fund diversification only after Market Penetration or Product Development generates predictable cash flow."
+          }
         }
       ]
     }
@@ -676,11 +730,33 @@
                     </div>
                 </div>
                 <div class="text-center mt-6">
-                    <a href="mba-frameworks.html" class="text-lg font-semibold" style="color: #597AFF;">
-                        <i class="fas fa-arrow-left mr-2"></i>Back to All Frameworks
+                    <a href="/mba-frameworks" class="text-lg font-semibold mr-6" style="color: #FFDE59;">
+                        <i class="fas fa-arrow-left mr-2"></i>All MBA Strategy Frameworks
+                    </a>
+                    <a href="/skills/" class="text-lg font-semibold" style="color: #FFDE59;">
+                        Claude Code Agent Skills <i class="fas fa-arrow-right ml-2"></i>
                     </a>
                 </div>
             </div>
+
+            <!-- FAQ Section -->
+            <section class="bg-white rounded-xl p-8 mb-8" aria-labelledby="ansoff-faq-heading">
+                <h2 id="ansoff-faq-heading" class="text-2xl font-bold mb-6">Ansoff Matrix Frequently Asked Questions</h2>
+                <div class="space-y-6">
+                    <div>
+                        <h3 class="text-lg font-bold mb-2">Which Ansoff Matrix quadrant has the lowest risk?</h3>
+                        <p class="text-gray-600">Market Penetration carries the lowest execution risk because you sell an existing product to an audience you already understand. Improving conversion, retention, or publishing cadence tests demand before committing capital to new products or unfamiliar markets.</p>
+                    </div>
+                    <div>
+                        <h3 class="text-lg font-bold mb-2">When should an operator choose Product Development over Market Development?</h3>
+                        <p class="text-gray-600">Choose Product Development when you already own high-trust distribution with a defined buyer segment and hear repeated requests for an adjacent tool, tier, or service. Choose Market Development when your core product already converts reliably and can reach a second channel or geography without a rebuild.</p>
+                    </div>
+                    <div>
+                        <h3 class="text-lg font-bold mb-2">Why is Diversification the riskiest Ansoff growth strategy?</h3>
+                        <p class="text-gray-600">Diversification compounds product risk and distribution risk at the same time because both the offer and the buyer are unproven. Most lean operators fund diversification only after Market Penetration or Product Development generates predictable cash flow.</p>
+                    </div>
+                </div>
+            </section>
 
             <div class="flex gap-4 justify-center text-sm text-gray-400 mb-4">
                     <a href="/privacy.html" class="hover:text-black">Privacy Policy</a>
@@ -1018,6 +1094,7 @@
             });
         }
     </script>
+    <script defer src="/resources/framework-brief.js" data-framework="ansoff"></script>
 </body>
 </html>
 
