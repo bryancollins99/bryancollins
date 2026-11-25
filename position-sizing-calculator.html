@@ -3,23 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Position Sizing Calculator | Bryan Collins</title>
-    <meta name="description" content="Calculate safe position sizes for wheel strategy and options trading. Conservative risk management for systematic income investing.">
+    <title>Options &amp; Wheel Strategy Position Sizing Calculator | Bryan Collins</title>
+    <meta name="description" content="Calculate maximum option contracts, share exposure, margin requirements, and cash reserve buffers from portfolio size, risk percentage, stock price, and strategy.">
     
     <link rel="canonical" href="https://bryancollins.com/position-sizing-calculator">
     
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://bryancollins.com/position-sizing-calculator">
-    <meta property="og:title" content="Position Sizing Calculator | Bryan Collins">
-    <meta property="og:description" content="Calculate safe position sizes for options trading and risk management.">
+    <meta property="og:title" content="Options &amp; Wheel Strategy Position Sizing Calculator | Bryan Collins">
+    <meta property="og:description" content="Calculate safe contract limits, share exposure, margin requirements, and cash reserves for cash-secured puts and covered calls.">
     <meta property="og:image" content="https://bryancollins.com/resources/bryan-collins.jpeg">
     
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
     <meta property="twitter:url" content="https://bryancollins.com/position-sizing-calculator">
-    <meta property="twitter:title" content="Position Sizing Calculator">
-    <meta property="twitter:description" content="Free position sizing calculator for safe options trading.">
+    <meta property="twitter:title" content="Options &amp; Wheel Strategy Position Sizing Calculator">
+    <meta property="twitter:description" content="Multi-input options position sizing calculator for cash-secured puts and the Wheel strategy.">
     <meta property="twitter:image" content="https://bryancollins.com/resources/bryan-collins.jpeg">
     
     <link rel="icon" type="image/svg+xml" href="/favicon.svg">
@@ -198,10 +198,32 @@
         {
           "@type": "ListItem",
           "position": 2,
-          "name": "Position Sizing Calculator",
-          "item": "https://bryancollins.com/position-sizing-calculator.html"
+          "name": "Options & Wheel Strategy Position Sizing Calculator",
+          "item": "https://bryancollins.com/position-sizing-calculator"
         }
       ]
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "Options & Wheel Strategy Position Sizing Calculator",
+      "url": "https://bryancollins.com/position-sizing-calculator",
+      "description": "Multi-input options position sizing calculator computing contract caps, share exposure, margin requirements, diversification limits, and cash reserve buffers.",
+      "applicationCategory": "FinanceApplication",
+      "operatingSystem": "Any",
+      "isAccessibleForFree": true,
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      },
+      "author": {
+        "@type": "Person",
+        "name": "Bryan Collins",
+        "url": "https://bryancollins.com/"
+      }
     }
     </script>
 </head>
@@ -240,9 +262,9 @@
     <header class="hero-gradient text-white py-16 px-4">
         <div class="max-w-4xl mx-auto text-center">
             <i class="fas fa-balance-scale icon-yellow text-5xl mb-6"></i>
-            <h1 class="text-4xl sm:text-5xl font-extrabold mb-4 leading-tight">Position Sizing Calculator</h1>
-            <p class="text-xl sm:text-2xl opacity-90 leading-relaxed">Calculate safe position sizes for wheel strategy and options trading.</p>
-            <p class="text-lg opacity-80 mt-4">Conservative risk management. No margin calls. No blown accounts.</p>
+            <h1 class="text-4xl sm:text-5xl font-extrabold mb-4 leading-tight">Options &amp; Wheel Strategy Position Sizing Calculator</h1>
+            <p class="text-xl sm:text-2xl opacity-90 leading-relaxed">Calculate maximum contracts, capital exposure, and cash buffers for cash-secured puts and covered calls.</p>
+            <p class="text-lg opacity-80 mt-4">Conservative risk management. No margin calls. No overconcentration.</p>
         </div>
     </header>
 
@@ -353,6 +375,9 @@
                         </h3>
                         <div id="positionDetails"></div>
                     </div>
+
+                    <!-- Inline Operator Capture (R504) -->
+                    <div id="calculator-capture-root" data-calculator="position-sizing-calculator" class="mt-6"></div>
                 </div>
             </div>
 
@@ -675,6 +700,8 @@
             }
         }
     </script>
+    <script defer src="/resources/calculator-capture.js"></script>
+    <script defer src="/resources/subscribe.js"></script>
 </body>
 </html>
 

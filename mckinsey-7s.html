@@ -3,11 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>McKinsey 7S — Bryan Collins</title>
-    <meta name="description" content="Free interactive McKinsey 7S Framework tool. Align Strategy, Structure, Systems, Shared Values, Style, Staff, and Skills.">
-    <meta property="og:url" content="https://bryancollins.com/mckinsey-7s/" />
-    <meta property="og:title" content="McKinsey 7S Framework Tool" />
-    <meta property="og:description" content="Align your organization with this interactive 7S tool." />
+    <title>McKinsey 7S Alignment Calculator &amp; Diagnostic Builder | Bryan Collins</title>
+    <meta name="description" content="Interactive McKinsey 7S alignment builder covering Strategy, Structure, Systems, Shared Values, Style, Staff, and Skills with PDF and Markdown brief export.">
+    <meta property="og:url" content="https://bryancollins.com/mckinsey-7s" />
+    <meta property="og:title" content="McKinsey 7S Alignment Calculator &amp; Diagnostic Builder | Bryan Collins" />
+    <meta property="og:description" content="Audit organizational alignment across all 7 McKinsey elements and export a Markdown brief or PDF." />
     
     <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="/favicon.svg">
@@ -212,7 +212,7 @@
         .mobile-nav .nav-link { padding: 0.75rem 1rem; border-bottom: 1px solid #333; }
         @media (max-width: 768px) { .mobile-menu-button { display: block; } .desktop-nav { display: none; } }
     </style>
-    <link rel="canonical" href="https://bryancollins.com/mckinsey-7s.html">
+    <link rel="canonical" href="https://bryancollins.com/mckinsey-7s">
     <!-- Breadcrumb Schema -->
     <script type="application/ld+json">
     {
@@ -229,13 +229,67 @@
           "@type": "ListItem",
           "position": 2,
           "name": "MBA Frameworks",
-          "item": "https://bryancollins.com/mba-frameworks.html"
+          "item": "https://bryancollins.com/mba-frameworks"
         },
         {
           "@type": "ListItem",
           "position": 3,
-          "name": "McKinsey 7S",
-          "item": "https://bryancollins.com/mckinsey-7s.html"
+          "name": "McKinsey 7S Alignment Builder",
+          "item": "https://bryancollins.com/mckinsey-7s"
+        }
+      ]
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "McKinsey 7S Alignment Calculator & Diagnostic Builder",
+      "url": "https://bryancollins.com/mckinsey-7s",
+      "description": "Interactive 8-step McKinsey 7S organizational alignment diagnostic covering hard and soft elements with PDF and Markdown brief export.",
+      "applicationCategory": "BusinessApplication",
+      "operatingSystem": "Any",
+      "isAccessibleForFree": true,
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      },
+      "author": {
+        "@type": "Person",
+        "name": "Bryan Collins",
+        "url": "https://bryancollins.com/"
+      }
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "What are the Hard S and Soft S elements in McKinsey 7S?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "The three Hard elements are Strategy, Structure, and Systems because leadership can document and redesign them directly. The four Soft elements are Shared Values, Style, Staff, and Skills, which reflect culture and capabilities that take longer to shift."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Why does Shared Values sit in the center of the McKinsey 7S model?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Shared Values define what an organization refuses to compromise on, such as data accuracy, shipping speed, or customer trust. When a new strategy conflicts with core operating values or daily systems, execution stalls until the mismatch is resolved."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can a solo operator or small AI-native team use McKinsey 7S?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. For a lean team or solo builder using coding agents and contractors, Systems and Skills carry disproportionate weight: automated QA gates, documented workflows, and clear contractor boundaries replace traditional middle-management structure."
+          }
         }
       ]
     }
@@ -300,7 +354,7 @@
                     All 7 elements must be aligned for optimal performance.
                 </p>
                 <p class="text-lg mb-4">
-                    <strong>For content creators,</strong> this helps you ensure all parts of your business work together harmoniously— 
+                    <strong>For content creators,</strong> this helps you ensure all parts of your business work together harmoniously, 
                     from your strategy and systems to your team and company culture.
                 </p>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-6">
@@ -594,11 +648,33 @@
                     </div>
                 </div>
                 <div class="text-center mt-6">
-                    <a href="mba-frameworks.html" class="text-lg font-semibold" style="color: #956FA6;">
-                        <i class="fas fa-arrow-left mr-2"></i>Back to All Frameworks
+                    <a href="/mba-frameworks" class="text-lg font-semibold mr-6" style="color: #956FA6;">
+                        <i class="fas fa-arrow-left mr-2"></i>All MBA Strategy Frameworks
+                    </a>
+                    <a href="/skills/" class="text-lg font-semibold" style="color: #956FA6;">
+                        Claude Code Agent Skills <i class="fas fa-arrow-right ml-2"></i>
                     </a>
                 </div>
             </div>
+
+            <!-- FAQ Section -->
+            <section class="bg-white rounded-xl p-8 mb-8" aria-labelledby="seven-s-faq-heading">
+                <h2 id="seven-s-faq-heading" class="text-2xl font-bold mb-6">McKinsey 7S Frequently Asked Questions</h2>
+                <div class="space-y-6">
+                    <div>
+                        <h3 class="text-lg font-bold mb-2">What are the Hard S and Soft S elements in McKinsey 7S?</h3>
+                        <p class="text-gray-700">The three Hard elements are Strategy, Structure, and Systems because leadership can document and redesign them directly. The four Soft elements are Shared Values, Style, Staff, and Skills, which reflect culture and capabilities that take longer to shift.</p>
+                    </div>
+                    <div>
+                        <h3 class="text-lg font-bold mb-2">Why does Shared Values sit in the center of the McKinsey 7S model?</h3>
+                        <p class="text-gray-700">Shared Values define what an organization refuses to compromise on, such as data accuracy, shipping speed, or customer trust. When a new strategy conflicts with core operating values or daily systems, execution stalls until the mismatch is resolved.</p>
+                    </div>
+                    <div>
+                        <h3 class="text-lg font-bold mb-2">Can a solo operator or small AI-native team use McKinsey 7S?</h3>
+                        <p class="text-gray-700">Yes. For a lean team or solo builder using coding agents and contractors, Systems and Skills carry disproportionate weight: automated QA gates, documented workflows, and clear contractor boundaries replace traditional middle-management structure.</p>
+                    </div>
+                </div>
+            </section>
 
             <div class="flex gap-4 justify-center text-sm text-gray-400 mb-4">
                     <a href="/privacy.html" class="hover:text-black">Privacy Policy</a>
@@ -750,6 +826,7 @@
             });
         }
     </script>
+    <script defer src="/resources/framework-brief.js" data-framework="mckinsey-7s"></script>
 </body>
 </html>
 

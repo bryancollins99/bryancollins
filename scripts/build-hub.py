@@ -206,10 +206,12 @@ NAV = [("/videos", "Videos"), ("/projects", "Projects"), ("/skills/", "Skills"),
        ("/books", "Books"), ("/work-with-me", "Work"), ("/#newsletter", "Newsletter")]
 
 
-def page(path, title, desc, body, hub, jsonld=None, depth=0):
+def page(path, title, desc, body, hub, jsonld=None, depth=0, extra_scripts=None):
     canon = SITE + path
     nav = "".join(f'<a href="{h}">{t}</a>' for h, t in NAV)
-    ld = f'\n    <script type="application/ld+json">{json.dumps(jsonld, ensure_ascii=False)}</script>' if jsonld else ""
+    ld_items = jsonld if isinstance(jsonld, list) else ([jsonld] if jsonld else [])
+    ld = "".join(f'\n    <script type="application/ld+json">{json.dumps(item, ensure_ascii=False)}</script>' for item in ld_items)
+    scripts_html = "".join(f'\n    <script defer src="{esc(src)}"></script>' for src in (extra_scripts or []))
     L = hub["links"]
     return f"""<!DOCTYPE html>
 <html lang="en">
@@ -230,7 +232,7 @@ def page(path, title, desc, body, hub, jsonld=None, depth=0):
     <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#121211">
     <link rel="icon" type="image/svg+xml" href="/favicon.svg">
     <link rel="stylesheet" href="/assets/hub.css">
-{ANALYTICS}{ld}
+{ANALYTICS}{ld}{scripts_html}
 </head>
 <body>
 <a class="skip" href="#content">Skip to content</a>
@@ -389,6 +391,17 @@ def build_projects(hub):
                 body, hub)
 
 
+STACK_CHIPS = [
+    ("astro-static", "Astro / Static", True),
+    ("nextjs-react", "Next.js / React", False),
+    ("python-cli", "Python / CLI", False),
+    ("netlify", "Netlify", True),
+    ("cloudflare-workers", "Cloudflare Workers", False),
+    ("github-actions", "GitHub Actions", True),
+    ("markdown-vault", "Markdown Vault / Notes", False),
+]
+
+
 def build_skills_index(hub, skills, snap):
     groups, out = [], []
     for s in skills:
@@ -399,25 +412,157 @@ def build_skills_index(hub, skills, snap):
             f'<li class="card skill-card"><h3><a href="/skills/{esc(s["name"])}">/{esc(s["name"])}</a></h3><p>{esc(first_sentence(s["blurb"]))}</p><a class="more internal" href="/skills/{esc(s["name"])}">Read and install</a></li>'
             for s in skills if s["group"] == g)
         out.append(f'<p class="group-title">{esc(g)}</p><ul class="grid">{rows}</ul>')
+
+    chips_html = "".join(
+        f'<button type="button" class="stack-chip" data-stack="{esc(key)}" aria-pressed="{"true" if default_on else "false"}">{esc(label)}</button>'
+        for key, label, default_on in STACK_CHIPS
+    )
+    picker_items = "".join(
+        f'<label class="skill-pick-item">'
+        f'<input type="checkbox" class="skill-checkbox" data-skill="{esc(s["name"])}" checked>'
+        f'<span class="skill-pick-meta">'
+        f'<span class="skill-pick-top"><span class="skill-pick-name">/{esc(s["name"])}</span><span class="rec-pill" hidden>Recommended</span></span>'
+        f'<span class="skill-pick-desc">{esc(first_sentence(s["blurb"]))}</span>'
+        f'</span></label>'
+        for s in skills
+    )
+    bundle_data = json.dumps(
+        [{"name": s["name"], "group": s["group"], "summary": first_sentence(s["blurb"])} for s in skills],
+        ensure_ascii=False,
+    )
+
     body = f"""<section class="hero">
-    <h1>Agent skills</h1>
-    <p class="lede">Skills and workflows for AI coding agents, taken from my own setup and made generic so they work in any repo.</p>
-    <p>Each one is a plain Markdown procedure. They ship as Claude Code slash commands, but the same text works as a Cursor rule or a prompt for any capable agent. Every skill here earned its place by catching something real. MIT licensed.</p>
-    <div class="actions"><a class="btn btn-ghost" href="https://github.com/{SKILLS_REPO}">github.com/{SKILLS_REPO}</a></div>
+    <h1>Claude Code Skills &amp; Stack Builder</h1>
+    <p class="lede">Configure a tailored CLAUDE.md, AGENTS.md, and slash-command installer from the {len(skills)} open-source agent workflows I run every day.</p>
+    <p>Each skill is a plain Markdown procedure. They ship as Claude Code slash commands inside <code>.claude/commands/</code>, and the same text works in Cursor, Windsurf, or any coding agent. MIT licensed.</p>
+    <div class="actions"><a class="btn btn-primary" href="#skills-bundle-builder">Build your stack bundle</a><a class="btn btn-ghost" href="https://github.com/{SKILLS_REPO}">github.com/{SKILLS_REPO}</a></div>
+</section>
+<section id="skills-bundle-builder" class="bundle-builder-section">
+    <div class="bundle-builder">
+        <div class="block-head" style="margin-bottom:8px;">
+            <div>
+                <h2>Interactive Claude Code &amp; Agent Stack Bundle Builder</h2>
+                <p class="sub" style="margin:4px 0 0;">Pick your stack, choose your slash commands, and export a ready-to-run <code>AGENTS.md</code> plus <code>.claude/commands/</code> installer.</p>
+            </div>
+        </div>
+
+        <div class="bundle-step">
+            <div class="bundle-step-head">
+                <h3><span class="bundle-step-label">Step 1</span>Pick your stack</h3>
+                <span class="muted small">Auto-selects the slash commands and guardrails that fit your repo</span>
+            </div>
+            <div class="stack-chips" role="group" aria-label="Technology stack">{chips_html}</div>
+        </div>
+
+        <div class="bundle-step">
+            <div class="bundle-step-head">
+                <h3><span class="bundle-step-label">Step 2</span>Pick slash commands (<span id="bundle-selected-count">{len(skills)} of {len(skills)} selected</span>)</h3>
+                <div class="picker-controls">
+                    <button type="button" class="picker-link-btn" id="skills-select-recommended">Select recommended</button>
+                    <button type="button" class="picker-link-btn" id="skills-select-all">Select all {len(skills)}</button>
+                    <button type="button" class="picker-link-btn" id="skills-clear-all">Clear</button>
+                </div>
+            </div>
+            <div class="skill-picker-grid">{picker_items}</div>
+        </div>
+
+        <div class="bundle-step">
+            <div class="bundle-step-head">
+                <h3><span class="bundle-step-label">Step 3</span>Live preview &amp; install</h3>
+                <div class="bundle-tabs" role="tablist" aria-label="Bundle preview format">
+                    <button type="button" role="tab" class="bundle-tab" data-tab="agents" aria-selected="true">AGENTS.md / CLAUDE.md</button>
+                    <button type="button" role="tab" class="bundle-tab" data-tab="installer">install-claude-skills.sh</button>
+                </div>
+            </div>
+            <pre class="bundle-preview"><code id="bundle-preview-code">Loading bundle preview...</code></pre>
+            <div class="bundle-actions">
+                <button type="button" class="btn-action primary" id="copy-agents-md">Copy combined AGENTS.md</button>
+                <button type="button" class="btn-action" id="download-sh-bundle">Download .sh installer</button>
+                <button type="button" class="btn-action" id="download-md-bundle">Download .md bundle</button>
+                <span id="bundle-action-feedback" class="muted small" role="status" aria-live="polite"></span>
+            </div>
+
+            <div class="bundle-email-box">
+                <div>
+                    <h3>Email me this bundle + weekly operator field notes</h3>
+                    <p>Get the Claude Code Starter Pack in your inbox now, plus weekly notes on what worked and what broke across live builds.</p>
+                </div>
+                <div>
+                    <form class="bc-subscribe signup bundle-signup" data-form="skills-bundle-builder" data-source="skills-bundle-builder" action="/.netlify/functions/subscribe" method="post">
+                        <input type="hidden" name="lane" value="claude">
+                        <input type="hidden" name="form" value="skills-bundle-builder">
+                        <input type="hidden" name="source" value="skills-bundle-builder">
+                        <input type="hidden" name="elapsed" value="">
+                        {HONEYPOT}
+                        <div class="signup-fields">
+                            <label class="sr" for="bundle-nl-email">Email address</label>
+                            <input id="bundle-nl-email" name="email" type="email" placeholder="you@company.com" autocomplete="email" required>
+                            <button type="submit"><span>Email me the starter pack</span></button>
+                        </div>
+                        <div id="bundle-signup-status" class="bundle-status" role="status" aria-live="polite"></div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script type="application/json" id="skills-bundle-data">{bundle_data}</script>
 </section>
 <section class="block install">
-    <h2>Install all of them</h2>
+    <h2>Install all {len(skills)} skills via Git</h2>
 <pre><code>git clone https://github.com/{SKILLS_REPO}.git
 cp agent-skills/skills/*.md ~/.claude/commands/</code></pre>
 </section>
-<section class="block">{''.join(out)}</section>
+<section class="block">
+    <div class="block-head"><h2>Browse all {len(skills)} Claude Code skills</h2><a href="/mba-frameworks">Strategy calculators</a></div>
+    {''.join(out)}
+</section>
 {newsletter(hub, "Get new skills by email")}"""
-    ld = {"@context": "https://schema.org", "@type": "SoftwareSourceCode", "name": "Agent skills",
-          "codeRepository": f"https://github.com/{SKILLS_REPO}", "license": "https://opensource.org/licenses/MIT",
-          "author": {"@type": "Person", "name": "Bryan Collins", "url": SITE + "/"}}
-    return page("/skills/", "Agent skills for Claude Code · Bryan Collins",
-                "Open-source, MIT-licensed skills and slash commands for Claude Code and other AI coding agents.",
-                body, hub, ld)
+
+    web_app_ld = {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "Claude Code Stack & Skill Bundle Builder",
+        "url": f"{SITE}/skills/",
+        "description": "Interactive builder that generates tailored CLAUDE.md and AGENTS.md stack rules plus a shell installer for 13 open-source Claude Code slash commands.",
+        "applicationCategory": "DeveloperApplication",
+        "operatingSystem": "macOS, Linux, Windows",
+        "isAccessibleForFree": True,
+        "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"},
+        "author": {"@type": "Person", "name": "Bryan Collins", "url": f"{SITE}/"},
+    }
+    item_list_ld = {
+        "@context": "https://schema.org",
+        "@type": "ItemList",
+        "name": "Open-Source Claude Code Skills by Bryan Collins",
+        "numberOfItems": len(skills),
+        "itemListElement": [
+            {
+                "@type": "ListItem",
+                "position": idx + 1,
+                "name": f"/{s['name']}",
+                "description": first_sentence(s["blurb"]),
+                "url": f"{SITE}/skills/{s['name']}",
+            }
+            for idx, s in enumerate(skills)
+        ],
+    }
+    code_ld = {
+        "@context": "https://schema.org",
+        "@type": "SoftwareSourceCode",
+        "name": "Agent skills",
+        "codeRepository": f"https://github.com/{SKILLS_REPO}",
+        "license": "https://opensource.org/licenses/MIT",
+        "author": {"@type": "Person", "name": "Bryan Collins", "url": f"{SITE}/"},
+    }
+    return page(
+        "/skills/",
+        "Claude Code Skills & Agent Stack Bundle Builder | Bryan Collins",
+        "Build a custom CLAUDE.md, AGENTS.md, and slash-command installer from 13 open-source, MIT-licensed Claude Code skills by Bryan Collins.",
+        body,
+        hub,
+        [web_app_ld, item_list_ld, code_ld],
+        extra_scripts=["/resources/skills-bundle-builder.js"],
+    )
 
 
 def build_skill(hub, s, skills):
@@ -426,7 +571,7 @@ def build_skill(hub, s, skills):
     desc = first_sentence(s["blurb"])
     others = "".join(f'<li><a href="/skills/{esc(o["name"])}"><code>/{esc(o["name"])}</code></a></li>'
                      for o in skills if o["name"] != s["name"])
-    body = f"""<nav class="crumbs"><a href="/skills/">Agent skills</a> /</nav>
+    body = f"""<nav class="crumbs"><a href="/skills/">Agent skills &amp; bundle builder</a> /</nav>
 <section class="hero">
     <h1><code>/{esc(s['name'])}</code></h1>
     <p class="muted">{esc(s['group'])}</p>
@@ -436,7 +581,7 @@ def build_skill(hub, s, skills):
     <h2>Install</h2>
 <pre><code>curl -o ~/.claude/commands/{esc(s['name'])}.md \\
   {raw}</code></pre>
-    <p class="small">Then run <code>/{esc(s['name'])}</code> in Claude Code. For any other agent, paste the procedure below as its instruction. <a href="{src}">View on GitHub</a>.</p>
+    <p class="small">Then run <code>/{esc(s['name'])}</code> in Claude Code, or combine it with other workflows in the <a href="/skills/#skills-bundle-builder">Stack Bundle Builder</a>. <a href="{src}">View on GitHub</a>.</p>
 </section>
 <section class="block">
     <h2>The procedure</h2>
@@ -444,11 +589,44 @@ def build_skill(hub, s, skills):
 </section>
 <section class="block"><h2>More skills</h2><ul class="inline">{others}</ul></section>
 {newsletter(hub, "Get new skills by email")}"""
-    ld = {"@context": "https://schema.org", "@type": "SoftwareSourceCode", "name": f"/{s['name']}",
-          "description": desc, "codeRepository": f"https://github.com/{SKILLS_REPO}",
-          "license": "https://opensource.org/licenses/MIT", "programmingLanguage": "Markdown",
-          "author": {"@type": "Person", "name": "Bryan Collins", "url": SITE + "/"}}
-    return page(f"/skills/{s['name']}", f"/{s['name']}: a Claude Code skill · Bryan Collins", desc, body, hub, ld)
+    code_ld = {
+        "@context": "https://schema.org",
+        "@type": "SoftwareSourceCode",
+        "name": f"/{s['name']}",
+        "description": desc,
+        "codeRepository": f"https://github.com/{SKILLS_REPO}",
+        "license": "https://opensource.org/licenses/MIT",
+        "programmingLanguage": "Markdown",
+        "author": {"@type": "Person", "name": "Bryan Collins", "url": f"{SITE}/"},
+    }
+    howto_ld = {
+        "@context": "https://schema.org",
+        "@type": "HowTo",
+        "name": f"How to install and run /{s['name']} in Claude Code",
+        "description": desc,
+        "step": [
+            {
+                "@type": "HowToStep",
+                "position": 1,
+                "name": "Download the skill Markdown file",
+                "text": f"Download {raw} into ~/.claude/commands/{s['name']}.md or your project .claude/commands/ folder.",
+            },
+            {
+                "@type": "HowToStep",
+                "position": 2,
+                "name": f"Invoke /{s['name']} in Claude Code",
+                "text": f"Type /{s['name']} inside Claude Code (or paste the Markdown procedure into Cursor or your coding agent).",
+            },
+        ],
+    }
+    return page(
+        f"/skills/{s['name']}",
+        f"/{s['name']}: Claude Code Skill & Workflow | Bryan Collins",
+        desc,
+        body,
+        hub,
+        [code_ld, howto_ld],
+    )
 
 
 def build_books(hub):
@@ -509,8 +687,8 @@ def write(rel, text):
         m = re.search(pat, text)
         if m:
             sys.exit(f"refusing to write {rel}: matches private pattern {pat!r} near {text[max(0, m.start()-60):m.end()+60]!r}")
-    if "—" in text:
-        print(f"warning: em dash in {rel}")
+    if "\u2014" in text or "\u2013" in text:
+        print(f"warning: em/en dash in {rel}")
     p = ROOT / rel
     p.parent.mkdir(parents=True, exist_ok=True)
     p.write_text(text)

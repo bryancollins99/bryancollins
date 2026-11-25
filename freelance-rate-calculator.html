@@ -3,23 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Freelance Rate Calculator | Bryan Collins</title>
-    <meta name="description" content="Calculate your minimum freelance rates based on expenses, income goals, and billable hours. Stop undercharging and build a sustainable freelance business.">
+    <title>Freelance Hourly, Day &amp; Project Rate Calculator | Bryan Collins</title>
+    <meta name="description" content="Calculate your minimum freelance hourly rate, recommended buffer rate, day rate, and tiered project fees from expenses, take-home pay, billable hours, and taxes.">
     
     <link rel="canonical" href="https://bryancollins.com/freelance-rate-calculator">
     
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://bryancollins.com/freelance-rate-calculator">
-    <meta property="og:title" content="Freelance Rate Calculator | Bryan Collins">
-    <meta property="og:description" content="Calculate your minimum freelance rates. Stop undercharging and build a sustainable freelance business.">
+    <meta property="og:title" content="Freelance Hourly, Day &amp; Project Rate Calculator | Bryan Collins">
+    <meta property="og:description" content="Calculate minimum hourly, day, and project rates from expenses, target income, billable hours, and tax rate.">
     <meta property="og:image" content="https://bryancollins.com/resources/bryan-collins.jpeg">
     
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
     <meta property="twitter:url" content="https://bryancollins.com/freelance-rate-calculator">
-    <meta property="twitter:title" content="Freelance Rate Calculator">
-    <meta property="twitter:description" content="Free calculator to determine your minimum freelance hourly rate.">
+    <meta property="twitter:title" content="Freelance Hourly, Day &amp; Project Rate Calculator">
+    <meta property="twitter:description" content="Calculate minimum freelance hourly, day, and project pricing across five inputs.">
     <meta property="twitter:image" content="https://bryancollins.com/resources/bryan-collins.jpeg">
     
     <link rel="icon" type="image/svg+xml" href="/favicon.svg">
@@ -175,10 +175,32 @@
         {
           "@type": "ListItem",
           "position": 2,
-          "name": "Freelance Rate Calculator",
-          "item": "https://bryancollins.com/freelance-rate-calculator.html"
+          "name": "Freelance Hourly, Day & Project Rate Calculator",
+          "item": "https://bryancollins.com/freelance-rate-calculator"
         }
       ]
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "Freelance Hourly, Day & Project Rate Calculator",
+      "url": "https://bryancollins.com/freelance-rate-calculator",
+      "description": "Multi-input freelance pricing calculator that computes minimum hourly rate, recommended buffer rate, day rate, project tiers, and client volume targets.",
+      "applicationCategory": "BusinessApplication",
+      "operatingSystem": "Any",
+      "isAccessibleForFree": true,
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      },
+      "author": {
+        "@type": "Person",
+        "name": "Bryan Collins",
+        "url": "https://bryancollins.com/"
+      }
     }
     </script>
 </head>
@@ -217,9 +239,9 @@
     <header class="hero-gradient text-white py-16 px-4">
         <div class="max-w-4xl mx-auto text-center">
             <i class="fas fa-calculator icon-yellow text-5xl mb-6"></i>
-            <h1 class="text-4xl sm:text-5xl font-extrabold mb-4 leading-tight">Freelance Rate Calculator</h1>
-            <p class="text-xl sm:text-2xl opacity-90 leading-relaxed">Calculate your minimum rates to build a sustainable freelance business.</p>
-            <p class="text-lg opacity-80 mt-4">Stop undercharging. Know your numbers.</p>
+            <h1 class="text-4xl sm:text-5xl font-extrabold mb-4 leading-tight">Freelance Hourly, Day &amp; Project Rate Calculator</h1>
+            <p class="text-xl sm:text-2xl opacity-90 leading-relaxed">Model your hourly floor, day rate, and fixed-scope project pricing from real expenses, taxes, and billable capacity.</p>
+            <p class="text-lg opacity-80 mt-4">Stop undercharging. Know your exact numbers.</p>
         </div>
     </header>
 
@@ -281,7 +303,7 @@
 
                     <div class="p-4 bg-blue-50 border-l-4 border-blue-400 rounded">
                         <p class="text-sm text-gray-700">
-                            <strong>Pro Tip:</strong> Most freelancers overestimate billable hours. Be conservative—25 hours/week is realistic when you account for admin, sales, and non-billable work.
+                            <strong>Pro Tip:</strong> Most freelancers overestimate billable hours. Be conservative: 25 hours/week is realistic when you account for admin, sales, and non-billable work.
                         </p>
                     </div>
                 </div>
@@ -337,6 +359,9 @@
                             </div>
                         </div>
                     </div>
+
+                    <!-- Inline Operator Capture (R504) -->
+                    <div id="calculator-capture-root" data-calculator="freelance-rate-calculator" class="mt-6"></div>
                 </div>
             </div>
 
@@ -605,6 +630,8 @@
             }
         }
     </script>
+    <script defer src="/resources/calculator-capture.js"></script>
+    <script defer src="/resources/subscribe.js"></script>
 </body>
 </html>
 
