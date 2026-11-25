@@ -60,7 +60,10 @@ export const CAMPAIGNS_PART_1 = [
           fg: "#FFFFFF",
           font: SERIF,
         }),
-        h2("2. Two editing deals that only drop once a year", SERIF, "#1C1917"),
+        h2("2. The Creator White Space Challenge ($97, 30-day email course)", SERIF, "#1C1917"),
+        p("If your real bottleneck is not tools, it is finding protected time and mental space to work on your book, newsletter or creative project in 2027, doors are also open for <strong>The Creator White Space Challenge ($97)</strong>.", SERIF, "#1C1917"),
+        p("Each morning for 30 days, you get one short, actionable email lesson ending with a practical Creative Action Plan. No bloated video portal. Try it for a few days and reply for a full refund if it is not a fit.", SERIF, "#1C1917"),
+        h2("3. Two editing deals that only drop once a year", SERIF, "#1C1917"),
         p("If you have been waiting to upgrade your editing tool, Black Friday week is the one time of year prices genuinely move:", SERIF, "#1C1917"),
         bulletList(
           [
@@ -92,7 +95,12 @@ For the next four days, you can grab all five paid downloads from Become a Write
 Open the Writers' Black Friday Vault:
 https://becomeawritertoday.com/black-friday/?utm_source=resend&utm_medium=email&utm_campaign=bfcm-2026-bf
 
-2. TWO EDITING DEALS THAT ONLY DROP ONCE A YEAR
+2. THE CREATOR WHITE SPACE CHALLENGE ($97, 30-DAY EMAIL COURSE)
+
+If your real bottleneck is not tools, it is finding protected time and mental space to work on your book, newsletter or creative project in 2027, doors are also open for The Creator White Space Challenge ($97). Each morning for 30 days, you get one short, actionable email lesson ending with a practical Creative Action Plan. Try it for a few days and reply for a full refund if it is not a fit:
+https://becomeawritertoday.com/black-friday/#creator-white-space
+
+3. TWO EDITING DEALS THAT ONLY DROP ONCE A YEAR
 
 - ProWritingAid (up to 50% off Annual and Lifetime plans, best for book-length drafts in Scrivener or Word):
 https://becomeawritertoday.com/try-prowritingaid/
