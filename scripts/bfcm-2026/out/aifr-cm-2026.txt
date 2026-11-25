@@ -1,15 +1,16 @@
 If you follow our weekly model tracker on AI Flash Report (https://aiflashreport.com/changes/), you have watched per-token inference prices drop steadily across 2026 while wrapper SaaS apps keep charging $29 to $99 a month per seat.
 
-Behind AI Flash Report, our Dublin publishing group runs nine sites using plain-text Markdown files, Python scripts and Claude Code skills instead of recurring SaaS wrappers.
+Behind AI Flash Report, our Dublin publishing group runs nine sites from git using Claude Code skills, plain-text Markdown files and small Python scripts instead of recurring SaaS wrappers.
 
-Until midnight tonight (Cyber Monday), our founder Bryan Collins has bundled all four of those local plain-text and Claude Code kits together for $69 one-time (normally $146):
+Until midnight UTC tonight (Cyber Monday), our founder Bryan Collins has opened private GitHub access to The Solo Operator Repo (bryancollins99/solo-operator-stack) for $79 one-time (normally $149):
 
-- The Builder's Pipeline: six Python scripts and prompts turning daily build logs into weekly drafts.
-- Claude Code for Writers & Operators: persistent MEMORY.md setup, undo safety and three CLAUDE.md project specs.
-- The Zettelkasten for Creators Kit: git-backed plain-Markdown vault and cleanup scripts.
-- Filler-Word Killer Editor Pack: local CLI prose linter + eight editable JSON dictionaries.
+- Sanitised .claude/ Skills & Hooks Pack: gitleaks-clean production skills (/prd, /prd-critic, /qa-loop, /swarm-check, /pre-commit-review, /commit, /log).
+- The Builder's Pipeline: daily Coding-Log.md to Friday LinkedIn, newsletter and YouTube scripts.
+- Zettelkasten Starter Vault + Hygiene Scripts: plain-Markdown note vault with zero SaaS lock-in.
+- Portfolio Site Blueprint: stripped-down Astro + Netlify + Resend + Stripe webhook starter behind running nine sites solo.
+- Lifetime git pull updates through 2027: zero subscription, 14-day refund.
 
-Inspect the $69 Cyber Monday Builder Stack:
+Get The Solo Operator Repo ($79 before midnight):
 https://bryancollins.com/black-friday.html?utm_source=aiflashreport&utm_medium=email&utm_campaign=aifr-bfcm-2026
 
 Also worth checking today: Lovable for rapid UI prototyping from a prompt (affiliate link: https://tfr-affiliate-hub.netlify.app/e/lovable-labs-incorporated), and Irish B2B AI benchmarks at https://vendors.ie/ai-tools-ireland.

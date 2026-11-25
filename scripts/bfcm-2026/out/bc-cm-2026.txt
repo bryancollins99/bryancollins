@@ -1,12 +1,12 @@
 Quick note before Cyber Monday wraps up tonight.
 
-At midnight I am taking down the $69 bundle page that packages my four plain-text kits together (The Builder's Pipeline, Claude Code for Writers, The Zettelkasten for Creators Kit, and the Filler-Word Killer Editor Pack). Tomorrow they go back to $146 across their individual pages.
+At midnight UTC I am closing the $79 Cyber Week launch price for The Solo Operator Repo (private GitHub access to bryancollins99/solo-operator-stack, normally $149).
 
-If you want to spend December setting up a clean Markdown note vault, a repeatable Claude Code memory setup, and a 20-minute Friday content workflow you own on disk with zero SaaS subscriptions, grab the stack here:
+You get the sanitised .claude/ skills and hooks pack (/prd, /prd-critic, /qa-loop, /swarm-check, /pre-commit-review, /commit, /log), The Builder's Pipeline, the Zettelkasten starter vault, the Astro + Netlify + Resend + Stripe site blueprint, and lifetime git pull updates through 2027:
 
 https://bryancollins.com/black-friday.html?utm_source=resend&utm_medium=email&utm_campaign=bc-bfcm-2026-cm
 
-Every kit comes with a 14-day no-questions refund if you open the zip files and decide the workflow does not fit how you work.
+Zero recurring subscription and a 14-day no-questions refund if you clone the repo and decide it does not fit how you build.
 
 Write on,
 Bryan Collins

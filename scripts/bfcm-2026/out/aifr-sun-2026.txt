@@ -1,0 +1,19 @@
+Every time a frontier model drops a new version, half the SaaS wrappers built on top of last quarter's API break or hike their renewal tier.
+
+When your Claude Code skills, publishing scripts, note vault and site starter live in a private git repository, switching models takes one line and you never lose your stack to a closed dashboard.
+
+Through midnight UTC tomorrow (Cyber Monday), you can get private GitHub access to The Solo Operator Repo (bryancollins99/solo-operator-stack) for $79 one-time (normally $149):
+
+- Sanitised .claude/ Skills & Hooks Pack: gitleaks-clean production skills (/prd, /prd-critic, /qa-loop, /swarm-check, /pre-commit-review, /commit, /log).
+- The Builder's Pipeline: daily Coding-Log.md to Friday LinkedIn, newsletter and YouTube scripts.
+- Zettelkasten Starter Vault + Hygiene Scripts: plain-Markdown vault with zero SaaS lock-in.
+- Portfolio Site Blueprint: stripped-down Astro + Netlify + Resend + Stripe webhook starter behind running nine sites solo.
+- Lifetime git pull updates through 2027: GitHub collaborator invite after Stripe checkout.
+
+Inspect The Solo Operator Repo ($79):
+https://bryancollins.com/black-friday.html?utm_source=aiflashreport&utm_medium=email&utm_campaign=aifr-bfcm-2026-sun
+
+14-day refund on request. Weekly model ledger: https://aiflashreport.com/changes/
+
+Consistent Publishing Ltd, CRO 742884, Landscape House, Baldonnell Business Park, Dublin D22 P3K7, Ireland
+Unsubscribe: {{{RESEND_UNSUBSCRIBE_URL}}}

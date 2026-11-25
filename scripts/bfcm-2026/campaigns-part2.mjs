@@ -1,11 +1,11 @@
 // scripts/bfcm-2026/campaigns-part2.mjs
 //
-// Campaign emails 7 to 14:
-//  7. Tri-Fuel Magic (Tri-Fuel · newsletter, 85a7b202-ab77-4bec-8cfd-5925b0d3a2d3)
-//  8. AI Flash Report (AI Flash Report · newsletter, e5f436a2-86f0-42bc-a277-5f8733bcc7eb)
-//  9. Prompt Writing Studio (PromptWritingStudio · newsletter, 8758d410-436e-49f5-b20f-a0623a976242)
-// 10-11. TenderWatch.ie NON-DISCOUNT (Tenderwatch · newsletter, 7e80858a-80e0-4eef-b6a3-780ab6541bc2 + Pro waitlist d38a0c6b)
-// 12-14. Vendors.ie NON-DISCOUNT (Vendors · newsletter, ed4b926c-07ef-43a8-a4af-c11b001969b3, ven-style2 template)
+// Campaign emails 10 to 24 (3 per site):
+// 10-12. Tri-Fuel Magic (Tri-Fuel · newsletter, 85a7b202-ab77-4bec-8cfd-5925b0d3a2d3)
+// 13-15. AI Flash Report (AI Flash Report · newsletter, e5f436a2-86f0-42bc-a277-5f8733bcc7eb)
+// 16-18. Prompt Writing Studio (PromptWritingStudio · newsletter, 8758d410-436e-49f5-b20f-a0623a976242)
+// 19-21. TenderWatch.ie NON-DISCOUNT (Tenderwatch · newsletter, 7e80858a-80e0-4eef-b6a3-780ab6541bc2 + Pro waitlist d38a0c6b)
+// 22-24. Vendors.ie NON-DISCOUNT (Vendors · newsletter, ed4b926c-07ef-43a8-a4af-c11b001969b3, ven-style2 template)
 
 import {
   p,
@@ -26,49 +26,267 @@ export const CAMPAIGNS_PART_2 = [
     segmentName: "Tri-Fuel · newsletter",
     segmentId: "85a7b202-ab77-4bec-8cfd-5925b0d3a2d3",
     audienceNote: "42 contacts (~32 active triathletes & runners)",
-    offerType: "25% Off Hexis (Code Tri25) + 2027 Winter Gut-Training Planner",
+    offerType: "40% Off Annual Hexis (Code TRIBF40, up from 25%) + 2027 Winter Fueling Kit",
     sendSlot: "Black Friday · Fri 27 Nov 2026, 14:00 UTC",
     from: "My Triathlon Calculator <hello@send.mytriathloncalculator.com>",
     replyTo: ["hello@send.mytriathloncalculator.com"],
-    subject: "Your 2027 winter gut-training setup (plus 25% off Hexis)",
-    previewText: "Set your winter base carb targets before spring build starts, and save 25% on Hexis daily carb-coding.",
+    subject: "40% off annual Hexis with code TRIBF40 (normally 25%)",
+    previewText: "Hexis bumped our reader code to 40% off annual plans with code TRIBF40 through 11:59am UTC on 1 December.",
     previewPageUrl: "https://deploy-preview-79--mytriathloncalculator.netlify.app/winter-fuel-pack/",
     livePageUrl: "https://mytriathloncalculator.com/winter-fuel-pack/",
     html: wrapBrandCardEmail({
-      title: "2027 Winter Base & Race Fueling Kit",
-      previewText: "Set your winter base carb targets before spring build starts, and save 25% on Hexis daily carb-coding.",
+      title: "40% Off Annual Hexis + 2027 Winter Base Fueling Kit",
+      previewText: "Hexis bumped our reader code to 40% off annual plans with code TRIBF40 through 11:59am UTC on 1 December.",
       brandName: "My Triathlon Calculator",
-      kicker: "2027 Off-Season Fueling & Cyber Week Partner Offer",
+      kicker: "Black Friday Partner Offer · Code TRIBF40 Ends 1 Dec 11:59am UTC",
       accentColor: "#2563EB",
       bodyHtml: [
         p("Most age-groupers spend Black Friday weekend shopping for carbon wheels and wait until two weeks before their spring 70.3 to practice race-rate carbohydrate intake."),
-        p("High-carb absorption is trainable, and November indoor turbo rides are the easiest place all year to build gut tolerance without race stress. We put together a new <strong>2027 Winter Base and Race Fueling Kit</strong> page with two practical tools:"),
+        p("High-carb absorption is trainable, and November indoor turbo rides are the easiest place all year to build gut tolerance. For Black Friday week, our nutrition partner <strong>Hexis bumped our reader discount from the usual 25% off to 40% off annual subscriptions</strong> with code <strong>TRIBF40</strong> (valid through 11:59am UTC on Tuesday 1 December)."),
+        `<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="margin-top:4px;margin-bottom:18px;"><tr><td align="center"><a href="https://www.gj4bt5vt.com/T58MD/3QQG7/?uid=3&sub2=email-bfcm2026&sub3=tribf40"><img src="https://mytriathloncalculator.com/images/hexis-bf-2026-tribf40.jpg" alt="Hexis Black Friday: Go annual and save 40% with code TRIBF40" width="280" style="display:block;width:280px;max-width:100%;height:auto;border-radius:10px;border:0;" /></a></td></tr></table>`,
         bulletList([
-          "<strong>Interactive Winter Gut-Training Progression:</strong> select Sprint, Olympic, 70.3 or Full Ironman to see exact g/hr carbohydrate targets for November-December base rides versus January-February build bricks.",
-          "<strong>25% off Hexis daily carb-coding (code Tri25):</strong> our nutrition partner <a href=\"https://www.gj4bt5vt.com/T58MD/3QQG7/?uid=3&sub2=email-bfcm2026&sub3=cyber-week\" style=\"color:#2563EB;font-weight:bold;text-decoration:underline;\">Hexis</a> syncs with TrainingPeaks, Garmin and Strava to adjust your daily meal targets around every workout.",
-          "<strong>Spec-first gear guides:</strong> comparing GPS triathlon watches, bike computers or wetsuits in weekend clearance sales? Check battery life, multi-band GPS and sizing on our site guides before checkout.",
+          "<strong>40% off annual Hexis (code TRIBF40, up from 25%):</strong> <a href=\"https://www.gj4bt5vt.com/T58MD/3QQG7/?uid=3&sub2=email-bfcm2026&sub3=tribf40\" style=\"color:#2563EB;font-weight:bold;text-decoration:underline;\">Hexis</a> syncs with TrainingPeaks, Garmin and Strava to adjust your daily carb targets around hard, easy and rest days.",
+          "<strong>Interactive 2027 Winter Gut-Training Planner:</strong> pick Sprint, Olympic, 70.3 or Full Ironman on our kit page to see exact g/hr carb targets for Nov-Dec base versus Jan-Feb build bricks.",
+          "<strong>Spec-first gear guides:</strong> comparing GPS watches, bike computers or wetsuits in weekend sales? Check battery life, multi-band GPS and sizing on our site guides before checkout.",
         ]),
         ctaButton({
-          label: "Open the 2027 Winter Fueling Kit + 25% Hexis Code",
-          href: "https://mytriathloncalculator.com/winter-fuel-pack/?utm_source=resend&utm_medium=email&utm_campaign=tf-bfcm-2026",
+          label: "Open the Winter Fueling Kit + 40% Hexis Code (TRIBF40)",
+          href: "https://mytriathloncalculator.com/winter-fuel-pack/?utm_source=resend&utm_medium=email&utm_campaign=tf-bfcm-2026-1",
           bg: "#2563EB",
           fg: "#FFFFFF",
         }),
-        `<p style="margin-top:0;margin-bottom:8px;font-family:Arial,Helvetica,sans-serif;font-size:12px;line-height:18px;color:#6B7280;">Disclosure: Hexis is a compensated partner. If you sign up through our link using code Tri25, we may earn a commission at no extra cost to you.</p>`,
+        `<p style="margin-top:0;margin-bottom:8px;font-family:Arial,Helvetica,sans-serif;font-size:12px;line-height:18px;color:#6B7280;">Disclosure: Hexis is a compensated partner. If you subscribe through our link using code TRIBF40, we may earn a commission at no extra cost to you.</p>`,
       ].join("\n"),
     }),
     text: `Most age-groupers spend Black Friday weekend shopping for carbon wheels and wait until two weeks before their spring 70.3 to practice race-rate carbohydrate intake.
 
-High-carb absorption is trainable, and November indoor turbo rides are the easiest place all year to build gut tolerance without race stress. We put together a 2027 Winter Base and Race Fueling Kit page for Cyber Weekend:
+For Black Friday week, our nutrition partner Hexis bumped our reader discount from the usual 25% off to 40% off annual subscriptions with code TRIBF40 (valid through 11:59am UTC on Tuesday 1 December).
 
-- Interactive Winter Gut-Training Progression: pick Sprint, Olympic, 70.3 or Full Ironman to see g/hr carbohydrate targets for Nov-Dec base versus Jan-Feb build sessions.
-- 25% off Hexis daily carb-coding with code Tri25: syncs with TrainingPeaks, Garmin and Strava to adjust daily carbs around every session (https://www.gj4bt5vt.com/T58MD/3QQG7/?uid=3&sub2=email-bfcm2026&sub3=cyber-week).
+- 40% off annual Hexis (code TRIBF40, up from our usual 25%): syncs with TrainingPeaks, Garmin and Strava to adjust your daily carbs around every session (https://www.gj4bt5vt.com/T58MD/3QQG7/?uid=3&sub2=email-bfcm2026&sub3=tribf40).
+- Interactive 2027 Winter Gut-Training Planner: pick Sprint, Olympic, 70.3 or Full Ironman to see g/hr carbohydrate targets for Nov-Dec base versus Jan-Feb build sessions.
 - Independent Watch, Bike Computer and Wetsuit spec guides on the site if you are comparing clearance deals this weekend.
 
 Open the 2027 Winter Fueling Kit:
-https://mytriathloncalculator.com/winter-fuel-pack/?utm_source=resend&utm_medium=email&utm_campaign=tf-bfcm-2026
+https://mytriathloncalculator.com/winter-fuel-pack/?utm_source=resend&utm_medium=email&utm_campaign=tf-bfcm-2026-1
 
 Disclosure: Hexis is a compensated partner. If you sign up through our link, we may earn a commission at no extra cost to you.
+
+Consistent Publishing Ltd, CRO 742884, Landscape House, Baldonnell Business Park, Dublin D22 P3K7, Ireland
+Unsubscribe: {{{RESEND_UNSUBSCRIBE_URL}}}`,
+  },
+
+  {
+    id: "trifuel-sun-2026",
+    property: "My Triathlon Calculator (Tri-Fuel Magic)",
+    segmentName: "Tri-Fuel · newsletter",
+    segmentId: "85a7b202-ab77-4bec-8cfd-5925b0d3a2d3",
+    audienceNote: "42 contacts (~32 active triathletes & runners)",
+    offerType: "Sunday Winter Base Gut-Training Guide + 40% Hexis Reminder (TRIBF40)",
+    sendSlot: "Sunday · Sun 29 Nov 2026, 15:00 UTC",
+    from: "My Triathlon Calculator <hello@send.mytriathloncalculator.com>",
+    replyTo: ["hello@send.mytriathloncalculator.com"],
+    subject: "Your winter turbo carb target (+ 40% off Hexis)",
+    previewText: "Why 75 to 95g/hr on a 70.3 starts on a 90-minute December trainer ride, plus code TRIBF40 for 40% off annual Hexis.",
+    previewPageUrl: "https://deploy-preview-79--mytriathloncalculator.netlify.app/winter-fuel-pack/",
+    livePageUrl: "https://mytriathloncalculator.com/winter-fuel-pack/",
+    html: wrapBrandCardEmail({
+      title: "Winter Base Gut-Training Targets",
+      previewText: "Why 75 to 95g/hr on a 70.3 starts on a 90-minute December trainer ride, plus code TRIBF40 for 40% off annual Hexis.",
+      brandName: "My Triathlon Calculator",
+      kicker: "2027 Base Fueling · Hexis 40% Offer Live",
+      accentColor: "#2563EB",
+      bodyHtml: [
+        p("If you are racing a 70.3 or Full Ironman in 2027, trying to jump straight to 80 to 100g of carbs per hour in May is a fast way to end up walking the run with GI distress."),
+        p("Two sessions a fortnight on the indoor trainer over December and January are enough to keep your gut transporters adapted without adding extra junk miles. Our interactive <strong>Winter Gut-Training Progression</strong> gives you exact Nov-Dec and Jan-Feb targets for Sprint, Olympic, 70.3 and Ironman."),
+        p("If you want daily meal-by-meal carb periodisation between those sessions, Hexis's Black Friday offer (<strong>40% off annual plans with code TRIBF40</strong>, up from our usual 25%) is still open through Tuesday 1 December at 11:59am UTC."),
+        ctaButton({
+          label: "Check Your 2027 Targets + Claim 40% Off Hexis",
+          href: "https://mytriathloncalculator.com/winter-fuel-pack/?utm_source=resend&utm_medium=email&utm_campaign=tf-bfcm-2026-2",
+          bg: "#2563EB",
+          fg: "#FFFFFF",
+        }),
+        `<p style="margin-top:0;margin-bottom:8px;font-family:Arial,Helvetica,sans-serif;font-size:12px;line-height:18px;color:#6B7280;">Disclosure: Hexis is a compensated partner. Using code TRIBF40 through our link supports My Triathlon Calculator at no extra cost to you.</p>`,
+      ].join("\n"),
+    }),
+    text: `If you are racing a 70.3 or Full Ironman in 2027, trying to jump straight to 80 to 100g of carbs per hour in May is a fast way to end up walking the run with GI distress.
+
+Two sessions a fortnight on the indoor trainer over December and January are enough to keep your gut transporters adapted. Pick your 2027 distance on our Winter Fueling Kit page to see your exact Nov-Dec and Jan-Feb g/hr targets.
+
+Hexis's Black Friday offer (40% off annual plans with code TRIBF40, up from our usual 25% off) stays open through Tuesday 1 December at 11:59am UTC.
+
+Check your 2027 targets + claim 40% off Hexis:
+https://mytriathloncalculator.com/winter-fuel-pack/?utm_source=resend&utm_medium=email&utm_campaign=tf-bfcm-2026-2
+
+Disclosure: Hexis is a compensated partner.
+
+Consistent Publishing Ltd, CRO 742884, Landscape House, Baldonnell Business Park, Dublin D22 P3K7, Ireland
+Unsubscribe: {{{RESEND_UNSUBSCRIBE_URL}}}`,
+  },
+
+  {
+    id: "trifuel-cm-2026",
+    property: "My Triathlon Calculator (Tri-Fuel Magic)",
+    segmentName: "Tri-Fuel · newsletter",
+    segmentId: "85a7b202-ab77-4bec-8cfd-5925b0d3a2d3",
+    audienceNote: "42 contacts (~32 active triathletes & runners)",
+    offerType: "Cyber Monday Final Call: 40% Off Annual Hexis (Code TRIBF40 Ends 1 Dec 11:59am UTC)",
+    sendSlot: "Cyber Monday · Mon 30 Nov 2026, 17:00 UTC",
+    from: "My Triathlon Calculator <hello@send.mytriathloncalculator.com>",
+    replyTo: ["hello@send.mytriathloncalculator.com"],
+    subject: "Code TRIBF40 expires tomorrow 11:59am (40% off Hexis)",
+    previewText: "Last chance to lock in 40% off annual Hexis (up from our usual 25%) before code TRIBF40 expires at 11:59am UTC on 1 Dec.",
+    previewPageUrl: "https://deploy-preview-79--mytriathloncalculator.netlify.app/winter-fuel-pack/",
+    livePageUrl: "https://mytriathloncalculator.com/winter-fuel-pack/",
+    html: wrapBrandCardEmail({
+      title: "Final Call: 40% Off Annual Hexis",
+      previewText: "Last chance to lock in 40% off annual Hexis (up from our usual 25%) before code TRIBF40 expires at 11:59am UTC on 1 Dec.",
+      brandName: "My Triathlon Calculator",
+      kicker: "Cyber Monday Final Reminder · Ends 1 Dec 11:59am UTC",
+      accentColor: "#2563EB",
+      bodyHtml: [
+        p("Quick Cyber Monday reminder before the window closes tomorrow morning."),
+        p("Our Black Friday Hexis code <strong>TRIBF40</strong> (<strong>40% off annual subscriptions</strong>, up from our year-round 25% reader discount) expires at <strong>11:59am UTC tomorrow, Tuesday 1 December</strong>."),
+        p("If you want personalised daily carb-coding synced to your Garmin, Strava or TrainingPeaks calendar for your 2027 build, lock in the annual rate before tomorrow morning:"),
+        ctaButton({
+          label: "Claim 40% Off Annual Hexis (Code TRIBF40)",
+          href: "https://mytriathloncalculator.com/winter-fuel-pack/?utm_source=resend&utm_medium=email&utm_campaign=tf-bfcm-2026-cm",
+          bg: "#2563EB",
+          fg: "#FFFFFF",
+        }),
+        `<p style="margin-top:0;margin-bottom:8px;font-family:Arial,Helvetica,sans-serif;font-size:12px;line-height:18px;color:#6B7280;">Disclosure: Hexis is a compensated partner. If you subscribe through our link using code TRIBF40, we may earn a commission at no extra cost to you.</p>`,
+      ].join("\n"),
+    }),
+    text: `Quick Cyber Monday reminder before the window closes tomorrow morning.
+
+Our Black Friday Hexis code TRIBF40 (40% off annual subscriptions, up from our year-round 25% reader discount) expires at 11:59am UTC tomorrow, Tuesday 1 December.
+
+Lock in 40% off annual Hexis (code TRIBF40):
+https://mytriathloncalculator.com/winter-fuel-pack/?utm_source=resend&utm_medium=email&utm_campaign=tf-bfcm-2026-cm
+
+Disclosure: Hexis is a compensated partner.
+
+Consistent Publishing Ltd, CRO 742884, Landscape House, Baldonnell Business Park, Dublin D22 P3K7, Ireland
+Unsubscribe: {{{RESEND_UNSUBSCRIBE_URL}}}`,
+  },
+
+  {
+    id: "aifr-bf-2026",
+    property: "AI Flash Report",
+    segmentName: "AI Flash Report · newsletter",
+    segmentId: "e5f436a2-86f0-42bc-a277-5f8733bcc7eb",
+    audienceNote: "35 contacts (active weekly frontier model tracker readers)",
+    offerType: "Black Friday Launch: The Solo Operator Repo ($79 Private GitHub Access, normally $149) + Lovable",
+    sendSlot: "Black Friday · Fri 27 Nov 2026, 14:30 UTC",
+    from: "AI Flash Report <alerts@send.aiflashreport.com>",
+    replyTo: ["bryan@bryancollins.com"],
+    subject: "We replaced half our AI SaaS bill with 1 private repo",
+    previewText: "Private GitHub access to the sanitised .claude/ skills, pipeline scripts, Zettelkasten vault and Astro blueprint behind 9 sites ($79).",
+    previewPageUrl: "https://deploy-preview-16--bryancollins.netlify.app/black-friday.html",
+    livePageUrl: "https://bryancollins.com/black-friday.html",
+    html: wrapBrandCardEmail({
+      title: "One Private GitHub Repo Instead of Monthly AI Wrappers",
+      previewText: "Private GitHub access to the sanitised .claude/ skills, pipeline scripts, Zettelkasten vault and Astro blueprint behind 9 sites ($79).",
+      brandName: "AI Flash Report",
+      kicker: "Black Friday to Cyber Monday · The Solo Operator Repo",
+      accentColor: "#0052FF",
+      bodyHtml: [
+        p("Every week on <a href=\"https://aiflashreport.com/changes/\" style=\"color:#0052FF;text-decoration:underline;\">AI Flash Report</a> we track frontier model releases and pricing cuts. One pattern stood out all year: raw API costs fell fast, while monthly AI wrapper subscriptions kept piling up."),
+        p("Inside our Dublin publishing group, we run nine sites from git using Claude Code skills, local Markdown files and small Python scripts instead of paying $29 to $99 a month per wrapper app."),
+        p("For Black Friday through Cyber Monday, our founder Bryan Collins opened private GitHub access to <strong>The Solo Operator Repo</strong> (<code>bryancollins99/solo-operator-stack</code>) for <strong>$79 one-time</strong> (normally $149):"),
+        bulletList([
+          "<strong>Sanitised <code>.claude/</code> Skills &amp; Hooks Pack:</strong> gitleaks-clean production skills (<code>/prd</code>, <code>/prd-critic</code>, <code>/qa-loop</code>, <code>/swarm-check</code>, <code>/pre-commit-review</code>, <code>/commit</code>, <code>/log</code>).",
+          "<strong>The Builder's Pipeline:</strong> daily <code>Coding-Log.md</code> to Friday LinkedIn, newsletter and YouTube scripts.",
+          "<strong>Zettelkasten Starter Vault + Hygiene Scripts:</strong> plain-Markdown vault with zero SaaS lock-in.",
+          "<strong>Portfolio Site Blueprint:</strong> stripped-down Astro + Netlify + Resend + Stripe webhook starter behind running nine sites solo.",
+          "<strong>Lifetime <code>git pull</code> updates through 2027:</strong> zero subscription, 14-day refund.",
+        ]),
+        ctaButton({
+          label: "Get The Solo Operator Repo ($79 one-time)",
+          href: "https://bryancollins.com/black-friday.html?utm_source=aiflashreport&utm_medium=email&utm_campaign=aifr-bfcm-2026-bf",
+          bg: "#0052FF",
+          fg: "#FFFFFF",
+        }),
+        p("If you also want a fast visual prototype builder for weekend experiments, <a href=\"https://tfr-affiliate-hub.netlify.app/e/lovable-labs-incorporated\" style=\"color:#0052FF;font-weight:bold;text-decoration:underline;\">Lovable</a> is running a Cyber Week offer (affiliate link)."),
+      ].join("\n"),
+    }),
+    text: `Every week on AI Flash Report (https://aiflashreport.com/changes/) we track frontier model releases and pricing cuts. One pattern stood out all year: raw API costs fell fast, while monthly AI wrapper subscriptions kept piling up.
+
+Inside our Dublin publishing group, we run nine sites from git using Claude Code skills, local Markdown files and small Python scripts instead of paying $29 to $99 a month per wrapper app.
+
+For Black Friday through Cyber Monday, our founder Bryan Collins opened private GitHub access to The Solo Operator Repo (bryancollins99/solo-operator-stack) for $79 one-time (normally $149):
+
+- Sanitised .claude/ Skills & Hooks Pack: gitleaks-clean production skills (/prd, /prd-critic, /qa-loop, /swarm-check, /pre-commit-review, /commit, /log).
+- The Builder's Pipeline: daily Coding-Log.md to Friday LinkedIn, newsletter and YouTube scripts.
+- Zettelkasten Starter Vault + Hygiene Scripts: plain-Markdown vault with zero SaaS lock-in.
+- Portfolio Site Blueprint: stripped-down Astro + Netlify + Resend + Stripe webhook starter behind running nine sites solo.
+- Lifetime git pull updates through 2027: zero subscription, 14-day refund.
+
+Get The Solo Operator Repo ($79 one-time):
+https://bryancollins.com/black-friday.html?utm_source=aiflashreport&utm_medium=email&utm_campaign=aifr-bfcm-2026-bf
+
+For rapid visual prototyping, check Lovable's Cyber Week offer (affiliate link):
+https://tfr-affiliate-hub.netlify.app/e/lovable-labs-incorporated
+
+Consistent Publishing Ltd, CRO 742884, Landscape House, Baldonnell Business Park, Dublin D22 P3K7, Ireland
+Unsubscribe: {{{RESEND_UNSUBSCRIBE_URL}}}`,
+  },
+
+  {
+    id: "aifr-sun-2026",
+    property: "AI Flash Report",
+    segmentName: "AI Flash Report · newsletter",
+    segmentId: "e5f436a2-86f0-42bc-a277-5f8733bcc7eb",
+    audienceNote: "35 contacts (active weekly frontier model tracker readers)",
+    offerType: "Sunday Deep Dive: How 9 Sites Run From One Private Claude Code Repo ($79)",
+    sendSlot: "Sunday · Sun 29 Nov 2026, 14:30 UTC",
+    from: "AI Flash Report <alerts@send.aiflashreport.com>",
+    replyTo: ["bryan@bryancollins.com"],
+    subject: "How 9 sites run from one private Claude Code repo",
+    previewText: "Plain files in git survive every model release. Inspect bryancollins99/solo-operator-stack before Monday midnight UTC ($79 vs $149).",
+    previewPageUrl: "https://deploy-preview-16--bryancollins.netlify.app/black-friday.html",
+    livePageUrl: "https://bryancollins.com/black-friday.html",
+    html: wrapBrandCardEmail({
+      title: "Plain Files in Git Survive Every Model Release",
+      previewText: "Plain files in git survive every model release. Inspect bryancollins99/solo-operator-stack before Monday midnight UTC ($79 vs $149).",
+      brandName: "AI Flash Report",
+      kicker: "Cyber Weekend Architecture Note · Closes Monday Midnight UTC",
+      accentColor: "#0052FF",
+      bodyHtml: [
+        p("Every time a frontier model drops a new version, half the SaaS wrappers built on top of last quarter's API break or hike their renewal tier."),
+        p("When your Claude Code skills, publishing scripts, note vault and site starter live in a private git repository, switching models takes one line and you never lose your stack to a closed dashboard."),
+        p("Through midnight UTC tomorrow (Cyber Monday), you can get private GitHub access to <strong>The Solo Operator Repo</strong> (<code>bryancollins99/solo-operator-stack</code>) for <strong>$79 one-time</strong> (normally $149):"),
+        bulletList([
+          "<strong>Sanitised <code>.claude/</code> Skills &amp; Hooks Pack:</strong> gitleaks-clean production skills (<code>/prd</code>, <code>/prd-critic</code>, <code>/qa-loop</code>, <code>/swarm-check</code>, <code>/pre-commit-review</code>, <code>/commit</code>, <code>/log</code>).",
+          "<strong>The Builder's Pipeline:</strong> daily <code>Coding-Log.md</code> to Friday LinkedIn, newsletter and YouTube scripts.",
+          "<strong>Zettelkasten Starter Vault + Hygiene Scripts:</strong> plain-Markdown vault with zero SaaS lock-in.",
+          "<strong>Portfolio Site Blueprint:</strong> stripped-down Astro + Netlify + Resend + Stripe webhook starter behind running nine sites solo.",
+          "<strong>Lifetime <code>git pull</code> updates through 2027:</strong> GitHub collaborator invite after Stripe checkout.",
+        ]),
+        ctaButton({
+          label: "Inspect The Solo Operator Repo ($79)",
+          href: "https://bryancollins.com/black-friday.html?utm_source=aiflashreport&utm_medium=email&utm_campaign=aifr-bfcm-2026-sun",
+          bg: "#0052FF",
+          fg: "#FFFFFF",
+        }),
+        p("14-day refund on request if the repo does not fit your setup. You can also check our weekly model ledger any time at <a href=\"https://aiflashreport.com/changes/\" style=\"color:#0052FF;text-decoration:underline;\">aiflashreport.com/changes</a>."),
+      ].join("\n"),
+    }),
+    text: `Every time a frontier model drops a new version, half the SaaS wrappers built on top of last quarter's API break or hike their renewal tier.
+
+When your Claude Code skills, publishing scripts, note vault and site starter live in a private git repository, switching models takes one line and you never lose your stack to a closed dashboard.
+
+Through midnight UTC tomorrow (Cyber Monday), you can get private GitHub access to The Solo Operator Repo (bryancollins99/solo-operator-stack) for $79 one-time (normally $149):
+
+- Sanitised .claude/ Skills & Hooks Pack: gitleaks-clean production skills (/prd, /prd-critic, /qa-loop, /swarm-check, /pre-commit-review, /commit, /log).
+- The Builder's Pipeline: daily Coding-Log.md to Friday LinkedIn, newsletter and YouTube scripts.
+- Zettelkasten Starter Vault + Hygiene Scripts: plain-Markdown vault with zero SaaS lock-in.
+- Portfolio Site Blueprint: stripped-down Astro + Netlify + Resend + Stripe webhook starter behind running nine sites solo.
+- Lifetime git pull updates through 2027: GitHub collaborator invite after Stripe checkout.
+
+Inspect The Solo Operator Repo ($79):
+https://bryancollins.com/black-friday.html?utm_source=aiflashreport&utm_medium=email&utm_campaign=aifr-bfcm-2026-sun
+
+14-day refund on request. Weekly model ledger: https://aiflashreport.com/changes/
 
 Consistent Publishing Ltd, CRO 742884, Landscape House, Baldonnell Business Park, Dublin D22 P3K7, Ireland
 Unsubscribe: {{{RESEND_UNSUBSCRIBE_URL}}}`,
@@ -80,32 +298,33 @@ Unsubscribe: {{{RESEND_UNSUBSCRIBE_URL}}}`,
     segmentName: "AI Flash Report · newsletter",
     segmentId: "e5f436a2-86f0-42bc-a277-5f8733bcc7eb",
     audienceNote: "35 contacts (active weekly frontier model tracker readers)",
-    offerType: "Cyber Monday Builder Stack ($69 Claude Code Operator Bundle + Lovable)",
+    offerType: "Cyber Monday Final Call: The Solo Operator Repo ($79 Private GitHub Access, normally $149) + Lovable",
     sendSlot: "Cyber Monday · Mon 30 Nov 2026, 14:30 UTC",
     from: "AI Flash Report <alerts@send.aiflashreport.com>",
     replyTo: ["bryan@bryancollins.com"],
-    subject: "Cyber Monday note: frontier API costs fell, wrapper subscriptions did not",
-    previewText: "How we replaced half our monthly AI SaaS bill with local Markdown + Claude Code scripts.",
+    subject: "API prices crashed. Why are you still paying $49/mo?",
+    previewText: "Final hours for $79 private GitHub access to The Solo Operator Repo (normally $149), plus Lovable and Vendors.ie benchmarks.",
     previewPageUrl: "https://deploy-preview-16--bryancollins.netlify.app/black-friday.html",
     livePageUrl: "https://bryancollins.com/black-friday.html",
     html: wrapBrandCardEmail({
       title: "Cyber Monday Builder Note",
-      previewText: "How we replaced half our monthly AI SaaS bill with local Markdown + Claude Code scripts.",
+      previewText: "Final hours for $79 private GitHub access to The Solo Operator Repo (normally $149), plus Lovable and Vendors.ie benchmarks.",
       brandName: "AI Flash Report",
-      kicker: "Cyber Monday Special Note · Frontier Models & Builder Tooling",
+      kicker: "Cyber Monday Final Call · Frontier Models & Builder Tooling",
       accentColor: "#0052FF",
       bodyHtml: [
         p("If you follow our weekly model tracker on <a href=\"https://aiflashreport.com/changes/\" style=\"color:#0052FF;text-decoration:underline;\">AI Flash Report</a>, you have watched per-token inference prices drop steadily across 2026 while wrapper SaaS apps keep charging $29 to $99 a month per seat."),
-        p("Behind AI Flash Report, our small Dublin publishing group runs nine sites using plain-text Markdown files, Python scripts and Claude Code skills instead of recurring SaaS wrappers."),
-        p("Until midnight tonight (Cyber Monday), our founder Bryan Collins has bundled all four of those local plain-text and Claude Code kits together for <strong>$69 one-time</strong> (normally $146 across individual kits):"),
+        p("Behind AI Flash Report, our small Dublin publishing group runs nine sites from git using Claude Code skills, plain-text Markdown files and small Python scripts instead of recurring SaaS wrappers."),
+        p("Until midnight UTC tonight (Cyber Monday), our founder Bryan Collins has opened private GitHub access to <strong>The Solo Operator Repo</strong> (<code>bryancollins99/solo-operator-stack</code>) for <strong>$79 one-time</strong> (normally $149):"),
         bulletList([
-          "<strong>The Builder's Pipeline:</strong> six Python scripts and prompts that turn daily commit/worklog lines into weekly social and newsletter drafts.",
-          "<strong>Claude Code for Writers &amp; Operators:</strong> persistent <code>MEMORY.md</code> setup, undo safety and three starter <code>CLAUDE.md</code> project specs.",
-          "<strong>The Zettelkasten for Creators Kit:</strong> git-backed plain-Markdown vault and cleanup scripts.",
-          "<strong>Filler-Word Killer Editor Pack:</strong> local CLI prose linter + eight editable JSON dictionaries.",
+          "<strong>Sanitised <code>.claude/</code> Skills &amp; Hooks Pack:</strong> gitleaks-clean production skills (<code>/prd</code>, <code>/prd-critic</code>, <code>/qa-loop</code>, <code>/swarm-check</code>, <code>/pre-commit-review</code>, <code>/commit</code>, <code>/log</code>).",
+          "<strong>The Builder's Pipeline:</strong> daily <code>Coding-Log.md</code> to Friday LinkedIn, newsletter and YouTube scripts.",
+          "<strong>Zettelkasten Starter Vault + Hygiene Scripts:</strong> plain-Markdown note vault with zero SaaS lock-in.",
+          "<strong>Portfolio Site Blueprint:</strong> stripped-down Astro + Netlify + Resend + Stripe webhook starter behind running nine sites solo.",
+          "<strong>Lifetime <code>git pull</code> updates through 2027:</strong> zero subscription, 14-day refund.",
         ]),
         ctaButton({
-          label: "Inspect the $69 Cyber Monday Builder Stack",
+          label: "Get The Solo Operator Repo ($79 before midnight)",
           href: "https://bryancollins.com/black-friday.html?utm_source=aiflashreport&utm_medium=email&utm_campaign=aifr-bfcm-2026",
           bg: "#0052FF",
           fg: "#FFFFFF",
@@ -115,16 +334,17 @@ Unsubscribe: {{{RESEND_UNSUBSCRIBE_URL}}}`,
     }),
     text: `If you follow our weekly model tracker on AI Flash Report (https://aiflashreport.com/changes/), you have watched per-token inference prices drop steadily across 2026 while wrapper SaaS apps keep charging $29 to $99 a month per seat.
 
-Behind AI Flash Report, our Dublin publishing group runs nine sites using plain-text Markdown files, Python scripts and Claude Code skills instead of recurring SaaS wrappers.
+Behind AI Flash Report, our Dublin publishing group runs nine sites from git using Claude Code skills, plain-text Markdown files and small Python scripts instead of recurring SaaS wrappers.
 
-Until midnight tonight (Cyber Monday), our founder Bryan Collins has bundled all four of those local plain-text and Claude Code kits together for $69 one-time (normally $146):
+Until midnight UTC tonight (Cyber Monday), our founder Bryan Collins has opened private GitHub access to The Solo Operator Repo (bryancollins99/solo-operator-stack) for $79 one-time (normally $149):
 
-- The Builder's Pipeline: six Python scripts and prompts turning daily build logs into weekly drafts.
-- Claude Code for Writers & Operators: persistent MEMORY.md setup, undo safety and three CLAUDE.md project specs.
-- The Zettelkasten for Creators Kit: git-backed plain-Markdown vault and cleanup scripts.
-- Filler-Word Killer Editor Pack: local CLI prose linter + eight editable JSON dictionaries.
+- Sanitised .claude/ Skills & Hooks Pack: gitleaks-clean production skills (/prd, /prd-critic, /qa-loop, /swarm-check, /pre-commit-review, /commit, /log).
+- The Builder's Pipeline: daily Coding-Log.md to Friday LinkedIn, newsletter and YouTube scripts.
+- Zettelkasten Starter Vault + Hygiene Scripts: plain-Markdown note vault with zero SaaS lock-in.
+- Portfolio Site Blueprint: stripped-down Astro + Netlify + Resend + Stripe webhook starter behind running nine sites solo.
+- Lifetime git pull updates through 2027: zero subscription, 14-day refund.
 
-Inspect the $69 Cyber Monday Builder Stack:
+Get The Solo Operator Repo ($79 before midnight):
 https://bryancollins.com/black-friday.html?utm_source=aiflashreport&utm_medium=email&utm_campaign=aifr-bfcm-2026
 
 Also worth checking today: Lovable for rapid UI prototyping from a prompt (affiliate link: https://tfr-affiliate-hub.netlify.app/e/lovable-labs-incorporated), and Irish B2B AI benchmarks at https://vendors.ie/ai-tools-ireland.
@@ -139,31 +359,32 @@ Unsubscribe: {{{RESEND_UNSUBSCRIBE_URL}}}`,
     segmentName: "PromptWritingStudio · newsletter",
     segmentId: "8758d410-436e-49f5-b20f-a0623a976242",
     audienceNote: "21 contacts (Claude Code / MCP / prompt practitioners)",
-    offerType: "4-Kit Claude Code & Plain-Text Bundle ($69, Zero Retired Course CTAs)",
+    offerType: "The Solo Operator Repo ($79 Private GitHub Access, normally $149, Zero Retired Course CTAs)",
     sendSlot: "Black Friday · Fri 27 Nov 2026, 15:00 UTC",
     from: "Prompt Writing Studio <hello@send.promptwritingstudio.com>",
     replyTo: ["bryan@bryancollins.com"],
-    subject: "Skip giant prompt packs this Black Friday (use project memory files instead)",
-    previewText: "Four downloadable Claude Code and plain-Markdown kits for $69 one-time through Cyber Monday.",
+    subject: "Stop buying 500-prompt PDFs. Clone my .claude/ repo.",
+    previewText: "Private GitHub access to sanitised production Claude Code skills, hooks, pipeline scripts and Astro blueprint ($79 through Monday).",
     previewPageUrl: "https://deploy-preview-16--bryancollins.netlify.app/black-friday.html",
     livePageUrl: "https://bryancollins.com/black-friday.html",
     html: wrapBrandCardEmail({
-      title: "From Prompt Packs to Claude Code Memory Files",
-      previewText: "Four downloadable Claude Code and plain-Markdown kits for $69 one-time through Cyber Monday.",
+      title: "From Prompt PDFs to a Production .claude/ Repo",
+      previewText: "Private GitHub access to sanitised production Claude Code skills, hooks, pipeline scripts and Astro blueprint ($79 through Monday).",
       brandName: "Prompt Writing Studio",
-      kicker: "Black Friday to Cyber Monday · Practical Agent & Markdown Kits",
+      kicker: "Black Friday to Cyber Monday · The Solo Operator Repo",
       accentColor: "#111827",
       bodyHtml: [
-        p("Copy-paste prompt libraries aged badly over the last twelve months. Pasting a 400-word mega-prompt into a fresh chat window every morning loses to a clean local folder with a <code>CLAUDE.md</code> brief and persistent session memory."),
-        p("We retired our old video courses this year in favour of small, local plain-text kits you download once and own on disk. For Black Friday through Cyber Monday, Bryan Collins has bundled all four kits together for <strong>$69 one-time</strong> (save $77 off the $146 separate price):"),
+        p("Copy-paste prompt libraries aged badly over the last twelve months. Pasting a 400-word mega-prompt into a fresh chat window every morning loses to a clean git repository with reusable Claude Code skills, hooks and project briefs."),
+        p("We retired our old video courses this year. For Black Friday through Cyber Monday, Bryan Collins opened private GitHub access to <strong>The Solo Operator Repo</strong> (<code>bryancollins99/solo-operator-stack</code>) for <strong>$79 one-time</strong> (normally $149):"),
         bulletList([
-          "<strong>Claude Code for Writers &amp; Operators ($39):</strong> zero-terminal setup, persistent <code>MEMORY.md</code> voice rules and three starter project briefs.",
-          "<strong>The Builder's Pipeline ($39):</strong> six Python scripts turning daily worklogs into content drafts.",
-          "<strong>The Zettelkasten for Creators Kit ($39):</strong> git-friendly Markdown note vault + five templates.",
-          "<strong>Filler-Word Killer Editor Pack ($29):</strong> CLI prose tighten-up script + editable JSON lists.",
+          "<strong>Sanitised <code>.claude/</code> Skills &amp; Hooks Pack:</strong> gitleaks-clean production skills (<code>/prd</code>, <code>/prd-critic</code>, <code>/qa-loop</code>, <code>/swarm-check</code>, <code>/pre-commit-review</code>, <code>/commit</code>, <code>/log</code>).",
+          "<strong>The Builder's Pipeline:</strong> daily <code>Coding-Log.md</code> to Friday LinkedIn, newsletter and YouTube scripts.",
+          "<strong>Zettelkasten Starter Vault + Hygiene Scripts:</strong> plain-Markdown vault with zero SaaS lock-in.",
+          "<strong>Portfolio Site Blueprint:</strong> stripped-down Astro + Netlify + Resend + Stripe webhook starter behind running nine sites solo.",
+          "<strong>Lifetime <code>git pull</code> updates through 2027:</strong> GitHub collaborator invite after Stripe checkout, 14-day refund.",
         ]),
         ctaButton({
-          label: "Get the 4-Kit Claude Code & Markdown Stack ($69)",
+          label: "Get The Solo Operator Repo ($79 one-time)",
           href: "https://bryancollins.com/black-friday.html?utm_source=promptwritingstudio&utm_medium=email&utm_campaign=pws-bfcm-2026",
           bg: "#111827",
           fg: "#FCD34D",
@@ -171,19 +392,124 @@ Unsubscribe: {{{RESEND_UNSUBSCRIBE_URL}}}`,
         p("Prefer free guides? Our Claude Code, MCP and sub-agent reference guides on <a href=\"https://promptwritingstudio.com/\" style=\"color:#0052FF;text-decoration:underline;\">PromptWritingStudio.com</a> remain free, and if you want a visual app builder to pair with them, check <a href=\"https://tfr-affiliate-hub.netlify.app/e/lovable-labs-incorporated\" style=\"color:#0052FF;text-decoration:underline;\">Lovable's Cyber Week offer</a> (affiliate link)."),
       ].join("\n"),
     }),
-    text: `Copy-paste prompt libraries aged badly over the last twelve months. Pasting a 400-word mega-prompt into a fresh chat window every morning loses to a clean local folder with a CLAUDE.md brief and persistent session memory.
+    text: `Copy-paste prompt libraries aged badly over the last twelve months. Pasting a 400-word mega-prompt into a fresh chat window every morning loses to a clean git repository with reusable Claude Code skills, hooks and project briefs.
 
-We retired our old video courses in favour of small, local plain-text kits you download once and own on disk. For Black Friday through Cyber Monday, Bryan Collins has bundled all four kits together for $69 one-time (normally $146):
+We retired our old video courses this year. For Black Friday through Cyber Monday, Bryan Collins opened private GitHub access to The Solo Operator Repo (bryancollins99/solo-operator-stack) for $79 one-time (normally $149):
 
-- Claude Code for Writers & Operators ($39): zero-terminal setup, persistent MEMORY.md voice rules and three starter project briefs.
-- The Builder's Pipeline ($39): six Python scripts turning daily worklogs into content drafts.
-- The Zettelkasten for Creators Kit ($39): git-friendly Markdown note vault + five templates.
-- Filler-Word Killer Editor Pack ($29): CLI prose tighten-up script + editable JSON lists.
+- Sanitised .claude/ Skills & Hooks Pack: gitleaks-clean production skills (/prd, /prd-critic, /qa-loop, /swarm-check, /pre-commit-review, /commit, /log).
+- The Builder's Pipeline: daily Coding-Log.md to Friday LinkedIn, newsletter and YouTube scripts.
+- Zettelkasten Starter Vault + Hygiene Scripts: plain-Markdown vault with zero SaaS lock-in.
+- Portfolio Site Blueprint: stripped-down Astro + Netlify + Resend + Stripe webhook starter behind running nine sites solo.
+- Lifetime git pull updates through 2027: GitHub collaborator invite after Stripe checkout, 14-day refund.
 
-Get the 4-Kit Stack ($69 through Cyber Monday):
+Get The Solo Operator Repo ($79 through Cyber Monday):
 https://bryancollins.com/black-friday.html?utm_source=promptwritingstudio&utm_medium=email&utm_campaign=pws-bfcm-2026
 
 Our Claude Code, MCP and sub-agent guides at https://promptwritingstudio.com/ remain free. For rapid visual app prototyping, see Lovable (affiliate link: https://tfr-affiliate-hub.netlify.app/e/lovable-labs-incorporated).
+
+Consistent Publishing Ltd, CRO 742884, Landscape House, Baldonnell Business Park, Dublin D22 P3K7, Ireland
+Unsubscribe: {{{RESEND_UNSUBSCRIBE_URL}}}`,
+  },
+
+  {
+    id: "pws-sat-2026",
+    property: "Prompt Writing Studio",
+    segmentName: "PromptWritingStudio · newsletter",
+    segmentId: "8758d410-436e-49f5-b20f-a0623a976242",
+    audienceNote: "21 contacts (Claude Code / MCP / prompt practitioners)",
+    offerType: "Saturday Walkthrough: The 7 Production Claude Code Skills Inside The Solo Operator Repo ($79)",
+    sendSlot: "Saturday · Sat 28 Nov 2026, 15:00 UTC",
+    from: "Prompt Writing Studio <hello@send.promptwritingstudio.com>",
+    replyTo: ["bryan@bryancollins.com"],
+    subject: "The 7 Claude Code skills inside my private repo",
+    previewText: "Walkthrough of /prd, /prd-critic, /qa-loop, /swarm-check, /pre-commit-review, /commit and /log inside bryancollins99/solo-operator-stack.",
+    previewPageUrl: "https://deploy-preview-16--bryancollins.netlify.app/black-friday.html",
+    livePageUrl: "https://bryancollins.com/black-friday.html",
+    html: wrapBrandCardEmail({
+      title: "The 7 Production Skills Inside The Solo Operator Repo",
+      previewText: "Walkthrough of /prd, /prd-critic, /qa-loop, /swarm-check, /pre-commit-review, /commit and /log inside bryancollins99/solo-operator-stack.",
+      brandName: "Prompt Writing Studio",
+      kicker: "Cyber Weekend Walkthrough · Private GitHub Repo",
+      accentColor: "#111827",
+      bodyHtml: [
+        p("Most AI coding setups break down the moment you move past one-off chat prompts: agents skip verification, drift off spec, or push broken changes to main."),
+        p("Inside <strong>The Solo Operator Repo</strong> (<code>bryancollins99/solo-operator-stack</code>), you get the exact gitleaks-clean <code>.claude/</code> skills and hooks we use every day to spec, critique, review and ship across nine sites:"),
+        bulletList([
+          "<strong><code>/prd</code> + <code>/prd-critic</code>:</strong> draft tight specifications and run an automated critic gate before writing code.",
+          "<strong><code>/qa-loop</code> + <code>/pre-commit-review</code>:</strong> independent diff reviews and closed-loop verification before anything merges.",
+          "<strong><code>/swarm-check</code>, <code>/commit</code> &amp; <code>/log</code>:</strong> pre-flight checks for parallel agents, clean commits and daily worklog capture.",
+          "<strong>Plus 3 complete companion modules:</strong> The Builder's Pipeline, the Zettelkasten Starter Vault + hygiene scripts, and the Astro + Netlify + Resend + Stripe Portfolio Site Blueprint.",
+        ]),
+        ctaButton({
+          label: "Inspect The Solo Operator Repo ($79)",
+          href: "https://bryancollins.com/black-friday.html?utm_source=promptwritingstudio&utm_medium=email&utm_campaign=pws-bfcm-2026-sat",
+          bg: "#111827",
+          fg: "#FCD34D",
+        }),
+        p("Cyber Week price is $79 one-time (normally $149) with lifetime <code>git pull</code> updates through 2027, zero subscription, and a 14-day refund on request."),
+      ].join("\n"),
+    }),
+    text: `Most AI coding setups break down the moment you move past one-off chat prompts: agents skip verification, drift off spec, or push broken changes to main.
+
+Inside The Solo Operator Repo (bryancollins99/solo-operator-stack), you get the exact gitleaks-clean .claude/ skills and hooks we use every day to spec, critique, review and ship across nine sites:
+
+- /prd + /prd-critic: draft tight specifications and run an automated critic gate before writing code.
+- /qa-loop + /pre-commit-review: independent diff reviews and closed-loop verification before anything merges.
+- /swarm-check, /commit & /log: pre-flight checks for parallel agents, clean commits and daily worklog capture.
+- Plus 3 complete companion modules: The Builder's Pipeline, the Zettelkasten Starter Vault + hygiene scripts, and the Astro + Netlify + Resend + Stripe Portfolio Site Blueprint.
+
+Inspect The Solo Operator Repo ($79):
+https://bryancollins.com/black-friday.html?utm_source=promptwritingstudio&utm_medium=email&utm_campaign=pws-bfcm-2026-sat
+
+Cyber Week price is $79 one-time (normally $149) with lifetime git pull updates through 2027, zero subscription, and a 14-day refund on request.
+
+Consistent Publishing Ltd, CRO 742884, Landscape House, Baldonnell Business Park, Dublin D22 P3K7, Ireland
+Unsubscribe: {{{RESEND_UNSUBSCRIBE_URL}}}`,
+  },
+
+  {
+    id: "pws-cm-2026",
+    property: "Prompt Writing Studio",
+    segmentName: "PromptWritingStudio · newsletter",
+    segmentId: "8758d410-436e-49f5-b20f-a0623a976242",
+    audienceNote: "21 contacts (Claude Code / MCP / prompt practitioners)",
+    offerType: "Cyber Monday Final Call: The Solo Operator Repo ($79 Private GitHub Access, normally $149)",
+    sendSlot: "Cyber Monday · Mon 30 Nov 2026, 16:30 UTC",
+    from: "Prompt Writing Studio <hello@send.promptwritingstudio.com>",
+    replyTo: ["bryan@bryancollins.com"],
+    subject: "Midnight cutoff: The Solo Operator Repo for $79",
+    previewText: "Cyber Week $79 private GitHub access to bryancollins99/solo-operator-stack closes at midnight UTC tonight (normally $149).",
+    previewPageUrl: "https://deploy-preview-16--bryancollins.netlify.app/black-friday.html",
+    livePageUrl: "https://bryancollins.com/black-friday.html",
+    html: wrapBrandCardEmail({
+      title: "Midnight Cutoff: The Solo Operator Repo ($79)",
+      previewText: "Cyber Week $79 private GitHub access to bryancollins99/solo-operator-stack closes at midnight UTC tonight (normally $149).",
+      brandName: "Prompt Writing Studio",
+      kicker: "Cyber Monday Final Reminder · Closes Midnight UTC",
+      accentColor: "#111827",
+      bodyHtml: [
+        p("Quick final reminder before the Cyber Week price closes at midnight UTC tonight."),
+        p("Until midnight, private GitHub access to <strong>The Solo Operator Repo</strong> (<code>bryancollins99/solo-operator-stack</code>) is <strong>$79 one-time</strong> instead of $149."),
+        p("Clone it once for the sanitised <code>.claude/</code> skills and hooks pack (<code>/prd</code>, <code>/prd-critic</code>, <code>/qa-loop</code>, <code>/swarm-check</code>, <code>/pre-commit-review</code>, <code>/commit</code>, <code>/log</code>), The Builder's Pipeline, the Zettelkasten Starter Vault, the Astro + Netlify + Resend + Stripe site blueprint, and lifetime <code>git pull</code> updates through 2027."),
+        ctaButton({
+          label: "Get Private Repo Access ($79 Before Midnight)",
+          href: "https://bryancollins.com/black-friday.html?utm_source=promptwritingstudio&utm_medium=email&utm_campaign=pws-bfcm-2026-cm",
+          bg: "#111827",
+          fg: "#FCD34D",
+        }),
+        p("Zero monthly subscription and a 14-day no-questions refund if you clone the repo and decide it is not for you. Our free Claude Code and MCP reference guides stay free on <a href=\"https://promptwritingstudio.com/\" style=\"color:#0052FF;text-decoration:underline;\">PromptWritingStudio.com</a>."),
+      ].join("\n"),
+    }),
+    text: `Quick final reminder before the Cyber Week price closes at midnight UTC tonight.
+
+Until midnight, private GitHub access to The Solo Operator Repo (bryancollins99/solo-operator-stack) is $79 one-time instead of $149.
+
+Clone it once for the sanitised .claude/ skills and hooks pack (/prd, /prd-critic, /qa-loop, /swarm-check, /pre-commit-review, /commit, /log), The Builder's Pipeline, the Zettelkasten Starter Vault, the Astro + Netlify + Resend + Stripe site blueprint, and lifetime git pull updates through 2027.
+
+Get Private Repo Access ($79 Before Midnight):
+https://bryancollins.com/black-friday.html?utm_source=promptwritingstudio&utm_medium=email&utm_campaign=pws-bfcm-2026-cm
+
+Zero monthly subscription and a 14-day no-questions refund. Free guides remain at https://promptwritingstudio.com/.
 
 Consistent Publishing Ltd, CRO 742884, Landscape House, Baldonnell Business Park, Dublin D22 P3K7, Ireland
 Unsubscribe: {{{RESEND_UNSUBSCRIBE_URL}}}`,
@@ -199,7 +525,7 @@ Unsubscribe: {{{RESEND_UNSUBSCRIBE_URL}}}`,
     sendSlot: "Black Friday · Fri 27 Nov 2026, 09:00 UTC",
     from: "Tenderwatch <alerts@tenderwatch.ie>",
     replyTo: ["bryan@tenderwatch.ie"],
-    subject: "Why we do not discount TenderWatch Pro (and 10 Q1 setup slots before 4 Dec)",
+    subject: "No Black Friday discount (10 Q1 setup slots instead)",
     previewText: "Every member pays EUR 490/yr. Join before 4 December and we build your Q1 alerts, rival watches and expiry dossier by hand.",
     previewPageUrl: "https://deploy-preview-602--tenderwatchirl.netlify.app/q1-readiness",
     livePageUrl: "https://www.tenderwatch.ie/q1-readiness",
@@ -259,15 +585,15 @@ Unsubscribe: {{{RESEND_UNSUBSCRIBE_URL}}}`,
 
   {
     id: "tenderwatch-q1-cm-2026",
-    property: "TenderWatch.ie (STRICTLY NON-DISCOUNT — Waitlist & High-Intent)",
+    property: "TenderWatch.ie (STRICTLY NON-DISCOUNT · Waitlist & High-Intent)",
     segmentName: "Tenderwatch · Pro waitlist",
     segmentId: "d38a0c6b-77be-4dfb-b57d-cb7567cbe70d",
     audienceNote: "8 commercial waitlist firms (Deloitte, EMM Security, Southern Scientific, etc.)",
     offerType: "NON-DISCOUNT: Direct Waitlist Note for Q1 Concierge Setup (EUR 490/yr)",
-    sendSlot: "Cyber Monday · Mon 30 Nov 2026, 09:30 UTC",
+    sendSlot: "Sunday · Sun 29 Nov 2026, 09:30 UTC",
     from: "Bryan Collins <bryan@tenderwatch.ie>",
     replyTo: ["bryan@tenderwatch.ie"],
-    subject: "Your Q1 2027 Irish tender watchlist + expiring contracts dossier",
+    subject: "10 done-for-you Q1 tender setups (waitlist priority)",
     previewText: "You joined the TenderWatch Pro waitlist earlier this year. We opened 10 done-for-you Q1 setup slots before Christmas.",
     previewPageUrl: "https://deploy-preview-602--tenderwatchirl.netlify.app/q1-readiness",
     livePageUrl: "https://www.tenderwatch.ie/q1-readiness",
@@ -310,6 +636,65 @@ Unsubscribe: {{{RESEND_UNSUBSCRIBE_URL}}}`,
   },
 
   {
+    id: "tenderwatch-q1-final-2026",
+    property: "TenderWatch.ie (STRICTLY NON-DISCOUNT · Final Q1 Reminder)",
+    segmentName: "Tenderwatch · newsletter",
+    segmentId: "7e80858a-80e0-4eef-b6a3-780ab6541bc2",
+    audienceNote: "~550+ Irish B2B suppliers (64% open, 36% click)",
+    offerType: "NON-DISCOUNT: Final Reminder for 10 Q1 Bid-Readiness Setup Slots (EUR 490/yr)",
+    sendSlot: "Cyber Monday · Mon 30 Nov 2026, 16:30 UTC",
+    from: "Tenderwatch <alerts@tenderwatch.ie>",
+    replyTo: ["bryan@tenderwatch.ie"],
+    subject: "Closing 4 Dec: we build your Q1 tender alerts by hand",
+    previewText: "Same EUR 490/yr Pro rate, no discounts. Join by Friday 4 December for 48-hour setup and your H1 2027 Expiring-Contracts Dossier.",
+    previewPageUrl: "https://deploy-preview-602--tenderwatchirl.netlify.app/q1-readiness",
+    livePageUrl: "https://www.tenderwatch.ie/q1-readiness",
+    html: wrapBrandCardEmail({
+      title: "Final Reminder: 10 Q1 Bid-Readiness Setup Slots",
+      previewText: "Same EUR 490/yr Pro rate, no discounts. Join by Friday 4 December for 48-hour setup and your H1 2027 Expiring-Contracts Dossier.",
+      brandName: "TenderWatch.ie",
+      kicker: "Cyber Monday Reminder · Closes Friday 4 December",
+      accentColor: "#174A2C",
+      bodyHtml: [
+        p("Quick Cyber Monday note as we head into December."),
+        p("We never discount TenderWatch Pro. Every annual member pays the same <strong>EUR 490/year</strong> rate (one annual plan, no monthly tier). What closes this Friday, 4 December, is our cap of <strong>10 done-for-you Q1 2027 Bid-Readiness setups</strong> so we can deliver every custom pack before Christmas:"),
+        bulletList([
+          "<strong>48-hour manual alert configuration:</strong> up to 10 semantic sector alerts across eTenders, TED and Find a Tender (NI) plus 5 named competitor award watches.",
+          "<strong>H1 2027 Expiring-Contracts Dossier (PDF + Excel CSV):</strong> recorded public contracts over EUR 100k in your sector estimated to expire between January and June 2027, with buyer spend and incumbent winners.",
+          "<strong>2026 VAT invoice + 30-day refund guarantee:</strong> allocate remaining 2026 budget cleanly and test the alerts risk-free for 30 days.",
+        ]),
+        ctaButton({
+          label: "Claim a Q1 Setup Slot (EUR 490/yr)",
+          href: "https://www.tenderwatch.ie/q1-readiness?utm_source=digest&utm_medium=email&utm_campaign=tw-q1-readiness-final",
+          bg: "#174A2C",
+          fg: "#FFFFFF",
+        }),
+        p("Public body, charity or CLG publishing a tender in December? Book a standard <strong>EUR 149 + VAT Featured Tender</strong> by 4 December and we include a bonus Closing-Week Reminder in the Monday digest at no extra charge: <a href=\"https://www.tenderwatch.ie/advertise?utm_source=digest&utm_medium=email&utm_campaign=q1-closing-reminder-final#book\" style=\"color:#174A2C;font-weight:bold;text-decoration:underline;\">book a Featured Tender</a>."),
+        p("Bryan Collins<br>Founder, TenderWatch.ie"),
+      ].join("\n"),
+    }),
+    text: `Quick Cyber Monday note as we head into December.
+
+We never discount TenderWatch Pro. Every annual member pays the same EUR 490/year rate (one annual plan, no monthly tier). What closes this Friday, 4 December, is our cap of 10 done-for-you Q1 2027 Bid-Readiness setups so we can deliver every custom pack before Christmas:
+
+1. 48-hour manual alert configuration: up to 10 semantic sector alerts across eTenders, TED and Find a Tender (NI) plus 5 named competitor award watches.
+2. H1 2027 Expiring-Contracts Dossier (PDF + Excel CSV): recorded public contracts over EUR 100k in your sector estimated to expire between January and June 2027, with buyer spend and incumbent winners.
+3. 2026 VAT invoice + 30-day refund guarantee: allocate remaining 2026 budget cleanly and test the alerts risk-free for 30 days.
+
+Claim a Q1 Setup Slot (EUR 490/yr):
+https://www.tenderwatch.ie/q1-readiness?utm_source=digest&utm_medium=email&utm_campaign=tw-q1-readiness-final
+
+Public body, charity or CLG publishing a tender in December? Book a standard EUR 149 + VAT Featured Tender by 4 December for a bonus Closing-Week Reminder mention:
+https://www.tenderwatch.ie/advertise?utm_source=digest&utm_medium=email&utm_campaign=q1-closing-reminder-final#book
+
+Bryan Collins
+Founder, TenderWatch.ie
+
+Consistent Publishing Ltd, CRO 742884, Landscape House, Baldonnell Business Park, Dublin D22 P3K7, Ireland
+Unsubscribe: {{{RESEND_UNSUBSCRIBE_URL}}}`,
+  },
+
+  {
     id: "vendors-bf-2026",
     property: "Vendors.ie (Email 1 of 3 · Non-Discount · ven-style2)",
     segmentName: "Vendors · newsletter",
@@ -319,7 +704,7 @@ Unsubscribe: {{{RESEND_UNSUBSCRIBE_URL}}}`,
     sendSlot: "Black Friday · Fri 27 Nov 2026, 09:00 UTC",
     from: "Vendors.ie <hello@vendors.ie>",
     replyTo: ["hello@vendors.ie"],
-    subject: "Before your Irish team signs a '50% off' annual software deal this week",
+    subject: "3 hidden costs in '50% off' annual SaaS deals",
     previewText: "Three numbers missing from Cyber Week SaaS banners: Year-2 list price, 2.25% FX card drag and IE VAT reverse-charge.",
     previewPageUrl: "https://deploy-preview-1445--vendorsie.netlify.app/q1-software-audit",
     livePageUrl: "https://vendors.ie/q1-software-audit",
@@ -377,7 +762,7 @@ Unsubscribe from all Vendors.ie email: {{{RESEND_UNSUBSCRIBE_URL}}}`,
     sendSlot: "Saturday · Sat 28 Nov 2026, 10:00 UTC",
     from: "Vendors.ie <hello@vendors.ie>",
     replyTo: ["hello@vendors.ie"],
-    subject: "Check your 2027 supplier list before year-end close (CRO, VAT and Peppol)",
+    subject: "Screen 100 Irish suppliers in one CSV (CRO, VAT, Peppol)",
     previewText: "Verify up to 100 Irish CRO companies or EU VAT numbers in one CSV pass, or watch key suppliers weekly.",
     previewPageUrl: "https://deploy-preview-1445--vendorsie.netlify.app/q1-software-audit",
     livePageUrl: "https://vendors.ie/tools/bulk-vat-checker",
@@ -438,7 +823,7 @@ Unsubscribe from all Vendors.ie email: {{{RESEND_UNSUBSCRIBE_URL}}}`,
     sendSlot: "Cyber Monday · Mon 30 Nov 2026, 10:00 UTC",
     from: "Bryan Collins <hello@vendors.ie>",
     replyTo: ["hello@vendors.ie"],
-    subject: "January software renewals start in 32 days (48h Vendors.ie profile setup)",
+    subject: "32 days to Q1 renewals: 48h Vendors.ie profile setup",
     previewText: "We never discount our EUR 99/yr founding claim rate. Claim by midnight tonight for priority 48-hour setup before December sign-offs.",
     previewPageUrl: "https://deploy-preview-1445--vendorsie.netlify.app/q1-software-audit",
     livePageUrl: "https://vendors.ie/q1-software-audit#vendor-q1-readiness",

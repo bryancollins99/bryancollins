@@ -1,13 +1,14 @@
-Copy-paste prompt libraries aged badly over the last twelve months. Pasting a 400-word mega-prompt into a fresh chat window every morning loses to a clean local folder with a CLAUDE.md brief and persistent session memory.
+Copy-paste prompt libraries aged badly over the last twelve months. Pasting a 400-word mega-prompt into a fresh chat window every morning loses to a clean git repository with reusable Claude Code skills, hooks and project briefs.
 
-We retired our old video courses in favour of small, local plain-text kits you download once and own on disk. For Black Friday through Cyber Monday, Bryan Collins has bundled all four kits together for $69 one-time (normally $146):
+We retired our old video courses this year. For Black Friday through Cyber Monday, Bryan Collins opened private GitHub access to The Solo Operator Repo (bryancollins99/solo-operator-stack) for $79 one-time (normally $149):
 
-- Claude Code for Writers & Operators ($39): zero-terminal setup, persistent MEMORY.md voice rules and three starter project briefs.
-- The Builder's Pipeline ($39): six Python scripts turning daily worklogs into content drafts.
-- The Zettelkasten for Creators Kit ($39): git-friendly Markdown note vault + five templates.
-- Filler-Word Killer Editor Pack ($29): CLI prose tighten-up script + editable JSON lists.
+- Sanitised .claude/ Skills & Hooks Pack: gitleaks-clean production skills (/prd, /prd-critic, /qa-loop, /swarm-check, /pre-commit-review, /commit, /log).
+- The Builder's Pipeline: daily Coding-Log.md to Friday LinkedIn, newsletter and YouTube scripts.
+- Zettelkasten Starter Vault + Hygiene Scripts: plain-Markdown vault with zero SaaS lock-in.
+- Portfolio Site Blueprint: stripped-down Astro + Netlify + Resend + Stripe webhook starter behind running nine sites solo.
+- Lifetime git pull updates through 2027: GitHub collaborator invite after Stripe checkout, 14-day refund.
 
-Get the 4-Kit Stack ($69 through Cyber Monday):
+Get The Solo Operator Repo ($79 through Cyber Monday):
 https://bryancollins.com/black-friday.html?utm_source=promptwritingstudio&utm_medium=email&utm_campaign=pws-bfcm-2026
 
 Our Claude Code, MCP and sub-agent guides at https://promptwritingstudio.com/ remain free. For rapid visual app prototyping, see Lovable (affiliate link: https://tfr-affiliate-hub.netlify.app/e/lovable-labs-incorporated).

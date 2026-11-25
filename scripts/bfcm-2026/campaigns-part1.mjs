@@ -1,9 +1,9 @@
 // scripts/bfcm-2026/campaigns-part1.mjs
 //
-// Campaign emails 1 to 6:
-//  1-2. Become a Writer Today (BAWT · newsletter, 7db2686b-5e9c-4782-886e-7ccb3c5fe674)
-//  3-4. Bryan Collins Personal Brand (Bryan Collins Newsletter, 389c476f-521e-444d-9932-770c5a443645 + Kit)
-//  5-6. Leinster Insider (Leinster Insider · newsletter, 726f5926-ad5f-4f79-a77c-9a7408578623 + County Planning lists)
+// Campaign emails 1 to 9 (3 per site):
+//  1-3. Become a Writer Today (BAWT · newsletter, 7db2686b-5e9c-4782-886e-7ccb3c5fe674)
+//  4-6. Bryan Collins Personal Brand (Bryan Collins Newsletter, 389c476f-521e-444d-9932-770c5a443645 + Kit)
+//  7-9. Leinster Insider (Leinster Insider · newsletter, 726f5926-ad5f-4f79-a77c-9a7408578623 + County Planning lists)
 
 import {
   p,
@@ -25,23 +25,23 @@ export const CAMPAIGNS_PART_1 = [
     segmentName: "BAWT · newsletter",
     segmentId: "7db2686b-5e9c-4782-886e-7ccb3c5fe674",
     audienceNote: "~5,700 writers (70% open, 10% click)",
-    offerType: "5-Pack Vault Bundle ($49 vs $118) + Verified Editing Deals",
+    offerType: "5-Pack Vault Bundle ($59 vs $118, save $59) + Verified Editing Deals",
     sendSlot: "Black Friday · Fri 27 Nov 2026, 13:00 UTC",
     from: "Become a Writer Today <bryan@becomeawritertoday.com>",
     replyTo: ["bryan@becomeawritertoday.com"],
-    subject: "All 5 writing packs in one download (plus 2 Black Friday deals worth checking)",
-    previewText: "Get the complete Become a Writer Today download vault for $49, plus honest notes on ProWritingAid and Grammarly.",
+    subject: "5 writing packs for $59 (normally $118)",
+    previewText: "Get the complete Become a Writer Today download vault for $59 (save $59), plus honest notes on ProWritingAid and Grammarly.",
     previewPageUrl: "https://deploy-preview-276--becomeawriter.netlify.app/black-friday/",
     livePageUrl: "https://becomeawritertoday.com/black-friday/",
     html: wrapBawtEmail({
       title: "The Writers' Black Friday Vault",
-      previewText: "Get the complete Become a Writer Today download vault for $49, plus honest notes on ProWritingAid and Grammarly.",
+      previewText: "Get the complete Become a Writer Today download vault for $59 (save $59), plus honest notes on ProWritingAid and Grammarly.",
       kicker: "Black Friday to Cyber Monday",
       bodyHtml: [
         p("Most Black Friday roundups for writers dump fifty software coupons in your lap and hope you click three of them. You do not need fifty new apps.", SERIF, "#1C1917"),
         p("If you want practical files you can actually use on a draft this weekend, I put together two things on a single page for Black Friday through Cyber Monday.", SERIF, "#1C1917"),
-        h2("1. The Complete Writer's Download Vault ($49, normally $118)", SERIF, "#1C1917"),
-        p("For the next four days, you can grab all five paid downloads from Become a Writer Today in one purchase. You pay once, no subscription, and all five zip files arrive in a single email:", SERIF, "#1C1917"),
+        h2("1. The Complete Writer's Download Vault ($59, normally $118)", SERIF, "#1C1917"),
+        p("For the next four days, you can grab all five paid downloads from Become a Writer Today in one purchase (50% off, saving $59). You pay once, no subscription, and all five zip files arrive in a single email:", SERIF, "#1C1917"),
         bulletList(
           [
             "<strong>Writers' Deadline Database ($29 value):</strong> every verified contest, literary magazine, residency and conference deadline in offline CSV sheets and genre calendar files.",
@@ -54,7 +54,7 @@ export const CAMPAIGNS_PART_1 = [
           "#1C1917",
         ),
         ctaButton({
-          label: "Open the Writers' Black Friday Vault ($49)",
+          label: "Open the Writers' Black Friday Vault ($59)",
           href: "https://becomeawritertoday.com/black-friday/?utm_source=resend&utm_medium=email&utm_campaign=bfcm-2026-bf",
           bg: "#B23A48",
           fg: "#FFFFFF",
@@ -82,9 +82,9 @@ export const CAMPAIGNS_PART_1 = [
 
 If you want practical files you can actually use on a draft this weekend, I put together two things on a single page for Black Friday through Cyber Monday.
 
-1. THE COMPLETE WRITER'S DOWNLOAD VAULT ($49, NORMALLY $118)
+1. THE COMPLETE WRITER'S DOWNLOAD VAULT ($59, NORMALLY $118, SAVE $59)
 
-For the next four days, you can grab all five paid downloads from Become a Writer Today in one purchase. You pay once, no subscription, and all five zip files arrive in a single email:
+For the next four days, you can grab all five paid downloads from Become a Writer Today in one purchase (50% off, saving $59). You pay once, no subscription, and all five zip files arrive in a single email:
 
 - Writers' Deadline Database ($29 value): verified contest, literary magazine, residency and conference deadlines in offline CSV sheets and calendar files.
 - The Zettelkasten for Creators Kit ($29 value): a plain-Markdown note folder, five templates and cleanup scripts.
@@ -120,26 +120,89 @@ Unsubscribe: {{{RESEND_UNSUBSCRIBE_URL}}}`,
   },
 
   {
+    id: "bawt-sat-2026",
+    property: "Become a Writer Today",
+    segmentName: "BAWT · newsletter",
+    segmentId: "7db2686b-5e9c-4782-886e-7ccb3c5fe674",
+    audienceNote: "~5,700 writers",
+    offerType: "Creator White Space Challenge ($97) + 5-Pack Vault Reminder",
+    sendSlot: "Saturday · Sat 28 Nov 2026, 13:00 UTC",
+    from: "Become a Writer Today <bryan@becomeawritertoday.com>",
+    replyTo: ["bryan@becomeawritertoday.com"],
+    subject: "30 mornings to protect your 2027 writing time",
+    previewText: "30 daily morning emails to carve out protected time and mental space for your book, newsletter or creative project.",
+    previewPageUrl: "https://deploy-preview-276--becomeawriter.netlify.app/black-friday/#creator-white-space",
+    livePageUrl: "https://becomeawritertoday.com/black-friday/#creator-white-space",
+    html: wrapBawtEmail({
+      title: "The Creator White Space Challenge",
+      previewText: "30 daily morning emails to carve out protected time and mental space for your book, newsletter or creative project.",
+      kicker: "Cyber Weekend · 30-Day Email Course",
+      bodyHtml: [
+        p("Most writers I speak with do not have an ideas problem. They have a time and mental-bandwidth problem.", SERIF, "#1C1917"),
+        p("If you want to finish a book, build a newsletter or Substack, or launch a creative project in 2027 without burning out, doors are open through Monday night for <strong>The Creator White Space Challenge ($97)</strong>.", SERIF, "#1C1917"),
+        p("It is a 30-day daily email course. Each morning you get one short, practical lesson that ends with a concrete Creative Action Plan you can finish in a busy day. No bloated video portal.", SERIF, "#1C1917"),
+        calloutBox({
+          title: "What past participants said",
+          border: "#E7E2DA",
+          bg: "#FAF7F2",
+          font: SERIF,
+          bodyHtml:
+            "\"You communicate each lesson so clearly and with a length that makes reading each email easy to fit into any busy day. I also love how you end each challenge with a Creative Action Plan in specific, practical steps.\" (Patricia)<br><br>\"I've been knowing that I am building something worth sharing. I am really glad I signed up for this course.\" (Craig)",
+        }),
+        ctaButton({
+          label: "Join the Creator White Space Challenge ($97)",
+          href: "https://becomeawritertoday.com/black-friday/?utm_source=resend&utm_medium=email&utm_campaign=bfcm-2026-sat#creator-white-space",
+          bg: "#B23A48",
+          fg: "#FFFFFF",
+          font: SERIF,
+        }),
+        p("Try it for a few days. If it is not a fit, reply to any email for a full refund. And if you also want all five Become a Writer Today downloadable packs bundled together ($59 vs $118, saving $59), they are on the same page until midnight UTC on Monday.", SERIF, "#1C1917"),
+        p("Write on,<br>Bryan Collins", SERIF, "#1C1917"),
+      ].join("\n"),
+    }),
+    text: `Most writers I speak with do not have an ideas problem. They have a time and mental-bandwidth problem.
+
+If you want to finish a book, build a newsletter or Substack, or launch a creative project in 2027 without burning out, doors are open through Monday night for The Creator White Space Challenge ($97).
+
+It is a 30-day daily email course. Each morning you get one short, practical lesson that ends with a concrete Creative Action Plan you can finish in a busy day. No bloated video portal.
+
+Patricia wrote: "You communicate each lesson so clearly and with a length that makes reading each email easy to fit into any busy day. I also love how you end each challenge with a Creative Action Plan in specific, practical steps."
+
+Craig wrote: "I am really glad I signed up for this course."
+
+Join the Creator White Space Challenge ($97):
+https://becomeawritertoday.com/black-friday/?utm_source=resend&utm_medium=email&utm_campaign=bfcm-2026-sat#creator-white-space
+
+Try it for a few days. If it is not a fit, reply to any email for a full refund. All five Become a Writer Today downloadable packs ($59 vs $118, saving $59) are on the same page until midnight UTC on Monday.
+
+Write on,
+Bryan Collins
+
+Become a Writer Today, Consistent Publishing Ltd, Landscape House, Baldonnell Business Park, Dublin D22 P3K7, Ireland
+Unsubscribe: {{{RESEND_UNSUBSCRIBE_URL}}}`,
+  },
+
+  {
     id: "bawt-cm-2026",
     property: "Become a Writer Today",
     segmentName: "BAWT · newsletter",
     segmentId: "7db2686b-5e9c-4782-886e-7ccb3c5fe674",
     audienceNote: "~5,700 writers",
-    offerType: "Cyber Monday Final Call ($49 Vault + ProWritingAid/Grammarly)",
+    offerType: "Cyber Monday Final Call ($59 Vault + ProWritingAid/Grammarly)",
     sendSlot: "Cyber Monday · Mon 30 Nov 2026, 15:00 UTC",
     from: "Become a Writer Today <bryan@becomeawritertoday.com>",
     replyTo: ["bryan@becomeawritertoday.com"],
-    subject: "Closing tonight: the 5-pack Writer's Vault ($49)",
-    previewText: "Last call for the bundled Writers' Deadline Database, Zettelkasten Kit, Claude Code guide and editor packs.",
+    subject: "Midnight cutoff: 5 writing packs for $59",
+    previewText: "Last call for the bundled Writers' Deadline Database, Zettelkasten Kit, Claude Code guide and editor packs (save $59).",
     previewPageUrl: "https://deploy-preview-276--becomeawriter.netlify.app/black-friday/",
     livePageUrl: "https://becomeawritertoday.com/black-friday/",
     html: wrapBawtEmail({
       title: "Closing tonight: the 5-pack Writer's Vault",
-      previewText: "Last call for the bundled Writers' Deadline Database, Zettelkasten Kit, Claude Code guide and editor packs.",
+      previewText: "Last call for the bundled Writers' Deadline Database, Zettelkasten Kit, Claude Code guide and editor packs (save $59).",
       kicker: "Cyber Monday Final Call",
       bodyHtml: [
         p("A quick reminder before I take down the Cyber Week page tonight.", SERIF, "#1C1917"),
-        p("Until midnight, all five Become a Writer Today downloads are bundled together for <strong>$49 one-time</strong> instead of $118 bought separately. Everything arrives as plain-text Markdown, CSV, calendar and Python files you keep on your own computer:", SERIF, "#1C1917"),
+        p("Until midnight, all five Become a Writer Today downloads are bundled together for <strong>$59 one-time</strong> instead of $118 bought separately (50% off, saving $59). Everything arrives as plain-text Markdown, CSV, calendar and Python files you keep on your own computer:", SERIF, "#1C1917"),
         bulletList(
           [
             "Writers' Deadline Database (all four submission datasets + .ics calendars)",
@@ -152,7 +215,7 @@ Unsubscribe: {{{RESEND_UNSUBSCRIBE_URL}}}`,
           "#1C1917",
         ),
         ctaButton({
-          label: "Grab all 5 packs for $49 before midnight",
+          label: "Grab all 5 packs for $59 before midnight",
           href: "https://becomeawritertoday.com/black-friday/?utm_source=resend&utm_medium=email&utm_campaign=bfcm-2026-cm",
           bg: "#B23A48",
           fg: "#FFFFFF",
@@ -166,7 +229,7 @@ Unsubscribe: {{{RESEND_UNSUBSCRIBE_URL}}}`,
     }),
     text: `A quick reminder before I take down the Cyber Week page tonight.
 
-Until midnight, all five Become a Writer Today downloads are bundled together for $49 one-time instead of $118 bought separately. Everything arrives as plain-text Markdown, CSV, calendar and Python files you keep on your own computer:
+Until midnight, all five Become a Writer Today downloads are bundled together for $59 one-time instead of $118 bought separately (50% off, saving $59). Everything arrives as plain-text Markdown, CSV, calendar and Python files you keep on your own computer:
 
 - Writers' Deadline Database (all four submission datasets + .ics calendars)
 - The Zettelkasten for Creators Kit (starter vault + 5 templates)
@@ -174,7 +237,7 @@ Until midnight, all five Become a Writer Today downloads are bundled together fo
 - Filler-Word Killer Editor Pack (batch CLI manuscript checker + 8 JSON lists)
 - Prompt & Word-Bank Pack (every site word bank + genre prompts offline)
 
-Grab all 5 packs for $49 before midnight:
+Grab all 5 packs for $59 before midnight:
 https://becomeawritertoday.com/black-friday/?utm_source=resend&utm_medium=email&utm_campaign=bfcm-2026-cm
 
 Tonight is also the cutoff for the annual Black Friday discounts on ProWritingAid (https://becomeawritertoday.com/try-prowritingaid/) and Grammarly Pro (https://becomeawritertoday.com/try-grammarly/) if you plan to edit a manuscript over the winter.
@@ -196,30 +259,31 @@ Unsubscribe: {{{RESEND_UNSUBSCRIBE_URL}}}`,
     segmentName: "Bryan Collins Newsletter",
     segmentId: "389c476f-521e-444d-9932-770c5a443645",
     audienceNote: "~774 engaged AI builders & creators",
-    offerType: "Solo Operator 4-Kit Stack ($69 vs $146) + AI Builder Stack",
+    offerType: "The Solo Operator Repo ($79 Private GitHub Access, normally $149)",
     sendSlot: "Black Friday · Fri 27 Nov 2026, 10:00 UTC",
     from: "Bryan Collins <bryan@bryancollins.com>",
     replyTo: ["bryan@bryancollins.com"],
-    subject: "Why I stopped buying $997 courses (and my $69 Cyber Week stack)",
-    previewText: "Four plain-text Markdown and Claude Code kits I use every day to run nine sites without a team.",
+    subject: "Why I ditched $997 courses for 1 private repo ($79)",
+    previewText: "Private GitHub access to my sanitised .claude/ skills, Builder's Pipeline, Zettelkasten vault and 9-site Astro blueprint.",
     previewPageUrl: "https://deploy-preview-16--bryancollins.netlify.app/black-friday.html",
     livePageUrl: "https://bryancollins.com/black-friday.html",
     html: wrapPersonalEmail({
-      title: "Why I stopped buying $997 courses",
-      previewText: "Four plain-text Markdown and Claude Code kits I use every day to run nine sites without a team.",
+      title: "Why I ditched $997 courses for 1 private repo",
+      previewText: "Private GitHub access to my sanitised .claude/ skills, Builder's Pipeline, Zettelkasten vault and 9-site Astro blueprint.",
       bodyHtml: [
         p("Every November my inbox fills up with $997 video courses promising to teach me an operating system for content or AI."),
         p("I bought plenty of them in my thirties. Almost every one sat at 18% completion while I went back to work."),
-        p("When I started rebuilding my portfolio with Claude Code this year, I stopped keeping ideas inside SaaS dashboards and course portals. Everything that runs my week lives in plain Markdown files and small Python scripts on my Mac: my note vault, my voice memory files, my Friday content pipeline, and my prose checker."),
-        p("For Black Friday through Cyber Monday, I bundled all four of those working kits onto one page for <strong>$69 one-time</strong> (normally $146 bought separately):"),
+        p("When I rebuilt my portfolio with Claude Code this year, I stopped keeping workflows inside SaaS dashboards and course portals. Everything that runs my week lives in git: my Claude Code skills and hooks, my Friday content pipeline, my plain-Markdown note vault, and the Astro + Netlify + Stripe site blueprint behind my nine sites."),
+        p("For Black Friday through Cyber Monday, I am opening private GitHub access to <strong>The Solo Operator Repo</strong> (<code>bryancollins99/solo-operator-stack</code>) for <strong>$79 one-time</strong> (normally $149):"),
         bulletList([
-          "<strong>The Builder's Pipeline ($39):</strong> six scripts and prompts that turn one-line daily build notes into a week of LinkedIn posts, newsletter drafts and YouTube ideas.",
-          "<strong>Claude Code for Writers ($39):</strong> zero-terminal quickstart, persistent <code>MEMORY.md</code> voice rules, undo safety, and three ready-to-fill <code>CLAUDE.md</code> project briefs.",
-          "<strong>The Zettelkasten for Creators Kit ($39):</strong> git-backed plain-Markdown starter vault, five note templates and three cleanup scripts.",
-          "<strong>Filler-Word Killer Editor Pack ($29):</strong> batch CLI prose checker for an entire folder of Markdown drafts plus eight editable word lists.",
+          "<strong>Sanitised <code>.claude/</code> Skills &amp; Hooks Pack:</strong> gitleaks-clean production skills including <code>/prd</code>, <code>/prd-critic</code>, <code>/qa-loop</code>, <code>/swarm-check</code>, <code>/pre-commit-review</code>, <code>/commit</code> and <code>/log</code>.",
+          "<strong>The Builder's Pipeline:</strong> scripts turning daily <code>Coding-Log.md</code> lines into Friday LinkedIn posts, newsletter drafts and YouTube ideas.",
+          "<strong>Zettelkasten Starter Vault + Hygiene Scripts:</strong> plain-Markdown note vault and cleanup scripts with zero SaaS lock-in.",
+          "<strong>Portfolio Site Blueprint:</strong> stripped-down Astro + Netlify + Resend + Stripe webhook starter behind running nine sites solo.",
+          "<strong>Lifetime <code>git pull</code> updates through 2027:</strong> GitHub collaborator invite after Stripe checkout, zero subscription, 14-day refund.",
         ]),
         ctaButton({
-          label: "See the Solo Operator Stack ($69)",
+          label: "Get The Solo Operator Repo ($79 one-time)",
           href: "https://bryancollins.com/black-friday.html?utm_source=resend&utm_medium=email&utm_campaign=bc-bfcm-2026-bf",
           bg: "#111827",
           fg: "#FCD34D",
@@ -232,16 +296,17 @@ Unsubscribe: {{{RESEND_UNSUBSCRIBE_URL}}}`,
 
 I bought plenty of them in my thirties. Almost every one sat at 18% completion while I went back to work.
 
-When I started rebuilding my portfolio with Claude Code this year, I stopped keeping ideas inside SaaS dashboards and course portals. Everything that runs my week lives in plain Markdown files and small Python scripts on my Mac: my note vault, my voice memory files, my Friday content pipeline, and my prose checker.
+When I rebuilt my portfolio with Claude Code this year, I stopped keeping workflows inside SaaS dashboards and course portals. Everything that runs my week lives in git: my Claude Code skills and hooks, my Friday content pipeline, my plain-Markdown note vault, and the Astro + Netlify + Stripe site blueprint behind my nine sites.
 
-For Black Friday through Cyber Monday, I bundled all four of those working kits onto one page for $69 one-time (normally $146 bought separately):
+For Black Friday through Cyber Monday, I am opening private GitHub access to The Solo Operator Repo (bryancollins99/solo-operator-stack) for $79 one-time (normally $149):
 
-- The Builder's Pipeline ($39): six scripts and prompts that turn one-line daily build notes into a week of LinkedIn posts, newsletter drafts and YouTube ideas.
-- Claude Code for Writers ($39): zero-terminal quickstart, persistent MEMORY.md voice rules, undo safety, and three CLAUDE.md project briefs.
-- The Zettelkasten for Creators Kit ($39): git-backed plain-Markdown starter vault, five note templates and three cleanup scripts.
-- Filler-Word Killer Editor Pack ($29): batch CLI prose checker for an entire folder of Markdown drafts plus eight editable word lists.
+- Sanitised .claude/ Skills & Hooks Pack: gitleaks-clean production skills (/prd, /prd-critic, /qa-loop, /swarm-check, /pre-commit-review, /commit, /log).
+- The Builder's Pipeline: scripts turning daily Coding-Log.md lines into Friday LinkedIn posts, newsletter drafts and YouTube ideas.
+- Zettelkasten Starter Vault + Hygiene Scripts: plain-Markdown note vault and cleanup scripts with zero SaaS lock-in.
+- Portfolio Site Blueprint: stripped-down Astro + Netlify + Resend + Stripe webhook starter behind running nine sites solo.
+- Lifetime git pull updates through 2027: GitHub collaborator invite after Stripe checkout, zero subscription, 14-day refund.
 
-See the Solo Operator Stack ($69):
+Get The Solo Operator Repo ($79 one-time):
 https://bryancollins.com/black-friday.html?utm_source=resend&utm_medium=email&utm_campaign=bc-bfcm-2026-bf
 
 On the same page I listed the three paid tools that survived my SaaS cull this year and run Cyber Week offers:
@@ -258,45 +323,102 @@ Unsubscribe: {{{RESEND_UNSUBSCRIBE_URL}}}`,
   },
 
   {
+    id: "bc-sat-2026",
+    property: "bryancollins.com (Personal Brand + Kit)",
+    segmentName: "Bryan Collins Newsletter",
+    segmentId: "389c476f-521e-444d-9932-770c5a443645",
+    audienceNote: "~774 engaged AI builders & creators",
+    offerType: "Saturday Walkthrough: Inside The Solo Operator Repo ($79 Private GitHub Access)",
+    sendSlot: "Saturday · Sat 28 Nov 2026, 11:00 UTC",
+    from: "Bryan Collins <bryan@bryancollins.com>",
+    replyTo: ["bryan@bryancollins.com"],
+    subject: "Inside the private GitHub repo running my 9 sites",
+    previewText: "No 40-hour video portal: clone bryancollins99/solo-operator-stack with sanitised .claude/ skills, pipeline scripts and Astro blueprint.",
+    previewPageUrl: "https://deploy-preview-16--bryancollins.netlify.app/black-friday.html",
+    livePageUrl: "https://bryancollins.com/black-friday.html",
+    html: wrapPersonalEmail({
+      title: "Inside The Solo Operator Repo",
+      previewText: "No 40-hour video portal: clone bryancollins99/solo-operator-stack with sanitised .claude/ skills, pipeline scripts and Astro blueprint.",
+      bodyHtml: [
+        p("A few readers asked what actually arrives when you join The Solo Operator Repo ($79 Cyber Week one-time, normally $149)."),
+        p("There is no course login and no 40 hours of Zoom replays. After Stripe checkout you receive a private GitHub collaborator invite to <code>bryancollins99/solo-operator-stack</code>. Clone it once, adapt it to your own repos, and pull updates through 2027:"),
+        bulletList([
+          "<strong>Sanitised <code>.claude/</code> Skills &amp; Hooks Pack:</strong> gitleaks-clean production skills (<code>/prd</code>, <code>/prd-critic</code>, <code>/qa-loop</code>, <code>/swarm-check</code>, <code>/pre-commit-review</code>, <code>/commit</code>, <code>/log</code>).",
+          "<strong>The Builder's Pipeline:</strong> daily <code>Coding-Log.md</code> to Friday LinkedIn, newsletter and YouTube scripts.",
+          "<strong>Zettelkasten Starter Vault + Hygiene Scripts:</strong> plain-Markdown note vault with zero SaaS lock-in.",
+          "<strong>Portfolio Site Blueprint:</strong> stripped-down Astro + Netlify + Resend + Stripe webhook starter behind running nine sites solo.",
+        ]),
+        ctaButton({
+          label: "Inspect The Solo Operator Repo ($79 through Monday)",
+          href: "https://bryancollins.com/black-friday.html?utm_source=resend&utm_medium=email&utm_campaign=bc-bfcm-2026-sat",
+          bg: "#111827",
+          fg: "#FCD34D",
+        }),
+        p("Normally $149. Lifetime <code>git pull</code> updates through 2027, zero subscription, 14-day refund on request."),
+        p("Write on,<br>Bryan Collins"),
+      ].join("\n"),
+    }),
+    text: `A few readers asked what actually arrives when you join The Solo Operator Repo ($79 Cyber Week one-time, normally $149).
+
+There is no course login and no 40 hours of Zoom replays. After Stripe checkout you receive a private GitHub collaborator invite to bryancollins99/solo-operator-stack. Clone it once, adapt it to your own repos, and pull updates through 2027:
+
+- Sanitised .claude/ Skills & Hooks Pack: gitleaks-clean production skills (/prd, /prd-critic, /qa-loop, /swarm-check, /pre-commit-review, /commit, /log).
+- The Builder's Pipeline: daily Coding-Log.md to Friday LinkedIn, newsletter and YouTube scripts.
+- Zettelkasten Starter Vault + Hygiene Scripts: plain-Markdown note vault with zero SaaS lock-in.
+- Portfolio Site Blueprint: stripped-down Astro + Netlify + Resend + Stripe webhook starter behind running nine sites solo.
+
+Inspect The Solo Operator Repo ($79 through Monday midnight UTC):
+https://bryancollins.com/black-friday.html?utm_source=resend&utm_medium=email&utm_campaign=bc-bfcm-2026-sat
+
+Normally $149. Lifetime git pull updates through 2027, zero subscription, 14-day refund on request.
+
+Write on,
+Bryan Collins
+
+Consistent Publishing Ltd, Landscape House, Baldonnell Business Park, Dublin D22 P3K7, Ireland
+Unsubscribe: {{{RESEND_UNSUBSCRIBE_URL}}}`,
+  },
+
+  {
     id: "bc-cm-2026",
     property: "bryancollins.com (Personal Brand + Kit)",
     segmentName: "Bryan Collins Newsletter",
     segmentId: "389c476f-521e-444d-9932-770c5a443645",
     audienceNote: "~774 engaged AI builders & creators",
-    offerType: "Cyber Monday Last Call ($69 Operator Stack)",
+    offerType: "Cyber Monday Last Call ($79 Private GitHub Repo, normally $149)",
     sendSlot: "Cyber Monday · Mon 30 Nov 2026, 16:00 UTC",
     from: "Bryan Collins <bryan@bryancollins.com>",
     replyTo: ["bryan@bryancollins.com"],
-    subject: "Last call tonight: my 4 Claude Code and Markdown kits ($69)",
-    previewText: "The Solo Operator bundle comes down at midnight, back to $146 across individual pages tomorrow.",
+    subject: "The private repo behind my 9 sites ($79 ends tonight)",
+    previewText: "Cyber Week $79 access to bryancollins99/solo-operator-stack ends at midnight UTC tonight (normally $149).",
     previewPageUrl: "https://deploy-preview-16--bryancollins.netlify.app/black-friday.html",
     livePageUrl: "https://bryancollins.com/black-friday.html",
     html: wrapPersonalEmail({
-      title: "Last call tonight: my 4 Claude Code and Markdown kits",
-      previewText: "The Solo Operator bundle comes down at midnight, back to $146 across individual pages tomorrow.",
+      title: "The private repo behind my 9 sites ($79 ends tonight)",
+      previewText: "Cyber Week $79 access to bryancollins99/solo-operator-stack ends at midnight UTC tonight (normally $149).",
       bodyHtml: [
         p("Quick note before Cyber Monday wraps up tonight."),
-        p("At midnight I am taking down the $69 bundle page that packages my four plain-text kits together (The Builder's Pipeline, Claude Code for Writers, The Zettelkasten for Creators Kit, and the Filler-Word Killer Editor Pack). Tomorrow they go back to $146 across their individual pages."),
-        p("If you want to spend December setting up a clean Markdown note vault, a repeatable Claude Code memory setup, and a 20-minute Friday content workflow you own on disk with zero SaaS subscriptions, grab the stack here:"),
+        p("At midnight UTC I am closing the <strong>$79 Cyber Week launch price</strong> for <strong>The Solo Operator Repo</strong> (private GitHub access to <code>bryancollins99/solo-operator-stack</code>, normally $149)."),
+        p("You get the sanitised <code>.claude/</code> skills and hooks pack (<code>/prd</code>, <code>/prd-critic</code>, <code>/qa-loop</code>, <code>/swarm-check</code>, <code>/pre-commit-review</code>, <code>/commit</code>, <code>/log</code>), The Builder's Pipeline, the Zettelkasten starter vault, the Astro + Netlify + Resend + Stripe site blueprint, and lifetime <code>git pull</code> updates through 2027:"),
         ctaButton({
-          label: "Get all 4 kits for $69 before midnight",
+          label: "Get Private Repo Access ($79 before midnight)",
           href: "https://bryancollins.com/black-friday.html?utm_source=resend&utm_medium=email&utm_campaign=bc-bfcm-2026-cm",
           bg: "#111827",
           fg: "#FCD34D",
         }),
-        p("Every kit comes with a 14-day no-questions refund if you open the zip files and decide the workflow does not fit how you work."),
+        p("Zero recurring subscription and a 14-day no-questions refund if you clone the repo and decide it does not fit how you build."),
         p("Write on,<br>Bryan Collins"),
       ].join("\n"),
     }),
     text: `Quick note before Cyber Monday wraps up tonight.
 
-At midnight I am taking down the $69 bundle page that packages my four plain-text kits together (The Builder's Pipeline, Claude Code for Writers, The Zettelkasten for Creators Kit, and the Filler-Word Killer Editor Pack). Tomorrow they go back to $146 across their individual pages.
+At midnight UTC I am closing the $79 Cyber Week launch price for The Solo Operator Repo (private GitHub access to bryancollins99/solo-operator-stack, normally $149).
 
-If you want to spend December setting up a clean Markdown note vault, a repeatable Claude Code memory setup, and a 20-minute Friday content workflow you own on disk with zero SaaS subscriptions, grab the stack here:
+You get the sanitised .claude/ skills and hooks pack (/prd, /prd-critic, /qa-loop, /swarm-check, /pre-commit-review, /commit, /log), The Builder's Pipeline, the Zettelkasten starter vault, the Astro + Netlify + Resend + Stripe site blueprint, and lifetime git pull updates through 2027:
 
 https://bryancollins.com/black-friday.html?utm_source=resend&utm_medium=email&utm_campaign=bc-bfcm-2026-cm
 
-Every kit comes with a 14-day no-questions refund if you open the zip files and decide the workflow does not fit how you work.
+Zero recurring subscription and a 14-day no-questions refund if you clone the repo and decide it does not fit how you build.
 
 Write on,
 Bryan Collins
@@ -315,7 +437,7 @@ Unsubscribe: {{{RESEND_UNSUBSCRIBE_URL}}}`,
     sendSlot: "Small Business Saturday · Sat 28 Nov 2026, 10:30 UTC",
     from: "Leinster Insider <info@leinsterinsider.ie>",
     replyTo: ["info@leinsterinsider.ie"],
-    subject: "Run a business or event in Leinster? Our 2-for-1 Christmas and New Year pass",
+    subject: "2-for-1 Leinster feature: December + January included",
     previewText: "Book a December feature or event slot by Cyber Monday and get a bonus January 2027 placement included.",
     previewPageUrl: "https://deploy-preview-201--leinsterinsider.netlify.app/sponsor/cyber-week/",
     livePageUrl: "https://leinsterinsider.ie/sponsor/cyber-week/",
@@ -381,7 +503,7 @@ Unsubscribe: {{{RESEND_UNSUBSCRIBE_URL}}}`,
     sendSlot: "Cyber Monday · Mon 30 Nov 2026, 11:00 UTC",
     from: "Leinster Insider <info@leinsterinsider.ie>",
     replyTo: ["info@leinsterinsider.ie"],
-    subject: "Own your county planning page on Leinster Insider in 2027 (EUR 99/mo founding lock)",
+    subject: "1 sponsor per Leinster county for 2027 (EUR 99/mo)",
     previewText: "One founding sponsor slot per county for estate agents, architects, surveyors, solicitors and builders.",
     previewPageUrl: "https://deploy-preview-201--leinsterinsider.netlify.app/sponsor/cyber-week/",
     livePageUrl: "https://leinsterinsider.ie/sponsor/cyber-week/",
@@ -423,6 +545,61 @@ Buying, renting or reviewing a lease yourself before year-end? Use our free offi
 - RTB Rent-Review Evidence Pack: https://leinsterinsider.ie/rent-review/
 - Town Price & Yield Comparison: https://leinsterinsider.ie/compare/
 - Commute Finder: https://leinsterinsider.ie/find-your-town/
+
+Consistent Publishing Ltd, CRO 742884, Landscape House, Baldonnell Business Park, Dublin D22 P3K7, Ireland
+Unsubscribe: {{{RESEND_UNSUBSCRIBE_URL}}}`,
+  },
+
+  {
+    id: "leinster-cm-final-2026",
+    property: "Leinster Insider",
+    segmentName: "Leinster Insider · newsletter",
+    segmentId: "726f5926-ad5f-4f79-a77c-9a7408578623",
+    audienceNote: "~1,643 Leinster subscribers across 12 counties",
+    offerType: "Cyber Monday Final Call: 2-for-1 Local Sponsor Pass + EUR 99/mo County Lock",
+    sendSlot: "Cyber Monday · Mon 30 Nov 2026, 17:30 UTC",
+    from: "Leinster Insider <info@leinsterinsider.ie>",
+    replyTo: ["info@leinsterinsider.ie"],
+    subject: "Final hours: 2-for-1 Leinster pass + 12 county slots",
+    previewText: "Closes at midnight UTC: book a December feature or event and get January included, or lock in a EUR 99/mo county planning slot.",
+    previewPageUrl: "https://deploy-preview-201--leinsterinsider.netlify.app/sponsor/cyber-week/",
+    livePageUrl: "https://leinsterinsider.ie/sponsor/cyber-week/",
+    html: wrapBrandCardEmail({
+      title: "Final Hours: 2-for-1 Leinster Pass & 2027 County Slots",
+      previewText: "Closes at midnight UTC: book a December feature or event and get January included, or lock in a EUR 99/mo county planning slot.",
+      brandName: "Leinster Insider",
+      kicker: "Cyber Monday Final Call · Closes Midnight UTC",
+      accentColor: "#1F2937",
+      bodyHtml: [
+        p("Quick final reminder before we close the Cyber Week page at midnight tonight (Monday 30 November)."),
+        p("We do not discount Leinster Insider ad rates. Instead, bookings placed before midnight UTC get extra placements or a 12-month founding rate lock across 2027:"),
+        bulletList([
+          "<strong>Festive + New Year Business Feature (EUR 299 one-off):</strong> one December issue feature written in our voice, a permanent town or county guide link, plus a bonus January 2027 placement included.",
+          "<strong>Christmas &amp; January Event Pass (EUR 99 one-off):</strong> a weekly issue slot plus a shareable event page and a bonus closing-weekend reminder.",
+          "<strong>Founding County Planning Sponsor (EUR 99/mo):</strong> one firm per Leinster county pinned at the top of your county planning page and weekly planning digest for 12 months. Cancel any time.",
+        ]),
+        ctaButton({
+          label: "Claim a Slot Before Midnight UTC",
+          href: "https://leinsterinsider.ie/sponsor/cyber-week/?utm_source=newsletter&utm_medium=email&utm_campaign=li-bfcm-2026-cm-final",
+          bg: "#111827",
+          fg: "#FFFFFF",
+        }),
+        p("Smaller budget? You can still add a permanent listing to the <a href=\"https://leinsterinsider.ie/board/?utm_source=newsletter&utm_medium=email&utm_campaign=li-bfcm-2026-cm-final\" style=\"color:#0052FF;font-weight:bold;text-decoration:underline;\">Leinster Business Spotlight board</a> from EUR 10 any day of the year."),
+      ].join("\n"),
+    }),
+    text: `Quick final reminder before we close the Cyber Week page at midnight tonight (Monday 30 November).
+
+We do not discount Leinster Insider ad rates. Instead, bookings placed before midnight UTC get extra placements or a 12-month founding rate lock across 2027:
+
+- Festive + New Year Business Feature (EUR 299 one-off): one December issue feature written in our voice, a permanent town or county guide link, plus a bonus January 2027 placement included.
+- Christmas & January Event Pass (EUR 99 one-off): a weekly issue slot plus a shareable event page and a bonus closing-weekend reminder.
+- Founding County Planning Sponsor (EUR 99/mo): one firm per Leinster county pinned at the top of your county planning page and weekly planning digest for 12 months. Cancel any time.
+
+Claim a Slot Before Midnight UTC:
+https://leinsterinsider.ie/sponsor/cyber-week/?utm_source=newsletter&utm_medium=email&utm_campaign=li-bfcm-2026-cm-final
+
+Smaller budget? Add a permanent listing to the Leinster Business Spotlight board from EUR 10:
+https://leinsterinsider.ie/board/?utm_source=newsletter&utm_medium=email&utm_campaign=li-bfcm-2026-cm-final
 
 Consistent Publishing Ltd, CRO 742884, Landscape House, Baldonnell Business Park, Dublin D22 P3K7, Ireland
 Unsubscribe: {{{RESEND_UNSUBSCRIBE_URL}}}`,

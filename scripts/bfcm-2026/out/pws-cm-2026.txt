@@ -1,0 +1,13 @@
+Quick final reminder before the Cyber Week price closes at midnight UTC tonight.
+
+Until midnight, private GitHub access to The Solo Operator Repo (bryancollins99/solo-operator-stack) is $79 one-time instead of $149.
+
+Clone it once for the sanitised .claude/ skills and hooks pack (/prd, /prd-critic, /qa-loop, /swarm-check, /pre-commit-review, /commit, /log), The Builder's Pipeline, the Zettelkasten Starter Vault, the Astro + Netlify + Resend + Stripe site blueprint, and lifetime git pull updates through 2027.
+
+Get Private Repo Access ($79 Before Midnight):
+https://bryancollins.com/black-friday.html?utm_source=promptwritingstudio&utm_medium=email&utm_campaign=pws-bfcm-2026-cm
+
+Zero monthly subscription and a 14-day no-questions refund. Free guides remain at https://promptwritingstudio.com/.
+
+Consistent Publishing Ltd, CRO 742884, Landscape House, Baldonnell Business Park, Dublin D22 P3K7, Ireland
+Unsubscribe: {{{RESEND_UNSUBSCRIBE_URL}}}

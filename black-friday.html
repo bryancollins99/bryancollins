@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>The Solo Operator's Cyber Week Stack (2026) | Bryan Collins</title>
-    <meta name="description" content="Get all four plain-text and Claude Code kits from Bryan Collins in one Cyber Week bundle, plus the AI and creator tools I actually pay for.">
+    <title>The Solo Operator Repo (Cyber Week 2026) | Bryan Collins</title>
+    <meta name="description" content="Get private GitHub access to The Solo Operator Repo ($79 Cyber Week one-time, normally $149): sanitised .claude/ skills, The Builder's Pipeline, Zettelkasten vault, and Astro+Netlify+Stripe blueprint.">
     <meta name="robots" content="noindex, nofollow">
     <link rel="canonical" href="https://bryancollins.com/black-friday.html">
     <link rel="icon" type="image/svg+xml" href="/favicon.svg">
@@ -35,75 +35,97 @@
             <img class="avatar" src="/resources/bryan-collins-320.jpg" alt="Bryan Collins" width="132" height="132">
             <div>
                 <p class="small"><strong>Black Friday to Cyber Monday (27 to 30 November 2026)</strong></p>
-                <h1>The Solo Operator's Claude Code &amp; Plain-Text Stack</h1>
+                <h1>The Solo Operator Repo</h1>
                 <p class="lede">
                     Most Black Friday creator deals are bloated video courses you will still feel guilty about not watching in March.
-                    Everything I sell here is a folder of plain-text Markdown files, Python scripts and working Claude Code templates you can put to work in twenty minutes.
+                    For Cyber Week, I am opening private GitHub access to the exact sanitised Claude Code skills, hooks, publishing scripts and site blueprint I use to run nine sites solo.
                 </p>
                 <div class="actions">
-                    <a class="btn btn-primary" href="#operator-bundle">See the $69 Cyber Week Bundle (save $77)</a>
-                    <a class="btn btn-ghost" href="#individual-kits">Buy a single kit</a>
+                    <a class="btn btn-primary" href="#operator-repo">Get Private GitHub Access ($79, normally $149)</a>
+                    <a class="btn btn-ghost" href="#individual-kits">See standalone kits</a>
                 </div>
+                <p class="small" style="margin-top: 14px; font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-weight: 700;" id="bc-bfcm-timer" aria-live="polite">
+                    Closes Monday 30 November at midnight UTC
+                </p>
             </div>
         </div>
     </section>
+    <script>
+      (function () {
+        var el = document.getElementById('bc-bfcm-timer');
+        if (!el) return;
+        var target = Date.parse('2026-11-30T23:59:59Z');
+        function tick() {
+          var diff = target - Date.now();
+          if (diff <= 0) {
+            el.textContent = 'Cyber Week repo offer closed (midnight UTC)';
+            return;
+          }
+          var d = Math.floor(diff / 86400000);
+          var h = String(Math.floor((diff % 86400000) / 3600000)).padStart(2, '0');
+          var m = String(Math.floor((diff % 3600000) / 60000)).padStart(2, '0');
+          var s = String(Math.floor((diff % 60000) / 1000)).padStart(2, '0');
+          el.textContent = 'Offer ends midnight UTC (30 Nov): ' + d + 'd ' + h + 'h ' + m + 'm ' + s + 's left';
+        }
+        tick();
+        setInterval(tick, 1000);
+      })();
+    </script>
 
-    <section id="operator-bundle" class="block">
+    <section id="operator-repo" class="block">
         <div class="card" style="border-width: 2px; border-color: var(--accent); padding: 28px;">
-            <span class="tag">Cyber Week Operator Bundle</span>
-            <h2>All 4 Plain-Text &amp; Claude Code Kits: $69 one-time <span class="muted" style="font-weight: 500; font-size: 0.72em;">(normally $146 bought separately)</span></h2>
+            <span class="tag">Private GitHub Repo &middot; Cyber Week Launch</span>
+            <h2>The Solo Operator Repo: $79 one-time <span class="muted" style="font-weight: 500; font-size: 0.72em;">(normally $149)</span></h2>
             <p>
-                Built from the exact scripts, <code>CLAUDE.md</code> memory files and Markdown vault rules I use to run nine sites, publish three YouTube videos a week, and ship software without a team. One payment, no recurring SaaS lock-in, yours to keep offline forever.
+                Direct collaborator access to <code>bryancollins99/solo-operator-stack</code> (GitHub invite sent after Stripe checkout). Clone it, fork it into your own workflow, and run <code>git pull</code> for updates through 2027. Zero monthly subscription, no course portal, 14-day refund on request.
             </p>
 
             <div class="table" style="margin-top: 20px;">
                 <table>
                     <thead>
                         <tr>
-                            <th>Included Kit</th>
-                            <th>What It Solves</th>
-                            <th>Regular Price</th>
+                            <th>Inside the Repo</th>
+                            <th>What You Get</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
-                            <td><strong><a href="/builders-pipeline.html">The Builder's Pipeline</a></strong></td>
-                            <td>Six Python scripts + prompts that turn a scrappy daily worklog into Friday LinkedIn posts, newsletter drafts and YouTube ideas.</td>
-                            <td>$39</td>
+                            <td><strong>1. Sanitised <code>.claude/</code> Skills &amp; Hooks Pack</strong></td>
+                            <td>Gitleaks-clean production Claude Code skills and hooks: <code>/prd</code>, <code>/prd-critic</code>, <code>/qa-loop</code>, <code>/swarm-check</code>, <code>/pre-commit-review</code>, <code>/commit</code>, and <code>/log</code>.</td>
                         </tr>
                         <tr>
-                            <td><strong><a href="/claude-code-for-writers.html">Claude Code for Writers</a></strong></td>
-                            <td>Zero-terminal quickstart, persistent <code>MEMORY.md</code> voice setup, safety undo workflow, and 3 ready-to-fill <code>CLAUDE.md</code> project briefs.</td>
-                            <td>$39</td>
+                            <td><strong>2. The Builder's Pipeline</strong></td>
+                            <td>Scripts and prompts that turn daily <code>Coding-Log.md</code> lines into Friday LinkedIn posts, newsletter drafts and YouTube video angles.</td>
                         </tr>
                         <tr>
-                            <td><strong><a href="/zettelkasten-kit.html">The Zettelkasten for Creators Kit</a></strong></td>
-                            <td>Git-backed plain-Markdown starter vault, 5 note templates, and 3 cleanup scripts so your notes never get trapped in a SaaS app.</td>
-                            <td>$39</td>
+                            <td><strong>3. Zettelkasten Starter Vault + Hygiene Scripts</strong></td>
+                            <td>Plain-Markdown note vault, five templates and cleanup scripts with zero SaaS lock-in.</td>
                         </tr>
                         <tr>
-                            <td><strong><a href="/filler-word-killer.html">Filler-Word Killer Editor Pack</a></strong></td>
-                            <td>Batch CLI prose checker for a whole folder of drafts, 8 editable JSON word lists, and a self-hosted browser copy.</td>
-                            <td>$29</td>
+                            <td><strong>4. Portfolio Site Blueprint</strong></td>
+                            <td>Stripped-down Astro + Netlify + Resend + Stripe webhook starter behind running nine content and data sites solo.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>5. Lifetime <code>git pull</code> Updates Through 2027</strong></td>
+                            <td>Every new skill, hook and pipeline refinement pushed to the repo through 2027 is yours with one <code>git pull</code>.</td>
                         </tr>
                     </tbody>
                 </table>
             </div>
 
             <div class="actions" style="margin-top: 22px;">
-                <!-- OPERATOR-BUNDLE-CHECKOUT: replace #individual-kits with the live $69 Stripe Payment Link generated by scripts/bfcm-2026/create-stripe-bundles.mjs -->
-                <a class="btn btn-primary" href="#individual-kits" data-operator-bundle-cta>Get all 4 kits ($69 Cyber Week Stack)</a>
-                <span class="muted small" style="align-self: center;">Save $77 vs individual checkout. Instant zip downloads via Stripe + 14-day refund on request.</span>
+                <a class="btn btn-primary" href="https://buy.stripe.com/4gMaEY1nN0XVeMK95KbZe0T" data-operator-bundle-cta>Get The Solo Operator Repo ($79 one-time)</a>
+                <span class="muted small" style="align-self: center;">Save $70 vs regular $149 price. GitHub repo invite after Stripe checkout + 14-day refund.</span>
             </div>
         </div>
     </section>
 
     <section id="individual-kits" class="block">
         <div class="block-head">
-            <h2>Or grab a single kit on its own</h2>
+            <h2>Or grab a standalone kit</h2>
             <a href="/products.html">All products</a>
         </div>
-        <p class="sub">Only have one bottleneck right now? Every kit has its own direct Stripe checkout.</p>
+        <p class="sub">Only need one piece right now? Both standalone builder kits have direct Stripe checkout. Looking for writer-focused packs? Visit the <a href="https://becomeawritertoday.com/black-friday/">Become a Writer Today Cyber Week page</a>.</p>
         <ul class="grid">
             <li class="card">
                 <span class="tag">$39 one-time</span>
@@ -113,21 +135,9 @@
             </li>
             <li class="card">
                 <span class="tag">$39 one-time</span>
-                <h3><a href="/claude-code-for-writers.html">Claude Code for Writers</a></h3>
-                <p>Put Claude Code to work on research, drafts and small personal tools without writing code from scratch.</p>
-                <a class="more" href="https://buy.stripe.com/cNi5kE2rRfSP8om1DibZe0v">Buy direct ($39)</a>
-            </li>
-            <li class="card">
-                <span class="tag">$39 one-time</span>
                 <h3><a href="/zettelkasten-kit.html">The Zettelkasten for Creators Kit</a></h3>
                 <p>A plain-Markdown second brain you own on disk: starter vault, 5 templates, method guide and hygiene scripts.</p>
                 <a class="more" href="https://buy.stripe.com/28EcN62rR7mjdIG3LqbZe0t">Buy direct ($39)</a>
-            </li>
-            <li class="card">
-                <span class="tag">$29 one-time</span>
-                <h3><a href="/filler-word-killer.html">Filler-Word Killer Editor Pack</a></h3>
-                <p>Scan an entire folder of Markdown drafts for hedges, crutch words and corporate filler in one pass.</p>
-                <a class="more" href="https://buy.stripe.com/8x2cN69UjfSP1ZYgycbZe0u">Buy direct ($29)</a>
             </li>
         </ul>
     </section>

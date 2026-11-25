@@ -1,24 +1,24 @@
 #!/usr/bin/env node
 // scripts/bfcm-2026/create-stripe-bundles.mjs
 //
-// Dry-run by default. With --apply and STRIPE_SECRET_KEY set, creates the $69 USD
-// one-time Stripe Product + Price + Payment Link for "The Solo Operator's Claude
-// Code & Plain-Text Stack (All 4 Kits)" on bryancollins.com.
+// Dry-run by default. With --apply and STRIPE_SECRET_KEY set, creates the $79 USD
+// one-time Stripe Product + Price + Payment Link for "The Solo Operator Repo"
+// (private GitHub access to bryancollins99/solo-operator-stack) on bryancollins.com.
 
 const apply = process.argv.includes("--apply");
 const secretKey = process.env.STRIPE_SECRET_KEY || "";
 
 const SPEC = {
-  productName: "The Solo Operator's Claude Code & Plain-Text Stack (All 4 Kits)",
-  statementDescriptor: "BRYAN COLLINS STACK",
-  unitAmountCents: 6900,
+  productName: "The Solo Operator Repo (Private GitHub Access)",
+  statementDescriptor: "SOLO OPERATOR REPO",
+  unitAmountCents: 7900,
   currency: "usd",
   metadata: {
-    slug: "solo-operator-stack-2026",
+    slug: "solo-operator-repo",
     site: "bryancollins.com",
     campaign: "bfcm-2026",
   },
-  afterCompletionUrl: "https://bryancollins.com/thank-you.html?bundle=operator-stack",
+  afterCompletionUrl: "https://bryancollins.com/thank-you.html?bundle=solo-operator-repo",
 };
 
 async function stripePost(endpoint, params) {
@@ -37,7 +37,7 @@ async function stripePost(endpoint, params) {
 
 async function main() {
   if (!apply) {
-    console.log("[bfcm-stripe] DRY RUN (pass --apply with STRIPE_SECRET_KEY to mint live $69 Payment Link):");
+    console.log("[bfcm-stripe] DRY RUN (pass --apply with STRIPE_SECRET_KEY to mint live $79 Payment Link):");
     console.log(JSON.stringify(SPEC, null, 2));
     return;
   }

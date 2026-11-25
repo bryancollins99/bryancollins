@@ -5,18 +5,37 @@
     "segmentName": "BAWT · newsletter",
     "segmentId": "7db2686b-5e9c-4782-886e-7ccb3c5fe674",
     "audienceNote": "~5,700 writers (70% open, 10% click)",
-    "offerType": "5-Pack Vault Bundle ($49 vs $118) + Verified Editing Deals",
+    "offerType": "5-Pack Vault Bundle ($59 vs $118, save $59) + Verified Editing Deals",
     "sendSlot": "Black Friday · Fri 27 Nov 2026, 13:00 UTC",
     "from": "Become a Writer Today <bryan@becomeawritertoday.com>",
     "replyTo": [
       "bryan@becomeawritertoday.com"
     ],
-    "subject": "All 5 writing packs in one download (plus 2 Black Friday deals worth checking)",
-    "previewText": "Get the complete Become a Writer Today download vault for $49, plus honest notes on ProWritingAid and Grammarly.",
+    "subject": "5 writing packs for $59 (normally $118)",
+    "previewText": "Get the complete Become a Writer Today download vault for $59 (save $59), plus honest notes on ProWritingAid and Grammarly.",
     "previewPageUrl": "https://deploy-preview-276--becomeawriter.netlify.app/black-friday/",
     "livePageUrl": "https://becomeawritertoday.com/black-friday/",
     "htmlFile": "scripts/bfcm-2026/out/bawt-bf-2026.html",
     "textFile": "scripts/bfcm-2026/out/bawt-bf-2026.txt"
+  },
+  {
+    "id": "bawt-sat-2026",
+    "property": "Become a Writer Today",
+    "segmentName": "BAWT · newsletter",
+    "segmentId": "7db2686b-5e9c-4782-886e-7ccb3c5fe674",
+    "audienceNote": "~5,700 writers",
+    "offerType": "Creator White Space Challenge ($97) + 5-Pack Vault Reminder",
+    "sendSlot": "Saturday · Sat 28 Nov 2026, 13:00 UTC",
+    "from": "Become a Writer Today <bryan@becomeawritertoday.com>",
+    "replyTo": [
+      "bryan@becomeawritertoday.com"
+    ],
+    "subject": "30 mornings to protect your 2027 writing time",
+    "previewText": "30 daily morning emails to carve out protected time and mental space for your book, newsletter or creative project.",
+    "previewPageUrl": "https://deploy-preview-276--becomeawriter.netlify.app/black-friday/#creator-white-space",
+    "livePageUrl": "https://becomeawritertoday.com/black-friday/#creator-white-space",
+    "htmlFile": "scripts/bfcm-2026/out/bawt-sat-2026.html",
+    "textFile": "scripts/bfcm-2026/out/bawt-sat-2026.txt"
   },
   {
     "id": "bawt-cm-2026",
@@ -24,14 +43,14 @@
     "segmentName": "BAWT · newsletter",
     "segmentId": "7db2686b-5e9c-4782-886e-7ccb3c5fe674",
     "audienceNote": "~5,700 writers",
-    "offerType": "Cyber Monday Final Call ($49 Vault + ProWritingAid/Grammarly)",
+    "offerType": "Cyber Monday Final Call ($59 Vault + ProWritingAid/Grammarly)",
     "sendSlot": "Cyber Monday · Mon 30 Nov 2026, 15:00 UTC",
     "from": "Become a Writer Today <bryan@becomeawritertoday.com>",
     "replyTo": [
       "bryan@becomeawritertoday.com"
     ],
-    "subject": "Closing tonight: the 5-pack Writer's Vault ($49)",
-    "previewText": "Last call for the bundled Writers' Deadline Database, Zettelkasten Kit, Claude Code guide and editor packs.",
+    "subject": "Midnight cutoff: 5 writing packs for $59",
+    "previewText": "Last call for the bundled Writers' Deadline Database, Zettelkasten Kit, Claude Code guide and editor packs (save $59).",
     "previewPageUrl": "https://deploy-preview-276--becomeawriter.netlify.app/black-friday/",
     "livePageUrl": "https://becomeawritertoday.com/black-friday/",
     "htmlFile": "scripts/bfcm-2026/out/bawt-cm-2026.html",
@@ -43,18 +62,37 @@
     "segmentName": "Bryan Collins Newsletter",
     "segmentId": "389c476f-521e-444d-9932-770c5a443645",
     "audienceNote": "~774 engaged AI builders & creators",
-    "offerType": "Solo Operator 4-Kit Stack ($69 vs $146) + AI Builder Stack",
+    "offerType": "The Solo Operator Repo ($79 Private GitHub Access, normally $149)",
     "sendSlot": "Black Friday · Fri 27 Nov 2026, 10:00 UTC",
     "from": "Bryan Collins <bryan@bryancollins.com>",
     "replyTo": [
       "bryan@bryancollins.com"
     ],
-    "subject": "Why I stopped buying $997 courses (and my $69 Cyber Week stack)",
-    "previewText": "Four plain-text Markdown and Claude Code kits I use every day to run nine sites without a team.",
+    "subject": "Why I ditched $997 courses for 1 private repo ($79)",
+    "previewText": "Private GitHub access to my sanitised .claude/ skills, Builder's Pipeline, Zettelkasten vault and 9-site Astro blueprint.",
     "previewPageUrl": "https://deploy-preview-16--bryancollins.netlify.app/black-friday.html",
     "livePageUrl": "https://bryancollins.com/black-friday.html",
     "htmlFile": "scripts/bfcm-2026/out/bc-bf-2026.html",
     "textFile": "scripts/bfcm-2026/out/bc-bf-2026.txt"
+  },
+  {
+    "id": "bc-sat-2026",
+    "property": "bryancollins.com (Personal Brand + Kit)",
+    "segmentName": "Bryan Collins Newsletter",
+    "segmentId": "389c476f-521e-444d-9932-770c5a443645",
+    "audienceNote": "~774 engaged AI builders & creators",
+    "offerType": "Saturday Walkthrough: Inside The Solo Operator Repo ($79 Private GitHub Access)",
+    "sendSlot": "Saturday · Sat 28 Nov 2026, 11:00 UTC",
+    "from": "Bryan Collins <bryan@bryancollins.com>",
+    "replyTo": [
+      "bryan@bryancollins.com"
+    ],
+    "subject": "Inside the private GitHub repo running my 9 sites",
+    "previewText": "No 40-hour video portal: clone bryancollins99/solo-operator-stack with sanitised .claude/ skills, pipeline scripts and Astro blueprint.",
+    "previewPageUrl": "https://deploy-preview-16--bryancollins.netlify.app/black-friday.html",
+    "livePageUrl": "https://bryancollins.com/black-friday.html",
+    "htmlFile": "scripts/bfcm-2026/out/bc-sat-2026.html",
+    "textFile": "scripts/bfcm-2026/out/bc-sat-2026.txt"
   },
   {
     "id": "bc-cm-2026",
@@ -62,14 +100,14 @@
     "segmentName": "Bryan Collins Newsletter",
     "segmentId": "389c476f-521e-444d-9932-770c5a443645",
     "audienceNote": "~774 engaged AI builders & creators",
-    "offerType": "Cyber Monday Last Call ($69 Operator Stack)",
+    "offerType": "Cyber Monday Last Call ($79 Private GitHub Repo, normally $149)",
     "sendSlot": "Cyber Monday · Mon 30 Nov 2026, 16:00 UTC",
     "from": "Bryan Collins <bryan@bryancollins.com>",
     "replyTo": [
       "bryan@bryancollins.com"
     ],
-    "subject": "Last call tonight: my 4 Claude Code and Markdown kits ($69)",
-    "previewText": "The Solo Operator bundle comes down at midnight, back to $146 across individual pages tomorrow.",
+    "subject": "The private repo behind my 9 sites ($79 ends tonight)",
+    "previewText": "Cyber Week $79 access to bryancollins99/solo-operator-stack ends at midnight UTC tonight (normally $149).",
     "previewPageUrl": "https://deploy-preview-16--bryancollins.netlify.app/black-friday.html",
     "livePageUrl": "https://bryancollins.com/black-friday.html",
     "htmlFile": "scripts/bfcm-2026/out/bc-cm-2026.html",
@@ -87,7 +125,7 @@
     "replyTo": [
       "info@leinsterinsider.ie"
     ],
-    "subject": "Run a business or event in Leinster? Our 2-for-1 Christmas and New Year pass",
+    "subject": "2-for-1 Leinster feature: December + January included",
     "previewText": "Book a December feature or event slot by Cyber Monday and get a bonus January 2027 placement included.",
     "previewPageUrl": "https://deploy-preview-201--leinsterinsider.netlify.app/sponsor/cyber-week/",
     "livePageUrl": "https://leinsterinsider.ie/sponsor/cyber-week/",
@@ -106,7 +144,7 @@
     "replyTo": [
       "info@leinsterinsider.ie"
     ],
-    "subject": "Own your county planning page on Leinster Insider in 2027 (EUR 99/mo founding lock)",
+    "subject": "1 sponsor per Leinster county for 2027 (EUR 99/mo)",
     "previewText": "One founding sponsor slot per county for estate agents, architects, surveyors, solicitors and builders.",
     "previewPageUrl": "https://deploy-preview-201--leinsterinsider.netlify.app/sponsor/cyber-week/",
     "livePageUrl": "https://leinsterinsider.ie/sponsor/cyber-week/",
@@ -114,23 +152,118 @@
     "textFile": "scripts/bfcm-2026/out/leinster-county-cm-2026.txt"
   },
   {
+    "id": "leinster-cm-final-2026",
+    "property": "Leinster Insider",
+    "segmentName": "Leinster Insider · newsletter",
+    "segmentId": "726f5926-ad5f-4f79-a77c-9a7408578623",
+    "audienceNote": "~1,643 Leinster subscribers across 12 counties",
+    "offerType": "Cyber Monday Final Call: 2-for-1 Local Sponsor Pass + EUR 99/mo County Lock",
+    "sendSlot": "Cyber Monday · Mon 30 Nov 2026, 17:30 UTC",
+    "from": "Leinster Insider <info@leinsterinsider.ie>",
+    "replyTo": [
+      "info@leinsterinsider.ie"
+    ],
+    "subject": "Final hours: 2-for-1 Leinster pass + 12 county slots",
+    "previewText": "Closes at midnight UTC: book a December feature or event and get January included, or lock in a EUR 99/mo county planning slot.",
+    "previewPageUrl": "https://deploy-preview-201--leinsterinsider.netlify.app/sponsor/cyber-week/",
+    "livePageUrl": "https://leinsterinsider.ie/sponsor/cyber-week/",
+    "htmlFile": "scripts/bfcm-2026/out/leinster-cm-final-2026.html",
+    "textFile": "scripts/bfcm-2026/out/leinster-cm-final-2026.txt"
+  },
+  {
     "id": "trifuel-bf-2026",
     "property": "My Triathlon Calculator (Tri-Fuel Magic)",
     "segmentName": "Tri-Fuel · newsletter",
     "segmentId": "85a7b202-ab77-4bec-8cfd-5925b0d3a2d3",
     "audienceNote": "42 contacts (~32 active triathletes & runners)",
-    "offerType": "25% Off Hexis (Code Tri25) + 2027 Winter Gut-Training Planner",
+    "offerType": "40% Off Annual Hexis (Code TRIBF40, up from 25%) + 2027 Winter Fueling Kit",
     "sendSlot": "Black Friday · Fri 27 Nov 2026, 14:00 UTC",
     "from": "My Triathlon Calculator <hello@send.mytriathloncalculator.com>",
     "replyTo": [
       "hello@send.mytriathloncalculator.com"
     ],
-    "subject": "Your 2027 winter gut-training setup (plus 25% off Hexis)",
-    "previewText": "Set your winter base carb targets before spring build starts, and save 25% on Hexis daily carb-coding.",
+    "subject": "40% off annual Hexis with code TRIBF40 (normally 25%)",
+    "previewText": "Hexis bumped our reader code to 40% off annual plans with code TRIBF40 through 11:59am UTC on 1 December.",
     "previewPageUrl": "https://deploy-preview-79--mytriathloncalculator.netlify.app/winter-fuel-pack/",
     "livePageUrl": "https://mytriathloncalculator.com/winter-fuel-pack/",
     "htmlFile": "scripts/bfcm-2026/out/trifuel-bf-2026.html",
     "textFile": "scripts/bfcm-2026/out/trifuel-bf-2026.txt"
+  },
+  {
+    "id": "trifuel-sun-2026",
+    "property": "My Triathlon Calculator (Tri-Fuel Magic)",
+    "segmentName": "Tri-Fuel · newsletter",
+    "segmentId": "85a7b202-ab77-4bec-8cfd-5925b0d3a2d3",
+    "audienceNote": "42 contacts (~32 active triathletes & runners)",
+    "offerType": "Sunday Winter Base Gut-Training Guide + 40% Hexis Reminder (TRIBF40)",
+    "sendSlot": "Sunday · Sun 29 Nov 2026, 15:00 UTC",
+    "from": "My Triathlon Calculator <hello@send.mytriathloncalculator.com>",
+    "replyTo": [
+      "hello@send.mytriathloncalculator.com"
+    ],
+    "subject": "Your winter turbo carb target (+ 40% off Hexis)",
+    "previewText": "Why 75 to 95g/hr on a 70.3 starts on a 90-minute December trainer ride, plus code TRIBF40 for 40% off annual Hexis.",
+    "previewPageUrl": "https://deploy-preview-79--mytriathloncalculator.netlify.app/winter-fuel-pack/",
+    "livePageUrl": "https://mytriathloncalculator.com/winter-fuel-pack/",
+    "htmlFile": "scripts/bfcm-2026/out/trifuel-sun-2026.html",
+    "textFile": "scripts/bfcm-2026/out/trifuel-sun-2026.txt"
+  },
+  {
+    "id": "trifuel-cm-2026",
+    "property": "My Triathlon Calculator (Tri-Fuel Magic)",
+    "segmentName": "Tri-Fuel · newsletter",
+    "segmentId": "85a7b202-ab77-4bec-8cfd-5925b0d3a2d3",
+    "audienceNote": "42 contacts (~32 active triathletes & runners)",
+    "offerType": "Cyber Monday Final Call: 40% Off Annual Hexis (Code TRIBF40 Ends 1 Dec 11:59am UTC)",
+    "sendSlot": "Cyber Monday · Mon 30 Nov 2026, 17:00 UTC",
+    "from": "My Triathlon Calculator <hello@send.mytriathloncalculator.com>",
+    "replyTo": [
+      "hello@send.mytriathloncalculator.com"
+    ],
+    "subject": "Code TRIBF40 expires tomorrow 11:59am (40% off Hexis)",
+    "previewText": "Last chance to lock in 40% off annual Hexis (up from our usual 25%) before code TRIBF40 expires at 11:59am UTC on 1 Dec.",
+    "previewPageUrl": "https://deploy-preview-79--mytriathloncalculator.netlify.app/winter-fuel-pack/",
+    "livePageUrl": "https://mytriathloncalculator.com/winter-fuel-pack/",
+    "htmlFile": "scripts/bfcm-2026/out/trifuel-cm-2026.html",
+    "textFile": "scripts/bfcm-2026/out/trifuel-cm-2026.txt"
+  },
+  {
+    "id": "aifr-bf-2026",
+    "property": "AI Flash Report",
+    "segmentName": "AI Flash Report · newsletter",
+    "segmentId": "e5f436a2-86f0-42bc-a277-5f8733bcc7eb",
+    "audienceNote": "35 contacts (active weekly frontier model tracker readers)",
+    "offerType": "Black Friday Launch: The Solo Operator Repo ($79 Private GitHub Access, normally $149) + Lovable",
+    "sendSlot": "Black Friday · Fri 27 Nov 2026, 14:30 UTC",
+    "from": "AI Flash Report <alerts@send.aiflashreport.com>",
+    "replyTo": [
+      "bryan@bryancollins.com"
+    ],
+    "subject": "We replaced half our AI SaaS bill with 1 private repo",
+    "previewText": "Private GitHub access to the sanitised .claude/ skills, pipeline scripts, Zettelkasten vault and Astro blueprint behind 9 sites ($79).",
+    "previewPageUrl": "https://deploy-preview-16--bryancollins.netlify.app/black-friday.html",
+    "livePageUrl": "https://bryancollins.com/black-friday.html",
+    "htmlFile": "scripts/bfcm-2026/out/aifr-bf-2026.html",
+    "textFile": "scripts/bfcm-2026/out/aifr-bf-2026.txt"
+  },
+  {
+    "id": "aifr-sun-2026",
+    "property": "AI Flash Report",
+    "segmentName": "AI Flash Report · newsletter",
+    "segmentId": "e5f436a2-86f0-42bc-a277-5f8733bcc7eb",
+    "audienceNote": "35 contacts (active weekly frontier model tracker readers)",
+    "offerType": "Sunday Deep Dive: How 9 Sites Run From One Private Claude Code Repo ($79)",
+    "sendSlot": "Sunday · Sun 29 Nov 2026, 14:30 UTC",
+    "from": "AI Flash Report <alerts@send.aiflashreport.com>",
+    "replyTo": [
+      "bryan@bryancollins.com"
+    ],
+    "subject": "How 9 sites run from one private Claude Code repo",
+    "previewText": "Plain files in git survive every model release. Inspect bryancollins99/solo-operator-stack before Monday midnight UTC ($79 vs $149).",
+    "previewPageUrl": "https://deploy-preview-16--bryancollins.netlify.app/black-friday.html",
+    "livePageUrl": "https://bryancollins.com/black-friday.html",
+    "htmlFile": "scripts/bfcm-2026/out/aifr-sun-2026.html",
+    "textFile": "scripts/bfcm-2026/out/aifr-sun-2026.txt"
   },
   {
     "id": "aifr-cm-2026",
@@ -138,14 +271,14 @@
     "segmentName": "AI Flash Report · newsletter",
     "segmentId": "e5f436a2-86f0-42bc-a277-5f8733bcc7eb",
     "audienceNote": "35 contacts (active weekly frontier model tracker readers)",
-    "offerType": "Cyber Monday Builder Stack ($69 Claude Code Operator Bundle + Lovable)",
+    "offerType": "Cyber Monday Final Call: The Solo Operator Repo ($79 Private GitHub Access, normally $149) + Lovable",
     "sendSlot": "Cyber Monday · Mon 30 Nov 2026, 14:30 UTC",
     "from": "AI Flash Report <alerts@send.aiflashreport.com>",
     "replyTo": [
       "bryan@bryancollins.com"
     ],
-    "subject": "Cyber Monday note: frontier API costs fell, wrapper subscriptions did not",
-    "previewText": "How we replaced half our monthly AI SaaS bill with local Markdown + Claude Code scripts.",
+    "subject": "API prices crashed. Why are you still paying $49/mo?",
+    "previewText": "Final hours for $79 private GitHub access to The Solo Operator Repo (normally $149), plus Lovable and Vendors.ie benchmarks.",
     "previewPageUrl": "https://deploy-preview-16--bryancollins.netlify.app/black-friday.html",
     "livePageUrl": "https://bryancollins.com/black-friday.html",
     "htmlFile": "scripts/bfcm-2026/out/aifr-cm-2026.html",
@@ -157,18 +290,56 @@
     "segmentName": "PromptWritingStudio · newsletter",
     "segmentId": "8758d410-436e-49f5-b20f-a0623a976242",
     "audienceNote": "21 contacts (Claude Code / MCP / prompt practitioners)",
-    "offerType": "4-Kit Claude Code & Plain-Text Bundle ($69, Zero Retired Course CTAs)",
+    "offerType": "The Solo Operator Repo ($79 Private GitHub Access, normally $149, Zero Retired Course CTAs)",
     "sendSlot": "Black Friday · Fri 27 Nov 2026, 15:00 UTC",
     "from": "Prompt Writing Studio <hello@send.promptwritingstudio.com>",
     "replyTo": [
       "bryan@bryancollins.com"
     ],
-    "subject": "Skip giant prompt packs this Black Friday (use project memory files instead)",
-    "previewText": "Four downloadable Claude Code and plain-Markdown kits for $69 one-time through Cyber Monday.",
+    "subject": "Stop buying 500-prompt PDFs. Clone my .claude/ repo.",
+    "previewText": "Private GitHub access to sanitised production Claude Code skills, hooks, pipeline scripts and Astro blueprint ($79 through Monday).",
     "previewPageUrl": "https://deploy-preview-16--bryancollins.netlify.app/black-friday.html",
     "livePageUrl": "https://bryancollins.com/black-friday.html",
     "htmlFile": "scripts/bfcm-2026/out/pws-bf-2026.html",
     "textFile": "scripts/bfcm-2026/out/pws-bf-2026.txt"
+  },
+  {
+    "id": "pws-sat-2026",
+    "property": "Prompt Writing Studio",
+    "segmentName": "PromptWritingStudio · newsletter",
+    "segmentId": "8758d410-436e-49f5-b20f-a0623a976242",
+    "audienceNote": "21 contacts (Claude Code / MCP / prompt practitioners)",
+    "offerType": "Saturday Walkthrough: The 7 Production Claude Code Skills Inside The Solo Operator Repo ($79)",
+    "sendSlot": "Saturday · Sat 28 Nov 2026, 15:00 UTC",
+    "from": "Prompt Writing Studio <hello@send.promptwritingstudio.com>",
+    "replyTo": [
+      "bryan@bryancollins.com"
+    ],
+    "subject": "The 7 Claude Code skills inside my private repo",
+    "previewText": "Walkthrough of /prd, /prd-critic, /qa-loop, /swarm-check, /pre-commit-review, /commit and /log inside bryancollins99/solo-operator-stack.",
+    "previewPageUrl": "https://deploy-preview-16--bryancollins.netlify.app/black-friday.html",
+    "livePageUrl": "https://bryancollins.com/black-friday.html",
+    "htmlFile": "scripts/bfcm-2026/out/pws-sat-2026.html",
+    "textFile": "scripts/bfcm-2026/out/pws-sat-2026.txt"
+  },
+  {
+    "id": "pws-cm-2026",
+    "property": "Prompt Writing Studio",
+    "segmentName": "PromptWritingStudio · newsletter",
+    "segmentId": "8758d410-436e-49f5-b20f-a0623a976242",
+    "audienceNote": "21 contacts (Claude Code / MCP / prompt practitioners)",
+    "offerType": "Cyber Monday Final Call: The Solo Operator Repo ($79 Private GitHub Access, normally $149)",
+    "sendSlot": "Cyber Monday · Mon 30 Nov 2026, 16:30 UTC",
+    "from": "Prompt Writing Studio <hello@send.promptwritingstudio.com>",
+    "replyTo": [
+      "bryan@bryancollins.com"
+    ],
+    "subject": "Midnight cutoff: The Solo Operator Repo for $79",
+    "previewText": "Cyber Week $79 private GitHub access to bryancollins99/solo-operator-stack closes at midnight UTC tonight (normally $149).",
+    "previewPageUrl": "https://deploy-preview-16--bryancollins.netlify.app/black-friday.html",
+    "livePageUrl": "https://bryancollins.com/black-friday.html",
+    "htmlFile": "scripts/bfcm-2026/out/pws-cm-2026.html",
+    "textFile": "scripts/bfcm-2026/out/pws-cm-2026.txt"
   },
   {
     "id": "tenderwatch-q1-bf-2026",
@@ -182,7 +353,7 @@
     "replyTo": [
       "bryan@tenderwatch.ie"
     ],
-    "subject": "Why we do not discount TenderWatch Pro (and 10 Q1 setup slots before 4 Dec)",
+    "subject": "No Black Friday discount (10 Q1 setup slots instead)",
     "previewText": "Every member pays EUR 490/yr. Join before 4 December and we build your Q1 alerts, rival watches and expiry dossier by hand.",
     "previewPageUrl": "https://deploy-preview-602--tenderwatchirl.netlify.app/q1-readiness",
     "livePageUrl": "https://www.tenderwatch.ie/q1-readiness",
@@ -191,22 +362,41 @@
   },
   {
     "id": "tenderwatch-q1-cm-2026",
-    "property": "TenderWatch.ie (STRICTLY NON-DISCOUNT — Waitlist & High-Intent)",
+    "property": "TenderWatch.ie (STRICTLY NON-DISCOUNT · Waitlist & High-Intent)",
     "segmentName": "Tenderwatch · Pro waitlist",
     "segmentId": "d38a0c6b-77be-4dfb-b57d-cb7567cbe70d",
     "audienceNote": "8 commercial waitlist firms (Deloitte, EMM Security, Southern Scientific, etc.)",
     "offerType": "NON-DISCOUNT: Direct Waitlist Note for Q1 Concierge Setup (EUR 490/yr)",
-    "sendSlot": "Cyber Monday · Mon 30 Nov 2026, 09:30 UTC",
+    "sendSlot": "Sunday · Sun 29 Nov 2026, 09:30 UTC",
     "from": "Bryan Collins <bryan@tenderwatch.ie>",
     "replyTo": [
       "bryan@tenderwatch.ie"
     ],
-    "subject": "Your Q1 2027 Irish tender watchlist + expiring contracts dossier",
+    "subject": "10 done-for-you Q1 tender setups (waitlist priority)",
     "previewText": "You joined the TenderWatch Pro waitlist earlier this year. We opened 10 done-for-you Q1 setup slots before Christmas.",
     "previewPageUrl": "https://deploy-preview-602--tenderwatchirl.netlify.app/q1-readiness",
     "livePageUrl": "https://www.tenderwatch.ie/q1-readiness",
     "htmlFile": "scripts/bfcm-2026/out/tenderwatch-q1-cm-2026.html",
     "textFile": "scripts/bfcm-2026/out/tenderwatch-q1-cm-2026.txt"
+  },
+  {
+    "id": "tenderwatch-q1-final-2026",
+    "property": "TenderWatch.ie (STRICTLY NON-DISCOUNT · Final Q1 Reminder)",
+    "segmentName": "Tenderwatch · newsletter",
+    "segmentId": "7e80858a-80e0-4eef-b6a3-780ab6541bc2",
+    "audienceNote": "~550+ Irish B2B suppliers (64% open, 36% click)",
+    "offerType": "NON-DISCOUNT: Final Reminder for 10 Q1 Bid-Readiness Setup Slots (EUR 490/yr)",
+    "sendSlot": "Cyber Monday · Mon 30 Nov 2026, 16:30 UTC",
+    "from": "Tenderwatch <alerts@tenderwatch.ie>",
+    "replyTo": [
+      "bryan@tenderwatch.ie"
+    ],
+    "subject": "Closing 4 Dec: we build your Q1 tender alerts by hand",
+    "previewText": "Same EUR 490/yr Pro rate, no discounts. Join by Friday 4 December for 48-hour setup and your H1 2027 Expiring-Contracts Dossier.",
+    "previewPageUrl": "https://deploy-preview-602--tenderwatchirl.netlify.app/q1-readiness",
+    "livePageUrl": "https://www.tenderwatch.ie/q1-readiness",
+    "htmlFile": "scripts/bfcm-2026/out/tenderwatch-q1-final-2026.html",
+    "textFile": "scripts/bfcm-2026/out/tenderwatch-q1-final-2026.txt"
   },
   {
     "id": "vendors-bf-2026",
@@ -220,7 +410,7 @@
     "replyTo": [
       "hello@vendors.ie"
     ],
-    "subject": "Before your Irish team signs a '50% off' annual software deal this week",
+    "subject": "3 hidden costs in '50% off' annual SaaS deals",
     "previewText": "Three numbers missing from Cyber Week SaaS banners: Year-2 list price, 2.25% FX card drag and IE VAT reverse-charge.",
     "previewPageUrl": "https://deploy-preview-1445--vendorsie.netlify.app/q1-software-audit",
     "livePageUrl": "https://vendors.ie/q1-software-audit",
@@ -239,7 +429,7 @@
     "replyTo": [
       "hello@vendors.ie"
     ],
-    "subject": "Check your 2027 supplier list before year-end close (CRO, VAT and Peppol)",
+    "subject": "Screen 100 Irish suppliers in one CSV (CRO, VAT, Peppol)",
     "previewText": "Verify up to 100 Irish CRO companies or EU VAT numbers in one CSV pass, or watch key suppliers weekly.",
     "previewPageUrl": "https://deploy-preview-1445--vendorsie.netlify.app/q1-software-audit",
     "livePageUrl": "https://vendors.ie/tools/bulk-vat-checker",
@@ -258,7 +448,7 @@
     "replyTo": [
       "hello@vendors.ie"
     ],
-    "subject": "January software renewals start in 32 days (48h Vendors.ie profile setup)",
+    "subject": "32 days to Q1 renewals: 48h Vendors.ie profile setup",
     "previewText": "We never discount our EUR 99/yr founding claim rate. Claim by midnight tonight for priority 48-hour setup before December sign-offs.",
     "previewPageUrl": "https://deploy-preview-1445--vendorsie.netlify.app/q1-software-audit",
     "livePageUrl": "https://vendors.ie/q1-software-audit#vendor-q1-readiness",
