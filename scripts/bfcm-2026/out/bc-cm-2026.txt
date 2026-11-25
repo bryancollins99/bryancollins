@@ -1,0 +1,15 @@
+Quick note before Cyber Monday wraps up tonight.
+
+At midnight UTC I am closing the $79 Cyber Week launch price for The Solo Operator Repo (private GitHub access to bryancollins99/solo-operator-stack, normally $149).
+
+You get the sanitised .claude/ skills and hooks pack (/prd, /prd-critic, /qa-loop, /swarm-check, /pre-commit-review, /commit, /log), The Builder's Pipeline, the Zettelkasten starter vault, the Astro + Netlify + Resend + Stripe site blueprint, and lifetime git pull updates through 2027:
+
+https://bryancollins.com/black-friday.html?utm_source=resend&utm_medium=email&utm_campaign=bc-bfcm-2026-cm
+
+Zero recurring subscription and a 14-day no-questions refund if you clone the repo and decide it does not fit how you build.
+
+Write on,
+Bryan Collins
+
+Consistent Publishing Ltd, Landscape House, Baldonnell Business Park, Dublin D22 P3K7, Ireland
+Unsubscribe: {{{RESEND_UNSUBSCRIBE_URL}}}

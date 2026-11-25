@@ -1,0 +1,20 @@
+Every week on AI Flash Report (https://aiflashreport.com/changes/) we track frontier model releases and pricing cuts. One pattern stood out all year: raw API costs fell fast, while monthly AI wrapper subscriptions kept piling up.
+
+Inside our Dublin publishing group, we run nine sites from git using Claude Code skills, local Markdown files and small Python scripts instead of paying $29 to $99 a month per wrapper app.
+
+For Black Friday through Cyber Monday, our founder Bryan Collins opened private GitHub access to The Solo Operator Repo (bryancollins99/solo-operator-stack) for $79 one-time (normally $149):
+
+- Sanitised .claude/ Skills & Hooks Pack: gitleaks-clean production skills (/prd, /prd-critic, /qa-loop, /swarm-check, /pre-commit-review, /commit, /log).
+- The Builder's Pipeline: daily Coding-Log.md to Friday LinkedIn, newsletter and YouTube scripts.
+- Zettelkasten Starter Vault + Hygiene Scripts: plain-Markdown vault with zero SaaS lock-in.
+- Portfolio Site Blueprint: stripped-down Astro + Netlify + Resend + Stripe webhook starter behind running nine sites solo.
+- Lifetime git pull updates through 2027: zero subscription, 14-day refund.
+
+Get The Solo Operator Repo ($79 one-time):
+https://bryancollins.com/black-friday.html?utm_source=aiflashreport&utm_medium=email&utm_campaign=aifr-bfcm-2026-bf
+
+For rapid visual prototyping, check Lovable's Cyber Week offer (affiliate link):
+https://tfr-affiliate-hub.netlify.app/e/lovable-labs-incorporated
+
+Consistent Publishing Ltd, CRO 742884, Landscape House, Baldonnell Business Park, Dublin D22 P3K7, Ireland
+Unsubscribe: {{{RESEND_UNSUBSCRIBE_URL}}}

@@ -1,0 +1,28 @@
+Every November my inbox fills up with $997 video courses promising to teach me an operating system for content or AI.
+
+I bought plenty of them in my thirties. Almost every one sat at 18% completion while I went back to work.
+
+When I rebuilt my portfolio with Claude Code this year, I stopped keeping workflows inside SaaS dashboards and course portals. Everything that runs my week lives in git: my Claude Code skills and hooks, my Friday content pipeline, my plain-Markdown note vault, and the Astro + Netlify + Stripe site blueprint behind my nine sites.
+
+For Black Friday through Cyber Monday, I am opening private GitHub access to The Solo Operator Repo (bryancollins99/solo-operator-stack) for $79 one-time (normally $149):
+
+- Sanitised .claude/ Skills & Hooks Pack: gitleaks-clean production skills (/prd, /prd-critic, /qa-loop, /swarm-check, /pre-commit-review, /commit, /log).
+- The Builder's Pipeline: scripts turning daily Coding-Log.md lines into Friday LinkedIn posts, newsletter drafts and YouTube ideas.
+- Zettelkasten Starter Vault + Hygiene Scripts: plain-Markdown note vault and cleanup scripts with zero SaaS lock-in.
+- Portfolio Site Blueprint: stripped-down Astro + Netlify + Resend + Stripe webhook starter behind running nine sites solo.
+- Lifetime git pull updates through 2027: GitHub collaborator invite after Stripe checkout, zero subscription, 14-day refund.
+
+Get The Solo Operator Repo ($79 one-time):
+https://bryancollins.com/black-friday.html?utm_source=resend&utm_medium=email&utm_campaign=bc-bfcm-2026-bf
+
+On the same page I listed the three paid tools that survived my SaaS cull this year and run Cyber Week offers:
+- Lovable: https://tfr-affiliate-hub.netlify.app/e/lovable-labs-incorporated
+- Grammarly Pro: https://becomeawritertoday.com/try-grammarly/
+- Kit: https://tfr-affiliate-hub.netlify.app/e/kit-formerly-convertkit
+(All three are affiliate links.)
+
+Write on,
+Bryan Collins
+
+Consistent Publishing Ltd, Landscape House, Baldonnell Business Park, Dublin D22 P3K7, Ireland
+Unsubscribe: {{{RESEND_UNSUBSCRIBE_URL}}}

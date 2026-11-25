@@ -1,0 +1,16 @@
+Most AI coding setups break down the moment you move past one-off chat prompts: agents skip verification, drift off spec, or push broken changes to main.
+
+Inside The Solo Operator Repo (bryancollins99/solo-operator-stack), you get the exact gitleaks-clean .claude/ skills and hooks we use every day to spec, critique, review and ship across nine sites:
+
+- /prd + /prd-critic: draft tight specifications and run an automated critic gate before writing code.
+- /qa-loop + /pre-commit-review: independent diff reviews and closed-loop verification before anything merges.
+- /swarm-check, /commit & /log: pre-flight checks for parallel agents, clean commits and daily worklog capture.
+- Plus 3 complete companion modules: The Builder's Pipeline, the Zettelkasten Starter Vault + hygiene scripts, and the Astro + Netlify + Resend + Stripe Portfolio Site Blueprint.
+
+Inspect The Solo Operator Repo ($79):
+https://bryancollins.com/black-friday.html?utm_source=promptwritingstudio&utm_medium=email&utm_campaign=pws-bfcm-2026-sat
+
+Cyber Week price is $79 one-time (normally $149) with lifetime git pull updates through 2027, zero subscription, and a 14-day refund on request.
+
+Consistent Publishing Ltd, CRO 742884, Landscape House, Baldonnell Business Park, Dublin D22 P3K7, Ireland
+Unsubscribe: {{{RESEND_UNSUBSCRIBE_URL}}}
