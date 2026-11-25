@@ -29,7 +29,7 @@ export const CAMPAIGNS_PART_1 = [
     sendSlot: "Black Friday · Fri 27 Nov 2026, 13:00 UTC",
     from: "Become a Writer Today <bryan@becomeawritertoday.com>",
     replyTo: ["bryan@becomeawritertoday.com"],
-    subject: "All 5 writing packs in one download (plus 3 Black Friday deals worth checking)",
+    subject: "All 5 writing packs in one download (plus 2 Black Friday deals worth checking)",
     previewText: "Get the complete Become a Writer Today download vault for $49, plus honest notes on ProWritingAid and Grammarly.",
     previewPageUrl: "https://deploy-preview-276--becomeawriter.netlify.app/black-friday/",
     livePageUrl: "https://becomeawritertoday.com/black-friday/",
@@ -60,13 +60,12 @@ export const CAMPAIGNS_PART_1 = [
           fg: "#FFFFFF",
           font: SERIF,
         }),
-        h2("2. Three editing and craft deals that only drop once a year", SERIF, "#1C1917"),
+        h2("2. Two editing deals that only drop once a year", SERIF, "#1C1917"),
         p("If you have been waiting to upgrade your editing tool, Black Friday week is the one time of year prices genuinely move:", SERIF, "#1C1917"),
         bulletList(
           [
             "<a href=\"https://becomeawritertoday.com/try-prowritingaid/\" style=\"color:#B23A48;font-weight:bold;text-decoration:underline;\">ProWritingAid</a> runs up to 50% off its Annual and Lifetime plans. Best choice if you write novels, memoir or longform books in Scrivener or Word.",
             "<a href=\"https://becomeawritertoday.com/try-grammarly/\" style=\"color:#B23A48;font-weight:bold;text-decoration:underline;\">Grammarly Pro</a> cuts its annual plan for Black Friday. Fastest option if you file articles, newsletters and client work across Google Docs and browsers.",
-            "<a href=\"https://tfr-affiliate-hub.netlify.app/e/masterclass\" style=\"color:#B23A48;font-weight:bold;text-decoration:underline;\">MasterClass</a> runs its holiday membership offer, covering craft classes from Margaret Atwood, Neil Gaiman, Judy Blume and Salman Rushdie.",
           ],
           SERIF,
           "#1C1917",
@@ -78,7 +77,7 @@ export const CAMPAIGNS_PART_1 = [
     }),
     text: `Most Black Friday roundups for writers dump fifty software coupons in your lap and hope you click three of them. You do not need fifty new apps.
 
-If you want practical files you can actually use on a draft this weekend, I put together two things on one page for Black Friday through Cyber Monday.
+If you want practical files you can actually use on a draft this weekend, I put together two things on a single page for Black Friday through Cyber Monday.
 
 1. THE COMPLETE WRITER'S DOWNLOAD VAULT ($49, NORMALLY $118)
 
@@ -93,16 +92,13 @@ For the next four days, you can grab all five paid downloads from Become a Write
 Open the Writers' Black Friday Vault:
 https://becomeawritertoday.com/black-friday/?utm_source=resend&utm_medium=email&utm_campaign=bfcm-2026-bf
 
-2. THREE EDITING AND CRAFT DEALS THAT ONLY DROP ONCE A YEAR
+2. TWO EDITING DEALS THAT ONLY DROP ONCE A YEAR
 
 - ProWritingAid (up to 50% off Annual and Lifetime plans, best for book-length drafts in Scrivener or Word):
 https://becomeawritertoday.com/try-prowritingaid/
 
 - Grammarly Pro (Black Friday annual plan cut, fastest for articles, newsletters and client copy):
 https://becomeawritertoday.com/try-grammarly/
-
-- MasterClass (holiday membership offer, craft classes from Margaret Atwood, Neil Gaiman and Judy Blume):
-https://tfr-affiliate-hub.netlify.app/e/masterclass
 
 If the free contest pages and browser word tools on the site already cover what you need, keep using them. Everything free stays free.
 
@@ -220,7 +216,7 @@ Unsubscribe: {{{RESEND_UNSUBSCRIBE_URL}}}`,
           bg: "#111827",
           fg: "#FCD34D",
         }),
-        p("On the same page I listed the four paid tools that survived my SaaS cull this year and run genuine Cyber Week offers: <a href=\"https://tfr-affiliate-hub.netlify.app/e/lovable-labs-incorporated\" style=\"color:#0052FF;text-decoration:underline;\">Lovable</a> for rapid app prototypes, <a href=\"https://becomeawritertoday.com/try-grammarly/\" style=\"color:#0052FF;text-decoration:underline;\">Grammarly Pro</a> for fast copy checks, <a href=\"https://tfr-affiliate-hub.netlify.app/e/kit-formerly-convertkit\" style=\"color:#0052FF;text-decoration:underline;\">Kit</a> for Creator Network referrals, and <a href=\"https://tfr-affiliate-hub.netlify.app/e/teachable\" style=\"color:#0052FF;text-decoration:underline;\">Teachable</a> for hosting digital products (all affiliate links)."),
+        p("On the same page I listed the three paid tools that survived my SaaS cull this year and run genuine Cyber Week offers: <a href=\"https://tfr-affiliate-hub.netlify.app/e/lovable-labs-incorporated\" style=\"color:#0052FF;text-decoration:underline;\">Lovable</a> for rapid app prototypes, <a href=\"https://becomeawritertoday.com/try-grammarly/\" style=\"color:#0052FF;text-decoration:underline;\">Grammarly Pro</a> for fast copy checks, and <a href=\"https://tfr-affiliate-hub.netlify.app/e/kit-formerly-convertkit\" style=\"color:#0052FF;text-decoration:underline;\">Kit</a> for Creator Network referrals (all affiliate links)."),
         p("Write on,<br>Bryan Collins"),
       ].join("\n"),
     }),
@@ -240,12 +236,11 @@ For Black Friday through Cyber Monday, I bundled all four of those working kits 
 See the Solo Operator Stack ($69):
 https://bryancollins.com/black-friday.html?utm_source=resend&utm_medium=email&utm_campaign=bc-bfcm-2026-bf
 
-On the same page I listed the four paid tools that survived my SaaS cull this year and run Cyber Week offers:
+On the same page I listed the three paid tools that survived my SaaS cull this year and run Cyber Week offers:
 - Lovable: https://tfr-affiliate-hub.netlify.app/e/lovable-labs-incorporated
 - Grammarly Pro: https://becomeawritertoday.com/try-grammarly/
 - Kit: https://tfr-affiliate-hub.netlify.app/e/kit-formerly-convertkit
-- Teachable: https://tfr-affiliate-hub.netlify.app/e/teachable
-(All four are affiliate links.)
+(All three are affiliate links.)
 
 Write on,
 Bryan Collins
