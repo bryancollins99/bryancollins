@@ -314,6 +314,27 @@ function jsonResp(status, data = {}) {
     "forbidden_origin"
   );
 
+  // forbidden_origin must fire BEFORE invalid_email on headerless bot/scanner POSTs
+  await assertFailedReason(
+    new Request("https://bryancollins.com/.netlify/functions/subscribe", {
+      method: "POST",
+      headers: new Headers({ "content-type": "application/x-www-form-urlencoded" }),
+      body: new URLSearchParams({ email: "", lane: "hub" }).toString(),
+    }),
+    403,
+    "forbidden_origin"
+  );
+
+  // forbidden_origin must reject self-referer probes pointing at /.netlify/functions/*
+  await assertFailedReason(
+    makeReq(
+      { email: "", lane: "hub" },
+      { origin: "https://bryancollins.com", referer: "https://bryancollins.com/.netlify/functions/subscribe" }
+    ),
+    403,
+    "forbidden_origin"
+  );
+
   // bot_honeypot (still redirects 303)
   await assertFailedReason(makeReq({ email: "ok@example.com", lane: "hub", website: "http://spam.test" }), 303, "bot_honeypot");
 
