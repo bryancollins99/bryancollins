@@ -135,10 +135,18 @@ function blockedDomain(email) {
   return false;
 }
 function originAllowed(req) {
-  for (const name of ["origin", "referer"]) {
-    const v = req.headers.get(name);
-    if (!v) continue;
-    try { return allowedHost(new URL(v).hostname); } catch { return false; }
+  const origin = req.headers.get("origin");
+  const referer = req.headers.get("referer");
+  if (referer) {
+    try {
+      const u = new URL(referer);
+      // No HTML form lives on /.netlify/functions/*; a self-referer is a bot/scanner probe.
+      if (u.pathname.startsWith("/.netlify/functions/")) return false;
+      if (!origin) return allowedHost(u.hostname);
+    } catch { return false; }
+  }
+  if (origin) {
+    try { return allowedHost(new URL(origin).hostname); } catch { return false; }
   }
   return false;
 }
@@ -397,13 +405,13 @@ export default async (req, context) => {
   const lane = Object.hasOwn(LANES, form.lane) ? form.lane : "hub";
   const labels = extractLabels(form, lane, req);
 
-  if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email) || email.length > 254) {
-    await captureFailed(email, labels, "invalid_email");
-    return fail(400, "That email address does not look right. Please check it and try again.");
-  }
   if (!originAllowed(req)) {
     await captureFailed(email, labels, "forbidden_origin");
     return new Response(JSON.stringify({ error: "forbidden" }), { status: 403, headers: { "content-type": "application/json" } });
+  }
+  if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email) || email.length > 254) {
+    await captureFailed(email, labels, "invalid_email");
+    return fail(400, "That email address does not look right. Please check it and try again.");
   }
 
   // Bots get a normal-looking success and nothing is written.
